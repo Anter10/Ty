@@ -1,0 +1,5 @@
+/Applications/CocosCreator.app/Contents/MacOS/CocosCreator --path ./ --build "platform=wechatgame;debug=false"
+tar xvfz sub.tgz
+sh tinypng.sh
+python tywxTools/JSconfuse.py
+

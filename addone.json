@@ -1,0 +1,128 @@
+{
+	"gezi_size": 132,
+	"gezi_pitch": 140,
+	"move_time": 0.3,
+	"swidth": 720,
+	"sheight": 1280,
+	"maxphy_value": 5,
+	"geziNumber": 25,
+	"minCanRemoveNumber": 3,
+	"baseScore": 10,
+	"maxrnum": 2,
+	"marginbottom": 358,
+	"thanfriendScore": 300,
+	"letUserClickTime": 3,
+	"initGivePlayerItemNumber": 3,
+	"initGameMaxNum": 5,
+	"lianjiEffects": {
+		"sgood": 3,
+		"cgood": 4,
+		"bgood": 5,
+		"maxgood": 6
+	},
+	"showphy_pros": {
+		"width": 130,
+		"height": 40,
+		"radius": 6,
+		"phy_num": 5,
+		"colors": [
+			[255, 0, 0],
+			[255, 165, 0],
+			[255, 255, 0],
+			[0, 255, 0],
+			[0, 127, 255],
+			[0, 0, 255],
+			[139, 0, 255]
+		]
+	},
+	"color_list": [
+		[233, 85, 56],
+		[255, 128, 64],
+		[44, 175, 219],
+		[165, 198, 31],
+		[23, 177, 167],
+		[0, 128, 0],
+		[0, 0, 128],
+		[128, 0, 0],
+		[128, 64, 32],
+		[128, 0, 128],
+		[32, 32, 32]
+	],
+	"gameState": {
+		"checkclick": 1,
+		"domove": 2,
+		"dodrop": 3,
+		"waitclick": 4,
+		"gameover": 5,
+		"usingitem": 6
+	},
+	"allitem": [{
+		"id": 1,
+		"name": "数字-1道具",
+		"png": "",
+		"num": 0,
+		"value": -1
+	}, {
+		"id": 2,
+		"name": "数字+2道具",
+		"png": "",
+		"num": 0,
+		"value": 2
+	}, {
+		"id": 5,
+		"name": "+1血道具",
+		"png": "",
+		"num": 0,
+		"value": 0
+	}, {
+		"id": 6,
+		"name": "锤子道具",
+		"png": "",
+		"num": 0,
+		"value": 0
+	}],
+	"celltilenumColors": [
+		[154, 91, 1],
+		[51, 112, 0],
+		[161, 62, 3],
+		[165, 14, 14],
+		[1, 107, 98],
+		[151, 0, 103],
+		[0, 107, 160],
+		[15, 84, 105],
+		[107, 33, 207],
+		[131, 0, 155],
+		[15, 84, 195]
+	],
+	"VCTR": {
+		"v101": {
+			"auditing": true
+		},
+		"default": {
+			"auditing": false
+		}
+	},
+	"SOUNDS": {
+		"AWESOME": "sounds/awesome.mp3",
+		"COOL": "sounds/cool.mp3",
+		"GOOD": "sounds/good.mp3",
+		"MUSIC_LOGO": "sounds/music_logo.mp3",
+		"POPUPCLOSE": "sounds/PopupClose.mp3",
+		"UNBLIEVEABLE": "sounds/unblieveable.mp3",
+		"COMBO": ["sounds/combo3.mp3", "sounds/combo4.mp3", "sounds/combo5.mp3", "sounds/combo6.mp3", "sounds/combo7.mp3", "sounds/combo8.mp3", "sounds/combo9.mp3", "sounds/combo10.mp3", "sounds/combo11.mp3", "sounds/combo12.mp3", "sounds/combo13.mp3", "sounds/combo14.mp3"]
+	},
+	"MUSICS": {
+		"BG_MUSIC": "https://marketqn.nalrer.cn/teris/m/3.mp3"
+	},
+	"xykRandNumber": 0.2,
+	"box_rate": {
+		"sub1": 0.5,
+		"add2": 0.2,
+		"heart": 0.2,
+		"chui": 0.1
+	},
+	"luck_block": {
+		"score": [0, 10000, 20000, 25000, 30000, 35000, 100000000],
+		"rate": [0.8, 0.7, 0.6, 0.3, 0.2, 0.1]
+	}
+}

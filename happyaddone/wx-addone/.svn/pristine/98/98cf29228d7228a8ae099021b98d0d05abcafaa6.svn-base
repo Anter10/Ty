@@ -1,0 +1,28 @@
+"use strict";
+cc._RF.push(module, 'df1312uJO5DOpgdFArNGVZn', 'friendicon');
+// Script/friendicon.js
+
+"use strict";
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        // 超逾玩家的信息
+        friendmsd: cc.Node,
+        // 名字
+        nameLabel: cc.Label,
+        // 分数
+        scoreLabel: cc.Label,
+        // 头像
+        iconSprite: cc.Sprite
+    },
+
+    onLoad: function onLoad() {},
+    start: function start() {}
+}
+
+// update (dt) {},
+);
+
+cc._RF.pop();

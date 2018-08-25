@@ -1,0 +1,145 @@
+"use strict";
+cc._RF.push(module, '93486w69BJG5rxHNI3FISIF', 'rankitem');
+// Script/rankitem.js
+
+"use strict";
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*
+   排行榜上每个微信好友的基本信息显示
+   created by gyc on 2018-08-06.
+   final changed by gyc on 2018-08-06;
+*/
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        // 玩家在好友中的排名显示
+        pmLabel: cc.Label,
+        // 排名1图标s
+        allPmicon: {
+            default: [],
+            type: cc.Sprite
+        },
+        // 玩家的微信头像
+        imageIcon: cc.Sprite,
+        // 玩家的昵称
+        nickLabel: cc.Label,
+        // 玩家的积分显示
+        scoreLabel: cc.Label
+        // 玩家的微信数据
+
+    },
+
+    /*
+        调用: 更新数据data并且更新data产生的view刷新
+        功能: 显示微信好友玩家的信息
+        参数: [
+           data: 微信好友的基础属性
+        ]
+        返回值:[
+           无
+        ]
+        思路: 游戏逻辑需要
+    */
+    updateData: function updateData(data) {
+        this.data = data;
+        this.updateView(this.data);
+    },
+
+    /*
+        调用: 更新data的时候调用
+        功能: 显示微信好友玩家的信息
+        参数: [
+           data: 微信好友的基础属性
+        ]
+        返回值:[
+           无
+        ]
+        思路: 游戏逻辑需要
+    */
+    updateView: function updateView(data) {
+        console.log("更新数据 = " + JSON.stringify(data));
+        if (data.pm < 3) {
+            this.pmLabel.node.active = false;
+            this.allPmicon[data.pm].node.active = true;
+        } else {
+            this.pmLabel.string = data.pm + 1;
+        }
+
+        this.nickLabel.string = this.stringSlice(data.nickname, 13);
+        this.scoreLabel.string = data.KVDataList[0] == null ? 0 : data.KVDataList[0].value + "分";
+        this.createIcon(this.imageIcon, data.avatarUrl);
+    },
+
+    //先算出整个字符串的长度，并获得第length - 2个字符串的位置，给".."留2个位置
+    stringSlice: function stringSlice(str, length) {
+        if (!str) {
+            return str;
+        }
+        var len = 0;
+        var tmp = 0;
+        var s;
+        for (var i = 0; i < str.length; i++) {
+            var charCode = str.charCodeAt(i);
+            if (charCode >= 0 && charCode <= 128) {
+                tmp += 1;
+            } else {
+                // 如果是中文则长度加2
+                tmp += 2;
+            }
+            if (tmp <= length - 2) {
+                len++;
+            }
+        }
+        if (tmp <= length) {
+            s = str.slice(0);
+        } else {
+            s = str.slice(0, len);
+            s += "..";
+        }
+        return s;
+    },
+    /*
+        调用: 显示玩家微信好友排行榜的时候显示
+        功能: 创建玩家的微信头像
+        参数: [
+           avatarUrl: 玩家微信头像的url
+        ]
+        返回值:[
+           无
+        ]
+        思路: 游戏逻辑需要
+    */
+    createIcon: function createIcon(sprite, avatarUrl) {
+        var self = this;
+        var tsp = sprite;
+        try {
+            var image = wx.createImage();
+            image.onload = function () {
+                try {
+                    var texture = new cc.Texture2D();
+                    texture.initWithElement(image);
+                    texture.handleLoadedTexture();
+                    tsp.spriteFrame = new cc.SpriteFrame(texture);
+                    console.log("加载失败___c1 " + (typeof image === "undefined" ? "undefined" : _typeof(image)) + sprite._gycname);
+
+                    // sprite.node.width=50;
+                    // sprite.node.height=50;
+                } catch (e) {
+                    console.log("加载失败___v " + e);
+                    tsp.node.active = false;
+                }
+            };
+            image.src = avatarUrl;
+        } catch (e) {
+            console.log("加载失败____ddd " + e);
+            tsp.node.active = false;
+        }
+    },
+
+    start: function start() {}
+});
+
+cc._RF.pop();

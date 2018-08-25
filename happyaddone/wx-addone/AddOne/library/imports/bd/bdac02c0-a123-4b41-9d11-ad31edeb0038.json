@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "goodunb",
+    "texture": "aead83d3-83b4-4512-8af1-a1330f0c8e09",
+    "atlas": "",
+    "rect": [
+      2,
+      1,
+      535,
+      128
+    ],
+    "offset": [
+      -0.5,
+      0.5
+    ],
+    "originalSize": [
+      540,
+      131
+    ]
+  }
+}

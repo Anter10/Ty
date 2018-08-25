@@ -1,0 +1,102 @@
+{
+  "version": "1.1.1",
+  "windows": {
+    "main": {
+      "main": true,
+      "url": "app://editor/index.html",
+      "windowType": "dockable",
+      "x": 790,
+      "y": 364,
+      "width": 1028,
+      "height": 845,
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "hierarchy"
+                ],
+                "height": 338,
+                "type": "panel",
+                "width": 205
+              },
+              {
+                "active": 0,
+                "children": [
+                  "assets"
+                ],
+                "height": 413,
+                "type": "panel",
+                "width": 205
+              }
+            ],
+            "height": 754,
+            "type": "dock-v",
+            "width": 205
+          },
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "scene"
+                ],
+                "height": 485,
+                "type": "panel",
+                "width": 506
+              },
+              {
+                "active": 0,
+                "children": [
+                  "console",
+                  "timeline"
+                ],
+                "height": 266,
+                "type": "panel",
+                "width": 506
+              }
+            ],
+            "height": 754,
+            "type": "dock-v",
+            "width": 506
+          },
+          {
+            "active": 0,
+            "children": [
+              "inspector"
+            ],
+            "height": 754,
+            "type": "panel",
+            "width": 305
+          }
+        ],
+        "type": "dock-h"
+      },
+      "panels": [
+        "console",
+        "timeline",
+        "inspector",
+        "hierarchy",
+        "assets",
+        "scene"
+      ]
+    },
+    "window-1534815602630": {}
+  },
+  "panels": {
+    "builder": {
+      "x": 0,
+      "y": 145,
+      "width": 410,
+      "height": 366
+    },
+    "project-settings": {
+      "x": 490,
+      "y": 117,
+      "width": 584,
+      "height": 548
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "efscool",
+    "texture": "867a6924-677b-4a5f-9242-209ffcec3771",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      276,
+      122
+    ],
+    "offset": [
+      -0.5,
+      0.5
+    ],
+    "originalSize": [
+      279,
+      125
+    ]
+  }
+}

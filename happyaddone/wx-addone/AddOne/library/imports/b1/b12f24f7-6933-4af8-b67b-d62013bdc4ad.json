@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "mrljbutton",
+    "texture": "829cf968-f8a6-4316-bd57-684dd8515a2b",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      344,
+      124
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      344,
+      124
+    ]
+  }
+}

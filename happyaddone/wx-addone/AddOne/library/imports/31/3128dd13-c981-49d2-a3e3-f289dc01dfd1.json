@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "chuizi10",
+    "texture": "2759f5d8-cc68-479c-b7c5-dbca8e7dc87a",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      87,
+      87
+    ],
+    "offset": [
+      -0.5,
+      0
+    ],
+    "originalSize": [
+      88,
+      87
+    ]
+  }
+}
