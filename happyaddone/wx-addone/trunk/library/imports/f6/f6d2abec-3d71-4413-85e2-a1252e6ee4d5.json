@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "goodlizi_xing05",
+    "texture": "d66f1fd5-df9a-4fed-acf1-fc159b416bbd",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      61,
+      60
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      61,
+      60
+    ]
+  }
+}

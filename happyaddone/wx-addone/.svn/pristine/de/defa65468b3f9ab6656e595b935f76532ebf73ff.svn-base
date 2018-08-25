@@ -1,0 +1,26 @@
+{
+    "globals": {
+        "$": false,
+        "window": true,
+        "document":false,
+        "tywx":true,
+        "cc":true,
+        "wx":true,
+        "console":true,
+        "require":true,
+        "describe":true,
+        "it":true,
+        "sp":true,
+        "module": true,
+        "setTimeout": true,
+        "define": true
+    },
+    "strict": false,
+    "curly": false,  
+    "eqeqeq": true,
+    "noarg": true,
+    "noempty": true,
+    "undef": true,
+    "unused": true,
+    "esversion": 6
+}

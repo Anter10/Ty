@@ -1,0 +1,101 @@
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        cells:{
+            default:[],
+            type:cc.Node
+        },
+        czNode:{
+            default:null,
+            type:cc.Node
+        },
+        numNode:{
+            default:null,
+            type:cc.Node
+        },
+        showMessage:{
+            default:null,
+            type:cc.Label
+        },
+        
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+         this.allnumbers = [2,3,4,4,3,5];
+         for(var tindex = 0; tindex < this.cells.length; tindex ++){
+            var tilescript= this.cells[tindex].getComponent("celltile");
+            tilescript.setCantClick(true);
+            tilescript.changeShow(this.allnumbers[tindex]);
+         }
+         this.cells[0].getComponent("celltile").playNewPlayerEff();
+
+    },
+
+    addNumber:function(num){
+        var self = this;
+        var tilescript = this.cells[0].getComponent("celltile")
+        tilescript.node.stopAllActions();
+        var delay1 = cc.delayTime(1.5);
+        var call = cc.callFunc(function(){
+            tilescript.changeShow(self.allnumbers[0] + num);
+            
+        })
+        var delay2 = cc.delayTime(1.5);
+        var call1 = cc.callFunc(function(){
+            tilescript.changeShow(self.allnumbers[0]);
+        })
+        var seq   = cc.sequence(delay1, call,delay2 ,call1);
+        var rep = cc.repeatForever(seq);
+
+        this.cells[0].getComponent("celltile").node.runAction(rep);
+    },
+
+    start () {
+
+    },
+
+    
+    
+    showChuiZi:function(){
+        this.cells[0].getComponent("celltile").changeShow(2);
+        this.cells[0].getComponent("celltile").node.stopAllActions();
+        this.czNode.active = true;
+        this.numNode.active = false;
+        var anim = this.czNode.getComponent(cc.Animation);
+        anim.play("chuizi");
+        this.setShowMsg("点击需要砸掉的方块");
+    },
+
+    showNum:function(num){
+        this.addNumber(num);
+        this.czNode.active = false;
+        this.numNode.active = true;
+        var anim = this.czNode.getComponent(cc.Animation);
+        anim.stop("chuizi");
+        var fh = "+";
+        if(num < 0){
+           fh = "-"; 
+        }
+        this.setShowMsg("点击让方块数字"+fh+Math.abs(num));
+    },
+
+    hideView:function(){
+        this.cells[0].getComponent("celltile").changeShow(2);
+        var anim = this.czNode.getComponent(cc.Animation);
+        anim.stop("chuizi");
+        this.czNode.active = false;
+        this.numNode.active = false;
+    },
+
+    setShowMsg:function(msg){
+        this.showMessage.string = msg;
+    },
+
+
+
+    // update (dt) {},
+});
