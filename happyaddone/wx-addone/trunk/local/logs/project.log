@@ -466,3 +466,1168 @@ Node path: "djitem"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
+2018-08-27T05:15:39.182Z - normal: AddOne boot start
+2018-08-27T05:15:39.187Z - normal: AddOne boot end
+2018-08-27T05:15:39.198Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:15:39.209Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:15:39.209Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:15:41.052Z - normal: Initializing...
+
+2018-08-27T05:15:41.059Z - normal: idePortFile: /Users/guoyouchao/Library/Application Support/微信web开发者工具/Default/.ide
+
+2018-08-27T05:15:41.078Z - normal: IDE server has started, listening on http://127.0.0.1:11058
+
+2018-08-27T05:15:41.079Z - normal: initialization finished
+
+2018-08-27T05:15:41.675Z - normal: open IDE success
+
+2018-08-27T05:22:38.876Z - normal: AddOne boot start
+2018-08-27T05:22:38.878Z - normal: AddOne boot end
+2018-08-27T05:22:38.881Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:22:38.898Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:22:38.899Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:23:43.719Z - normal: AddOne boot start
+2018-08-27T05:23:43.723Z - normal: AddOne boot end
+2018-08-27T05:23:43.726Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:23:43.743Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:23:43.743Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:25:16.099Z - normal: AddOne boot start
+2018-08-27T05:25:16.102Z - normal: AddOne boot end
+2018-08-27T05:25:16.116Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:25:16.134Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:25:16.134Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:25:28.143Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:25:28.144Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:25:28.144Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:25:28.145Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:25:28.145Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:25:28.145Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:25:28.147Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:25:28.148Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:25:28.148Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:25:30.558Z - error: getComponent: Type must be non-nil
+    at Object.cc.errorID (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDebug.js:166:16)
+    at getConstructor (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:29:20)
+    at cc_Node.getComponent (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:399:35)
+    at HTMLElement.query-node-info (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor/builtin/scene/panel/messages/scene-query.js:1:1251)
+    at Object.e._dispatch (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/panel.js:1:1941)
+    at EventEmitter.o.on.s (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/ipc.js:1:2917)
+    at emitMany (events.js:127:13)
+    at EventEmitter.emit (events.js:204:7)
+2018-08-27T05:28:17.263Z - normal: AddOne boot start
+2018-08-27T05:28:17.268Z - normal: AddOne boot end
+2018-08-27T05:28:17.278Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:28:17.289Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:28:17.289Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:28:17.578Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:28:17.578Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:28:17.578Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:28:17.579Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:28:17.579Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:28:17.579Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:28:17.580Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:28:17.580Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:28:17.581Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:45:32.601Z - normal: AddOne boot start
+2018-08-27T05:45:32.609Z - normal: AddOne boot end
+2018-08-27T05:45:32.623Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:45:32.638Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:45:32.639Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:45:33.121Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:45:33.122Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:45:33.124Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:45:33.125Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:45:33.125Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:45:33.128Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:45:33.129Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:45:33.130Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:45:33.130Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T05:46:36.111Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:117451
+2018-08-27T05:47:16.250Z - normal: AddOne boot start
+2018-08-27T05:47:16.257Z - normal: AddOne boot end
+2018-08-27T05:47:16.266Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:47:16.277Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:47:16.277Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:47:25.828Z - normal: AddOne boot start
+2018-08-27T05:47:25.829Z - normal: AddOne boot end
+2018-08-27T05:47:25.831Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:47:25.838Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:47:25.839Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:47:26.831Z - normal: AddOne boot start
+2018-08-27T05:47:26.833Z - normal: AddOne boot end
+2018-08-27T05:47:26.837Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:47:26.844Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:47:26.844Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:49:48.990Z - normal: AddOne boot start
+2018-08-27T05:49:48.992Z - normal: AddOne boot end
+2018-08-27T05:49:48.993Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:49:49.003Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:49:49.003Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:52:58.286Z - normal: AddOne boot start
+2018-08-27T05:52:58.289Z - normal: AddOne boot end
+2018-08-27T05:52:58.291Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:52:58.304Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:52:58.305Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:54:58.197Z - normal: AddOne boot start
+2018-08-27T05:54:58.200Z - normal: AddOne boot end
+2018-08-27T05:54:58.202Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:54:58.217Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:54:58.218Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T05:59:16.713Z - normal: AddOne boot start
+2018-08-27T05:59:16.714Z - normal: AddOne boot end
+2018-08-27T05:59:16.718Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T05:59:16.730Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T05:59:16.731Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:01:29.744Z - normal: AddOne boot start
+2018-08-27T06:01:29.754Z - normal: AddOne boot end
+2018-08-27T06:01:29.755Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:01:29.760Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:01:29.761Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:01:29.765Z - failed: load script [/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js] failed : ReferenceError: pbview is not defined
+    at __define (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:8:14)
+    at /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:33:13
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:40:11)
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:43:3)
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32)
+    at tryModuleLoad (module.js:447:12)
+    at Function.Module._load (module.js:439:3)
+    at Module.require (module.js:498:17)
+2018-08-27T06:01:29.782Z - failed: load script [PingBiView] failed : ReferenceError: pbview is not defined
+    at __define (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:8:14)
+    at /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:33:13
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:40:11)
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:43:3)
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32)
+    at tryModuleLoad (module.js:447:12)
+    at Function.Module._load (module.js:439:3)
+    at Module.require (module.js:498:17)
+2018-08-27T06:01:29.935Z - warn: Script attached to "stopv" in prefab "UIStopView.prefab" is missing or invalid. Detailed information:
+Node path: "stopv"
+Asset url: "db://assets/resources/prefabs/UIStopView.prefab"
+Script UUID: "830b6815-43d7-40ce-b4f2-ee77416141e3"
+Class ID: "830b6gVQ9dAzrTy7ndBYUHj"
+
+2018-08-27T06:01:29.942Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:03:35.524Z - normal: AddOne boot start
+2018-08-27T06:03:35.525Z - normal: AddOne boot end
+2018-08-27T06:03:35.526Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:03:35.532Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:03:35.532Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:03:35.533Z - failed: load script [/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js] failed : ReferenceError: pbview is not defined
+    at __define (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:8:14)
+    at /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:33:13
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:40:11)
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:43:3)
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32)
+    at tryModuleLoad (module.js:447:12)
+    at Function.Module._load (module.js:439:3)
+    at Module.require (module.js:498:17)
+2018-08-27T06:03:35.622Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:03:46.108Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:04:14.214Z - normal: AddOne boot start
+2018-08-27T06:04:14.216Z - normal: AddOne boot end
+2018-08-27T06:04:14.217Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:04:14.223Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:04:14.224Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:04:14.225Z - failed: load script [/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js] failed : ReferenceError: pbview is not defined
+    at __define (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:8:14)
+    at /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:33:13
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:40:11)
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:43:3)
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32)
+    at tryModuleLoad (module.js:447:12)
+    at Function.Module._load (module.js:439:3)
+    at Module.require (module.js:498:17)
+2018-08-27T06:04:14.320Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:04:24.637Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:04:55.743Z - warn: The Asset used by component "UIGiftView" in prefab "UIGiftView.prefab" is missing. Detailed information:
+Node path: "GiftView"
+Asset url: "db://assets/resources/prefabs/UIGiftView.prefab"
+Missing uuid: "1e1d83c5-467e-47d8-ac93-f446632efbe7"
+
+2018-08-27T06:04:55.744Z - warn: The Asset used by component "UIGiftView" in prefab "UIGiftView.prefab" is missing. Detailed information:
+Node path: "GiftView"
+Asset url: "db://assets/resources/prefabs/UIGiftView.prefab"
+Missing uuid: "1e1d83c5-467e-47d8-ac93-f446632efbe7"
+
+2018-08-27T06:04:55.781Z - normal: ScaleX != ScaleY. Don't know which one to return
+2018-08-27T06:05:07.329Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:05:22.588Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:05:37.427Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:05:49.023Z - warn: Script attached to "PingBiView" in prefab "UIOpenBoxView.prefab" is missing or invalid. Detailed information:
+Node path: "UIOpenBoxView/PingBiView"
+Asset url: "db://assets/resources/prefabs/UIOpenBoxView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:05:53.840Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:06:08.370Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:06:24.040Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:07:22.939Z - normal: AddOne boot start
+2018-08-27T06:07:22.945Z - normal: AddOne boot end
+2018-08-27T06:07:22.955Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:07:22.965Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:07:22.966Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:07:22.969Z - failed: load script [/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js] failed : ReferenceError: pbview is not defined
+    at __define (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:8:14)
+    at /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:33:13
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:40:11)
+    at Object.<anonymous> (/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/temp/quick-scripts/assets/Script/models/PingBiView.js:43:3)
+    at Module._compile (module.js:571:32)
+    at Object.Module._extensions..js (module.js:580:10)
+    at Module.load (module.js:488:32)
+    at tryModuleLoad (module.js:447:12)
+    at Function.Module._load (module.js:439:3)
+    at Module.require (module.js:498:17)
+2018-08-27T06:07:23.056Z - warn: Script attached to "PingBiView" in prefab "UIHelpView.prefab" is missing or invalid. Detailed information:
+Node path: "HelpView/PingBiView"
+Asset url: "db://assets/resources/prefabs/UIHelpView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:07:23.097Z - warn: Script attached to "PingBiView" in prefab "UIStopView.prefab" is missing or invalid. Detailed information:
+Node path: "stopv/PingBiView"
+Asset url: "db://assets/resources/prefabs/UIStopView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:07:23.110Z - warn: Script attached to "back" in prefab "PingBiView.prefab" is missing or invalid. Detailed information:
+Node path: "back"
+Asset url: "db://assets/resources/prefabs/PingBiView.prefab"
+Script UUID: "f5a1e107-39a4-4ca7-8ede-b2a0f09bd51d"
+Class ID: "f5a1eEHOaRMp47esqDwm9Ud"
+
+2018-08-27T06:12:38.803Z - normal: AddOne boot start
+2018-08-27T06:12:38.811Z - normal: AddOne boot end
+2018-08-27T06:12:38.820Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:12:38.831Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:12:38.832Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:15:46.232Z - normal: AddOne boot start
+2018-08-27T06:15:46.234Z - normal: AddOne boot end
+2018-08-27T06:15:46.235Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:15:46.248Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:15:46.249Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:19:42.490Z - normal: AddOne boot start
+2018-08-27T06:19:42.493Z - normal: AddOne boot end
+2018-08-27T06:19:42.495Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:19:42.506Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:19:42.507Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:19:49.282Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:19:49.282Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:19:49.282Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:19:49.283Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:19:49.283Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:19:49.284Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:19:49.284Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:19:49.285Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:19:49.285Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:21:48.089Z - failed: [db-task][sync-changes] Failed to import asset /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/assets/Script/gamemain.js, message: Compile error: SyntaxError: /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/assets/Script/gamemain.js: Unexpected token (675:12)
+  673 |             rsg:function(){
+  674 |                 this.
+> 675 |             }
+      |             ^
+  676 |         });
+  677 |     },
+  678 |     /*
+    at Parser.pp$5.raise (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp$3.parseIdentifier (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4332:10)
+    at Parser.pp$3.parseSubscripts (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3517:30)
+    at Parser.pp$3.parseExprSubscripts (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3504:15)
+    at Parser.pp$3.parseMaybeUnary (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3474:19)
+    at Parser.pp$3.parseExprOps (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3404:19)
+    at Parser.pp$3.parseMaybeConditional (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3381:19)
+    at Parser.pp$3.parseMaybeAssign (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3344:19)
+    at Parser.pp$3.parseExpression (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3306:19)
+2018-08-27T06:21:48.668Z - normal: AddOne boot start
+2018-08-27T06:21:48.676Z - normal: AddOne boot end
+2018-08-27T06:21:48.688Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:21:48.701Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:21:48.701Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:21:49.189Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:21:49.190Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:21:49.190Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:21:49.191Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:21:49.191Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:21:49.192Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:21:49.193Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:21:49.193Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:21:49.194Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:22:29.698Z - normal: AddOne boot start
+2018-08-27T06:22:29.702Z - normal: AddOne boot end
+2018-08-27T06:22:29.720Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:22:29.734Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:22:29.735Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:22:30.156Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:22:30.156Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:22:30.157Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:22:30.157Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:22:30.158Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:22:30.158Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:22:30.159Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:22:30.159Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:22:30.160Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:26:03.175Z - normal: AddOne boot start
+2018-08-27T06:26:03.178Z - normal: AddOne boot end
+2018-08-27T06:26:03.192Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:26:03.204Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:26:03.205Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:26:03.783Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:26:03.784Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:26:03.784Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:26:03.785Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:26:03.785Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:26:03.786Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:26:03.786Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:26:03.787Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:26:03.787Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:15.281Z - normal: AddOne boot start
+2018-08-27T06:34:15.290Z - normal: AddOne boot end
+2018-08-27T06:34:15.302Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:34:15.319Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:34:15.319Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:34:15.829Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:15.829Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:15.830Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:15.831Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:15.832Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:15.834Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:15.835Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:15.835Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:15.836Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:27.535Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:27.536Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:27.536Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:27.536Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:27.537Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:27.537Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:27.537Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:27.538Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:34:27.538Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:13.669Z - normal: AddOne boot start
+2018-08-27T06:39:13.676Z - normal: AddOne boot end
+2018-08-27T06:39:13.687Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:39:13.700Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:39:13.700Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:39:14.100Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:14.100Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:14.100Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:14.101Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:14.101Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:14.101Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:14.102Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:14.102Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:14.102Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:39:28.894Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:28.894Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:28.895Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:28.895Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:28.895Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:28.897Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:28.897Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:28.898Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.304Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.304Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.305Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.305Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.305Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.306Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.306Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.307Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.801Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.801Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.802Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.802Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.804Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.806Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.807Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:39:29.808Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:09.208Z - normal: AddOne boot start
+2018-08-27T06:44:09.223Z - normal: AddOne boot end
+2018-08-27T06:44:09.244Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T06:44:09.266Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T06:44:09.267Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T06:44:10.296Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:44:10.297Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:44:10.298Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:44:10.299Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:44:10.300Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:44:10.301Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:44:10.303Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:44:10.304Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:44:10.305Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T06:44:10.919Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:10.919Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:10.919Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:10.920Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:10.920Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:10.922Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:10.922Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:10.924Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:11.408Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:11.408Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:11.409Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:11.409Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:11.409Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:11.411Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:11.411Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:11.412Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:15.765Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:15.766Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:15.766Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:15.766Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:15.767Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:15.769Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:15.769Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:15.771Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:20.571Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:20.571Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:20.571Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:20.572Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:20.572Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:20.573Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:20.574Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:20.575Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.017Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.017Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.018Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.018Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.019Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.020Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.020Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.021Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.624Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.625Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.626Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.626Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.626Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.628Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.628Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T06:44:21.630Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:10:45.015Z - normal: AddOne boot start
+2018-08-27T08:10:45.021Z - normal: AddOne boot end
+2018-08-27T08:10:45.101Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T08:10:45.101Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T08:10:45.102Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T08:10:45.424Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T08:10:45.425Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T08:10:45.425Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T08:10:45.425Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T08:10:45.426Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T08:10:45.426Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T08:10:45.426Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T08:10:45.427Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T08:10:45.427Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T08:37:13.499Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:13.505Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:13.506Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:13.506Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:13.507Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:13.509Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:13.510Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:13.513Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:15.342Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:15.343Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:15.344Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:15.344Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:15.345Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:15.346Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:15.347Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:15.350Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:16.383Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:16.384Z - warn: The Sprite referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:16.385Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:16.385Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:16.387Z - warn: The Label referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:16.390Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:16.390Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T08:37:16.392Z - warn: The Node referenced by component "gamemain" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T10:52:59.132Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:308179
+2018-08-27T12:19:09.414Z - info: shutdown preview server

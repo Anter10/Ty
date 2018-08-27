@@ -15,6 +15,33 @@ let ShareConfig = {
     FREE_GIFT_SHARE   : ['freegiftshare',true],      // 免费领取
 };
 
+// 游戏的基础配置
+let GameCenterConfig = {
+     //! 音效
+     SOUNDS: {
+         AWESOME: 'sounds/awesome.mp3',
+         COOL: 'sounds/cool.mp3',
+         GOOD: 'sounds/good.mp3',
+         MUSIC_LOGO: 'sounds/music_logo.mp3',
+         POPUPCLOSE: 'sounds/PopupClose.mp3',
+         UNBLIEVEABLE: 'sounds/unblieveable.mp3',
+         COMBO: [
+             'sounds/combo3.mp3',
+             'sounds/combo4.mp3',
+             'sounds/combo5.mp3',
+             'sounds/combo6.mp3',
+             'sounds/combo7.mp3',
+             'sounds/combo8.mp3',
+             'sounds/combo9.mp3',
+             'sounds/combo10.mp3',
+             'sounds/combo11.mp3',
+             'sounds/combo12.mp3',
+             'sounds/combo13.mp3',
+             'sounds/combo14.mp3',
+         ]
+     },
+};
+
 module.exports = {
     ShareConfig
 };

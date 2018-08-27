@@ -230,7 +230,9 @@ var gamemain = cc.Class({
         // 是哦用道具不消耗生命
         isUsingItem: false,
         // 当前是否在刷新mask
-        refreshingMask: false
+        refreshingMask: false,
+        // 此次点击是否有分数产生
+        hasProduceNewScore: false
     },
 
     /*
@@ -245,6 +247,7 @@ var gamemain = cc.Class({
         思路: 系统自带
     */
     onLoad: function onLoad() {
+        this.pjlShareButtton.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.POJILU_SHARE);
         // 初始分数显示为0
         this.scoreLabel.string = this.score;
         var self = this;
@@ -369,12 +372,32 @@ var gamemain = cc.Class({
     },
 
     fhBtnShow: function fhBtnShow() {
+        console.log("当前的版本信息 =" + tywx.SystemInfo.version + JSON.stringify(config));
         if (config.VCTR["v" + tywx.SystemInfo.version] && config.VCTR["v" + tywx.SystemInfo.version].auditing == true) {
             this.fuHuo.active = false;
             this.loseRestartGameBtn.active = true;
         } else {
             this.fuHuo.active = true;
             // this.loseRestartGameBtn.active = false;
+        }
+    },
+
+    /**
+     * 设置游戏状态
+     * 参数: state {Type: umber}
+     */
+    setWaitClickState: function setWaitClickState() {
+        // 判断连接数的大小 如果连接数大于不同的值则产生不同的效果
+        if (this.gamestate != config.gameState.waitclick) {
+            this.gamestate = config.gameState.waitclick;
+            if (this.lianjiNumber >= config.lianjiEffects.sgood && this.point > 0) {
+                this.dealLianJiNumber();
+            } else {
+                if (this.hadShowPjl == false && this.point > 0 && this.hasProduceNewScore == true) {
+                    this.hasProduceNewScore = false;
+                    this.pjlCallBack();
+                }
+            }
         }
     },
 
@@ -755,7 +778,10 @@ var gamemain = cc.Class({
             itemid = config.allitem[3].id;
         }
 
-        this.produceItem = { id: itemid, num: itemnum };
+        this.produceItem = {
+            id: itemid,
+            num: itemnum
+        };
         tywx.LOGE("当前产生的道具 " + JSON.stringify(this.produceItem));
     },
 
@@ -1044,6 +1070,12 @@ var gamemain = cc.Class({
             this._updateSubDomainCanvas();
         }
         switch (this.gamestate) {
+            /*case config.gameState.waitclick:{
+                if (this.hadShowPjl == false && this.point > 0) {
+                    this.pjlCallBack();
+                }
+                break;
+            }*/
             case config.gameState.checkclick:
                 {
                     this.resetAllMask();
@@ -1053,6 +1085,7 @@ var gamemain = cc.Class({
                     if (this.g_mask_samecnt >= config.minCanRemoveNumber) {
                         this.gamestatetime = config.move_time;
                         this.score += config.baseScore * (this.g_mask_samecnt - 1) * sc;
+                        this.hasProduceNewScore = true;
                         this.scoreLabel.string = this.score;
                         for (var i = 0; i < config.geziNumber; i++) {
                             // 判断是否已经标记 
@@ -1066,6 +1099,7 @@ var gamemain = cc.Class({
                         }
                         this.gamestate = config.gameState.domove;
                     } else {
+                        this.hasProduceNewScore = false;
                         if (this.isUsingItem == true) {
                             this.isUsingItem = false;
                         } else {
@@ -1076,12 +1110,13 @@ var gamemain = cc.Class({
                         if (this.point <= 0) {
                             this.gameOverCallBack();
                         } else {
-                            this.gamestate = config.gameState.waitclick;
+                            // this.gamestate = config.gameState.waitclick;
+                            this.setWaitClickState();
                             this.finalDealMask();
                         }
-                        if (this.hadShowPjl == false) {
-                            this.pjlCallBack();
-                        }
+                        // if (this.hadShowPjl == false) {
+                        //     this.pjlCallBack();
+                        // }
                     }
                     break;
                 }
@@ -1203,10 +1238,9 @@ var gamemain = cc.Class({
         }
 
         if (bfound == false) {
-            this.gamestate = config.gameState.waitclick;
+            // this.gamestate = config.gameState.waitclick;
+            this.setWaitClickState();
             this.finalDealMask();
-            // 判断连接数的大小 如果连接数大于不同的值则产生不同的效果
-            this.dealLianJiNumber();
         }
     },
 
@@ -1493,6 +1527,7 @@ var gamemain = cc.Class({
     */
     initgame: function initgame() {
         this.storeScore();
+        this.hasProduceNewScore = false;
         this.score = 0;
         this.scoreLabel.string = this.score;
         this.point = config.maxphy_value;
@@ -1549,16 +1584,16 @@ var gamemain = cc.Class({
     },
 
     /*
-       调用: 1: 处理游戏点击的时候调用 2:游戏格子连接的时候调用
-       功能: 递归寻找给定ID的格子 并在mask数组里面进行标记
-       参数: [
-           id: 每个格子的ID type: Number
-           step: 此次寻找的步数 type: Number
-       ]
-       返回值:[
-           无
-       ]
-       思路: 游戏逻辑需要 通过mask标记来找出每次连接的格子
+        调用: 1: 处理游戏点击的时候调用 2:游戏格子连接的时候调用
+        功能: 递归寻找给定ID的格子 并在mask数组里面进行标记
+        参数: [
+            id: 每个格子的ID type: Number
+            step: 此次寻找的步数 type: Number
+        ]
+        返回值:[
+            无
+        ]
+        思路: 游戏逻辑需要 通过mask标记来找出每次连接的格子
     */
     checkmaskbyid: function checkmaskbyid(id, step) {
         this.getAllmask()[id].step = step;
@@ -1570,18 +1605,18 @@ var gamemain = cc.Class({
     },
 
     /*
-       调用: 1: checkmaskbyid寻找可连的点
-       功能: 检查是否可以继续连接
-       参数: [
-           id: 每个格子的ID type: Number
-           step: 此次寻找的步数 type: Number
-           bj: 寻找边界 type: Number
-           add: 叠加数 上下加减5 左右加减1 type: Number
-       ]
-       返回值:[
-          无
-       ]
-       思路: 根据递归寻找下一个点的连接情况
+        调用: 1: checkmaskbyid寻找可连的点
+        功能: 检查是否可以继续连接
+        参数: [
+            id: 每个格子的ID type: Number
+            step: 此次寻找的步数 type: Number
+            bj: 寻找边界 type: Number
+            add: 叠加数 上下加减5 左右加减1 type: Number
+        ]
+        返回值:[
+           无
+        ]
+        思路: 根据递归寻找下一个点的连接情况
     */
     checkDirPaths: function checkDirPaths(id, step, bj, add) {
         if (Math.abs(add) == 4 && this.getAllmask()[id] != null && this.getAllmask()[id].y == bj) {
@@ -1606,15 +1641,15 @@ var gamemain = cc.Class({
     },
 
     /*
-       调用: 游戏初始的时候调用
-       功能: 改变格子的数字 通过mask
-       参数: [
-          无
-       ]
-       返回值:[
-          无
-       ]
-       思路: 游戏逻辑需要
+        调用: 游戏初始的时候调用
+        功能: 改变格子的数字 通过mask
+        参数: [
+           无
+        ]
+        返回值:[
+           无
+        ]
+        思路: 游戏逻辑需要
     */
     changenumbymask: function changenumbymask() {
         for (var i = 0; i < config.geziNumber; i++) {
@@ -1686,7 +1721,6 @@ var gamemain = cc.Class({
         思路: 游戏逻辑需要
     */
     refreshbymask: function refreshbymask() {
-
         for (var i = 0; i < config.geziNumber; i++) {
             if (this.getAllmask()[i].step != 9999999 && this.getAllmask()[i].step != 0) {
                 this.getAllmask()[i].from = -1;
@@ -1699,7 +1733,23 @@ var gamemain = cc.Class({
                     }
                     tmpid += 5;
                 }
+
+                var luck = false;
+                var sjs = Math.random();
+                var ttindex = 0;
+                for (var sindex = 1; sindex < config.luck_block.score.length - 1; sindex++) {
+                    if (this.score >= config.luck_block.score[sindex]) {
+                        ttindex = sindex;
+                        break;
+                    }
+                }
+                var tgl = config.luck_block.rate[ttindex];
+                if (sjs <= tgl) {
+                    luck = true;
+                }
+
                 if (topid != -1) {
+                    //
                     var dis = this.getAllmask()[topid].y - this.getAllmask()[i].y;
                     this.getAllgz()[i].block.posx = this.getAllgz()[topid].posx;
                     this.getAllgz()[i].block.posy = this.getAllgz()[topid].posy;
@@ -1708,21 +1758,13 @@ var gamemain = cc.Class({
                     this.getAllgz()[i].block.speed_keep = dis * config.gezi_pitch / config.move_time;
                     this.getAllgz()[i].block.adjustdrop();
                     this.getAllgz()[topid].step = 888;
-                    var sjs = Math.random();
-                    var ttindex = 0;
-                    for (var sindex = 1; sindex < config.luck_block.score.length - 1; sindex++) {
-                        if (this.score >= config.luck_block.score[sindex]) {
-                            ttindex = sindex;
-                            break;
-                        }
-                    }
-                    var tgl = config.luck_block.rate[ttindex];
-                    if (sjs <= tgl) {
-                        this.getAllgz()[i].setnum(this.getAllgz()[topid].num);
+                    var num = -1;
+                    if (luck) {
+                        num = this.getAllgz()[topid].num;
                     } else {
-                        var num = this.getPjNumberName(i);
-                        this.getAllgz()[i].setnum(num);
+                        num = this.getPjNumberName(i);
                     }
+                    this.getAllgz()[i].setnum(num);
                     this.getAllgz()[i].settoblockvalue();
                     this.getAllgz()[i].block.effectid = this.getAllgz()[topid].block.effectid;
                     this.getAllgz()[i].block.effecttime = this.getAllgz()[topid].block.effecttime;
@@ -1736,9 +1778,15 @@ var gamemain = cc.Class({
                     this.getAllgz()[i].block.id_dest = i;
                     this.getAllgz()[i].block.speed_keep = dis * config.gezi_pitch / config.move_time;
                     this.getAllgz()[i].block.adjustdrop();
-                    var num = this.getrandomnum();
+                    var num = -1;
+                    if (luck) {
+                        num = this.getPjNumberName(i);
+                        num = parseInt(num + 2.0 - 4.0 * Math.random());
+                        if (num <= 0) num = 1;
+                    } else {
+                        num = this.getrandomnum();
+                    }
                     this.getAllgz()[i].setnum(num);
-
                     this.getAllgz()[i].settoblockvalue();
                 }
             }
@@ -1795,15 +1843,15 @@ var gamemain = cc.Class({
     },
 
     /*
-       调用: 单独开启的线程调用
-       功能: 开启玩家即将超逾的好友显示 开始更新update
-       参数: [
-          无
-       ]
-       返回值:[
-          无
-       ]
-       思路: 游戏逻辑需要
+        调用: 单独开启的线程调用
+        功能: 开启玩家即将超逾的好友显示 开始更新update
+        参数: [
+           无
+        ]
+        返回值:[
+           无
+        ]
+        思路: 游戏逻辑需要
     */
     showMinFriend: function showMinFriend() {
         var self = this;
@@ -1860,15 +1908,15 @@ var gamemain = cc.Class({
     },
 
     /*
-       调用: update的时候调用 
-       功能: 刷新子域即将超越的玩家纹理
-       参数: [
-          无
-       ]
-       返回值:[
-          无
-       ]
-       思路: 游戏逻辑需要
+        调用: update的时候调用 
+        功能: 刷新子域即将超越的玩家纹理
+        参数: [
+           无
+        ]
+        返回值:[
+           无
+        ]
+        思路: 游戏逻辑需要
     */
     _updateSubDomainCanvas: function _updateSubDomainCanvas() {
         if (!this.tex || !tywx.publicwx) {

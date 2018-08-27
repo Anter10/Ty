@@ -1,0 +1,1 @@
+[{"__type__":"cc.Prefab","_name":"stopshow","data":{"__id__":1}},{"__type__":"cc.Node","_name":"stopshow","_level":1,"_prefab":{"__type__":"cc.PrefabInfo","root":{"__id__":1},"asset":{"__id__":0},"fileId":"7bQC8VBDRLEKsD++q0u1B3"},"_position":{"__type__":"cc.Vec3","x":4},"_scale":{"__type__":"cc.Vec3","x":1,"y":1,"z":1},"_localZOrder":31}]

@@ -2,9 +2,9 @@
   * 功能: 点击游戏暂停的时候弹出的界面
   * created by gyc on 2018-8-25
   */
-
+ var pibview = require("PingBiView");
  cc.Class({
-     extends: cc.Component,
+     extends: pibview,
 
      properties: {
 
@@ -19,6 +19,7 @@
       */
      init: function (param) {
          this.param = param;
+         console.log("paramHeloc  " + this.param.Heloc);
      },
 
      /**
@@ -28,7 +29,8 @@
       * 思路: 逻辑需要
       */
      goOnCallBack: function () {
-         this.param.goc ? this.param.goc() : tywx.ado.logWithColor("没有设置继续游戏回调");
+         this.param.goc !== undefined ? this.param.goc() : tywx.ado.logWithColor("没有设置继续游戏回调");
+         this.node.destroy();
      },
 
      /**
@@ -38,7 +40,8 @@
       * 思路: 逻辑需要
       */
      repeatStartGame: function () {
-         this.param.rsg ? this.param.rsg() : tywx.ado.logWithColor("没有设置重新开始游戏回调");
+         this.param.rsg !== undefined ? this.param.rsg() : tywx.ado.logWithColor("没有设置重新开始游戏回调");
+         this.node.destroy();
      },
 
      /**
@@ -48,7 +51,7 @@
       * 思路: 逻辑需要
       */
      goBackHome: function () {
-         this.param.goHomeCall ? this.param.ghc() : tywx.ado.logWithColor("没有设置返回首页回调");
+         this.param.ghc !== undefined ? this.param.ghc() : tywx.ado.logWithColor("没有设置返回首页回调");
      },
 
      /**
@@ -62,6 +65,8 @@
      },
 
 
+
+
      /**
       * 功能: 游戏加载完的逻辑处理
       * 调用: 界面加载完成
@@ -71,12 +76,7 @@
      onLoad: function () {
 
      },
-     
-     /**
-      * 关闭当前的界面
-      */
-     close:function(){
-         this.node.destroy();
-     }
+
+
 
  });

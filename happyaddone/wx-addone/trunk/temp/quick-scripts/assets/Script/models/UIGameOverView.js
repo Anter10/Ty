@@ -35,7 +35,30 @@ var UIGameOverView = cc.Class({
      * 参数: 无
      * 思路: 逻辑需要
      */
-    onLoad: function onLoad() {},
+    onLoad: function onLoad() {
+
+        console.log("当前的");
+        var fhbut = this.fuHuo.getComponent("ShareButton");
+        if (fhbut) {
+            var fhcall = function fhcall() {
+                self.recoverGame();
+            };
+            var hycall = function hycall() {
+                self.fhsbCallBack();
+            };
+
+            var errorcall = function errorcall() {
+                self.fhsbCallBack();
+            };
+            // 设置分享到组的成功回调
+            fhbut.setShareGroupCall(fhcall);
+            // 设置分享到好友的回调
+            fhbut.setSuccessCall(hycall);
+            // 设置分享失败后的回调
+            fhbut.setErrorCall(hycall);
+            fhbut.setShareConfig(tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE);
+        }
+    },
 
 
     /**
@@ -57,6 +80,7 @@ var UIGameOverView = cc.Class({
      */
     repeateCall: function repeateCall() {
         this.param.rcb ? this.param.rcb() : tywx.ado.logWithColor("游戏结束后点击重新开始按钮 没有设置重新开始按钮回调函数");
+        this.node.destroy();
     }
 
 });

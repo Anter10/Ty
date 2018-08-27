@@ -114,6 +114,24 @@ module.exports = function (id, parent) {
     };
 
     /*
+           调用: gamemain中调用
+           功能: 更新自身block的数据
+           参数: [
+               无
+           ]
+           返回值:[
+               无
+           ]
+           思路: 逻辑需要
+    */
+    this.settoblockAndNumber = function (num) {
+        if (this.block.posx != this.posx && this.block.posy != this.block.posy) {
+            this.block.setinfo(this.color, num);
+        }
+        this.block.setpos(this.posx, this.posy);
+    };
+
+    /*
          调用: gamemain中调用
          功能: 更新自身block的数据
          参数: [

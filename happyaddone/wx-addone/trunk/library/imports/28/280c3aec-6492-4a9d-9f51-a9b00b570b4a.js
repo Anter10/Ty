@@ -42,7 +42,10 @@ var gamemain = cc.Class({
             default: [],
             type: cc.Node
         },
-
+        stopView: {
+            default: null,
+            type: cc.Node
+        },
         tupojilu: {
             default: null,
             type: cc.Node
@@ -242,6 +245,7 @@ var gamemain = cc.Class({
         思路: 系统自带
     */
     onLoad: function onLoad() {
+        this.pjlShareButtton.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.POJILU_SHARE);
         // 初始分数显示为0
         this.scoreLabel.string = this.score;
         var self = this;
@@ -657,13 +661,11 @@ var gamemain = cc.Class({
         思路: 逻辑需要
     */
     showStopView: function showStopView() {
-        if (this.stopView) {
-            this.stopView.active = !this.stopView.active ? true : false;
-            if (this.stopView.active == false) {
-                this.stopV.active = false;
-                this.pjlView.active = false;
-                this.openboxview.active = false;
-            }
+        this.stopView.active = !this.stopView.active ? true : false;
+        if (this.stopView.active == false) {
+            this.stopV.active = false;
+            this.pjlView.active = false;
+            this.openboxview.active = false;
         }
     },
 
@@ -1046,6 +1048,12 @@ var gamemain = cc.Class({
             this._updateSubDomainCanvas();
         }
         switch (this.gamestate) {
+            case config.gameState.waitclick:
+                {
+                    if (this.hadShowPjl == false && this.point > 0) {
+                        this.pjlCallBack();
+                    }
+                }
             case config.gameState.checkclick:
                 {
                     this.resetAllMask();
@@ -1081,9 +1089,7 @@ var gamemain = cc.Class({
                             this.gamestate = config.gameState.waitclick;
                             this.finalDealMask();
                         }
-
-                        // 游戏完了 破纪录就不用展示了
-                        if (this.hadShowPjl == false && this.point > 0) {
+                        if (this.hadShowPjl == false) {
                             this.pjlCallBack();
                         }
                     }
@@ -1695,7 +1701,6 @@ var gamemain = cc.Class({
         思路: 游戏逻辑需要
     */
     refreshbymask: function refreshbymask() {
-
         for (var i = 0; i < config.geziNumber; i++) {
             if (this.getAllmask()[i].step != 9999999 && this.getAllmask()[i].step != 0) {
                 this.getAllmask()[i].from = -1;
@@ -1708,7 +1713,23 @@ var gamemain = cc.Class({
                     }
                     tmpid += 5;
                 }
+
+                var luck = false;
+                var sjs = Math.random();
+                var ttindex = 0;
+                for (var sindex = 1; sindex < config.luck_block.score.length - 1; sindex++) {
+                    if (this.score >= config.luck_block.score[sindex]) {
+                        ttindex = sindex;
+                        break;
+                    }
+                }
+                var tgl = config.luck_block.rate[ttindex];
+                if (sjs <= tgl) {
+                    luck = true;
+                }
+
                 if (topid != -1) {
+                    //
                     var dis = this.getAllmask()[topid].y - this.getAllmask()[i].y;
                     this.getAllgz()[i].block.posx = this.getAllgz()[topid].posx;
                     this.getAllgz()[i].block.posy = this.getAllgz()[topid].posy;
@@ -1717,21 +1738,13 @@ var gamemain = cc.Class({
                     this.getAllgz()[i].block.speed_keep = dis * config.gezi_pitch / config.move_time;
                     this.getAllgz()[i].block.adjustdrop();
                     this.getAllgz()[topid].step = 888;
-                    var sjs = Math.random();
-                    var ttindex = 0;
-                    for (var sindex = 1; sindex < config.luck_block.score.length - 1; sindex++) {
-                        if (this.score >= config.luck_block.score[sindex]) {
-                            ttindex = sindex;
-                            break;
-                        }
-                    }
-                    var tgl = config.luck_block.rate[ttindex];
-                    if (sjs <= tgl) {
-                        this.getAllgz()[i].setnum(this.getAllgz()[topid].num);
+                    var num = -1;
+                    if (luck) {
+                        num = this.getAllgz()[topid].num;
                     } else {
-                        var num = this.getPjNumberName(i);
-                        this.getAllgz()[i].setnum(num);
+                        num = this.getPjNumberName(i);
                     }
+                    this.getAllgz()[i].setnum(num);
                     this.getAllgz()[i].settoblockvalue();
                     this.getAllgz()[i].block.effectid = this.getAllgz()[topid].block.effectid;
                     this.getAllgz()[i].block.effecttime = this.getAllgz()[topid].block.effecttime;
@@ -1745,9 +1758,15 @@ var gamemain = cc.Class({
                     this.getAllgz()[i].block.id_dest = i;
                     this.getAllgz()[i].block.speed_keep = dis * config.gezi_pitch / config.move_time;
                     this.getAllgz()[i].block.adjustdrop();
-                    var num = this.getrandomnum();
+                    var num = -1;
+                    if (luck) {
+                        num = this.getPjNumberName(i);
+                        num = parseInt(num + 2.0 - 4.0 * Math.random());
+                        if (num <= 0) num = 1;
+                    } else {
+                        num = this.getrandomnum();
+                    }
                     this.getAllgz()[i].setnum(num);
-
                     this.getAllgz()[i].settoblockvalue();
                 }
             }

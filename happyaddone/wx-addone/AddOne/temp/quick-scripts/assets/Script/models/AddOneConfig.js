@@ -131,7 +131,7 @@ var config = {
 
 	// 审核通过后 将版本号v101修改成对应的版本 auditing 设置成false即可
 	VCTR: {
-		v101: {
+		v102: {
 			auditing: true
 		},
 		default: {

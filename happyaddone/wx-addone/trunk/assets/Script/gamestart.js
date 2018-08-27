@@ -190,19 +190,15 @@ var gamestart = cc.Class({
             if (groupBtnComponent) {
                 groupBtnComponent.setShareConfig(tywx.ado.Constants.ShareConfig.RANK_SHARE);
                 groupBtnComponent.setShareGroupCall(function (data) {
-                    console.log("群分享当前的文档")
-                    if (self.showPhb) {
-                        self.phbView.active = false;
-                        self.showPhb = false;
-                    } else {
-                        self.phbView.active = true;
-                        self.showPhb = true;
-                    }
-                    window.wx.postMessage({
-                        method: 2,
-                        MAIN_MENU_NUM: "x1",
-                        shareTicket: data.shareTickets[0]
+                    console.log("群分享当前的文档" + JSON.stringify(data));
+                    tywx.ado.UIManager.showUIByConfig(tywx.ado.ResConfig.PrefabConfig.PREFAB_UIPhbView, {
+                        Heloc: "ccc"
                     });
+                    // window.wx.postMessage({
+                    //     method: 2,
+                    //     MAIN_MENU_NUM: "x1",
+                    //     shareTicket: data.shareTickets[0]
+                    // });
 
                 })
 
@@ -229,14 +225,7 @@ var gamestart = cc.Class({
         } else {
             console.log("当前分数不存在")
         }
-
-        // cc.loader.downloader.loadSubpackage("subone",function(error){
-        //     if(error){
-        //         console.log("下载分包失败");
-        //         return;
-        //     }
-        //     console.log("下载分包成功");
-        // });
+ 
 
 
         //  游戏的点击逻辑

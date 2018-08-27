@@ -32,6 +32,27 @@
        */
       onLoad() {
 
+        console.log("当前的");
+        let fhbut = this.fuHuo.getComponent("ShareButton");
+        if (fhbut) {
+            var fhcall = function () {
+                self.recoverGame();
+            }
+            var hycall = function () {
+                self.fhsbCallBack();
+            }
+
+            var errorcall = function () {
+                self.fhsbCallBack();
+            }
+            // 设置分享到组的成功回调
+            fhbut.setShareGroupCall(fhcall);
+            // 设置分享到好友的回调
+            fhbut.setSuccessCall(hycall);
+            // 设置分享失败后的回调
+            fhbut.setErrorCall(hycall);
+            fhbut.setShareConfig(tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE);
+        }
       },
 
 
@@ -56,6 +77,7 @@
        */
       repeateCall: function () {
           this.param.rcb ? this.param.rcb() : tywx.ado.logWithColor("游戏结束后点击重新开始按钮 没有设置重新开始按钮回调函数");
+          this.node.destroy();
       }
 
   });

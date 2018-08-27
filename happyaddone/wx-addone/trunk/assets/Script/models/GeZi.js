@@ -125,7 +125,9 @@ module.exports = function(id,parent){
        this.settoblockAndNumber = function (num) {
            if(this.block.posx != this.posx && this.block.posy != this.block.posy){
               this.block.setinfo(this.color, num);
+              console.log("位置不对的时候补出来的数 = " + num);
            }
+        //    console.log("位置相同的时候补出来的数 = " + num);
            this.block.setpos(this.posx, this.posy);
        }
     

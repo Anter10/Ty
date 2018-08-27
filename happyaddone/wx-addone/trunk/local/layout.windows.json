@@ -5,10 +5,10 @@
       "main": true,
       "url": "app://editor/index.html",
       "windowType": "dockable",
-      "x": 51,
-      "y": 23,
+      "x": 703,
+      "y": 384,
       "width": 1280,
-      "height": 861,
+      "height": 877,
       "layout": {
         "children": [
           {
@@ -18,7 +18,7 @@
                 "children": [
                   "hierarchy"
                 ],
-                "height": 269,
+                "height": 472.984375,
                 "type": "panel",
                 "width": 426
               },
@@ -27,12 +27,12 @@
                 "children": [
                   "assets"
                 ],
-                "height": 498,
+                "height": 310,
                 "type": "panel",
                 "width": 426
               }
             ],
-            "height": 770,
+            "height": 786,
             "type": "dock-v",
             "width": 426
           },
@@ -43,7 +43,7 @@
                 "children": [
                   "scene"
                 ],
-                "height": 501,
+                "height": 511.984375,
                 "type": "panel",
                 "width": 538
               },
@@ -53,12 +53,12 @@
                   "console",
                   "timeline"
                 ],
-                "height": 266,
+                "height": 271,
                 "type": "panel",
                 "width": 538
               }
             ],
-            "height": 770,
+            "height": 786,
             "type": "dock-v",
             "width": 538
           },
@@ -67,7 +67,7 @@
             "children": [
               "inspector"
             ],
-            "height": 770,
+            "height": 786,
             "type": "panel",
             "width": 304
           }
@@ -76,7 +76,6 @@
       },
       "panels": [
         "hierarchy",
-        "node-library",
         "console",
         "timeline",
         "inspector",
@@ -88,7 +87,7 @@
   },
   "panels": {
     "builder": {
-      "x": 779,
+      "x": 614,
       "y": 23,
       "width": 500,
       "height": 603

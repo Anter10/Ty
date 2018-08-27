@@ -8,9 +8,9 @@ cc._RF.push(module, '830b6gVQ9dAzrTy7ndBYUHj', 'UIStopView', __filename);
  * 功能: 点击游戏暂停的时候弹出的界面
  * created by gyc on 2018-8-25
  */
-
+var pibview = require("PingBiView");
 cc.Class({
-  extends: cc.Component,
+  extends: pibview,
 
   properties: {},
 
@@ -22,6 +22,7 @@ cc.Class({
    */
   init: function init(param) {
     this.param = param;
+    console.log("paramHeloc  " + this.param.Heloc);
   },
 
   /**
@@ -31,7 +32,8 @@ cc.Class({
    * 思路: 逻辑需要
    */
   goOnCallBack: function goOnCallBack() {
-    this.param.goc ? this.param.goc() : tywx.ado.logWithColor("没有设置继续游戏回调");
+    this.param.goc !== undefined ? this.param.goc() : tywx.ado.logWithColor("没有设置继续游戏回调");
+    this.node.destroy();
   },
 
   /**
@@ -41,7 +43,8 @@ cc.Class({
    * 思路: 逻辑需要
    */
   repeatStartGame: function repeatStartGame() {
-    this.param.rsg ? this.param.rsg() : tywx.ado.logWithColor("没有设置重新开始游戏回调");
+    this.param.rsg !== undefined ? this.param.rsg() : tywx.ado.logWithColor("没有设置重新开始游戏回调");
+    this.node.destroy();
   },
 
   /**
@@ -51,7 +54,7 @@ cc.Class({
    * 思路: 逻辑需要
    */
   goBackHome: function goBackHome() {
-    this.param.goHomeCall ? this.param.ghc() : tywx.ado.logWithColor("没有设置返回首页回调");
+    this.param.ghc !== undefined ? this.param.ghc() : tywx.ado.logWithColor("没有设置返回首页回调");
   },
 
   /**
@@ -70,14 +73,7 @@ cc.Class({
    * 参数: 无
    * 思路: 系统自带
    */
-  onLoad: function onLoad() {},
-
-  /**
-   * 关闭当前的界面
-   */
-  close: function close() {
-    this.node.destroy();
-  }
+  onLoad: function onLoad() {}
 
 });
 
