@@ -1,0 +1,68 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "maotouying",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "maotouying",
+    "_children": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__type__": "cc.PrefabInfo",
+      "root": {
+        "__id__": 1
+      },
+      "asset": {
+        "__uuid__": "53/Mx6aE1NNbzQp7b+x3Ir"
+      },
+      "fileId": "2e+V4LzshDcJPQw9uWxdiY"
+    },
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 212,
+      "y": 120
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "elsfk_spine_mty",
+    "_parent": {
+      "__id__": 1
+    },
+    "_components": [
+      {
+        "__type__": "sp.Skeleton",
+        "node": {
+          "__id__": 2
+        },
+        "defaultAnimation": "stand",
+        "_premultipliedAlpha": false,
+        "_N$skeletonData": {
+          "__uuid__": "47OHGIbdRGyq8tkKKwfwzE"
+        }
+      }
+    ],
+    "_prefab": {
+      "__type__": "cc.PrefabInfo",
+      "root": {
+        "__id__": 1
+      },
+      "asset": {
+        "__uuid__": "53/Mx6aE1NNbzQp7b+x3Ir"
+      },
+      "fileId": "54q6a9eSZIFpBIfLf4aRiM"
+    },
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 68,
+      "y": 267
+    }
+  }
+]

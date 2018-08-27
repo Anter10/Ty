@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "resurrection",
+    "texture": "be9b2f10-987c-4335-af00-5577ea99e55d",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      84,
+      249
+    ],
+    "offset": [
+      -22,
+      3.5
+    ],
+    "originalSize": [
+      128,
+      256
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "els_magic_bottle_back",
+    "texture": "b4d51c9c-f3c4-48b4-be5a-42cef9463844",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      123,
+      104
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      123,
+      104
+    ]
+  }
+}

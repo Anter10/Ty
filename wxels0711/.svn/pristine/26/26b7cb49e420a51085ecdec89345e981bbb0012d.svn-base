@@ -1,0 +1,30 @@
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        zhuBaoBlocks: [cc.Node],
+        zhuBaoAnimations: [cc.Animation],
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+        //this.hideAllZhuBaoAnimation();
+    },
+
+    start () {
+
+    },
+
+    // update (dt) {},
+    showZhuBaoAnimationByIdx(idx){
+        this.hideAllZhuBaoAnimation();
+        this.zhuBaoBlocks[idx].active = true;
+    },
+    hideAllZhuBaoAnimation(){
+        this.zhuBaoBlocks.forEach(n => {
+            n.active = false;
+        });
+    },
+});

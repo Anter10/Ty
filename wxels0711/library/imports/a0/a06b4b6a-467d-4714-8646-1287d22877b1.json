@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "xin2048_tx_huode02",
+    "texture": "1e76780d-087f-4ffb-9f15-a0a5e2538335",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      590,
+      594
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      590,
+      594
+    ]
+  }
+}

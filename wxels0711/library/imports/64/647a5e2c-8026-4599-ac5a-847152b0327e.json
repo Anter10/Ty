@@ -1,0 +1,85 @@
+{
+  "__type__": "cc.BitmapFont",
+  "_name": "rank_font_01",
+  "_objFlags": 0,
+  "_native": "",
+  "fntDataStr": "",
+  "spriteFrame": {
+    "__uuid__": "795cd0b7-46eb-4071-a964-f2be12af1069"
+  },
+  "fontSize": 32,
+  "_fntConfig": {
+    "commonHeight": 46,
+    "fontSize": 32,
+    "atlasName": "rank_font_01.png",
+    "fontDefDictionary": {
+      "9": {
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "xOffset": 0,
+        "yOffset": 0,
+        "xAdvance": 176
+      },
+      "32": {
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 0,
+          "height": 0
+        },
+        "xOffset": 0,
+        "yOffset": 0,
+        "xAdvance": 22
+      },
+      "21697": {
+        "rect": {
+          "x": 47,
+          "y": 48,
+          "width": 41,
+          "height": 44
+        },
+        "xOffset": 0,
+        "yOffset": 1,
+        "xAdvance": 41
+      },
+      "25103": {
+        "rect": {
+          "x": 47,
+          "y": 0,
+          "width": 44,
+          "height": 47
+        },
+        "xOffset": 0,
+        "yOffset": -1,
+        "xAdvance": 44
+      },
+      "28216": {
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 46,
+          "height": 46
+        },
+        "xOffset": 0,
+        "yOffset": 0,
+        "xAdvance": 46
+      },
+      "31036": {
+        "rect": {
+          "x": 0,
+          "y": 47,
+          "width": 46,
+          "height": 47
+        },
+        "xOffset": 0,
+        "yOffset": -1,
+        "xAdvance": 46
+      }
+    },
+    "kerningDict": {}
+  }
+}

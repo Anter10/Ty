@@ -1,0 +1,18 @@
+info face="Victoryfailed_sl.fnt" size=32 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1
+common lineHeight=94 base=26 scaleW=512 scaleH=256 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
+page id=0 file="Victoryfailed_sl.png"
+chars count=12
+char id=24050 x=375 y=0 width=87 height=84 xoffset=0 yoffset=6 xadvance=87 page=0 chnl=0 letter="已"
+char id=32463 x=188 y=93 width=93 height=90 xoffset=0 yoffset=2 xadvance=93 page=0 chnl=0 letter="经"
+char id=24685 x=189 y=0 width=92 height=90 xoffset=0 yoffset=2 xadvance=92 page=0 chnl=0 letter="恭"
+char id=21916 x=282 y=0 width=92 height=88 xoffset=0 yoffset=3 xadvance=92 page=0 chnl=0 letter="喜"
+char id=32988 x=95 y=0 width=93 height=92 xoffset=0 yoffset=1 xadvance=93 page=0 chnl=0 letter="胜"
+char id=21033 x=374 y=89 width=88 height=88 xoffset=0 yoffset=5 xadvance=88 page=0 chnl=0 letter="利"
+char id=36890 x=94 y=93 width=93 height=87 xoffset=0 yoffset=5 xadvance=93 page=0 chnl=0 letter="通"
+char id=20851 x=282 y=89 width=91 height=92 xoffset=0 yoffset=2 xadvance=91 page=0 chnl=0 letter="关"
+char id=33719 x=0 y=93 width=93 height=93 xoffset=0 yoffset=1 xadvance=93 page=0 chnl=0 letter="获"
+char id=24471 x=0 y=0 width=94 height=92 xoffset=0 yoffset=2 xadvance=94 page=0 chnl=0 letter="得"
+char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=64 page=0 chnl=0 letter=" "
+char id=9 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=512 page=0 chnl=0 letter="	"
+
+kernings count=0

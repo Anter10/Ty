@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "guangsu_035",
+    "texture": "2f871e83-b1b9-4ead-831d-38e5c758f4ef",
+    "atlas": "",
+    "rect": [
+      2,
+      0,
+      126,
+      128
+    ],
+    "offset": [
+      1,
+      0
+    ],
+    "originalSize": [
+      128,
+      128
+    ]
+  }
+}

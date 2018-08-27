@@ -1,0 +1,8 @@
+{
+    "quality_min": "40",
+    "quality_max": "50",
+    "no_tinypng": [
+        "FangKuai_an_bg_guang.png",
+        "FangKuai_shengli_bg_guang.png"
+    ]
+}

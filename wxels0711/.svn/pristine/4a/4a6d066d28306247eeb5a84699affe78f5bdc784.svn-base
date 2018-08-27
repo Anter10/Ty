@@ -1,0 +1,208 @@
+let ELSEvent = require('../core/ElsEvents.js');
+let els = require('../core/els.js');
+let ElsUtils = require('../core/ElsUtils.js');
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        nodeGiftBox: cc.Node,
+        nodeGiftProp: cc.Node,
+        animGiftBox: cc.Animation,
+        animGiftBoxRotate: cc.Animation,
+        animGiftProp: cc.Animation,
+        animGiftPropRotate: cc.Animation,
+        nodePropDisplays: [cc.Node],
+        nodeBtnClose: cc.Node,
+        particlesInGiftBox: [cc.ParticleSystem],
+        particlesInGiftProp: [cc.ParticleSystem],
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+        this.nodeGiftBox.active = false;
+        this.nodeGiftProp.active = false;
+        this.nodeBtnClose.active = false;
+        this.isTouchEnable = true;
+
+        let self = this;
+        this.animGiftBox.on('finished', (num, string)=>{
+            console.log('show gift box finished',num, string);
+            self.animGiftBoxRotate.play();
+        }, this);
+        this.animGiftProp.on('finished', (num, string)=>{
+            console.log('show gift box finished',num, string);
+            self.animGiftPropRotate.play();
+        }, this);
+        // tywx.NotificationCenter.listen(ELSEvent.ELS_EVENT_ADD_ITEM_SUCCESS, this._MsgAddItem, this);
+        
+    },
+
+    start () {
+    },
+
+    showParticlesInGiftBox(){
+        this.particlesInGiftBox.forEach(particle=>{
+            particle.resetSystem();
+        });
+    },
+    hideParticlesInGiftBox(){
+        this.particlesInGiftBox.forEach(particle=>{
+            particle.stopSystem();
+        });
+    },
+    showParticlesInGiftProp(){
+        this.particlesInGiftProp.forEach(particle=>{
+            particle.resetSystem();
+        });
+    },
+    hideParticlesInGiftProp(){
+        this.particlesInGiftProp.forEach(particle=>{
+            particle.stopSystem();
+        });
+    },
+
+    _MsgAddItem(params){
+        // tywx.UserInfo.user_add_item = -1;
+        // this.hideGiftBox();
+        // this.showGiftProp();
+        // let self = this;
+        // let _sid = params.result.itemId;
+        // this.nodePropDisplays.forEach(function (_node, _i) {
+        //     let _s = tywx.UserInfo.local2Server(_i);
+        //     _node.active = false;
+        //     if (_sid.indexOf(_s) !== -1) { // 包含 item:1017 1017
+        //         _node.active = true;
+        //     }
+        // });
+        //! 添加道具
+        // tywx.NotificationCenter.trigger(ELSEvent.ELS_EVENT_ADD_PROP,params);
+    },
+
+    _locAddItem(_itemId) {
+        this.hideGiftBox();
+        this.showGiftProp();
+        let self = this;
+        // let _itemId = params.result.itemId;
+        this.nodePropDisplays.forEach(function (_node, _i) {
+            let _s = tywx.UserInfo.local2Server(_i);
+            _node.active = false;
+            if (parseInt(_s) === parseInt(_itemId)) { // 包含 item:1017 1017
+                _node.active = true;
+            }
+        });
+    },
+
+    onDestroy(){
+        console.log('els_gift_prop_view   on destroy');
+        // tywx.NotificationCenter.ignore(ELSEvent.ELS_EVENT_GIFT_PROP, this.onGiftProp, this);
+        tywx.NotificationCenter.ignoreScope(this);
+
+    },
+    init(game){
+        this.game = game;
+        console.log('init els gift prop view ===>',this.game.config);
+    },
+    showGiftBox(){
+        this.isTouchEnable = true;
+        this.nodeGiftBox.active = true;
+        this.nodeBtnClose.active = true;
+        this.nodeGiftProp.active = false;
+        this.animGiftBox.play();
+        this.game.pauseGame();
+        this.game.model.playMusic(els.ELS_VOICE.BOX_MUSIC, false);
+        this.showParticlesInGiftBox();
+    },
+    hideGiftBox(){
+        this.isTouchEnable = false;
+        this.nodeGiftBox.active = false;
+        this.animGiftBox.stop();
+        this.animGiftBoxRotate.stop();
+        this.hideParticlesInGiftBox();
+    },
+    showGiftProp(){
+        this.nodeGiftProp.active = true;
+        this.animGiftProp.play();
+        this.showParticlesInGiftProp();
+    },
+    hideGiftProp(){
+        this.nodeGiftProp.active = false;
+        this.animGiftProp.stop();
+        this.animGiftPropRotate.stop();
+        this.hideParticlesInGiftProp();
+    },
+    // //! {type:0,num:1}
+    // onGiftProp(param){
+    //     this.hideGiftBox();
+    //     this.showGiftProp();
+    //     for(let prop of this.nodePropDisplays){
+    //         prop.active = false;
+    //     }
+    //     this.nodePropDisplays[param.type].active = true;
+    //     //! 添加道具
+    //     tywx.NotificationCenter.trigger(ELSEvent.ELS_EVENT_ADD_PROP,param);
+    //
+    // },
+    onBtnShareBox(){
+        console.log('onBtnShareBox===>',this.game.config);
+        if(!this.isTouchEnable) return;
+        this.isTouchEnable = false;
+        if(els.CONFIG.openEmergency){  
+            let self = this;
+            tywx.ShareInterface.shareMsg({
+                type: els.ELS_SHRAE_TYPE.SHARE_GIFT_PROP,
+                successCallback:(result)=>{
+                    console.log('onBtnTestShare',result);
+                    ElsUtils.isCanShare2GroupByTicket(
+                        els.SHARE_LOCK_TAG.TAG_REVIVE_AND_GIFT_PROP,
+                        result,
+                        ()=>{
+                            console.log('onBtnShareBox===>分享成功');
+                            let _itemId = tywx.MSG.addItems(6);
+                            if (tywx.TCPClient.connectStatus !== tywx.TCPClient.CONNECT_STATUS_OK) {
+                                tywx.UserInfo.user_add_item = _itemId;
+                            }
+                            self._locAddItem(_itemId);
+                        },()=>{
+                            console.log('onBtnShareBox===>分享失败===.分享到不同的群');
+                            tywx.Util.wechatShowModal("获得失败，请分享到不同群", false, "确认");
+                            //self.onShareFailed();
+                            self.isTouchEnable = true;
+                        }
+                    ); 
+                },
+                failCallback:(result)=>{
+                    self.isTouchEnable = true;
+                    if (result.errMsg === "shareAppMessage:cancel") {
+                        console.log("分享取消");
+                        return;
+                    }
+                    console.log('分享失败');
+                    self.onShareFailed();
+
+                }
+            });  
+        }
+        else{
+            let _itemId = tywx.MSG.addItems(6);
+            this._locAddItem(_itemId);
+        }
+    },
+    onShareFailed(){
+        //! 显示关闭按钮
+        this.nodeBtnClose.active = true;
+    },
+    onBtnShareProp(){
+        //this.node.destroy();
+        tywx.NotificationCenter.trigger(ELSEvent.ELS_EVENT_HIDE_GIFT_PROP,{});
+        this.node.active = false;
+        this.nodeBtnClose.active = false;
+        // tywx.NotificationCenter.ignore(ELSEvent.ELS_EVENT_GIFT_PROP, this.onGiftProp, this);
+    },
+
+    // update (dt) {},
+    motaiCallback(){
+
+    },
+
+});

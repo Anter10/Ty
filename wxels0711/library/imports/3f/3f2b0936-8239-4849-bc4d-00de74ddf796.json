@@ -1,0 +1,53 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_name": "elst.plist",
+  "_objFlags": 0,
+  "_native": "",
+  "_spriteFrames": {
+    "close": {
+      "__uuid__": "4dd8b4f0-e49c-40b9-b441-00ec87fde8bf"
+    },
+    "fanhuiMain": {
+      "__uuid__": "7e287f79-7d84-498b-b5ac-8b472c6606b5"
+    },
+    "fenxiang": {
+      "__uuid__": "bf609d50-d5ce-4579-9637-b657d8a35d5d"
+    },
+    "jxgame": {
+      "__uuid__": "fbf35afc-c9d9-475c-bbe4-f0074c236d8d"
+    },
+    "miyy": {
+      "__uuid__": "fefc3bd8-c129-437d-bc84-0f5c805a0685"
+    },
+    "pwdb": {
+      "__uuid__": "a6fb7bdb-e77d-41e9-8b95-7af4b4bdc8f9"
+    },
+    "pweibg": {
+      "__uuid__": "67d79c69-05c2-4c32-8b52-f07f7d706b3f"
+    },
+    "shengc": {
+      "__uuid__": "952bd8e3-0a95-4506-a0e8-6b2fbf54f877"
+    },
+    "shengyin": {
+      "__uuid__": "b7861914-3cbc-4237-bbab-827f9af79c03"
+    },
+    "slsbbutton": {
+      "__uuid__": "1df9895e-03cd-40df-9ad8-1eeecef2379d"
+    },
+    "txtbg": {
+      "__uuid__": "72f3315a-bd6b-499c-820d-a787827c06dd"
+    },
+    "vsbg": {
+      "__uuid__": "14c0fc2f-dfa0-4900-8c10-33cea40af297"
+    },
+    "xiaobj": {
+      "__uuid__": "b3efa3df-7b64-421c-b85c-646a80765cbd"
+    },
+    "yiwen": {
+      "__uuid__": "ef7917d5-61e7-4250-a139-2267bc8a82dc"
+    },
+    "zanting": {
+      "__uuid__": "9f18bff2-7833-48d0-a355-2a0b97ed2bb9"
+    }
+  }
+}

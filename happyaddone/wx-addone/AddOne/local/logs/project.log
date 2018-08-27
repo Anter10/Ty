@@ -1,60 +1,60 @@
-2018-08-25T08:05:27.534Z - normal: Load ~/.CocosCreator/settings.json
-2018-08-25T08:05:27.538Z - normal: checking language setting...
-2018-08-25T08:05:27.538Z - normal: Language: zh
-2018-08-25T08:05:28.163Z - success: protocol editor-framework registered
-2018-08-25T08:05:28.163Z - success: protocol app registered
-2018-08-25T08:05:28.164Z - success: protocol theme registered
-2018-08-25T08:05:28.164Z - success: protocol packages registered
-2018-08-25T08:05:28.164Z - success: protocol unpack registerred
-2018-08-25T08:05:28.164Z - success: protocol disable-commonjs registerred
-2018-08-25T08:05:28.356Z - normal: connected!
-2018-08-25T08:05:28.359Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
-2018-08-25T08:05:28.364Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
-2018-08-25T08:05:28.368Z - normal: Initializing Cocos2d
-2018-08-25T08:05:29.165Z - normal: Initializing Asset Database
-2018-08-25T08:05:29.219Z - success: protocol uuid registerred
-2018-08-25T08:05:29.220Z - success: protocol db registerred
-2018-08-25T08:05:29.220Z - success: protocol thumbnail registerred
-2018-08-25T08:05:29.220Z - normal: Loading editor/builtin packages
-2018-08-25T08:05:29.404Z - success: assets loaded
-2018-08-25T08:05:29.408Z - success: builder loaded
-2018-08-25T08:05:29.410Z - success: cocos-analytics loaded
-2018-08-25T08:05:29.416Z - success: console loaded
-2018-08-25T08:05:29.463Z - success: fb-instant-games loaded
-2018-08-25T08:05:29.472Z - success: hierarchy loaded
-2018-08-25T08:05:29.477Z - success: inspector loaded
-2018-08-25T08:05:29.479Z - success: keystore loaded
-2018-08-25T08:05:29.485Z - success: node-library loaded
-2018-08-25T08:05:29.487Z - success: package-asset loaded
-2018-08-25T08:05:29.489Z - success: preferences loaded
-2018-08-25T08:05:29.494Z - success: project-exporter loaded
-2018-08-25T08:05:29.521Z - success: project-importer loaded
-2018-08-25T08:05:29.527Z - success: project-settings loaded
-2018-08-25T08:05:29.535Z - success: ui-kit loaded
-2018-08-25T08:05:29.540Z - success: scene loaded
-2018-08-25T08:05:29.543Z - success: sprite-editor loaded
-2018-08-25T08:05:29.549Z - success: store loaded
-2018-08-25T08:05:29.555Z - success: timeline loaded
-2018-08-25T08:05:29.556Z - normal: Loading builtin packages
-2018-08-25T08:05:29.561Z - success: asset-db-debugger loaded
-2018-08-25T08:05:29.562Z - success: color-picker loaded
-2018-08-25T08:05:29.563Z - success: jsb-adapter loaded
-2018-08-25T08:05:29.567Z - success: package-manager loaded
-2018-08-25T08:05:29.568Z - success: qqplay-adapter loaded
-2018-08-25T08:05:29.577Z - success: sdkbox loaded
-2018-08-25T08:05:29.583Z - success: tester loaded
-2018-08-25T08:05:29.589Z - success: ui-grid loaded
-2018-08-25T08:05:29.595Z - success: ui-kit-preview-extra loaded
-2018-08-25T08:05:29.598Z - success: ui-kit-preview loaded
-2018-08-25T08:05:29.602Z - success: ui-tree loaded
-2018-08-25T08:05:29.603Z - success: weapp-adapter loaded
-2018-08-25T08:05:30.881Z - normal: Loading packages
-2018-08-25T08:05:30.887Z - normal: Watching packages
-2018-08-25T08:05:30.983Z - normal: Run Application
-2018-08-25T08:05:32.711Z - success: preview server running at http://localhost:7457
-2018-08-25T08:05:45.171Z - normal: AddOne boot start
-2018-08-25T08:05:45.183Z - normal: AddOne boot end
-2018-08-25T08:05:45.206Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
-2018-08-25T08:05:45.230Z - warn: Should not specify class name effect for Component which defines in project.
-2018-08-25T08:05:45.231Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-08-25T10:05:59.699Z - info: shutdown preview server
+2018-08-26T12:26:27.424Z - normal: Load ~/.CocosCreator/settings.json
+2018-08-26T12:26:27.427Z - normal: checking language setting...
+2018-08-26T12:26:27.428Z - normal: Language: zh
+2018-08-26T12:26:27.927Z - success: protocol editor-framework registered
+2018-08-26T12:26:27.928Z - success: protocol app registered
+2018-08-26T12:26:27.928Z - success: protocol theme registered
+2018-08-26T12:26:27.928Z - success: protocol packages registered
+2018-08-26T12:26:27.928Z - success: protocol unpack registerred
+2018-08-26T12:26:27.928Z - success: protocol disable-commonjs registerred
+2018-08-26T12:26:28.029Z - normal: connected!
+2018-08-26T12:26:28.033Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
+2018-08-26T12:26:28.036Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
+2018-08-26T12:26:28.041Z - normal: Initializing Cocos2d
+2018-08-26T12:26:28.678Z - normal: Initializing Asset Database
+2018-08-26T12:26:28.730Z - success: protocol uuid registerred
+2018-08-26T12:26:28.731Z - success: protocol db registerred
+2018-08-26T12:26:28.731Z - success: protocol thumbnail registerred
+2018-08-26T12:26:28.731Z - normal: Loading editor/builtin packages
+2018-08-26T12:26:28.884Z - success: assets loaded
+2018-08-26T12:26:28.889Z - success: builder loaded
+2018-08-26T12:26:28.891Z - success: cocos-analytics loaded
+2018-08-26T12:26:28.895Z - success: console loaded
+2018-08-26T12:26:28.930Z - success: fb-instant-games loaded
+2018-08-26T12:26:28.937Z - success: hierarchy loaded
+2018-08-26T12:26:28.940Z - success: inspector loaded
+2018-08-26T12:26:28.942Z - success: keystore loaded
+2018-08-26T12:26:28.949Z - success: node-library loaded
+2018-08-26T12:26:28.951Z - success: package-asset loaded
+2018-08-26T12:26:28.953Z - success: preferences loaded
+2018-08-26T12:26:28.957Z - success: project-exporter loaded
+2018-08-26T12:26:28.972Z - success: project-importer loaded
+2018-08-26T12:26:28.976Z - success: project-settings loaded
+2018-08-26T12:26:28.979Z - success: ui-kit loaded
+2018-08-26T12:26:28.984Z - success: scene loaded
+2018-08-26T12:26:28.985Z - success: sprite-editor loaded
+2018-08-26T12:26:28.990Z - success: store loaded
+2018-08-26T12:26:28.994Z - success: timeline loaded
+2018-08-26T12:26:28.995Z - normal: Loading builtin packages
+2018-08-26T12:26:28.999Z - success: asset-db-debugger loaded
+2018-08-26T12:26:29.000Z - success: color-picker loaded
+2018-08-26T12:26:29.001Z - success: jsb-adapter loaded
+2018-08-26T12:26:29.004Z - success: package-manager loaded
+2018-08-26T12:26:29.108Z - success: qqplay-adapter loaded
+2018-08-26T12:26:29.114Z - success: sdkbox loaded
+2018-08-26T12:26:29.122Z - success: tester loaded
+2018-08-26T12:26:29.127Z - success: ui-grid loaded
+2018-08-26T12:26:29.130Z - success: ui-kit-preview-extra loaded
+2018-08-26T12:26:29.133Z - success: ui-kit-preview loaded
+2018-08-26T12:26:29.137Z - success: ui-tree loaded
+2018-08-26T12:26:29.138Z - success: weapp-adapter loaded
+2018-08-26T12:26:30.209Z - normal: Loading packages
+2018-08-26T12:26:30.215Z - normal: Watching packages
+2018-08-26T12:26:30.299Z - normal: Run Application
+2018-08-26T12:26:31.522Z - success: preview server running at http://localhost:7457
+2018-08-26T12:26:39.614Z - normal: AddOne boot start
+2018-08-26T12:26:39.621Z - normal: AddOne boot end
+2018-08-26T12:26:39.632Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-26T12:26:39.660Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-26T12:26:39.660Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-26T12:27:11.722Z - info: shutdown preview server

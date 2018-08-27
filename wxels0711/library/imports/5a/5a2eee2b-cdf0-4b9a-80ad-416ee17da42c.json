@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "whisper_font_42",
+    "texture": "79315a75-a81a-480f-af64-53af310dcd00",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      308,
+      102
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      308,
+      102
+    ]
+  }
+}

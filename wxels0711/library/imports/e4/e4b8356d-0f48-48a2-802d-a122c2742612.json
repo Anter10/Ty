@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Animation_star_Bright",
+    "texture": "dec526e1-ca99-44b6-adff-9998e014a7d5",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      81,
+      79
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      81,
+      79
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "els_daily_login_bg",
+    "texture": "a1031628-db8e-48b8-8471-e8ba6fb2bdc9",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      593,
+      704
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      593,
+      704
+    ]
+  }
+}

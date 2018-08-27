@@ -31,6 +31,7 @@
       */
      closeCall: function () {
          this.param.cc ? this.param.cc() : tywx.ado.logWithColor("没有设置打开宝箱的关闭按钮");
+         this.node.destroy();
      },
 
 

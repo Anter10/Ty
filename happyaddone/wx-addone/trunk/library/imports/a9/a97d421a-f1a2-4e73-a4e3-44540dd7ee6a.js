@@ -77,16 +77,14 @@ var UIPhbView = cc.Class((_cc$Class = {
     } else {
         window.wx.postMessage({
             method: 2,
-            MAIN_MENU_NUM: "x1",
-            shareTicket: tywx.groupdata.shareTickets[0]
+            MAIN_MENU_NUM: "x1"
+            // shareTicket:  tywx.groupdata.shareTickets[0]
         });
     }
 }), _defineProperty(_cc$Class, "hidePhbView", function hidePhbView() {
     cc.director.loadScene("phbview", this.loadFinishCallBack);
-}), _defineProperty(_cc$Class, "loadFinishCallBack", function loadFinishCallBack() {
-    if (this.node) {
-        this.node.destroy();
-    }
+}), _defineProperty(_cc$Class, "close", function close() {
+    this.node.destroy();
 }), _cc$Class));
 
 module.exports = UIPhbView;

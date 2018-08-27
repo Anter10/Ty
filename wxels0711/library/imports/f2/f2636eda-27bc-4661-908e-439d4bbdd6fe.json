@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Animation_star_dark",
+    "texture": "99448916-feca-4ae0-9bdf-ff2d409c7eb5",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      81,
+      79
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      81,
+      79
+    ]
+  }
+}

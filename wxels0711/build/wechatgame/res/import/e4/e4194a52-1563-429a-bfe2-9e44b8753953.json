@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "elskf_chuizi04",
+    "texture": "606qRIshBO2Ink1G2ZpWiX",
+    "rect": [
+      0,
+      0,
+      57,
+      55
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      57,
+      55
+    ]
+  }
+}

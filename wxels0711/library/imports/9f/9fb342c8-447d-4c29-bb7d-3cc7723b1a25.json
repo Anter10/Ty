@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "nan",
+    "texture": "59d4e88f-1665-4c21-be58-c6ef5f11917a",
+    "atlas": "",
+    "rect": [
+      22,
+      7,
+      133,
+      66
+    ],
+    "offset": [
+      -20.5,
+      0
+    ],
+    "originalSize": [
+      218,
+      80
+    ]
+  }
+}

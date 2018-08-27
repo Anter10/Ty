@@ -5,9 +5,9 @@ cc._RF.push(module, '2fada/8fPBHRZzD6uWmYAck', 'ShareButton');
 "use strict";
 
 /*
-   游戏分享prefab
-   游戏的分享操作的主要逻辑在这个module里面编写
-   created by gyc on 2018-08-08.
+    游戏分享prefab
+    游戏的分享操作的主要逻辑在这个module里面编写
+    created by gyc on 2018-08-08.
 */
 cc.Class({
     extends: cc.Component,
@@ -15,15 +15,15 @@ cc.Class({
     properties: {},
 
     /*
-      调用: 场景加载完成后的回调
-      功能: 场景加载完成后的一些UI逻辑处理
-      参数: [
-          无
-      ]
-      返回值:[
-          无
-      ]
-      思路: 系统自带
+       调用: 场景加载完成后的回调
+       功能: 场景加载完成后的一些UI逻辑处理
+       参数: [
+           无
+       ]
+       返回值:[
+           无
+       ]
+       思路: 系统自带
     */
     onLoad: function onLoad() {
         this.data = {};
@@ -69,15 +69,15 @@ cc.Class({
 
 
     /*
-    调用: 使用此model分享功能的时候 
-    功能: 手动设置分享成功后的回调函数
-    参数: [
-        successCall: 分享成功后的回调方法 类型Function
-    ]
-    返回值:[
-        无
-    ]
-    思路: 逻辑需要
+       调用: 使用此model分享功能的时候 
+       功能: 手动设置分享成功后的回调函数
+       参数: [
+           successCall: 分享成功后的回调方法 类型Function
+       ]
+       返回值:[
+           无
+       ]
+       思路: 逻辑需要
     */
     setSuccessCall: function setSuccessCall(successCall) {
         this.successCallBack = successCall;
@@ -145,7 +145,9 @@ cc.Class({
             self.successCallBack(this);
         } else {
             if (tywx.IsWechatPlatform()) {
-                window.wx.showShareMenu({ withShareTicket: true });
+                window.wx.showShareMenu({
+                    withShareTicket: true
+                });
                 var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(this.shareConfig[0]);
                 tywx.LOGE("msg = " + JSON.stringify(msg));
                 if (msg) {

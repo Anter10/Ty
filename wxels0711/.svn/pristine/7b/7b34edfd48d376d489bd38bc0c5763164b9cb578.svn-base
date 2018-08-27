@@ -1,0 +1,30 @@
+info face="Popups_title.fnt" size=32 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1
+common lineHeight=74 base=26 scaleW=512 scaleH=512 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
+page id=0 file="Popups_title.png"
+chars count=24
+char id=21305 x=145 y=444 width=68 height=67 xoffset=0 yoffset=4 xadvance=68 page=0 chnl=0 letter="匹"
+char id=37197 x=74 y=0 width=71 height=69 xoffset=0 yoffset=3 xadvance=71 page=0 chnl=0 letter="配"
+char id=21040 x=146 y=298 width=68 height=70 xoffset=0 yoffset=3 xadvance=68 page=0 chnl=0 letter="到"
+char id=23545 x=73 y=371 width=71 height=73 xoffset=0 yoffset=1 xadvance=71 page=0 chnl=0 letter="对"
+char id=25163 x=0 y=373 width=72 height=72 xoffset=0 yoffset=1 xadvance=72 page=0 chnl=0 letter="手"
+char id=24708 x=146 y=225 width=70 height=72 xoffset=0 yoffset=1 xadvance=70 page=0 chnl=0 letter="悄"
+char id=35805 x=73 y=298 width=72 height=72 xoffset=0 yoffset=1 xadvance=72 page=0 chnl=0 letter="话"
+char id=26242 x=73 y=225 width=72 height=72 xoffset=0 yoffset=1 xadvance=72 page=0 chnl=0 letter="暂"
+char id=20572 x=146 y=0 width=71 height=76 xoffset=0 yoffset=-1 xadvance=71 page=0 chnl=0 letter="停"
+char id=35299 x=0 y=223 width=72 height=75 xoffset=0 yoffset=0 xadvance=72 page=0 chnl=0 letter="解"
+char id=38145 x=73 y=149 width=72 height=75 xoffset=0 yoffset=0 xadvance=72 page=0 chnl=0 letter="锁"
+char id=36947 x=0 y=149 width=72 height=73 xoffset=0 yoffset=1 xadvance=72 page=0 chnl=0 letter="道"
+char id=20855 x=0 y=299 width=72 height=73 xoffset=0 yoffset=2 xadvance=72 page=0 chnl=0 letter="具"
+char id=25105 x=146 y=77 width=70 height=73 xoffset=0 yoffset=1 xadvance=70 page=0 chnl=0 letter="我"
+char id=30340 x=217 y=227 width=66 height=73 xoffset=0 yoffset=1 xadvance=66 page=0 chnl=0 letter="的"
+char id=31036 x=73 y=74 width=72 height=74 xoffset=0 yoffset=0 xadvance=72 page=0 chnl=0 letter="礼"
+char id=29289 x=217 y=152 width=68 height=74 xoffset=0 yoffset=0 xadvance=68 page=0 chnl=0 letter="物"
+char id=36192 x=146 y=151 width=70 height=73 xoffset=0 yoffset=0 xadvance=70 page=0 chnl=0 letter="赠"
+char id=36865 x=145 y=371 width=71 height=72 xoffset=0 yoffset=0 xadvance=71 page=0 chnl=0 letter="送"
+char id=36873 x=0 y=0 width=73 height=73 xoffset=0 yoffset=0 xadvance=73 page=0 chnl=0 letter="选"
+char id=20221 x=0 y=74 width=72 height=74 xoffset=0 yoffset=0 xadvance=72 page=0 chnl=0 letter="份"
+char id=22823 x=217 y=77 width=70 height=74 xoffset=0 yoffset=0 xadvance=70 page=0 chnl=0 letter="大"
+char id=32 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=49 page=0 chnl=0 letter=" "
+char id=9 x=0 y=0 width=0 height=0 xoffset=0 yoffset=0 xadvance=392 page=0 chnl=0 letter="	"
+
+kernings count=0

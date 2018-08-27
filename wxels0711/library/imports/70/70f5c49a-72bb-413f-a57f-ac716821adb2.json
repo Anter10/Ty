@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "icon_circle_green",
+    "texture": "f7c076f5-f54c-448b-8a9a-0ac7a24aea1d",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      135,
+      136
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      135,
+      136
+    ]
+  }
+}

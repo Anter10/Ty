@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "pifu02",
+    "texture": "efeb423e-4ca8-45f2-acd7-1a8e96abd6d5",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      153,
+      105
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      153,
+      105
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+[
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "zhubao_3",
+      "texture": "1b56023e0",
+      "rect": [
+        220,
+        111,
+        49,
+        49
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        49,
+        49
+      ]
+    }
+  },
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "ice_block",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "ice_block",
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 1
+          },
+          "_spriteFrame": {
+            "__uuid__": "0fiZGf7LtFkLb89yzzd76P"
+          },
+          "_sizeMode": 0
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "421S1h5lVFNK+oVZfBUlzQ"
+        },
+        "fileId": "e4tZzvsjFDCL9ym1rwGO7c"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 72,
+        "height": 72
+      }
+    }
+  ]
+]

@@ -1,0 +1,375 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "FangKuai_daodan_chueizi_gxhd",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 2,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": 0,
+  "curveData": {
+    "paths": {
+      "xin2048_tx_huode01": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.06666666666666667,
+              "value": 0
+            },
+            {
+              "frame": 0.2,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode02": {
+        "props": {
+          "rotation": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 2,
+              "value": 60
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.26666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 0.4,
+              "value": 255
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 255
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.5666666666666667,
+              "value": 0
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": 1.2
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.5666666666666667,
+              "value": 0
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": 1.2
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode03": {
+        "props": {
+          "scaleX": [
+            {
+              "frame": 0.4,
+              "value": 0
+            },
+            {
+              "frame": 0.5666666666666667,
+              "value": 1.2
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 1
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.4,
+              "value": 0
+            },
+            {
+              "frame": 0.5666666666666667,
+              "value": 1.2
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 1
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode04": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.23333333333333334,
+              "value": 0,
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 0.6,
+              "value": 3
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.23333333333333334,
+              "value": 0,
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 0.6,
+              "value": 3
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.4,
+              "value": 255
+            },
+            {
+              "frame": 0.6,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode041": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.36666666666666664,
+              "value": 0,
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": 3
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.36666666666666664,
+              "value": 0,
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": 3
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.6333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode042": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.23333333333333334,
+              "value": 0,
+              "curve": [
+                0.18,
+                0.89,
+                0.31,
+                1.21
+              ]
+            },
+            {
+              "frame": 0.5333333333333333,
+              "value": 1
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.23333333333333334,
+              "value": 0,
+              "curve": [
+                0.18,
+                0.89,
+                0.31,
+                1.21
+              ]
+            },
+            {
+              "frame": 0.5333333333333333,
+              "value": 1
+            }
+          ]
+        }
+      },
+      "particlesystem1": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.43333333333333335,
+                "value": 0
+              },
+              {
+                "frame": 0.4666666666666667,
+                "value": 15
+              },
+              {
+                "frame": 0.5666666666666667,
+                "value": 10
+              }
+            ]
+          }
+        }
+      },
+      "particlesystem2": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.43333333333333335,
+                "value": 0
+              },
+              {
+                "frame": 0.4666666666666667,
+                "value": 41
+              },
+              {
+                "frame": 0.5666666666666667,
+                "value": 21
+              }
+            ]
+          }
+        }
+      },
+      "huodewu": {
+        "props": {
+          "scaleX": [
+            {
+              "frame": 0.16666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 0.3,
+              "value": 2
+            },
+            {
+              "frame": 0.43333333333333335,
+              "value": 1
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.16666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 0.3,
+              "value": 2
+            },
+            {
+              "frame": 0.43333333333333335,
+              "value": 1
+            }
+          ]
+        }
+      },
+      "huodewu/huodewu": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.3,
+              "value": 0
+            },
+            {
+              "frame": 0.43333333333333335,
+              "value": 255
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 0
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.43333333333333335,
+              "value": 1
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1.3
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.43333333333333335,
+              "value": 1
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1.3
+            }
+          ]
+        }
+      },
+      "FangKuai_caidai": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.16666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 0.26666666666666666,
+              "value": 255
+            }
+          ],
+          "scale": [
+            {
+              "frame": 0.16666666666666666,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.26666666666666666,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1.2,
+                "y": 1.2
+              }
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "elsfk_spine_mty",
+    "texture": "ae77c3e6-5611-4d90-b4a3-07cbb24aac11",
+    "atlas": "",
+    "rect": [
+      2,
+      2,
+      340,
+      124
+    ],
+    "offset": [
+      -84,
+      0
+    ],
+    "originalSize": [
+      512,
+      128
+    ]
+  }
+}

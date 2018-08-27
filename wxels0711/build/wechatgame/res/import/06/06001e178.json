@@ -1,0 +1,145 @@
+[
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "els_txt_endless_level_up",
+      "texture": "1130c8575",
+      "rect": [
+        1092,
+        196,
+        433,
+        156
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        433,
+        156
+      ]
+    }
+  },
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "els_view_level_up",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "els_view_level_up",
+      "_children": [
+        {
+          "__id__": 2
+        },
+        {
+          "__id__": 3
+        }
+      ],
+      "_components": [
+        {
+          "__type__": "cc.ParticleSystem",
+          "node": {
+            "__id__": 1
+          },
+          "_file": {
+            "__uuid__": "65MVoPYtlO2Y8tAGe/URVI"
+          },
+          "_texture": {
+            "__uuid__": "a2O7LNROhOJKiKFIZ0DNMO"
+          },
+          "_emissionRate": 100
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "b01DqAAj1B/aKtPZAQZpDC"
+        },
+        "fileId": "b9Zi36L/lCs6DqjPkG6Zoa"
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "els_txt_endless_level_up",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 2
+          },
+          "_spriteFrame": {
+            "__uuid__": "5crIyPU7pAK4CLdGx6rYif"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "b01DqAAj1B/aKtPZAQZpDC"
+        },
+        "fileId": "71MVdvgBNLUZObN1Vq9f5A"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 433,
+        "height": 156
+      },
+      "_position": {
+        "__type__": "cc.Vec2",
+        "y": 8
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "New Label",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Label",
+          "node": {
+            "__id__": 3
+          },
+          "_useOriginalSize": false,
+          "_N$string": "成功收集宝石",
+          "_N$horizontalAlign": 1,
+          "_N$verticalAlign": 1
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "b01DqAAj1B/aKtPZAQZpDC"
+        },
+        "fileId": "a7VLliYt5LlY5QqoPdJ/mT"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 240,
+        "height": 40
+      },
+      "_position": {
+        "__type__": "cc.Vec2",
+        "x": 16,
+        "y": -98
+      }
+    }
+  ]
+]

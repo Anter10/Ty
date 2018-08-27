@@ -1,0 +1,50 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_spriteFrames": {
+    "xin2048_tx_huode01": {
+      "__uuid__": "fa/g61ITVC25aMwmr41P24"
+    },
+    "xin2048_tx_huode02": {
+      "__uuid__": "a0a0tqRn1HFIZGEofSKHex"
+    },
+    "xin2048_tx_huode04": {
+      "__uuid__": "2cjL1M5oxHvajHdJZUNGii"
+    },
+    "xin2048_tx_huode03": {
+      "__uuid__": "6775+JhpZE5JcCIwh+6PYE"
+    },
+    "glow_light_gc_01_hlight_ct_glow_02_h": {
+      "__uuid__": "7drxX8yPFNjK3e0AxaERED"
+    },
+    "glow_light_gc_01_h": {
+      "__uuid__": "faUqgsIm5GmZVcVUbB0Zpx"
+    },
+    "glow_gc_02_ad": {
+      "__uuid__": "dcEA1qC7xOw4lvTN4jh+77"
+    },
+    "glow_gc_02": {
+      "__uuid__": "25L1e1b5tPfrBqtr82nkOA"
+    },
+    "xin2048_baoxiang_01": {
+      "__uuid__": "4aIvXSjwlJ66f+Yl5MUXlu"
+    },
+    "shijiaoxin": {
+      "__uuid__": "92TxzPCDpLXq6nEkVcD4V/"
+    },
+    "xingxing": {
+      "__uuid__": "7cHdLRlNpOeoUq/4Qsp4ci"
+    },
+    "miaozhjun": {
+      "__uuid__": "d4MAwM1ytPr5N+aGALUX+f"
+    },
+    "xueren_fw658a": {
+      "__uuid__": "bdZWPmzFlG141ZAjjXhEQk"
+    },
+    "xueren_fw658c": {
+      "__uuid__": "217JfyJRpD6J+l7Vw0yEaC"
+    },
+    "lizi": {
+      "__uuid__": "06h8kBKq9AB53hpVoZ96Aa"
+    }
+  }
+}

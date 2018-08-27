@@ -1,0 +1,2 @@
+sh ./tinypng.sh
+python tywxTools/JSconfuse.py 

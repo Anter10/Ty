@@ -1,0 +1,53 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "zuanshi_lv",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 2,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "paths": {
+      "zhezhao/guangsu_035": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -23.6,
+                -40.8
+              ]
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": [
+                26.7,
+                46.3
+              ]
+            }
+          ]
+        }
+      },
+      "zuanshi_lv_tx": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 130
+            },
+            {
+              "frame": 2,
+              "value": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

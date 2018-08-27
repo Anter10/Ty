@@ -1,0 +1,45 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "holdtip",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.15,
+  "sample": 60,
+  "speed": 0.05,
+  "wrapMode": 38,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            100,
+            492
+          ]
+        },
+        {
+          "frame": 0.05,
+          "value": [
+            110,
+            492
+          ]
+        },
+        {
+          "frame": 0.1,
+          "value": [
+            90,
+            492
+          ]
+        },
+        {
+          "frame": 0.15,
+          "value": [
+            100,
+            492
+          ]
+        }
+      ]
+    }
+  },
+  "events": []
+}

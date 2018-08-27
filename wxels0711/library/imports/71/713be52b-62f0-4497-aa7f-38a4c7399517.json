@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "labelbj",
+    "texture": "2c8bf5dc-903d-4bcc-80d9-0f83d3ac6fae",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      163,
+      40
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      163,
+      40
+    ]
+  }
+}

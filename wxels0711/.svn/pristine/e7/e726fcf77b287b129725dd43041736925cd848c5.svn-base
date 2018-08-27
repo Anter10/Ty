@@ -1,0 +1,111 @@
+var els = require("../../core/els.js");
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        product_icon : cc.Node,
+
+        user_icon_l : cc.Node,
+        user_name_l : cc.Label,
+
+        user_icon_r : cc.Node,
+        user_name_r : cc.Label,
+
+        button_title: cc.Label,
+
+        button_nodes: [cc.Node] // 0 : 已经领取 1: 可领取 2: 分享
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+        this.user_name_l.string = '';
+        this.user_name_r.string = '';
+    },
+
+    init(_data, _i) {
+        this._index = _i;
+        this.button_state = 2;
+        if (_data) {
+            this._itemId = _data["itemId"];
+            if (parseInt(_data["getDianmond"]) === 1){ // 可以领取
+                this.button_state = 1;
+            } else { // 已经领取完毕
+                this.button_state = 0;
+            }
+            let _users = _data["users"];
+            if (_users.length < 2) {
+                this.button_state = 2;
+            }
+            let self = this;
+            _users.forEach(function (_user, i) {
+                let _icon = i === 0 ? self.user_icon_l : self.user_icon_r;
+                let _name = i === 0 ? self.user_name_l : self.user_name_r;
+                self.setUserInfo(_user, _icon, _name);
+            });
+        }
+        this.update_button();
+    },
+
+    update_button(){
+        console.log("update_button", this.button_state);
+        let self = this;
+        this.button_nodes.forEach(function (_node, i) {
+            _node.active = false;
+            if (i === parseInt(self.button_state)) {
+                _node.active = true;
+            }
+        })
+    },
+
+    setUserInfo(_user, _icon, _name) {
+        _name.active = true;
+        _name.string = _user.name;
+        let _imageUrl = _user.purl;
+        if (_imageUrl.indexOf("https://wx.qlogo.cn") !== -1) {
+            _imageUrl = _imageUrl + "?aaa=aaa.png";
+        } else {
+            _imageUrl = "res/raw-assets/resources/invited_icon.png";
+            _name.string = "已邀请";
+        }
+        this.setImage(_icon, _imageUrl);
+    },
+
+    setImage(_node, _imageUrl) {
+
+        cc.loader.load(_imageUrl, function (err, texture) {
+            if (!err) {
+                _node.getComponent('cc.Sprite').spriteFrame = new cc.SpriteFrame(texture);
+            }
+        });
+    },
+
+    button_click(){
+        let self = this;
+        switch (this.button_state) {
+            case 0: // 已经领取
+            {
+                break;
+            }
+            case 1: // 可领取
+            {
+                tywx.MSG.addItems(7, self._index);
+                break;
+            }
+            case 2: // 分享
+            {
+                tywx.ShareInterface.shareMsg({
+                    type:els.ELS_SHRAE_TYPE.UNLOCK_GIFT_PROP
+                });
+                break;
+            }
+            default:
+            {
+
+            }
+        }
+    },
+
+    // update (dt) {},
+});

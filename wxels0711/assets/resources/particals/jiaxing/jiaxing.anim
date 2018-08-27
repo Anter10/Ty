@@ -1,0 +1,115 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "jiaxing",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 1.6666666666666667,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "Animation_star_Bright": {
+        "props": {
+          "scaleX": [
+            {
+              "frame": 0.5,
+              "value": 10
+            },
+            {
+              "frame": 0.9666666666666667,
+              "value": 1
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.5,
+              "value": 10
+            },
+            {
+              "frame": 0.9666666666666667,
+              "value": 1
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.5,
+              "value": 0
+            },
+            {
+              "frame": 0.9333333333333333,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "Animation_star_Brighttx": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.5,
+              "value": 10
+            },
+            {
+              "frame": 1,
+              "value": 1
+            },
+            {
+              "frame": 1.6666666666666667,
+              "value": 1.6
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.5,
+              "value": 10
+            },
+            {
+              "frame": 1,
+              "value": 1
+            },
+            {
+              "frame": 1.6666666666666667,
+              "value": 1.6
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.5,
+              "value": 0
+            },
+            {
+              "frame": 1,
+              "value": 255
+            },
+            {
+              "frame": 1.6666666666666667,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "particlesystem": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.7333333333333333,
+                "value": 0
+              },
+              {
+                "frame": 0.8666666666666667,
+                "value": 800
+              },
+              {
+                "frame": 1,
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "events": []
+}

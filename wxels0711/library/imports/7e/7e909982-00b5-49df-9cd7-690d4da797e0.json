@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "FangKuai_daodan",
+    "texture": "70a6bf16-0c12-4bce-8f5e-3d86ce82ab17",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      96,
+      105
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      96,
+      105
+    ]
+  }
+}

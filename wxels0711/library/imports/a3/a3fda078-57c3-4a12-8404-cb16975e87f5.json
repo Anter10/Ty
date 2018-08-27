@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "qqh_btn_bg",
+    "texture": "4b13c062-e1fc-4d34-a034-761495b760ec",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      355,
+      120
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      355,
+      120
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "glow_light_gc_01_h",
+    "texture": "8cc6dd34-3f29-4285-bee8-93a3b149db77",
+    "atlas": "",
+    "rect": [
+      10,
+      0,
+      240,
+      237
+    ],
+    "offset": [
+      2,
+      9.5
+    ],
+    "originalSize": [
+      256,
+      256
+    ]
+  }
+}

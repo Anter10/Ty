@@ -1,0 +1,26 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_spriteFrames": {
+    "unlock_01": {
+      "__uuid__": "46KDeI0sZKXZtsiAVbOl8R"
+    },
+    "unlock_02": {
+      "__uuid__": "ecUQJ/GctEqp/reT4a0MPy"
+    },
+    "unlock_title_bg": {
+      "__uuid__": "dbMisfZYZAc7BdJeNf1xgT"
+    },
+    "unlock_btn01": {
+      "__uuid__": "d28AMh4ddM85J2HLWuLE4k"
+    },
+    "unlock_btn02": {
+      "__uuid__": "2bHoFkKCZDBaFNTwdPo5kJ"
+    },
+    "unlock_btn03": {
+      "__uuid__": "bfjb/sbkdCwYdXFC9vOQrZ"
+    },
+    "invitation_btn_bg": {
+      "__uuid__": "adXyEnhklD2oUTT7inaCOp"
+    }
+  }
+}

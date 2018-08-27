@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "vs_label_bg",
+    "texture": "597a8fdc-3831-452d-a089-b3fae8bc03d4",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      340,
+      45
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      340,
+      45
+    ]
+  }
+}

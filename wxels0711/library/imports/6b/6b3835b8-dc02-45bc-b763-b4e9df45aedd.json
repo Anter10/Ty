@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "shexian",
+    "texture": "23a1214e-0ee0-4b83-8960-acd67f151bbf",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      339,
+      341
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      339,
+      341
+    ]
+  }
+}

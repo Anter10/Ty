@@ -1,0 +1,113 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "good",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 1,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": 0,
+  "curveData": {
+    "paths": {
+      "guangxian": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.26666666666666666,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.1,
+              "value": 4
+            },
+            {
+              "frame": 0.4666666666666667,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "txt": {
+        "props": {
+          "scaleX": [
+            {
+              "frame": 0.03333333333333333,
+              "value": 0
+            },
+            {
+              "frame": 0.1,
+              "value": 1.2
+            },
+            {
+              "frame": 0.23333333333333334,
+              "value": 1
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.03333333333333333,
+              "value": 0
+            },
+            {
+              "frame": 0.1,
+              "value": 1.2
+            },
+            {
+              "frame": 0.23333333333333334,
+              "value": 1
+            }
+          ]
+        }
+      },
+      "txt/goodtx": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.1,
+              "value": 255
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "particlesystem": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.06666666666666667,
+                "value": 0
+              },
+              {
+                "frame": 0.1,
+                "value": 1000
+              },
+              {
+                "frame": 0.16666666666666666,
+                "value": 0
+              },
+              {
+                "frame": 1,
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "events": []
+}

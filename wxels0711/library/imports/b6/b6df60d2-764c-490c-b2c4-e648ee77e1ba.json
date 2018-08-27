@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "FangKuai_mobang",
+    "texture": "801a8b94-e898-4ff4-8dcb-b23abeb97c12",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      105,
+      163
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      105,
+      163
+    ]
+  }
+}

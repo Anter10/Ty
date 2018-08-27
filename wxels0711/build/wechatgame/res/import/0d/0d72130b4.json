@@ -1,0 +1,165 @@
+[
+  {
+    "__type__": "cc.AnimationClip",
+    "_name": "FangKuai_daodan_miaozhjun",
+    "_duration": 0.6666666666666666,
+    "sample": 30,
+    "wrapMode": 2,
+    "curveData": {
+      "props": {},
+      "paths": {
+        "01": {
+          "props": {
+            "scale": [
+              {
+                "frame": 0,
+                "value": {
+                  "__type__": "cc.Vec2",
+                  "x": 1,
+                  "y": 1
+                }
+              },
+              {
+                "frame": 0.3333333333333333,
+                "value": {
+                  "__type__": "cc.Vec2",
+                  "x": 1.1,
+                  "y": 1.1
+                }
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": {
+                  "__type__": "cc.Vec2",
+                  "x": 1,
+                  "y": 1
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "FangKuai_daodan_miaozhjun",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "FangKuai_daodan_miaozhjun",
+      "_children": [
+        {
+          "__id__": 2
+        }
+      ],
+      "_components": [
+        {
+          "__type__": "cc.Animation",
+          "node": {
+            "__id__": 1
+          },
+          "_defaultClip": {
+            "__uuid__": "12hUmvVtFPb5WuHpItFjk/"
+          },
+          "_clips": [
+            {
+              "__uuid__": "12hUmvVtFPb5WuHpItFjk/"
+            }
+          ],
+          "playOnLoad": true
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "bao5/uwJBHQo7np+UopiT3"
+        },
+        "fileId": "66mMDEUC9BJ6NJfmzxCVWQ"
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "01",
+      "_parent": {
+        "__id__": 1
+      },
+      "_children": [
+        {
+          "__id__": 3
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "bao5/uwJBHQo7np+UopiT3"
+        },
+        "fileId": "8458200DxDVqTNma9clURH"
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "miaozhjun",
+      "_parent": {
+        "__id__": 2
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 3
+          },
+          "_spriteFrame": {
+            "__uuid__": "d4MAwM1ytPr5N+aGALUX+f"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "bao5/uwJBHQo7np+UopiT3"
+        },
+        "fileId": "43P1C9cdVBT6ZB6rzcX1qW"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 52,
+        "height": 52
+      }
+    }
+  ],
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "miaozhjun",
+      "texture": "12fef5646",
+      "rect": [
+        1104,
+        243,
+        52,
+        52
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        52,
+        52
+      ]
+    }
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "item_box",
+    "texture": "1f0353f88",
+    "rect": [
+      211,
+      485,
+      113,
+      133
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      113,
+      133
+    ]
+  }
+}

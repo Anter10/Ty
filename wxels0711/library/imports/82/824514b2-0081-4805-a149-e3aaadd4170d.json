@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "fangdajing",
+    "texture": "2b86ac4d-f35c-45c1-8734-a70098b7f674",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      123,
+      129
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      123,
+      129
+    ]
+  }
+}

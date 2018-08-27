@@ -1,0 +1,363 @@
+2018-08-20T00:03:57.546Z - normal: Load ~/.CocosCreator/settings.json
+2018-08-20T00:03:57.550Z - normal: checking language setting...
+2018-08-20T00:03:57.551Z - normal: Language: zh
+2018-08-20T00:03:58.020Z - success: protocol editor-framework registered
+2018-08-20T00:03:58.021Z - success: protocol app registered
+2018-08-20T00:03:58.021Z - success: protocol theme registered
+2018-08-20T00:03:58.021Z - success: protocol packages registered
+2018-08-20T00:03:58.021Z - success: protocol unpack registerred
+2018-08-20T00:03:58.022Z - success: protocol disable-commonjs registerred
+2018-08-20T00:03:58.120Z - normal: connected!
+2018-08-20T00:03:58.122Z - normal: Check project /Users/zipxing/Desktop/work/els/wxels0711
+2018-08-20T00:03:58.123Z - normal: Initializing project /Users/zipxing/Desktop/work/els/wxels0711
+2018-08-20T00:03:58.125Z - normal: Initializing Cocos2d
+2018-08-20T00:03:58.415Z - normal: Initializing Asset Database
+2018-08-20T00:03:58.449Z - success: protocol uuid registerred
+2018-08-20T00:03:58.449Z - success: protocol db registerred
+2018-08-20T00:03:58.449Z - success: protocol thumbnail registerred
+2018-08-20T00:03:58.449Z - normal: Loading editor/builtin packages
+2018-08-20T00:03:58.594Z - success: assets loaded
+2018-08-20T00:03:58.598Z - success: builder loaded
+2018-08-20T00:03:58.599Z - success: cocos-analytics loaded
+2018-08-20T00:03:58.604Z - success: console loaded
+2018-08-20T00:03:58.637Z - success: fb-instant-games loaded
+2018-08-20T00:03:58.643Z - success: hierarchy loaded
+2018-08-20T00:03:58.647Z - success: inspector loaded
+2018-08-20T00:03:58.649Z - success: keystore loaded
+2018-08-20T00:03:58.653Z - success: node-library loaded
+2018-08-20T00:03:58.655Z - success: package-asset loaded
+2018-08-20T00:03:58.657Z - success: preferences loaded
+2018-08-20T00:03:58.660Z - success: project-exporter loaded
+2018-08-20T00:03:58.675Z - success: project-importer loaded
+2018-08-20T00:03:58.678Z - success: project-settings loaded
+2018-08-20T00:03:58.682Z - success: ui-kit loaded
+2018-08-20T00:03:58.686Z - success: scene loaded
+2018-08-20T00:03:58.687Z - success: sprite-editor loaded
+2018-08-20T00:03:58.691Z - success: store loaded
+2018-08-20T00:03:58.697Z - success: timeline loaded
+2018-08-20T00:03:58.698Z - normal: Loading builtin packages
+2018-08-20T00:03:58.702Z - success: asset-db-debugger loaded
+2018-08-20T00:03:58.703Z - success: color-picker loaded
+2018-08-20T00:03:58.707Z - success: package-manager loaded
+2018-08-20T00:03:58.708Z - success: qqplay-adapter loaded
+2018-08-20T00:03:58.715Z - success: sdkbox loaded
+2018-08-20T00:03:58.720Z - success: tester loaded
+2018-08-20T00:03:58.726Z - success: ui-grid loaded
+2018-08-20T00:03:58.730Z - success: ui-kit-preview-extra loaded
+2018-08-20T00:03:58.735Z - success: ui-kit-preview loaded
+2018-08-20T00:03:58.738Z - success: ui-tree loaded
+2018-08-20T00:03:58.739Z - success: weapp-adapter loaded
+2018-08-20T00:03:59.806Z - normal: Loading packages
+2018-08-20T00:03:59.811Z - normal: Watching packages
+2018-08-20T00:03:59.865Z - normal: Run Application
+2018-08-20T00:04:01.254Z - success: preview server running at http://localhost:7456
+2018-08-20T00:04:10.276Z - warn: The Asset used by component "cc.Sprite" in prefab "mask_label.prefab" is missing. Detailed information:
+Node path: "mask_label"
+Asset url: "db://assets/resources/prefab/mask_label.prefab"
+Missing uuid: "8c25e79e-17a4-4ad5-a47c-778b094c0c9a"
+
+2018-08-20T00:04:10.379Z - warn: The Asset used by component "cc.Sprite" in prefab "mogu.prefab" is missing. Detailed information:
+Node path: "mogu/Animation_loding"
+Asset url: "db://assets/resources/particals/mogu/mogu.prefab"
+Missing uuid: "615f7ddb-9aba-451f-8a80-8e604ab34d27"
+
+2018-08-20T00:04:10.799Z - warn: The Asset used by component "cc.Sprite" in prefab "win.prefab" is missing. Detailed information:
+Node path: "win/FangKuai_shengli/FangKuai_shibai_bg"
+Asset url: "db://assets/resources/prefab/win.prefab"
+Missing uuid: "a73d89ef-9c8e-4987-9dd9-3184d52bf70b"
+
+2018-08-20T00:04:10.800Z - warn: The Asset used by component "cc.Sprite" in prefab "win.prefab" is missing. Detailed information:
+Node path: "win/FangKuai_shengli/FangKuai_shengli"
+Asset url: "db://assets/resources/prefab/win.prefab"
+Missing uuid: "d9d29dec-b481-413c-8586-9c992bb86d67"
+
+2018-08-20T00:04:10.800Z - warn: The Asset used by component "cc.Sprite" in prefab "win.prefab" is missing. Detailed information:
+Node path: "win/FangKuai_shengli/bg_guang/FangKuai_shengli_bg_guang"
+Asset url: "db://assets/resources/prefab/win.prefab"
+Missing uuid: "43358ec1-3647-4ebc-a17b-ad48b568bd7f"
+
+2018-08-20T00:04:10.802Z - warn: The Asset used by component "cc.Sprite" in prefab "win.prefab" is missing. Detailed information:
+Node path: "win/FangKuai_shengli/bg_guang/FangKuai_shengli_bg_guang_b"
+Asset url: "db://assets/resources/prefab/win.prefab"
+Missing uuid: "43358ec1-3647-4ebc-a17b-ad48b568bd7f"
+
+2018-08-20T00:04:10.810Z - warn: The Asset used by component "cc.Sprite" in prefab "win.prefab" is missing. Detailed information:
+Node path: "win/FangKuai_shengli/FangKuai_xuanyao"
+Asset url: "db://assets/resources/prefab/win.prefab"
+Missing uuid: "7e7831b3-f73d-4c9f-a646-39dad4eec625"
+
+2018-08-20T00:04:10.838Z - warn: The Asset used by component "cc.Sprite" in prefab "win.prefab" is missing. Detailed information:
+Node path: "win"
+Asset url: "db://assets/resources/prefab/win.prefab"
+Missing uuid: "3ab82a62-5bcd-44c7-8c9a-a2141729739e"
+
+2018-08-20T00:04:10.840Z - warn: The Asset used by component "cc.Sprite" in prefab "win_single.prefab" is missing. Detailed information:
+Node path: "whipser_win_single/FangKuai_shengli/bg_guang/FangKuai_shengli_bg_guang"
+Asset url: "db://assets/resources/prefab/win_single.prefab"
+Missing uuid: "43358ec1-3647-4ebc-a17b-ad48b568bd7f"
+
+2018-08-20T00:04:10.841Z - warn: The Asset used by component "cc.Sprite" in prefab "win_single.prefab" is missing. Detailed information:
+Node path: "whipser_win_single/FangKuai_shengli/bg_guang/FangKuai_shengli_bg_guang_b"
+Asset url: "db://assets/resources/prefab/win_single.prefab"
+Missing uuid: "43358ec1-3647-4ebc-a17b-ad48b568bd7f"
+
+2018-08-20T00:04:10.844Z - warn: The Asset used by component "cc.Sprite" in prefab "win_single.prefab" is missing. Detailed information:
+Node path: "whipser_win_single/FangKuai_shengli/FangKuai_xuanyao"
+Asset url: "db://assets/resources/prefab/win_single.prefab"
+Missing uuid: "7e7831b3-f73d-4c9f-a646-39dad4eec625"
+
+2018-08-20T00:04:10.844Z - warn: The Asset used by component "cc.Sprite" in prefab "win_single.prefab" is missing. Detailed information:
+Node path: "whipser_win_single/win_whisper_image"
+Asset url: "db://assets/resources/prefab/win_single.prefab"
+Missing uuid: "50efe25c-0563-4d36-949f-67a18f173189"
+
+2018-08-20T00:04:10.848Z - warn: The Asset used by component "cc.Sprite" in prefab "FangKuai_shibai.prefab" is missing. Detailed information:
+Node path: "FangKuai_shibai/bg_guang/FangKuai_an_bg_guang"
+Asset url: "db://assets/resources/animation/FangKuai_shibai.prefab"
+Missing uuid: "61d8e7ed-e0f2-4f37-8c3a-eba1b6424b72"
+
+2018-08-20T00:04:10.850Z - warn: The Asset used by component "cc.Sprite" in prefab "FangKuai_shibai.prefab" is missing. Detailed information:
+Node path: "FangKuai_shibai/bg_guang/FangKuai_shengli_bg_guang_b"
+Asset url: "db://assets/resources/animation/FangKuai_shibai.prefab"
+Missing uuid: "43358ec1-3647-4ebc-a17b-ad48b568bd7f"
+
+2018-08-20T00:04:10.855Z - warn: The Asset used by component "cc.Sprite" in prefab "keepstarOK.prefab" is missing. Detailed information:
+Node path: "keepstarOK/FangKuai_shibai/bg_guang/FangKuai_an_bg_guang"
+Asset url: "db://assets/resources/prefab/keepstarOK.prefab"
+Missing uuid: "61d8e7ed-e0f2-4f37-8c3a-eba1b6424b72"
+
+2018-08-20T00:04:10.856Z - warn: The Asset used by component "cc.Sprite" in prefab "keepstarOK.prefab" is missing. Detailed information:
+Node path: "keepstarOK/FangKuai_shibai/bg_guang/FangKuai_shengli_bg_guang_b"
+Asset url: "db://assets/resources/prefab/keepstarOK.prefab"
+Missing uuid: "43358ec1-3647-4ebc-a17b-ad48b568bd7f"
+
+2018-08-20T00:04:10.857Z - warn: The Asset used by component "cc.Sprite" in prefab "keepstarOK.prefab" is missing. Detailed information:
+Node path: "keepstarOK/FangKuai_shibai/FangKuai_chongxin"
+Asset url: "db://assets/resources/prefab/keepstarOK.prefab"
+Missing uuid: "03d6b9b1-49fb-496f-be60-7ecb01b7583b"
+
+2018-08-20T00:04:10.860Z - warn: The Asset used by component "cc.Sprite" in prefab "keepstar.prefab" is missing. Detailed information:
+Node path: "keepstar/FangKuai_shibai/FangKuai_shibai_bg"
+Asset url: "db://assets/resources/prefab/keepstar.prefab"
+Missing uuid: "a73d89ef-9c8e-4987-9dd9-3184d52bf70b"
+
+2018-08-20T00:04:10.860Z - warn: The Asset used by component "cc.Sprite" in prefab "keepstar.prefab" is missing. Detailed information:
+Node path: "keepstar/FangKuai_shibai/bg_guang/FangKuai_an_bg_guang"
+Asset url: "db://assets/resources/prefab/keepstar.prefab"
+Missing uuid: "61d8e7ed-e0f2-4f37-8c3a-eba1b6424b72"
+
+2018-08-20T00:04:10.861Z - warn: The Asset used by component "cc.Sprite" in prefab "keepstar.prefab" is missing. Detailed information:
+Node path: "keepstar/FangKuai_shibai/bg_guang/FangKuai_shengli_bg_guang_b"
+Asset url: "db://assets/resources/prefab/keepstar.prefab"
+Missing uuid: "43358ec1-3647-4ebc-a17b-ad48b568bd7f"
+
+2018-08-20T00:04:10.861Z - warn: The Asset used by component "cc.Sprite" in prefab "keepstar.prefab" is missing. Detailed information:
+Node path: "keepstar/FangKuai_shibai/FangKuai_chongxin"
+Asset url: "db://assets/resources/prefab/keepstar.prefab"
+Missing uuid: "03d6b9b1-49fb-496f-be60-7ecb01b7583b"
+
+2018-08-20T00:04:10.862Z - warn: The Asset used by component "cc.Sprite" in prefab "keepstar.prefab" is missing. Detailed information:
+Node path: "keepstar/btngiveup"
+Asset url: "db://assets/resources/prefab/keepstar.prefab"
+Missing uuid: "032564eb-77e7-47a0-91ab-398af25b1489"
+
+2018-08-20T00:04:10.864Z - warn: The Asset used by component "cc.Sprite" in prefab "lose_single.prefab" is missing. Detailed information:
+Node path: "lose_single/FangKuai_shibai/FangKuai_shibai_bg"
+Asset url: "db://assets/resources/prefab/lose_single.prefab"
+Missing uuid: "a73d89ef-9c8e-4987-9dd9-3184d52bf70b"
+
+2018-08-20T00:04:10.865Z - warn: The Asset used by component "cc.Sprite" in prefab "lose_single.prefab" is missing. Detailed information:
+Node path: "lose_single/FangKuai_shibai/bg_guang/FangKuai_an_bg_guang"
+Asset url: "db://assets/resources/prefab/lose_single.prefab"
+Missing uuid: "61d8e7ed-e0f2-4f37-8c3a-eba1b6424b72"
+
+2018-08-20T00:04:10.865Z - warn: The Asset used by component "cc.Sprite" in prefab "lose_single.prefab" is missing. Detailed information:
+Node path: "lose_single/FangKuai_shibai/bg_guang/FangKuai_shengli_bg_guang_b"
+Asset url: "db://assets/resources/prefab/lose_single.prefab"
+Missing uuid: "43358ec1-3647-4ebc-a17b-ad48b568bd7f"
+
+2018-08-20T00:04:10.866Z - warn: The Asset used by component "cc.Sprite" in prefab "lose_single.prefab" is missing. Detailed information:
+Node path: "lose_single/FangKuai_shibai/FangKuai_chongxin"
+Asset url: "db://assets/resources/prefab/lose_single.prefab"
+Missing uuid: "03d6b9b1-49fb-496f-be60-7ecb01b7583b"
+
+2018-08-20T00:04:10.867Z - warn: The Asset used by component "cc.Sprite" in prefab "lose_single.prefab" is missing. Detailed information:
+Node path: "lose_single"
+Asset url: "db://assets/resources/prefab/lose_single.prefab"
+Missing uuid: "cb06ce3d-e210-495a-9c88-3e0dafb6da7f"
+
+2018-08-20T00:04:39.668Z - warn: 找不到微信开发程序版本信息路径 [/Applications/wechatwebdevtools.app/Contents/Resources/app.nw/package.json]。
+2018-08-20T00:04:39.669Z - warn: 微信开发程序版本过低，不能享用所有功能，请尽快升级。
+2018-08-20T00:04:40.120Z - normal: Initializing...
+
+2018-08-20T00:04:40.127Z - normal: idePortFile: /Users/zipxing/Library/Application Support/微信web开发者工具/Default/.ide
+
+2018-08-20T00:04:40.140Z - normal: starting ide...
+
+2018-08-20T00:04:43.612Z - normal: IDE server has started, listening on http://127.0.0.1:54008
+
+2018-08-20T00:04:43.616Z - normal: initialization finished
+
+2018-08-20T00:04:43.668Z - error: StatusCodeError: 400 - "{\"code\":40000,\"error\":\"错误 需要重新登录\"}"
+
+    at Socket.<anonymous> (/Applications/CocosCreator.app/Contents/Resources/app.asar/editor/core/wechat-game.js:1:1298)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:191:7)
+    at readableAddChunk (_stream_readable.js:178:18)
+    at Socket.Readable.push (_stream_readable.js:136:10)
+    at Pipe.onread (net.js:560:20)
+2018-08-20T00:15:01.322Z - normal: Start building with options : {
+  "actualPlatform": "Wechat Game",
+  "apiLevel": "",
+  "appABIs": [],
+  "appKey": "",
+  "appSecret": "",
+  "buildPath": "/Users/zipxing/Desktop/work/els/wxels0711/build",
+  "debug": true,
+  "dest": "/Users/zipxing/Desktop/work/els/wxels0711/build/wechatgame",
+  "embedWebDebugger": false,
+  "encryptJs": true,
+  "excludeScenes": [],
+  "excludedModules": [
+    "TiledMap",
+    "VideoPlayer",
+    "RichText",
+    "MotionStreak",
+    "Collider",
+    "Graphics",
+    "DragonBones",
+    "Physics",
+    "StudioComponent",
+    "Camera"
+  ],
+  "fb-instant-games": {},
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": false,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.wx-els",
+  "platform": "wechatgame",
+  "previewHeight": "720",
+  "previewWidth": "1280",
+  "privateKey": "",
+  "qqplay": {
+    "orientation": "portrait"
+  },
+  "renderMode": "0",
+  "scenes": [
+    "e637d355-c245-4168-a0b1-7ea747f8743b"
+  ],
+  "sourceMaps": true,
+  "startScene": "e637d355-c245-4168-a0b1-7ea747f8743b",
+  "template": "link",
+  "title": "wx-els-prop",
+  "useDebugKeystore": true,
+  "vsVersion": "auto",
+  "webOrientation": "auto",
+  "wechatgame": {
+    "appid": "wx7e3b12072efbfc27",
+    "orientation": "portrait"
+  },
+  "xxteaKey": "6dabe57a-18fa-46",
+  "zipCompressJs": true,
+  "project": "/Users/zipxing/Desktop/work/els/wxels0711",
+  "projectName": "wx-els-prop",
+  "debugBuildWorker": false
+}
+2018-08-20T00:15:01.326Z - normal: Building /Users/zipxing/Desktop/work/els/wxels0711
+2018-08-20T00:15:01.326Z - normal: Destination /Users/zipxing/Desktop/work/els/wxels0711/build/wechatgame
+2018-08-20T00:15:01.602Z - normal: Delete /Users/zipxing/Desktop/work/els/wxels0711/build/wechatgame/**/*
+2018-08-20T00:15:33.361Z - normal: Start building assets
+2018-08-20T00:15:33.362Z - normal: Start spawn build-worker
+2018-08-20T00:15:33.988Z - normal: Finish spawn build-worker
+2018-08-20T00:15:33.988Z - normal: Start init build-worker
+2018-08-20T00:15:35.996Z - normal: Finish init build-worker
+2018-08-20T00:15:35.996Z - normal: Start build-assets in worker
+2018-08-20T00:15:38.813Z - warn: The referenced asset used in "db://assets/resources/animation/FangKuai_shengli.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "FangKuai_shengli/bg_guang/FangKuai_shengli_bg_guang"
+Used in Component: "cc.Sprite"
+uuid: "43358ec1-3647-4ebc-a17b-ad48b568bd7f"
+2018-08-20T00:15:38.815Z - warn: The referenced asset used in "db://assets/resources/animation/FangKuai_shengli.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "FangKuai_shengli/FangKuai_xuanyao"
+Used in Component: "cc.Sprite"
+uuid: "7e7831b3-f73d-4c9f-a646-39dad4eec625"
+2018-08-20T00:15:38.818Z - warn: The referenced asset used in "db://assets/resources/animation/FangKuai_shibai.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "FangKuai_shibai/bg_guang/FangKuai_an_bg_guang"
+Used in Component: "cc.Sprite"
+uuid: "61d8e7ed-e0f2-4f37-8c3a-eba1b6424b72"
+2018-08-20T00:15:38.819Z - warn: The referenced asset used in "db://assets/resources/animation/yindao/yindao_had.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "yindao_had/ddz_yindao_shou"
+Used in Component: "cc.Sprite"
+uuid: "cf6f7b14-cb0d-4cc6-9575-acb57a99fdde"
+2018-08-20T00:15:38.820Z - warn: The referenced asset used in "db://assets/resources/particals/mogu/mogu.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "mogu/Animation_loding"
+Used in Component: "cc.Sprite"
+uuid: "615f7ddb-9aba-451f-8a80-8e604ab34d27"
+2018-08-20T00:15:38.821Z - warn: The referenced asset used in "db://assets/resources/prefab/adNode.prefab" is not found, it may have been deleted. Detailed information:
+Used by "cc.PrefabInfo"
+uuid: "7abd61eb-c44f-47dc-96cc-0341338ee3d4"
+2018-08-20T00:15:38.823Z - warn: The referenced asset used in "db://assets/resources/prefab/keepstar.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "keepstar/FangKuai_shibai/FangKuai_shibai_bg"
+Used in Component: "cc.Sprite"
+uuid: "a73d89ef-9c8e-4987-9dd9-3184d52bf70b"
+2018-08-20T00:15:38.824Z - warn: The referenced asset used in "db://assets/resources/prefab/keepstar.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "keepstar/FangKuai_shibai/FangKuai_chongxin"
+Used in Component: "cc.Sprite"
+uuid: "03d6b9b1-49fb-496f-be60-7ecb01b7583b"
+2018-08-20T00:15:38.825Z - warn: The referenced asset used in "db://assets/resources/prefab/keepstar.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "keepstar/btngiveup"
+Used in Component: "cc.Sprite"
+uuid: "032564eb-77e7-47a0-91ab-398af25b1489"
+2018-08-20T00:15:38.826Z - warn: The referenced asset used in "db://assets/resources/prefab/lose_single.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "lose_single"
+Used in Component: "cc.Sprite"
+uuid: "cb06ce3d-e210-495a-9c88-3e0dafb6da7f"
+2018-08-20T00:15:38.827Z - warn: The referenced asset used in "db://assets/resources/prefab/lose.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "lose"
+Used in Component: "cc.Sprite"
+uuid: "5d40135a-47ca-4b87-8e6b-8452007601e7"
+2018-08-20T00:15:38.828Z - warn: The referenced asset used in "db://assets/resources/prefab/mask_label.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "mask_label"
+Used in Component: "cc.Sprite"
+uuid: "8c25e79e-17a4-4ad5-a47c-778b094c0c9a"
+2018-08-20T00:15:38.829Z - warn: The referenced asset used in "db://assets/resources/prefab/win_single.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "whipser_win_single/win_whisper_image"
+Used in Component: "cc.Sprite"
+uuid: "50efe25c-0563-4d36-949f-67a18f173189"
+2018-08-20T00:15:38.830Z - warn: The referenced asset used in "db://assets/resources/prefab/win.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "win/FangKuai_shengli/FangKuai_shengli"
+Used in Component: "cc.Sprite"
+uuid: "d9d29dec-b481-413c-8586-9c992bb86d67"
+2018-08-20T00:15:38.832Z - warn: The referenced asset used in "db://assets/resources/prefab/win.prefab" is not found, it may have been deleted. Detailed information:
+Node path: "win"
+Used in Component: "cc.Sprite"
+uuid: "3ab82a62-5bcd-44c7-8c9a-a2141729739e"
+2018-08-20T00:16:11.000Z - warn: `原图 db://assets/resources/image/pircle1/shijiaoxin.png 已经被打包到自动图集 resources/image/pircle1/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.002Z - warn: `原图 db://assets/resources/image/pircle/glow_S_08.png 已经被打包到自动图集 resources/image/pircle/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.004Z - warn: `原图 db://assets/resources/image/pircle/caidai_B_005.png 已经被打包到自动图集 resources/image/pircle/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.005Z - warn: `原图 db://assets/resources/image/pircle1/xingxing.png 已经被打包到自动图集 resources/image/pircle1/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.006Z - warn: `原图 db://assets/resources/image/pircle1/lizi.png 已经被打包到自动图集 resources/image/pircle1/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.008Z - warn: `原图 db://assets/resources/image/pircle1/xueren_fw658c.png 已经被打包到自动图集 resources/image/pircle1/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.009Z - warn: `原图 db://assets/resources/image/pircle1/xueren_fw658a.png 已经被打包到自动图集 resources/image/pircle1/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.010Z - warn: `原图 db://assets/resources/image/pircle/Dujiaoshou_gj_hua_01.png 已经被打包到自动图集 resources/image/pircle/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.011Z - warn: `原图 db://assets/resources/image/pircle/daoju03_huaban.png 已经被打包到自动图集 resources/image/pircle/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.012Z - warn: `原图 db://assets/resources/image/pircle/daoju04.1.png 已经被打包到自动图集 resources/image/pircle/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.013Z - warn: `原图 db://assets/resources/image/pircle/FangKuai_xingxing.png 已经被打包到自动图集 resources/image/pircle/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:11.014Z - warn: `原图 db://assets/resources/image/pircle/FangKuai_xuanzhong.png 已经被打包到自动图集 resources/image/pircle/AutoAtlas.pac，但由于这张原图同时被 Creator 直接使用，因此原图仍然会保留一份，单独给 Creator 使用。
+2018-08-20T00:16:12.789Z - normal: Finish build-assets in worker
+2018-08-20T00:16:12.793Z - normal: Finish building assets
+2018-08-20T00:16:12.897Z - normal: Start building plugin scripts
+2018-08-20T00:16:12.952Z - normal: Finish building plugin scripts
+2018-08-20T00:16:12.957Z - normal: Generating main.js from /Applications/CocosCreator.app/Contents/Resources/static/build-templates/shares/main.js
+2018-08-20T00:16:14.565Z - normal: Built to "/Users/zipxing/Desktop/work/els/wxels0711/build/wechatgame" successfully

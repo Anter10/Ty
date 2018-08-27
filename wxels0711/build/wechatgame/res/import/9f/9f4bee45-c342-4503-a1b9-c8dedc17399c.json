@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "FangKuai_anxingxing",
+    "texture": "1d0748592",
+    "rect": [
+      623,
+      287,
+      255,
+      79
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      255,
+      79
+    ]
+  }
+}

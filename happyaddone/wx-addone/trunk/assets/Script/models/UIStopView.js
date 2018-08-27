@@ -70,8 +70,13 @@
       */
      onLoad: function () {
 
+     },
+     
+     /**
+      * 关闭当前的界面
+      */
+     close:function(){
+         this.node.destroy();
      }
-
-
 
  });

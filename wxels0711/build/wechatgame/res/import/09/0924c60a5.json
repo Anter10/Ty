@@ -1,0 +1,996 @@
+[
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "elskf_chuizi01",
+      "texture": "e3wPn/V9RLkKQd5GQDjmOW",
+      "rect": [
+        0,
+        0,
+        228,
+        211
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        228,
+        211
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "elskf_chuizi06",
+      "texture": "6d6I10FGRDE7UoKfQnOWPy",
+      "rect": [
+        0,
+        0,
+        328,
+        321
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        328,
+        321
+      ]
+    }
+  },
+  {
+    "__type__": "cc.AnimationClip",
+    "_name": "chuizii",
+    "_duration": 2,
+    "sample": 30,
+    "curveData": {
+      "paths": {
+        "elskf_chuizi01": {
+          "props": {
+            "position": [
+              {
+                "frame": 0,
+                "value": [
+                  80,
+                  106
+                ],
+                "motionPath": [
+                  [
+                    93,
+                    191,
+                    72,
+                    159,
+                    114,
+                    224
+                  ]
+                ]
+              },
+              {
+                "frame": 0.5,
+                "value": [
+                  164,
+                  236
+                ],
+                "motionPath": [],
+                "curve": [
+                  0.18,
+                  0.89,
+                  0.31,
+                  1.21
+                ]
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": [
+                  102.3,
+                  115.7
+                ],
+                "motionPath": []
+              }
+            ],
+            "rotation": [
+              {
+                "frame": 0,
+                "value": 0
+              },
+              {
+                "frame": 0.3333333333333333,
+                "value": 60
+              },
+              {
+                "frame": 0.5,
+                "value": 120,
+                "curve": [
+                  0.18,
+                  0.89,
+                  0.31,
+                  1.21
+                ]
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": 0
+              }
+            ],
+            "scaleY": [
+              {
+                "frame": 0.5,
+                "value": 1
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": 1.2
+              }
+            ],
+            "scaleX": [
+              {
+                "frame": 0.5,
+                "value": 1
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": 1.2
+              }
+            ],
+            "opacity": [
+              {
+                "frame": 1.6666666666666667,
+                "value": 255
+              },
+              {
+                "frame": 1.9,
+                "value": 0
+              }
+            ]
+          }
+        },
+        "jidian/particlesystem1": {
+          "comps": {
+            "cc.ParticleSystem": {
+              "emissionRate": [
+                {
+                  "frame": 0.5666666666666667,
+                  "value": 0
+                },
+                {
+                  "frame": 0.6333333333333333,
+                  "value": 55
+                },
+                {
+                  "frame": 0.7,
+                  "value": 0
+                }
+              ]
+            }
+          }
+        },
+        "jidian/particlesystem2": {
+          "comps": {
+            "cc.ParticleSystem": {
+              "emissionRate": [
+                {
+                  "frame": 0.5666666666666667,
+                  "value": 0
+                },
+                {
+                  "frame": 0.6,
+                  "value": 55
+                },
+                {
+                  "frame": 0.6666666666666666,
+                  "value": 0
+                }
+              ]
+            }
+          }
+        },
+        "jidian/particlesystem3": {
+          "comps": {
+            "cc.ParticleSystem": {
+              "emissionRate": [
+                {
+                  "frame": 0.6,
+                  "value": 0
+                },
+                {
+                  "frame": 0.6666666666666666,
+                  "value": 31
+                },
+                {
+                  "frame": 0.7,
+                  "value": 0
+                },
+                {
+                  "frame": 2,
+                  "value": 0
+                }
+              ]
+            }
+          }
+        },
+        "jidian/particlesystem4": {
+          "comps": {
+            "cc.ParticleSystem": {
+              "emissionRate": [
+                {
+                  "frame": 0.6,
+                  "value": 0
+                },
+                {
+                  "frame": 0.6666666666666666,
+                  "value": 41
+                },
+                {
+                  "frame": 0.7,
+                  "value": 0
+                }
+              ]
+            }
+          }
+        },
+        "jidian/particlesystem5": {
+          "comps": {
+            "cc.ParticleSystem": {
+              "emissionRate": [
+                {
+                  "frame": 0.6,
+                  "value": 0
+                },
+                {
+                  "frame": 0.6666666666666666,
+                  "value": 31
+                },
+                {
+                  "frame": 0.7,
+                  "value": 0
+                }
+              ]
+            }
+          }
+        },
+        "jidian/elskf_chuizi05": {
+          "props": {
+            "scaleY": [
+              {
+                "frame": 0.5333333333333333,
+                "value": 0,
+                "curve": [
+                  0.18,
+                  0.89,
+                  0.31,
+                  1.21
+                ]
+              },
+              {
+                "frame": 0.8666666666666667,
+                "value": 2
+              }
+            ],
+            "scaleX": [
+              {
+                "frame": 0.5333333333333333,
+                "value": 0,
+                "curve": [
+                  0.18,
+                  0.89,
+                  0.31,
+                  1.21
+                ]
+              },
+              {
+                "frame": 0.8666666666666667,
+                "value": 2
+              }
+            ],
+            "opacity": [
+              {
+                "frame": 0.6333333333333333,
+                "value": 255
+              },
+              {
+                "frame": 0.8666666666666667,
+                "value": 0
+              }
+            ]
+          }
+        },
+        "jidian/elskf_chuizi06": {
+          "props": {
+            "scaleY": [
+              {
+                "frame": 0.6,
+                "value": 0,
+                "curve": [
+                  0.18,
+                  0.89,
+                  0.31,
+                  1.21
+                ]
+              },
+              {
+                "frame": 0.9666666666666667,
+                "value": 2
+              }
+            ],
+            "scaleX": [
+              {
+                "frame": 0.6,
+                "value": 0,
+                "curve": [
+                  0.18,
+                  0.89,
+                  0.31,
+                  1.21
+                ]
+              },
+              {
+                "frame": 0.9666666666666667,
+                "value": 2
+              }
+            ],
+            "opacity": [
+              {
+                "frame": 0.7666666666666667,
+                "value": 255
+              },
+              {
+                "frame": 0.9666666666666667,
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "elskf_chuizi05",
+      "texture": "31pSCsVVtCloylz5KuriyT",
+      "rect": [
+        0,
+        0,
+        240,
+        234
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        240,
+        234
+      ]
+    }
+  },
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "chuizi",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "chuizi",
+      "_children": [
+        {
+          "__id__": 2
+        },
+        {
+          "__id__": 10
+        }
+      ],
+      "_components": [
+        {
+          "__type__": "cc.Animation",
+          "node": {
+            "__id__": 1
+          },
+          "_defaultClip": {
+            "__uuid__": "b5z8zL3IFJza1qIcCqzx7J"
+          },
+          "_clips": [
+            {
+              "__uuid__": "b5z8zL3IFJza1qIcCqzx7J"
+            }
+          ],
+          "playOnLoad": true
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "65VS6lGZJGNpLoiv15wAEv"
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "jidian",
+      "_parent": {
+        "__id__": 1
+      },
+      "_children": [
+        {
+          "__id__": 3
+        },
+        {
+          "__id__": 4
+        },
+        {
+          "__id__": 5
+        },
+        {
+          "__id__": 6
+        },
+        {
+          "__id__": 7
+        },
+        {
+          "__id__": 8
+        },
+        {
+          "__id__": 9
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "a2xB4zZLVP3YGuX41FcTlx"
+      },
+      "_scaleY": 0.3
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "particlesystem1",
+      "_parent": {
+        "__id__": 2
+      },
+      "_components": [
+        {
+          "__type__": "cc.ParticleSystem",
+          "node": {
+            "__id__": 3
+          },
+          "_custom": true,
+          "_file": {
+            "__uuid__": "b2aHrECZ5APKGS/0d2hvT1"
+          },
+          "_texture": {
+            "__uuid__": "dfU2JoT9tKwJRv4Eh4OR6C"
+          },
+          "_dstBlendFactor": 1,
+          "_totalParticles": 200,
+          "_emissionRate": 15,
+          "_lifeVar": 0.5,
+          "_startColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 244,
+            "a": 163
+          },
+          "_startColorVar": {
+            "__type__": "cc.Color",
+            "a": 198
+          },
+          "_endColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 214
+          },
+          "_endColorVar": {
+            "__type__": "cc.Color",
+            "a": 188
+          },
+          "_angle": 360,
+          "_angleVar": 360,
+          "_startSize": 3.369999885559082,
+          "_startSizeVar": 50,
+          "_endSize": 30.31999969482422,
+          "_startSpin": -47.369998931884766,
+          "_endSpin": -47.369998931884766,
+          "_endSpinVar": -142.11000061035156,
+          "_posVar": {
+            "__type__": "cc.Vec2",
+            "x": 7,
+            "y": 7
+          },
+          "_positionType": 1,
+          "_emitterMode": 1,
+          "_gravity": {
+            "__type__": "cc.Vec2",
+            "x": 0.25,
+            "y": 0.8600000143051147
+          },
+          "_speed": 0,
+          "_speedVar": 190.7899932861328,
+          "_tangentialAccel": 0,
+          "_startRadius": 50,
+          "_endRadius": 300
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "21ouyxuYNCA7gX4upFP3Np"
+      },
+      "_scaleY": 2
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "particlesystem2",
+      "_parent": {
+        "__id__": 2
+      },
+      "_components": [
+        {
+          "__type__": "cc.ParticleSystem",
+          "node": {
+            "__id__": 4
+          },
+          "_custom": true,
+          "_file": {
+            "__uuid__": "b2aHrECZ5APKGS/0d2hvT1"
+          },
+          "_texture": {
+            "__uuid__": "dfU2JoT9tKwJRv4Eh4OR6C"
+          },
+          "_dstBlendFactor": 1,
+          "_totalParticles": 200,
+          "_emissionRate": 15,
+          "_lifeVar": 0.5,
+          "_startColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 244,
+            "a": 163
+          },
+          "_startColorVar": {
+            "__type__": "cc.Color",
+            "a": 198
+          },
+          "_endColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 214
+          },
+          "_endColorVar": {
+            "__type__": "cc.Color",
+            "a": 188
+          },
+          "_angle": 360,
+          "_angleVar": 360,
+          "_startSize": 3.369999885559082,
+          "_startSizeVar": 50,
+          "_endSize": 50,
+          "_endSizeVar": 15,
+          "_startSpin": -47.369998931884766,
+          "_endSpin": -47.369998931884766,
+          "_endSpinVar": -142.11000061035156,
+          "_posVar": {
+            "__type__": "cc.Vec2",
+            "x": 7,
+            "y": 7
+          },
+          "_positionType": 1,
+          "_emitterMode": 1,
+          "_gravity": {
+            "__type__": "cc.Vec2",
+            "x": 0.25,
+            "y": 0.8600000143051147
+          },
+          "_speed": 0,
+          "_speedVar": 190.7899932861328,
+          "_tangentialAccel": 0,
+          "_startRadius": 50,
+          "_endRadius": 300
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "44VgR3YuhBloSsK2PNZTfO"
+      },
+      "_scaleY": 3
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "particlesystem3",
+      "_parent": {
+        "__id__": 2
+      },
+      "_components": [
+        {
+          "__type__": "cc.ParticleSystem",
+          "node": {
+            "__id__": 5
+          },
+          "_custom": true,
+          "_file": {
+            "__uuid__": "b2aHrECZ5APKGS/0d2hvT1"
+          },
+          "_texture": {
+            "__uuid__": "dfU2JoT9tKwJRv4Eh4OR6C"
+          },
+          "_dstBlendFactor": 1,
+          "_totalParticles": 200,
+          "_emissionRate": 15,
+          "_lifeVar": 0.5,
+          "_startColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 244,
+            "a": 163
+          },
+          "_startColorVar": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 198
+          },
+          "_endColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 214
+          },
+          "_endColorVar": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 188
+          },
+          "_angle": 360,
+          "_angleVar": 360,
+          "_startSize": 3.369999885559082,
+          "_startSizeVar": 15,
+          "_endSize": 15,
+          "_endSizeVar": 2,
+          "_startSpin": -47.369998931884766,
+          "_endSpin": -47.369998931884766,
+          "_endSpinVar": -142.11000061035156,
+          "_posVar": {
+            "__type__": "cc.Vec2",
+            "x": 7,
+            "y": 7
+          },
+          "_positionType": 1,
+          "_emitterMode": 1,
+          "_gravity": {
+            "__type__": "cc.Vec2",
+            "x": 0.25,
+            "y": 0.8600000143051147
+          },
+          "_speed": 0,
+          "_speedVar": 190.7899932861328,
+          "_tangentialAccel": 0,
+          "_startRadius": 100,
+          "_endRadius": 300
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "1bupIKm4NKLqqYxDixCdRF"
+      },
+      "_scaleY": 3
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "particlesystem4",
+      "_parent": {
+        "__id__": 2
+      },
+      "_components": [
+        {
+          "__type__": "cc.ParticleSystem",
+          "node": {
+            "__id__": 6
+          },
+          "_custom": true,
+          "_file": {
+            "__uuid__": "b2aHrECZ5APKGS/0d2hvT1"
+          },
+          "_texture": {
+            "__uuid__": "95ZEpbu19Hg6JR3hnlsgn2"
+          },
+          "_dstBlendFactor": 1,
+          "_totalParticles": 200,
+          "_emissionRate": 15,
+          "_lifeVar": 0.5,
+          "_startColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 244,
+            "a": 163
+          },
+          "_startColorVar": {
+            "__type__": "cc.Color",
+            "a": 198
+          },
+          "_endColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 214
+          },
+          "_endColorVar": {
+            "__type__": "cc.Color",
+            "a": 188
+          },
+          "_angle": 360,
+          "_angleVar": 360,
+          "_startSize": 3.369999885559082,
+          "_startSizeVar": 50,
+          "_endSize": 30.31999969482422,
+          "_startSpin": -47.369998931884766,
+          "_endSpin": -47.369998931884766,
+          "_endSpinVar": -142.11000061035156,
+          "_posVar": {
+            "__type__": "cc.Vec2",
+            "x": 7,
+            "y": 7
+          },
+          "_positionType": 1,
+          "_emitterMode": 1,
+          "_gravity": {
+            "__type__": "cc.Vec2",
+            "x": 0.25,
+            "y": 0.8600000143051147
+          },
+          "_speed": 0,
+          "_speedVar": 190.7899932861328,
+          "_tangentialAccel": 0,
+          "_startRadius": 50,
+          "_endRadius": 300
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "c4XDRn2rZFqLSs8LdjmeNf"
+      },
+      "_scaleY": 3
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "elskf_chuizi05",
+      "_parent": {
+        "__id__": 2
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 7
+          },
+          "_spriteFrame": {
+            "__uuid__": "ed8x2gQ6JIIbBCtUVkTawE"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "d8+VdSL55HxLH/wKXtIb6Q"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 240,
+        "height": 234
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "elskf_chuizi06",
+      "_parent": {
+        "__id__": 2
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 8
+          },
+          "_spriteFrame": {
+            "__uuid__": "35kCKXY4tPQajrMZx5B5wf"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "d2bJVD7YhMpqZbWqnbuYVS"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 328,
+        "height": 321
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "particlesystem5",
+      "_parent": {
+        "__id__": 2
+      },
+      "_components": [
+        {
+          "__type__": "cc.ParticleSystem",
+          "node": {
+            "__id__": 9
+          },
+          "_custom": true,
+          "_file": {
+            "__uuid__": "b2aHrECZ5APKGS/0d2hvT1"
+          },
+          "_texture": {
+            "__uuid__": "95ZEpbu19Hg6JR3hnlsgn2"
+          },
+          "_dstBlendFactor": 1,
+          "_totalParticles": 200,
+          "_emissionRate": 15,
+          "_lifeVar": 0.5,
+          "_startColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 244,
+            "a": 163
+          },
+          "_startColorVar": {
+            "__type__": "cc.Color",
+            "a": 198
+          },
+          "_endColor": {
+            "__type__": "cc.Color",
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 214
+          },
+          "_endColorVar": {
+            "__type__": "cc.Color",
+            "a": 188
+          },
+          "_angle": 360,
+          "_angleVar": 360,
+          "_startSize": 3.369999885559082,
+          "_startSizeVar": 50,
+          "_endSize": 30.31999969482422,
+          "_startSpin": -47.369998931884766,
+          "_endSpin": -47.369998931884766,
+          "_endSpinVar": -142.11000061035156,
+          "_posVar": {
+            "__type__": "cc.Vec2",
+            "x": 7,
+            "y": 7
+          },
+          "_positionType": 1,
+          "_emitterMode": 1,
+          "_gravity": {
+            "__type__": "cc.Vec2",
+            "x": 0.25,
+            "y": 0.8600000143051147
+          },
+          "_speed": 0,
+          "_speedVar": 190.7899932861328,
+          "_tangentialAccel": 0,
+          "_startRadius": 50,
+          "_endRadius": 300
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "27K6IDjMxPcrsBmKIalArh"
+      },
+      "_scaleY": 3
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "elskf_chuizi01",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 10
+          },
+          "_spriteFrame": {
+            "__uuid__": "21niHIjopGS5b2Jok1lTTV"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "f5DeHW3h1Cqpjxp4f0v7hx"
+        },
+        "fileId": "489egML31ObbEOKl2rjzHS"
+      },
+      "_anchorPoint": {
+        "__type__": "cc.Vec2",
+        "x": 0.7,
+        "y": 0.5
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 228,
+        "height": 211
+      },
+      "_position": {
+        "__type__": "cc.Vec2",
+        "x": 83,
+        "y": 92
+      }
+    }
+  ]
+]

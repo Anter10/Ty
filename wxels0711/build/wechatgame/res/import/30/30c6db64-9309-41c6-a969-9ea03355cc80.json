@@ -1,0 +1,27 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "rank_selected",
+    "texture": "1826a1210",
+    "rect": [
+      1282,
+      1214,
+      230,
+      60
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      230,
+      60
+    ],
+    "capInsets": [
+      11,
+      13,
+      1,
+      15
+    ]
+  }
+}

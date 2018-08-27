@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Animation_Fireworks",
+    "texture": "410bc5bd-e20c-48e7-a0b1-29683fa05311",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      100,
+      101
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      100,
+      101
+    ]
+  }
+}

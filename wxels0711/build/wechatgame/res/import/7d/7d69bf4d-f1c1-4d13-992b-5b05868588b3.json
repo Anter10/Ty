@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "daoju001",
+    "texture": "1f0353f88",
+    "rect": [
+      745,
+      311,
+      113,
+      79
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      113,
+      79
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+// Learn cc.Class:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
+// Learn Attribute:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
+// Learn life-cycle callbacks:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var els = require("../../core/els.js");
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        nickname:cc.Label,
+        icon:cc.Sprite,
+        button:cc.Button,
+        rewardState:0,
+        btn_Nodes:[cc.Node] // 0: 领取 1: 邀请 2: 领取
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    init(_data){
+        this.data = _data;
+        if (_data["data"]){
+            this.setImage(this.icon, _data["data"]["purl"]);
+        }
+        this.rewardState = _data["state"];
+    },
+
+    onLoad () {
+        
+        for (let i = 0; i < this.btn_Nodes.length; i ++) {
+            this.btn_Nodes[i].active = false;
+        }
+        this.button.node.on("click", this.buttonClick, this);
+        this.updateState();
+    },
+
+    buttonClick (){
+        
+      if (this.rewardState === 2) {
+          return;
+      }
+      if (this.rewardState === 0) { // 领取
+      //  TODO: 领取成功后 readyState = 2 刷新状态
+          if (!this.data) {
+              console.log("数据不存在", "userid");
+              return;
+          }
+          console.log("领取");
+          if (!this.isListen) {
+            tywx.NotificationCenter.listen(tywx.EventType.CMD_ELSWX, this._MsgRewardInfo, this);
+            this.isListen = true;
+          }
+          
+          tywx.MSG.addRewardDiamond(2, this.data.data.userId);
+      }
+      if (this.rewardState === 1) { // 邀请
+          console.log("邀请");
+          tywx.ShareInterface.shareMsg({
+            type:els.ELS_SHRAE_TYPE.HOME_REWARD
+        });
+      }
+    },
+
+    updateState(){
+        for (let i = 0; i < this.btn_Nodes.length; i ++) {
+            if (i === this.rewardState) {
+                this.btn_Nodes[i].active = true;
+            }else  {
+                this.btn_Nodes[i].active = false;
+            }
+        }
+    },
+
+    setImage(_node, _imageUrl) {
+        if (_imageUrl.indexOf("https://wx.qlogo") !== -1) {
+            _imageUrl = _imageUrl + "?aaa=aaa.png";
+        }
+        _node.node.setContentSize(123, 123);
+        cc.loader.load(_imageUrl, function (err, texture) {
+            if (!err) {
+                _node.getComponent('cc.Sprite').spriteFrame = new cc.SpriteFrame(texture);
+            }
+        });
+    },
+
+    _MsgRewardInfo(params){
+        if (params.result.action === tywx.EventType.CMD_ACTION_ADD_DIAMOND) {
+            if (params.result.status === 1 && params.result.reason === 2){// 邀请奖励领取成功
+                this.rewardState = 2;
+                this.updateState();
+                tywx.Util.wechatShowModal("领取成功 获得钻石x"+params.result.count, false, "确定");
+            }
+        }
+    },
+
+    onDestroy(){
+        tywx.NotificationCenter.ignoreScope(this);
+    },
+});

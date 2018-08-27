@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "ylq",
+    "texture": "1130c8575",
+    "rect": [
+      276,
+      484,
+      115,
+      68
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      115,
+      68
+    ]
+  }
+}

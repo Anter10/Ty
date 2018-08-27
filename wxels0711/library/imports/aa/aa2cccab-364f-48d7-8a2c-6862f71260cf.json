@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btn_watch_video",
+    "texture": "3c0b4aec-3e47-4dbb-885d-5043926494d7",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      88,
+      89
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      88,
+      89
+    ]
+  }
+}

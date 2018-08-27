@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "shadow7",
+    "texture": "1b56023e0",
+    "rect": [
+      111,
+      111,
+      105,
+      55
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      105,
+      55
+    ]
+  }
+}

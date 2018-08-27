@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "pifu04",
+    "texture": "1f0353f88",
+    "rect": [
+      446,
+      459,
+      153,
+      105
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      153,
+      105
+    ]
+  }
+}

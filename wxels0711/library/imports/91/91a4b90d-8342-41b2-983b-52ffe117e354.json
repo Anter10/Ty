@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "zhubao_2",
+    "texture": "6f32b4a9-4e48-4a8c-9a66-d60e6e9fccb4",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      82,
+      80
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      82,
+      80
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_spriteFrames": {
+    "mall_bj": {
+      "__uuid__": "eelt17vTxEVrarOx+I3pN2"
+    },
+    "show_bg": {
+      "__uuid__": "4fcr+3U9NMsYVe2c7fitLl"
+    },
+    "ggw": {
+      "__uuid__": "59elMsq39B/4mac25Y60Ie"
+    },
+    "mall_sc01": {
+      "__uuid__": "4au6Zl+EdENo0ZtYuf/ho/"
+    },
+    "select_gift_p": {
+      "__uuid__": "2at9GUpW9Oq5Qz3UjBAs+h"
+    },
+    "share_btn_bg": {
+      "__uuid__": "c4gzC52c1B+IAYv1jPGyiq"
+    },
+    "share": {
+      "__uuid__": "468In+2RFI/LDcP915Iz0w"
+    },
+    "video": {
+      "__uuid__": "f5pShURjlDVZGQa5WJAM2g"
+    },
+    "select_gift_show_bg": {
+      "__uuid__": "e5x7uUAOxJ5qYJ+CRcMEIM"
+    },
+    "tx": {
+      "__uuid__": "e6De7tq6NNAoD5HHUN1GJ6"
+    },
+    "vs_label_bg": {
+      "__uuid__": "8b0dw4ypxBmLseCqMJehMv"
+    },
+    "whisper_font_15": {
+      "__uuid__": "241YOSQaVOxJFGtXJ6bZ6s"
+    },
+    "mall_btn_1": {
+      "__uuid__": "admhMINMtD6Z6dUfFzqzSg"
+    },
+    "txzs": {
+      "__uuid__": "36E3G8HHRB87q9GLbtEWlG"
+    },
+    "select_tips_bg": {
+      "__uuid__": "d7I3KVqpdFPbn/1beiJP5x"
+    },
+    "whisper_font_42": {
+      "__uuid__": "5aLu4rzfBLmoCtQW7hfaQs"
+    },
+    "mall_jb": {
+      "__uuid__": "17ROQRuU5FVao1Y0QBEUps"
+    },
+    "whisper_font_41": {
+      "__uuid__": "c5fQjUKONNlaXYcOsw7yp4"
+    },
+    "mall_btn_3": {
+      "__uuid__": "2egbU4HKJOObzVRlx3zI+i"
+    },
+    "mall_gg_anniu": {
+      "__uuid__": "288PCNthhGgI2a2mAyHGfC"
+    },
+    "whisper_font_40": {
+      "__uuid__": "f5wbKqC8dC6IqFkR6A0e1M"
+    },
+    "whisper_font_14": {
+      "__uuid__": "fcyGDbemJL2ppW7A/s6dEL"
+    },
+    "mall_btn_2": {
+      "__uuid__": "084xMkFRxGxJ527y7nDAWF"
+    },
+    "whisper_font_32": {
+      "__uuid__": "49mBCh4GJOLbMTjVX1Vy9q"
+    },
+    "whisper_font_13": {
+      "__uuid__": "c07dbhULVHK77cv3eAlvWR"
+    },
+    "whisper_font_25": {
+      "__uuid__": "53yEMAmltIE54QvSCf0sY4"
+    },
+    "diamond_ad_btn": {
+      "__uuid__": "dbus+NnotOYL4XgKTV+WNl"
+    },
+    "small_star_bright": {
+      "__uuid__": "a7wClnqMpMH7uG0HRBRwUJ"
+    },
+    "small_star_dark": {
+      "__uuid__": "a1v1XlzA1HXbnXwxYUC0Dd"
+    }
+  }
+}

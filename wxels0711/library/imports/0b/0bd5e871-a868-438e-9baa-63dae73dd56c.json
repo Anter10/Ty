@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "elst",
+    "texture": "dd83d97d-10ed-448d-bc30-a49e6177313d",
+    "atlas": "",
+    "rect": [
+      2,
+      2,
+      1000,
+      653
+    ],
+    "offset": [
+      -10,
+      183.5
+    ],
+    "originalSize": [
+      1024,
+      1024
+    ]
+  }
+}

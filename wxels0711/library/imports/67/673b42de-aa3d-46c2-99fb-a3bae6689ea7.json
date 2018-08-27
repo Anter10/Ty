@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "ddz_yindao_shou",
+    "texture": "350d7527-b1db-4a39-a1f4-f823af28740a",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      104,
+      129
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      104,
+      129
+    ]
+  }
+}

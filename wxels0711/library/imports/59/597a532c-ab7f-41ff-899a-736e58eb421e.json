@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "ggw",
+    "texture": "7090ba74-2237-46e5-9ecb-a52b42f1496e",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      693,
+      174
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      693,
+      174
+    ]
+  }
+}

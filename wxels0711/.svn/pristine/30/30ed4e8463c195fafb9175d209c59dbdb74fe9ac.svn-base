@@ -1,0 +1,473 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "FangKuai_daoju_05",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 3,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": "1",
+  "curveData": {
+    "paths": {
+      "xin2048_tx_huode01": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.4,
+              "value": 0
+            },
+            {
+              "frame": 0.5333333333333333,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode02": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.6,
+              "value": 0
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 2.1333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 3,
+              "value": 0
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.6,
+              "value": 0
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": 3
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.6,
+              "value": 0
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": 3
+            }
+          ],
+          "rotation": [
+            {
+              "frame": 0.6,
+              "value": 0
+            },
+            {
+              "frame": 3,
+              "value": 90
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode04": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.5,
+              "value": 0,
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 3
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.5,
+              "value": 0,
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 3
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.6666666666666666,
+              "value": 255
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode041": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.6666666666666666,
+              "value": 0,
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 3
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.6666666666666666,
+              "value": 0,
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 3
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.8333333333333334,
+              "value": 255
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "huodewu": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.5,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1.2,
+                "y": 1.2
+              }
+            },
+            {
+              "frame": 0.5666666666666667,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 1.1333333333333333,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 1.3,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0.85,
+                "y": 0.85
+              }
+            },
+            {
+              "frame": 1.4666666666666666,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 1.6333333333333333,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0.85,
+                "y": 0.85
+              }
+            },
+            {
+              "frame": 1.8,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 1.9666666666666666,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0.85,
+                "y": 0.85
+              }
+            },
+            {
+              "frame": 2.3,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            }
+          ],
+          "rotation": [
+            {
+              "frame": 0.5,
+              "value": 0
+            },
+            {
+              "frame": 0.5666666666666667,
+              "value": -10
+            },
+            {
+              "frame": 0.6333333333333333,
+              "value": 0
+            },
+            {
+              "frame": 0.7,
+              "value": 10
+            },
+            {
+              "frame": 0.7666666666666667,
+              "value": 0
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": -10
+            },
+            {
+              "frame": 0.9,
+              "value": 0
+            },
+            {
+              "frame": 0.9666666666666667,
+              "value": 10
+            },
+            {
+              "frame": 1.0333333333333334,
+              "value": 0
+            },
+            {
+              "frame": 1.1,
+              "value": -10
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 0
+            },
+            {
+              "frame": 1.2333333333333334,
+              "value": 10
+            },
+            {
+              "frame": 1.3,
+              "value": 0
+            }
+          ],
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                390,
+                148
+              ]
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      },
+      "huodewu/huodewu": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1.5333333333333334,
+              "value": 0
+            },
+            {
+              "frame": 1.6666666666666667,
+              "value": 255
+            },
+            {
+              "frame": 2.1666666666666665,
+              "value": 0
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 1.6666666666666667,
+              "value": 1
+            },
+            {
+              "frame": 2.1666666666666665,
+              "value": 3
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 1.6666666666666667,
+              "value": 1
+            },
+            {
+              "frame": 2.1666666666666665,
+              "value": 3
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode043": {
+        "props": {
+          "scaleX": [
+            {
+              "frame": 1,
+              "value": 0
+            },
+            {
+              "frame": 1.6666666666666667,
+              "value": 3
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 1,
+              "value": 0
+            },
+            {
+              "frame": 1.6666666666666667,
+              "value": 3
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 1.1666666666666667,
+              "value": 255
+            },
+            {
+              "frame": 1.6666666666666667,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode044": {
+        "props": {
+          "scaleX": [
+            {
+              "frame": 1.3333333333333333,
+              "value": 0
+            },
+            {
+              "frame": 2,
+              "value": 3
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 1.3333333333333333,
+              "value": 0
+            },
+            {
+              "frame": 2,
+              "value": 3
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 1.5,
+              "value": 255
+            },
+            {
+              "frame": 2,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "xin2048_tx_huode01a": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.4,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.7333333333333333,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 2.41,
+                "y": 2.41
+              }
+            }
+          ]
+        }
+      },
+      "particlesystem00_02": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 1,
+                "value": 0
+              },
+              {
+                "frame": 1.2,
+                "value": 40
+              }
+            ]
+          }
+        }
+      },
+      "particlesystem00_01": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.5,
+                "value": 0
+              },
+              {
+                "frame": 0.7,
+                "value": 100
+              },
+              {
+                "frame": 1,
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "events": []
+}

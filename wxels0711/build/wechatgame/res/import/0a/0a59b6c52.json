@@ -1,0 +1,62 @@
+[
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "attack1",
+      "texture": "1130c8575",
+      "rect": [
+        311,
+        666,
+        13,
+        13
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        13,
+        13
+      ]
+    }
+  },
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "attack1",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "attack1",
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 1
+          },
+          "_spriteFrame": {
+            "__uuid__": "29jbarXztAW4MCFy6qkvez"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__id__": 0
+        },
+        "fileId": "ca7dQxCuhF2qgOMyYV8hD2"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 13,
+        "height": 13
+      }
+    }
+  ]
+]

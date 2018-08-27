@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "caidai_B_005",
+    "texture": "2d1b9d3c-4643-438d-bac4-579d31350e7c",
+    "atlas": "",
+    "rect": [
+      4,
+      5,
+      34,
+      33
+    ],
+    "offset": [
+      0,
+      -0.5
+    ],
+    "originalSize": [
+      42,
+      42
+    ]
+  }
+}

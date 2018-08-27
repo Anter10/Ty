@@ -9,27 +9,27 @@ tywx.publicwx = true;
 var curscene = null;
 let UIPhbView = cc.Class({
     extends: cc.Component,
-    properties:{
-         
-        backButton:{
-            default:null,
+    properties: {
+
+        backButton: {
+            default: null,
             type: cc.Button,
         },
-        
-        phbView:{
+
+        phbView: {
             default: null,
-            type:cc.Node,
+            type: cc.Node,
         },
 
-        shareButton:{
+        shareButton: {
             default: null,
-            type:cc.Node,
+            type: cc.Node,
         },
 
-        phbSprite:cc.Sprite,
-       
+        phbSprite: cc.Sprite,
+
     },
-    _updateSubDomainCanvas () {
+    _updateSubDomainCanvas() {
         // let self = this;
         // if (!self.tex) {
         //     return;
@@ -38,14 +38,14 @@ let UIPhbView = cc.Class({
         //     method:1,
 
         // });
-         
+
     },
-    start () {
- 
+    start() {
+
     },
 
     // 刷新子域的纹理
-    _updateSubDomainCanvas: function() {
+    _updateSubDomainCanvas: function () {
         if (!this.tex) {
             return;
         }
@@ -67,13 +67,13 @@ let UIPhbView = cc.Class({
         ]
         思路: 系统自带
     */
-    ctor: function(){
-        config = tywx.config != null?tywx.config : config;
+    ctor: function () {
+        config = tywx.config != null ? tywx.config : config;
     },
 
-    update: function(delayTime){
-        if(tywx.publicwx){
-           this._updateSubDomainCanvas();   
+    update: function (delayTime) {
+        if (tywx.publicwx) {
+            this._updateSubDomainCanvas();
         }
     },
 
@@ -88,27 +88,27 @@ let UIPhbView = cc.Class({
         ]
         思路: 系统自带
     */
-    onLoad:function(){
-        if(tywx.curgotophbtype == 1){
-            if(tywx.publicwx){
+    onLoad: function () {
+        if (tywx.curgotophbtype == 1) {
+            if (tywx.publicwx) {
                 wx.postMessage({
                     method: 1,
                     MAIN_MENU_NUM: "x1",
                 });
             }
-        }else{
+        } else {
             window.wx.postMessage({
                 method: 2,
                 MAIN_MENU_NUM: "x1",
-                shareTicket:  tywx.groupdata.shareTickets[0]
-          });
+                // shareTicket:  tywx.groupdata.shareTickets[0]
+            });
         }
-       
-        
-       
+
+
+
     },
 
-  
+
 
     /*
         调用: 点击返回按钮
@@ -121,29 +121,17 @@ let UIPhbView = cc.Class({
         ]
         思路: 游戏需要
     */
-   hidePhbView: function(){
-       cc.director.loadScene("phbview", this.loadFinishCallBack);
-        
-   },
-
-    /*
-        调用: 进入游戏的时候调用
-        功能: 清除当前界面占用的内存
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏需要
-    */
-    loadFinishCallBack:function(){
-         if(this.node){
-            this.node.destroy();
-         }
+    hidePhbView: function () {
+        cc.director.loadScene("phbview", this.loadFinishCallBack);
     },
-   
-  
+
+
+    /**
+     * 关闭排行榜的界面
+     */
+    close: function () {
+        this.node.destroy();
+    }
 
 });
 

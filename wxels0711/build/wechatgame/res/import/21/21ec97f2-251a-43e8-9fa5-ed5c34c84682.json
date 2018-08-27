@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "xueren_fw658c",
+    "texture": "12fef5646",
+    "rect": [
+      2,
+      1803,
+      47,
+      97
+    ],
+    "offset": [
+      4.5,
+      -0.5
+    ],
+    "originalSize": [
+      128,
+      128
+    ]
+  }
+}

@@ -1,212 +1,467 @@
-2018-08-25T10:41:23.606Z - normal: Load ~/.CocosCreator/settings.json
-2018-08-25T10:41:23.609Z - normal: checking language setting...
-2018-08-25T10:41:23.610Z - normal: Language: zh
-2018-08-25T10:41:24.116Z - success: protocol editor-framework registered
-2018-08-25T10:41:24.117Z - success: protocol app registered
-2018-08-25T10:41:24.117Z - success: protocol theme registered
-2018-08-25T10:41:24.117Z - success: protocol packages registered
-2018-08-25T10:41:24.118Z - success: protocol unpack registerred
-2018-08-25T10:41:24.118Z - success: protocol disable-commonjs registerred
-2018-08-25T10:41:24.229Z - normal: connected!
-2018-08-25T10:41:24.233Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk
-2018-08-25T10:41:24.237Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk
-2018-08-25T10:41:24.240Z - normal: Initializing Cocos2d
-2018-08-25T10:41:24.975Z - normal: Initializing Asset Database
-2018-08-25T10:41:25.021Z - success: protocol uuid registerred
-2018-08-25T10:41:25.022Z - success: protocol db registerred
-2018-08-25T10:41:25.022Z - success: protocol thumbnail registerred
-2018-08-25T10:41:25.022Z - normal: Loading editor/builtin packages
-2018-08-25T10:41:25.192Z - success: assets loaded
-2018-08-25T10:41:25.196Z - success: builder loaded
-2018-08-25T10:41:25.198Z - success: cocos-analytics loaded
-2018-08-25T10:41:25.204Z - success: console loaded
-2018-08-25T10:41:25.247Z - success: fb-instant-games loaded
-2018-08-25T10:41:25.254Z - success: hierarchy loaded
-2018-08-25T10:41:25.258Z - success: inspector loaded
-2018-08-25T10:41:25.260Z - success: keystore loaded
-2018-08-25T10:41:25.265Z - success: node-library loaded
-2018-08-25T10:41:25.267Z - success: package-asset loaded
-2018-08-25T10:41:25.269Z - success: preferences loaded
-2018-08-25T10:41:25.272Z - success: project-exporter loaded
-2018-08-25T10:41:25.289Z - success: project-importer loaded
-2018-08-25T10:41:25.293Z - success: project-settings loaded
-2018-08-25T10:41:25.298Z - success: ui-kit loaded
-2018-08-25T10:41:25.303Z - success: scene loaded
-2018-08-25T10:41:25.305Z - success: sprite-editor loaded
-2018-08-25T10:41:25.310Z - success: store loaded
-2018-08-25T10:41:25.316Z - success: timeline loaded
-2018-08-25T10:41:25.316Z - normal: Loading builtin packages
-2018-08-25T10:41:25.321Z - success: asset-db-debugger loaded
-2018-08-25T10:41:25.322Z - success: color-picker loaded
-2018-08-25T10:41:25.323Z - success: jsb-adapter loaded
-2018-08-25T10:41:25.326Z - success: package-manager loaded
-2018-08-25T10:41:25.327Z - success: qqplay-adapter loaded
-2018-08-25T10:41:25.334Z - success: sdkbox loaded
-2018-08-25T10:41:25.339Z - success: tester loaded
-2018-08-25T10:41:25.347Z - success: ui-grid loaded
-2018-08-25T10:41:25.351Z - success: ui-kit-preview-extra loaded
-2018-08-25T10:41:25.354Z - success: ui-kit-preview loaded
-2018-08-25T10:41:25.358Z - success: ui-tree loaded
-2018-08-25T10:41:25.358Z - success: weapp-adapter loaded
-2018-08-25T10:41:26.474Z - normal: Loading packages
-2018-08-25T10:41:26.483Z - normal: Watching packages
-2018-08-25T10:41:26.567Z - normal: Run Application
-2018-08-25T10:41:27.309Z - success: preview server running at http://localhost:7456
-2018-08-25T10:41:37.741Z - normal: AddOne boot start
-2018-08-25T10:41:37.750Z - normal: AddOne boot end
-2018-08-25T10:41:37.765Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
-2018-08-25T10:41:37.783Z - warn: Should not specify class name effect for Component which defines in project.
-2018-08-25T10:41:37.784Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-08-25T10:49:21.948Z - normal: AddOne boot start
-2018-08-25T10:49:21.957Z - normal: AddOne boot end
-2018-08-25T10:49:21.974Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
-2018-08-25T10:49:21.994Z - warn: Should not specify class name effect for Component which defines in project.
-2018-08-25T10:49:21.995Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-08-25T10:50:12.011Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T01:33:57.487Z - normal: Load ~/.CocosCreator/settings.json
+2018-08-27T01:33:57.490Z - normal: checking language setting...
+2018-08-27T01:33:57.490Z - normal: Language: zh
+2018-08-27T01:33:58.055Z - success: protocol editor-framework registered
+2018-08-27T01:33:58.055Z - success: protocol app registered
+2018-08-27T01:33:58.056Z - success: protocol theme registered
+2018-08-27T01:33:58.056Z - success: protocol packages registered
+2018-08-27T01:33:58.057Z - success: protocol unpack registerred
+2018-08-27T01:33:58.057Z - success: protocol disable-commonjs registerred
+2018-08-27T01:33:58.159Z - normal: connected!
+2018-08-27T01:33:58.163Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk
+2018-08-27T01:33:58.167Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk
+2018-08-27T01:33:58.170Z - normal: Initializing Cocos2d
+2018-08-27T01:33:58.796Z - normal: Initializing Asset Database
+2018-08-27T01:33:58.841Z - success: protocol uuid registerred
+2018-08-27T01:33:58.841Z - success: protocol db registerred
+2018-08-27T01:33:58.841Z - success: protocol thumbnail registerred
+2018-08-27T01:33:58.842Z - normal: Loading editor/builtin packages
+2018-08-27T01:33:58.995Z - success: assets loaded
+2018-08-27T01:33:58.999Z - success: builder loaded
+2018-08-27T01:33:59.001Z - success: cocos-analytics loaded
+2018-08-27T01:33:59.006Z - success: console loaded
+2018-08-27T01:33:59.038Z - success: fb-instant-games loaded
+2018-08-27T01:33:59.044Z - success: hierarchy loaded
+2018-08-27T01:33:59.048Z - success: inspector loaded
+2018-08-27T01:33:59.050Z - success: keystore loaded
+2018-08-27T01:33:59.055Z - success: node-library loaded
+2018-08-27T01:33:59.057Z - success: package-asset loaded
+2018-08-27T01:33:59.059Z - success: preferences loaded
+2018-08-27T01:33:59.062Z - success: project-exporter loaded
+2018-08-27T01:33:59.079Z - success: project-importer loaded
+2018-08-27T01:33:59.082Z - success: project-settings loaded
+2018-08-27T01:33:59.085Z - success: ui-kit loaded
+2018-08-27T01:33:59.089Z - success: scene loaded
+2018-08-27T01:33:59.091Z - success: sprite-editor loaded
+2018-08-27T01:33:59.096Z - success: store loaded
+2018-08-27T01:33:59.101Z - success: timeline loaded
+2018-08-27T01:33:59.101Z - normal: Loading builtin packages
+2018-08-27T01:33:59.109Z - success: asset-db-debugger loaded
+2018-08-27T01:33:59.110Z - success: color-picker loaded
+2018-08-27T01:33:59.111Z - success: jsb-adapter loaded
+2018-08-27T01:33:59.115Z - success: package-manager loaded
+2018-08-27T01:33:59.219Z - success: qqplay-adapter loaded
+2018-08-27T01:33:59.226Z - success: sdkbox loaded
+2018-08-27T01:33:59.231Z - success: tester loaded
+2018-08-27T01:33:59.237Z - success: ui-grid loaded
+2018-08-27T01:33:59.240Z - success: ui-kit-preview-extra loaded
+2018-08-27T01:33:59.244Z - success: ui-kit-preview loaded
+2018-08-27T01:33:59.247Z - success: ui-tree loaded
+2018-08-27T01:33:59.248Z - success: weapp-adapter loaded
+2018-08-27T01:34:00.251Z - normal: Loading packages
+2018-08-27T01:34:00.257Z - normal: Watching packages
+2018-08-27T01:34:00.327Z - normal: Run Application
+2018-08-27T01:34:02.298Z - success: preview server running at http://localhost:7456
+2018-08-27T01:34:10.321Z - normal: AddOne boot start
+2018-08-27T01:34:10.328Z - normal: AddOne boot end
+2018-08-27T01:34:10.337Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T01:34:10.350Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T01:34:10.350Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T01:34:10.781Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/addtwo"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:50:12.012Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T01:34:10.781Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/cutone"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:50:12.012Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T01:34:10.781Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/iconcz"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:50:12.013Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T01:34:10.782Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/xx"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:50:12.013Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T01:34:10.783Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/name"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:50:12.014Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T01:34:10.783Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/num"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:50:12.016Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T01:34:10.786Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:50:12.016Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T01:34:10.787Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/xx1"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:50:12.017Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T01:34:10.787Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:51:24.279Z - error: getComponent: Type must be non-nil
-    at Object.cc.errorID (/Applications/CocosCreator2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDebug.js:177:16)
-    at getConstructor (/Applications/CocosCreator2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:29:20)
-    at cc_Node.getComponent (/Applications/CocosCreator2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:399:35)
-    at HTMLElement.query-node-info (/Applications/CocosCreator2.app/Contents/Resources/app.asar/editor/builtin/scene/panel/messages/scene-query.js:1:1251)
-    at Object.e._dispatch (/Applications/CocosCreator2.app/Contents/Resources/app.asar/editor-framework/lib/renderer/panel.js:1:1941)
-    at EventEmitter.o.on.s (/Applications/CocosCreator2.app/Contents/Resources/app.asar/editor-framework/lib/renderer/ipc.js:1:2917)
+2018-08-27T01:34:17.190Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:34:17.192Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:34:17.193Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:34:17.193Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:34:17.195Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:34:17.196Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:34:17.196Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:34:17.197Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:34:17.198Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:34:37.818Z - warn: The Node referenced by component "gamestart" is invalid. Detailed information:
+Node path: "Canvas"
+
+2018-08-27T01:45:57.363Z - normal: AddOne boot start
+2018-08-27T01:45:57.369Z - normal: AddOne boot end
+2018-08-27T01:45:57.377Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T01:45:57.387Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T01:45:57.388Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T01:46:08.650Z - normal: Initializing...
+
+2018-08-27T01:46:08.657Z - normal: idePortFile: /Users/guoyouchao/Library/Application Support/微信web开发者工具/Default/.ide
+
+2018-08-27T01:46:08.672Z - normal: starting ide...
+
+2018-08-27T01:46:12.229Z - normal: IDE server has started, listening on http://127.0.0.1:11058
+
+2018-08-27T01:46:12.234Z - normal: initialization finished
+
+2018-08-27T01:46:13.102Z - normal: open IDE success
+
+2018-08-27T01:57:53.410Z - normal: AddOne boot start
+2018-08-27T01:57:53.412Z - normal: AddOne boot end
+2018-08-27T01:57:53.413Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T01:57:53.434Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T01:57:53.434Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T01:58:38.461Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:58:38.462Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:58:38.463Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:58:38.463Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:58:38.464Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:58:38.464Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:58:38.466Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:58:38.466Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T01:58:38.466Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:23:33.349Z - normal: AddOne boot start
+2018-08-27T02:23:33.358Z - normal: AddOne boot end
+2018-08-27T02:23:33.372Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T02:23:33.389Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T02:23:33.389Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T02:23:33.991Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:23:33.993Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:23:33.997Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:23:33.998Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:23:33.998Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:23:34.001Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:23:34.005Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:23:34.006Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:23:34.006Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:54.808Z - normal: AddOne boot start
+2018-08-27T02:25:54.811Z - normal: AddOne boot end
+2018-08-27T02:25:54.824Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T02:25:54.841Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T02:25:54.842Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T02:25:55.529Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:55.532Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:55.533Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:55.533Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:55.535Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:55.539Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:55.539Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:55.540Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:55.541Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:58.481Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/addtwo"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:58.482Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/cutone"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:58.482Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/iconcz"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:58.486Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/xx"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:58.486Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/name"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:58.487Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon/num"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:58.490Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/icon"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:58.490Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem/xx1"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:25:58.491Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+Node path: "djitem"
+Asset url: "db://assets/resources/prefabs/djitem.prefab"
+Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
+
+2018-08-27T02:26:00.687Z - error: getComponent: Type must be non-nil
+    at Object.cc.errorID (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDebug.js:166:16)
+    at getConstructor (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:29:20)
+    at cc_Node.getComponent (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:399:35)
+    at HTMLElement.query-node-info (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor/builtin/scene/panel/messages/scene-query.js:1:1251)
+    at Object.e._dispatch (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/panel.js:1:1941)
+    at EventEmitter.o.on.s (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/ipc.js:1:2917)
     at emitMany (events.js:127:13)
     at EventEmitter.emit (events.js:204:7)
-2018-08-25T10:51:58.716Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:43.706Z - normal: AddOne boot start
+2018-08-27T02:45:43.715Z - normal: AddOne boot end
+2018-08-27T02:45:43.730Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-27T02:45:43.747Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-27T02:45:43.747Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-27T02:45:44.201Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/addtwo"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:51:58.718Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:44.201Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/cutone"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:51:58.718Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:44.202Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/iconcz"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:51:58.720Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:44.202Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/xx"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:51:58.721Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:44.203Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/name"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:51:58.723Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:44.203Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/num"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:51:58.723Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:44.206Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:51:58.724Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:44.207Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/xx1"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:51:58.724Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:44.207Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:58:11.652Z - normal: AddOne boot start
-2018-08-25T10:58:11.660Z - normal: AddOne boot end
-2018-08-25T10:58:11.674Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
-2018-08-25T10:58:11.690Z - warn: Should not specify class name effect for Component which defines in project.
-2018-08-25T10:58:11.691Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-08-25T10:58:12.188Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:51.078Z - warn: The Asset used by node "addtwo" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/addtwo"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:58:12.188Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:51.081Z - warn: The Asset used by node "cutone" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/cutone"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:58:12.188Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:51.081Z - warn: The Asset used by node "iconcz" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/iconcz"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:58:12.189Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:51.083Z - warn: The Asset used by node "xx" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/xx"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:58:12.189Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:51.086Z - warn: The Asset used by node "name" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/name"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:58:12.190Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:51.087Z - warn: The Asset used by node "num" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon/num"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:58:12.191Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:51.088Z - warn: The Asset used by node "icon" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/icon"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:58:12.191Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:51.089Z - warn: The Asset used by node "xx1" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem/xx1"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"
 
-2018-08-25T10:58:12.192Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
+2018-08-27T02:45:51.089Z - warn: The Asset used by node "djitem" in prefab "djitem.prefab" is missing. Detailed information:
 Node path: "djitem"
 Asset url: "db://assets/resources/prefabs/djitem.prefab"
 Missing uuid: "5976894f-82af-4073-91bf-25012cff81dc"

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "FangKuai_chueizi",
+    "texture": "b28a6621-6582-40f3-bb72-48011982831a",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      85,
+      98
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      85,
+      98
+    ]
+  }
+}

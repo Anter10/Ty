@@ -1,0 +1,368 @@
+[
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "vsbg",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        2,
+        458,
+        340,
+        45
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        340,
+        45
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "slsbbutton",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        2,
+        560,
+        273,
+        95
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        273,
+        95
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteAtlas",
+    "_name": "elst.plist",
+    "_spriteFrames": {
+      "close": {
+        "__uuid__": "4d2LTw5JxAubRBAOyH/ei/"
+      },
+      "fanhuiMain": {
+        "__uuid__": "7eKH95fYRJi7Wsi0csZga1"
+      },
+      "fenxiang": {
+        "__uuid__": "bfYJ1Q1c5FeZY3tlfYo11d"
+      },
+      "jxgame": {
+        "__uuid__": "fb81r8ydlHXLvk8AdMI22N"
+      },
+      "miyy": {
+        "__uuid__": "fe/DvYwSlDfbyED1yAWgaF"
+      },
+      "pwdb": {
+        "__uuid__": "a6+3vb531B6YuVevS0vcj5"
+      },
+      "pweibg": {
+        "__uuid__": "6715xpBcJMMotS8H99cGs/"
+      },
+      "shengc": {
+        "__uuid__": "95K9jjCpVFBqDoay+/VPh3"
+      },
+      "shengyin": {
+        "__uuid__": "b7hhkUPLxCN7urgn+a95wD"
+      },
+      "slsbbutton": {
+        "__uuid__": "1d+YleA81A35rYHu7O8jed"
+      },
+      "txtbg": {
+        "__uuid__": "728zFavWtJnIINp4eCfAbd"
+      },
+      "vsbg": {
+        "__uuid__": "14wPwv36BJAIwQM86kCvKX"
+      },
+      "xiaobj": {
+        "__uuid__": "b376Pfe2RCHLhcZGqAdly9"
+      },
+      "yiwen": {
+        "__uuid__": "efeRfVYedCUKE5Ime8ioLc"
+      },
+      "zanting": {
+        "__uuid__": "9fGL/yeDNI0KNVKguX7Su5"
+      }
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "close",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        908,
+        2,
+        94,
+        98
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        94,
+        98
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "pweibg",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        344,
+        458,
+        119,
+        42
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        119,
+        42
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "txtbg",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        277,
+        560,
+        256,
+        64
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        256,
+        64
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "fanhuiMain",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        537,
+        434,
+        369,
+        142
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        369,
+        142
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "shengc",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        537,
+        2,
+        369,
+        142
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        369,
+        142
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "zanting",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        908,
+        324,
+        69,
+        69
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        69,
+        69
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "pwdb",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        2,
+        505,
+        322,
+        53
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        322,
+        53
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "xiaobj",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        2,
+        2,
+        533,
+        454
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        533,
+        454
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "shengyin",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        908,
+        176,
+        72,
+        72
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        72,
+        72
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "fenxiang",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        908,
+        250,
+        72,
+        72
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        72,
+        72
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "yiwen",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        908,
+        102,
+        72,
+        72
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        72,
+        72
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "jxgame",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        537,
+        290,
+        369,
+        142
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        369,
+        142
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "miyy",
+      "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+      "rect": [
+        537,
+        146,
+        369,
+        142
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        369,
+        142
+      ]
+    }
+  }
+]

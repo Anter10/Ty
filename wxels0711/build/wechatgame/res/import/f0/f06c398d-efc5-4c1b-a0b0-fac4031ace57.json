@@ -1,0 +1,118 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "yanhua",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "yanhua",
+    "_children": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_prefab": {
+      "__type__": "cc.PrefabInfo",
+      "root": {
+        "__id__": 1
+      },
+      "asset": {
+        "__uuid__": "f0bDmN78VMG6Cw+sQDGs5X"
+      },
+      "fileId": "9bl5ig7w1Pa5sDnp5aR548"
+    },
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 341,
+      "y": 880
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "particlesystem",
+    "_parent": {
+      "__id__": 1
+    },
+    "_components": [
+      {
+        "__type__": "cc.ParticleSystem",
+        "node": {
+          "__id__": 2
+        },
+        "_custom": true,
+        "_texture": {
+          "__uuid__": "41C8W94gxI56CxKWg/oFMR"
+        },
+        "_dstBlendFactor": 1,
+        "_totalParticles": 200,
+        "_emissionRate": 5,
+        "_life": 0.8,
+        "_lifeVar": 0.1,
+        "_startColor": {
+          "__type__": "cc.Color",
+          "r": 202,
+          "g": 200,
+          "b": 86,
+          "a": 163
+        },
+        "_startColorVar": {
+          "__type__": "cc.Color",
+          "r": 229,
+          "g": 255,
+          "b": 173,
+          "a": 198
+        },
+        "_endColor": {
+          "__type__": "cc.Color",
+          "r": 173,
+          "g": 161,
+          "b": 19,
+          "a": 214
+        },
+        "_endColorVar": {
+          "__type__": "cc.Color",
+          "r": 107,
+          "g": 249,
+          "b": 249,
+          "a": 188
+        },
+        "_angle": 360,
+        "_angleVar": 360,
+        "_startSize": 0,
+        "_endSize": 150,
+        "_posVar": {
+          "__type__": "cc.Vec2",
+          "x": 200,
+          "y": 100
+        },
+        "_positionType": 1,
+        "_gravity": {
+          "__type__": "cc.Vec2",
+          "y": -15
+        },
+        "_speed": 0,
+        "_speedVar": 0,
+        "_tangentialAccel": 0,
+        "_startRadius": 100
+      }
+    ],
+    "_prefab": {
+      "__type__": "cc.PrefabInfo",
+      "root": {
+        "__id__": 1
+      },
+      "asset": {
+        "__uuid__": "f0bDmN78VMG6Cw+sQDGs5X"
+      },
+      "fileId": "feIX09OFVMOpEGDzyvxWiH"
+    },
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 29,
+      "y": 90
+    }
+  }
+]

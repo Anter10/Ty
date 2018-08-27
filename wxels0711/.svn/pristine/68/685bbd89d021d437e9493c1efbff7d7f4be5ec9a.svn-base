@@ -1,0 +1,205 @@
+// Learn cc.Class:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
+// Learn Attribute:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
+// Learn life-cycle callbacks:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var ElsUtils = require("../core/ElsUtils.js");
+var els = require("../core/els.js");
+var ELSEvent = require("../core/ElsEvents.js");
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        win_content: cc.Node,
+        win_content_icon: cc.Sprite,
+        user_win_content_icon: cc.Sprite,
+        win_whisper_image: cc.Sprite,
+        title: cc.Label
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad() {
+        tywx.NotificationCenter.listen(tywx.EventType.CMD_ELSWX, this._onMsgElsWx, this);
+
+        this.node.getChildByName('sShareBtn').on(cc.Node.EventType.TOUCH_END, this.onwinShareHandler, this);
+        this.node.getChildByName('sSaveBtn').on(cc.Node.EventType.TOUCH_END, this.onwinSaveHandler, this);
+        this.node.getChildByName('backBtn').on(cc.Node.EventType.TOUCH_END, this.dismiss_btn_click, this);
+
+        this.win_content = this.node.getChildByName('whisper_win_content');
+        this.win_content_icon = this.node.getChildByName('whisper_win_content_icon');
+
+    },
+
+    start() {
+        this.game = tywx.UIManager.game;
+        this.model = this.game.model;
+        let that = this;
+        cc.loader.load('share_img/wisper_share.jpg', function(err, tex) {
+            cc.log('Result should be a texture: ' + (tex instanceof cc.Texture2D));
+            var spriteFrame = new cc.SpriteFrame(tex);
+            that.win_whisper_image.getComponent('cc.Sprite').spriteFrame = spriteFrame;
+        });
+    },
+
+    dismiss_btn_click() {
+        this.node.active = false;
+        this.model.mconf.isWhisper = false;
+        var _game = tywx.UIManager.getUI(els.ELS_GAME_LAYER.GAME_SINGLE).node.getComponent("gameSinglemode");
+        _game.node.getChildByName("win_tips").active = false;
+        tywx.UIManager.hideAllUI();
+        tywx.UIManager.showUI(els.ELS_GAME_LAYER.HOMEPAGE);
+
+        this.node.destroyAllChildren();
+        this.node.removeAllChildren();
+        this.node.destroy();
+    },
+
+    onDestroy() {
+        tywx.NotificationCenter.trigger(ELSEvent.ELS_EVENT_CLEARN_GIFT_PROP_ANIMATION);
+        tywx.NotificationCenter.ignoreScope(this);
+    },
+
+    _onMsgElsWx(params) {
+        if (params.result.action === "whisperPass") {
+            if (params.result.status === 1) {
+                let itemId = params.result.itemKindId;
+                tywx.NotificationCenter.trigger(ELSEvent.ELS_EVENT_SHOW_GIFT_PROP_ANIMATION, {
+                    type: 0,
+                    prop_id: itemId
+                });
+                wx.showToast({
+                    title: '恭喜获取道具',
+                    duration: 1000,
+                    icon: null
+                });
+            }
+            console.log("_onMsgElsWx::whisper_pass", JSON.stringify(params));
+        }
+    },
+
+    showWithData(data) {
+        tywx.UIManager.game.model.canelScheduleAd();
+        tywx.AdManager.destroyBannerAd();
+        // let title = this.win_content_data.title ? this.win_content_data.title: "恭喜通关";
+        let title = "恭喜通关";
+        this.title.getComponent("cc.Label").string = title;
+
+        this.win_content_data = data;
+        this.node.active = true;
+        let _win_single = this.node;
+        this.win_content.active = true;
+        this.win_content.getComponent("cc.Label").string = this.win_content_data.data;
+        var self = this;
+        let openId = data.openId;
+        if (this.openData) {
+            this.openData.getComponent("OpenData").showQQHWin(openId);
+        } else {
+            let self = this;
+            cc.loader.loadRes('prefab/OpenData', function(err, prefab) {
+                var preFabNode = cc.instantiate(prefab);
+                self.openData = preFabNode;
+                preFabNode.parent = self.node;
+                preFabNode.getComponent("OpenData").showQQHWin(openId);
+            });
+        }
+
+        //新的成功动画  个人
+        var succ = _win_single.getChildByName("FangKuai_shengli");
+        succ.getComponent(cc.Animation).play("FangKuai_shengli");
+        //播放粒子
+        let pcs = succ.getChildByName("particlesystem01").getComponent(cc.ParticleSystem);
+        pcs.resetSystem();
+
+        if (tywx.SECRETLANGUAGEDATA) {
+            let _sendUser = tywx.SECRETLANGUAGEDATA.inviteCode;
+            let _uuid = tywx.SECRETLANGUAGEDATA.randomKey;
+            tywx.MSG.whisperPass(_sendUser, _uuid);
+        }
+
+    },
+
+
+    onwinShareHandler(eve) {
+        this.stopAllParticleSys();
+        // 悄悄话通关 分享
+        tywx.ShareInterface.shareMsg({
+            type: els.ELS_SHRAE_TYPE.GAME_QQH_WIN
+        });
+    },
+
+    stopAllParticleSys() {
+        //新的成功动画
+        var succ = this.node.getChildByName("FangKuai_shengli");
+        succ.getComponent(cc.Animation).play("FangKuai_shengli");
+        //播放粒子
+        let pcs2 = succ.getChildByName("particlesystem01").getComponent(cc.ParticleSystem);
+        pcs2.stopSystem();
+    },
+
+    onwinSaveHandler: function() {
+        console.log("onwinSaveHandler");
+        wx.showLoading({
+            title: "正在保存图片."
+        });
+        this.isSave = false;
+        try {
+            let self = this;
+            let params = {
+                wisper_ming: self.win_content_data.data.split("\n")[0],
+                wisper_an: self.win_content_data.data.split("\n")[1],
+                heard_url: self.win_content_data.avatarUrl,
+                user_heard_url: self.win_content_data.user_heard_url,
+                size: cc.size(720, 1280),
+                bg: 'share_img/wisper_share.jpg',
+                success: function() {
+                    wx.hideLoading();
+                    wx.showToast({
+                        title: '保存成功',
+                        duration: 2000,
+                        icon: null
+                    });
+                    console.log('保存图片成功');
+                    self.isSave = true;
+                },
+                fail: function() {
+                    wx.hideLoading();
+                    wx.showToast({
+                        title: '保存失败',
+                        duration: 2000,
+                        icon: null
+                    });
+                    console.log('保存图片失败');
+                    self.isSave = true;
+                }
+            };
+            ElsUtils.createAndSaveImg2WXAlbum(params);
+        } catch (e) {
+            // statements
+            console.log(e);
+            wx.hideLoading();
+            wx.showToast({
+                title: '保存失败',
+                duration: 2000,
+                icon: null
+            });
+            console.log('保存图片失败');
+        }
+        let self = this;
+        setTimeout(function() {
+            if (!self.isSave) {
+                wx.showToast({
+                    title: '保存失败啦',
+                    duration: 2000,
+                    icon: null
+                });
+            }
+        }, 3000);
+    },
+
+    // update (dt) {},
+});

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "daoju03",
+    "texture": "d767abab-3034-474f-8d9a-179b853a1064",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      323,
+      268
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      323,
+      268
+    ]
+  }
+}

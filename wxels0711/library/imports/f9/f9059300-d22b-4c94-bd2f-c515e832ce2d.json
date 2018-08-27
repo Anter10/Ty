@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "rank_font_02",
+    "texture": "348b7cbd-0766-4632-bc5d-cda5491cfde1",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      91,
+      94
+    ],
+    "offset": [
+      -18.5,
+      17
+    ],
+    "originalSize": [
+      128,
+      128
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "glow_gc_02_ad",
+    "texture": "12fef5646",
+    "rect": [
+      2,
+      1574,
+      224,
+      225
+    ],
+    "offset": [
+      10,
+      11.5
+    ],
+    "originalSize": [
+      256,
+      254
+    ]
+  }
+}

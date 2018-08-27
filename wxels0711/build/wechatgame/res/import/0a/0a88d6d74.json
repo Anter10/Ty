@@ -1,0 +1,228 @@
+[
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "game_full_line2",
+      "texture": "eau6xFgfBPi4Yqo3ZUVnom",
+      "rect": [
+        0,
+        0,
+        509,
+        59
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        509,
+        59
+      ]
+    }
+  },
+  {
+    "__type__": "cc.AnimationClip",
+    "_name": "ani_clearn_line",
+    "_duration": 0.5,
+    "curveData": {
+      "paths": {
+        "game_full_line2": {
+          "props": {
+            "opacity": [
+              {
+                "frame": 0,
+                "value": 0
+              },
+              {
+                "frame": 0.15,
+                "value": 0
+              },
+              {
+                "frame": 0.3,
+                "value": 255
+              },
+              {
+                "frame": 0.5,
+                "value": 0
+              }
+            ]
+          }
+        },
+        "game_full_line1": {
+          "props": {
+            "opacity": [
+              {
+                "frame": 0,
+                "value": 0
+              },
+              {
+                "frame": 0.3,
+                "value": 255
+              },
+              {
+                "frame": 0.5,
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "els_view_effect_clearn_line",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "els_view_effect_clearn_line",
+      "_children": [
+        {
+          "__id__": 2
+        },
+        {
+          "__id__": 3
+        }
+      ],
+      "_components": [
+        {
+          "__type__": "cc.Animation",
+          "node": {
+            "__id__": 1
+          },
+          "_defaultClip": {
+            "__uuid__": "84HwPlr0VACLE8Pdiqlvk/"
+          },
+          "_clips": [
+            {
+              "__uuid__": "84HwPlr0VACLE8Pdiqlvk/"
+            }
+          ]
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "b9KUyYOKlM3ITIdDBqfRan"
+        },
+        "fileId": "2a7ifiu7tBHoX6ndPr7jPq"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 500,
+        "height": 50
+      },
+      "_position": {
+        "__type__": "cc.Vec2",
+        "x": 464,
+        "y": 239
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "game_full_line1",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 2
+          },
+          "_spriteFrame": {
+            "__uuid__": "d8O4LD2u5GSpgzQcCIoRgf"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "b9KUyYOKlM3ITIdDBqfRan"
+        },
+        "fileId": "4bUQmeVcZLX6jxzBgMvcub"
+      },
+      "_opacity": 0,
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 461,
+        "height": 45
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "game_full_line2",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 3
+          },
+          "_spriteFrame": {
+            "__uuid__": "82MbtZtctLpL7Dn7dOqnUM"
+          }
+        },
+        {
+          "__type__": "cc.Animation",
+          "node": {
+            "__id__": 3
+          },
+          "_clips": [
+            {
+              "__uuid__": "84HwPlr0VACLE8Pdiqlvk/"
+            }
+          ]
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "b9KUyYOKlM3ITIdDBqfRan"
+        },
+        "fileId": "1bqvQHCAFBbLpHijltiqbf"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 509,
+        "height": 59
+      }
+    }
+  ],
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "game_full_line1",
+      "texture": "41ZfiRemRNjpl/U2k6pGDM",
+      "rect": [
+        0,
+        0,
+        461,
+        45
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        461,
+        45
+      ]
+    }
+  }
+]

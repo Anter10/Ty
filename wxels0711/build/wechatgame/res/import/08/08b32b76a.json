@@ -1,0 +1,78 @@
+[
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "03",
+      "texture": "1dcddf936",
+      "rect": [
+        2,
+        439,
+        215,
+        316
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        215,
+        316
+      ],
+      "capInsets": [
+        24,
+        20,
+        21,
+        13
+      ]
+    }
+  },
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "label_content",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "New Sprite(Splash)",
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 1
+          },
+          "_spriteFrame": {
+            "__uuid__": "b3dYXOcDxIq6NNEkbAgOKd"
+          },
+          "_sizeMode": 0
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "fbgRvXvuJPh67dFMKz2OsA"
+        },
+        "fileId": "7fQQgKDx5GT6Pw1C59wT9C"
+      },
+      "_anchorPoint": {
+        "__type__": "cc.Vec2",
+        "y": 1
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 215,
+        "height": 316
+      },
+      "_position": {
+        "__type__": "cc.Vec2",
+        "x": -93,
+        "y": 97
+      }
+    }
+  ]
+]

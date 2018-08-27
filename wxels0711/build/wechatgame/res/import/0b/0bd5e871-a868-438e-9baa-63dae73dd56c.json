@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "elst",
+    "texture": "ddg9l9EO1EjbwwpJ5hdzE9",
+    "rect": [
+      2,
+      2,
+      1000,
+      653
+    ],
+    "offset": [
+      -10,
+      183.5
+    ],
+    "originalSize": [
+      1024,
+      1024
+    ]
+  }
+}

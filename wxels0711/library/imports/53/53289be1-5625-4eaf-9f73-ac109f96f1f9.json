@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "zuanshi_hong",
+    "texture": "1ee78b16-671b-4dcb-aaea-ecc9cba9c0b4",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      82,
+      80
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      82,
+      80
+    ]
+  }
+}

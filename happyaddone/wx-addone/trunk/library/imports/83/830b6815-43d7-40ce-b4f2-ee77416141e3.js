@@ -70,7 +70,14 @@ cc.Class({
    * 参数: 无
    * 思路: 系统自带
    */
-  onLoad: function onLoad() {}
+  onLoad: function onLoad() {},
+
+  /**
+   * 关闭当前的界面
+   */
+  close: function close() {
+    this.node.destroy();
+  }
 
 });
 

@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "daoju03_huaban",
+    "texture": "1d0748592",
+    "rect": [
+      303,
+      942,
+      59,
+      56
+    ],
+    "offset": [
+      2.5,
+      1
+    ],
+    "originalSize": [
+      64,
+      64
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "whisper_win_btn_bg",
+    "texture": "a24126c4-eebd-4364-9b3d-0a1670a9c2c2",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      43,
+      48
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      43,
+      48
+    ]
+  }
+}

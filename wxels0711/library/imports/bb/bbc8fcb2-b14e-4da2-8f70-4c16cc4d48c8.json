@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "FangKuai_caidai",
+    "texture": "10f80933-f7d2-4fd9-bea3-a530e6e77dad",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      619,
+      185
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      619,
+      185
+    ]
+  }
+}

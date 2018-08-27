@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "els_magic_bottle_front",
+    "texture": "2fbdc6ab-9c7f-4893-b5b1-7d67fe243dbb",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      159,
+      163
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      159,
+      163
+    ]
+  }
+}

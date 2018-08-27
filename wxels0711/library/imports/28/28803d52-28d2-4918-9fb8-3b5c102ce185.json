@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "combofnt",
+    "texture": "c57c50f1-2294-4812-8465-35a0f35502df",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      365,
+      215
+    ],
+    "offset": [
+      -73.5,
+      20.5
+    ],
+    "originalSize": [
+      512,
+      256
+    ]
+  }
+}

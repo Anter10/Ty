@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "select_gift_show_bg",
+    "texture": "6fe8fe99-8d27-468b-bf53-cf930ed0460d",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      150,
+      150
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      150,
+      150
+    ],
+    "capInsets": [
+      14,
+      16,
+      13,
+      16
+    ]
+  }
+}

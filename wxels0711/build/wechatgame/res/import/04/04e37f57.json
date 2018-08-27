@@ -1,0 +1,105 @@
+[
+  {
+    "__type__": "cc.BitmapFont",
+    "_name": "123",
+    "spriteFrame": {
+      "__uuid__": "e4bfbXqoVK6pnBDbzqH+jS"
+    },
+    "fontSize": 32,
+    "_fntConfig": {
+      "commonHeight": 100,
+      "fontSize": 32,
+      "atlasName": "123.png",
+      "fontDefDictionary": {
+        "9": {
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "xOffset": 0,
+          "yOffset": 0,
+          "xAdvance": 368
+        },
+        "32": {
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 0,
+            "height": 0
+          },
+          "xOffset": 0,
+          "yOffset": 0,
+          "xAdvance": 46
+        },
+        "48": {
+          "rect": {
+            "x": 0,
+            "y": 99,
+            "width": 72,
+            "height": 98
+          },
+          "xOffset": 0,
+          "yOffset": 2,
+          "xAdvance": 52
+        },
+        "49": {
+          "rect": {
+            "x": 73,
+            "y": 99,
+            "width": 51,
+            "height": 96
+          },
+          "xOffset": 0,
+          "yOffset": 3,
+          "xAdvance": 31
+        },
+        "50": {
+          "rect": {
+            "x": 73,
+            "y": 0,
+            "width": 72,
+            "height": 98
+          },
+          "xOffset": 0,
+          "yOffset": 2,
+          "xAdvance": 52
+        },
+        "51": {
+          "rect": {
+            "x": 0,
+            "y": 0,
+            "width": 72,
+            "height": 98
+          },
+          "xOffset": 0,
+          "yOffset": 2,
+          "xAdvance": 52
+        }
+      },
+      "kerningDict": {}
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "123",
+      "texture": "5cXTanGB9Da7YOkNDD3sc3",
+      "rect": [
+        0,
+        0,
+        145,
+        197
+      ],
+      "offset": [
+        -55.5,
+        29.5
+      ],
+      "originalSize": [
+        256,
+        256
+      ]
+    }
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "els_magic_bottle_back",
+    "texture": "1130c8575",
+    "rect": [
+      311,
+      558,
+      123,
+      104
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      123,
+      104
+    ]
+  }
+}

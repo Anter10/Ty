@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "btn_gift",
+    "texture": "4f124705-76da-4abf-ac88-3e1502b656b8",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      102,
+      111
+    ],
+    "offset": [
+      -0.5,
+      0
+    ],
+    "originalSize": [
+      103,
+      111
+    ]
+  }
+}

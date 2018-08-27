@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "vs_label_bg",
+    "texture": "1d6cb1d6f",
+    "rect": [
+      1349,
+      148,
+      340,
+      45
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      340,
+      45
+    ]
+  }
+}

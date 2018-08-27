@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "els_txt_endless_level_up",
+    "texture": "9e64b565-e3ba-495c-88d9-ce37e5a1babc",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      433,
+      156
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      433,
+      156
+    ]
+  }
+}

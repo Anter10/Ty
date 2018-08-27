@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "guangxian",
+    "texture": "f35a4273-9e56-49b7-9b93-fd28d7b9bef3",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      100,
+      200
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      100,
+      200
+    ]
+  }
+}

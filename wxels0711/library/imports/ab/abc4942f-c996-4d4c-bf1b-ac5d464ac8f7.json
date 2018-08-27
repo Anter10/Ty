@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Dujiaoshou_gj_hua_01",
+    "texture": "1ec689cb-79c7-4f02-939a-5641b1b2c8ec",
+    "atlas": "",
+    "rect": [
+      8,
+      5,
+      49,
+      54
+    ],
+    "offset": [
+      0.5,
+      0
+    ],
+    "originalSize": [
+      64,
+      64
+    ]
+  }
+}

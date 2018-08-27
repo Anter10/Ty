@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "els_gift_frame",
+    "texture": "b4aa4bed-4570-4063-a2f1-51e571e14137",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      144,
+      93
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      144,
+      93
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "mall_font",
+    "texture": "a27a1500-8a54-4ae9-8315-788116c693c9",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      104,
+      245
+    ],
+    "offset": [
+      -12,
+      5.5
+    ],
+    "originalSize": [
+      128,
+      256
+    ]
+  }
+}

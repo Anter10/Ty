@@ -1,0 +1,30 @@
+{
+  "ver": "2.0.0",
+  "uuid": "801a8b94-e898-4ff4-8dcb-b23abeb97c12",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "FangKuai_mobang": {
+      "ver": "1.0.3",
+      "uuid": "b6df60d2-764c-490c-b2c4-e648ee77e1ba",
+      "rawTextureUuid": "801a8b94-e898-4ff4-8dcb-b23abeb97c12",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 105,
+      "height": 163,
+      "rawWidth": 105,
+      "rawHeight": 163,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

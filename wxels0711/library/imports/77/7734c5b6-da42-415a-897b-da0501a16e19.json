@@ -1,0 +1,135 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "tanshe02",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 1,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": "1",
+  "curveData": {
+    "paths": {
+      "feixin": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -358.4,
+                195
+              ],
+              "motionPath": [
+                [
+                  -8,
+                  312,
+                  -91,
+                  357,
+                  86,
+                  260
+                ]
+              ]
+            },
+            {
+              "frame": 0.5,
+              "value": [
+                0,
+                0
+              ],
+              "motionPath": []
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.13333333333333333,
+              "value": 255
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.36666666666666664,
+              "value": 1
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.36666666666666664,
+              "value": 1
+            }
+          ]
+        }
+      },
+      "xin-02tx": {
+        "props": {
+          "scaleX": [
+            {
+              "frame": 0.5,
+              "value": 1
+            },
+            {
+              "frame": 1,
+              "value": 3
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.5,
+              "value": 1
+            },
+            {
+              "frame": 1,
+              "value": 3
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.43333333333333335,
+              "value": 0
+            },
+            {
+              "frame": 0.5,
+              "value": 255
+            },
+            {
+              "frame": 1,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "feixin/particlesystem2": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.43333333333333335,
+                "value": 200
+              },
+              {
+                "frame": 0.5,
+                "value": 0
+              }
+            ]
+          }
+        }
+      },
+      "feixin/xin-02": {
+        "props": {
+          "opacity": []
+        }
+      }
+    }
+  },
+  "events": []
+}

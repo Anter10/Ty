@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "mall_bj",
+    "texture": "89571bc7-acd5-4195-85a9-a4e3833afb10",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      646,
+      993
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      646,
+      993
+    ]
+  }
+}

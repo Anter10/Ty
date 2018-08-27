@@ -139,7 +139,15 @@ let UIGiftView = cc.Class({
            this.upBut.node.active = true;
            this.nextBut.node.active = true;
         }
+    },
+
+    /**
+     * 关闭邀请领取的界面
+     */
+    close:function(){
+        this.node.destroy();
     }
+
 
 });
 

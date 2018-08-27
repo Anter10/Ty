@@ -41,6 +41,7 @@ cc.Class({
      */
     closeCall: function closeCall() {
         this.param.closeCall ? this.param.closeCall() : tywx.ado.logWithColor("没有设置破纪录的回调函数");
+        this.node.destroy();
     },
 
     /**

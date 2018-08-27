@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "unlock_title_bg",
+    "texture": "d3352e47-b551-40ea-be9c-0bfe6086627c",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      371,
+      79
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      371,
+      79
+    ]
+  }
+}

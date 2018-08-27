@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "els_magic_bottle_mask",
+    "texture": "e1283f7b-25d3-41a7-b57c-03d75515c8a6",
+    "atlas": "",
+    "rect": [
+      10,
+      0,
+      134,
+      153
+    ],
+    "offset": [
+      -2.5,
+      5
+    ],
+    "originalSize": [
+      159,
+      163
+    ]
+  }
+}

@@ -1,0 +1,106 @@
+[
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "fangdajing",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "fangdajing",
+      "_children": [
+        {
+          "__id__": 2
+        }
+      ],
+      "_components": [
+        {
+          "__type__": "cc.Animation",
+          "node": {
+            "__id__": 1
+          },
+          "_defaultClip": {
+            "__uuid__": "c0qgGGMt9JD7EXEEtE5M4c"
+          },
+          "_clips": [
+            {
+              "__uuid__": "c0qgGGMt9JD7EXEEtE5M4c"
+            }
+          ]
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "27b8FRgONJlJ44XCN8vl+H"
+        },
+        "fileId": "1cyS0fJchEqZOQRwdKvyBW"
+      },
+      "_position": {
+        "__type__": "cc.Vec2",
+        "x": 720,
+        "y": 1280
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "fangdajing",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 2
+          },
+          "_spriteFrame": {
+            "__uuid__": "82RRSyAIFIBaFJ46qt1BcN"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "27b8FRgONJlJ44XCN8vl+H"
+        },
+        "fileId": "dfsSB9PLVPNrmw34lmSgVK"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 123,
+        "height": 129
+      }
+    }
+  ],
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "fangdajing",
+      "texture": "1d0748592",
+      "rect": [
+        376,
+        899,
+        123,
+        129
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        123,
+        129
+      ],
+      "rotated": 1
+    }
+  }
+]

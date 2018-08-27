@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Dujiaoshou_gj_hua_01",
+    "texture": "1d0748592",
+    "rect": [
+      719,
+      136,
+      49,
+      54
+    ],
+    "offset": [
+      0.5,
+      0
+    ],
+    "originalSize": [
+      64,
+      64
+    ],
+    "rotated": 1
+  }
+}

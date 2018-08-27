@@ -1,0 +1,405 @@
+[
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "FangKuai_waifaguang",
+      "texture": "1d0748592",
+      "rect": [
+        660,
+        797,
+        144,
+        144
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        144,
+        144
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "FangKuai_zhengchang",
+      "texture": "1d0748592",
+      "rect": [
+        660,
+        639,
+        154,
+        154
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        154,
+        154
+      ]
+    }
+  },
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "FangKuai_daodan",
+      "texture": "1f0353f88",
+      "rect": [
+        2,
+        903,
+        96,
+        105
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        96,
+        105
+      ]
+    }
+  },
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "FangKuai_daodan_chueizi",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "FangKuai_daodan_chueizi",
+      "_children": [
+        {
+          "__id__": 2
+        },
+        {
+          "__id__": 3
+        },
+        {
+          "__id__": 4
+        },
+        {
+          "__id__": 5
+        }
+      ],
+      "_components": [
+        {
+          "__type__": "cc.Animation",
+          "node": {
+            "__id__": 1
+          },
+          "_defaultClip": {
+            "__uuid__": "f7AY80B4JNOJKRG9AVjWAb"
+          },
+          "_clips": [
+            {
+              "__uuid__": "f7AY80B4JNOJKRG9AVjWAb"
+            }
+          ],
+          "playOnLoad": true
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "82r9jKSwBNbbTOuqS6JmGN"
+        },
+        "fileId": "07kOS4yNtHcoRRLNfyXuFS"
+      },
+      "_position": {
+        "__type__": "cc.Vec2",
+        "x": 351,
+        "y": 910
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "FangKuai_zhengchang",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 2
+          },
+          "_spriteFrame": {
+            "__uuid__": "60onLtf59E2JOymsNSRTMh"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "82r9jKSwBNbbTOuqS6JmGN"
+        },
+        "fileId": "07Utl+PdNOO4paNjyhfsqX"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 154,
+        "height": 154
+      },
+      "_position": {
+        "__type__": "cc.Vec2",
+        "y": -2.842170943040401e-14
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "FangKuai_xuanzhong",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 3
+          },
+          "_spriteFrame": {
+            "__uuid__": "ec/heBMqlA2IiXCS0QM1kn"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "82r9jKSwBNbbTOuqS6JmGN"
+        },
+        "fileId": "23AWIEq95CSI6VQHuKWRno"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 154,
+        "height": 154
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "FangKuai_waifaguang",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 4
+          },
+          "_spriteFrame": {
+            "__uuid__": "03uqOXCP1E+bc+ErTtKzPO"
+          },
+          "_dstBlendFactor": 1
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "82r9jKSwBNbbTOuqS6JmGN"
+        },
+        "fileId": "55JLdjmTFJCbTCfXMKPg6C"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 144,
+        "height": 144
+      },
+      "_scaleX": 1.29,
+      "_scaleY": 1.29,
+      "_position": {
+        "__type__": "cc.Vec2",
+        "y": 4.3
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "pingzi_chueizi",
+      "_parent": {
+        "__id__": 1
+      },
+      "_children": [
+        {
+          "__id__": 6
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "82r9jKSwBNbbTOuqS6JmGN"
+        },
+        "fileId": "3fmPLnb5BC87rpheXEx0kI"
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "FangKuai_daodan",
+      "_parent": {
+        "__id__": 5
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 6
+          },
+          "_spriteFrame": {
+            "__uuid__": "7ekJmCALVJ35zXaQ1Np5fg"
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "82r9jKSwBNbbTOuqS6JmGN"
+        },
+        "fileId": "61wChwJXFKu5mMIs/RJ/T6"
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 96,
+        "height": 105
+      }
+    }
+  ],
+  {
+    "__type__": "cc.SpriteFrame",
+    "content": {
+      "name": "FangKuai_xuanzhong",
+      "texture": "1d0748592",
+      "rect": [
+        218,
+        784,
+        154,
+        154
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "originalSize": [
+        154,
+        154
+      ]
+    }
+  },
+  {
+    "__type__": "cc.AnimationClip",
+    "_name": "FangKuai_daodan",
+    "_duration": 0.6666666666666666,
+    "sample": 30,
+    "wrapMode": 2,
+    "curveData": {
+      "paths": {
+        "FangKuai_xuanzhong": {
+          "props": {
+            "opacity": [
+              {
+                "frame": 0,
+                "value": 0
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": 180
+              }
+            ]
+          }
+        },
+        "FangKuai_waifaguang": {
+          "props": {
+            "scale": [
+              {
+                "frame": 0,
+                "value": {
+                  "__type__": "cc.Vec2",
+                  "x": 1,
+                  "y": 1
+                }
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": {
+                  "__type__": "cc.Vec2",
+                  "x": 1.29,
+                  "y": 1.29
+                }
+              }
+            ],
+            "opacity": [
+              {
+                "frame": 0,
+                "value": 100
+              },
+              {
+                "frame": 0.06666666666666667,
+                "value": 255
+              },
+              {
+                "frame": 0.3333333333333333,
+                "value": 255
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": 0
+              }
+            ]
+          }
+        },
+        "pingzi_chueizi": {
+          "props": {
+            "scale": [
+              {
+                "frame": 0,
+                "value": {
+                  "__type__": "cc.Vec2",
+                  "x": 1,
+                  "y": 1
+                }
+              },
+              {
+                "frame": 0.3333333333333333,
+                "value": {
+                  "__type__": "cc.Vec2",
+                  "x": 1.1,
+                  "y": 1.1
+                }
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": {
+                  "__type__": "cc.Vec2",
+                  "x": 1,
+                  "y": 1
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+]

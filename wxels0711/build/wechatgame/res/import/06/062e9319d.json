@@ -1,0 +1,169 @@
+[
+  [
+    {
+      "__type__": "cc.Prefab",
+      "_name": "mogu",
+      "data": {
+        "__id__": 1
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "mogu",
+      "_children": [
+        {
+          "__id__": 2
+        }
+      ],
+      "_components": [
+        {
+          "__type__": "cc.Animation",
+          "node": {
+            "__id__": 1
+          },
+          "_defaultClip": {
+            "__uuid__": "571Y4MialL3ZGcvhogauiK"
+          },
+          "_clips": [
+            {
+              "__uuid__": "571Y4MialL3ZGcvhogauiK"
+            }
+          ],
+          "playOnLoad": true
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "44KY+tX25FZoe5nS/99MKb"
+        },
+        "fileId": "79fwQf5FtH9b8Aay9AQP6j"
+      },
+      "_position": {
+        "__type__": "cc.Vec2",
+        "x": -2
+      }
+    },
+    {
+      "__type__": "cc.Node",
+      "_name": "Animation_loding",
+      "_parent": {
+        "__id__": 1
+      },
+      "_components": [
+        {
+          "__type__": "cc.Sprite",
+          "node": {
+            "__id__": 2
+          }
+        }
+      ],
+      "_prefab": {
+        "__type__": "cc.PrefabInfo",
+        "root": {
+          "__id__": 1
+        },
+        "asset": {
+          "__uuid__": "44KY+tX25FZoe5nS/99MKb"
+        },
+        "fileId": "b6fpj/t2VA8oQ5hzj7yyrg"
+      },
+      "_anchorPoint": {
+        "__type__": "cc.Vec2",
+        "x": 0.5
+      },
+      "_contentSize": {
+        "__type__": "cc.Size",
+        "width": 61,
+        "height": 49
+      }
+    }
+  ],
+  {
+    "__type__": "cc.AnimationClip",
+    "_name": "mogu",
+    "_duration": 2.6666666666666665,
+    "sample": 30,
+    "wrapMode": 2,
+    "curveData": {
+      "paths": {
+        "Animation_loding": {
+          "props": {
+            "scaleY": [
+              {
+                "frame": 0,
+                "value": 1
+              },
+              {
+                "frame": 0.3333333333333333,
+                "value": 0.9
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": 1
+              },
+              {
+                "frame": 1,
+                "value": 0.9
+              },
+              {
+                "frame": 1.3333333333333333,
+                "value": 1
+              },
+              {
+                "frame": 1.4666666666666666,
+                "value": 0.8
+              },
+              {
+                "frame": 1.6,
+                "value": 0.7
+              },
+              {
+                "frame": 1.7333333333333334,
+                "value": 0.9
+              },
+              {
+                "frame": 2.033333333333333,
+                "value": 1
+              },
+              {
+                "frame": 2.2666666666666666,
+                "value": 0.8
+              },
+              {
+                "frame": 2.6666666666666665,
+                "value": 1
+              }
+            ],
+            "position": [
+              {
+                "frame": 1.4666666666666666,
+                "value": [
+                  0,
+                  0
+                ]
+              },
+              {
+                "frame": 1.7333333333333334,
+                "value": [
+                  0,
+                  48.8
+                ]
+              },
+              {
+                "frame": 2.033333333333333,
+                "value": [
+                  0,
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+]

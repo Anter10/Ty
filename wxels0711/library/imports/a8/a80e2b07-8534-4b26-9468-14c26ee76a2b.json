@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "select_gift_caidai",
+    "texture": "564cb206-d045-4ec8-b519-4ec57604c09d",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      173,
+      52
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      173,
+      52
+    ]
+  }
+}

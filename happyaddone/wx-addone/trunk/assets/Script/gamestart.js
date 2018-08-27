@@ -273,29 +273,9 @@ var gamestart = cc.Class({
     */
 
     showPlayMethod: function () {
-        console.log("heloc bangzhu")
-        tywx.ado.UIManager.showUIByConfig(tywx.ado.ResConfig.PrefabConfig.PREFAB_UiHelpView, {Heloc:"ccc"});
-        // if (this.helpviewpre != null) {
-        //     this.helpviewpre.destroy();
-        //     this.helpviewpre = null;
-        // }
-        // // 添加帮助
-        // this.helpviewpre = cc.instantiate(this.helpViewPre);
-
-        // this.helpview.active = !this.helpview.active ? true : false;
-        // if (this.helpview.active == true) {
-        //     this.helpviewpre.parent = this.helpview;
-        //     this.helpviewpre.x = -360;
-        //     this.helpviewpre.y = 0;
-        //     this.helpviewscript = this.helpviewpre.getComponent("helpview");
-        //     console.log("this.helpviewscript.setCloseCall" + this.helpviewscript.setCloseCall);
-        //     this.helpviewscript.setCloseCall(function () {
-        //         curscene.showPlayMethod();
-        //     });
-        //     curscene.showBack()
-        // } else {
-        //     curscene.hideBack()
-        // }
+        tywx.ado.UIManager.showUIByConfig(tywx.ado.ResConfig.PrefabConfig.PREFAB_UIHelpView, {
+            Heloc: "ccc"
+        });
     },
 
     /*
@@ -311,12 +291,9 @@ var gamestart = cc.Class({
     */
 
     showGiftView: function () {
-        this.giftview.active = !this.giftview.active ? true : false;
-        if (this.giftview.active == true) {
-            curscene.showBack()
-        } else {
-            curscene.hideBack()
-        }
+       tywx.ado.UIManager.showUIByConfig(tywx.ado.ResConfig.PrefabConfig.PREFAB_UIHelpView, {
+           Heloc: "ccc"
+       });
     },
 
     /*
@@ -331,23 +308,26 @@ var gamestart = cc.Class({
         思路: 游戏需要
     */
     showFriendPhbView: function () {
-        console.log("Hellocd")
-        if (this.showPhb) {
-            this.phbView.active = false;
-            curscene.hideBack()
-            this.showPhb = false;
-        } else {
-            curscene.showBack()
-            this.phbView.active = true;
-            this.showPhb = true;
-        }
-        if (tywx.publicwx) {
-            console.log("Hellocd")
-            wx.postMessage({
-                method: 1,
-                MAIN_MENU_NUM: "x1",
-            });
-        }
+         tywx.ado.UIManager.showUIByConfig(tywx.ado.ResConfig.PrefabConfig.PREFAB_UIPhbView, {
+             Heloc: "ccc"
+         });
+        // console.log("Hellocd")
+        // if (this.showPhb) {
+        //     this.phbView.active = false;
+        //     curscene.hideBack()
+        //     this.showPhb = false;
+        // } else {
+        //     curscene.showBack()
+        //     this.phbView.active = true;
+        //     this.showPhb = true;
+        // }
+        // if (tywx.publicwx) {
+        //     console.log("Hellocd")
+        //     wx.postMessage({
+        //         method: 1,
+        //         MAIN_MENU_NUM: "x1",
+        //     });
+        // }
     },
 
     /*
@@ -362,16 +342,16 @@ var gamestart = cc.Class({
         思路: 游戏需要
     */
     hidePhbView: function () {
-        console.log("çç.showPhb = " + typeof (curscene.phbView))
-        if (curscene.showPhb) {
-            curscene.phbView.active = false;
-            curscene.showPhb = false;
-            curscene.hideBack()
-        } else {
-            curscene.phbView.active = true;
-            curscene.showBack()
-            curscene.showPhb = true;
-        }
+        // console.log("çç.showPhb = " + typeof (curscene.phbView))
+        // if (curscene.showPhb) {
+        //     curscene.phbView.active = false;
+        //     curscene.showPhb = false;
+        //     curscene.hideBack()
+        // } else {
+        //     curscene.phbView.active = true;
+        //     curscene.showBack()
+        //     curscene.showPhb = true;
+        // }
 
     },
 

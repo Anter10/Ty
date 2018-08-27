@@ -125,8 +125,7 @@ var UIManager = function () {
                 this.loadingInstance.destroy();
                 this.loadingInstance = null;
             }
-            var canvas = cc.director.getScene().getChildByName('Canvas');
-            var root_node = canvas.node;
+            var root_node = cc.director.getScene().getChildByName('Canvas');
             var self = this;
             if (!this.prefabCache.has(LOADING_PREFAB)) {
                 cc.loader.loadRes('prefabs/' + LOADING_PREFAB, function (err, prefab) {

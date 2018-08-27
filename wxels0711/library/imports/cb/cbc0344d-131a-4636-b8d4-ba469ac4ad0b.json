@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "whisper_label_bg",
+    "texture": "c3525dba-6e52-4ca0-80ba-eb2abf8f0fd7",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      431,
+      124
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      431,
+      124
+    ]
+  }
+}

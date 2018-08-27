@@ -1,0 +1,49 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "OpenData",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "OpenData",
+    "_components": [
+      {
+        "__id__": 2
+      },
+      {
+        "__type__": "fcce2+1aQlM46iLBQp5jUyT",
+        "node": {
+          "__id__": 1
+        },
+        "display": {
+          "__id__": 2
+        }
+      }
+    ],
+    "_prefab": {
+      "__type__": "cc.PrefabInfo",
+      "root": {
+        "__id__": 1
+      },
+      "asset": {
+        "__uuid__": "160GOdbkdK/5eybtZADdyG"
+      },
+      "fileId": "f9gmBZ4W5AXYYLqa/Iw8EO"
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 720,
+      "height": 1280
+    }
+  },
+  {
+    "__type__": "cc.Sprite",
+    "node": {
+      "__id__": 1
+    },
+    "_sizeMode": 0
+  }
+]

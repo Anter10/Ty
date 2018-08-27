@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "xueren_fw658c",
+    "texture": "be89fbb6-c508-4768-94d7-20590b296e94",
+    "atlas": "",
+    "rect": [
+      45,
+      16,
+      47,
+      97
+    ],
+    "offset": [
+      4.5,
+      -0.5
+    ],
+    "originalSize": [
+      128,
+      128
+    ]
+  }
+}

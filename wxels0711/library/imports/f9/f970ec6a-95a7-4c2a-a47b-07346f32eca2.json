@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Popups_title",
+    "texture": "93269535-79b6-4d02-a684-8cb32e94309a",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      287,
+      511
+    ],
+    "offset": [
+      -112.5,
+      0.5
+    ],
+    "originalSize": [
+      512,
+      512
+    ]
+  }
+}

@@ -1,0 +1,395 @@
+var els = require("../core/els.js");
+var ElsUtils = require("../core/ElsUtils.js");
+var ELSEvent = require('../core/ElsEvents.js');
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+
+        gameNode: {
+            default: null,
+            type: cc.Node,
+            displayName: "对[game common]的引用"
+        },
+        winline: cc.Node,
+        lose_single: cc.Node,
+        win_single: cc.Node,
+        whisper_win_single: cc.Node,
+        sl_bg: cc.Node,
+        prefabMTAnima: cc.Prefab, //! 猫头鹰动画
+        nodeAdapterBgHome: cc.Node,
+        nodeAdapterGame: cc.Node,
+        masks: [cc.Node],
+        prefabWisperStartAni: {
+            default: null,
+            type: cc.Prefab,
+            displayName: '悄悄话开始动画预制件',
+        },
+        nodeWisperAniParent: {
+            default: null,
+            type: cc.Node,
+            displayName: '悄悄话开始动画父节点',
+        },
+        btnRevive: cc.Node, //! 复活按钮
+        nodeZhuBaoInfo: cc.Node, //! 珠宝信息节点
+        labelZhuBaoCounts: [cc.Label], //! 珠宝数量
+        labelBtnRevive: cc.Label, //* 复活按钮中的label
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad() {
+        this.btnRevive.active = false;
+        this.gameview = this.gameNode.getComponent("game");
+        this.game_mask = this.node.getChildByName('game_mask');
+        this.nanguan = this.node.getChildByName('nanguan');
+        this.mask_btn = this.game_mask.getChildByName('mask_btn');
+        this.mask_btn.on(cc.Node.EventType.TOUCH_END, this.mask_btn_click, this);
+
+        this.lose_single.getChildByName('sBackBtn').on(cc.Node.EventType.TOUCH_END, this.onloseBackHandler, this);
+        this.lose_single.getChildByName('sreGameBtn').on(cc.Node.EventType.TOUCH_END, this.onloseRegameHandler, this);
+
+        this.win_single.getChildByName('sNextBtn').on(cc.Node.EventType.TOUCH_END, this.onwinNextHandler, this);
+        this.win_single.getChildByName('sShareBtn').on(cc.Node.EventType.TOUCH_END, this.onwinShareHandler, this);
+
+        // this.whisper_win_single.getChildByName('sShareBtn').on(cc.Node.EventType.TOUCH_END, this.onwinShareHandler, this);
+        // this.whisper_win_single.getChildByName('sSaveBtn').on(cc.Node.EventType.TOUCH_END, this.onwinSaveHandler, this);
+
+        this.win_content = this.whisper_win_single.getChildByName('whisper_win_content');
+        this.win_content_icon = this.whisper_win_single.getChildByName('whisper_win_content_icon');
+        let self = this;
+        cc.loader.loadRes('prefab/OpenData', function(err, prefab) {
+            var preFabNode = cc.instantiate(prefab);
+            // preFabNode.parent = self.node;
+            self.openData = preFabNode;
+            self.node.insertChild(preFabNode, 0);
+        });
+        tywx.NotificationCenter.listen(ELSEvent.ELS_EVENT_REFRESH_ZHUBAO_COUNT, this.refreshZhuBaoInfo, this);
+    },
+
+    onDestroy() {
+        tywx.NotificationCenter.ignoreScope(this);
+    },
+
+    start: function() {
+        this.game = tywx.UIManager.game;
+        this.model = this.game.model;
+        this.updateWinLine();
+    },
+
+    updateWinLine: function() {
+        let tmp_model = tywx.UIManager.game.model;
+        if (tmp_model.mconf.isWhisper || tmp_model.mconf.isEndless) {
+            this.winline.active = false;
+        } else {
+            this.winline.active = true;
+            this.winline.opacity = 150;
+            var strContent = '';
+            var pos_y = -421;
+            var pos_x = 103;
+            var ltl = tmp_model.getWinLine();
+            strContent = `消到${ltl}行以下过关`;
+            pos_y = ltl * 50 + pos_y;
+            this.winline.position = cc.v2(pos_x, pos_y);
+            let labelContent = this.winline.getChildByName('label_win').getComponent(cc.Label);
+            labelContent.string = strContent;
+            tmp_model.getWinStep();
+            this.nanguan.active = tmp_model.isNanGuan;
+        }
+    },
+
+    showMe: function() {
+        if (this.node.openData) {
+            this.node.openData.removeFromParent();
+        }
+        this.win_single.active = false;
+        this.whisper_win_single.active = false;
+        this.lose_single.active = false;
+        this.sl_bg.active = false;
+        this.win_content.active = false;
+        this.win_content_icon.active = false;
+        this.updateWinLine();
+        //! Modify by Lu Ning  at  2018/6/30  18:04 .
+        //! 胜利条件修改为一直显示
+        //this.winline.runAction(cc.sequence(cc.fadeIn(0.5), cc.delayTime(1), cc.fadeOut(0.5)));
+        this.stopAllParticleSys();
+
+        this.nodeAdapterBgHome.active = false;
+        this.nodeAdapterGame.active = true;
+
+        // 珠宝信息
+        let tmp_model = tywx.UIManager.game.model;
+        this.nodeZhuBaoInfo.active = tmp_model.mconf.isEndless;
+        this.refreshZhuBaoInfo();
+    },
+
+    hideMe: function() {
+        this.winline.active = false;
+    },
+    /**
+     * @param {Object} params
+     * @param {Number} params.x
+     * @param {Number} params.y
+     * @param {Number} params.type
+     */
+    refreshZhuBaoInfo: function(params) {
+        let tmp_model = tywx.UIManager.game.model;
+        if (!tmp_model.mconf.isEndless) return;
+        let tmp_grid = tmp_model.mgrid[0];
+        let zhubao_count = tmp_grid.mcore.zhubao_count;
+        let zhubao_max = tmp_grid.mcore.zhubao_max;
+        this.labelZhuBaoCounts[0].string = `${zhubao_count.get(112)}/${zhubao_max.get(112)}`;
+        this.labelZhuBaoCounts[1].string = `${zhubao_count.get(113)}/${zhubao_max.get(113)}`;
+        this.labelZhuBaoCounts[2].string = `${zhubao_count.get(114)}/${zhubao_max.get(114)}`;
+    },
+
+    showWisperStart: function(index) {
+        console.log('showWisperStart', index);
+        let self = this;
+        this.game = tywx.UIManager.game;
+        let animation_end_callback = () => {
+            self.game.hiden_mask();
+            self.hideMask();
+        };
+        let content = this.game.win_content.split("\n")[1][index];
+
+        let ani = cc.instantiate(this.prefabWisperStartAni);
+        ani.getComponent('WisperStartAnimation').init(content, animation_end_callback, this.masks[this.game.cipherIndex]);
+        ani.parent = this.nodeWisperAniParent;
+    },
+
+    hideMask: function() {
+        //! 右侧区域
+        let self = this;
+        this.game_mask.runAction(cc.sequence(
+            cc.fadeOut(0.5),
+            cc.callFunc(() => {
+                self.game_mask.active = false;
+                self.game_mask.opacity = 255;
+            })
+        ));
+        //! 左侧暗文
+        //this.masks[this.game.cipherIndex].active = false;
+    },
+
+    showWin: function() {
+        this.updateWinLine();
+        this.lose_single.active = false;
+        this.btnRevive.active = false;
+
+        var _win_single = undefined;
+        if (this.game.model.mconf.mode === els.ELS_MODE_SINGLE && this.game.model.mconf.isWhisper === true && this.game.cipherIndex == this.game.cipherData.length) {
+            // TODO: 悄悄话胜利 选择礼物
+            // tywx.MSG.whisperPass(tywx.showQuery.inviteCode, tywx.showQuery.randomKey);
+            this.whisper_win_single.getComponent("whisper_win_single").showWithData({
+                // avatarUrl:this.game.win_contetn_avatarUrl,
+                // user_heard_url:tywx.WXUserInfo.avatarUrl,
+                openId: tywx.showQuery.openId,
+                data: this.game.win_content,
+            });
+            return;
+        } else {
+            this.whisper_win_single.active = false;
+            this.win_single.active = true;
+            _win_single = this.win_single;
+        }
+
+        //新的成功动画  个人
+        var succ = _win_single.getChildByName("FangKuai_shengli");
+        succ.getComponent(cc.Animation).play("FangKuai_shengli");
+        //播放粒子
+        let pcs = succ.getChildByName("particlesystem01").getComponent(cc.ParticleSystem);
+        pcs.resetSystem();
+        //this.model.playMusic(els.ELS_VOICE.WIN_MUSIC, false);
+    },
+
+    showLose: function() {
+        this.lose_single.active = true;
+        this.win_single.active = false;
+        this.whisper_win_single.active = false;
+
+        //新的失败动画  单人
+        var shibai = this.lose_single.getChildByName("FangKuai_shibai");
+        shibai.getComponent(cc.Animation).play("FangKuai_shibai");
+        //播放粒子
+        let pcs = shibai.getChildByName("particlesystem01").getComponent(cc.ParticleSystem);
+        pcs.resetSystem();
+
+        //* 复活按钮显示刷新 normal: 复活+10步，分享复活
+        let is_endless = tywx.UIManager.game.model.mconf.isEndless;
+        this.labelBtnRevive.string = is_endless ? '分享复活' : '分享复活+10步';
+        //! 无尽模式需要限制复活次数
+        if (is_endless && tywx.UIManager.game.currentReviveTimes >= els.ENDLESS_VALUES.ReviveMaxTime) {
+            this.btnRevive.node.active = false;
+        }
+    },
+    /**
+     * 失败显示复活
+     */
+    showRevive: function() {
+        this.showLose();
+        //根据配置显示复活按钮
+        if (els.CONFIG.openEmergency) {
+            //if(true){    
+            this.btnRevive.active = true;
+        } else {
+            this.btnRevive.active = false;
+        }
+    },
+
+    stopAllParticleSys() {
+        var shibai = this.lose_single.getChildByName("FangKuai_shibai");
+        shibai.getComponent(cc.Animation).play("FangKuai_shibai");
+        let pcs1 = shibai.getChildByName("particlesystem01").getComponent(cc.ParticleSystem);
+        pcs1.stopSystem();
+        //新的成功动画
+        var succ = this.win_single.getChildByName("FangKuai_shengli");
+        succ.getComponent(cc.Animation).play("FangKuai_shengli");
+        //播放粒子 
+        let pcs2 = succ.getChildByName("particlesystem01").getComponent(cc.ParticleSystem);
+        pcs2.stopSystem();
+    },
+
+    mask_btn_click: function() {
+        console.log('mask_btn_click');
+        //! 游戏区域遮罩隐藏
+        this.game.hiden_mask();
+        //! 左侧文字遮罩隐藏
+        this.masks[this.game.cipherIndex].active = false;
+    },
+
+    onloseBackHandler(eve) {
+        this.lose_single.active = false;
+        this.stopAllParticleSys();
+        this.game.loseBackToHome();
+    },
+
+    onloseRegameHandler(eve) {
+        let is_endless = tywx.UIManager.game.model.mconf.isEndless;
+        if(is_endless) {
+            console.log("delete local ELS_CURRENT_ENDLESS_LEVEL!!!");
+            ElsUtils.delItem('ELS_CURRENT_ENDLESS_LEVEL');
+        }
+        this.lose_single.active = false;
+        this.stopAllParticleSys();
+        this.game.reStartGame();
+    },
+
+    onwinNextHandler(eve) {
+        this.stopAllParticleSys();
+        this.win_single.active = false;
+        this.whisper_win_single.active = false;
+        console.log("fengbing", " *-*-*-*- win next handler *-*-*-*-");
+        if (this.game.model.mconf.mode == els.ELS_MODE_SINGLE && this.game.model.mconf.isWhisper == true && this.game.cipherIndex >= this.game.cipherData.length) {
+            // tywx.UIManager.showUI(els.ELS_GAME_LAYER.HOMEPAGE);
+            this.game.loseBackToHome();
+            this.win_content.getComponent("cc.Label").string = "";
+        } else {
+            this.game.nextStage();
+        }
+
+        //this.gameNode.yanhua.active = false;
+    },
+
+    onwinShareHandler(eve) {
+        this.stopAllParticleSys();
+        // 悄悄话通关 分享
+        if (this.game.model.mconf.mode == els.ELS_MODE_SINGLE && this.game.model.mconf.isWhisper == true && this.game.cipherIndex >= this.game.cipherData.length) {
+            tywx.ShareInterface.shareMsg({
+                type: els.ELS_SHRAE_TYPE.GAME_QQH_WIN
+            });
+        } else { // 闯关胜利 分享
+            tywx.ShareInterface.shareMsg({
+                type: els.ELS_SHRAE_TYPE.GAME_SINGLE_WIN
+            });
+        }
+    },
+
+    // save(params) {
+    //     var canvas = cc.game.canvas;
+    //     var width = cc.winSize.width;
+    //     var height = cc.winSize.height;
+    //     canvas.toTempFilePath({
+    //         x: width / 10,
+    //         y: height / 10 + (height - 1280) / 2,
+    //         width: 720*0.8,
+    //         height: 1280*0.8,
+    //         destWidth: 720*0.8,
+    //         destHeight: 1280*0.8,
+    //         success(res) {
+    //             //.可以保存该截屏图片
+    //             console.log(res)
+    //             ElsUtils.saveImage2PhoneByUrl(res.tempFilePath, params.success, params.fail);
+    //         },
+    //         fail(res) {
+    //             params.fail && params.fail();
+    //         }
+    //     });
+    // },
+
+    onwinSaveHandler: function() {
+        console.log("onwinSaveHandler11111");
+        // this.save({
+        //     success: function() {
+        //         wx.hideLoading();
+        //         wx.showToast({
+        //             title: '保存成功',
+        //             duration: 2000,
+        //             icon: null
+        //         });
+        //     },
+        //     fail: function() {
+        //         wx.hideLoading();
+        //         wx.showToast({
+        //             title: '保存失败',
+        //             duration: 2000,
+        //             icon: null
+        //         });
+        //     }
+        // });
+    },
+
+    // update (dt) {},
+    onBtnReviveClickCallback() {
+        let self = this;
+        tywx.ShareInterface.shareMsg({
+            type: els.ELS_SHRAE_TYPE.SHARE_REVIVE,
+            successCallback: (result) => {
+                ElsUtils.isCanShare2GroupByTicket(
+                    els.SHARE_LOCK_TAG.TAG_REVIVE_AND_GIFT_PROP,
+                    result,
+                    () => {
+                        //! success
+                        //! 加10步
+                        self.game.model.add_step += 10;
+                        //! 设置游戏没有结束
+                        self.game.model.mgrid[0].mcore.game_over = false;
+                        //! 限制消除条件
+                        if (self.game.model.mgrid[0].mcore.top_line >= 18) {
+                            //! 消除5行
+                            self.game.model.mgrid[0].clearThreeBottomLines();
+                        }
+                        self.lose_single.active = false;
+
+                        self.game.model.setGameStatus(els.ELS_GAME_STATE.PLAYING);
+                        setTimeout(() => {
+                            //! 设置游戏状态
+                            console.log('reset-waiting-revive-state', self.game.isWaitingRevive);
+                            self.game.isWaitingRevive = false;
+                        }, 2000);
+                        //! Add revive times.
+                        self.game.currentReviveTimes++;
+                    }, () => {
+                        //! fail
+                        console.log('分享失败');
+                        tywx.Util.wechatShowModal("复活失败，请分享到不同群", false, "确认");
+                    }
+                );
+            },
+            failCallback: () => {
+                console.log('分享失败');
+            }
+        });
+    }
+});

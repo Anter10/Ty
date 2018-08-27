@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Mall_small02",
+    "texture": "81d4d620-8100-4f99-aa61-2653f18cc5b3",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      136,
+      118
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      136,
+      118
+    ],
+    "capInsets": [
+      16,
+      10,
+      18,
+      14
+    ]
+  }
+}

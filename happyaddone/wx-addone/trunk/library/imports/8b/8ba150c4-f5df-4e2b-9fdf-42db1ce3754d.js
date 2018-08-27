@@ -6,8 +6,6 @@ cc._RF.push(module, '8ba15DE9d9OK5/fQtsc43VN', 'gamestart');
 
 var _cc$Class;
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /*
@@ -232,65 +230,46 @@ var gamestart = cc.Class((_cc$Class = {
     //tywx.playMusic();
     tywx.ado.AudioManager.playMusic(tywx.ado.Configs.MUSICS.BG_MUSIC);
 }), _defineProperty(_cc$Class, "showPlayMethod", function showPlayMethod() {
-    console.log("heloc bangzhu");
-    tywx.ado.UIManager.showUIByConfig(tywx.ado.ResConfig.PrefabConfig.PREFAB_UiHelpView, { Heloc: "ccc" });
-    // if (this.helpviewpre != null) {
-    //     this.helpviewpre.destroy();
-    //     this.helpviewpre = null;
-    // }
-    // // 添加帮助
-    // this.helpviewpre = cc.instantiate(this.helpViewPre);
-
-    // this.helpview.active = !this.helpview.active ? true : false;
-    // if (this.helpview.active == true) {
-    //     this.helpviewpre.parent = this.helpview;
-    //     this.helpviewpre.x = -360;
-    //     this.helpviewpre.y = 0;
-    //     this.helpviewscript = this.helpviewpre.getComponent("helpview");
-    //     console.log("this.helpviewscript.setCloseCall" + this.helpviewscript.setCloseCall);
-    //     this.helpviewscript.setCloseCall(function () {
-    //         curscene.showPlayMethod();
-    //     });
-    //     curscene.showBack()
-    // } else {
-    //     curscene.hideBack()
-    // }
+    tywx.ado.UIManager.showUIByConfig(tywx.ado.ResConfig.PrefabConfig.PREFAB_UIHelpView, {
+        Heloc: "ccc"
+    });
 }), _defineProperty(_cc$Class, "showGiftView", function showGiftView() {
-    this.giftview.active = !this.giftview.active ? true : false;
-    if (this.giftview.active == true) {
-        curscene.showBack();
-    } else {
-        curscene.hideBack();
-    }
+    tywx.ado.UIManager.showUIByConfig(tywx.ado.ResConfig.PrefabConfig.PREFAB_UIHelpView, {
+        Heloc: "ccc"
+    });
 }), _defineProperty(_cc$Class, "showFriendPhbView", function showFriendPhbView() {
-    console.log("Hellocd");
-    if (this.showPhb) {
-        this.phbView.active = false;
-        curscene.hideBack();
-        this.showPhb = false;
-    } else {
-        curscene.showBack();
-        this.phbView.active = true;
-        this.showPhb = true;
-    }
-    if (tywx.publicwx) {
-        console.log("Hellocd");
-        wx.postMessage({
-            method: 1,
-            MAIN_MENU_NUM: "x1"
-        });
-    }
+    tywx.ado.UIManager.showUIByConfig(tywx.ado.ResConfig.PrefabConfig.PREFAB_UIPhbView, {
+        Heloc: "ccc"
+    });
+    // console.log("Hellocd")
+    // if (this.showPhb) {
+    //     this.phbView.active = false;
+    //     curscene.hideBack()
+    //     this.showPhb = false;
+    // } else {
+    //     curscene.showBack()
+    //     this.phbView.active = true;
+    //     this.showPhb = true;
+    // }
+    // if (tywx.publicwx) {
+    //     console.log("Hellocd")
+    //     wx.postMessage({
+    //         method: 1,
+    //         MAIN_MENU_NUM: "x1",
+    //     });
+    // }
 }), _defineProperty(_cc$Class, "hidePhbView", function hidePhbView() {
-    console.log("çç.showPhb = " + _typeof(curscene.phbView));
-    if (curscene.showPhb) {
-        curscene.phbView.active = false;
-        curscene.showPhb = false;
-        curscene.hideBack();
-    } else {
-        curscene.phbView.active = true;
-        curscene.showBack();
-        curscene.showPhb = true;
-    }
+    // console.log("çç.showPhb = " + typeof (curscene.phbView))
+    // if (curscene.showPhb) {
+    //     curscene.phbView.active = false;
+    //     curscene.showPhb = false;
+    //     curscene.hideBack()
+    // } else {
+    //     curscene.phbView.active = true;
+    //     curscene.showBack()
+    //     curscene.showPhb = true;
+    // }
+
 }), _defineProperty(_cc$Class, "loadFinishCallBack", function loadFinishCallBack() {
     if (this.node) {
         // this.node.destroy();

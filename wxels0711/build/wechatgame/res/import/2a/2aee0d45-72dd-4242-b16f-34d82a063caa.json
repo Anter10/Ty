@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "shadow5",
+    "texture": "1b56023e0",
+    "rect": [
+      2,
+      279,
+      155,
+      105
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      155,
+      105
+    ]
+  }
+}

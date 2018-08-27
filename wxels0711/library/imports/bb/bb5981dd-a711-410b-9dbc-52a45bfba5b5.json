@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "Victoryfailed_sb",
+    "texture": "04b8de40-187c-4b2c-aaaf-264fe13ffeff",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      95,
+      1014
+    ],
+    "offset": [
+      -16.5,
+      5
+    ],
+    "originalSize": [
+      128,
+      1024
+    ]
+  }
+}

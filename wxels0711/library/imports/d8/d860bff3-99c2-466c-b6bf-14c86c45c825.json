@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "whisper_edit_bg",
+    "texture": "e8179320-d661-4311-9836-b9ebae451514",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      393,
+      100
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      393,
+      100
+    ],
+    "capInsets": [
+      53,
+      0,
+      45,
+      0
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "elskf_chuizi04",
+    "texture": "60eaa448-b210-4ed8-89e4-d46d99a56897",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      57,
+      55
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      57,
+      55
+    ]
+  }
+}

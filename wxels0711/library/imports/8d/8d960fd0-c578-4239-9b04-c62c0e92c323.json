@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "50beijiyishang_guangmang01",
+    "texture": "1490ef01-fbbd-4c41-83ef-31f89fc7e163",
+    "atlas": "",
+    "rect": [
+      0,
+      1,
+      256,
+      253
+    ],
+    "offset": [
+      0,
+      0.5
+    ],
+    "originalSize": [
+      256,
+      256
+    ]
+  }
+}

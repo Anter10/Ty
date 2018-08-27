@@ -657,11 +657,13 @@ var gamemain = cc.Class({
         思路: 逻辑需要
     */
     showStopView: function showStopView() {
-        this.stopView.active = !this.stopView.active ? true : false;
-        if (this.stopView.active == false) {
-            this.stopV.active = false;
-            this.pjlView.active = false;
-            this.openboxview.active = false;
+        if (this.stopView) {
+            this.stopView.active = !this.stopView.active ? true : false;
+            if (this.stopView.active == false) {
+                this.stopV.active = false;
+                this.pjlView.active = false;
+                this.openboxview.active = false;
+            }
         }
     },
 
@@ -1079,7 +1081,9 @@ var gamemain = cc.Class({
                             this.gamestate = config.gameState.waitclick;
                             this.finalDealMask();
                         }
-                        if (this.hadShowPjl == false) {
+
+                        // 游戏完了 破纪录就不用展示了
+                        if (this.hadShowPjl == false && this.point > 0) {
                             this.pjlCallBack();
                         }
                     }
@@ -1476,7 +1480,12 @@ var gamemain = cc.Class({
 
     finalDealMask: function finalDealMask() {
         for (var i = 0; i < config.geziNumber; i++) {
-            this.getAllgz()[i].settoblock();
+            var tnum = this.getPjNumberName(i);
+            if (tnum == 0) {
+                tnum = this.getrandomnum();
+            }
+            // 判断位置是否相等
+            this.getAllgz()[i].settoblockAndNumber(tnum);
         }
     },
 

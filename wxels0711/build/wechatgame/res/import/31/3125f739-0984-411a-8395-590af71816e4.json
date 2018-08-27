@@ -1,0 +1,107 @@
+{
+  "__type__": "cc.SpriteAtlas",
+  "_spriteFrames": {
+    "label_bg": {
+      "__uuid__": "f28DMycUhDSL4tRiuGaNMg"
+    },
+    "help": {
+      "__uuid__": "6d2cfiYXdNopnD6QL3+HVb"
+    },
+    "els_daily_login_bg": {
+      "__uuid__": "a7ljaMftxFeLfBpOq8tsef"
+    },
+    "select_gift_bg": {
+      "__uuid__": "87kL9FAolMFIECIWNd0NVR"
+    },
+    "pause_bg": {
+      "__uuid__": "73jC/VcE1JnqB1X8T9UKWJ"
+    },
+    "logo2": {
+      "__uuid__": "a8rpObj+VPdpSORUjKrav9"
+    },
+    "rank_btn_bg01": {
+      "__uuid__": "b46v0wxS1HNLGJe9WuqW2A"
+    },
+    "label_bg1": {
+      "__uuid__": "52zqmWoiZHoJ9acZxtCuDj"
+    },
+    "game_mask": {
+      "__uuid__": "daTguw6v9ByIuLy6kh7qHC"
+    },
+    "fanhuiMain": {
+      "__uuid__": "e4R8Wzp5RETYue2SuaLXAr"
+    },
+    "els_daily_login_title": {
+      "__uuid__": "40VdrmE6RLzaBiRSpNLTh7"
+    },
+    "qqh_btn_bg": {
+      "__uuid__": "a3/aB4V8NKEoQEyxaXXof1"
+    },
+    "qqh_btn_icon": {
+      "__uuid__": "097XPj/alP86rNjUio/d/l"
+    },
+    "els_daily_login_item_bg": {
+      "__uuid__": "d9pyAbmXdAe7GnpoUBlr11"
+    },
+    "qqh_btn_title": {
+      "__uuid__": "7aPSmjyoVK2I/cl38gVq94"
+    },
+    "rank_btn_bg02": {
+      "__uuid__": "92y2QeoEFEfYYT8AkgmVym"
+    },
+    "icon_circle_green": {
+      "__uuid__": "709cSacrtBP6V/rHFoIa2y"
+    },
+    "els_daily_login_item_mask": {
+      "__uuid__": "73c/6s22RPf6Hg0x/F7cBM"
+    },
+    "rank_selected": {
+      "__uuid__": "30xttkkwlBxqlpnqAzVcyA"
+    },
+    "rank_btn_bg04": {
+      "__uuid__": "5bF2P9+RRBeZhZyp/eBpNc"
+    },
+    "pause_btn_bg1": {
+      "__uuid__": "3ex+i9vMNEu56zFCCq7y55"
+    },
+    "rank_unselect": {
+      "__uuid__": "d9ui4xrOFCRaMqPK6VJaQI"
+    },
+    "gift_box_0": {
+      "__uuid__": "a4a0rSmOhFv6gmdVS0knsm"
+    },
+    "rank_btn_bg03": {
+      "__uuid__": "05M9/a7GJDr6ORt/9sKBsn"
+    },
+    "select_gift_caidai": {
+      "__uuid__": "a8DisHhTRLJpRoFMJu52or"
+    },
+    "select_gift_item_bg": {
+      "__uuid__": "7btvWqqL1MkJry8iGdqqFw"
+    },
+    "nan": {
+      "__uuid__": "9fs0LIRH1MKbt9PMdyOxol"
+    },
+    "pause_volume_bg": {
+      "__uuid__": "b34lcYJcZGcIWqWtlx5sUp"
+    },
+    "select_gift_item_bg02": {
+      "__uuid__": "1bDoHc0F1IEIqi98mr/fdI"
+    },
+    "pause_volume_close": {
+      "__uuid__": "abgKzTll5C95EjfGHdSSon"
+    },
+    "pause_help_bg": {
+      "__uuid__": "e4UsVC2lZLlr4kgtrciIe6"
+    },
+    "light": {
+      "__uuid__": "9aRs474mRNOp/IJeFxltYK"
+    },
+    "els_daily_login_icon_getted": {
+      "__uuid__": "025QdsuWtKzY4NHUhOShk1"
+    },
+    "label_mask_heart": {
+      "__uuid__": "21C4q9/pBLy4RHnIxHxo8p"
+    }
+  }
+}

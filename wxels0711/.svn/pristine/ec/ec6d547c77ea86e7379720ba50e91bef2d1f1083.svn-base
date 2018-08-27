@@ -1,0 +1,37 @@
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        labAddValue: cc.Label
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    // onLoad () {},
+
+    start () {
+        let dt = 0.8;
+        let self = this;
+        this.node.runAction(
+            cc.sequence(
+                cc.spawn(
+                    cc.moveBy(dt, cc.p(0, 100)),
+                    cc.scaleBy(dt, 1.5),
+                    cc.fadeOut(dt)
+                ),
+                cc.callFunc(()=>{
+                    console.log('add magic animation end callback');
+                    self.ani_cb();
+                }),
+                cc.removeSelf()
+            )
+        );
+    },
+
+    // update (dt) {},
+    init(add_value, cb){
+        this.labAddValue.string = `+${add_value}`;
+        this.ani_cb = cb;
+    },
+});

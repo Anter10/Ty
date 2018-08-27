@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "back4ipx_game",
+    "texture": "87bb3171-9389-4e91-8ba8-de6e0c8896e9",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      720,
+      246
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      720,
+      246
+    ]
+  }
+}

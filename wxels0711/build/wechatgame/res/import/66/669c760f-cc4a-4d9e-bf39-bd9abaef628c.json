@@ -1,0 +1,76 @@
+[
+  {
+    "__type__": "cc.Prefab",
+    "_name": "yindao_had",
+    "data": {
+      "__id__": 1
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "yindao_had",
+    "_children": [
+      {
+        "__id__": 2
+      }
+    ],
+    "_components": [
+      {
+        "__type__": "cc.Animation",
+        "node": {
+          "__id__": 1
+        },
+        "_clips": [
+          {
+            "__uuid__": "65zbnUz1pKtrKqVk88X0Am"
+          }
+        ]
+      }
+    ],
+    "_prefab": {
+      "__type__": "cc.PrefabInfo",
+      "root": {
+        "__id__": 1
+      },
+      "asset": {
+        "__uuid__": "66nHYPzEpNnr85vZq672KM"
+      },
+      "fileId": "f3zNB5A6tCB6mKStvZsmtz"
+    }
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "ddz_yindao_shou",
+    "_parent": {
+      "__id__": 1
+    },
+    "_components": [
+      {
+        "__type__": "cc.Sprite",
+        "node": {
+          "__id__": 2
+        }
+      }
+    ],
+    "_prefab": {
+      "__type__": "cc.PrefabInfo",
+      "root": {
+        "__id__": 1
+      },
+      "asset": {
+        "__uuid__": "66nHYPzEpNnr85vZq672KM"
+      },
+      "fileId": "e0BLdRa71HNIjvMN4lWG5g"
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.1,
+      "y": 0.9
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 104,
+      "height": 129
+    }
+  }
+]

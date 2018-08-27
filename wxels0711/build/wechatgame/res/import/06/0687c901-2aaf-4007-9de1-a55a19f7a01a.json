@@ -1,0 +1,21 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "lizi",
+    "texture": "12fef5646",
+    "rect": [
+      230,
+      1574,
+      43,
+      43
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      43,
+      43
+    ]
+  }
+}

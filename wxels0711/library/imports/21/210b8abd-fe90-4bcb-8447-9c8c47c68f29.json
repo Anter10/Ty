@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "label_mask_heart",
+    "texture": "7014bc24-12c9-40c9-898a-61c6a97e8a39",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      51,
+      42
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      51,
+      42
+    ]
+  }
+}
