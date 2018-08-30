@@ -55,8 +55,8 @@ var AudioManager = function () {
     _createClass(AudioManager, [{
         key: 'loadAudioRes',
         value: function loadAudioRes() {
-            var sounds_config = tywx.ado.Configs.SOUNDS;
-            var music_config = tywx.ado.Configs.default.MUSICS;
+            var sounds_config = tywx.ado.Constants.GameCenterConfig.SOUNDS;
+            var music_config = tywx.ado.Configs.MUSICS;
             var sound_keys = Reflect.ownKeys(sounds_config);
             var music_keys = Reflect.ownKeys(music_config);
             var self = this;

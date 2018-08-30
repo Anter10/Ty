@@ -1,5 +1,5 @@
 let events = require('./open_data_config.js').events;
-let CloundKeys = require('./open_data_config.js').CloudDataKey;
+let CloudKeys = require('./open_data_config.js').CloudDataKey;
 const _shareCanvas = wx.getSharedCanvas().getContext('2d');
 var canvas = wx.getSharedCanvas();
 let orwidth = canvas.width;
@@ -15,6 +15,10 @@ bottom.src = 'image/yjjx.png'
 
 function getShareCanvas() {
     return wx.getSharedCanvas();
+}
+
+function isMySelf(lhr, rhr) {
+    return lhr.nickname === rhr.nickName && lhr.avatarUrl === rhr.avatarUrl;
 }
 
 
@@ -50,7 +54,7 @@ function loadData() {
     //* 好友数据
     console.log("开始请求好友数据");
     wx.getFriendCloudStorage({
-        keyList: ["x1"],
+        keyList: [CloudKeys.x1],
         success: result => {
             _friendCloudDatas = result.data;
             console.log("当前请求下来的数据" + JSON.stringify(_friendCloudDatas));
@@ -73,7 +77,7 @@ function loadData() {
     });
     //* 自己的数据
     wx.getUserCloudStorage({
-        keyList: ["x1"],
+        keyList: [CloudKeys.x1],
         success: result => {
             console.log('获取自己的数据', result);
             _selfCloudDatas = result;
@@ -101,7 +105,7 @@ function loadData() {
 function loadGroupCloudDataByShareTicket(share_ticket, success_cb) {
     wx.getGroupCloudStorage({
         shareTicket: share_ticket,
-        keyList: CloundKeys.keys(),
+        keyList: CloudKeys.keys(),
         success: result => {
             success_cb(result);
         }
@@ -157,14 +161,14 @@ function drawThanFriend(score, x, y, width) {
     // canvas.height = 111;
     _shareCanvas.clearRect(0, 0, 32222, 3222)
     var frdata = null;
-    console.log("canvaswid" + canvas.width + "canvasheight" + canvas.height +
-        "好友数据 = " + JSON.stringify(_friendCloudDatas));
+    //console.log("canvaswid" + canvas.width + "canvasheight" + canvas.height +
+    //    "好友数据 = " + JSON.stringify(_friendCloudDatas));
     for (let i = _friendCloudDatas.length - 1; i >= 0; i--) {
         var tdata = _friendCloudDatas[i];
         var fscore = tdata.KVDataList[0] == null ? 0 : tdata.KVDataList[0].value;
         var chazhi = fscore - score;
 
-        if (chazhi > 0) {
+        if (chazhi > 0 && !isMySelf(tdata, _selfUserInfo)) {
             frdata = tdata;
             frdata.score = fscore;
             // prePersonIconUrl = tdata.avatarUrl;
@@ -209,16 +213,13 @@ function drawFriendRank(drawdata) {
     if (!drawdata) {
         return;
     }
-    var tdata = new Array();
 
-    for (var tdatai = 0; tdatai < drawdata.length; tdatai++) {
-        tdata.push(drawdata[tdatai]);
-    }
-    _shareCanvas.clearRect(0, 0, 32222, 3222)
+    _shareCanvas.clearRect(0, 0, 32222, 3222);
+    var curbzcount = 3;
 
-    function drawItem(data, index) {
+    function drawItem(data, index, posi) {
         console.log('drawItem', index, data);
-        let [x, y, w, h] = [40, 100 * index, 635, 100];
+        let [x, y, w, h] = [40, 100 * posi, 635, 100];
         console.log('drawItem', x, y);
         let padding_x = 5;
         let label_y = y + h * 0.6 - 10;
@@ -228,18 +229,31 @@ function drawFriendRank(drawdata) {
         //y += h / 2;
         // * rank label
         console.log("当前的绘制数据 = " + JSON.stringify(data));
-        if (data.pm < 3) {
-            drawImage("image/phb" + (data.pm + 1) + ".png", x - 26, avatar_y - 1, 58, 78);
+        if (index < curbzcount) {
+            if (index == 0) {
+                if (data.pm < 3) {
+                    drawImage("image/phb" + (data.pm + 1) + ".png", x - 26, avatar_y - 1, 58, 78);
+                } else {
+                    _shareCanvas.fillStyle = "#6495ED";
+                    _shareCanvas.font = "25px Arial";
+                    _shareCanvas.textAlign = 'left';
+                    _shareCanvas.fillText(`` + data.pm, x, label_y);
+                }
+            } else {
+                drawImage("image/phb" + (index) + ".png", x - 26, avatar_y - 1, 58, 78);
+            }
         } else {
             _shareCanvas.fillStyle = "#6495ED";
             _shareCanvas.font = "25px Arial";
             _shareCanvas.textAlign = 'left';
-
-            _shareCanvas.fillText(`` + data.pm, x, label_y);
+            _shareCanvas.fillText(`` + index, x, label_y);
         }
         // * avatar
         x += 60;
-        drawImage(data.avatarUrl, x, avatar_y, 65, 65);
+        setTimeout(() => {
+            console.log("惺惺相惜 = " + x);
+            drawImage(data.avatarUrl, 100, avatar_y + 5, 65, 65);
+        }, index * 400);
         // * name label
         x += 150;
         _shareCanvas.fillStyle = "#6495ED";
@@ -253,13 +267,24 @@ function drawFriendRank(drawdata) {
         _shareCanvas.textAlign = 'left';
         data.KVDataList.forEach(e => {
             console.log('kvdatalist', e);
-            if (e.key === 'x1') {
+            if (e.key === CloudKeys.x1) {
                 _shareCanvas.fillText(e.value + '分', x, label_y);
             }
         });
         // * bottom line 
         x = 0;
         drawImage('image/line.png', x + 30, bottom_y - 4, 580, 4);
+    }
+
+    function isHaveDataByKey(data_list, key) {
+        let ret = false;
+        data_list.forEach(data => {
+            if (data.key === key) {
+                ret = true;
+                return ret;
+            }
+        });
+        return ret;
     }
     let self_data = {
         nickname: _selfUserInfo.nickName,
@@ -269,36 +294,31 @@ function drawFriendRank(drawdata) {
 
     var hasfindself = false;
     var findindex = -1;
-    for (var tindex = 0; tindex < tdata.length; tindex++) {
-
-        if (hasfindself) {
-            tdata[tindex - 1].pm = tindex + 1;
-        } else {
-            tdata[tindex].pm = tindex;
-        }
-        if (hasfindself == false && tdata[tindex].avatarUrl == _selfUserInfo.avatarUrl) {
+    for (var tindex = 0; tindex < drawdata.length; tindex++) {
+        if (hasfindself == false && drawdata[tindex].avatarUrl == _selfUserInfo.avatarUrl) {
             self_data.pm = tindex;
-            tdata.splice(tindex, 1);
-            findindex = tindex;
-            hasfindself = true;
-        }
-
-    }
-
-    console.log("当前显示的条数 = " + tdata.length);
-    if (tdata.length > 1) {
-        tdata[tdata.length - 1].pm = tdata.length + 1;
-    } else {
-        if (tdata.length == 1) {
-            tdata[tdata.length - 1].pm = 1;
+            if (tindex < 3) {
+                curbzcount = 4;
+            }
+            break;
         }
     }
+    let render_idx = 0;
+    if (isHaveDataByKey(self_data.KVDataList, CloudKeys.x1)) {
+        drawItem(self_data, 0, 0);
 
-    drawItem(self_data, 0);
+        render_idx++;
+    }
     var findself = false;
-    tdata.forEach((data, index) => {
+    drawdata.forEach((data, index) => {
         if (index + 1 > 21) return;
-        drawItem(data, index + 1);
+        if (isHaveDataByKey(data.KVDataList, CloudKeys.x1)) {
+            if (render_idx == 0) {
+                drawItem(data, index + 1, index);
+            } else {
+                drawItem(data, index + 1, index + 1);
+            }
+        }
     });
 
 
@@ -331,48 +351,42 @@ wx.onMessage(data => {
 
 
 getGroupFriendData = function (tshareTicket) {
-        var shareTicket = tshareTicket;
-        wx.getUserInfo({
-            openIdList: ['selfOpenId'],
-            success: (userRes) => {
-                //  Log('success', userRes.data)
-                let userData = userRes.data[0];
-                //取出所有好友数据
-                wx.getGroupCloudStorage({
-                    shareTicket: shareTicket,
-                    keyList: ["x1"],
-                    success: res => {
-                        let data = res.data;
-                        data.sort((a, b) => {
-                            if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
-                                return 0;
-                            }
-                            if (a.KVDataList.length == 0) {
-                                return 1;
-                            }
-                            if (b.KVDataList.length == 0) {
-                                return -1;
-                            }
-                            return b.KVDataList[0].value - a.KVDataList[0].value;
-                        });
-                        _groupfriendCloudDatas = data;
-                        // 绘制群排行的玩家数据
-                        drawFriendRank(_groupfriendCloudDatas);
-                    },
-                    fail: res => {
-                        //  Log("得到群组数据失败", res);
-                        // this.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
-                    },
-                });
-            },
-            fail: (res) => {
-                // this.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
-            }
-        });
-    },
-
-
-
-    function isMySelf(lhr, rhr) {
-        return lhr.nickname === rhr.nickName && lhr.avatarUrl === rhr.avatarUrl;
-    };
+    var shareTicket = tshareTicket;
+    wx.getUserInfo({
+        openIdList: ['selfOpenId'],
+        success: (userRes) => {
+            //  Log('success', userRes.data)
+            let userData = userRes.data[0];
+            //取出所有好友数据
+            wx.getGroupCloudStorage({
+                shareTicket: shareTicket,
+                keyList: [CloudKeys.x1],
+                success: res => {
+                    let data = res.data;
+                    data.sort((a, b) => {
+                        if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
+                            return 0;
+                        }
+                        if (a.KVDataList.length == 0) {
+                            return 1;
+                        }
+                        if (b.KVDataList.length == 0) {
+                            return -1;
+                        }
+                        return b.KVDataList[0].value - a.KVDataList[0].value;
+                    });
+                    _groupfriendCloudDatas = data;
+                    // 绘制群排行的玩家数据
+                    drawFriendRank(_groupfriendCloudDatas);
+                },
+                fail: res => {
+                    //  Log("得到群组数据失败", res);
+                    // this.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+                },
+            });
+        },
+        fail: (res) => {
+            // this.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+        }
+    });
+}

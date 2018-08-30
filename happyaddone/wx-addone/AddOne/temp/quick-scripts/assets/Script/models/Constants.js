@@ -128,13 +128,6 @@ var GameCenterConfig = {
     [32, 32, 32] // 深黑色
     ],
 
-    // 连接数在不同的值需要展示特定的效果
-    lianjiEffects: {
-        sgood: 3, // cool 
-        cgood: 4, // good
-        bgood: 5, // awesome
-        maxgood: 6 // unbelive
-    },
     // 体力显示的属性
     showphy_pros: {
         width: 130,

@@ -397,7 +397,7 @@ var gamemain = cc.Class({
 
         // 设置免费领取的回调
         var mflq = this.mflqBtn.getComponent("ShareButton");
-        if (config["v" + tywx.SystemInfo.version] && config["v" + tywx.SystemInfo.version].auditing == true) {
+        if (tywx.config.auditing == true) {
             mflq.setReactCall(true);
         } else {
             mflq.setReactCall(false);
@@ -416,7 +416,7 @@ var gamemain = cc.Class({
 
     fhBtnShow: function fhBtnShow() {
         console.log("当前的版本信息 =" + tywx.SystemInfo.version + JSON.stringify(config));
-        if (config["v" + tywx.SystemInfo.version] && config["v" + tywx.SystemInfo.version].auditing == true) {
+        if (tywx.config.auditing == true) {
             this.fuHuo.active = false;
             this.loseRestartGameBtn.active = true;
         } else {
@@ -433,7 +433,7 @@ var gamemain = cc.Class({
         // 判断连接数的大小 如果连接数大于不同的值则产生不同的效果
         if (this.gamestate != tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
             this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
-            if (this.lianjiNumber >= tywx.ado.Constants.GameCenterConfig.lianjiEffects.sgood && this.point > 0) {
+            if (this.lianjiNumber >= tywx.config.combo_level.good[0] && this.point > 0) {
                 this.dealLianJiNumber();
             } else {
                 if (this.hadShowPjl == false && this.point > 0 && this.hasProduceNewScore == true) {
@@ -630,7 +630,7 @@ var gamemain = cc.Class({
             });
 
             item.x = 165 + itemIndex * 125;
-            item.y = -40;
+            item.y = -55;
             this.allOpenItems.push(item);
         }
         // 刷新道具显示
@@ -836,13 +836,13 @@ var gamemain = cc.Class({
 
         var itemnum = 1;
         var randomNum = Math.random();
-        if (randomNum >= 1 - config.default.box_rate.sub1) {
+        if (randomNum >= 1 - config.box_rate.sub1) {
             itemid = tywx.ado.Constants.GameCenterConfig.allitem[0].id;
-        } else if (randomNum < 1 - config.default.box_rate.sub1 && randomNum >= 1 - config.default.box_rate.sub1 - config.default.box_rate.add2) {
+        } else if (randomNum < 1 - config.box_rate.sub1 && randomNum >= 1 - config.box_rate.sub1 - config.box_rate.add2) {
             itemid = tywx.ado.Constants.GameCenterConfig.allitem[1].id;
-        } else if (randomNum < 1 - config.default.box_rate.sub1 - config.default.box_rate.add2 && randomNum > config.default.box_rate.chui) {
+        } else if (randomNum < 1 - config.box_rate.sub1 - config.box_rate.add2 && randomNum > config.box_rate.chui) {
             itemid = tywx.ado.Constants.GameCenterConfig.allitem[2].id;
-        } else if (randomNum <= config.default.box_rate.chui) {
+        } else if (randomNum <= config.box_rate.chui) {
             itemid = tywx.ado.Constants.GameCenterConfig.allitem[3].id;
         }
 
@@ -1350,19 +1350,19 @@ var gamemain = cc.Class({
     },
     */
     dealLianJiNumber: function dealLianJiNumber() {
-        if (this.lianjiNumber == tywx.ado.Constants.GameCenterConfig.lianjiEffects.sgood) {
+        if (this.lianjiNumber == tywx.config.combo_level.good[0]) {
             this.playGood();
             this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.GOOD);
             this.showboxNumber = 1;
-        } else if (this.lianjiNumber == tywx.ado.Constants.GameCenterConfig.lianjiEffects.cgood) {
+        } else if (this.lianjiNumber == tywx.config.combo_level.cool[0]) {
             this.playCool();
             this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.COOL);
             this.showboxNumber = 2;
-        } else if (this.lianjiNumber == tywx.ado.Constants.GameCenterConfig.lianjiEffects.bgood) {
+        } else if (this.lianjiNumber == tywx.config.combo_level.awesome[0]) {
             this.playAwesome();
             this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.AWESOME);
             this.showboxNumber = 3;
-        } else if (this.lianjiNumber >= tywx.ado.Constants.GameCenterConfig.lianjiEffects.maxgood) {
+        } else if (this.lianjiNumber >= tywx.config.combo_level.unbelive[0]) {
             this.playUnbelive();
             this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.UNBLIEVEABLE);
             this.showboxNumber = 4;
@@ -1580,8 +1580,7 @@ var gamemain = cc.Class({
     */
     pjlCallBack: function pjlCallBack() {
         // 判断此次得分是否创纪录
-        if (this.score > parseInt(tywx.Util.getItemFromLocalStorage("maxscore", 0))) {
-            // console.log(typeof this.score + "" + typeof tywx.Util.getItemFromLocalStorage("maxscore", 0)+ " " + this.score+"是否破纪录= "+parseInt(tywx.Util.getItemFromLocalStorage("maxscore", 0)));
+        if (this.score > parseInt(tywx.ado.Utils.loadItem("ADDONE_SCORE", 0))) {
             this.hadShowPjl = true;
             this.visibleControllButton(false);
             var delay = cc.delayTime(0.1);
@@ -1854,13 +1853,13 @@ var gamemain = cc.Class({
                 var luck = false;
                 var sjs = Math.random();
                 var ttindex = 0;
-                for (var sindex = 1; sindex < config.default.luck_block.score.length - 1; sindex++) {
-                    if (this.score >= config.default.luck_block.score[sindex]) {
+                for (var sindex = 1; sindex < config.luck_block.score.length - 1; sindex++) {
+                    if (this.score >= config.luck_block.score[sindex]) {
                         ttindex = sindex;
                         break;
                     }
                 }
-                var tgl = config.default.luck_block.rate[ttindex];
+                var tgl = config.luck_block.rate[ttindex];
                 if (sjs <= tgl) {
                     luck = true;
                 }
@@ -1937,15 +1936,8 @@ var gamemain = cc.Class({
     },
 
     storeScore: function storeScore() {
-        if (parseInt(tywx.Util.getItemFromLocalStorage("maxscore", 0)) < this.score) {
-            tywx.Util.setItemToLocalStorage("maxscore", this.score);
-        }
-
-        if (tywx.publicwx) {
-            wx.postMessage({
-                method: 4,
-                score: this.score
-            });
+        if (parseInt(tywx.ado.Utils.loadItem("ADDONE_SCORE", 0)) < this.score) {
+            tywx.ado.Utils.saveItem('ADDONE_SCORE', this.score, false);
         }
     },
 
@@ -2142,7 +2134,8 @@ var gamemain = cc.Class({
         思路: 游戏逻辑需要
     */
     showBox: function showBox(maxnum) {
-        var arr = [0.3, 0.4, 0.9, 1];
+        var cl = tywx.config.combo_level;
+        var arr = [cl.good[1], cl.cool[1], cl.awesome[1], cl.unbelive[1]];
         var ran = Math.random();
         var is_show = ran <= arr[maxnum - 1];
         tywx.ado.logWithColor("maxnum:" + maxnum + ",ran:" + ran + ",is_show:" + is_show);

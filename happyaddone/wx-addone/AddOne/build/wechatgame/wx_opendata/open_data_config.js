@@ -22,7 +22,7 @@ let events = {
 };
 
 let CloudDataKey = {
-    x1:"x1",
+    x1:"ADDONE_SCORE",
 };
 
 module.exports = {

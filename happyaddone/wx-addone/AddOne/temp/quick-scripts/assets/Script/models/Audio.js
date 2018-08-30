@@ -73,7 +73,7 @@ cc.Class({
             this.play();
             //tywx.playMusic();
             tywx.ado.AudioManager.setIsMute(false);
-            tywx.ado.AudioManager.playMusic(tywx.ado.Configs.default.MUSICS.BG_MUSIC);
+            tywx.ado.AudioManager.playMusic(tywx.ado.Configs.MUSICS.BG_MUSIC);
             curAudioState = 1;
         }
         // 控制显示

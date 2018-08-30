@@ -77,3 +77,48 @@
     at emitMany (events.js:127:13)
     at EventEmitter.emit (events.js:204:7)
 2018-08-30T07:03:51.617Z - warn: The resizeMode type of "topscreen<Layout>" has been reset to NONE because it is conflict with its child widget "friends<Widget>" in vertical layout.
+2018-08-30T07:54:55.444Z - normal: AddOne boot start
+2018-08-30T07:54:55.448Z - normal: AddOne boot end
+2018-08-30T07:54:55.460Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T07:54:55.477Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T07:54:55.477Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T08:06:13.699Z - normal: AddOne boot start
+2018-08-30T08:06:13.709Z - normal: AddOne boot end
+2018-08-30T08:06:13.745Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T08:06:13.783Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T08:06:13.783Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T08:21:00.722Z - normal: AddOne boot start
+2018-08-30T08:21:00.728Z - normal: AddOne boot end
+2018-08-30T08:21:00.739Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T08:21:00.754Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T08:21:00.755Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T08:32:20.942Z - normal: AddOne boot start
+2018-08-30T08:32:20.946Z - normal: AddOne boot end
+2018-08-30T08:32:20.961Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T08:32:20.976Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T08:32:20.977Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T08:46:39.312Z - normal: AddOne boot start
+2018-08-30T08:46:39.316Z - normal: AddOne boot end
+2018-08-30T08:46:39.328Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T08:46:39.343Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T08:46:39.343Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T09:00:26.472Z - normal: AddOne boot start
+2018-08-30T09:00:26.476Z - normal: AddOne boot end
+2018-08-30T09:00:26.488Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T09:00:26.502Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T09:00:26.502Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T09:01:48.221Z - normal: AddOne boot start
+2018-08-30T09:01:48.225Z - normal: AddOne boot end
+2018-08-30T09:01:48.236Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T09:01:48.249Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T09:01:48.249Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T09:43:07.195Z - normal: AddOne boot start
+2018-08-30T09:43:07.199Z - normal: AddOne boot end
+2018-08-30T09:43:07.211Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T09:43:07.225Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T09:43:07.225Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T10:35:26.440Z - normal: AddOne boot start
+2018-08-30T10:35:26.446Z - normal: AddOne boot end
+2018-08-30T10:35:26.459Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T10:35:26.476Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T10:35:26.476Z - warn: Can not instantiate CCClass 'effect' with arguments.

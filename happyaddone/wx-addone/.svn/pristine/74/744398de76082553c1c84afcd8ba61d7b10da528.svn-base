@@ -1,0 +1,23 @@
+/*
+   游戏配置文件:
+   主要配置游戏逻辑和界面上的一些常量。
+   created by gyc on 2018-08-01.
+*/
+var config = {
+    auditing: true,
+    MUSICS: {
+        BG_MUSIC: 'https://marketqn.nalrer.cn/teris/m/3.mp3',
+    },
+    box_rate: {
+        sub1: 0.5,
+        add2: 0.2,
+        heart: 0.2,
+        chui: 0.1
+    },
+    luck_block: {
+        score: [0, 10000, 20000, 25000, 30000, 35000, 100000000],
+        rate: [0.8, 0.7, 0.6, 0.3, 0.2, 0.1]
+    }
+};
+
+module.exports = config;

@@ -175,6 +175,9 @@ module.exports = function (id, parent) {
 
         tilescript.visByNum(pngnum, this.block.num);
         var cindex = pngnum - 1;
+        if (cindex < 0) {
+            cindex = 0;
+        }
         var colors = tywx.ado.Constants.GameCenterConfig.celltilenumColors[cindex];
         tilescript.setColor(new cc.color(colors[0], colors[1], colors[2], 255));
         cell.getComponent(cc.Sprite).node.x = this.block.posx - 360 + tywx.ado.Constants.GameCenterConfig.gezi_size / 2;

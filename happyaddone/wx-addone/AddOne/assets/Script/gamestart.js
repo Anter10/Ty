@@ -164,7 +164,7 @@ var gamestart = cc.Class({
     onLoad: function () {
         wx.postMessage({
             method: "load_data",
-            MAIN_MENU_NUM: "x1",
+            MAIN_MENU_NUM: "ADDONE_SCORE",
         });
         // this.contentView.height = 60 * 30; 
         this.phbShareBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.RANK_SHARE);
@@ -207,14 +207,14 @@ var gamestart = cc.Class({
                         self.showPhb = true;
                         window.wx.postMessage({
                             method: 2,
-                            MAIN_MENU_NUM: "x1",
+                            MAIN_MENU_NUM: "ADDONE_SCORE",
                             shareTicket: data.shareTickets[0]
                         });
                         // 开一个线程监听次时间段用户是否有点击
                         self.phbNameLabel.string = "群排行榜";
                         tywx.Timer.setTimer(self, function () {
                             self._updateSubDomainCanvas();
-                        }, 2, 5, 0);
+                        }, 1, 2, 0);
                     }
 
 
@@ -227,7 +227,7 @@ var gamestart = cc.Class({
             }
 
         }
-        var score = tywx.Util.getItemFromLocalStorage("maxscore", 0);
+        var score = tywx.ado.Utils.loadItem("ADDONE_SCORE", 0);
         if (score != null) {
             this.gameScore.string = score;
             let length = (score + "").length;
@@ -266,13 +266,13 @@ var gamestart = cc.Class({
         this.givePlayerItems();
         this.firstShowHelpView();
         // this.backButton.node.on("click",this.returnView, this);
-        console.log("当前的项目配置 = " + JSON.stringify(config))
+        console.log("本地的项目配置 = " + JSON.stringify(config))
         this.requestConfigInfo();
         // 开一个线程监听次时间段用户是否有点击
 
         tywx.Timer.setTimer(self, function () {
             self._updateSubDomainCanvas();
-        }, 1, 5, 0);
+        }, 1, 2, 0);
 
     },
 
@@ -359,14 +359,14 @@ var gamestart = cc.Class({
                 console.log("Hellocd")
                 wx.postMessage({
                     method: 1,
-                    MAIN_MENU_NUM: "x1",
+                    MAIN_MENU_NUM: "ADDONE_SCORE",
                 });
             }
             // 开一个线程监听次时间段用户是否有点击
             self.phbNameLabel.string = "好友排行榜";
             tywx.Timer.setTimer(self, function () {
                 self._updateSubDomainCanvas();
-            }, 1, 5, 0);
+            }, 1, 2, 0);
         }
 
     },
@@ -462,44 +462,62 @@ var gamestart = cc.Class({
      * 请求获取配置信息
      */
     requestConfigInfo: function () {
+
         this.requestTimes--;
         var _configUrl = tywx.SystemInfo.cdnPath + 'config/addone2.json';
         var that = this;
+
         console.log('请求的CDN地址 = ' + _configUrl);
+
         var successcb = function (ret) {
+            console.log("服务器读到的配置:"+JSON.stringify(ret));
             that.requestTimes = 3;
             var v = tywx.SystemInfo.version;
             var uid = parseInt(tywx.UserInfo.userId);
             var c, cb, d;
-            c = ret['v' + v];
-            cb = ret['' + v + '_ABTEST'];
-            d = ret;
-            var tconfig = config;
-            if (!d) {
+            c = ret[''+v];
+            cb = ret[''+v+'_ABTEST'];
+            d = ret['default'];
+            if(!d) {
                 //没找到缺省服务器配置...
                 console.log('No default server config, use local config...');
                 d = config;
             }
-            config = d;
-
-            for (var k in tconfig) {
-                if (config[k] === undefined) {
-                    config[k] = tconfig[k];
+            if(!c) {
+                //没找到版本对应配置，使用缺省配置...
+                config = d;
+                console.log(_configUrl + 'use default config...');
+            } else {
+                //AB测试...
+                if(cb) {
+                    if(uid % 2 == 0) {
+                        config = c;
+                        console.log(_configUrl + 'use '+ v + '_A server config...');
+                    } else {
+                        config = cb;
+                        console.log(_configUrl + 'use '+ v + '_B server config...');
+                    }
+                } else {
+                    config = c;
+                    console.log(_configUrl + 'use '+ v + ' server config...');
+                }
+                //把缺省配置中的配置项复制到当前配置...
+                for(var k in d) {
+                    if(config[k] === undefined)
+                        config[k] = d[k];
                 }
             }
-
-            config.move_time = 1;
-            config.partLJTime = 0.5;
             tywx.ado.Configs = config;
-            tywx.config = tywx.ado.Configs;
-            console.log('请求后的数据 ' + JSON.stringify(tywx.config));
+            tywx.config = config;
+            console.log('CONFIG '+JSON.stringify(config));
         };
 
         var failcb = function (ret) {
             if (that.requestTimes > 0) {
                 that.requestConfigInfo();
             } else {
-                config = config;
+                tywx.ado.Configs = config;
+                tywx.config = config;
             }
         };
 

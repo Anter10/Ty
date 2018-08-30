@@ -30,7 +30,7 @@ tywx.ado.logWithColor = function (info) {
 tywx.ado.onShow = function (result) {
     tywx.ado.AudioManager.loadAudioRes();
     console.log("播放背景音乐配置 " + JSON.stringify(tywx.ado.Configs));
-    tywx.ado.AudioManager.playMusic(tywx.ado.Configs.default.MUSICS.BG_MUSIC);
+    tywx.ado.AudioManager.playMusic(tywx.ado.Configs.MUSICS.BG_MUSIC);
     tywx.ado.logWithColor('tywx.ado.onShow');
 };
 //! 插件onHide, 与插件相关的处理尽量放在这里
