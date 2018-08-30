@@ -122,3 +122,9 @@
 2018-08-30T10:35:26.459Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
 2018-08-30T10:35:26.476Z - warn: Should not specify class name effect for Component which defines in project.
 2018-08-30T10:35:26.476Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T13:01:02.964Z - normal: AddOne boot start
+2018-08-30T13:01:02.965Z - normal: AddOne boot end
+2018-08-30T13:01:02.972Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T13:01:02.984Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T13:01:02.984Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T13:01:05.621Z - info: shutdown preview server

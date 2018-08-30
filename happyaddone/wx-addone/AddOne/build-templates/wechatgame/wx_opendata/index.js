@@ -159,6 +159,7 @@ function drawText(str, x, y) {
 function drawThanFriend(score, x, y, width) {
     // canvas.width = 311;
     // canvas.height = 111;
+
     _shareCanvas.clearRect(0, 0, 32222, 3222)
     var frdata = null;
     //console.log("canvaswid" + canvas.width + "canvasheight" + canvas.height +
@@ -219,7 +220,7 @@ function drawFriendRank(drawdata) {
 
     function drawItem(data, index, posi) {
         console.log('drawItem', index, data);
-        let [x, y, w, h] = [40, 100 * posi, 635, 100];
+        let [x, y, w, h] = [60, 100 * posi, 635, 100];
         console.log('drawItem', x, y);
         let padding_x = 5;
         let label_y = y + h * 0.6 - 10;
@@ -235,7 +236,7 @@ function drawFriendRank(drawdata) {
                     drawImage("image/phb" + (data.pm + 1) + ".png", x - 26, avatar_y - 1, 58, 78);
                 } else {
                     _shareCanvas.fillStyle = "#6495ED";
-                    _shareCanvas.font = "25px Arial";
+                    _shareCanvas.font = "28px Arial";
                     _shareCanvas.textAlign = 'left';
                     _shareCanvas.fillText(`` + data.pm, x, label_y);
                 }
@@ -244,7 +245,7 @@ function drawFriendRank(drawdata) {
             }
         } else {
             _shareCanvas.fillStyle = "#6495ED";
-            _shareCanvas.font = "25px Arial";
+            _shareCanvas.font = "28px Arial";
             _shareCanvas.textAlign = 'left';
             _shareCanvas.fillText(`` + index, x, label_y);
         }
@@ -252,18 +253,18 @@ function drawFriendRank(drawdata) {
         x += 60;
         setTimeout(() => {
             console.log("惺惺相惜 = " + x);
-            drawImage(data.avatarUrl, 100, avatar_y + 5, 65, 65);
+            drawImage(data.avatarUrl, 130, avatar_y + 5, 65, 65);
         }, index * 400);
         // * name label
-        x += 150;
+        x += 120;
         _shareCanvas.fillStyle = "#6495ED";
-        _shareCanvas.font = "25px Arial";
+        _shareCanvas.font = "28px Arial";
         _shareCanvas.textAlign = 'left';
         _shareCanvas.fillText(`` + data.nickname, x, label_y);
         // * score label
         x += 240;
         _shareCanvas.fillStyle = "#FF8C00";
-        _shareCanvas.font = "25px Arial";
+        _shareCanvas.font = "28px Arial";
         _shareCanvas.textAlign = 'left';
         data.KVDataList.forEach(e => {
             console.log('kvdatalist', e);
@@ -313,10 +314,17 @@ function drawFriendRank(drawdata) {
     drawdata.forEach((data, index) => {
         if (index + 1 > 21) return;
         if (isHaveDataByKey(data.KVDataList, CloudKeys.x1)) {
+
             if (render_idx == 0) {
                 drawItem(data, index + 1, index);
             } else {
-                drawItem(data, index + 1, index + 1);
+                if (index == self_data.pm) {
+                    //    drawItem(data, index, index + 1);
+                } else if (index > self_data.pm) {
+                    drawItem(data, index + 1, index);
+                } else if (index < self_data.pm) {
+                    drawItem(data, index + 1, index + 1);
+                }
             }
         }
     });
