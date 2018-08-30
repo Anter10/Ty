@@ -75,14 +75,17 @@ cc.Class({
                 item.y = 220;
                 item.x = (hindex - 3) * 150 + 90;
             }
-            this.curgzPos.push({ x: item.x, y: item.y });
+            this.curgzPos.push({
+                x: item.x,
+                y: item.y
+            });
             var tilescript = item.getComponent("celltile");
             var pngnum = this.allhelpdata[hindex];
             if (pngnum > 10) {
                 pngnum = pngnum % 10;
             }
             tilescript.visByNum(pngnum, this.allhelpdata[hindex]);
-            var colors = config.celltilenumColors[pngnum - 1];
+            var colors = tywx.ado.Constants.GameCenterConfig.celltilenumColors[pngnum - 1];
             tilescript.setColor(new cc.color(colors[0], colors[1], colors[2], 255));
             if (hindex == 4) {
                 var self = this;
@@ -117,7 +120,7 @@ cc.Class({
         curnumber = curnumber + 1 + addnum;
         tywx.LOGE("当前的格子数值 = " + curnumber);
         script.visByNum(curnumber, curnumber);
-        var colors = config.celltilenumColors[curnumber - 1];
+        var colors = tywx.ado.Constants.GameCenterConfig.celltilenumColors[curnumber - 1];
         script.setColor(new cc.color(colors[0], colors[1], colors[2], 255));
     },
 
@@ -246,6 +249,21 @@ cc.Class({
     },
 
     /*
+            调用: 格子数字变化的时候调用
+            功能: 设置关闭的回调函数
+            参数: [
+                cc: 回调函数 type: Function
+            ]
+            返回值:[
+                无
+            ]
+            思路: 逻辑需要
+        */
+    setStartGameCall: function setStartGameCall(cc) {
+        this.startGameCall = cc;
+    },
+
+    /*
         调用: 逻辑调用
         功能: 设置是否是在游戏内展示引导
         参数: [
@@ -279,6 +297,9 @@ cc.Class({
             this.node.active = false;
         } else {
             cc.director.loadScene("gamemain");
+        }
+        if (this.startGameCall) {
+            this.startGameCall();
         }
     }
 

@@ -1,6 +1,6 @@
 {
     "deviceOrientation": "portrait",
-    "openDataContext": "./HappyAdd1rank",
+    "openDataContext": "./wx_opendata",
     "networkTimeout": {
         "request": 5000,
         "connectSocket": 5000,

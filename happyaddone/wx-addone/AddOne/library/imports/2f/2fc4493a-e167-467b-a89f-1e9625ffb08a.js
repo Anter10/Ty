@@ -56,7 +56,7 @@ var AudioManager = function () {
         key: 'loadAudioRes',
         value: function loadAudioRes() {
             var sounds_config = tywx.ado.Configs.SOUNDS;
-            var music_config = tywx.ado.Configs.MUSICS;
+            var music_config = tywx.ado.Configs.default.MUSICS;
             var sound_keys = Reflect.ownKeys(sounds_config);
             var music_keys = Reflect.ownKeys(music_config);
             var self = this;
@@ -157,6 +157,7 @@ var AudioManager = function () {
     }, {
         key: 'playSound',
         value: function playSound(url) {
+            if (this.isMute) return; //! 静音
             if (this.soundsCache.has(url)) {
                 var tmp_context = this.soundsCache.get(url);
                 tmp_context.play();

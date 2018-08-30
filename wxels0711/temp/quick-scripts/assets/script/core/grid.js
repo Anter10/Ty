@@ -75,7 +75,7 @@ var ElsGrid = Class.extend({
                 var useable_fill_idx = []; // 存放可以被填充的元素idx
                 var useable_fill_idx_hole = []; //空洞备用
                 var max_key = Math.min(parseInt(row_keys[0]) + deep - 1, els.ZONG - 1);
-                var min_key = max_key - 2;
+                var min_key = max_key - 3;
                 for (var r = min_key; r <= max_key; r++) {
                     var _useable_fill_idx, _useable_fill_idx_hol;
 

@@ -1234,9 +1234,10 @@ var gamemain = cc.Class({
                 }
                 bfound = true;
                 this.g_clickid = j;
-                this.gamestate = config.gameState.domove;
                 if (this.point < 5)
                     this.point++;
+                this.gamestate = config.gameState.domove;
+                
                 this.drawPhyPoint();
                 break;
             }

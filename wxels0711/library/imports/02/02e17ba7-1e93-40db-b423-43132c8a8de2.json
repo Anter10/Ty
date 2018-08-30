@@ -2,7 +2,7 @@
   "__type__": "cc.BitmapFont",
   "_name": "fnt",
   "_objFlags": 0,
-  "_native": "",
+  "_rawFiles": null,
   "fntDataStr": "",
   "spriteFrame": {
     "__uuid__": "74d27f93-2ff8-4176-a8c6-6680fa039250"

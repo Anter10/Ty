@@ -29,7 +29,8 @@ tywx.ado.logWithColor = function (info) {
 //! 插件onShow, 与插件相关的处理尽量放在这里
 tywx.ado.onShow = function (result) {
     tywx.ado.AudioManager.loadAudioRes();
-    tywx.ado.AudioManager.playMusic(tywx.ado.Configs.MUSICS.BG_MUSIC);
+    console.log("播放背景音乐配置 " + JSON.stringify(tywx.ado.Configs));
+    tywx.ado.AudioManager.playMusic(tywx.ado.Configs.default.MUSICS.BG_MUSIC);
     tywx.ado.logWithColor('tywx.ado.onShow');
 };
 //! 插件onHide, 与插件相关的处理尽量放在这里

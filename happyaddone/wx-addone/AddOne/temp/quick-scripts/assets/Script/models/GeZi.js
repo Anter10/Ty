@@ -23,9 +23,9 @@ module.exports = function (id, parent) {
     // 格子的容器
     this.parent = parent;
     // 格子的x坐标
-    this.posx = 25 + (config.swidth - 5 * config.gezi_pitch) / 2 + id % 5 * config.gezi_pitch + 2;
+    this.posx = 25 + (tywx.ado.Constants.GameCenterConfig.swidth - 5 * tywx.ado.Constants.GameCenterConfig.gezi_pitch) / 2 + id % 5 * tywx.ado.Constants.GameCenterConfig.gezi_pitch + 2;
     // 格子的Y坐标
-    this.posy = 304 + parseInt(id / 5) * config.gezi_pitch;
+    this.posy = 304 + parseInt(id / 5) * tywx.ado.Constants.GameCenterConfig.gezi_pitch;
     // 格子的数据层
     this.block = new block(this);
 
@@ -44,10 +44,10 @@ module.exports = function (id, parent) {
         config = tywx.config != null ? tywx.config : config;
         this.num = num;
         var colorindex = num - 1;
-        if (this.num > config.color_list.length) {
-            colorindex = colorindex % config.color_list.length;
+        if (this.num > tywx.ado.Constants.GameCenterConfig.color_list.length) {
+            colorindex = colorindex % tywx.ado.Constants.GameCenterConfig.color_list.length;
         }
-        var colors = config.color_list[colorindex];
+        var colors = tywx.ado.Constants.GameCenterConfig.color_list[colorindex];
         var color = cc.color(colors[0], colors[1], colors[2]);
         this.setColor(color);
     };
@@ -161,23 +161,24 @@ module.exports = function (id, parent) {
     this.draw = function (cell) {
         config = tywx.config != null ? tywx.config : config;
         // ctx.fillColor = this.block.color;
-        // ctx.roundRect(this.block.posx,this.block.posy,config.gezi_size,config.gezi_size,8);
+        // ctx.roundRect(this.block.posx,this.block.posy,tywx.ado.Constants.GameCenterConfig.gezi_size,tywx.ado.Constants.GameCenterConfig.gezi_size,8);
         // ctx.fill();
         // lable.string = this.block.num;
-        // lable.node.x = this.block.posx-360+config.gezi_size/2;
-        // lable.node.y = this.block.posy-640+config.gezi_size/2;
+        // lable.node.x = this.block.posx-360+tywx.ado.Constants.GameCenterConfig.gezi_size/2;
+        // lable.node.y = this.block.posy-640+tywx.ado.Constants.GameCenterConfig.gezi_size/2;
 
         var tilescript = cell.getComponent("celltile");
         var pngnum = this.block.num;
-        if (pngnum > config.celltilenumColors.length) {
-            pngnum = pngnum % config.celltilenumColors.length;
+        if (pngnum > tywx.ado.Constants.GameCenterConfig.celltilenumColors.length) {
+            pngnum = pngnum % tywx.ado.Constants.GameCenterConfig.celltilenumColors.length;
         }
+
         tilescript.visByNum(pngnum, this.block.num);
         var cindex = pngnum - 1;
-        var colors = config.celltilenumColors[cindex];
+        var colors = tywx.ado.Constants.GameCenterConfig.celltilenumColors[cindex];
         tilescript.setColor(new cc.color(colors[0], colors[1], colors[2], 255));
-        cell.getComponent(cc.Sprite).node.x = this.block.posx - 360 + config.gezi_size / 2;
-        cell.getComponent(cc.Sprite).node.y = this.block.posy - 640 + config.gezi_size / 2;
+        cell.getComponent(cc.Sprite).node.x = this.block.posx - 360 + tywx.ado.Constants.GameCenterConfig.gezi_size / 2;
+        cell.getComponent(cc.Sprite).node.y = this.block.posy - 640 + tywx.ado.Constants.GameCenterConfig.gezi_size / 2;
     };
 };
 

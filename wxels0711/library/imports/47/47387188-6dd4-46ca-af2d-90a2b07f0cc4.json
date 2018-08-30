@@ -2,7 +2,9 @@
   "__type__": "sp.SkeletonData",
   "_name": "elsfk_spine_mty",
   "_objFlags": 0,
-  "_native": "raw-skeleton.json",
+  "_rawFiles": [
+    "raw-skeleton.json"
+  ],
   "_skeletonJson": {
     "skeleton": {
       "hash": "zG2CZ0e4nP+Q13hKxmhhuzTaN6w",
@@ -8595,13 +8597,13 @@
     }
   },
   "_atlasText": "\nelsfk_spine_mty.png\nsize: 512,128\nformat: RGBA8888\nfilter: Linear,Linear\nrepeat: none\nelsfk_spine_mty01\n  rotate: true\n  xy: 2, 25\n  size: 101, 162\n  orig: 101, 162\n  offset: 0, 0\n  index: -1\nelsfk_spine_mty02\n  rotate: false\n  xy: 252, 82\n  size: 44, 44\n  orig: 44, 44\n  offset: 0, 0\n  index: -1\nelsfk_spine_mty03\n  rotate: false\n  xy: 298, 82\n  size: 44, 44\n  orig: 44, 44\n  offset: 0, 0\n  index: -1\nelsfk_spine_mty04\n  rotate: false\n  xy: 166, 59\n  size: 41, 67\n  orig: 41, 67\n  offset: 0, 0\n  index: -1\nelsfk_spine_mty05\n  rotate: false\n  xy: 209, 59\n  size: 41, 67\n  orig: 41, 67\n  offset: 0, 0\n  index: -1\nelsfk_spine_mty06\n  rotate: false\n  xy: 166, 46\n  size: 46, 11\n  orig: 46, 11\n  offset: 0, 0\n  index: -1\nelsfk_spine_mty07\n  rotate: false\n  xy: 2, 2\n  size: 18, 21\n  orig: 18, 21\n  offset: 0, 0\n  index: -1\n",
+  "atlasUrl": {
+    "__uuid__": "cfb48be2-1636-4276-87b0-64b02aee3268"
+  },
   "textures": [
     {
       "__uuid__": "ae77c3e6-5611-4d90-b4a3-07cbb24aac11"
     }
-  ],
-  "textureNames": [
-    "elsfk_spine_mty.png"
   ],
   "scale": 1
 }

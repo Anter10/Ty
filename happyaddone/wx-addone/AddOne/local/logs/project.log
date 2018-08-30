@@ -1,63 +1,63 @@
-2018-08-27T08:28:19.347Z - normal: Load ~/.CocosCreator/settings.json
-2018-08-27T08:28:19.350Z - normal: checking language setting...
-2018-08-27T08:28:19.350Z - normal: Language: zh
-2018-08-27T08:28:19.905Z - success: protocol editor-framework registered
-2018-08-27T08:28:19.905Z - success: protocol app registered
-2018-08-27T08:28:19.906Z - success: protocol theme registered
-2018-08-27T08:28:19.906Z - success: protocol packages registered
-2018-08-27T08:28:19.906Z - success: protocol unpack registerred
-2018-08-27T08:28:19.906Z - success: protocol disable-commonjs registerred
-2018-08-27T08:28:20.022Z - normal: connected!
-2018-08-27T08:28:20.026Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
-2018-08-27T08:28:20.029Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
-2018-08-27T08:28:20.035Z - normal: Initializing Cocos2d
-2018-08-27T08:28:20.738Z - normal: Initializing Asset Database
-2018-08-27T08:28:20.784Z - success: protocol uuid registerred
-2018-08-27T08:28:20.784Z - success: protocol db registerred
-2018-08-27T08:28:20.784Z - success: protocol thumbnail registerred
-2018-08-27T08:28:20.784Z - normal: Loading editor/builtin packages
-2018-08-27T08:28:20.932Z - success: assets loaded
-2018-08-27T08:28:20.936Z - success: builder loaded
-2018-08-27T08:28:20.938Z - success: cocos-analytics loaded
-2018-08-27T08:28:20.943Z - success: console loaded
-2018-08-27T08:28:20.979Z - success: fb-instant-games loaded
-2018-08-27T08:28:20.985Z - success: hierarchy loaded
-2018-08-27T08:28:20.989Z - success: inspector loaded
-2018-08-27T08:28:20.990Z - success: keystore loaded
-2018-08-27T08:28:20.995Z - success: node-library loaded
-2018-08-27T08:28:20.999Z - success: package-asset loaded
-2018-08-27T08:28:21.000Z - success: preferences loaded
-2018-08-27T08:28:21.004Z - success: project-exporter loaded
-2018-08-27T08:28:21.021Z - success: project-importer loaded
-2018-08-27T08:28:21.024Z - success: project-settings loaded
-2018-08-27T08:28:21.029Z - success: ui-kit loaded
-2018-08-27T08:28:21.033Z - success: scene loaded
-2018-08-27T08:28:21.035Z - success: sprite-editor loaded
-2018-08-27T08:28:21.039Z - success: store loaded
-2018-08-27T08:28:21.043Z - success: timeline loaded
-2018-08-27T08:28:21.044Z - normal: Loading builtin packages
-2018-08-27T08:28:21.048Z - success: asset-db-debugger loaded
-2018-08-27T08:28:21.050Z - success: color-picker loaded
-2018-08-27T08:28:21.051Z - success: jsb-adapter loaded
-2018-08-27T08:28:21.055Z - success: package-manager loaded
-2018-08-27T08:28:21.171Z - success: qqplay-adapter loaded
-2018-08-27T08:28:21.178Z - success: sdkbox loaded
-2018-08-27T08:28:21.183Z - success: tester loaded
-2018-08-27T08:28:21.188Z - success: ui-grid loaded
-2018-08-27T08:28:21.192Z - success: ui-kit-preview-extra loaded
-2018-08-27T08:28:21.195Z - success: ui-kit-preview loaded
-2018-08-27T08:28:21.198Z - success: ui-tree loaded
-2018-08-27T08:28:21.200Z - success: weapp-adapter loaded
-2018-08-27T08:28:22.268Z - normal: Loading packages
-2018-08-27T08:28:22.274Z - normal: Watching packages
-2018-08-27T08:28:22.354Z - normal: Run Application
-2018-08-27T08:28:24.694Z - success: preview server running at http://localhost:7458
-2018-08-27T08:28:33.287Z - normal: AddOne boot start
-2018-08-27T08:28:33.291Z - normal: AddOne boot end
-2018-08-27T08:28:33.302Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
-2018-08-27T08:28:33.316Z - warn: Should not specify class name effect for Component which defines in project.
-2018-08-27T08:28:33.317Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-08-27T08:29:27.304Z - error: getComponent: Type must be non-nil
+2018-08-30T06:45:21.709Z - normal: Load ~/.CocosCreator/settings.json
+2018-08-30T06:45:21.712Z - normal: checking language setting...
+2018-08-30T06:45:21.712Z - normal: Language: zh
+2018-08-30T06:45:22.218Z - success: protocol editor-framework registered
+2018-08-30T06:45:22.218Z - success: protocol app registered
+2018-08-30T06:45:22.218Z - success: protocol theme registered
+2018-08-30T06:45:22.219Z - success: protocol packages registered
+2018-08-30T06:45:22.219Z - success: protocol unpack registerred
+2018-08-30T06:45:22.219Z - success: protocol disable-commonjs registerred
+2018-08-30T06:45:22.334Z - normal: connected!
+2018-08-30T06:45:22.336Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
+2018-08-30T06:45:22.340Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
+2018-08-30T06:45:22.342Z - normal: Initializing Cocos2d
+2018-08-30T06:45:22.961Z - normal: Initializing Asset Database
+2018-08-30T06:45:23.010Z - success: protocol uuid registerred
+2018-08-30T06:45:23.010Z - success: protocol db registerred
+2018-08-30T06:45:23.010Z - success: protocol thumbnail registerred
+2018-08-30T06:45:23.011Z - normal: Loading editor/builtin packages
+2018-08-30T06:45:23.158Z - success: assets loaded
+2018-08-30T06:45:23.163Z - success: builder loaded
+2018-08-30T06:45:23.165Z - success: cocos-analytics loaded
+2018-08-30T06:45:23.171Z - success: console loaded
+2018-08-30T06:45:23.207Z - success: fb-instant-games loaded
+2018-08-30T06:45:23.212Z - success: hierarchy loaded
+2018-08-30T06:45:23.216Z - success: inspector loaded
+2018-08-30T06:45:23.217Z - success: keystore loaded
+2018-08-30T06:45:23.223Z - success: node-library loaded
+2018-08-30T06:45:23.225Z - success: package-asset loaded
+2018-08-30T06:45:23.227Z - success: preferences loaded
+2018-08-30T06:45:23.230Z - success: project-exporter loaded
+2018-08-30T06:45:23.247Z - success: project-importer loaded
+2018-08-30T06:45:23.251Z - success: project-settings loaded
+2018-08-30T06:45:23.256Z - success: ui-kit loaded
+2018-08-30T06:45:23.260Z - success: scene loaded
+2018-08-30T06:45:23.261Z - success: sprite-editor loaded
+2018-08-30T06:45:23.265Z - success: store loaded
+2018-08-30T06:45:23.270Z - success: timeline loaded
+2018-08-30T06:45:23.270Z - normal: Loading builtin packages
+2018-08-30T06:45:23.275Z - success: asset-db-debugger loaded
+2018-08-30T06:45:23.276Z - success: color-picker loaded
+2018-08-30T06:45:23.277Z - success: jsb-adapter loaded
+2018-08-30T06:45:23.280Z - success: package-manager loaded
+2018-08-30T06:45:23.394Z - success: qqplay-adapter loaded
+2018-08-30T06:45:23.402Z - success: sdkbox loaded
+2018-08-30T06:45:23.407Z - success: tester loaded
+2018-08-30T06:45:23.412Z - success: ui-grid loaded
+2018-08-30T06:45:23.415Z - success: ui-kit-preview-extra loaded
+2018-08-30T06:45:23.419Z - success: ui-kit-preview loaded
+2018-08-30T06:45:23.422Z - success: ui-tree loaded
+2018-08-30T06:45:23.424Z - success: weapp-adapter loaded
+2018-08-30T06:45:24.453Z - normal: Loading packages
+2018-08-30T06:45:24.459Z - normal: Watching packages
+2018-08-30T06:45:24.543Z - normal: Run Application
+2018-08-30T06:45:25.208Z - success: preview server running at http://localhost:7456
+2018-08-30T06:45:33.563Z - normal: AddOne boot start
+2018-08-30T06:45:33.568Z - normal: AddOne boot end
+2018-08-30T06:45:33.579Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
+2018-08-30T06:45:33.607Z - warn: Should not specify class name effect for Component which defines in project.
+2018-08-30T06:45:33.607Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-08-30T06:47:07.327Z - error: getComponent: Type must be non-nil
     at Object.cc.errorID (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDebug.js:166:16)
     at getConstructor (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:29:20)
     at cc_Node.getComponent (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:399:35)
@@ -66,12 +66,8 @@
     at EventEmitter.o.on.s (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/ipc.js:1:2917)
     at emitMany (events.js:127:13)
     at EventEmitter.emit (events.js:204:7)
-2018-08-27T08:32:26.896Z - normal: AddOne boot start
-2018-08-27T08:32:26.901Z - normal: AddOne boot end
-2018-08-27T08:32:26.913Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
-2018-08-27T08:32:26.927Z - warn: Should not specify class name effect for Component which defines in project.
-2018-08-27T08:32:26.928Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-08-27T08:32:29.292Z - error: getComponent: Type must be non-nil
+2018-08-30T06:47:14.208Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:1840
+2018-08-30T06:58:42.673Z - error: getComponent: Type must be non-nil
     at Object.cc.errorID (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDebug.js:166:16)
     at getConstructor (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:29:20)
     at cc_Node.getComponent (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/utils/base-node.js:399:35)
@@ -80,24 +76,4 @@
     at EventEmitter.o.on.s (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor-framework/lib/renderer/ipc.js:1:2917)
     at emitMany (events.js:127:13)
     at EventEmitter.emit (events.js:204:7)
-2018-08-27T08:32:36.366Z - normal: Initializing...
-
-2018-08-27T08:32:36.375Z - normal: idePortFile: /Users/guoyouchao/Library/Application Support/微信web开发者工具/Default/.ide
-
-2018-08-27T08:32:36.394Z - normal: IDE server has started, listening on http://127.0.0.1:11058
-
-2018-08-27T08:32:36.395Z - normal: initialization finished
-
-2018-08-27T08:32:37.070Z - normal: open IDE success
-
-2018-08-27T10:56:52.182Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:35278
-2018-08-27T12:19:13.792Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:45038
-2018-08-27T12:19:14.378Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:45039
-2018-08-27T12:19:29.626Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:45049
-2018-08-27T12:20:09.843Z - normal: AddOne boot start
-2018-08-27T12:20:09.852Z - normal: AddOne boot end
-2018-08-27T12:20:09.873Z - warn: The 'type' attribute of 'gamemain.itemview' is undefined when loading script
-2018-08-27T12:20:09.901Z - warn: Should not specify class name effect for Component which defines in project.
-2018-08-27T12:20:09.902Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-08-27T12:30:19.986Z - warn: [object Object]
-2018-08-27T12:33:47.059Z - info: shutdown preview server
+2018-08-30T07:03:51.617Z - warn: The resizeMode type of "topscreen<Layout>" has been reset to NONE because it is conflict with its child widget "friends<Widget>" in vertical layout.

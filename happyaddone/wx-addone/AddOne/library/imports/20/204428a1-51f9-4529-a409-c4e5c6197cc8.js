@@ -37,6 +37,17 @@ cc.Class({
     */
     onLoad: function onLoad() {
         cc.audioEngine.setMaxWebAudioSize(1024 * 10);
+        this.changeTexture();
+    },
+
+    changeTexture: function changeTexture() {
+        if (tywx.ado.AudioManager.getIsMute()) {
+            curAudioState = 0;
+        } else {
+            curAudioState = 1;
+        }
+
+        this.changeButtonTexture();
     },
 
     /*
@@ -51,15 +62,18 @@ cc.Class({
          思路: 逻辑需要
      */
     controlAudio: function controlAudio() {
+
         if (curAudioState == 1) {
             this.pause();
             //tywx.stopMusic();
             tywx.ado.AudioManager.stopMusic();
             curAudioState = 0;
+            tywx.ado.AudioManager.setIsMute(true);
         } else if (curAudioState == 0) {
             this.play();
             //tywx.playMusic();
-            tywx.ado.AudioManager.playMusic(tywx.ado.Configs.MUSICS.BG_MUSIC);
+            tywx.ado.AudioManager.setIsMute(false);
+            tywx.ado.AudioManager.playMusic(tywx.ado.Configs.default.MUSICS.BG_MUSIC);
             curAudioState = 1;
         }
         // 控制显示

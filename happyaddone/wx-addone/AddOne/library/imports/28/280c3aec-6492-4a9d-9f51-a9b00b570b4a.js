@@ -14,6 +14,7 @@ cc._RF.push(module, '280c3rsZJJKnZ9RqbALVwtK', 'gamemain');
 var config = require("AddOneConfig");
 var gezi = require("GeZi");
 var mask = require("GeZiMask");
+var maxzorder = 999;
 
 var gamemain = cc.Class({
     extends: cc.Component,
@@ -137,6 +138,15 @@ var gamemain = cc.Class({
             type: cc.Node
         },
 
+        friendsNode: {
+            default: null,
+            type: cc.Node
+        },
+        mergeAniNode: {
+            default: null,
+            type: cc.Prefab
+        },
+
         helpview: {
             default: null,
             type: cc.Node
@@ -173,6 +183,25 @@ var gamemain = cc.Class({
             default: null,
             type: cc.Node
         },
+        // 血量提示tip
+        hpHelpTips: {
+            default: null,
+            type: cc.Node
+        },
+
+        cellUpView: {
+            default: null,
+            type: cc.Node
+        },
+        addScoreLabelPools: {
+            default: null,
+            type: cc.NodePool
+        },
+
+        addScoreNode: {
+            default: null,
+            type: cc.Prefab
+        },
 
         // 游戏的背景
         bg: cc.Node,
@@ -181,7 +210,7 @@ var gamemain = cc.Class({
         // 当前玩家得分
         score: 0,
         // 玩家当前体力 默认为最大值
-        point: config.maxphy_value,
+        point: tywx.ado.Constants.GameCenterConfig.maxphy_value,
         // 当前点击的块ID
         g_mask_samecnt: 0,
         //点击的格子ID
@@ -232,7 +261,14 @@ var gamemain = cc.Class({
         // 当前是否在刷新mask
         refreshingMask: false,
         // 此次点击是否有分数产生
-        hasProduceNewScore: false
+        hasProduceNewScore: false,
+        // 此次是否已经加过num
+        hadAddNum: false,
+        // 当前需要合并的所有块的ID
+        allmergecellIds: [],
+        // 
+        showAddTime: 0.1
+
     },
 
     /*
@@ -247,18 +283,24 @@ var gamemain = cc.Class({
         思路: 系统自带
     */
     onLoad: function onLoad() {
+        this.addScoreLabelPools = new cc.NodePool();
+        var curcount = 6;
+        for (var _i = 0; _i < curcount; ++_i) {
+            var scoreNodeLabel = cc.instantiate(this.addScoreNode); // 创建节点
+            this.addScoreLabelPools.put(scoreNodeLabel); // 通过 putInPool 接口放入对象池
+        }
         this.pjlShareButtton.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.POJILU_SHARE);
         // 初始分数显示为0
         this.scoreLabel.string = this.score;
         var self = this;
         // 循环生成初始游戏
-        for (var i = 0; i < config.geziNumber; i++) {
+        for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
             var node = new cc.Node("node");
             var cellt = cc.instantiate(this.celltile);
             var script = cellt.getComponent("celltile");
             script.setId(i);
             script.setClickCall(function (data, celltile) {
-                self.palyAudioByIndex(config.SOUNDS.POPUPCLOSE);
+                self.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.POPUPCLOSE);
                 self.touchEndCallback(data, celltile);
             });
             this.allpngs.push(cellt);
@@ -273,8 +315,8 @@ var gamemain = cc.Class({
         }
         if (tywx.publicwx) {
             this.tex = new cc.Texture2D();
-            window.sharedCanvas.width = 720;
-            window.sharedCanvas.height = 1280;
+            window.sharedCanvas.width = 211;
+            window.sharedCanvas.height = 98;
         }
         var self = this;
         // 游戏的点击逻辑
@@ -330,20 +372,20 @@ var gamemain = cc.Class({
         // 开启一个进程循环显示即将超逾的玩家
         tywx.Timer.setTimer(self, function () {
             self.showMinFriend();
-        }, 10, cc.macro.REPEAT_FOREVER, 5);
+        }, 10, cc.macro.REPEAT_FOREVER, 0);
 
         // // 开启一个进程循环隐藏即将超逾的玩家
         tywx.Timer.setTimer(self, function () {
             self.hideMinFriend();
-        }, 10, cc.macro.REPEAT_FOREVER, 7);
+        }, 15, cc.macro.REPEAT_FOREVER, 5);
 
         // 开一个线程监听次时间段用户是否有点击
         tywx.Timer.setTimer(self, function () {
-            if (this.gamestate == config.gameState.waitclick) {
-                self.dealPlayerNoClickScreen();
+            if (this.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
                 this.hadClickScreen = false;
+                self.dealPlayerNoClickScreen();
             }
-        }, 5, cc.macro.REPEAT_FOREVER, 15);
+        }, 5, 0, 15);
 
         this.node.on('touchend', function (event) {
             self.itemhelpview.getComponent("ItemHelp").hideView();
@@ -355,7 +397,7 @@ var gamemain = cc.Class({
 
         // 设置免费领取的回调
         var mflq = this.mflqBtn.getComponent("ShareButton");
-        if (config.VCTR["v" + tywx.SystemInfo.version] && config.VCTR["v" + tywx.SystemInfo.version].auditing == true) {
+        if (config["v" + tywx.SystemInfo.version] && config["v" + tywx.SystemInfo.version].auditing == true) {
             mflq.setReactCall(true);
         } else {
             mflq.setReactCall(false);
@@ -369,11 +411,12 @@ var gamemain = cc.Class({
         mflq.setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE);
         this.firstShowHelpView();
         self.friendIcon.node.active = true;
+        this.musicBtn.getComponent("Audio").changeTexture();
     },
 
     fhBtnShow: function fhBtnShow() {
         console.log("当前的版本信息 =" + tywx.SystemInfo.version + JSON.stringify(config));
-        if (config.VCTR["v" + tywx.SystemInfo.version] && config.VCTR["v" + tywx.SystemInfo.version].auditing == true) {
+        if (config["v" + tywx.SystemInfo.version] && config["v" + tywx.SystemInfo.version].auditing == true) {
             this.fuHuo.active = false;
             this.loseRestartGameBtn.active = true;
         } else {
@@ -388,9 +431,9 @@ var gamemain = cc.Class({
      */
     setWaitClickState: function setWaitClickState() {
         // 判断连接数的大小 如果连接数大于不同的值则产生不同的效果
-        if (this.gamestate != config.gameState.waitclick) {
-            this.gamestate = config.gameState.waitclick;
-            if (this.lianjiNumber >= config.lianjiEffects.sgood && this.point > 0) {
+        if (this.gamestate != tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
+            this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
+            if (this.lianjiNumber >= tywx.ado.Constants.GameCenterConfig.lianjiEffects.sgood && this.point > 0) {
                 this.dealLianJiNumber();
             } else {
                 if (this.hadShowPjl == false && this.point > 0 && this.hasProduceNewScore == true) {
@@ -408,11 +451,11 @@ var gamemain = cc.Class({
             this.hadClickScreen = true;
             // 得到当前点击可以消除的格子
             var allcellids = [];
-            for (var i = 0; i < config.geziNumber; i++) {
+            for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
                 this.resetAllMask();
                 this.getAllmask()[i].num = this.getAllmask()[i].num + 1;
                 this.checkmaskbyid(i, 0);
-                if (this.g_mask_samecnt >= config.minCanRemoveNumber) {
+                if (this.g_mask_samecnt >= tywx.ado.Constants.GameCenterConfig.minCanRemoveNumber) {
                     allcellids[allcellids.length] = i;
                 }
             }
@@ -422,24 +465,32 @@ var gamemain = cc.Class({
             //        this.allpngs[allcellids[ci]].getComponent("celltile").playDaijiEff();
             //     }
             // }
+
             if (allcellids.length > 0) {
+                console.log(" 所有可连接的ID = " + JSON.stringify(allcellids));
                 self.node.stopAllActions();
-                var delay = cc.delayTime(config.letUserClickTime);
+                var delay = cc.delayTime(tywx.ado.Constants.GameCenterConfig.letUserClickTime);
                 var idindex = 0;
                 var call = cc.callFunc(function () {
                     var cellid = allcellids[idindex];
-                    tywx.LOGE(idindex + " = 当前的ID信息 = " + cellid);
+                    console.log(idindex + " = 当前的ID信息 = " + cellid);
                     if (idindex > 0) {
                         var precellid = allcellids[idindex - 1];
                         self.allpngs[precellid].getComponent("celltile").stopDaijiEff();
                     }
 
-                    self.allpngs[cellid].getComponent("celltile").playDaijiEff();
-                    idindex = idindex + 1;
-                    if (idindex == allcellids.length) {
+                    if (idindex - 1 >= 0) {
                         var precellid = allcellids[idindex - 1];
                         self.allpngs[precellid].getComponent("celltile").stopDaijiEff();
+                    } else {
+                        var precellid = allcellids[allcellids.length - 1];
+                        self.allpngs[precellid].getComponent("celltile").stopDaijiEff();
+                    }
+                    self.allpngs[cellid].getComponent("celltile").playDaijiEff();
+                    if (idindex == allcellids.length - 1) {
                         idindex = 0;
+                    } else {
+                        idindex = idindex + 1;
                     }
                 });
                 var seq = cc.sequence(call, delay);
@@ -452,12 +503,21 @@ var gamemain = cc.Class({
     // 判断玩家当前是否有点击 没有点击的话
     dealPlayerClickScreen: function dealPlayerClickScreen() {
         // if(this.hadClickScreen == false){
+        var self = this;
         this.node.stopAllActions();
-        for (var ci = 0; ci < config.geziNumber; ci++) {
+        for (var ci = 0; ci < tywx.ado.Constants.GameCenterConfig.geziNumber; ci++) {
             if (this.allpngs[ci] != null) {
                 this.allpngs[ci].getComponent("celltile").stopDaijiEff();
             }
         }
+        this.hadClickScreen = true;
+        // 开一个线程监听次时间段用户是否有点击
+        tywx.Timer.setTimer(self, function () {
+            if (self.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
+                self.hadClickScreen = false;
+                self.dealPlayerNoClickScreen();
+            }
+        }, 5, 0, 15);
         // }
     },
 
@@ -484,13 +544,20 @@ var gamemain = cc.Class({
         this.helpviewpre.y = 0;
         this.helpviewscript = this.helpviewpre.getComponent("helpview");
         var self = this;
-        //  this.helpviewscript.setIsGame(1);
+        this.helpviewscript.setIsGame(1);
         this.helpviewscript.setCloseCall(function () {
             //  self.showSubStopView();
-            self.showPlayMethod();
+            self.helpview.active = !self.helpview.active ? true : false;
+            self.showUseHpHelp(true);
+            // console.log("当前的新手帮助")
+        });
+
+        this.helpviewscript.setStartGameCall(function () {
+            self.helpview.active = !self.helpview.active ? true : false;
+            self.showUseHpHelp(true);
         });
         this.helpviewpre.parent = this.helpview;
-        this.helpview.active = !this.helpview.active ? true : false;
+        self.helpview.active = !self.helpview.active ? true : false;
     },
 
     // 复活调用
@@ -503,20 +570,20 @@ var gamemain = cc.Class({
     // 显示当前的道具
     showItem: function showItem() {
         tywx.LOGE("当局 = ");
-        for (var itemIndex = 0; itemIndex < config.allitem.length; itemIndex++) {
+        for (var itemIndex = 0; itemIndex < tywx.ado.Constants.GameCenterConfig.allitem.length; itemIndex++) {
             var item = cc.instantiate(this.djitem);
             var itemsceipt = item.getComponent("DjItem");
-            itemsceipt.setData(config.allitem[itemIndex]);
+            itemsceipt.setData(tywx.ado.Constants.GameCenterConfig.allitem[itemIndex]);
             item.parent = this.itemview;
             var self = this;
             itemsceipt.setClickCall(function (data, item) {
                 // 判断当前游戏是否是等待点击状态 不是则不能使用道具
-                if (self.gamestate == config.gameState.waitclick) {
+                if (self.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
                     // 判断道具数量足不足
                     if (data.num > 0) {
                         var canupdate = true;
                         if (data.id == 4) {
-                            if (self.point == config.maxphy_value) {
+                            if (self.point == tywx.ado.Constants.GameCenterConfig.maxphy_value) {
                                 self.showAlert("当前生命值已满。");
                                 canupdate = false;
                             } else {
@@ -524,8 +591,8 @@ var gamemain = cc.Class({
                             }
                         } else if (data.id == 5) {
                             // 加1血
-                            tywx.LOGE("当前徐良= " + self.point + "," + config.maxphy_value);
-                            if (self.point < config.maxphy_value) {
+                            tywx.LOGE("当前徐良= " + self.point + "," + tywx.ado.Constants.GameCenterConfig.maxphy_value);
+                            if (self.point < tywx.ado.Constants.GameCenterConfig.maxphy_value) {
                                 self.showOneHpEf(item);
                                 self.prepoint = self.point;
                                 self.point = self.point + 1;
@@ -561,8 +628,9 @@ var gamemain = cc.Class({
                     }
                 }
             });
+
             item.x = 165 + itemIndex * 125;
-            item.y = -50;
+            item.y = -40;
             this.allOpenItems.push(item);
         }
         // 刷新道具显示
@@ -604,7 +672,7 @@ var gamemain = cc.Class({
     addRecoverNumber: function addRecoverNumber() {
         this.recoverNumber = this.recoverNumber + 1;
         // 如果恢复的次数等于2的话 隐藏恢复按钮
-        if (this.recoverNumber == config.maxrnum) {
+        if (this.recoverNumber == tywx.ado.Constants.GameCenterConfig.maxrnum) {
             this.fuHuo.active = false;
         } else {
             this.fhBtnShow();
@@ -762,20 +830,20 @@ var gamemain = cc.Class({
     */
     produceItems: function produceItems(maxnum) {
         // 随机道具的ID
-        var tindex = this.randomFrom(0, config.allitem.length - 1);
-        var itemid = config.allitem[tindex].id;
+        var tindex = this.randomFrom(0, tywx.ado.Constants.GameCenterConfig.allitem.length - 1);
+        var itemid = tywx.ado.Constants.GameCenterConfig.allitem[tindex].id;
         // 随机道具的数量
 
         var itemnum = 1;
         var randomNum = Math.random();
-        if (randomNum >= 1 - config.box_rate.sub1) {
-            itemid = config.allitem[0].id;
-        } else if (randomNum < 1 - config.box_rate.sub1 && randomNum >= 1 - config.box_rate.sub1 - config.box_rate.add2) {
-            itemid = config.allitem[1].id;
-        } else if (randomNum < 1 - config.box_rate.sub1 - config.box_rate.add2 && randomNum > config.box_rate.chui) {
-            itemid = config.allitem[2].id;
-        } else if (randomNum <= config.box_rate.chui) {
-            itemid = config.allitem[3].id;
+        if (randomNum >= 1 - config.default.box_rate.sub1) {
+            itemid = tywx.ado.Constants.GameCenterConfig.allitem[0].id;
+        } else if (randomNum < 1 - config.default.box_rate.sub1 && randomNum >= 1 - config.default.box_rate.sub1 - config.default.box_rate.add2) {
+            itemid = tywx.ado.Constants.GameCenterConfig.allitem[1].id;
+        } else if (randomNum < 1 - config.default.box_rate.sub1 - config.default.box_rate.add2 && randomNum > config.default.box_rate.chui) {
+            itemid = tywx.ado.Constants.GameCenterConfig.allitem[2].id;
+        } else if (randomNum <= config.default.box_rate.chui) {
+            itemid = tywx.ado.Constants.GameCenterConfig.allitem[3].id;
         }
 
         this.produceItem = {
@@ -861,15 +929,15 @@ var gamemain = cc.Class({
 
     getAllPathByitemValue: function getAllPathByitemValue(data) {
 
-        if (this.gamestate == config.gameState.waitclick) {
-            this.gamestate = config.gameState.usingitem;
+        if (this.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
+            this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.usingitem;
             // 得出当前可连的所有路径
             var allcellids = [];
-            for (var i = 0; i < config.geziNumber; i++) {
+            for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
                 this.resetAllMask();
                 this.getAllmask()[i].num = this.getAllmask()[i].num + data.value;
                 this.checkmaskbyid(i, 0);
-                if (this.g_mask_samecnt >= config.minCanRemoveNumber) {
+                if (this.g_mask_samecnt >= tywx.ado.Constants.GameCenterConfig.minCanRemoveNumber) {
                     allcellids[allcellids.length] = i;
                     break;
                 }
@@ -877,20 +945,20 @@ var gamemain = cc.Class({
             this.resetAllMask();
             //  tywx.LOGE("当前值可消除的mask"+JSON.stringify(allcellids));
             if (allcellids.length > 0) {
-                var _i = allcellids[0];
-                var num = this.getAllgz()[_i].num + data.value;
-                this.getAllgz()[_i].setnum(num);
-                this.getAllgz()[_i].settoblock();
-                this.getAllgz()[_i].block.effectid = 0;
-                this.getAllgz()[_i].block.effecttime = 0.5;
+                var _i2 = allcellids[0];
+                var num = this.getAllgz()[_i2].num + data.value;
+                this.getAllgz()[_i2].setnum(num);
+                this.getAllgz()[_i2].settoblock();
+                this.getAllgz()[_i2].block.effectid = 0;
+                this.getAllgz()[_i2].block.effecttime = 0.5;
                 if (num > this.maxnum) {
                     this.setMaxNumber(num);
                 }
                 this.g_clickid = allcellids[0];
-                this.gamestate = config.gameState.checkclick;
+                this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.checkclick;
                 return true;
             } else {
-                this.gamestate = config.gameState.checkclick;
+                this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.checkclick;
                 tywx.ado.Utils.showWXToast("此块不能使用道具");
                 return false;
             }
@@ -911,7 +979,7 @@ var gamemain = cc.Class({
         思路: 游戏和玩家的交互接口
     */
     touchEndCallback: function touchEndCallback(i, celltile) {
-        if (this.gamestate == config.gameState.waitclick) {
+        if (this.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
             tywx.LOGE("当前即将使用的道具谁 = " + JSON.stringify(this.curUsingItemData));
             var curaddnum = 1;
             var tdata = this.curUsingItemData;
@@ -946,7 +1014,7 @@ var gamemain = cc.Class({
                     }
                     // 记录下当前点击的格子 和切换当前的游戏状态为检查点击状态
                     this.g_clickid = i;
-                    this.gamestate = config.gameState.checkclick;
+                    this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.checkclick;
                     // 在方块上产生点击特效
                     var mpos = {};
                     this.showTouchEffect(mpos);
@@ -991,55 +1059,25 @@ var gamemain = cc.Class({
             self.chuiziEft.parent = self.node;
             anim.stop("chuiziza");
         };
-
+        this.getAllmask()[id].step = 1;
         var call = cc.callFunc(function () {
-            var tnumber = self.randomFrom(1, self.maxnum);
-            var tid = id;
-            for (var trow = 0; trow < 5; trow++) {
-                if (tid > config.geziNumber - 1) {
-                    break;
-                } else {
-                    if (tid + 5 <= config.geziNumber - 1) {
-                        var dis = 5 - self.getAllmask()[tid].y;
-                        self.getAllgz()[tid].block.posx = self.getAllgz()[tid].posx;
-                        self.getAllgz()[tid].block.posy = self.getAllgz()[tid].posy + dis * config.gezi_pitch;
-                        self.getAllgz()[tid].block.id_keep = -1;
-                        self.getAllgz()[tid].block.id_dest = tid;
-                        self.getAllgz()[tid].block.speed_keep = dis * config.gezi_pitch / config.move_time;
-                        self.getAllgz()[tid].block.adjustdrop();
-                        var num = self.getAllgz()[tid + 5].block.num;
-                        // self.getAllgz()[tid]
-                        // 
-                        self.getAllgz()[tid].setnum(num);
-                        self.getAllgz()[tid].settoblockvalue();
-                    } else {
-                        var num = self.getrandomnum();
-                        self.getAllgz()[tid].setnum(num);
-                        var dis = 5 - self.getAllmask()[tid].y;
-                        self.getAllgz()[tid].block.posx = self.getAllgz()[tid].posx;
-                        self.getAllgz()[tid].block.posy = self.getAllgz()[tid].posy + dis * config.gezi_pitch;
-                        self.getAllgz()[tid].block.id_keep = -1;
-                        self.getAllgz()[tid].block.id_dest = tid;
-                        self.getAllgz()[tid].block.speed_keep = dis * config.gezi_pitch / config.move_time;
-                        self.getAllgz()[tid].block.adjustdrop();
-                        self.getAllgz()[tid].settoblockvalue();
-                        break;
-                    }
-                    tid = tid + 5;
-                }
-            }
+            self.refreshbymask();
             self.lianjiNumber = 1;
-            self.gamestatetime = config.move_time;
-            self.gamestate = config.gameState.dodrop;
+            self.gamestatetime = tywx.ado.Constants.GameCenterConfig.drop_time;
+            tywx.Timer.setTimer(self, function () {
+                self.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.dodrop;
+                self.hadAddNum = false;
+                //pπ 开启一个进程循环显示即将超逾的玩家
+            }, 0, 0, tywx.ado.Constants.GameCenterConfig.merge_delay_time);
         });
 
-        var delay = cc.delayTime(0.6);
+        var delay = cc.delayTime(0.5);
         var seq = cc.sequence(delay, call);
         celltile.node.runAction(seq);
         // self.getAllmask(tid).step = 0;
 
         // self.refreshbymask();
-        // this.gamestate = config.gameState.checkclick;
+        // this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.checkclick;
 
 
         var animateState = anim.play("chuiziza");
@@ -1059,45 +1097,57 @@ var gamemain = cc.Class({
         思路: 每一帧都调用适合处理这个游戏的玩法和操作  
     */
     update: function update(dt) {
-
+        // this.showAddTime = this.showAddTime - dt;
+        // if (this.showAddTime < 0) {
         for (var i = 0; i < this.getAllgz().length; i++) {
             this.getAllgz()[i].block.tickmove(dt);
             this.getAllgz()[i].block.tickeffect(dt, this.star, this.star1);
             this.getAllgz()[i].draw(this.allpngs[i]);
         }
+        // }
+
 
         if (this.isShowFIcon) {
             this._updateSubDomainCanvas();
         }
         switch (this.gamestate) {
-            /*case config.gameState.waitclick:{
+            /*case tywx.ado.Constants.GameCenterConfig.gameState.waitclick:{
                 if (this.hadShowPjl == false && this.point > 0) {
                     this.pjlCallBack();
                 }
                 break;
             }*/
-            case config.gameState.checkclick:
+            case tywx.ado.Constants.GameCenterConfig.gameState.checkclick:
                 {
                     this.resetAllMask();
                     var sc = this.getAllgz()[this.g_clickid].num;
                     this.lianjiNumber = 1;
+
+                    this.allmergecellIds = [];
+                    this.allmergecellIds[this.allmergecellIds.length] = this.g_clickid;
                     this.checkmaskbyid(this.g_clickid, 0);
-                    if (this.g_mask_samecnt >= config.minCanRemoveNumber) {
-                        this.gamestatetime = config.move_time;
-                        this.score += config.baseScore * (this.g_mask_samecnt - 1) * sc;
+
+                    if (this.g_mask_samecnt >= tywx.ado.Constants.GameCenterConfig.minCanRemoveNumber) {
+                        this.gamestatetime = tywx.ado.Constants.GameCenterConfig.merge_time + tywx.ado.Constants.GameCenterConfig.merge_delay_time;
+                        this.score += tywx.ado.Constants.GameCenterConfig.baseScore * this.g_mask_samecnt * 1;
                         this.hasProduceNewScore = true;
                         this.scoreLabel.string = this.score;
-                        for (var i = 0; i < config.geziNumber; i++) {
+                        for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
                             // 判断是否已经标记 
                             if (this.getAllmask()[i].step != 9999999 && this.getAllmask()[i].step != 0) {
-                                this.getAllgz()[i].block.speed_keep = config.gezi_pitch * this.getAllmask()[i].step / config.move_time;
-                                this.getAllgz()[i].block.actiontime_keep = config.move_time / this.getAllmask()[i].step;
+                                this.getAllgz()[i].block.speed_keep = tywx.ado.Constants.GameCenterConfig.gezi_pitch * this.getAllmask()[i].step / tywx.ado.Constants.GameCenterConfig.merge_time;
+                                this.getAllgz()[i].block.actiontime_keep = tywx.ado.Constants.GameCenterConfig.merge_time / this.getAllmask()[i].step;
                                 this.getAllgz()[i].block.id_keep = i;
                                 this.getAllgz()[i].block.id_dest = this.getAllmask()[i].from;
                                 this.getAllgz()[i].block.adjustmove();
                             }
                         }
-                        this.gamestate = config.gameState.domove;
+                        this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.domove;
+                        console.log("当前可以连接的格子数ID是 = " + this.allmergecellIds);
+                        this.showAddTime = 0.1;
+                        this.addGetScoreLabelOnTile(this.allmergecellIds, tywx.ado.Constants.GameCenterConfig.baseScore);
+                        console.log("this.hadAddNum2 " + this.hadAddNum);
+                        this.hadAddNum = false;
                     } else {
                         this.hasProduceNewScore = false;
                         if (this.isUsingItem == true) {
@@ -1110,7 +1160,7 @@ var gamemain = cc.Class({
                         if (this.point <= 0) {
                             this.gameOverCallBack();
                         } else {
-                            // this.gamestate = config.gameState.waitclick;
+                            // this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
                             this.setWaitClickState();
                             this.finalDealMask();
                         }
@@ -1121,19 +1171,34 @@ var gamemain = cc.Class({
                     break;
                 }
             //格子组合移动，进入掉落状态
-            case config.gameState.domove:
+            case tywx.ado.Constants.GameCenterConfig.gameState.domove:
                 {
                     this.gamestatetime -= dt;
                     if (this.gamestatetime <= 0) {
                         this.dealDoMove();
                     }
+                    if (this.gamestatetime <= tywx.ado.Constants.GameCenterConfig.merge_delay_time) {
+                        if (this.hadAddNum == false) {
+
+                            this.playMergeAnimation();
+                            console.log("当前点击的ID = " + this.g_clickid);
+                            this.hadAddNum = true;
+                            this.allpngs[this.g_clickid].zIndex = maxzorder++;
+                            var num = this.getAllgz()[this.g_clickid].num + 1;
+                            console.log("当前点击的num = " + num);
+                            this.getAllgz()[this.g_clickid].setnum(num);
+                            this.getAllgz()[this.g_clickid].block.num = num;
+                        }
+                    }
+
                     break;
                 }
             //格子掉落完，进入再次检查合并状态，或者等待点击状态
-            case config.gameState.dodrop:
+            case tywx.ado.Constants.GameCenterConfig.gameState.dodrop:
                 {
                     this.gamestatetime -= dt;
                     if (this.gamestatetime <= 0) {
+                        //console.log("dealLianJiLogic1")
                         this.dealLianJiLogic();
                     }
                     break;
@@ -1155,10 +1220,10 @@ var gamemain = cc.Class({
     */
     dealDoMove: function dealDoMove() {
         //  this.star.node.active = false;
-
-        this.gamestatetime = config.move_time;
-        var num = this.getAllgz()[this.g_clickid].num + 1;
-        this.getAllgz()[this.g_clickid].setnum(num);
+        var self = this;
+        console.log("dealDoMovedealDoMovedealDoMove 1");
+        this.gamestatetime = tywx.ado.Constants.GameCenterConfig.merge_time + tywx.ado.Constants.GameCenterConfig.merge_delay_time;
+        var num = this.getAllgz()[this.g_clickid].num;
         this.getAllgz()[this.g_clickid].settoblock();
         this.getAllgz()[this.g_clickid].block.effectid = 1;
         this.getAllgz()[this.g_clickid].block.effecttime = 0.5;
@@ -1167,18 +1232,21 @@ var gamemain = cc.Class({
         }
         if (this.allpngs[this.g_clickid]) {
             var audioIndex = this.lianjiNumber + 1;
-            if (audioIndex > config.SOUNDS.COMBO.length - 1) {
-                audioIndex = config.SOUNDS.COMBO.length - 1;
+            if (audioIndex > tywx.ado.Constants.GameCenterConfig.SOUNDS.COMBO.length - 1) {
+                audioIndex = tywx.ado.Constants.GameCenterConfig.SOUNDS.COMBO.length - 1;
             }
             if (audioIndex < 0) {
                 audioIndex = 0;
             }
-            this.palyAudioByIndex(config.SOUNDS.COMBO[audioIndex]);
+            this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.COMBO[audioIndex]);
             this.allpngs[this.g_clickid].getComponent("celltile").playZhEff();
         }
         //  tywx.LOGE("Hellocd");
         this.refreshbymask();
-        this.gamestate = config.gameState.dodrop;
+        tywx.Timer.setTimer(self, function () {
+            self.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.dodrop;
+            // 开启一个进程循环显示即将超逾的玩家
+        }, 0, 0, tywx.ado.Constants.GameCenterConfig.merge_delay_time);
     },
 
 
@@ -1210,19 +1278,22 @@ var gamemain = cc.Class({
     */
     dealLianJiLogic: function dealLianJiLogic() {
         var bfound = false;
-        for (var j = 0; j < config.geziNumber; j++) {
+        //console.log("dealLianJiLogic abc")
+        for (var j = 0; j < tywx.ado.Constants.GameCenterConfig.geziNumber; j++) {
             this.resetAllMask();
             var sc = this.getAllgz()[j].num;
+            this.allmergecellIds = [];
+            this.allmergecellIds[0] = 0;
             this.checkmaskbyid(j, 0);
-            if (this.g_mask_samecnt >= config.minCanRemoveNumber) {
-                this.gamestatetime = config.move_time;
+            if (this.g_mask_samecnt >= tywx.ado.Constants.GameCenterConfig.minCanRemoveNumber) {
+                this.gamestatetime = tywx.ado.Constants.GameCenterConfig.merge_time + tywx.ado.Constants.GameCenterConfig.merge_delay_time;
                 this.lianjiNumber++;
-                this.score += config.baseScore * sc * (this.g_mask_samecnt - 1);
+                this.score += tywx.ado.Constants.GameCenterConfig.baseScore * this.g_mask_samecnt * this.lianjiNumber;
                 this.scoreLabel.string = this.score;
                 for (var i = 0; i < 25; i++) {
                     if (this.getAllmask()[i].step != 9999999 && this.getAllmask()[i].step != 0) {
-                        this.getAllgz()[i].block.speed_keep = config.gezi_pitch * this.getAllmask()[i].step / config.move_time;
-                        this.getAllgz()[i].block.actiontime_keep = config.move_time / this.getAllmask()[i].step;
+                        this.getAllgz()[i].block.speed_keep = tywx.ado.Constants.GameCenterConfig.gezi_pitch * this.getAllmask()[i].step / tywx.ado.Constants.GameCenterConfig.merge_time;
+                        this.getAllgz()[i].block.actiontime_keep = tywx.ado.Constants.GameCenterConfig.merge_time / this.getAllmask()[i].step;
                         this.getAllgz()[i].block.id_keep = i;
                         this.getAllgz()[i].block.id_dest = this.getAllmask()[i].from;
                         this.getAllgz()[i].block.adjustmove();
@@ -1230,15 +1301,31 @@ var gamemain = cc.Class({
                 }
                 bfound = true;
                 this.g_clickid = j;
-                this.gamestate = config.gameState.domove;
-                if (this.point < 5) this.point++;
+                this.allmergecellIds[0] = this.g_clickid;
+                if (this.point < 5) {
+                    this.point++;
+                }
                 this.drawPhyPoint();
+                var self = this;
+                // var num = this.getAllgz()[this.g_clickid].num + 1;
+                // this.getAllgz()[this.g_clickid].setnum(num);
+                // this.showAddTime = 0.1;
+                this.addGetScoreLabelOnTile(this.allmergecellIds, tywx.ado.Constants.GameCenterConfig.baseScore * this.lianjiNumber);
+                console.log("当前可以连接的格子数ID是 = " + this.allmergecellIds);
+
+                tywx.Timer.setTimer(self, function () {
+
+                    self.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.domove;
+                    console.log("this.hadAddNum1 " + this.hadAddNum);
+                    self.hadAddNum = false;
+                    //pπ 开启一个进程循环显示即将超逾的玩家
+                }, 0, 0, tywx.ado.Constants.GameCenterConfig.merge_delay_time);
                 break;
             }
         }
 
         if (bfound == false) {
-            // this.gamestate = config.gameState.waitclick;
+            // this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
             this.setWaitClickState();
             this.finalDealMask();
         }
@@ -1263,21 +1350,21 @@ var gamemain = cc.Class({
     },
     */
     dealLianJiNumber: function dealLianJiNumber() {
-        if (this.lianjiNumber == config.lianjiEffects.sgood) {
+        if (this.lianjiNumber == tywx.ado.Constants.GameCenterConfig.lianjiEffects.sgood) {
             this.playGood();
-            this.palyAudioByIndex(config.SOUNDS.GOOD);
+            this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.GOOD);
             this.showboxNumber = 1;
-        } else if (this.lianjiNumber == config.lianjiEffects.cgood) {
+        } else if (this.lianjiNumber == tywx.ado.Constants.GameCenterConfig.lianjiEffects.cgood) {
             this.playCool();
-            this.palyAudioByIndex(config.SOUNDS.COOL);
+            this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.COOL);
             this.showboxNumber = 2;
-        } else if (this.lianjiNumber == config.lianjiEffects.bgood) {
+        } else if (this.lianjiNumber == tywx.ado.Constants.GameCenterConfig.lianjiEffects.bgood) {
             this.playAwesome();
-            this.palyAudioByIndex(config.SOUNDS.AWESOME);
+            this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.AWESOME);
             this.showboxNumber = 3;
-        } else if (this.lianjiNumber >= config.lianjiEffects.maxgood) {
+        } else if (this.lianjiNumber >= tywx.ado.Constants.GameCenterConfig.lianjiEffects.maxgood) {
             this.playUnbelive();
-            this.palyAudioByIndex(config.SOUNDS.UNBLIEVEABLE);
+            this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.UNBLIEVEABLE);
             this.showboxNumber = 4;
         } else {
             this.showboxNumber = 0;
@@ -1400,17 +1487,26 @@ var gamemain = cc.Class({
         // var ctx = this.bg.getComponent(cc.Graphics);
         // ctx.clear();
         // for(var i = 0;i< this.point; i++){
-        //     let color = config.showphy_pros.colors[i];
+        //     let color = tywx.ado.Constants.GameCenterConfig.showphy_pros.colors[i];
         //     ctx.fillColor = cc.color(color[0],color[1],color[2]);
-        //     var x = (config.swidth - ((config.showphy_pros.phy_num - (config.maxphy_value - this.point)) * config.gezi_pitch)) / 2 + (config.showphy_pros.width + 10) * i;
+        //     var x = (tywx.ado.Constants.GameCenterConfig.swidth - ((tywx.ado.Constants.GameCenterConfig.showphy_pros.phy_num - (tywx.ado.Constants.GameCenterConfig.maxphy_value - this.point)) * tywx.ado.Constants.GameCenterConfig.gezi_pitch)) / 2 + (tywx.ado.Constants.GameCenterConfig.showphy_pros.width + 10) * i;
         //     var y = 980;
-        //     var w = config.showphy_pros.width;
-        //     var h = config.showphy_pros.height;
-        //     ctx.roundRect(x,y,w,h,config.showphy_pros.radius);
+        //     var w = tywx.ado.Constants.GameCenterConfig.showphy_pros.width;
+        //     var h = tywx.ado.Constants.GameCenterConfig.showphy_pros.height;
+        //     ctx.roundRect(x,y,w,h,tywx.ado.Constants.GameCenterConfig.showphy_pros.radius);
         //     ctx.fill();
         // }
+        if (this.point > 1) {
+            this.stars[0].scaleX = 1;
+            this.stars[0].scaleY = 1;
+            this.stars[0].stopAllActions();
+        }
         if (this.prepoint == this.point) {
             return;
+        }
+        // 咋这里判断当前的血量是否为1 如果为1的话产生 动画提示和tips
+        if (this.point == 1) {
+            this.produceHPAni();
         }
         this.prepoint = this.point;
         for (var starIndex = 0; starIndex < 5; starIndex++) {
@@ -1420,6 +1516,21 @@ var gamemain = cc.Class({
                 this.stars[starIndex].getComponent("LifeStar").hide();
             }
         }
+    },
+
+    /**
+     * 第一个星星产生一个放大缩小的动画 并且产生提示动画
+     */
+    produceHPAni: function produceHPAni() {
+        this.stars[0].stopAllActions();
+        var scaleBoom = cc.scaleTo(0.2, 1.2);
+        var scaleSmaller = cc.scaleTo(0.2, 1);
+        var delay = cc.delayTime(0.2);
+        var seq = cc.sequence(scaleBoom, scaleSmaller, delay);
+        var rep = cc.repeatForever(seq);
+        this.stars[0].runAction(rep);
+
+        this.showAlertMSG("血量要耗光啦~");
     },
 
     /*
@@ -1450,7 +1561,7 @@ var gamemain = cc.Class({
     */
     gameOverCallBack: function gameOverCallBack() {
         // 判断此次得分是否创纪录
-        this.gamestate = config.gameState.gameover;
+        this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.gameover;
         this.visibleControllButton(true);
         // 刷新当前的显示得分
         this.loseScoreLabel.string = this.score;
@@ -1473,7 +1584,7 @@ var gamemain = cc.Class({
             // console.log(typeof this.score + "" + typeof tywx.Util.getItemFromLocalStorage("maxscore", 0)+ " " + this.score+"是否破纪录= "+parseInt(tywx.Util.getItemFromLocalStorage("maxscore", 0)));
             this.hadShowPjl = true;
             this.visibleControllButton(false);
-            var delay = cc.delayTime(0.3);
+            var delay = cc.delayTime(0.1);
             var self = this;
             var call = cc.callFunc(function () {
                 self.stopView.active = true;
@@ -1509,7 +1620,7 @@ var gamemain = cc.Class({
     },
 
     finalDealMask: function finalDealMask() {
-        for (var i = 0; i < config.geziNumber; i++) {
+        for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
             this.getAllgz()[i].settoblock();
         }
     },
@@ -1530,14 +1641,14 @@ var gamemain = cc.Class({
         this.hasProduceNewScore = false;
         this.score = 0;
         this.scoreLabel.string = this.score;
-        this.point = config.maxphy_value;
+        this.point = tywx.ado.Constants.GameCenterConfig.maxphy_value;
         this.drawPhyPoint();
-        this.maxnum = config.maxphy_value;
+        this.maxnum = tywx.ado.Constants.GameCenterConfig.maxphy_value;
         this.recoverNumber = 0;
         this.fhBtnShow();
         this.isRestartGame = true;
         this.hadShowPjl = false;
-        for (var i = 0; i < config.geziNumber; i++) {
+        for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
             var num = this.getrandomnum();
             this.getAllgz()[i].setnum(num);
             this.getAllgz()[i].settoblock();
@@ -1547,7 +1658,7 @@ var gamemain = cc.Class({
 
         while (needcheck == true) {
             needcheck = false;
-            for (var i = 0; i < config.geziNumber; i++) {
+            for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
                 this.resetAllMask();
                 this.checkmaskbyid(i, 0);
                 if (this.g_mask_samecnt >= 3) {
@@ -1557,8 +1668,12 @@ var gamemain = cc.Class({
             }
         }
 
-        this.gamestate = config.gameState.waitclick;
+        this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
         this.visibleControllButton(false);
+
+        if (parseInt(tywx.Util.getItemFromLocalStorage("hadshowhelpview", 0)) == 1) {
+            this.showUseHpHelp(true);
+        }
     },
 
     /*
@@ -1575,7 +1690,7 @@ var gamemain = cc.Class({
     resetAllMask: function resetAllMask() {
         if (this.refreshingMask == false) {
             this.refreshingMask = true;
-            for (var i = 0; i < config.geziNumber; i++) {
+            for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
                 this.getAllmask()[i].reset();
             }
             this.g_mask_samecnt = 1;
@@ -1596,6 +1711,7 @@ var gamemain = cc.Class({
         思路: 游戏逻辑需要 通过mask标记来找出每次连接的格子
     */
     checkmaskbyid: function checkmaskbyid(id, step) {
+
         this.getAllmask()[id].step = step;
         // 从左找
         this.checkDirPaths(id, step, 0, -1);
@@ -1637,6 +1753,7 @@ var gamemain = cc.Class({
 
         this.getAllmask()[id + add].step = step;
         this.getAllmask()[id + add].from = id;
+        this.allmergecellIds[this.allmergecellIds.length] = id + add;
         this.checkmaskbyid(id + add, step + 1, bj, add);
     },
 
@@ -1652,7 +1769,7 @@ var gamemain = cc.Class({
         思路: 游戏逻辑需要
     */
     changenumbymask: function changenumbymask() {
-        for (var i = 0; i < config.geziNumber; i++) {
+        for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
             if (this.getAllmask()[i].step != 9999999 && this.getAllmask()[i].step != 0) {
                 var num = this.getrandomnum();
                 this.getAllgz()[i].setnum(num);
@@ -1674,7 +1791,7 @@ var gamemain = cc.Class({
      */
     getrandomnum: function getrandomnum() {
         var tnum = this.maxnum - 1;
-        if (tnum < config.initGameMaxNum) tnum = config.initGameMaxNum;
+        if (tnum < tywx.ado.Constants.GameCenterConfig.initGameMaxNum) tnum = tywx.ado.Constants.GameCenterConfig.initGameMaxNum;
 
         var num = parseInt(Math.random() * 10000) % tnum + 1;
         // if(this.prerandomnumber == num){
@@ -1697,14 +1814,14 @@ var gamemain = cc.Class({
         思路: 逻辑需要
     */
     recoverGame: function recoverGame() {
-        if (this.recoverNumber < config.maxrnum) {
-            this.point = config.maxphy_value;
+        if (this.recoverNumber < tywx.ado.Constants.GameCenterConfig.maxrnum) {
+            this.point = tywx.ado.Constants.GameCenterConfig.maxphy_value;
             this.drawPhyPoint();
-            this.gamestate = config.gameState.waitclick;
+            this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
             this.addRecoverNumber();
             this.visibleControllButton(false);
         } else {
-            this.showAlert("复活次数已达" + config.maxrnum + "次，不能继续复活。");
+            this.showAlert("复活次数已达" + tywx.ado.Constants.GameCenterConfig.maxrnum + "次，不能继续复活。");
             this.initgame();
         }
     },
@@ -1721,12 +1838,12 @@ var gamemain = cc.Class({
         思路: 游戏逻辑需要
     */
     refreshbymask: function refreshbymask() {
-        for (var i = 0; i < config.geziNumber; i++) {
+        for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
             if (this.getAllmask()[i].step != 9999999 && this.getAllmask()[i].step != 0) {
                 this.getAllmask()[i].from = -1;
                 var topid = -1;
                 var tmpid = i + 5;
-                while (tmpid < config.geziNumber) {
+                while (tmpid < tywx.ado.Constants.GameCenterConfig.geziNumber) {
                     if (this.getAllmask()[tmpid].step == 9999999 || this.getAllmask()[tmpid].step == 0) {
                         topid = tmpid;
                         break;
@@ -1737,13 +1854,13 @@ var gamemain = cc.Class({
                 var luck = false;
                 var sjs = Math.random();
                 var ttindex = 0;
-                for (var sindex = 1; sindex < config.luck_block.score.length - 1; sindex++) {
-                    if (this.score >= config.luck_block.score[sindex]) {
+                for (var sindex = 1; sindex < config.default.luck_block.score.length - 1; sindex++) {
+                    if (this.score >= config.default.luck_block.score[sindex]) {
                         ttindex = sindex;
                         break;
                     }
                 }
-                var tgl = config.luck_block.rate[ttindex];
+                var tgl = config.default.luck_block.rate[ttindex];
                 if (sjs <= tgl) {
                     luck = true;
                 }
@@ -1755,15 +1872,10 @@ var gamemain = cc.Class({
                     this.getAllgz()[i].block.posy = this.getAllgz()[topid].posy;
                     this.getAllgz()[i].block.id_keep = topid;
                     this.getAllgz()[i].block.id_dest = i;
-                    this.getAllgz()[i].block.speed_keep = dis * config.gezi_pitch / config.move_time;
+                    this.getAllgz()[i].block.speed_keep = dis * tywx.ado.Constants.GameCenterConfig.gezi_pitch / tywx.ado.Constants.GameCenterConfig.drop_time;
                     this.getAllgz()[i].block.adjustdrop();
-                    this.getAllgz()[topid].step = 888;
-                    var num = -1;
-                    if (luck) {
-                        num = this.getAllgz()[topid].num;
-                    } else {
-                        num = this.getPjNumberName(i);
-                    }
+                    this.getAllmask()[topid].step = 888;
+                    var num = this.getAllgz()[topid].num;
                     this.getAllgz()[i].setnum(num);
                     this.getAllgz()[i].settoblockvalue();
                     this.getAllgz()[i].block.effectid = this.getAllgz()[topid].block.effectid;
@@ -1773,10 +1885,10 @@ var gamemain = cc.Class({
                 } else {
                     var dis = 5 - this.getAllmask()[i].y;
                     this.getAllgz()[i].block.posx = this.getAllgz()[i].posx;
-                    this.getAllgz()[i].block.posy = this.getAllgz()[i].posy + dis * config.gezi_pitch;
+                    this.getAllgz()[i].block.posy = this.getAllgz()[i].posy + dis * tywx.ado.Constants.GameCenterConfig.gezi_pitch;
                     this.getAllgz()[i].block.id_keep = -1;
                     this.getAllgz()[i].block.id_dest = i;
-                    this.getAllgz()[i].block.speed_keep = dis * config.gezi_pitch / config.move_time;
+                    this.getAllgz()[i].block.speed_keep = dis * tywx.ado.Constants.GameCenterConfig.gezi_pitch / tywx.ado.Constants.GameCenterConfig.drop_time;
                     this.getAllgz()[i].block.adjustdrop();
                     var num = -1;
                     if (luck) {
@@ -1828,6 +1940,7 @@ var gamemain = cc.Class({
         if (parseInt(tywx.Util.getItemFromLocalStorage("maxscore", 0)) < this.score) {
             tywx.Util.setItemToLocalStorage("maxscore", this.score);
         }
+
         if (tywx.publicwx) {
             wx.postMessage({
                 method: 4,
@@ -1854,16 +1967,21 @@ var gamemain = cc.Class({
         思路: 游戏逻辑需要
     */
     showMinFriend: function showMinFriend() {
+        tywx.ado.logWithColor('showMinFriend=====');
         var self = this;
         var bpos = cc.v2(this.stopButton.x, this.stopButton.y);
         this.isShowFIcon = true;
         var rest = self.isRestartGame;
+        var pos = this.friendsNode.convertToWorldSpace(cc.p(this.friendsNode.x, this.friendsNode.y));
+        var screen = cc.view.getVisibleSizeInPixel();
+        console.log("y = " + pos.y + "x = " + pos.x + "screen = " + JSON.stringify(screen));
         wx.postMessage({
             method: 5,
             isrestart: rest,
             score: self.score,
-            posx: bpos.x,
-            posy: bpos.y - 30
+            width: screen.width,
+            x: pos.x,
+            y: screen.height - pos.y - 90
         });
         self.isRestartGame = false;
     },
@@ -1919,6 +2037,7 @@ var gamemain = cc.Class({
         思路: 游戏逻辑需要
     */
     _updateSubDomainCanvas: function _updateSubDomainCanvas() {
+        //return;
         if (!this.tex || !tywx.publicwx) {
             return;
         }
@@ -1990,8 +2109,8 @@ var gamemain = cc.Class({
             // 组织显示得到的信息
 
             var item = null;
-            for (var djIndex = 0; djIndex < config.allitem.length; djIndex++) {
-                var dj = config.allitem[djIndex];
+            for (var djIndex = 0; djIndex < tywx.ado.Constants.GameCenterConfig.allitem.length; djIndex++) {
+                var dj = tywx.ado.Constants.GameCenterConfig.allitem[djIndex];
                 // tywx.LOGE(JSON.stringify(dj)+"当前得到的宝箱数据  = "+JSON.stringify(this.produceItem));
                 if (this.produceItem.id == dj.id) {
                     item = dj;
@@ -2080,6 +2199,112 @@ var gamemain = cc.Class({
     startNewGame: function startNewGame() {
         this.visibleControllButton(false);
         this.initgame();
+    },
+
+    // 在置顶的块上播放组合动画
+    playMergeAnimation: function playMergeAnimation() {
+        //return;
+        if (this.g_clickid) {
+            var self = this;
+            if (!this.cmergeAniNode) {
+                this.cmergeAniNode = cc.instantiate(this.mergeAniNode);
+                var mergeAni = this.cmergeAniNode.getComponent(cc.Animation);
+                var removeCall = function removeCall() {
+                    self.cmergeAniNode.active = false;
+                };
+                this.cmergeAniNode.parent = this.cellUpView;
+                mergeAni.on('finished', removeCall, self);
+            }
+            this.cmergeAniNode.active = true;
+            this.cmergeAniNode.position = this.allpngs[this.g_clickid].position;
+            var animState = this.cmergeAniNode.getComponent(cc.Animation).play("mergani");
+            // 使动画播放速度加速
+            animState.speed = 1.3;
+        }
+    },
+
+    getLabel: function getLabel(num) {
+        var label = null;
+        if (this.addScoreLabelPools.size() > 0) {
+            // 通过 size 接口判断对象池中是否有空闲的对象
+            label = this.addScoreLabelPools.get();
+        } else {
+            // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
+            label = cc.instantiate(this.addScoreNode);
+        }
+        var labelScrpt = label.getComponent("AddScoreLabel");
+        labelScrpt.setNumber("+" + num);
+        return label;
+    },
+    // tywx.ado.Constants.GameCenterConfig.baseScore * (this.g_mask_samecnt - 1) * sc;
+    // 在当前加分的每个快上 加得分 10 * 3 * 4
+    addGetScoreLabelOnTile: function addGetScoreLabelOnTile(tiles, shownum) {
+        var _this = this;
+
+        var _loop = function _loop() {
+            id = tiles[tileIndex];
+            // var num = 10;
+            // if (id == this.g_clickid) {
+            //     num = tywx.ado.Constants.GameCenterConfig.baseScore * (this.getAllgz()[this.g_clickid].num);
+            //     console.log(id  + "当前的下标 first " + tileIndex + " 分数 = " + num);
+            // }else{
+            //     num = tywx.ado.Constants.GameCenterConfig.baseScore * tileIndex;
+            //     console.log(id  + "当前的下标 second " + tileIndex + " 分数 = " + num);
+            // }
+
+            var label = _this.getLabel(shownum);
+            label.getComponent("addNode");
+            scaleBoom = cc.scaleTo(0.2, 1.3);
+            scalesm = cc.scaleTo(0.2, 1);
+            mtop = cc.moveBy(0.2, cc.p(0, 10));
+            spawn = cc.spawn([scaleBoom, mtop]);
+            self = _this;
+            call = cc.callFunc(function () {
+                label.scalex = 1;
+                label.scaley = 1;
+                self.addScoreLabelPools.put(label);
+                //console.log("移除没有4")
+            });
+            // var pos = this.getPos(id);
+
+            label.parent = _this.cellUpView;
+            label.x = _this.allpngs[id].x;
+            label.y = _this.allpngs[id].y - 10;
+            seq = cc.sequence(spawn, scalesm, call);
+
+            label.runAction(seq);
+        };
+
+        for (var tileIndex = 0; tileIndex < tiles.length; tileIndex++) {
+            var id;
+            var scaleBoom;
+            var scalesm;
+            var mtop;
+            var spawn;
+            var self;
+            var call;
+            var seq;
+
+            _loop();
+        }
+    },
+    // 展示血量帮助提示
+    showUseHpHelp: function showUseHpHelp(needaddstore) {
+        if (parseInt(tywx.Util.getItemFromLocalStorage("hadshowhpnum", 0)) < 2) {
+            if (needaddstore) {
+                tywx.Util.setItemToLocalStorage("hadshowhpnum", parseInt(tywx.Util.getItemFromLocalStorage("hadshowhpnum", 0)) + 1);
+            }
+            this.hpHelpTips.active = true;
+            var delay = cc.delayTime(5);
+            var self = this;
+            var call = cc.callFunc(function () {
+                self.hpHelpTips.active = false;
+            });
+            var seq = cc.sequence(delay, call);
+            this.hpHelpTips.runAction(seq);
+        } else {
+            this.hpHelpTips.active = false;
+        }
     }
 
 });

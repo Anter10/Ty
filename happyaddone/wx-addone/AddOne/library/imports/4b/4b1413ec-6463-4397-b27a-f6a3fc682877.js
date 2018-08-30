@@ -130,7 +130,7 @@ var Utils = function () {
                             var t0 = parseInt(ff.loadItem(id, 0));
                             var tc = new Date().getTime();
                             console.log('isCanShare2GroupByTicket==>openGId', id, typeof id === 'undefined' ? 'undefined' : _typeof(id));
-                            if (tc - t0 >= 24 * 60 * 60 * 1000) {
+                            if (tc - t0 >= 8 * 60 * 60 * 1000) {
                                 ff.saveItem(id, tc, true);
                                 call_succ();
                             } else {

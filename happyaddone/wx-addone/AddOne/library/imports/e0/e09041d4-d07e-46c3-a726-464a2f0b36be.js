@@ -92,7 +92,7 @@ cc.Class({
     },
 
     changeShow: function changeShow(num) {
-        var colors = config.celltilenumColors[num - 1];
+        var colors = tywx.ado.Constants.GameCenterConfig.celltilenumColors[num - 1];
         this.setColor(new cc.color(colors[0], colors[1], colors[2], 255));
         this.visByNum(num, num);
     },

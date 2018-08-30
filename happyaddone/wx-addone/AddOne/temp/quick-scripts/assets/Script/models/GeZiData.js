@@ -155,7 +155,7 @@ module.exports = function (parent) {
     this.adjustdrop = function () {
         if (this.id_dest == -1) return;
         config = tywx.config != null ? tywx.config : config;
-        this.actiontime = config.move_time;
+        this.actiontime = tywx.ado.Constants.GameCenterConfig.drop_time;
         this.speedx = 0;
         this.speedy = -this.speed_keep;
         this.destx = this.parent.getAllgz()[this.id_dest].posx;
@@ -208,8 +208,8 @@ module.exports = function (parent) {
     this.tickeffect = function (dt, spr0, spr1) {
         // if(this.effectid >= 0 && this.effecttime > 0){
         //    if(this.effectid==1){
-        //         spr1.node.x = this.posx + config.gezi_size / 2;
-        //         spr1.node.y = this.posy + config.gezi_size / 2;
+        //         spr1.node.x = this.posx + tywx.ado.Constants.GameCenterConfig.gezi_size / 2;
+        //         spr1.node.y = this.posy + tywx.ado.Constants.GameCenterConfig.gezi_size / 2;
 
         //         spr1.node.setScale(1 - this.effecttime);
         //         if(spr1.node.active == false){
