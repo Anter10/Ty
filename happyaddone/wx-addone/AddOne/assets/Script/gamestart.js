@@ -5,7 +5,7 @@
 */
 var config = require("AddOneConfig")
 tywx.publicwx = true;
-
+// 记录下当前的场景 用于异步调用
 var curscene = null;
 var gamestart = cc.Class({
     extends: cc.Component,
@@ -36,8 +36,8 @@ var gamestart = cc.Class({
         },
 
         phbNameLabel: {
-             default: null,
-             type: cc.Label,
+            default: null,
+            type: cc.Label,
         },
         phb: {
             default: null,
@@ -103,6 +103,7 @@ var gamestart = cc.Class({
         //! 请求次数上线
         requestTimes: 3,
     },
+    
 
     start() {
         //是否发布微信版本
@@ -114,7 +115,9 @@ var gamestart = cc.Class({
         this.showPhb = false;
     },
 
-    // 刷新子域的纹理
+    /**
+     * 刷新子域的canvas
+     */
     _updateSubDomainCanvas: function () {
         if (!this.tex) {
             return;
@@ -146,9 +149,6 @@ var gamestart = cc.Class({
             //    this._updateSubDomainCanvas();   
         }
     },
-
-
-
 
     /*
         调用: 界面加载完成后的回调。
@@ -243,16 +243,6 @@ var gamestart = cc.Class({
         } else {
             console.log("当前分数不存在")
         }
-
-        // cc.loader.downloader.loadSubpackage("subone",function(error){
-        //     if(error){
-        //         console.log("下载分包失败");
-        //         return;
-        //     }
-        //     console.log("下载分包成功");
-        // });
-
-
         //  游戏的点击逻辑
         this.phbback.node.on('touchstart', function (event) {
             return true;
@@ -264,8 +254,6 @@ var gamestart = cc.Class({
 
         curscene.hideBack()
         this.givePlayerItems();
-        this.firstShowHelpView();
-        // this.backButton.node.on("click",this.returnView, this);
         console.log("本地的项目配置 = " + JSON.stringify(config))
         this.requestConfigInfo();
         // 开一个线程监听次时间段用户是否有点击
@@ -273,7 +261,6 @@ var gamestart = cc.Class({
         tywx.Timer.setTimer(self, function () {
             self._updateSubDomainCanvas();
         }, 1, 2, 0);
-
     },
 
     /*
@@ -287,7 +274,6 @@ var gamestart = cc.Class({
         ]
         思路: 游戏需要
     */
-
     showPlayMethod: function () {
         if (this.helpviewpre != null) {
             this.helpviewpre.destroy();
@@ -442,22 +428,9 @@ var gamestart = cc.Class({
         思路: 游戏需要
     */
     startGame: function () {
-        console.log("Hellocd")
-        cc.director.loadScene("gamemain"); //, this.loadFinishCallBack
+        cc.director.loadScene("gamemain");
     },
-
-    /*
-
-    */
-    shareApp: function () {
-        if (tywx.IsWechatPlatform()) {
-            wx.shareAppMessage({
-                title: "赶紧加入我们，一起愉快的玩耍吧...",
-                imageUrl: "https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/d68bced2b5c4b7dcb6b73838383d02.jpg?20180808115403",
-            });
-        }
-    },
-
+    
     /**
      * 请求获取配置信息
      */
@@ -470,46 +443,46 @@ var gamestart = cc.Class({
         console.log('请求的CDN地址 = ' + _configUrl);
 
         var successcb = function (ret) {
-            console.log("服务器读到的配置:"+JSON.stringify(ret));
+            console.log("服务器读到的配置:" + JSON.stringify(ret));
             that.requestTimes = 3;
             var v = tywx.SystemInfo.version;
             var uid = parseInt(tywx.UserInfo.userId);
             var c, cb, d;
-            c = ret[''+v];
-            cb = ret[''+v+'_ABTEST'];
+            c = ret['' + v];
+            cb = ret['' + v + '_ABTEST'];
             d = ret['default'];
-            if(!d) {
+            if (!d) {
                 //没找到缺省服务器配置...
                 console.log('No default server config, use local config...');
                 d = config;
             }
-            if(!c) {
+            if (!c) {
                 //没找到版本对应配置，使用缺省配置...
                 config = d;
                 console.log(_configUrl + 'use default config...');
             } else {
                 //AB测试...
-                if(cb) {
-                    if(uid % 2 == 0) {
+                if (cb) {
+                    if (uid % 2 == 0) {
                         config = c;
-                        console.log(_configUrl + 'use '+ v + '_A server config...');
+                        console.log(_configUrl + 'use ' + v + '_A server config...');
                     } else {
                         config = cb;
-                        console.log(_configUrl + 'use '+ v + '_B server config...');
+                        console.log(_configUrl + 'use ' + v + '_B server config...');
                     }
                 } else {
                     config = c;
-                    console.log(_configUrl + 'use '+ v + ' server config...');
+                    console.log(_configUrl + 'use ' + v + ' server config...');
                 }
                 //把缺省配置中的配置项复制到当前配置...
-                for(var k in d) {
-                    if(config[k] === undefined)
+                for (var k in d) {
+                    if (config[k] === undefined)
                         config[k] = d[k];
                 }
             }
             tywx.ado.Configs = config;
             tywx.config = config;
-            console.log('CONFIG '+JSON.stringify(config));
+            console.log('CONFIG ' + JSON.stringify(config));
         };
 
         var failcb = function (ret) {
@@ -527,21 +500,29 @@ var gamestart = cc.Class({
     },
 
 
+    /**
+     * 显示排行榜黑色排行榜
+     */
     showBack: function () {
         this.phbback.node.active = true;
         this.phbback.node.opacity = 165;
     },
 
+
+    /**
+     * 隐藏排行榜黑色背景
+     */
     hideBack: function () {
         this.phbback.node.active = false;
         this.phbback.node.opacity = 0;
     },
 
-    // 初始化的时候给玩家道具个三个
+    /**
+     * 初始化的时候给玩家三个道具
+     * 参数: 无
+     */
     givePlayerItems: function () {
-        console.log("当前玩家的1 = " + parseInt(tywx.Util.getItemFromLocalStorage("hadgiveitem", 0)))
         if (parseInt(tywx.Util.getItemFromLocalStorage("hadgiveitem", 0)) === 0) {
-            console.log("当前玩家的2 = " + parseInt(tywx.Util.getItemFromLocalStorage("hadgiveitem", 0)))
             tywx.Util.setItemToLocalStorage("hadgiveitem", 1);
             var giveitems = [];
             for (var djIndex = 0; djIndex < tywx.ado.Constants.GameCenterConfig.allitem.length; djIndex++) {
@@ -553,14 +534,5 @@ var gamestart = cc.Class({
             tywx.Util.setItemToLocalStorage("allitems", JSON.stringify(giveitems));
         }
     },
-
-    // 首次弹出帮助界面
-    firstShowHelpView: function () {
-        // if(parseInt(tywx.Util.getItemFromLocalStorage("hadshowhelpview",0)) === 0){
-        //    tywx.Util.setItemToLocalStorage("hadshowhelpview",1); 
-        //    this.showPlayMethod();
-        // }
-    }
-
 
 });

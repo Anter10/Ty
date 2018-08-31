@@ -13,7 +13,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 */
 var config = require("AddOneConfig");
 tywx.publicwx = true;
-
+// 记录下当前的场景 用于异步调用
 var curscene = null;
 var gamestart = cc.Class({
     extends: cc.Component,
@@ -123,7 +123,9 @@ var gamestart = cc.Class({
     },
 
 
-    // 刷新子域的纹理
+    /**
+     * 刷新子域的canvas
+     */
     _updateSubDomainCanvas: function _updateSubDomainCanvas() {
         if (!this.tex) {
             return;
@@ -243,16 +245,6 @@ var gamestart = cc.Class({
         } else {
             console.log("当前分数不存在");
         }
-
-        // cc.loader.downloader.loadSubpackage("subone",function(error){
-        //     if(error){
-        //         console.log("下载分包失败");
-        //         return;
-        //     }
-        //     console.log("下载分包成功");
-        // });
-
-
         //  游戏的点击逻辑
         this.phbback.node.on('touchstart', function (event) {
             return true;
@@ -264,8 +256,6 @@ var gamestart = cc.Class({
 
         curscene.hideBack();
         this.givePlayerItems();
-        this.firstShowHelpView();
-        // this.backButton.node.on("click",this.returnView, this);
         console.log("本地的项目配置 = " + JSON.stringify(config));
         this.requestConfigInfo();
         // 开一个线程监听次时间段用户是否有点击
@@ -286,7 +276,6 @@ var gamestart = cc.Class({
         ]
         思路: 游戏需要
     */
-
     showPlayMethod: function showPlayMethod() {
         if (this.helpviewpre != null) {
             this.helpviewpre.destroy();
@@ -439,19 +428,7 @@ var gamestart = cc.Class({
         思路: 游戏需要
     */
     startGame: function startGame() {
-        console.log("Hellocd");
-        cc.director.loadScene("gamemain"); //, this.loadFinishCallBack
-    },
-
-    /*
-     */
-    shareApp: function shareApp() {
-        if (tywx.IsWechatPlatform()) {
-            wx.shareAppMessage({
-                title: "赶紧加入我们，一起愉快的玩耍吧...",
-                imageUrl: "https://gss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/d68bced2b5c4b7dcb6b73838383d02.jpg?20180808115403"
-            });
-        }
+        cc.director.loadScene("gamemain");
     },
 
     /**
@@ -521,21 +498,28 @@ var gamestart = cc.Class({
         }, successcb, failcb);
     },
 
+    /**
+     * 显示排行榜黑色排行榜
+     */
     showBack: function showBack() {
         this.phbback.node.active = true;
         this.phbback.node.opacity = 165;
     },
 
+    /**
+     * 隐藏排行榜黑色背景
+     */
     hideBack: function hideBack() {
         this.phbback.node.active = false;
         this.phbback.node.opacity = 0;
     },
 
-    // 初始化的时候给玩家道具个三个
+    /**
+     * 初始化的时候给玩家三个道具
+     * 参数: 无
+     */
     givePlayerItems: function givePlayerItems() {
-        console.log("当前玩家的1 = " + parseInt(tywx.Util.getItemFromLocalStorage("hadgiveitem", 0)));
         if (parseInt(tywx.Util.getItemFromLocalStorage("hadgiveitem", 0)) === 0) {
-            console.log("当前玩家的2 = " + parseInt(tywx.Util.getItemFromLocalStorage("hadgiveitem", 0)));
             tywx.Util.setItemToLocalStorage("hadgiveitem", 1);
             var giveitems = [];
             for (var djIndex = 0; djIndex < tywx.ado.Constants.GameCenterConfig.allitem.length; djIndex++) {
@@ -546,14 +530,6 @@ var gamestart = cc.Class({
             }
             tywx.Util.setItemToLocalStorage("allitems", JSON.stringify(giveitems));
         }
-    },
-
-    // 首次弹出帮助界面
-    firstShowHelpView: function firstShowHelpView() {
-        // if(parseInt(tywx.Util.getItemFromLocalStorage("hadshowhelpview",0)) === 0){
-        //    tywx.Util.setItemToLocalStorage("hadshowhelpview",1); 
-        //    this.showPlayMethod();
-        // }
     }
 
 });

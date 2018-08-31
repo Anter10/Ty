@@ -10,19 +10,28 @@ let _selfCloudDatas = null;
 let _selfUserInfo = null;
 //  玩家发送给子域的数据类型
 var prePersonIconUrl = null;
+
+// 预先加载本地的图片
 let bottom = wx.createImage()
 bottom.src = 'image/yjjx.png'
 
-function getShareCanvas() {
-    return wx.getSharedCanvas();
-}
 
+/**
+ * 根据给定的好友数据 判断当前数据属性是否是自己
+ * @param {*} lhr  
+ * @param {*} rhr 
+ */
 function isMySelf(lhr, rhr) {
     return lhr.nickname === rhr.nickName && lhr.avatarUrl === rhr.avatarUrl;
 }
 
 
-//先算出整个字符串的长度，并获得第length - 2个字符串的位置，给".."留2个位置
+/**
+ * 先算出整个字符串的长度， 并获得第length - 2 个字符串的位置， 给 ".."
+ 留2个位置
+ * @param {String} str 被截取的字符串
+ * @param {*} length 截取的长度
+ */
 function stringSlice(str, length) {
     if (!str) {
         return str;
@@ -50,6 +59,10 @@ function stringSlice(str, length) {
     return s;
 }
 
+/**
+ * 请求好友数据和自己的数据
+ * 参数: 无
+ */
 function loadData() {
     //* 好友数据
     console.log("开始请求好友数据");
@@ -134,6 +147,7 @@ function drawImage(url, x, y, w, h, callback = null) {
     };
     img.src = url;
 }
+
 /**
  * @description 绘制文本
  * @author lu ning
@@ -148,7 +162,7 @@ function drawText(str, x, y) {
 
 
 /**
- * @description 超越好友
+ * @description 绘制超越好友
  * @author lu ning
  * @date 2018-08-29
  * @param {*} score
@@ -159,6 +173,7 @@ function drawText(str, x, y) {
 function drawThanFriend(score, x, y, width) {
     // canvas.width = 311;
     // canvas.height = 111;
+
     _shareCanvas.clearRect(0, 0, 32222, 3222)
     var frdata = null;
     //console.log("canvaswid" + canvas.width + "canvasheight" + canvas.height +
@@ -209,6 +224,11 @@ function drawThanFriend(score, x, y, width) {
     }
 }
 
+
+/**
+ * 根据玩家数据 绘制排行榜
+ * @param {Array}} drawdata 
+ */
 function drawFriendRank(drawdata) {
     if (!drawdata) {
         return;
@@ -219,7 +239,7 @@ function drawFriendRank(drawdata) {
 
     function drawItem(data, index, posi) {
         console.log('drawItem', index, data);
-        let [x, y, w, h] = [40, 100 * posi, 635, 100];
+        let [x, y, w, h] = [60, 100 * posi, 635, 100];
         console.log('drawItem', x, y);
         let padding_x = 5;
         let label_y = y + h * 0.6 - 10;
@@ -235,7 +255,7 @@ function drawFriendRank(drawdata) {
                     drawImage("image/phb" + (data.pm + 1) + ".png", x - 26, avatar_y - 1, 58, 78);
                 } else {
                     _shareCanvas.fillStyle = "#6495ED";
-                    _shareCanvas.font = "25px Arial";
+                    _shareCanvas.font = "28px Arial";
                     _shareCanvas.textAlign = 'left';
                     _shareCanvas.fillText(`` + data.pm, x, label_y);
                 }
@@ -244,7 +264,7 @@ function drawFriendRank(drawdata) {
             }
         } else {
             _shareCanvas.fillStyle = "#6495ED";
-            _shareCanvas.font = "25px Arial";
+            _shareCanvas.font = "28px Arial";
             _shareCanvas.textAlign = 'left';
             _shareCanvas.fillText(`` + index, x, label_y);
         }
@@ -252,18 +272,18 @@ function drawFriendRank(drawdata) {
         x += 60;
         setTimeout(() => {
             console.log("惺惺相惜 = " + x);
-            drawImage(data.avatarUrl, 100, avatar_y + 5, 65, 65);
+            drawImage(data.avatarUrl, 130, avatar_y + 5, 65, 65);
         }, index * 400);
         // * name label
-        x += 150;
+        x += 120;
         _shareCanvas.fillStyle = "#6495ED";
-        _shareCanvas.font = "25px Arial";
+        _shareCanvas.font = "28px Arial";
         _shareCanvas.textAlign = 'left';
         _shareCanvas.fillText(`` + data.nickname, x, label_y);
         // * score label
         x += 240;
         _shareCanvas.fillStyle = "#FF8C00";
-        _shareCanvas.font = "25px Arial";
+        _shareCanvas.font = "28px Arial";
         _shareCanvas.textAlign = 'left';
         data.KVDataList.forEach(e => {
             console.log('kvdatalist', e);
@@ -313,10 +333,17 @@ function drawFriendRank(drawdata) {
     drawdata.forEach((data, index) => {
         if (index + 1 > 21) return;
         if (isHaveDataByKey(data.KVDataList, CloudKeys.x1)) {
+
             if (render_idx == 0) {
                 drawItem(data, index + 1, index);
             } else {
-                drawItem(data, index + 1, index + 1);
+                if (index == self_data.pm) {
+                    //    drawItem(data, index, index + 1);
+                } else if (index > self_data.pm) {
+                    drawItem(data, index + 1, index);
+                } else if (index < self_data.pm) {
+                    drawItem(data, index + 1, index + 1);
+                }
             }
         }
     });
@@ -325,31 +352,10 @@ function drawFriendRank(drawdata) {
 }
 
 
-wx.onMessage(data => {
-    console.log("当前传进来的消息数据 = " + JSON.stringify(data));
-    if (data.method === events.LOAD_DATA) {
-        // * 加载数据
-        loadData();
-    } else if (data.method == events.friends) {
-        // self.titleLabel.string = "  好友排行榜";
-        // self.getFriendData();
-        drawFriendRank(_friendCloudDatas);
-    } else if (data.method == events.group) {
-        // self.titleLabel.string = "群组排行榜";
-        getGroupFriendData(data.shareTicket);
-    } else if (data.method == events.userinfo) {
-        // self.getUserInfoData();
-    } else if (data.method == events.submitscore) {
-        // self.submitScore(data.score);
-    } else if (data.method == events.storefris) {
-        // self.storeFriends(data.score, data.isrestart);
-        drawThanFriend(data.score, data.x, data.y, data.width)
-    } else if (data.method == events.hideUi) {
-        // self.hideUi(data.rank, data.friendicon);
-    }
-});
-
-
+/**
+ * 得到群组的的好友数据 用于显示群组排行榜使用
+ * tshareTicket: String 群组的shareticketID
+ */
 getGroupFriendData = function (tshareTicket) {
     var shareTicket = tshareTicket;
     wx.getUserInfo({
@@ -390,3 +396,21 @@ getGroupFriendData = function (tshareTicket) {
         }
     });
 }
+
+
+/**
+ * 处理主域给子域发送的消息
+ * data: type: Object 主域给子域发送的数据
+ */
+wx.onMessage(data => {
+    console.log("当前传进来的消息数据 = " + JSON.stringify(data));
+    if (data.method === events.LOAD_DATA) {
+        loadData();
+    } else if (data.method == events.friends) {
+        drawFriendRank(_friendCloudDatas);
+    } else if (data.method == events.group) {
+        getGroupFriendData(data.shareTicket);
+    } else if (data.method == events.storefris) {
+        drawThanFriend(data.score, data.x, data.y, data.width)
+    }
+});
