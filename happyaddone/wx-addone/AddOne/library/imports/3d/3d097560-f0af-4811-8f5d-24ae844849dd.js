@@ -160,7 +160,7 @@ module.exports = function (parent) {
         this.speedy = -this.speed_keep;
         this.destx = this.parent.getAllgz()[this.id_dest].posx;
         this.desty = this.parent.getAllgz()[this.id_dest].posy;
-    };
+    },
 
     /*
          调用: gamemain中调用

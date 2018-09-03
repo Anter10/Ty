@@ -46,7 +46,7 @@ module.exports = function (id, parent) {
         this.step = 9999999;
     };
     this.showMSG = function () {
-        console.log("当前的格子ID = " + this.id + " 格子显示 " + this.num + "格子的x = " + this.x + "格子的y " + this.y);
+        console.log("当前的格子ID = " + this.id + " num = " + this.num + " 格子显示 " + this.num + "格子的x = " + this.x + "格子的y " + this.y);
     };
 };
 

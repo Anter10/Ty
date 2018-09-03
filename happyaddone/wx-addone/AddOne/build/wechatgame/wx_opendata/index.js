@@ -14,7 +14,7 @@ var prePersonIconUrl = null;
 // 预先加载本地的图片
 let bottom = wx.createImage()
 bottom.src = 'image/yjjx.png'
- 
+
 
 /**
  * 根据给定的好友数据 判断当前数据属性是否是自己
@@ -255,18 +255,23 @@ function drawFriendRank(drawdata) {
                     drawImage("image/phb" + (data.pm + 1) + ".png", x - 26, avatar_y - 1, 58, 78);
                 } else {
                     _shareCanvas.fillStyle = "#6495ED";
-                    _shareCanvas.font = "28px Arial";
+                    _shareCanvas.font = "32px Arial";
                     _shareCanvas.textAlign = 'left';
-                    _shareCanvas.fillText(`` + data.pm, x, label_y);
+                    _shareCanvas.fillText(`` + (data.pm + 1), x - 10, label_y);
                 }
             } else {
                 drawImage("image/phb" + (index) + ".png", x - 26, avatar_y - 1, 58, 78);
             }
         } else {
-            _shareCanvas.fillStyle = "#6495ED";
-            _shareCanvas.font = "28px Arial";
-            _shareCanvas.textAlign = 'left';
-            _shareCanvas.fillText(`` + index, x, label_y);
+            if (index < 4) {
+                drawImage("image/phb" + (index) + ".png", x - 26, avatar_y - 1, 58, 78);
+            } else {
+                _shareCanvas.fillStyle = "#6495ED";
+                _shareCanvas.font = "32px Arial";
+                _shareCanvas.textAlign = 'left';
+                _shareCanvas.fillText(`` + index, x - 10, label_y);
+            }
+
         }
         // * avatar
         x += 60;
@@ -341,14 +346,12 @@ function drawFriendRank(drawdata) {
                     //    drawItem(data, index, index + 1);
                 } else if (index > self_data.pm) {
                     drawItem(data, index + 1, index);
-                } else if (index < self_data.pm) {
+                } else if (index - 1 < self_data.pm) {
                     drawItem(data, index + 1, index + 1);
                 }
             }
         }
     });
-
-
 }
 
 
@@ -414,5 +417,3 @@ wx.onMessage(data => {
         drawThanFriend(data.score, data.x, data.y, data.width)
     }
 });
-
-

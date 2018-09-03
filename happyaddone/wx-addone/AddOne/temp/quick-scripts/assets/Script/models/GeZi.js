@@ -144,7 +144,7 @@ module.exports = function (id, parent) {
      */
     this.settoblockvalue = function () {
         this.block.setinfo(this.color, this.num);
-    };
+    },
 
     /*
          调用: gamemain中调用
@@ -178,6 +178,7 @@ module.exports = function (id, parent) {
         if (cindex < 0) {
             cindex = 0;
         }
+        tilescript.setCurNum(this.getAllmask()[this.id].num);
         var colors = tywx.ado.Constants.GameCenterConfig.celltilenumColors[cindex];
         tilescript.setColor(new cc.color(colors[0], colors[1], colors[2], 255));
         cell.getComponent(cc.Sprite).node.x = this.block.posx - 360 + tywx.ado.Constants.GameCenterConfig.gezi_size / 2;

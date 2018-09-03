@@ -147,7 +147,13 @@ cc.Class({
             if (tywx.IsWechatPlatform()) {
                 window.wx.showShareMenu({ withShareTicket: true });
                 var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(this.shareConfig[0]);
-                tywx.LOGE("msg = " + JSON.stringify(msg));
+                if (!msg) {
+                    msg = {};
+                    msg.shareContent = "你知道" + "1 吗？";
+                    msg.sharePicUrl = "https://marketqn.nalrer.cn/teris/share_image/jiayi/jy03.jpg";
+                    msg.sharePointId = "766";
+                    msg.shareSchemeId = "1155";
+                }
                 if (msg) {
                     tywx.ShareInterface.share(msg.shareContent, msg.sharePicUrl, msg.sharePointId, msg.shareSchemeId, function (res) {
                         tywx.LOGE("分享成功后的数据" + JSON.stringify(res));

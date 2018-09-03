@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "xin2048_baoxiang_icon",
+    "texture": "e56a03b9-8e41-4a9a-ab64-0f793bd8252f",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      374,
+      135
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      374,
+      135
+    ]
+  }
+}
