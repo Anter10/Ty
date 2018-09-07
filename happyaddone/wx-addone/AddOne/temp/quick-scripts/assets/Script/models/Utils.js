@@ -454,23 +454,27 @@ var Utils = function () {
             tywx.ado.Utils.destroyWXBanner();
             var sys_info = wx.getSystemInfoSync();
             var s_w = sys_info.screenWidth;
-            var s_h = sys_info.screenHeight;
+            var s_h = sys_info.screenHeight; // 220
+            // ! 强制适配,主要是ipx有问题
+            var is_ipx = tywx.ado.Utils.isIpx();
             WXBannerAD = wx.createBannerAd({
                 adUnitId: tywx.ado.Constants.WXAdConfig.bannerId,
                 style: {
                     left: 0,
                     top: 0,
-                    width: s_w * 0.95
+                    width: is_ipx ? s_w * 0.8 : s_w * 0.95
                 }
             });
+
             try {
                 WXBannerAD.onResize(function (res) {
                     console.log('showBannerAd', '当前banner,width:' + res.width + "; height:" + res.height);
                     if (WXBannerAD) {
+                        var top = s_h - res.height - 5; //is_ipx ? s_h - res.height + 50 : s_h - res.height - 5;
                         WXBannerAD.style.left = (s_w - res.width) / 2;
-                        WXBannerAD.style.top = s_h - res.height - 5; // s_h * 0.15;      //
-                        res.height = s_h * 0.13;
-                        res.width = s_w * 0.9;
+                        WXBannerAD.style.top = top;
+                        //res.width             = is_ipx ? s_w * 0.8 : s_w * 0.9;
+                        //res.height            = s_h * 0.13;
                     }
                 });
             } catch (e) {
@@ -580,7 +584,25 @@ var Utils = function () {
         key: 'commonScaleIn',
         value: function commonScaleIn(node) {
             if (!node) return;
-            node.runAction(cc.sequence(cc.scaleTo(0.2, 1.1).easing(cc.easeIn(3.0)), cc.scaleTo(0.1, 1)));
+            node.runAction(cc.sequence(cc.scaleTo(0.08, 0.95).easing(cc.easeIn(3.0)), cc.scaleTo(0.12, 1.1).easing(cc.easeIn(3.0)), cc.scaleTo(0.08, 1).easing(cc.easeIn(3.0))));
+        }
+        /**
+         * @description 是否是iphoneX
+         * @author lu ning
+         * @date 2018-09-07
+         * @static
+         * @returns
+         */
+
+    }, {
+        key: 'isIpx',
+        value: function isIpx() {
+            var ret = false;
+            var sys_info = wx.getSystemInfoSync();
+            if (sys_info.model === 'iPhone X' || sys_info.system.indexOf('iOS') > 0 && sys_info.windowHeight / sys_info.windowWidth > 1.9) {
+                return true;
+            }
+            return ret;
         }
     }]);
 

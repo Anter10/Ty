@@ -16,6 +16,10 @@ cc.Class({
             type: cc.Node,
             default: null
         },
+        rootNode: {
+            type: cc.Node,
+            default: null
+        },
         yellowNumberLabel: {
             default: null,
             type: cc.Label
@@ -122,6 +126,7 @@ cc.Class({
      */
     playAni: function playAni() {
         //  this.node.getComponent(cc.Animation).play("huode1");
+        this.uiAni();
     },
 
     /**
@@ -151,6 +156,12 @@ cc.Class({
         this.hadstorephotonumber = false;
     },
 
+    /**
+     * @description 播放界面通用动画
+     */
+    uiAni: function uiAni() {
+        tywx.ado.Utils.commonScaleIn(this.rootNode);
+    },
     /**
       * @description 页面加载完成后的逻辑处理
       */

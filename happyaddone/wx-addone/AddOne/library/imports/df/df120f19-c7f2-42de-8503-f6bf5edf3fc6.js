@@ -28,10 +28,8 @@ var WXAdConfig = {
 };
 // 游戏的基础配置
 var GameCenterConfig = {
-    // 得分大于15万的时候显示如意宝箱的按钮
-    showRybxNumber: 100000,
     //游戏开始的时候方块下落的时间
-    mergeMaxNumberBaseScore: 500,
+    mergeMaxNumberBaseScore: 700,
     //游戏开始的时候方块下落的时间
     startGameDropTime: 0.3,
     // 当格子显示的数字超过此值时 显示皇冠
@@ -45,11 +43,11 @@ var GameCenterConfig = {
     // 每个格子+间隙的大小 
     gezi_pitch: 140,
     // 格子移动一个的时间
-    drop_time: 0.1,
+    drop_time: 0.15,
     // 合并间歇时间
-    merge_delay_time: 0.05,
+    merge_delay_time: 0.08,
     // 移动合并时间
-    merge_time: 0.2,
+    merge_time: 0.25,
     // 宽
     swidth: 720,
     //高

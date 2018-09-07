@@ -11,6 +11,7 @@ cc._RF.push(module, '7c2dbJUdiZLmIzaqT+PBih/', 'AddOneConfig');
 */
 var config = {
     "auditing": false,
+    "ruyiScore": 45000,
     "MUSICS": {
         "BG_MUSIC": "https://marketqn.nalrer.cn/teris/m/3.mp3"
     },
@@ -22,7 +23,7 @@ var config = {
     },
     "luck_block": {
         "score": [0, 100000, 200000, 250000, 300000, 400000, 100000000],
-        "rate": [0.9, 0.8, 0.75, 0.7, 0.6, 0.01],
+        "rate": [0.7, 0.65, 0.6, 0.55, 0.5, 0.3],
         "range": [3, 3.5, 3.5, 3.5, 4, 6]
     },
     "combo_level": {

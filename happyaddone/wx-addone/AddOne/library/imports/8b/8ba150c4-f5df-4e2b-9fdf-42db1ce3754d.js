@@ -107,6 +107,16 @@ var gamestart = cc.Class({
             type: cc.Node
         },
 
+        addInMyMini: {
+            default: null,
+            type: cc.Node
+        },
+
+        shouZHiNode: {
+            default: null,
+            type: cc.Node
+        },
+
         icon: cc.Sprite,
         //! 请求次数上线
         requestTimes: 3,
@@ -174,10 +184,20 @@ var gamestart = cc.Class({
     onLoad: function onLoad() {
         wx.postMessage({
             method: "load_data",
-            MAIN_MENU_NUM: "ADDONE_SCORE"
+            MAIN_MENU_NUM: "ADDONE_SCORE2"
         });
         this.haveStoreGameData = tywx.ado.loadProgress();
         tywx.ado.Utils.showGameClub();
+        var _ref = [cc.game.canvas.width, cc.game.canvas.height],
+            cw = _ref[0],
+            ch = _ref[1];
+
+        var is_ipx = ch / cw >= 1.9;
+        if (is_ipx) {
+            console.log("iphone x start game");
+            this.addInMyMini.y = this.addInMyMini.y - 45;
+        }
+        this.playSZAni(this.shouZHiNode, 1, 1.2);
         // ! Modify by luning [06-09-18] 交叉导流icon,这个版本隐藏
         //tywx.AdManager.showAd(cc.v2(100, 100),'GAME_START');
 
@@ -224,7 +244,7 @@ var gamestart = cc.Class({
                         tywx.ado.Utils.hideGameClub();
                         window.wx.postMessage({
                             method: 2,
-                            MAIN_MENU_NUM: "ADDONE_SCORE",
+                            MAIN_MENU_NUM: "ADDONE_SCORE2",
                             shareTicket: data.shareTickets[0]
                         });
                         // 开一个线程监听次时间段用户是否有点击
@@ -240,7 +260,7 @@ var gamestart = cc.Class({
                 });
             }
         }
-        var score = tywx.ado.Utils.loadItem("ADDONE_SCORE", 0);
+        var score = tywx.ado.Utils.loadItem("ADDONE_SCORE2", 0);
         if (score != null) {
             this.gameScore.string = score;
             var length = (score + "").length;
@@ -278,6 +298,22 @@ var gamestart = cc.Class({
         // ! 菜单不显示banner
         //this.showBanner();
     },
+
+    /**
+     * @description: 第一个星星产生一个放大缩小的动画 并且产生提示动画
+     */
+    playSZAni: function playSZAni(node, stime, scale) {
+        node.stopAllActions();
+        var scaletime = !stime ? 0.2 : stime;
+        var tscale = !scale ? 1.2 : scale;
+        var scaleBoom = cc.scaleTo(scaletime, tscale);
+        var scaleSmaller = cc.scaleTo(scaletime, 1);
+        var delay = cc.delayTime(scaletime);
+        var seq = cc.sequence(scaleBoom, scaleSmaller, delay);
+        var rep = cc.repeatForever(seq);
+        node.runAction(rep);
+    },
+
     onDestroy: function onDestroy() {
         tywx.ado.Utils.hideGameClub();
         tywx.ado.Utils.destroyWXBanner();
@@ -370,7 +406,7 @@ var gamestart = cc.Class({
                 console.log("Hellocd");
                 wx.postMessage({
                     method: 1,
-                    MAIN_MENU_NUM: "ADDONE_SCORE"
+                    MAIN_MENU_NUM: "ADDONE_SCORE2"
                 });
             }
             // 开一个线程监听次时间段用户是否有点击
@@ -585,6 +621,7 @@ var gamestart = cc.Class({
      */
     showGoonProgress: function showGoonProgress() {
         if (tywx.config.auditing == true) {
+            cc.director.loadScene("gamemain");
             return;
         }
         var self = this;
@@ -649,13 +686,14 @@ var gamestart = cc.Class({
                                     shareGroupCallBack && shareGroupCallBack(res);
                                 }, function () {
                                     // * failed callback
-                                    tywx.ado.Utils.showWXModal('请分享到不同群', "", false, function () {
-                                        if (self.hasgononstate) {
-                                            self.showGoonProgress();
-                                            self.hasgononstate = false;
-                                        }
-                                    });
-                                    errorCallBack && errorCallBack(null);
+                                    // tywx.ado.Utils.showWXModal('请分享到不同群', "", false, function () {
+                                    // if (self.hasgononstate) {
+                                    self.goonProgressGame();
+                                    // self.showGoonProgress()
+                                    // self.hasgononstate = false;
+                                    // }
+                                    // });
+                                    // errorCallBack && errorCallBack(null);
                                 });
                             }
                         } else {
