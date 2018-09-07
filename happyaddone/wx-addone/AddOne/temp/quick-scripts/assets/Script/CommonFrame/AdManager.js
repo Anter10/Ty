@@ -714,7 +714,7 @@ tywx.AdManager = {
                     that.processRawConfigInfo();
                 }
 
-                console.error('requestLocalIPInfo ==>' + JSON.stringify(res));
+                console.log('requestLocalIPInfo ==>' + JSON.stringify(res));
             },
             fail: function fail(res) {}
         });

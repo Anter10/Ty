@@ -1,0 +1,158 @@
+ cc.Class({
+     extends: cc.Component,
+
+     properties: {
+         showNumber: {
+             type: cc.Label,
+             default: null,
+         },
+         shareNode: {
+             type: cc.Node,
+             default: null,
+         },
+         yellowNumberLabel: {
+             default: null,
+             type: cc.Label
+         },
+
+         curhcScoreLabel: {
+             default: null,
+             type: cc.Label
+         },
+
+        curgzupNumberLabel: {
+            default: null,
+            type: cc.Label
+        },
+
+        curgzItemNameLabel: {
+            default: null,
+            type: cc.Label
+        },
+
+         showdbSprite: {
+             type: cc.Sprite,
+             default: null,
+         },
+         backSprite: {
+             type: cc.Sprite,
+             default: null,
+         },
+
+         spriteFrames: {
+             default: [],
+             type: cc.SpriteFrame,
+         }
+
+     },
+
+     setShowNumber: function (shownum, score, name) {
+         this.showNumber.string = shownum;
+         this.setDbByIndex(shownum, score, name);
+     },
+
+     /**
+      * @description 保存照片
+      */
+     storePhoto: function () {
+        if(this.hadstorephotonumber){
+           tywx.ado.Utils.showWXToast("已经保存成功",500);
+           return;
+        }
+        // this.hadstorephotonumber = true;
+        let [cw,ch]                  = [cc.game.canvas.width, cc.game.canvas.height];
+        let is_ipx                   = ch / cw >= 1.9;                                                 // * 是否是2:1屏幕
+        let ds                       = cc.size(720, 1280);
+        let dcs                      = cc.size(516, 818);
+        let [rate_width,rate_height] = [dcs.width / ds.width, dcs.height / ds.height];
+        let [d_x, d_y]               = [(ds.width - dcs.width) / 2, (ds.height - dcs.height) / 2 - 102];
+        let [rate_x,rate_y]          = [d_x / ds.width,d_y / ds.height];
+
+        let w = cw * rate_width;
+        let h = is_ipx ? w * (dcs.height / dcs.width) : ch * rate_height;
+        let x = cw * rate_x;
+        let y = is_ipx ?  (ch - h) / 2 - this.showdbSprite.node.position.y: ch * rate_y ;
+        var self = this;
+        canvas.toTempFilePath({
+            x: x,
+            y: y,
+            width: w, 
+            height: h,
+            destWidth: 516,
+            destHeight: 818,
+            success: function success(res) {
+                //console.log(res);
+                tywx.ado.Utils.saveImage2PhoneByUrl(res.tempFilePath,function(){
+                    self.hadstorephotonumber = true;
+                    self.storesuccall && self.storesuccall();
+                    tywx.ado.Utils.showWXToast("领取成功",1000);
+                }, function(){
+                    self.hadstorephotonumber = false;
+                    tywx.ado.Utils.showWXToast("保存图片失败"); 
+                });
+            },
+            fail: function fail(res) {
+                self.hadstorephotonumber = false;
+                tywx.ado.Utils.showWXToast("保存图片失败"); 
+            }
+        });
+     },
+
+    
+
+     playAni: function () {
+         //  this.node.getComponent(cc.Animation).play("huode1");
+     },
+
+     close: function () {
+         this.node.active = false;
+         this.hadstorephotonumber = false;
+         if (this.clossc) {
+             this.clossc();
+         }
+     },
+
+     setCloseCall: function (clossc) {
+         this.clossc = clossc;
+     },
+
+     init:function(){
+        this.hadstorephotonumber = false;
+     },
+
+     onLoad() {
+         this.hadstorephotonumber = false;
+         // 设置分享点
+         this.shareNode.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE);
+         this.backSprite.node.on('touchstart', function (event) {
+             return true;
+         });
+         
+     },
+
+     getShareComponent: function () {
+         return this.shareNode.getComponent("ShareButton");
+     },
+     
+      
+     
+     setStoreSucCallBack: function(succall){
+         this.storesuccall = succall;
+     },
+     setDbByIndex: function (num, score, name) {
+         if (num == 8) {
+             this.showdbSprite.spriteFrame = this.spriteFrames[0];
+         } else if (num == 9) {
+             this.showdbSprite.spriteFrame = this.spriteFrames[1];
+         } else {
+             this.showdbSprite.spriteFrame = this.spriteFrames[2];
+         }
+         this.yellowNumberLabel.string = num;
+         this.curhcScoreLabel.string = score;
+         this.curgzupNumberLabel.string = num;
+         this.curgzItemNameLabel.string = name;
+     }
+
+
+
+ });

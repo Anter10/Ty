@@ -62,6 +62,7 @@ cc.Class({
         // 前面的位置
         prex: 0,
         prey: 0
+
     },
 
     /*
@@ -77,13 +78,24 @@ cc.Class({
         思路: 逻辑需要
     */
     visByNum: function visByNum(num, renum) {
+        this.hasvis = false;
         for (var i = 0; i < this.cells.length; i++) {
+            // if(num == 0){
+            //    num = 1;
+            // }
             if (i == num - 1) {
+                this.hasvis = true;
                 this.cells[i].node.active = true;
             } else {
                 this.cells[i].node.active = false;
             }
         }
+
+        if (!this.hasvis) {
+            this.hasvis = true;
+            this.cells[0].node.active = true;
+        }
+
         this.number.string = renum;
         this.renumber = renum;
         // this.showHG();
@@ -195,6 +207,7 @@ cc.Class({
     onLoad: function onLoad() {
         this.prex = parseInt(this.node.x);
         this.prey = parseInt(this.node.y);
+        this.hasvis = false;
         // 设置成屏蔽层
         var self = this;
         // this.hide.node.active = false;

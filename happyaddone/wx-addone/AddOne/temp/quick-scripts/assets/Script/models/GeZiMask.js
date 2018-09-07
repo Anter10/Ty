@@ -38,7 +38,9 @@ module.exports = function (id, parent) {
         思路: 游戏逻辑需要
     */
     this.reset = function () {
+
         var g = this.parent.getAllgz()[this.id];
+        // console.log("格子的ID = "+this.id+g.num);
         this.num = g.num;
         this.x = this.id % 5;
         this.y = parseInt(this.id / 5);

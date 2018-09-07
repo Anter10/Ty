@@ -16,6 +16,17 @@ let bottom = wx.createImage()
 bottom.src = 'image/yjjx.png'
 
 
+function isHaveDataByKey(data_list, key) {
+    let ret = false;
+    data_list.forEach(data => {
+        if (data.key === key) {
+            ret = true;
+            return ret;
+        }
+    });
+    return ret;
+}
+
 /**
  * 根据给定的好友数据 判断当前数据属性是否是自己
  * @param {*} lhr  
@@ -173,7 +184,10 @@ function drawText(str, x, y) {
 function drawThanFriend(score, x, y, width) {
     // canvas.width = 311;
     // canvas.height = 111;
-
+    if (!_friendCloudDatas){
+        loadData();
+        return;
+    }
     _shareCanvas.clearRect(0, 0, 32222, 3222)
     var frdata = null;
     //console.log("canvaswid" + canvas.width + "canvasheight" + canvas.height +
@@ -207,7 +221,7 @@ function drawThanFriend(score, x, y, width) {
 
         x += padding_x;
         y = padding_y;
-        drawImage(frdata.avatarUrl, x + 125, y, 65, 65);
+        drawImage(frdata.avatarUrl, x + 115, y - 10, 80, 80);
 
         _shareCanvas.fillStyle = "#ffffff";
         _shareCanvas.font = "25px Arial";
@@ -226,6 +240,89 @@ function drawThanFriend(score, x, y, width) {
 
 
 /**
+ * @desc 刷新排行榜
+ * @param {Object} friendsdata 好友数据
+ */
+function drawOverphb(friendsdata) {
+    
+    if (!friendsdata || friendsdata.length == 0) {
+        return;
+    }
+    var frienddata = [];
+    for (var ti = 0; ti < friendsdata.length; ti++) {
+        if (isMySelf(friendsdata[ti], _selfUserInfo)) {
+            if (ti == 0) {
+                frienddata[0] = friendsdata[ti];
+                frienddata[0].pm = 1;
+                if (friendsdata[ti + 1]) {
+                    frienddata[1] = friendsdata[ti + 1];
+                    frienddata[1].pm = 2;
+                }
+                if (friendsdata[ti + 2]) {
+                    frienddata[2] = friendsdata[ti + 2];
+                    frienddata[2].pm = 3;
+                }
+            } else {
+                frienddata[0] = friendsdata[ti - 1];
+                frienddata[0].pm = ti;
+                frienddata[1] = friendsdata[ti];
+                frienddata[1].pm = ti + 1;
+                if ((ti + 1) <= friendsdata.length - 1) {
+                    frienddata[2] = friendsdata[ti + 1];
+                    frienddata[2].pm = ti + 2;
+                }
+            }
+            break;
+        }
+    }
+
+    // 开始绘制数据
+    // console.log("游戏结束时候当排行榜的数据" + JSON.stringify(frienddata));
+    var x = 20;
+    var y = 30;
+    var width = 90;
+    var height = 90;
+    var margin = 70;
+    
+    function drawIcon(data, index) {
+        setTimeout(() => {
+            drawImage(data.avatarUrl, x + ((index - 1) * (width + margin)), y, width, height);
+            _shareCanvas.fillStyle = "#ffffff";
+            _shareCanvas.font = "27px Arial";
+            _shareCanvas.textAlign = 'center';
+            _shareCanvas.fillText(`` + stringSlice(data.nickname, 12), x + ((index - 1) * (width + margin)) + width / 2, height + y + 25);
+
+            _shareCanvas.fillStyle = "#ffffff";
+            _shareCanvas.font = "25px Arial";
+            _shareCanvas.textAlign = 'center';
+            _shareCanvas.fillText(`` + data.KVDataList[0].value, x + ((index - 1) * (width + margin)) + width / 2 , height + y + 55);
+            
+            _shareCanvas.fillStyle = "#ffffff";
+            _shareCanvas.font = "27px Arial";
+            _shareCanvas.textAlign = 'center';
+            _shareCanvas.fillText(`` + data.pm, x + ((index - 1) * (width + margin)) + width / 2 ,28);
+
+        }, (index -1) * 200);
+        
+    }
+
+    frienddata.forEach((data, index) => {
+        if (isHaveDataByKey(data.KVDataList, CloudKeys.x1)) {
+            drawIcon(data, index + 1);
+        }
+    });
+ 
+
+}
+
+/**
+ * @desc 刷新好友数据 并且绘制排行榜
+ */
+function showOverphb() {
+    drawOverphb(_friendCloudDatas);
+}
+
+/**
  * 根据玩家数据 绘制排行榜
  * @param {Array}} drawdata 
  */
@@ -238,9 +335,9 @@ function drawFriendRank(drawdata) {
     var curbzcount = 3;
 
     function drawItem(data, index, posi) {
-        console.log('drawItem', index, data);
+        // console.log('drawItem', index, data);
         let [x, y, w, h] = [60, 100 * posi, 635, 100];
-        console.log('drawItem', x, y);
+        // console.log('drawItem', x, y);
         let padding_x = 5;
         let label_y = y + h * 0.6 - 10;
         let avatar_y = y;
@@ -275,10 +372,10 @@ function drawFriendRank(drawdata) {
         }
         // * avatar
         x += 60;
+
         setTimeout(() => {
-            console.log("惺惺相惜 = " + x);
-            drawImage(data.avatarUrl, 130, avatar_y + 5, 65, 65);
-        }, index * 400);
+             drawImage(data.avatarUrl, 130, avatar_y + 5, 65, 65);
+        }, posi * 400);
         // * name label
         x += 120;
         _shareCanvas.fillStyle = "#6495ED";
@@ -301,16 +398,7 @@ function drawFriendRank(drawdata) {
         drawImage('image/line.png', x + 30, bottom_y - 4, 580, 4);
     }
 
-    function isHaveDataByKey(data_list, key) {
-        let ret = false;
-        data_list.forEach(data => {
-            if (data.key === key) {
-                ret = true;
-                return ret;
-            }
-        });
-        return ret;
-    }
+    
     let self_data = {
         nickname: _selfUserInfo.nickName,
         avatarUrl: _selfUserInfo.avatarUrl,
@@ -338,7 +426,6 @@ function drawFriendRank(drawdata) {
     drawdata.forEach((data, index) => {
         if (index + 1 > 21) return;
         if (isHaveDataByKey(data.KVDataList, CloudKeys.x1)) {
-
             if (render_idx == 0) {
                 drawItem(data, index + 1, index);
             } else {
@@ -353,6 +440,7 @@ function drawFriendRank(drawdata) {
         }
     });
 }
+
 
 
 /**
@@ -415,5 +503,13 @@ wx.onMessage(data => {
         getGroupFriendData(data.shareTicket);
     } else if (data.method == events.storefris) {
         drawThanFriend(data.score, data.x, data.y, data.width)
+    } else if (data.method == events.overphb) {
+        loadData();
+    }else if (data.method == 8) {
+        showOverphb()
+    }else if (data.method == 9) {
+        _shareCanvas.clearRect(0, 0, 32222, 3222);
     }
+
+
 });

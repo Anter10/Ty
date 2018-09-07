@@ -109,7 +109,10 @@ var gamestart = cc.Class({
 
         icon: cc.Sprite,
         //! 请求次数上线
-        requestTimes: 3
+        requestTimes: 3,
+        // 当前是否有保存的游戏数据
+        haveStoreGameData: -1
+
     },
 
     start: function start() {
@@ -134,6 +137,7 @@ var gamestart = cc.Class({
         var sharedCanvas = openDataContext.canvas;
         this.tex.initWithElement(sharedCanvas);
         this.tex.handleLoadedTexture();
+        // tywx.ado.Utils.createAndSaveImg2WXAlbum({});
         this.phbSprite.spriteFrame = new cc.SpriteFrame(this.tex);
     },
 
@@ -172,6 +176,11 @@ var gamestart = cc.Class({
             method: "load_data",
             MAIN_MENU_NUM: "ADDONE_SCORE"
         });
+        this.haveStoreGameData = tywx.ado.loadProgress();
+        tywx.ado.Utils.showGameClub();
+        // ! Modify by luning [06-09-18] 交叉导流icon,这个版本隐藏
+        //tywx.AdManager.showAd(cc.v2(100, 100),'GAME_START');
+
         // this.contentView.height = 60 * 30; 
         this.phbShareBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.RANK_SHARE);
         console.log("当前屏幕尺寸  " + JSON.stringify(cc.view.getDevicePixelRatio()) + JSON.stringify(cc.view.getVisibleSize()));
@@ -208,9 +217,11 @@ var gamestart = cc.Class({
                     if (self.showPhb) {
                         self.phbView.active = false;
                         self.showPhb = false;
+                        tywx.ado.Utils.showGameClub();
                     } else {
                         self.phbView.active = true;
                         self.showPhb = true;
+                        tywx.ado.Utils.hideGameClub();
                         window.wx.postMessage({
                             method: 2,
                             MAIN_MENU_NUM: "ADDONE_SCORE",
@@ -220,7 +231,7 @@ var gamestart = cc.Class({
                         self.phbNameLabel.string = "群排行榜";
                         tywx.Timer.setTimer(self, function () {
                             self._updateSubDomainCanvas();
-                        }, 1, 2, 0);
+                        }, 1, 11, 0);
                     }
                 });
 
@@ -262,8 +273,16 @@ var gamestart = cc.Class({
 
         tywx.Timer.setTimer(self, function () {
             self._updateSubDomainCanvas();
-        }, 1, 2, 0);
+        }, 1, 11, 0);
+
+        // ! 菜单不显示banner
+        //this.showBanner();
     },
+    onDestroy: function onDestroy() {
+        tywx.ado.Utils.hideGameClub();
+        tywx.ado.Utils.destroyWXBanner();
+    },
+
 
     /*
         调用: 点击游戏帮助的时候调用
@@ -290,13 +309,15 @@ var gamestart = cc.Class({
             this.helpviewpre.x = -360;
             this.helpviewpre.y = 0;
             this.helpviewscript = this.helpviewpre.getComponent("helpview");
-            console.log("this.helpviewscript.setCloseCall" + this.helpviewscript.setCloseCall);
+            // console.log("this.helpviewscript.setCloseCall" + this.helpviewscript.setCloseCall);
             this.helpviewscript.setCloseCall(function () {
                 curscene.showPlayMethod();
             });
+            tywx.ado.Utils.hideGameClub();
             curscene.showBack();
         } else {
             curscene.hideBack();
+            tywx.ado.Utils.showGameClub();
         }
     },
 
@@ -338,9 +359,11 @@ var gamestart = cc.Class({
         if (this.showPhb) {
             this.phbView.active = false;
             curscene.hideBack();
+            tywx.ado.Utils.showGameClub();
             this.showPhb = false;
         } else {
             curscene.showBack();
+            tywx.ado.Utils.hideGameClub();
             this.phbView.active = true;
             this.showPhb = true;
             if (tywx.publicwx) {
@@ -354,7 +377,7 @@ var gamestart = cc.Class({
             self.phbNameLabel.string = "好友排行榜";
             tywx.Timer.setTimer(self, function () {
                 self._updateSubDomainCanvas();
-            }, 1, 2, 0);
+            }, 1, 11, 0);
         }
     },
 
@@ -374,10 +397,12 @@ var gamestart = cc.Class({
         if (curscene.showPhb) {
             curscene.phbView.active = false;
             curscene.showPhb = false;
+            tywx.ado.Utils.showGameClub();
             curscene.hideBack();
         } else {
             curscene.phbView.active = true;
             curscene.showBack();
+            tywx.ado.Utils.hideGameClub();
             curscene.showPhb = true;
         }
     },
@@ -414,21 +439,6 @@ var gamestart = cc.Class({
         if (score != null) {
             this.gameScore.string = Math.abs(score);
         }
-    },
-
-    /*
-        调用: 点击开始游戏的时候调用
-        功能: 进入游戏界面
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏需要
-    */
-    startGame: function startGame() {
-        cc.director.loadScene("gamemain");
     },
 
     /**
@@ -529,6 +539,144 @@ var gamestart = cc.Class({
                 giveitems.push(titem);
             }
             tywx.Util.setItemToLocalStorage("allitems", JSON.stringify(giveitems));
+        }
+    },
+    showBanner: function showBanner() {
+        tywx.ado.Utils.createAndShowWXBanner();
+        this.schedule(this.bannerRefresh, tywx.ado.Constants.WXAdConfig.bannerRefreshTime);
+    },
+    bannerRefresh: function bannerRefresh() {
+        tywx.ado.Utils.createAndShowWXBanner();
+    },
+
+
+    /*
+            调用: 点击开始游戏的时候调用
+            功能: 进入游戏界面
+            参数: [
+                无
+            ]
+            返回值:[
+                无
+            ]
+            思路: 游戏需要
+        */
+    startGame: function startGame() {
+        if (this.haveStoreGameData != -1) {
+            this.showGoonProgress();
+        } else {
+            cc.director.loadScene("gamemain");
+        }
+    },
+
+    /**
+     * @description 继续游戏进度的分享回调
+     */
+    goonProgressGame: function goonProgressGame(reset) {
+        if (reset) {
+            tywx.ado.resetProgerss();
+        }
+
+        cc.director.loadScene("gamemain");
+    },
+
+    /**
+     * @description 弹出游戏的选择是否继续进度的对话框
+     */
+    showGoonProgress: function showGoonProgress() {
+        if (tywx.config.auditing == true) {
+            return;
+        }
+        var self = this;
+        self.hasgononstate = false;
+        tywx.ado.Utils.showWXModal("分享继续之前的进度", '继续游戏', true,
+        // 确定
+        function () {
+            var config = tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE;
+            var groupSucCall = function groupSucCall() {
+                self.goonProgressGame();
+            };
+            var succall = function succall() {
+                self.hasgononstate = true;
+            };
+
+            var failcall = function failcall() {
+                self.hasgononstate = true;
+            };
+
+            self.shareMiniApp(config, groupSucCall, succall, failcall);
+        },
+        // 取消
+        function () {
+            self.goonProgressGame(true);
+        });
+    },
+
+    /**
+     * @description 非分享按钮的分享 （手动分享）
+     * @param {Object} shareconfig 分享配置信息
+     * @param {Function} shareGroupCallBack 分享到群成功的回调
+     * @param {Function} successCallBack 分享成功的回调
+     * @param {Function} errorCallBack 分享失败的回调
+     */
+    shareMiniApp: function shareMiniApp(shareconfig, shareGroupCallBack, successCallBack, errorCallBack) {
+        console.log("当前的分享配置  = " + JSON.stringify(shareconfig));
+        var self = this;
+        if (tywx.IsWechatPlatform()) {
+            window.wx.showShareMenu({
+                withShareTicket: true
+            });
+            var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(shareconfig[0]);
+            if (!msg) {
+                msg = {};
+                msg.shareContent = "你知道" + "1 吗？";
+                msg.sharePicUrl = "https://marketqn.nalrer.cn/teris/share_image/jiayi/jy03.jpg";
+                msg.sharePointId = "766";
+                msg.shareSchemeId = "1155";
+            }
+            if (msg) {
+                tywx.ShareInterface.share(msg.shareContent, msg.sharePicUrl, msg.sharePointId, msg.shareSchemeId, function (res) {
+                    tywx.LOGE("分享成功后的数据" + JSON.stringify(res));
+                    // * is share to group
+                    if (shareconfig && shareconfig[1]) {
+                        // * froce share to group
+                        if (res.shareTickets !== undefined && res.shareTickets.length > 0) {
+                            if (shareconfig[0] === tywx.ado.Constants.ShareConfig.RANK_SHARE[0]) {
+                                shareGroupCallBack && shareGroupCallBack(res);
+                            } else {
+                                tywx.ado.Utils.share2GroupByTicket(shareconfig[0], res, function () {
+                                    // * success callback
+                                    shareGroupCallBack && shareGroupCallBack(res);
+                                }, function () {
+                                    // * failed callback
+                                    tywx.ado.Utils.showWXModal('请分享到不同群', "", false, function () {
+                                        if (self.hasgononstate) {
+                                            self.showGoonProgress();
+                                            self.hasgononstate = false;
+                                        }
+                                    });
+                                    errorCallBack && errorCallBack(null);
+                                });
+                            }
+                        } else {
+                            // * failed
+                            tywx.ado.Utils.showWXModal('请分享到群', "", false, function () {
+                                if (self.hasgononstate) {
+                                    self.showGoonProgress();
+                                    self.hasgononstate = false;
+                                }
+                            });
+                            errorCallBack && errorCallBack(null);
+                        }
+                    } else {
+                        // * success
+                        successCallBack && successCallBack(res);
+                    }
+                }, function (data) {
+                    tywx.LOGE("分享成功后的数2据" + JSON.stringify(data));
+                    errorCallBack && errorCallBack(data);
+                });
+            }
         }
     }
 

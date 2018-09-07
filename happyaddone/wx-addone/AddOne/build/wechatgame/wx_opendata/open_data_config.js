@@ -19,6 +19,8 @@ let events = {
     storefris: 5,
     // 隐藏UI
     hideUi: 6,
+    // 游戏结束后的排行榜显示
+    overphb:7,
 };
 
 let CloudDataKey = {

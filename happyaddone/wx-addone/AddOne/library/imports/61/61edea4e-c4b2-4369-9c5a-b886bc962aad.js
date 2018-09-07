@@ -45,6 +45,7 @@ cc.Class({
         curgzPos: [],
         // 当前步数的引导是否完成
         curGuidefinish: false
+
     },
 
     /*
@@ -63,6 +64,7 @@ cc.Class({
         this.node.on('touchstart', function (event) {
             return true;
         });
+
         this.newGuideLabel.string = "点击1，加1变2";
         this.allhelpdata = [3, 4, 5, 2, 1, 2];
         // 初始化道具
@@ -293,6 +295,7 @@ cc.Class({
         思路: 逻辑需要
     */
     startGame: function startGame() {
+        tywx.ado.Utils.showWXBanner();
         if (this.isgame == 1) {
             this.node.active = false;
         } else {

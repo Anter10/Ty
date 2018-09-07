@@ -78,7 +78,7 @@ var gamemain = cc.Class({
         },
         itemview: {
             default: null,
-            type: cc.Nodef
+            type: cc.Node
         },
 
         yyview: {
@@ -115,6 +115,7 @@ var gamemain = cc.Class({
             default: null,
             type: cc.Label
         },
+
         GameOver: {
             default: null,
             type: cc.Label
@@ -159,6 +160,43 @@ var gamemain = cc.Class({
             default: null,
             type: cc.Label
         },
+
+        ljnumberLabel: {
+            default: null,
+            type: cc.Label
+        },
+
+        itemframes: {
+            default: [],
+            type: cc.SpriteFrame
+        },
+
+        maxscoreLabel: {
+            default: null,
+            type: cc.Label
+        },
+
+        recoverNumberLabel: {
+            default: null,
+            type: cc.Label
+        },
+
+        // 本局最大数的label
+        curmaxnumberLabel: {
+            default: null,
+            type: cc.Label
+        },
+        openBoxIconSprite: {
+            default: null,
+            type: cc.Sprite
+        },
+
+        // 排名的Sprite
+        paimingSprite: {
+            default: null,
+            type: cc.Sprite
+        },
+
         effect: {
             default: null,
             type: cc.Prefab
@@ -189,6 +227,11 @@ var gamemain = cc.Class({
         },
         // 血量提示tip
         hpHelpTips: {
+            default: null,
+            type: cc.Node
+        },
+
+        gameOutRoot: {
             default: null,
             type: cc.Node
         },
@@ -287,14 +330,88 @@ var gamemain = cc.Class({
         // 所有禁用小皇冠ID
         alljzxhgid: [],
         // 所有展示过分享领奖的数字
-        allshowshareids: []
-
+        allshowshareids: [],
+        // 交换道具的使用
+        twocellexchange: [],
+        // 打开宝箱之前禁止操作盘面
+        playjjaniing: false,
+        // 本局合出来的最大数
+        curmaxNumber: 5,
+        // 之前存储的进度数据
+        curPreStorePData: null,
+        // 领取如意box的按钮
+        ryBox: cc.Node,
+        ryBoxBack: cc.Sprite,
+        // 如意宝箱的按钮
+        ryBoxBtn: cc.Node,
+        // 控制帮助显示广告
+        isitemhelphide: false
     },
 
+    /**
+     * @description 设置当前合出的最大数
+     * @param {Number} maxnum 设置的最大数
+     */
+    setCurMaxNumber: function setCurMaxNumber(maxnum) {
+        if (maxnum > this.curmaxNumber) {
+            this.curmaxNumber = maxnum;
+        }
+    },
+
+    /**
+     * @description 添加交换对象
+     * @param {celltile} cell 格子对象
+     */
+    addJHCell: function addJHCell(cell) {
+        if (this.twocellexchange.length < 2) {
+            this.twocellexchange[this.twocellexchange.length] = cell;
+        } else {
+            console.log("交换格子数不对");
+        }
+    },
+
+    /**
+     * @description 清空交换对象
+     */
+    clearJHCell: function clearJHCell() {
+        this.twocellexchange = [];
+    },
+
+    /**
+     * @description 使用交换道具的时候调用
+     */
+    exchangeTWOCell: function exchangeTWOCell() {
+        if (this.twocellexchange.length == 2) {
+
+            // 交换完成后检查是否有合并
+        } else {
+            console.log("请选择交换对象");
+        }
+    },
+
+    /**
+     * @description 添加展示过小皇冠的number
+     * @param {Number} id 对应的数字
+     */
     addXHGId: function addXHGId(id) {
         this.alljzxhgid[this.alljzxhgid.length] = id;
     },
 
+    // 处理当前保存的最大值以下的小皇冠ID
+    dealAddStoreMaxNum: function dealAddStoreMaxNum() {
+        console.log("游戏初始化的时候的最大值= " + starNum);
+        for (var starNum = 7; starNum <= this.curmaxNumber; starNum++) {
+            if (starNum % 2 == 0) {
+                this.addXHGId(starNum);
+                this.allshowshareids[this.allshowshareids.length] = starNum;
+            }
+        }
+    },
+
+    /**
+     * @description 判断给定给的数字是否显示过皇冠
+     * @param {Number } id 数字
+     */
     hadXHGId: function hadXHGId(id) {
         for (var ti = 0; ti < this.alljzxhgid.length; ti++) {
             if (this.alljzxhgid[ti] == id) {
@@ -304,10 +421,17 @@ var gamemain = cc.Class({
         return false;
     },
 
+    /**
+     * @description 添加小皇冠的cell
+     * @param {celltile} cell 格子对象
+     */
     addXHGCell: function addXHGCell(cell) {
         this.allxhggz[this.allxhggz.length] = cell;
     },
 
+    /**
+     * @description 处理小皇冠的显示
+     */
     dealXhgCells: function dealXhgCells() {
         for (var mai = 0; mai < this.getAllmask().length; mai++) {
             this.allpngs[mai].getComponent("celltile").setCurNum(this.getAllmask()[mai].num);
@@ -315,23 +439,22 @@ var gamemain = cc.Class({
         }
     },
 
+    /**
+     * @description 得到对应格子的数据
+     * @param {Number} id 对应格子的ID
+     */
     getIDData: function getIDData(id) {
         return this.getAllmask()[id];
     },
 
-    /*
-        调用: 场景加载完成后的回调
-        功能: 场景加载完成后的一些UI逻辑处理
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 系统自带
-    */
+    /**
+     * @description: 场景加载完成后的一些UI逻辑处理 
+     */
     onLoad: function onLoad() {
+        this.pos = this.gameOutRoot.convertToWorldSpace(this.gameOutRoot.position);
+        console.log(JSON.stringify(this.pos1) + " v= " + JSON.stringify(cc.view.getVisibleSize()) + "尺寸= " + this.gameOutRoot.width + " z = " + this.gameOutRoot.height + " 坐标 = " + JSON.stringify(this.pos));
         tywx.gamecenter = this;
+        tywx.ado.inGame(this);
         this.addScoreLabelPools = new cc.NodePool();
         var curcount = 6;
         for (var _i = 0; _i < curcount; ++_i) {
@@ -349,9 +472,11 @@ var gamemain = cc.Class({
             var script = cellt.getComponent("celltile");
             script.setId(i);
             script.setClickCall(function (data, celltile) {
-                // self.printMaskMsg();
+
                 self.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.POPUPCLOSE);
-                self.touchEndCallback(data, celltile);
+                if (!self.playjjaniing) {
+                    self.touchEndCallback(data, celltile);
+                }
             });
             this.allpngs.push(cellt);
             cellt.parent = this.yyview;
@@ -365,8 +490,6 @@ var gamemain = cc.Class({
         }
         if (tywx.publicwx) {
             this.tex = new cc.Texture2D();
-            window.sharedCanvas.width = 211;
-            window.sharedCanvas.height = 98;
         }
         var self = this;
         // 游戏的点击逻辑
@@ -388,6 +511,10 @@ var gamemain = cc.Class({
         });
 
         this.gameOut.node.on('touchstart', function (event) {
+            return true;
+        });
+
+        this.ryBoxBack.node.on('touchstart', function (event) {
             return true;
         });
 
@@ -440,6 +567,10 @@ var gamemain = cc.Class({
         this.node.on('touchend', function (event) {
             self.itemhelpview.getComponent("ItemHelp").hideView();
             self.curUsingItemData = null;
+            if (self.isitemhelphide == true) {
+                tywx.ado.Utils.showWXBanner();
+                self.isitemhelphide = false;
+            }
             self.itemhelpview.active = false;
             self.dealPlayerClickScreen();
             self.hadClickScreen = true;
@@ -488,12 +619,42 @@ var gamemain = cc.Class({
             self.stopView.active = false;
             self.hadshowlqbox = false;
         });
+        // 设置保存照片成功后的回调
+        this.showNumberNode.getComponent("MoreTanNumber").setStoreSucCallBack(function () {
+            self.lingQuItem(true);
+            // console.log("当前已经领取成功");
+        });
         // this.showAnimationWhenScoreBiggerThanTen(14);
         this.firstShowHelpView();
         self.friendIcon.node.active = true;
         this.musicBtn.getComponent("Audio").changeTexture();
+        var _ref = [cc.game.canvas.width, cc.game.canvas.height],
+            cw = _ref[0],
+            ch = _ref[1];
+
+        var is_ipx = ch / cw >= 1.9;
+        if (is_ipx) {
+            this.friendIcon.node.y = this.friendIcon.node.y + 40;
+            this.yyview.y = this.yyview.y - 30;
+        }
+
+        this.showBanner();
     },
 
+    /**
+     * @description 退出游戏
+     */
+    onDestroy: function onDestroy() {
+        // this.printMaskMsg();
+        tywx.ado.outGame();
+
+        tywx.ado.Utils.destroyWXBanner();
+    },
+
+
+    /**
+     * @description 复活按钮的显示控制
+     */
     fhBtnShow: function fhBtnShow() {
         // console.log("当前的版本信息 =" + tywx.SystemInfo.version + JSON.stringify(config));
         if (tywx.config.auditing == true) {
@@ -505,10 +666,22 @@ var gamemain = cc.Class({
         }
     },
 
+    /**
+     * @description 添加小皇冠显示过的格子数据
+     * @param {Number} num 格子显示的数字
+     * @param {Number} id 格子的ID
+     */
     addxhgNumber: function addxhgNumber(num, id) {
-        this.curshowxhgs[this.curshowxhgs.length] = { id: id, num: num };
+        this.curshowxhgs[this.curshowxhgs.length] = {
+            id: id,
+            num: num
+        };
     },
 
+    /**
+     * @description 根据数字移除格子的数据
+     * @param {Number} num 移除显示的格子数字
+     */
     removexhgNumber: function removexhgNumber(num) {
         // console.log("当前的ID是1 = " + JSON.stringify(this.curshowxhgs));
         for (var thn = 0; thn < this.curshowxhgs.length; thn++) {
@@ -520,14 +693,25 @@ var gamemain = cc.Class({
         // console.log("当前的ID是2 = " + JSON.stringify(this.curshowxhgs));
     },
 
+    /**
+     * @description 测试日志方法2
+     */
     showmsm2: function showmsm2() {
         //  console.log("showmsm2 = " + JSON.stringify(this.curshowxhgs));
     },
 
+    /**
+     * @description 测试日志方法1
+     */
     showmsm1: function showmsm1() {
         // console.log("showmsm1 = " + JSON.stringify(this.curshowxhgs));
     },
 
+    /**
+     * @description 判断当前的数字是否显示小皇冠
+     * @param {Number} num 显示的数字
+     * @param {Number} id 显示格子的ID
+     */
     hasShowxhgNum: function hasShowxhgNum(num, id) {
         if (this.curshowxhgs.length == 0) {
             return false;
@@ -544,9 +728,10 @@ var gamemain = cc.Class({
         }
         return false;
     },
+
     /**
-     * 设置游戏状态
-     * 参数: state {Type: umber}
+     * @description 设置游戏状态
+     * @param {Number}
      */
     setWaitClickState: function setWaitClickState() {
         //  if (this.waitnum && this.hasShowxhgNum(this.waitnum) == false) {
@@ -554,36 +739,72 @@ var gamemain = cc.Class({
         //     this.waitnum = null;
         //  }
         // this.curshowxhgs = [];
-
+        if (this.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.gameover) {
+            return;
+        }
+        if (this.point <= 0) {
+            return;
+        }
         // 判断连接数的大小 如果连接数大于不同的值则产生不同的效果
         if (this.gamestate != tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
-            // this.curshowxhgs = [];
-            this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
+
             if (this.lianjiNumber >= tywx.config.combo_level.good[0] && this.point > 0) {
                 if (!this.hadshowlqbox) {
                     this.dealLianJiNumber();
                 } else {
+                    this.playjjaniing = false;
                     if (this.hadshowlqbox) {
+                        tywx.ado.Utils.hideWXBanner();
                         this.showNumberNode.active = true;
+                        tywx.ado.Utils.commonScaleIn(this.showNumberNode);
                         this.showNumberNode.getComponent("MoreTanNumber").playAni();
+                        this.hadshowlqbox = false;
                     }
                 }
             } else {
                 if (this.hadshowlqbox) {
+                    tywx.ado.Utils.hideWXBanner();
                     this.showNumberNode.active = true;
+                    tywx.ado.Utils.commonScaleIn(this.showNumberNode);
                     this.showNumberNode.getComponent("MoreTanNumber").playAni();
+                    this.hadshowlqbox = false;
                 } else if (this.hadShowPjl == false && this.point > 0 && this.hasProduceNewScore == true) {
                     this.hasProduceNewScore = false;
                     this.pjlCallBack();
                 }
             }
+            this.showRYBoxButton();
+            this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
         }
     },
 
+    /**
+     * 显示如意宝箱
+     */
+    showRYBoxButton: function showRYBoxButton() {
+        if (this.score >= tywx.ado.Constants.GameCenterConfig.showRybxNumber && this.ryBoxBtn.active == false) {
+            if (tywx.config.auditing == true) {
+                this.ryBoxBtn.active = false;
+            } else {
+                this.ryBoxBtn.active = true;
+                var animation = this.ryBoxBtn.getComponent(cc.Animation);
+                animation.play("daiji");
+            }
+        } else if (this.score < tywx.ado.Constants.GameCenterConfig.showRybxNumber) {
+            this.ryBoxBtn.active = false;
+        }
+    },
+
+    /**
+     * @description 设置当前待处理的显示Number
+     */
     setWaitNum: function setWaitNum(waitnum) {
         this.waitnum = waitnum;
     },
-    // 判断玩家当前是否有点击 没有点击的话
+
+    /**
+     * @description 处理玩家没有点击屏幕的状态
+     */
     dealPlayerNoClickScreen: function dealPlayerNoClickScreen() {
         if (this.hadClickScreen == false) {
             var self = this;
@@ -639,7 +860,9 @@ var gamemain = cc.Class({
         }
     },
 
-    // 判断玩家当前是否有点击 没有点击的话
+    /**
+     * @description 处理玩家当前的点击屏幕的逻辑
+     */
     dealPlayerClickScreen: function dealPlayerClickScreen() {
         // if(this.hadClickScreen == false){
         var self = this;
@@ -660,18 +883,9 @@ var gamemain = cc.Class({
         // }
     },
 
-    /*
-        调用: 点击游戏帮助的时候调用
-        功能: 展示游戏玩法
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏需要
-    */
-
+    /**
+     * @description 显示游戏帮助界面
+     */
     showPlayMethod: function showPlayMethod() {
         if (this.helpviewpre != null) {
             this.helpviewpre.destroy();
@@ -699,16 +913,26 @@ var gamemain = cc.Class({
         self.helpview.active = !self.helpview.active ? true : false;
     },
 
-    // 复活调用
+    /**
+     * @description 复活成功后的回调调用
+     */
     fhsbCallBack: function fhsbCallBack() {
         // this.showAlert("请分享到不同的群");
         // this.visibleControllButton(false);
         // this.initgame();
     },
 
-    // 显示当前的道具
+    /**
+     * @description 显示当前玩家的道具
+     */
     showItem: function showItem() {
         tywx.LOGE("当局 = ");
+        var _ref2 = [cc.game.canvas.width, cc.game.canvas.height],
+            cw = _ref2[0],
+            ch = _ref2[1];
+
+        var is_ipx = ch / cw >= 1.9;
+
         for (var itemIndex = 0; itemIndex < tywx.ado.Constants.GameCenterConfig.allitem.length; itemIndex++) {
             var item = cc.instantiate(this.djitem);
             var itemsceipt = item.getComponent("DjItem");
@@ -744,6 +968,8 @@ var gamemain = cc.Class({
                         } else {
                             // canupdate = self.getAllPathByitemValue(data);
                             self.itemhelpview.active = true;
+                            tywx.ado.Utils.hideWXBanner();
+                            self.isitemhelphide = true;
                             var itemhelpscript = self.itemhelpview.getComponent("ItemHelp");
                             if (data.id == 2 || data.id == 1) {
                                 self.curUsingItemData = data;
@@ -770,13 +996,19 @@ var gamemain = cc.Class({
 
             item.x = 165 + itemIndex * 125;
             item.y = -55;
+            if (is_ipx) {
+                item.y = item.y + 30;
+            }
             this.allOpenItems.push(item);
         }
         // 刷新道具显示
         this.dealAllItems();
     },
 
-    // 使用1血特效
+    /**
+     * @description  使用1血特效
+     * @param {Object} item 具体的某个道具对象
+     */
     showOneHpEf: function showOneHpEf(item) {
         if ((this.point != 5 || this.point != 1) && item.xx1Icon.node.getNumberOfRunningActions() == 0) {
             var node = this.stars[this.point];
@@ -791,7 +1023,10 @@ var gamemain = cc.Class({
         }
     },
 
-    // 更新某个道具
+    /**
+     * @description 更新某个道具
+     * @param {Object} data 更新道具的数据
+     */
     updateItemByData: function updateItemByData(data) {
         if (data != null) {
             tywx.LOGE("当前更新的数据 = " + JSON.stringify(data));
@@ -807,7 +1042,9 @@ var gamemain = cc.Class({
             }
         }
     },
-    // 添加复活次数
+    /**
+     * @description 添加已经复活次数
+     */
     addRecoverNumber: function addRecoverNumber() {
         this.recoverNumber = this.recoverNumber + 1;
         // 如果恢复的次数等于2的话 隐藏恢复按钮
@@ -818,22 +1055,10 @@ var gamemain = cc.Class({
         }
     },
 
-    // 隔多久检查一下当前分数要超越的玩家
-    checkFriendsScore: function checkFriendsScore() {},
-
-    /*
-        调用: 一段时间没有点击屏幕后调用
-        功能: 提示玩家点击某个方块可以消除
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要
-    */
-    showTouchEveryTime: function showTouchEveryTime() {},
-
+    /**
+     * @description 显示微信的的toast 提示框
+     * @param {String} msg 显示的文本信息
+     */
     showAlert: function showAlert(msg) {
         wx.showToast({
             title: msg,
@@ -841,6 +1066,10 @@ var gamemain = cc.Class({
             duration: 1500
         });
     },
+    /**
+     * @description 显示向上弹出的文字提示
+     * @param {String} msg 显示的文本信息
+     */
     showAlertMSG: function showAlertMSG(msg) {
         if (msg !== null && this.showalertmsg.node.getNumberOfRunningActions() === 0) {
             this.showalertmsg.node.stopAllActions();
@@ -865,66 +1094,52 @@ var gamemain = cc.Class({
         //tywx.ado.Utils.showWXToast(msg);
     },
 
-    /*
-        调用: 点击的时候调用
-        功能: 点击方块产生特效
-        参数: [
-            touchpos: 当前触摸点的位置 type:{}
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要
-    */
+    /**
+     * @description 点击方块产生特效
+     * @param {cc.v2} touchpos 当前点击的位置
+     */
     showTouchEffect: function showTouchEffect(touchpos) {},
 
-    /*
-        调用: 点击停止按钮的时候调用
-        功能: 显示停止按钮控制的菜单
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要
-    */
+    /**
+     * @description 显示当前的暂停界面
+     */
     showStopView: function showStopView() {
         this.stopView.active = !this.stopView.active ? true : false;
         if (this.stopView.active == false) {
             this.stopV.active = false;
             this.pjlView.active = false;
             this.openboxview.active = false;
+            tywx.ado.Utils.showWXBanner();
+        } else {
+            tywx.ado.Utils.hideWXBanner();
         }
     },
 
-    /*
-        调用: 点击停止按钮的时候调用
-        功能: 显示停止按钮控制的菜单
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要
-    */
+    /**
+     * @description 显示停止按钮控制的菜单
+     */
     showSubStopView: function showSubStopView() {
         this.stopView.active = !this.stopView.active ? true : false;
         this.stopV.active = !this.stopV.active ? true : false;
     },
 
-    /*
-        调用: 道具变化和游戏初始化的时候调用
-        功能: 刷新道具显示
-        参数: [
-            allitem: 给定的显示道具数据
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要 
-    */
+    /**
+     * @description 点击暂停按钮的时候调用 显示暂停界面
+     */
+    stopCall: function stopCall() {
+        if (this.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick && !this.playjjaniing) {
+            tywx.ado.Utils.hideWXBanner();
+            this.openboxview.active = false;
+            this.pjlView.active = false;
+            this.stopView.active = !this.stopView.active ? true : false;
+            this.stopV.active = !this.stopV.active ? true : false;
+        }
+    },
+
+    /**
+     * @description 处理并保存道具数据
+     * @param {Number} allitem 处理的道具数据
+     */
     dealAllItems: function dealAllItems(allitem) {
         // tywx.Util.setItemToLocalStorage("allitems",JSON.stringify([{id:1, num:2}])); 
         var items = tywx.Util.getItemFromLocalStorage("allitems", []);
@@ -956,17 +1171,10 @@ var gamemain = cc.Class({
         }
     },
 
-    /*
-        调用: 道具变化和游戏初始化的时候调用
-        功能: 刷新道具显示
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要
-    */
+    /**
+     * @description 产生对应的道具
+     * @param {Number} maxnum 产生的最大道具数量 暂时默认值都为1
+     */
     produceItems: function produceItems(maxnum) {
         // 随机道具的ID
         var tindex = this.randomFrom(0, tywx.ado.Constants.GameCenterConfig.allitem.length - 1);
@@ -974,98 +1182,67 @@ var gamemain = cc.Class({
         // 随机道具的数量
 
         var itemnum = 1;
+        var itemname = "-1";
         var randomNum = Math.random();
         if (randomNum >= 1 - config.box_rate.sub1) {
             itemid = tywx.ado.Constants.GameCenterConfig.allitem[0].id;
+            itemname = tywx.ado.Constants.GameCenterConfig.allitem[0].name;
         } else if (randomNum < 1 - config.box_rate.sub1 && randomNum >= 1 - config.box_rate.sub1 - config.box_rate.add2) {
             itemid = tywx.ado.Constants.GameCenterConfig.allitem[1].id;
+            itemname = tywx.ado.Constants.GameCenterConfig.allitem[1].name;
         } else if (randomNum < 1 - config.box_rate.sub1 - config.box_rate.add2 && randomNum > config.box_rate.chui) {
             itemid = tywx.ado.Constants.GameCenterConfig.allitem[2].id;
+            itemname = tywx.ado.Constants.GameCenterConfig.allitem[2].name;
         } else if (randomNum <= config.box_rate.chui) {
             itemid = tywx.ado.Constants.GameCenterConfig.allitem[3].id;
+            itemname = tywx.ado.Constants.GameCenterConfig.allitem[3].name;
         }
 
         this.produceItem = {
             id: itemid,
-            num: itemnum
+            num: itemnum,
+            name: itemname
         };
         tywx.LOGE("当前产生的道具 " + JSON.stringify(this.produceItem));
     },
 
-    /*
-        调用: 产生随机数的地方调用
-        功能: 产生指定范围的随机数
-        参数: [
-            lowerValue: 范围的最小值
-            upperValue: 范围的最大值
-        ]
-        返回值:[
-            无
-        ]
-        思路: 通用方法
-    */
+    /**
+     * @description 产生指定范围的随机数
+     * @param {Number} lowerValue 最小值
+     * @param {Number} upperValue 最大值
+     */
     randomFrom: function randomFrom(lowerValue, upperValue) {
         return Math.floor(Math.random() * (upperValue - lowerValue + 1) + lowerValue);
     },
 
-    /*
-        调用: 系统new 的时候调用。
-        功能: 该类的构造函数 可用于自身变量的初始化
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 系统自带
-    */
+    /**
+     * @description: 该类的构造函数 可用于自身变量的初始化
+     */
     ctor: function ctor() {
         tywx.LOGE("helloc g");
         config = tywx.config != null ? tywx.config : config;
     },
 
-    /*
-        调用: 在GeZi, GeZiData和该类中都有调用
-        功能: 得到当前的格子容器
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 方便统一管理
-    */
+    /**
+     * @description 得到当前的格子容器
+     * @returns {Table} 格子的数据
+     */
     getAllgz: function getAllgz() {
         return this.g_gezi;
     },
 
-    /*
-        调用: 在GeZi, GeZiData和该类中都有调用
-        功能: 得到当前的mask容器
-        参数: [
-            无
-        ]
-        返回值: [
-            无
-        ]
-        思路: 方便统一管理
-    */
+    /**
+     * @description 得到当前的mask容器
+     * @returns {Table} mask数据 
+     */
     getAllmask: function getAllmask() {
         return this.g_mask;
     },
 
-    /*  
-        调用:点击使用道具的时候调用
-        功能:给定一个值 根据这个值在格子中的数字进行和值运算 找出每个格子加上这个值是否可以连接
-        参数: [
-            data: 道具数据 type:Table.
-        ]
-        返回值: [
-            true || false: true可以使用 false不可使用道具
-        ]
-        思路: 逻辑需要
-    */
-
+    /**
+     * @description 根据这个值在格子中的数字进行和值运算 找出每个格子加上这个值是否可以连接
+     * @param {Data} 道具数据
+     */
     getAllPathByitemValue: function getAllPathByitemValue(data) {
 
         if (this.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
@@ -1105,18 +1282,11 @@ var gamemain = cc.Class({
         return false;
     },
 
-    /*
-        调用: 当点击屏幕的时候调用
-        功能: 处理点击屏幕产生的逻辑(主要是判断出当前点击的位置在某个格子上)
-        参数: [
-            x: 点击的X坐标
-            y: 点击点的Y坐标
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏和玩家的交互接口
-    */
+    /**
+     * 处理点击屏幕产生的逻辑(主要是判断出当前点击的位置在某个格子上)
+     * @param {Number} i 锤子作用的ID
+     * @param {celltile} celltile 格子对象
+     */
     touchEndCallback: function touchEndCallback(i, celltile) {
         if (this.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
             tywx.LOGE("当前即将使用的道具谁 = " + JSON.stringify(this.curUsingItemData));
@@ -1130,6 +1300,7 @@ var gamemain = cc.Class({
                 // 判断当前的游戏状态是否为等待点击状态
                 // 根据点击的点 来判断当前点击在那个格子上面
                 var num = this.getAllgz()[i].num + curaddnum;
+                this.setCurMaxNumber(num);
                 this.showAnimationWhenScoreBiggerThanTen(num);
                 if (num < 1) {
                     this.showAlert("不能使用此道具");
@@ -1176,13 +1347,20 @@ var gamemain = cc.Class({
         }
     },
 
-    // 设置最大值
+    /**
+     * @description 设置最大值
+     * @param {Number} num 当前设置的最大数
+     */
     setMaxNumber: function setMaxNumber(num) {
         this.maxnum = num;
         this.maxScoreShow();
     },
 
-    // 使用锤子类型的道具
+    /**
+     * @description 使用锤子类型的道具
+     * @param {Number} id 锤子作用的ID
+     * @param {celltile} celltile 格子对象
+     */
     useCZClick: function useCZClick(id, celltile) {
         var self = this;
 
@@ -1226,17 +1404,10 @@ var gamemain = cc.Class({
         anim.on('finished', finishCallback, self);
     },
 
-    /*
-        调用: 每一帧都调用
-        功能: 游戏的主体逻辑都在这个方法里面
-        参数: [
-            dt: 系统渲染的时间
-        ]
-        返回值:[
-            无
-        ]
-        思路: 每一帧都调用适合处理这个游戏的玩法和操作  
-    */
+    /**
+     * @description 游戏的主体逻辑都在这个方法里面
+     * @param {Number} dt  刷新delay 
+     */
     update: function update(dt) {
         // this.showAddTime = this.showAddTime - dt;
         if (this.startDropTime <= 0) {
@@ -1326,6 +1497,7 @@ var gamemain = cc.Class({
                             this.allpngs[this.g_clickid].zIndex = maxzorder++;
                             var num = this.getAllgz()[this.g_clickid].num + 1;
                             this.getAllgz()[this.g_clickid].setnum(num);
+                            this.setCurMaxNumber(num);
                             this.getAllgz()[this.g_clickid].block.num = num;
                             // this.allpngs[this.g_clickid].getComponent("celltile").showHG(num);
                             if (this.hadshowlqbox) {}
@@ -1349,17 +1521,9 @@ var gamemain = cc.Class({
         }
     },
 
-    /*
-        调用: 处于移动状态的时候调用
-        功能: 移动的逻辑处理
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏和玩家的交互的表现
-    */
+    /**
+     * @description 移动的逻辑处理
+     */
     dealDoMove: function dealDoMove() {
         //  this.star.node.active = false;
         var self = this;
@@ -1393,32 +1557,16 @@ var gamemain = cc.Class({
     },
 
 
-    /*
-        调用: 产生最大数字的时候调用
-        功能: 产生最大数字的逻辑处理
-        参数: [
-            无
-        ]
-        返回值: [
-            无
-        ]
-        思路: 逻辑需要
-    */
+    /**
+     * @description 产生最大数字的逻辑处理
+     */
     maxScoreShow: function maxScoreShow() {
         tywx.LOGD("产生最大数字", this.maxnum);
     },
 
-    /*
-        调用: 游戏处于掉落状态的时候调用
-        功能: 掉落状态的逻辑处理
-        参数: [
-            无
-        ]
-        返回值: [
-            无
-        ]
-        思路: 游戏和玩家的交互的表现
-    */
+    /**
+     * @description 掉落状态的逻辑处理
+     */
     dealLianJiLogic: function dealLianJiLogic() {
         var bfound = false;
         //console.log("dealLianJiLogic abc")
@@ -1474,25 +1622,11 @@ var gamemain = cc.Class({
         }
     },
 
-    /*
-        调用: 当玩家点击一次交付结束后调用
-        功能: 展示相关的特效UI
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 多元化游戏元素
-            sgood:3,   // cool 
-            cgood:4,   // good
-            bgood:5,   // awesome
-            maxgood:6, // unbelive
-       
-        UNBLIEVEABLE: 'sounds/unblieveable.mp3',	
-    },
-    */
+    /**
+     * @description: 展示相关的特效UI
+     */
     dealLianJiNumber: function dealLianJiNumber() {
+        this.playjjaniing = true;
         if (this.lianjiNumber == tywx.config.combo_level.good[0]) {
             this.playGood();
             this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.GOOD);
@@ -1511,29 +1645,24 @@ var gamemain = cc.Class({
             this.showboxNumber = 4;
         } else {
             this.showboxNumber = 0;
+            this.playjjaniing = false;
         }
-
+        this.ljnumberLabel.string = this.lianjiNumber;
         //    else if(this.lianjiNumber > 1) {
         //       this.showBox(1);  
         //    }
     },
 
-    /*
-            调用: 出动画的时候
-            功能: 播放特定的音效
-            参数: [
-                index: 音效的下标 type: Number
-            ]
-            返回值:[
-                无
-            ]
-            思路: 游戏需求
+    /**
+     * @description: 播放特定的音效
      */
     palyAudioByIndex: function palyAudioByIndex(fileName) {
         tywx.ado.AudioManager.playSound(fileName);
     },
 
-    // 播放good特效
+    /**
+     * @@description: 播放good特效
+     */
     playGood: function playGood() {
         var self = this;
         var animation = this.goodEft.getComponent(cc.Animation);
@@ -1542,13 +1671,17 @@ var gamemain = cc.Class({
             if (self.showboxNumber > 0) {
                 self.showBox(this.showboxNumber);
                 self.showboxNumber = 0;
+            } else {
+                this.playjjaniing = false;
             }
         };
         animation.on('finished', finishCallback, self);
         var animationState = animation.play("encourage");
     },
 
-    // 播放good特效
+    /**
+     * @description: 播放good特效
+     */
     playCool: function playCool() {
         var self = this;
         var animation = this.coolEft.getComponent(cc.Animation);
@@ -1557,13 +1690,17 @@ var gamemain = cc.Class({
             if (self.showboxNumber > 0) {
                 self.showBox(this.showboxNumber);
                 self.showboxNumber = 0;
+            } else {
+                this.playjjaniing = false;
             }
         };
         animation.on('finished', finishCallback, self);
         var animationState = animation.play("encourage");
     },
 
-    // 播放awesome特效
+    /**
+     * @description: 播放awesome特效
+     */
     playAwesome: function playAwesome() {
         var self = this;
         this.awesEft.active = true;
@@ -1573,6 +1710,8 @@ var gamemain = cc.Class({
                 self.showBox(this.showboxNumber);
                 self.showboxNumber = 0;
                 this.awesEft.active = false;
+            } else {
+                this.playjjaniing = false;
             }
         };
         animation.on('finished', finishCallback, self);
@@ -1580,7 +1719,9 @@ var gamemain = cc.Class({
         animationState.wrapMode = cc.WrapMode.Normal;
     },
 
-    // 播放awesome特效
+    /**
+     * @description: 播放awesome特效
+     */
     playUnbelive: function playUnbelive() {
         var self = this;
         this.unbeliveEft.active = true;
@@ -1590,6 +1731,8 @@ var gamemain = cc.Class({
                 self.showBox(this.showboxNumber);
                 self.showboxNumber = 0;
                 self.unbeliveEft.active = false;
+            } else {
+                this.playjjaniing = false;
             }
         };
         animation.on('finished', finishCallback, self);
@@ -1597,16 +1740,8 @@ var gamemain = cc.Class({
         animationState.wrapMode = cc.WrapMode.Normal;
     },
 
-    /*
-            调用: 当宝箱数据有更新的时候存储
-            功能: 存储宝箱数据到本地
-            参数: [
-                无
-            ]
-            返回值:[
-                无
-            ]
-            思路: 游戏需求
+    /**
+     * @description: 把宝箱数据存储到本地
      */
     storeAllItem: function storeAllItem() {
         // console.log("当前存储的数据 = "+JSON.stringify(this.allitems))
@@ -1615,17 +1750,9 @@ var gamemain = cc.Class({
         }
     },
 
-    /*
-        调用: 1: 游戏初始的时候调用，2: 每次点击的时候没有连接的时候调用，3: 重新开始游戏的时候调用。
-        功能: 展示相关的特效UI
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏元素需求
-    */
+    /**
+     * @description：展示相关的特效UI
+     */
     drawPhyPoint: function drawPhyPoint() {
         // var ctx = this.bg.getComponent(cc.Graphics);
         // ctx.clear();
@@ -1662,7 +1789,7 @@ var gamemain = cc.Class({
     },
 
     /**
-     * 第一个星星产生一个放大缩小的动画 并且产生提示动画
+     * @description: 第一个星星产生一个放大缩小的动画 并且产生提示动画
      */
     produceHPAni: function produceHPAni() {
         this.stars[0].stopAllActions();
@@ -1672,55 +1799,83 @@ var gamemain = cc.Class({
         var seq = cc.sequence(scaleBoom, scaleSmaller, delay);
         var rep = cc.repeatForever(seq);
         this.stars[0].runAction(rep);
-
         this.showAlertMSG("血量要耗光啦~");
     },
 
-    /*
-        调用: 1: 游戏重新开始的时候需要隐藏，2: 游戏结束的时候需要显示
-        功能: gameOver和restart按钮的显示隐藏控制
-        参数: [
-            vis: false: 隐藏元素，true: 显示元素
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: gameOver和restart按钮的显示隐藏控制
+     * @param vis Boolean 是否显示gameout界面
+     */
     visibleControllButton: function visibleControllButton(vis) {
         this.gameOut.node.active = vis;
+        if (this.gameOut.node.active == true) {
+            tywx.ado.Utils.hideWXBanner();
+            tywx.ado.Utils.commonScaleIn(this.gameOut.node);
+        } else {
+            tywx.ado.Utils.showWXBanner();
+        }
     },
 
-    /*
-        调用: 1: 游戏结束的时候需要显示
-        功能: 游戏结束的逻辑
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 游戏结束的逻辑
+     */
     gameOverCallBack: function gameOverCallBack() {
+        this.storeScore();
+        tywx.ado.resetProgerss();
+        this.isShowFIcon = false;
+        this.friendIcon.node.active = false;
         // 判断此次得分是否创纪录
         this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.gameover;
         this.visibleControllButton(true);
         // 刷新当前的显示得分
         this.loseScoreLabel.string = this.score;
+        // 刷新最大得分显示
+        var maxscore = parseInt(tywx.ado.Utils.loadItem("ADDONE_SCORE", 0));
+        this.maxscoreLabel.string = "最好成绩 " + maxscore + "";
+        if (this.recoverNumber < tywx.ado.Constants.GameCenterConfig.maxrnum) {
+            this.recoverNumberLabel.string = tywx.ado.Constants.GameCenterConfig.maxrnum - this.recoverNumber;
+        } else {
+            this.recoverNumberLabel.string = 0;
+        }
+        console.log("当dd前的最大数" + this.curmaxNumber);
+        this.curmaxnumberLabel.string = this.curmaxNumber + "";
+        // 刷新显示的排行榜
+        this.showOverFriendsPH();
     },
 
-    /*
-        调用: 1: 刷新当前得分的时候
-        功能: 展示破纪录界面
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description 发送数据给子域 绘制出当前的
+     */
+    showOverFriendsPH: function showOverFriendsPH() {
+        this.isShowFIcon = false;
+        wx.postMessage({
+            method: 7
+        });
+        // this.tex.releaseTexture();
+        window.sharedCanvas.width = 460;
+        window.sharedCanvas.height = 180;
+        var self = this;
+        // 开启一个进程循环隐藏即将超逾的玩家
+        var tindex = 0;
+        wx.postMessage({
+            method: 9
+        });
+        this.paimingSprite.node.active = false;
+        tywx.Timer.setTimer(self, function () {
+            if (tindex == 0) {
+                wx.postMessage({
+                    method: 8
+                });
+            }
+            tindex += 1;
+            console.log("当前刷新次数 " + tindex);
+            self.flushPHBView();
+        }, 1, 5, 0);
+    },
+
+    /**
+     * @description: 展示破纪录界面
+     */
     pjlCallBack: function pjlCallBack() {
         // 判断当前的得分是否超过了可显示的分数
         if (this.score < tywx.ado.Constants.GameCenterConfig.showPjlScore) {
@@ -1734,7 +1889,10 @@ var gamemain = cc.Class({
             var self = this;
             var call = cc.callFunc(function () {
                 self.stopView.active = true;
+                tywx.ado.Utils.hideWXBanner();
                 self.pjlView.active = true;
+                self.openboxview.active = false;
+                self.stopV.active = false;
                 self.pjlView.runAction(cc.sequence(cc.scaleTo(0.1, 1.1), cc.scaleTo(0.2, 1)));
             });
             var seq = cc.sequence(delay, call);
@@ -1748,71 +1906,72 @@ var gamemain = cc.Class({
         }
     },
 
-    /*
-        调用: 点击展示破纪录画面时候的关闭按钮调用
-        功能: 关闭破纪录界面
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 关闭破纪录界面
+     */
     closePjlView: function closePjlView() {
         // 判断此次得分是否创纪录
+        tywx.ado.Utils.showWXBanner();
         this.showStopView();
         this.pjlView.active = false;
     },
 
+    /**
+     * @description: 最后补充格子
+     */
     finalDealMask: function finalDealMask() {
         for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
             this.getAllgz()[i].settoblock();
         }
     },
 
-    /*
-        调用: 1: 游戏开始的时候调用 2: 游戏重新开始的时候调用
-        功能: 游戏初始化
-        参数: [
-            restart: 是否为重新开始的游戏
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 游戏初始化
+     * @param restart Boolean 是否为重新开始游戏的初始化
+     */
     initgame: function initgame(restart) {
         this.storeScore();
+        this.hadstorephotonumber = false;
+        // ! 读取进度
+        var tmp_progress = restart ? -1 : tywx.ado.loadProgress();
+
+        this.curmaxNumber = tmp_progress === -1 ? 5 : tmp_progress.curmaxNumber;
+        this.score = tmp_progress === -1 ? 0 : tmp_progress.score;
+
+        this.playjjaniing = false;
         this.allshowshareids = [];
         this.alljzxhgid = [];
         this.allxhggz = [];
         this.curshowxhgs = [];
         this.hasProduceNewScore = false;
-        this.score = 0;
+
         this.hadProducetantenNUmber = false;
         this.startDropTime = 0;
         this.curGiveScore = 0;
         this.hadshowlqbox = false;
+        wx.postMessage({
+            method: 9
+        });
         this.scoreLabel.string = this.score;
-        this.point = tywx.ado.Constants.GameCenterConfig.maxphy_value;
+        this.point = tmp_progress === -1 ? tywx.ado.Constants.GameCenterConfig.maxphy_value : tmp_progress.life;
         this.drawPhyPoint();
         this.maxnum = tywx.ado.Constants.GameCenterConfig.maxphy_value;
         this.recoverNumber = 0;
         this.fhBtnShow();
         this.isRestartGame = true;
         this.hadShowPjl = false;
+
         for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
-            var num = this.getrandomnum();
+            var num = tmp_progress === -1 ? this.getrandomnum() : tmp_progress.mask[i];
             this.getAllgz()[i].setnum(num);
             this.getAllgz()[i].settoblock();
             // this.allpngs[i].getComponent("celltile").setCurNum(this.getAllmask()[i].num);
             this.allpngs[i].getComponent("celltile").showHG();
         }
 
-        var needcheck = true;
+        var needcheck = tmp_progress === -1;
 
-        while (needcheck == true) {
+        while (needcheck) {
             needcheck = false;
             for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
                 this.resetAllMask();
@@ -1834,10 +1993,11 @@ var gamemain = cc.Class({
             this.startDropAnimation();
         }
         this.dealPlayerClickScreen();
+        this.dealAddStoreMaxNum();
     },
 
     /**
-     * 产生格子下落动画
+     * @description: 产生格子下落动画
      */
     startDropAnimation: function startDropAnimation() {
         var self = this;
@@ -1864,17 +2024,9 @@ var gamemain = cc.Class({
         }, 0, 0, 0.2);
     },
 
-    /*
-        调用: 1: 游戏处于检查点击的时候调用 2: 游戏开始的时候调用 3: 处理格子连接的时候调用
-        功能: 重置棋盘mask，为重新探路做准备
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 重置棋盘mask， 为重新探路做准备
+     */
     resetAllMask: function resetAllMask() {
         if (this.refreshingMask == false) {
             this.refreshingMask = true;
@@ -1886,20 +2038,12 @@ var gamemain = cc.Class({
         }
     },
 
-    /*
-        调用: 1: 处理游戏点击的时候调用 2:游戏格子连接的时候调用
-        功能: 递归寻找给定ID的格子 并在mask数组里面进行标记
-        参数: [
-            id: 每个格子的ID type: Number
-            step: 此次寻找的步数 type: Number
-        ]
-        返回值:[
-            无
-        ]
-        思路: 游戏逻辑需要 通过mask标记来找出每次连接的格子
-    */
+    /**
+     * 递归寻找给定ID的格子 并在mask数组里面进行标记
+     * @param id Number 格子的ID
+     * @param step Number 当前找到第几步
+     */
     checkmaskbyid: function checkmaskbyid(id, step) {
-
         this.getAllmask()[id].step = step;
         // 从左找
         this.checkDirPaths(id, step, 0, -1);
@@ -1908,20 +2052,13 @@ var gamemain = cc.Class({
         this.checkDirPaths(id, step, 4, 5);
     },
 
-    /*
-        调用: 1: checkmaskbyid寻找可连的点
-        功能: 检查是否可以继续连接
-        参数: [
-            id: 每个格子的ID type: Number
-            step: 此次寻找的步数 type: Number
-            bj: 寻找边界 type: Number
-            add: 叠加数 上下加减5 左右加减1 type: Number
-        ]
-        返回值:[
-           无
-        ]
-        思路: 根据递归寻找下一个点的连接情况
-    */
+    /**
+     * @description:  检查是否可以继续连接
+     * @param id Number 每个格子的ID
+     * @param step Number 此次寻找的步数
+     * @param bj Number 寻找边界
+     * @param add Number 叠加数 上下加减5 左右加减1
+     */
     checkDirPaths: function checkDirPaths(id, step, bj, add) {
         if (Math.abs(add) == 4 && this.getAllmask()[id] != null && this.getAllmask()[id].y == bj) {
             return false;
@@ -1945,17 +2082,9 @@ var gamemain = cc.Class({
         this.checkmaskbyid(id + add, step + 1, bj, add);
     },
 
-    /*
-        调用: 游戏初始的时候调用
-        功能: 改变格子的数字 通过mask
-        参数: [
-           无
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 改变格子的数字 通过mask
+     */
     changenumbymask: function changenumbymask() {
         for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
             if (this.getAllmask()[i].step != 9999999 && this.getAllmask()[i].step != 0) {
@@ -1966,41 +2095,19 @@ var gamemain = cc.Class({
         }
     },
 
-    /*
-         调用: 1, 游戏初始的时候调用 2, 改变格子的数字的时候调用
-         功能: 创建随机的新块 返回新快的显示
-         参数: [
-            无
-         ]
-         返回值:[
-            num: 返回格子的显示数组
-         ]
-         思路: 游戏逻辑需要
+    /**
+     * @description: 创建随机的新块 返回新快的显示
      */
     getrandomnum: function getrandomnum() {
         var tnum = this.maxnum - 1;
         if (tnum < tywx.ado.Constants.GameCenterConfig.initGameMaxNum) tnum = tywx.ado.Constants.GameCenterConfig.initGameMaxNum;
-
         var num = parseInt(Math.random() * 10000) % tnum + 1;
-        // if(this.prerandomnumber == num){
-        //     return this.getrandomnum();
-        // }else{
-        //     this.prerandomnumber = num;
-        // }
         return num;
     },
 
-    /*
-        调用: 使用满血道具 或者分享游戏的时候调用
-        功能: 复活游戏
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要
-    */
+    /**
+     * @description: 使用满血道具 或者分享游戏的时候调用
+     */
     recoverGame: function recoverGame() {
         if (this.recoverNumber < tywx.ado.Constants.GameCenterConfig.maxrnum) {
             this.point = tywx.ado.Constants.GameCenterConfig.maxphy_value;
@@ -2014,17 +2121,9 @@ var gamemain = cc.Class({
         }
     },
 
-    /*
-        调用: 游戏处于移动状态的时候调用
-        功能: 创建新的棋盘，为掉落做准备
-        参数: [
-           无
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 创建新的棋盘， 为掉落做准备
+     */
     refreshbymask: function refreshbymask() {
         for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
             if (this.getAllmask()[i].step != 9999999 && this.getAllmask()[i].step != 0) {
@@ -2072,12 +2171,15 @@ var gamemain = cc.Class({
         }
     },
 
-    // 找出个格子的周围的数 算出平均数 来设置当前格子的数子
+    /**
+     * @description: 找出个格子的周围的数 算出平均数 来设置当前格子的数子
+     * @param id Number 给定的格子ID
+     */
     getPjNumberName: function getPjNumberName(id) {
         var luck = false;
         var sjs = Math.random();
         var ttindex = 0;
-        for (var sindex = 1; sindex < tywx.config.luck_block.score.length - 1; sindex++) {
+        for (var sindex = tywx.config.luck_block.score.length - 1; sindex > 0; sindex--) {
             if (this.score >= tywx.config.luck_block.score[sindex]) {
                 ttindex = sindex;
                 break;
@@ -2101,48 +2203,44 @@ var gamemain = cc.Class({
         var fudu = luck ? 1.0 : 3.5;
         var num = parseInt(pjNumber + fudu - 2 * fudu * Math.random());
         if (num <= 0) num = 1;
+        //console.log("score=", this.score, "ttindex=", ttindex, "sjs=", sjs, "tgl=", tgl, "luck=", luck, "pjNumber=", pjNumber, "fudu=", fudu, "num=", num);
         return num;
     },
-    /*
-        调用: 点击返回首页的时候会调用
-        功能: 返回首页
-        参数: [
-           无
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
+
+    /**
+     * @description： 点击返回首页的时候会调用
+     */
     backFirstPage: function backFirstPage() {
+        tywx.ado.saveProgress();
         this.storeScore();
         cc.director.loadScene("gamestart", this.destroyFinish);
     },
 
+    /**
+     * @description: 存储当前的分数
+     */
     storeScore: function storeScore() {
         if (parseInt(tywx.ado.Utils.loadItem("ADDONE_SCORE", 0)) < this.score) {
             tywx.ado.Utils.saveItem('ADDONE_SCORE', this.score, false);
         }
     },
 
+    /**
+     * @description: 暂时没用的功能
+     */
     backCall: function backCall() {
-        //    this.showMinFriend();
         this.showAlert("测试提示信息");
-        // this.getAllPathByitemValue({value:2});
     },
 
-    /*
-        调用: 单独开启的线程调用
-        功能: 开启玩家即将超逾的好友显示 开始更新update
-        参数: [
-           无
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 开启玩家即将超逾的好友显示 开始更新update
+     */
     showMinFriend: function showMinFriend() {
+        if (this.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.gameover) {
+            return;
+        }
+        window.sharedCanvas.width = 211;
+        window.sharedCanvas.height = 98;
         tywx.ado.logWithColor('showMinFriend=====');
         var self = this;
         var bpos = cc.v2(this.stopButton.x, this.stopButton.y);
@@ -2162,56 +2260,38 @@ var gamemain = cc.Class({
         self.isRestartGame = false;
     },
 
-    /*
-         调用: 单独开启的线程调用
-         功能: 隐藏玩家即将超逾的好友显示 停止更新update
-         参数: [
-            无
-         ]
-         返回值:[
-            无
-         ]
-         思路: 游戏逻辑需要
+    /**
+     * @description: 隐藏玩家即将超逾的好友显示 停止更新update
      */
     hideMinFriend: function hideMinFriend() {
         var self = this;
-        // self.friendIcon.node.active = false;
-
         this.isShowFIcon = false;
         return;
-        // wx.postMessage({
-        //     method: 6,
-        //     rank:false,
-        //     friendicon:false,
-        // });
-        // this.printMaskMsg();
     },
-    // 打印格子信息
+
+    /**
+     * @description: 打印当前界面上的格子信息
+     */
     printMaskMsg: function printMaskMsg() {
         for (var gzIndex = 0; gzIndex < 25; gzIndex++) {
             this.getAllmask()[gzIndex].showMSG();
         }
     },
 
-    // 首次弹出帮助界面
+    /**
+     * @description： 首次弹出帮助界面
+     */
     firstShowHelpView: function firstShowHelpView() {
         if (parseInt(tywx.Util.getItemFromLocalStorage("hadshowhelpview", 0)) === 0) {
             tywx.Util.setItemToLocalStorage("hadshowhelpview", 1);
+            tywx.ado.Utils.hideWXBanner();
             this.showPlayMethod();
         }
     },
 
-    /*
-        调用: update的时候调用 
-        功能: 刷新子域即将超越的玩家纹理
-        参数: [
-           无
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 刷新子域即将超越的玩家Canvas
+     */
     _updateSubDomainCanvas: function _updateSubDomainCanvas() {
         //return;
         if (!this.tex || !tywx.publicwx) {
@@ -2225,42 +2305,37 @@ var gamemain = cc.Class({
             this.friendIcon.spriteFrame = new cc.SpriteFrame(this.tex);
             this.friendIcon.node.active = true;
         }
-
-        // if(this.isShowFIcon){
-
-        // }
     },
 
-    /*
-        调用: 点击返回首页的时候会调用
-        功能: 清除当前的节点
-        参数: [
-           无
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description 刷新显示gameover排行榜
+     */
+    flushPHBView: function flushPHBView() {
+        var openDataContext = wx.getOpenDataContext();
+        var sharedCanvas = openDataContext.canvas;
+        this.tex.initWithElement(sharedCanvas);
+        this.tex.handleLoadedTexture();
+        this.paimingSprite.spriteFrame = new cc.SpriteFrame(this.tex);
+        this.paimingSprite.node.active = true;
+    },
+
+    /**
+     * @description: destroy当前场景的时候调用
+     */
     destroyFinish: function destroyFinish() {
         // if(this.node){
         //    this.node.destroy();
         // }
     },
 
-    /*
-        调用: 点击免费领取宝箱的时候调用
-        功能: 领取道具
-        参数: [
-           无
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
-    lingQuBox: function lingQuBox() {
-
+    /**
+     * @description: 点击免费领取宝箱的时候调用
+     * @param {Boolean} dontsetnull 是否需要设置成领取一次
+     */
+    lingQuItem: function lingQuItem(dontsetnull, giveitem) {
+        if (giveitem) {
+            this.produceItem = giveitem;
+        }
         // 查看当前ID的道具玩家是否存在
         if (this.produceItem != null) {
             if (this.allitems.length == 0) {
@@ -2295,28 +2370,30 @@ var gamemain = cc.Class({
             }
 
             if (item != null) {
-                this.showAlertMSG("领取成功" + item.name);
+                this.showAlertMSG("领取成功 " + item.name + " 道具");
             }
-            this.produceItem = null;
+            if (!dontsetnull) {
+                this.produceItem = null;
+            }
         }
 
         this.storeAllItem();
         this.dealAllItems(this.allitems);
+    },
+
+    /**
+     * 游戏中弹出的领取宝箱
+     */
+    lingQuBox: function lingQuBox() {
+        this.lingQuItem();
         this.openboxview.active = false;
         this.showStopView();
     },
 
-    /*
-        调用: 当条件达到某个值的时候显示领取宝箱
-        功能: 领取道具
-        参数: [
-           maxnum: 此次可以领取的道具的最大数量。
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 当条件达到某个值的时候显示领取宝箱
+     * @param maxnum Number 此次宝箱对应的连接数产生的值
+     */
     showBox: function showBox(maxnum) {
         var cl = tywx.config.combo_level;
         var arr = [cl.good[1], cl.cool[1], cl.awesome[1], cl.unbelive[1]];
@@ -2324,61 +2401,53 @@ var gamemain = cc.Class({
         var is_show = ran <= arr[maxnum - 1];
         tywx.ado.logWithColor("maxnum:" + maxnum + ",ran:" + ran + ",is_show:" + is_show);
         if (is_show) {
+            // 更新获得道具的item
             this.showStopView();
             this.produceItems(maxnum);
+            var frameindex = 0;
+            if (this.produceItem.id == 2) {
+                frameindex = 1;
+            } else if (this.produceItem.id == 5) {
+                frameindex = 2;
+            } else if (this.produceItem.id == 6) {
+                frameindex = 3;
+            }
+            this.openBoxIconSprite.spriteFrame = this.itemframes[frameindex];
+            this.pjlView.active = false;
+            this.stopV.active = false;
             this.openboxview.active = true;
+            tywx.ado.Utils.commonScaleIn(this.openboxview);
         }
+        this.playjjaniing = false;
     },
 
-    /*
-        调用: 逻辑部分
-        功能: 暂停界面的重新开始游戏
-        参数: [
-           无
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 暂停界面的重新开始游戏
+     */
     restartGame: function restartGame() {
         this.initgame(true);
         this.showSubStopView();
     },
 
-    /*
-         调用: 逻辑部分
-         功能: 失败界面的重新开始游戏
-         参数: [
-            无
-         ]
-         返回值:[
-            无
-         ]
-         思路: 游戏逻辑需要
+    /**
+     * @description: 失败界面的重新开始游戏
      */
     loseRestartGame: function loseRestartGame() {
         this.initgame(true);
         this.visibleControllButton(false);
     },
 
-    /*
-        调用: 点击失败界面上的关闭按钮调用
-        功能: 领取道具
-        参数: [
-           无
-        ]
-        返回值:[
-           无
-        ]
-        思路: 游戏逻辑需要
-    */
+    /**
+     * @description: 点击失败界面上的关闭按钮调用 重新开始新的游戏
+     */
     startNewGame: function startNewGame() {
         this.visibleControllButton(false);
         this.initgame(true);
     },
 
-    // 在置顶的块上播放组合动画
+    /**
+     * @description: 在置顶的块上播放组合动画
+     */
     playMergeAnimation: function playMergeAnimation() {
         //return;
         if (this.g_clickid) {
@@ -2401,8 +2470,8 @@ var gamemain = cc.Class({
     },
 
     /**
-     * 得到加分label
-     * label显示的分数
+     * @description: 得到加分label
+     * @param num Number label显示的分数
      */
     getLabel: function getLabel(num) {
         var label = null;
@@ -2417,8 +2486,12 @@ var gamemain = cc.Class({
         labelScrpt.setNumber("+" + num);
         return label;
     },
-    // tywx.ado.Constants.GameCenterConfig.baseScore * (this.g_mask_samecnt - 1) * sc;
-    // 在当前加分的每个快上 加得分 10 * 3 * 4
+
+    /**
+     * @description: 在当前加分的每个格子上显示 加分
+     * @param tiles Table 此次连接对应的所有格子ID
+     * @param shownum Number 所加的分数
+     */
     addGetScoreLabelOnTile: function addGetScoreLabelOnTile(tiles, shownum) {
         var _this = this;
 
@@ -2471,14 +2544,21 @@ var gamemain = cc.Class({
         }
     },
 
-    // 判断合成的格子中是否有小皇冠的格子
+    /**
+     * @description: 判断合成的格子中是否有小皇冠的格子
+     * @param id number 格子ID
+     */
     dealAddNumber: function dealAddNumber(id) {
         if (this.allpngs[id].getComponent("celltile").prenum != 0) {
             this.addXHGId(this.allpngs[id].getComponent("celltile").prenum);
             // console.log("当前的小皇冠禁用ID = " + JSON.stringify(this.alljzxhgid));
         }
     },
-    // 展示血量帮助提示
+
+    /**
+     * @description: 展示血量帮助提示
+     * @param needaddstore Boolean 用于扩展 暂时没用
+     */
     showUseHpHelp: function showUseHpHelp(needaddstore) {
         if (parseInt(tywx.Util.getItemFromLocalStorage("hadshowhpnum", 0)) < 2) {
             if (needaddstore) {
@@ -2498,7 +2578,8 @@ var gamemain = cc.Class({
     },
 
     /** 
-     * 当分数超过10以后显示一个动画(合并完成后出现)
+     * @description: 显示当前给定的数字对应的奖励界面当分数超过10以后显示一个动画(合并完成后出现)
+     * @param num {Number} 格子的显示数字
      */
     showAnimationWhenScoreBiggerThanTen: function showAnimationWhenScoreBiggerThanTen(num) {
         // 产生大于10的效果
@@ -2513,10 +2594,64 @@ var gamemain = cc.Class({
             }
             this.hadshowlqbox = true;
             var showScript = this.showNumberNode.getComponent("MoreTanNumber");
-            showScript.setShowNumber(num);
+            showScript.init();
+            showScript.setShowNumber(num, this.score, this.produceItem.name);
         }
     },
-    // 判断当前数字是否显示过分享领奖
+
+    /**
+     * @description 保存照片
+     */
+    storePhoto: function storePhoto() {
+
+        //console.log(JSON.stringify(this.gameOutRoot.getContentSize()) + JSON.stringify(this.gameOutRoot.getContentSize(true)) + " 尺寸 = " + JSON.stringify(cc.winSize));
+        var _ref3 = [cc.game.canvas.width, cc.game.canvas.height],
+            cw = _ref3[0],
+            ch = _ref3[1];
+
+        var is_ipx = ch / cw >= 1.9; // * 是否是2:1屏幕
+        var ds = cc.size(720, 1280);
+        var dcs = cc.size(516, 818);
+        var rate_width = dcs.width / ds.width,
+            rate_height = dcs.height / ds.height;
+        var d_x = (ds.width - dcs.width) / 2,
+            d_y = (ds.height - dcs.height) / 2 - 71;
+        var rate_x = d_x / ds.width,
+            rate_y = d_y / ds.height;
+
+
+        var w = cw * rate_width;
+        var h = is_ipx ? w * (dcs.height / dcs.width) : ch * rate_height;
+        var x = cw * rate_x;
+        var y = is_ipx ? (ch - h) / 2 - this.gameOutRoot.position.y : ch * rate_y;
+        var self = this;
+        canvas.toTempFilePath({
+            x: x,
+            y: y,
+            width: w,
+            height: h,
+            destWidth: 516,
+            destHeight: 818,
+            success: function success(res) {
+                //console.log(res);
+                tywx.ado.Utils.saveImage2PhoneByUrl(res.tempFilePath, function () {
+                    tywx.ado.Utils.showWXToast("保存图片成功");
+                    // self.lingQuItem();
+                    // self.hadstorephotonumber = false;
+                }, function () {
+                    tywx.ado.Utils.showWXToast("保存图片失败");
+                });
+            },
+            fail: function fail(res) {
+                tywx.ado.Utils.showWXToast("保存图片失败");
+            }
+        });
+    },
+
+    /**
+     * @description: 判断当前数字是否显示过分享领奖
+     * @param num {Number} 格子的显示数字
+     */
     hadShowShareLJ: function hadShowShareLJ(num) {
         for (var t = 0; t < this.allshowshareids.length; t++) {
             if (num == this.allshowshareids[t]) {
@@ -2524,6 +2659,22 @@ var gamemain = cc.Class({
             }
         }
         return false;
+    },
+
+    showBanner: function showBanner() {
+        tywx.ado.Utils.createAndcreateAndShowWXBanner();
+        this.schedule(this.bannerRefresh, tywx.ado.Constants.WXAdConfig.bannerRefreshTime);
+    },
+    bannerRefresh: function bannerRefresh() {
+        tywx.ado.Utils.createAndcreateAndShowWXBanner();
+    },
+
+    showRyBox: function showRyBox() {
+        if (this.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
+            this.ryBox.active = true;
+            tywx.ado.Utils.hideWXBanner();
+            tywx.ado.Utils.commonScaleIn(this.ryBox);
+        }
     }
 
 });

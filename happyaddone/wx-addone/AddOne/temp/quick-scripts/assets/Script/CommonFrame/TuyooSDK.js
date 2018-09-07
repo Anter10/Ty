@@ -669,8 +669,8 @@ tywx.TuyooSDK = {
 
             wx.onError(function (res) {
                 var d = new Date();
-                var errMsg = 'userId:' + tywx.UserInfo.userId + 'time:' + d.toDateString() + ' ' + d.toTimeString() + ';' + res.message;
-                tywx.BiLog.uploadLogTimely(errMsg);
+                // var errMsg = 'userId:' + tywx.UserInfo.userId + 'time:'+ d.toDateString() + ' ' + d.toTimeString() +';' + res.message;
+                tywx.ado.Utils.uploadErrorMsg(res.message);
             });
 
             wx.onAudioInterruptionEnd(function () {

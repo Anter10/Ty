@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.28046875,
-      "y": 0.28046875,
+      "x": 0.26483154296875,
+      "y": 0.26483154296875,
       "z": 1
     },
     "_quat": {
@@ -3314,15 +3314,15 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 75,
+      "g": 75,
+      "b": 75,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 121,
-      "height": 32
+      "width": 119.16,
+      "height": 52.53
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -3332,7 +3332,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 19,
+      "y": 11,
       "z": 0
     },
     "_scale": {
@@ -3369,11 +3369,11 @@
     "_useOriginalSize": false,
     "_string": "分享",
     "_N$string": "分享",
-    "_fontSize": 32,
-    "_lineHeight": 32,
+    "_fontSize": 41,
+    "_lineHeight": 41,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "22558344-d692-4c60-8035-11b3ec1fe5c4"
+      "__uuid__": "6b629fb7-3c43-4301-9d74-8a7759bb230b"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
@@ -5844,9 +5844,7 @@
     "_fontSize": 40,
     "_lineHeight": 60,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "22558344-d692-4c60-8035-11b3ec1fe5c4"
-    },
+    "_N$file": null,
     "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,

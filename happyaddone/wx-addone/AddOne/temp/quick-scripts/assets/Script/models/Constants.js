@@ -20,9 +20,16 @@ var ShareConfig = {
     RANK_SHARE: ['phbshare', true], // 排行榜界面分享
     FREE_GIFT_SHARE: ['freegiftshare', true] // 免费领取
 };
-
+// * 微信广告参数
+var WXAdConfig = {
+    bannerId: 'adunit-652297ac130ea5be',
+    vedioId: 'adunit-72772b75d8b17d65',
+    bannerRefreshTime: 20 // * Banner刷新时间
+};
 // 游戏的基础配置
 var GameCenterConfig = {
+    // 得分大于15万的时候显示如意宝箱的按钮
+    showRybxNumber: 100000,
     //游戏开始的时候方块下落的时间
     mergeMaxNumberBaseScore: 500,
     //游戏开始的时候方块下落的时间
@@ -70,25 +77,25 @@ var GameCenterConfig = {
     // 游戏中用到的道具数据
     allitem: [{
         id: 1,
-        name: "数字-1道具",
+        name: "-1",
         png: "",
         num: 0,
         value: -1
     }, {
         id: 2,
-        name: "数字+2道具",
+        name: "+2",
         png: "",
         num: 0,
         value: 2
     }, {
         id: 5,
-        name: "+1血道具",
+        name: "+1血",
         png: "",
         num: 0,
         value: 0
     }, {
         id: 6,
-        name: "锤子道具",
+        name: "锤子",
         png: "",
         num: 0,
         value: 0
@@ -152,7 +159,8 @@ var GameCenterConfig = {
 
 module.exports = {
     ShareConfig: ShareConfig,
-    GameCenterConfig: GameCenterConfig
+    GameCenterConfig: GameCenterConfig,
+    WXAdConfig: WXAdConfig
 };
 
 cc._RF.pop();

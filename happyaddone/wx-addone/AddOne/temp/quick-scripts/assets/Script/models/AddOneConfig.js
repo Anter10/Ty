@@ -10,7 +10,7 @@ cc._RF.push(module, '7c2dbJUdiZLmIzaqT+PBih/', 'AddOneConfig', __filename);
    created by gyc on 2018-08-01.
 */
 var config = {
-    "auditing": true,
+    "auditing": false,
     "MUSICS": {
         "BG_MUSIC": "https://marketqn.nalrer.cn/teris/m/3.mp3"
     },
@@ -21,8 +21,9 @@ var config = {
         "chui": 0.1
     },
     "luck_block": {
-        "score": [0, 10000, 20000, 25000, 30000, 35000, 50000, 80000, 100000000],
-        "rate": [0.9, 0.85, 0.8, 0.75, 0.7, 0.6, 0.4, 0.2]
+        "score": [0, 100000, 200000, 250000, 300000, 400000, 100000000],
+        "rate": [0.9, 0.8, 0.75, 0.7, 0.6, 0.01],
+        "range": [3, 3.5, 3.5, 3.5, 4, 6]
     },
     "combo_level": {
         "good": [4, 0.3],
