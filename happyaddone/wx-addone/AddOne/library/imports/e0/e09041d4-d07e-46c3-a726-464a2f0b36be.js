@@ -24,7 +24,11 @@ cc.Class({
             default: null,
             type: cc.Label
         },
-
+        // 格子上显示的数字阴影
+        shadow: {
+            default: null,
+            type: cc.Label
+        },
         // 点击开始的按钮
         touchEft: {
             default: null,
@@ -79,11 +83,12 @@ cc.Class({
     */
     visByNum: function visByNum(num, renum) {
         this.hasvis = false;
+        var tnum = (renum - 1) % 10;
         for (var i = 0; i < this.cells.length; i++) {
             // if(num == 0){
             //    num = 1;
             // }
-            if (i == num - 1) {
+            if (i == tnum) {
                 this.hasvis = true;
                 this.cells[i].node.active = true;
             } else {
@@ -97,6 +102,12 @@ cc.Class({
         }
 
         this.number.string = renum;
+        if (this.shadow == null) {
+            console.log("shadow is NULL!!!!");
+        } else {
+            this.shadow.string = renum;
+        }
+        //console.log("SHADOW:", typeof(this.shadow));
         this.renumber = renum;
         // this.showHG();
     },
@@ -146,7 +157,11 @@ cc.Class({
         思路: 逻辑需要
     */
     setColor: function setColor(color) {
-        this.number.node.color = color;
+        if (this.shadow == null) {
+            console.log("SETCOLOR", this.shadow);
+        } else {
+            this.shadow.node.color = color;
+        }
         //   this.hide.node.color = color;
     },
 
@@ -208,6 +223,7 @@ cc.Class({
         this.prex = parseInt(this.node.x);
         this.prey = parseInt(this.node.y);
         this.hasvis = false;
+        this.node.opacity = 230;
         // 设置成屏蔽层
         var self = this;
         // this.hide.node.active = false;

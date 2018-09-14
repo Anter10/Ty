@@ -375,6 +375,8 @@ var Utils = function () {
          * @param {boolean} [show_cancle=false]  是否显示取消
          * @param {Function} [sure_cb=null] 确定按钮回调
          * @param {Function} [cancle_cb=null] 取消按钮回调
+         * @param {string} [confirm_txt='确定']
+         * @param {string} [cancle_txt='取消']
          */
 
     }, {
@@ -384,11 +386,15 @@ var Utils = function () {
             var show_cancel = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
             var sure_cb = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
             var cancle_cb = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+            var confirm_txt = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '确定';
+            var cancle_txt = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : '取消';
 
             wx.showModal({
                 title: title,
                 content: content,
                 showCancel: show_cancel,
+                confirmText: confirm_txt,
+                cancelText: cancle_txt,
                 success: function success(res) {
                     if (res.confirm) {
                         console.log('用户点击确定');
@@ -599,10 +605,30 @@ var Utils = function () {
         value: function isIpx() {
             var ret = false;
             var sys_info = wx.getSystemInfoSync();
-            if (sys_info.model === 'iPhone X' || sys_info.system.indexOf('iOS') > 0 && sys_info.windowHeight / sys_info.windowWidth > 1.9) {
+            if (sys_info.model.indexOf('iPhone X') >= 0 || sys_info.system.indexOf('iOS') >= 0 && sys_info.windowHeight / sys_info.windowWidth > 1.9) {
                 return true;
             }
             return ret;
+        }
+        /**
+         * @description 根据url刷新sprite
+         * @author lu ning
+         * @date 2018-09-08
+         * @static
+         * @param {cc.Sprite} sprite
+         * @param {String} url
+         */
+
+    }, {
+        key: 'refreshSpriteByUrl',
+        value: function refreshSpriteByUrl(sprite, url) {
+            cc.loader.load(url, function (err, texture) {
+                if (!err) {
+                    var new_sprite_frame = new cc.SpriteFrame(texture);
+                    sprite.spriteFrame = new_sprite_frame;
+                    console.log("刷新CDN图片成功");
+                }
+            });
         }
     }]);
 

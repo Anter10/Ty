@@ -197,9 +197,10 @@ var gamestart = cc.Class({
             console.log("iphone x start game");
             this.addInMyMini.y = this.addInMyMini.y - 45;
         }
-        this.playSZAni(this.shouZHiNode, 1, 1.2);
-        // ! Modify by luning [06-09-18] 交叉导流icon,这个版本隐藏
-        //tywx.AdManager.showAd(cc.v2(100, 100),'GAME_START');
+        var an = tywx.AdManager.getAdNodeByTag('GAME_START');
+        if (an) an.showAdNode();
+        // this.playSZAni(this.shouZHiNode, 1,1.2);
+
 
         // this.contentView.height = 60 * 30; 
         this.phbShareBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.RANK_SHARE);
@@ -273,6 +274,7 @@ var gamestart = cc.Class({
                 this.historyLabel.node.x = this.historyLabel.node.x - tx;
                 this.gameScore.node.x = this.gameScore.node.x - tx;
             }
+            tywx.ado.Utils.saveItem("ADDONE_SCORE2", score, false);
         } else {
             console.log("当前分数不存在");
         }
@@ -289,6 +291,8 @@ var gamestart = cc.Class({
         this.givePlayerItems();
         console.log("本地的项目配置 = " + JSON.stringify(config));
         this.requestConfigInfo();
+        //   tywx.ado.Configs = config;
+        //   tywx.config = config;
         // 开一个线程监听次时间段用户是否有点击
 
         tywx.Timer.setTimer(self, function () {
@@ -478,6 +482,25 @@ var gamestart = cc.Class({
     },
 
     /**
+     * @description 获取配置成功后刷新
+     * @author lu ning
+     * @date 2018-09-12
+     */
+    refreshAfterGetConfig: function refreshAfterGetConfig() {
+        // ! Modify by luning [06-09-18] 交叉导流icon,这个版本隐藏
+        // ! Modify by luning [12-09-2018] 显示交叉导流,添加提审状态不显示
+        if (!tywx.config.auditing) {
+            var adNode = tywx.AdManager.getAdNodeByTag('GAME_START');
+            if (adNode) {
+                adNode.showAdNode();
+            } else {
+                tywx.AdManager.showAd(cc.v2(100, 100), 'GAME_START');
+            }
+        }
+    },
+
+
+    /**
      * 请求获取配置信息
      */
     requestConfigInfo: function requestConfigInfo() {
@@ -487,6 +510,8 @@ var gamestart = cc.Class({
         var that = this;
 
         console.log('请求的CDN地址 = ' + _configUrl);
+        tywx.ado.Configs = config;
+        tywx.config = config;
 
         var successcb = function successcb(ret) {
             console.log("服务器读到的配置:" + JSON.stringify(ret));
@@ -527,6 +552,7 @@ var gamestart = cc.Class({
             }
             tywx.ado.Configs = config;
             tywx.config = config;
+            that.refreshAfterGetConfig();
             console.log('CONFIG ' + JSON.stringify(config));
         };
 
@@ -598,6 +624,7 @@ var gamestart = cc.Class({
             思路: 游戏需要
         */
     startGame: function startGame() {
+        if (!tywx.config) return;
         if (this.haveStoreGameData != -1) {
             this.showGoonProgress();
         } else {
@@ -620,13 +647,23 @@ var gamestart = cc.Class({
      * @description 弹出游戏的选择是否继续进度的对话框
      */
     showGoonProgress: function showGoonProgress() {
-        if (tywx.config.auditing == true) {
+        if (tywx.config && tywx.config.auditing == true) {
             cc.director.loadScene("gamemain");
             return;
         }
+        var progress = tywx.ado.loadProgress();
+        if (progress === -1) {
+            this.goonProgressGame(true);
+            return;
+        }
+        if (progress.score == 0) {
+            this.goonProgressGame(true);
+            return;
+        }
+        var contentTxt = "\u4E0A\u6B21\u5F97\u5206" + progress.score + "\uFF0C\u60A8\u60F3\u7EE7\u7EED\u6E38\u620F\u5417\uFF1F";
         var self = this;
         self.hasgononstate = false;
-        tywx.ado.Utils.showWXModal("分享继续之前的进度", '继续游戏', true,
+        tywx.ado.Utils.showWXModal(contentTxt, '发现游戏进度', true,
         // 确定
         function () {
             var config = tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE;
@@ -646,7 +683,7 @@ var gamestart = cc.Class({
         // 取消
         function () {
             self.goonProgressGame(true);
-        });
+        }, '继续游戏', '重新开始');
     },
 
     /**

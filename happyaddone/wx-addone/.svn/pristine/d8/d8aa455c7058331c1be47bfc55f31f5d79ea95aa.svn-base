@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "imgshare",
+    "texture": "e56ece0d-95d9-48b7-89c4-419dab1f6982",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      45,
+      60
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      45,
+      60
+    ]
+  }
+}

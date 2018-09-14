@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "addtwo1",
+    "texture": "331f982b-67d2-4a7b-a295-84773f59fe4f",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      164,
+      162
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      164,
+      162
+    ]
+  }
+}

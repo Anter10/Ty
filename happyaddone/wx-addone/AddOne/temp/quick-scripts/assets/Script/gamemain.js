@@ -307,11 +307,6 @@ var gamemain = cc.Class({
         showboxNumber: 0,
         // 上一次的生命值
         prepoint: 0,
-        // 所有音效
-        allAudio: {
-            default: [],
-            type: cc.AudioSource
-        },
         // 时间段内玩家是否有点击过屏幕 true: 有点击 false: 没有点击 
         hadClickScreen: false,
         // 当前处于使用状态的道具ID
@@ -464,6 +459,9 @@ var gamemain = cc.Class({
      * @description: 场景加载完成后的一些UI逻辑处理 
      */
     onLoad: function onLoad() {
+        var an = tywx.AdManager.getAdNodeByTag('GAME_START');
+        console.log("IIIIIIIIIIAD....", an, tywx.AdManager.adNodeList.length);
+        if (an) an.hideAdNode();
         this.pos = this.gameOutRoot.convertToWorldSpace(this.gameOutRoot.position);
         console.log(JSON.stringify(this.pos1) + " v= " + JSON.stringify(cc.view.getVisibleSize()) + "尺寸= " + this.gameOutRoot.width + " z = " + this.gameOutRoot.height + " 坐标 = " + JSON.stringify(this.pos));
         tywx.gamecenter = this;
@@ -591,6 +589,7 @@ var gamemain = cc.Class({
 
         // 设置免费领取的回调
         var mflq = this.mflqBtn.getComponent("ShareButton");
+        this.produceHPAni(this.mflqBtn, 0.6, 1.1);
         if (tywx.config.auditing == true) {
             mflq.setReactCall(true);
         } else {
@@ -657,6 +656,7 @@ var gamemain = cc.Class({
             console.log('// ! Modify by luning [07-09-2018] ipxipxipxipx');
             //this.itemview.parent.position.y += 500;
         }
+        this.btnRefreshGameOverPhotoCallback();
     },
 
     /**
@@ -766,29 +766,33 @@ var gamemain = cc.Class({
         // 判断连接数的大小 如果连接数大于不同的值则产生不同的效果
         if (this.gamestate != tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
 
-            if (this.lianjiNumber >= tywx.config.combo_level.good[0] && this.point > 0) {
+            if (this.lianjiNumber >= tywx.config.combo_level_new.good && this.point > 0) {
                 if (!this.hadshowlqbox) {
                     this.dealLianJiNumber();
                 } else {
                     this.playjjaniing = false;
                     if (this.hadshowlqbox) {
-                        tywx.ado.Utils.hideWXBanner();
-                        this.showNumberNode.active = true;
-                        this.showCDAni();
-                        this.showNumberNode.getComponent("MoreTanNumber").playAni();
+                        if (tywx.config.auditing == false) {
+                            tywx.ado.Utils.hideWXBanner();
+                            this.showNumberNode.active = true;
+                            this.showCDAni();
+                            this.showNumberNode.getComponent("MoreTanNumber").playAni();
+                        }
                         this.hadshowlqbox = false;
                     }
                 }
             } else {
                 if (this.hadshowlqbox) {
-                    tywx.ado.Utils.hideWXBanner();
-                    this.showNumberNode.active = true;
-                    this.showCDAni();
-                    this.showNumberNode.getComponent("MoreTanNumber").playAni();
+                    if (tywx.config.auditing == false) {
+                        tywx.ado.Utils.hideWXBanner();
+                        this.showNumberNode.active = true;
+                        this.showCDAni();
+                        this.showNumberNode.getComponent("MoreTanNumber").playAni();
+                    }
                     this.hadshowlqbox = false;
                 } else if (this.hadShowPjl == false && this.point > 0 && this.hasProduceNewScore == true) {
                     this.hasProduceNewScore = false;
-                    this.pjlCallBack();
+                    // this.pjlCallBack();
                 }
             }
             this.showRYBoxButton();
@@ -1610,7 +1614,7 @@ var gamemain = cc.Class({
         var mt = tywx.ado.Constants.GameCenterConfig.merge_time;
         var ret = mt;
         if (sc > 4) ret = mt + mt * (sc - 4) * 0.2;
-        //console.log("SC=", sc, "RET=", ret);
+        //console.log("            =", sc, "RET=", ret);
         return ret;
     },
 
@@ -1677,22 +1681,22 @@ var gamemain = cc.Class({
      */
     dealLianJiNumber: function dealLianJiNumber() {
         this.playjjaniing = true;
-        if (this.lianjiNumber == tywx.config.combo_level.good[0]) {
+        if (this.lianjiNumber == tywx.config.combo_level_new.good) {
             this.playGood();
             this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.GOOD);
-            this.showboxNumber = 1;
-        } else if (this.lianjiNumber == tywx.config.combo_level.cool[0]) {
+            this.showboxNumber = this.lianjiNumber;
+        } else if (this.lianjiNumber == tywx.config.combo_level_new.cool) {
             this.playCool();
             this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.COOL);
-            this.showboxNumber = 2;
-        } else if (this.lianjiNumber == tywx.config.combo_level.awesome[0]) {
+            this.showboxNumber = this.lianjiNumber;
+        } else if (this.lianjiNumber == tywx.config.combo_level_new.awesome) {
             this.playAwesome();
             this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.AWESOME);
-            this.showboxNumber = 3;
-        } else if (this.lianjiNumber >= tywx.config.combo_level.unbelive[0]) {
+            this.showboxNumber = this.lianjiNumber;
+        } else if (this.lianjiNumber >= tywx.config.combo_level_new.unbelive) {
             this.playUnbelive();
             this.palyAudioByIndex(tywx.ado.Constants.GameCenterConfig.SOUNDS.UNBLIEVEABLE);
-            this.showboxNumber = 4;
+            this.showboxNumber = this.lianjiNumber;
         } else {
             this.showboxNumber = 0;
             this.playjjaniing = false;
@@ -1827,6 +1831,7 @@ var gamemain = cc.Class({
         // 咋这里判断当前的血量是否为1 如果为1的话产生 动画提示和tips
         if (this.point == 1) {
             this.produceHPAni(this.stars[0]);
+            this.showAlertMSG("血量要耗光啦~");
         }
         this.prepoint = this.point;
         for (var starIndex = 0; starIndex < 5; starIndex++) {
@@ -1852,7 +1857,6 @@ var gamemain = cc.Class({
         var seq = cc.sequence(scaleBoom, scaleSmaller, delay);
         var rep = cc.repeatForever(seq);
         node.runAction(rep);
-        this.showAlertMSG("血量要耗光啦~");
     },
 
     /**
@@ -1908,8 +1912,8 @@ var gamemain = cc.Class({
             method: 7
         });
         // this.tex.releaseTexture();
-        window.sharedCanvas.width = 460;
-        window.sharedCanvas.height = 180;
+        window.sharedCanvas.width = 490;
+        window.sharedCanvas.height = 210;
         var self = this;
         // 开启一个进程循环隐藏即将超逾的玩家
         var tindex = 0;
@@ -2029,7 +2033,7 @@ var gamemain = cc.Class({
 
         while (needcheck) {
             needcheck = false;
-            for (var i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
+            for (i = 0; i < tywx.ado.Constants.GameCenterConfig.geziNumber; i++) {
                 this.resetAllMask();
                 this.checkmaskbyid(i, 0);
                 if (this.g_mask_samecnt >= 3) {
@@ -2050,6 +2054,7 @@ var gamemain = cc.Class({
         }
         this.dealPlayerClickScreen();
         this.dealAddStoreMaxNum();
+        this.showRYBoxButton();
     },
 
     /**
@@ -2451,11 +2456,18 @@ var gamemain = cc.Class({
      * @param maxnum Number 此次宝箱对应的连接数产生的值
      */
     showBox: function showBox(maxnum) {
-        var cl = tywx.config.combo_level;
-        var arr = [cl.good[1], cl.cool[1], cl.awesome[1], cl.unbelive[1]];
+        var rvalue = 0;
+        var cn = this.curmaxNumber;
+        var sbr = tywx.config.show_box_rate;
+        for (var i = 1; i < sbr.maxnum.length; i++) {
+            if (cn >= sbr.maxnum[i - 1] && cn < sbr.maxnum[i]) {
+                rvalue = sbr.rate[i - 1] * Math.pow(maxnum, sbr.comboz);
+                break;
+            }
+        }
         var ran = Math.random();
-        var is_show = ran <= arr[maxnum - 1];
-        tywx.ado.logWithColor("maxnum:" + maxnum + ",ran:" + ran + ",is_show:" + is_show);
+        var is_show = ran <= rvalue;
+        tywx.ado.logWithColor("combonum:" + maxnum + ",maxnum:" + this.curmaxNumber + ",rvalue:" + rvalue + ",ran:" + ran + ",is_show:" + is_show);
         if (is_show) {
             // 更新获得道具的item
             this.showStopView();
@@ -2676,13 +2688,14 @@ var gamemain = cc.Class({
     storePhoto: function storePhoto() {
 
         //console.log(JSON.stringify(this.gameOutRoot.getContentSize()) + JSON.stringify(this.gameOutRoot.getContentSize(true)) + " 尺寸 = " + JSON.stringify(cc.winSize));
+        var contentsize = { width: this.gameOutRoot.width, height: this.gameOutRoot.height };
         var _ref4 = [cc.game.canvas.width, cc.game.canvas.height],
             cw = _ref4[0],
             ch = _ref4[1];
 
         var is_ipx = ch / cw >= 1.9; // * 是否是2:1屏幕
         var ds = cc.size(720, 1280);
-        var dcs = cc.size(516, 818);
+        var dcs = cc.size(contentsize.width, contentsize.height);
         var rate_width = dcs.width / ds.width,
             rate_height = dcs.height / ds.height;
         var d_x = (ds.width - dcs.width) / 2,
@@ -2701,8 +2714,10 @@ var gamemain = cc.Class({
             y: y,
             width: w,
             height: h,
-            destWidth: 516,
-            destHeight: 818,
+            destWidth: contentsize.width,
+            destHeight: contentsize.height,
+            quality: 1,
+            fileType: "jpg",
             success: function success(res) {
                 //console.log(res);
                 tywx.ado.Utils.saveImage2PhoneByUrl(res.tempFilePath, function () {
@@ -2752,6 +2767,16 @@ var gamemain = cc.Class({
         var parent = this.itemview.parent;
         var ret = parent.getChildByName('commbottom');
         return ret;
+    },
+    btnRefreshGameOverPhotoCallback: function btnRefreshGameOverPhotoCallback() {
+        var photo_urls = tywx.config.CDNImages.GameOverPhotos;
+        if (!this.showPicIndex || this.showPicIndex > photo_urls.length - 1) {
+            this.showPicIndex = 0;
+        }
+        var pngurl = tywx.SystemInfo.cdnPath + 'share_pyq/addone/' + photo_urls[this.showPicIndex];
+        console.log("cdnpngurl = " + pngurl);
+        tywx.ado.Utils.refreshSpriteByUrl(this.gameOutRoot.getComponent(cc.Sprite), pngurl);
+        this.showPicIndex = this.showPicIndex + 1;
     }
 });
 

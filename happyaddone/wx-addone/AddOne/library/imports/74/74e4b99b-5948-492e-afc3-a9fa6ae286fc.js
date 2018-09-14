@@ -16,6 +16,10 @@ cc.Class({
             type: cc.Node,
             default: null
         },
+        numberBj: {
+            type: cc.Node,
+            default: null
+        },
         rootNode: {
             type: cc.Node,
             default: null
@@ -75,14 +79,17 @@ cc.Class({
             tywx.ado.Utils.showWXToast("已经保存成功", 500);
             return;
         }
+
         // this.hadstorephotonumber = true;
+        var contentsize = { width: this.numberBj.width, height: this.numberBj.height };
+        console.log("contentsize  + " + JSON.stringify(contentsize));
         var _ref = [cc.game.canvas.width, cc.game.canvas.height],
             cw = _ref[0],
             ch = _ref[1];
 
         var is_ipx = ch / cw >= 1.9; // * 是否是2:1屏幕
         var ds = cc.size(720, 1280);
-        var dcs = cc.size(516, 818);
+        var dcs = cc.size(contentsize.width, contentsize.height);
         var rate_width = dcs.width / ds.width,
             rate_height = dcs.height / ds.height;
         var d_x = (ds.width - dcs.width) / 2,
@@ -101,8 +108,10 @@ cc.Class({
             y: y,
             width: w,
             height: h,
-            destWidth: 516,
-            destHeight: 818,
+            destWidth: contentsize.width,
+            destHeight: contentsize.height,
+            quality: 1,
+            fileType: "jpg",
             success: function success(res) {
                 //console.log(res);
                 tywx.ado.Utils.saveImage2PhoneByUrl(res.tempFilePath, function () {
@@ -162,6 +171,7 @@ cc.Class({
     uiAni: function uiAni() {
         tywx.ado.Utils.commonScaleIn(this.rootNode);
     },
+
     /**
       * @description 页面加载完成后的逻辑处理
       */
@@ -172,6 +182,7 @@ cc.Class({
         this.backSprite.node.on('touchstart', function (event) {
             return true;
         });
+        this.btnRefreshBgPhotoCallback();
     },
 
 
@@ -208,8 +219,19 @@ cc.Class({
         this.curhcScoreLabel.string = score;
         this.curgzupNumberLabel.string = num;
         this.curgzItemNameLabel.string = name;
-    }
+    },
 
+    btnRefreshBgPhotoCallback: function btnRefreshBgPhotoCallback() {
+        var photo_urls = tywx.config.CDNImages.MergeBigNumPhotos;
+        if (!this.showPicIndex || this.showPicIndex > photo_urls.length - 1) {
+            this.showPicIndex = 0;
+        }
+        var pngurl = tywx.SystemInfo.cdnPath + 'share_pyq/addone/' + photo_urls[this.showPicIndex];
+        console.log("cdnpngurl = " + pngurl);
+        var sprite = this.rootNode.getChildByName('numberbj1').getComponent(cc.Sprite);
+        tywx.ado.Utils.refreshSpriteByUrl(sprite, pngurl);
+        this.showPicIndex = this.showPicIndex + 1;
+    }
 });
 
 cc._RF.pop();

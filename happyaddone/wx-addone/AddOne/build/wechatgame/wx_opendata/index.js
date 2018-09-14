@@ -280,27 +280,27 @@ function drawOverphb(friendsdata) {
     // console.log("游戏结束时候当排行榜的数据" + JSON.stringify(frienddata));
     var x = 20;
     var y = 30;
-    var width = 90;
-    var height = 90;
+    var width = 109;
+    var height = 109;
     var margin = 70;
     
     function drawIcon(data, index) {
         setTimeout(() => {
-            drawImage(data.avatarUrl, x + ((index - 1) * (width + margin)), y, width, height);
-            _shareCanvas.fillStyle = "#ffffff";
+            drawImage(data.avatarUrl, x + ((index - 1) * (width + margin)), y + 5, width, height);
+            _shareCanvas.fillStyle = "#361348";
             _shareCanvas.font = "27px Arial";
             _shareCanvas.textAlign = 'center';
-            _shareCanvas.fillText(`` + stringSlice(data.nickname, 12), x + ((index - 1) * (width + margin)) + width / 2, height + y + 25);
+            _shareCanvas.fillText(`` + stringSlice(data.nickname, 12), x + ((index - 1) * (width + margin)) + width / 2, height + y + 40);
 
-            _shareCanvas.fillStyle = "#ffffff";
+            _shareCanvas.fillStyle = "#361348";
             _shareCanvas.font = "25px Arial";
             _shareCanvas.textAlign = 'center';
-            _shareCanvas.fillText(`` + data.KVDataList[0].value, x + ((index - 1) * (width + margin)) + width / 2 , height + y + 55);
+            _shareCanvas.fillText(`` + data.KVDataList[0].value, x + ((index - 1) * (width + margin)) + width / 2 , height + y + 70);
             
-            _shareCanvas.fillStyle = "#ffffff";
+            _shareCanvas.fillStyle = "#361348";
             _shareCanvas.font = "27px Arial";
             _shareCanvas.textAlign = 'center';
-            _shareCanvas.fillText(`` + data.pm, x + ((index - 1) * (width + margin)) + width / 2 ,28);
+            _shareCanvas.fillText(`` + data.pm, x + ((index - 1) * (width + margin)) + width / 2 ,y - 10);
 
         }, (index -1) * 200);
         

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "tupojilu03",
+    "texture": "616dd340-ee70-4cbf-b1b6-34894d2d7b43",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      548,
+      628
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      548,
+      628
+    ],
+    "capInsets": [
+      31,
+      22,
+      18,
+      18
+    ]
+  }
+}

@@ -1,0 +1,169 @@
+"use strict";
+cc._RF.push(module, 'df1208Zx/JC3oUD9r9e3z/G', 'Constants');
+// Script/models/Constants.js
+
+'use strict';
+
+/**
+ * @file: Constants.js
+ * @description: 游戏中的常量定义
+ * @author: lu ning
+ * @email: luning@tuyoogame.com
+ * @date: 2018-08-23
+ */
+// * 分享标识
+var ShareConfig = {
+    FIRST_PAGE_SHARE: ['firstpageshare', false], // 首页分享
+    RECOVER_GAME_SHARE: ['recovergameshare', true], // 分享复活
+    MAIN_BTN_SHARE: ['mainbtnshare', false], // 主界三点下面的分享
+    POJILU_SHARE: ['pojilushare', false], // 得分破纪录分享
+    RANK_SHARE: ['phbshare', true], // 排行榜界面分享
+    FREE_GIFT_SHARE: ['freegiftshare', true] // 免费领取
+};
+// * 微信广告参数
+var WXAdConfig = {
+    bannerId: 'adunit-652297ac130ea5be',
+    vedioId: 'adunit-72772b75d8b17d65',
+    bannerRefreshTime: 20 // * Banner刷新时间
+};
+// 游戏的基础配置
+var GameCenterConfig = {
+    //游戏开始的时候方块下落的时间
+    mergeMaxNumberBaseScore: 700,
+    //游戏开始的时候方块下落的时间
+    startGameDropTime: 0.3,
+    // 当格子显示的数字超过此值时 显示皇冠
+    moreThanTenNumber: 8,
+    // 当格子显示的数字超过此值时 显示动画
+    moreThanEightNumber: 8,
+    // 分数大于这个值的时候 突破记录才显示 否则不限时
+    showPjlScore: 8000,
+    // 每个格子的大小（宽 高）
+    gezi_size: 56,
+    //每个格子的间隙
+    gezi_gap: 4,
+    gezi_h_s: 48.5,
+    // 每个格子+间隙的大小 
+    gezi_pitch: 140,
+    // 格子移动一个的时间
+    drop_time: 0.15,
+    // 合并间歇时间
+    merge_delay_time: 0.08,
+    // 移动合并时间
+    merge_time: 0.25,
+    // 宽
+    swidth: 720,
+    //高
+    sheight: 1280,
+    // 玩家最大体力
+    maxphy_value: 5,
+    // 公共格子数量 5 * 5
+    geziNumber: 98,
+    // 最少连接多少个可以消除
+    minCanRemoveNumber: 5,
+    //玩家得分基数
+    baseScore: 10,
+    // 最大复活次数
+    maxrnum: 2,
+    //格子距离底部多远
+    marginbottom: 358,
+    // 即将超越对手多少分显示相应图标
+    thanfriendScore: 300,
+    gezi_offx: 30,
+    gezi_offy: 380,
+    // 提示用户点击轮播时间
+    letUserClickTime: 3,
+    // 初始化给玩家的道具数量
+    initGivePlayerItemNumber: 3,
+    // 初始化格子的最大数限制
+    initGameMaxNum: 5,
+    // 游戏中用到的道具数据
+    allitem: [{
+        id: 1,
+        name: "-1",
+        png: "",
+        num: 0,
+        value: -1
+    }, {
+        id: 2,
+        name: "+2",
+        png: "",
+        num: 0,
+        value: 2
+    }, {
+        id: 5,
+        name: "+1血",
+        png: "",
+        num: 0,
+        value: 0
+    }, {
+        id: 6,
+        name: "锤子",
+        png: "",
+        num: 0,
+        value: 0
+    }],
+    //! 音效
+    SOUNDS: {
+        AWESOME: 'sounds/awesome.mp3',
+        COOL: 'sounds/cool.mp3',
+        GOOD: 'sounds/good.mp3',
+        MUSIC_LOGO: 'sounds/music_logo.mp3',
+        POPUPCLOSE: 'sounds/PopupClose.mp3',
+        UNBLIEVEABLE: 'sounds/unblieveable.mp3',
+        COMBO: ['sounds/combo3.mp3', 'sounds/combo4.mp3', 'sounds/combo5.mp3', 'sounds/combo6.mp3', 'sounds/combo7.mp3', 'sounds/combo8.mp3', 'sounds/combo9.mp3', 'sounds/combo10.mp3', 'sounds/combo11.mp3', 'sounds/combo12.mp3', 'sounds/combo13.mp3', 'sounds/combo14.mp3']
+    },
+    // 格子中数字的颜色值
+    celltilenumColors: [[154, 91, 1], // 1
+    [51, 112, 0], // 2
+    [161, 62, 3], // 3
+    [165, 14, 14], // 4
+    [1, 107, 98], // 5
+    [151, 0, 103], // 6
+    [0, 107, 160], // 7
+    [15, 84, 105], // 8
+    [107, 33, 207], // 9
+    [131, 0, 155], // 10
+    [15, 84, 195]],
+    // 当前的游戏状态
+    gameState: {
+        checkclick: 1, // 玩家点击格子的状态
+        domove: 2, // 格子移动状态
+        dodrop: 3, // 各自处于掉落状态
+        waitclick: 4, // 等待点击状态
+        gameover: 5, // 游戏结束状态
+        usingitem: 6
+    },
+    // 格子颜色值(RGB) 现在没用
+    color_list: [[233, 85, 56], // 砖红色
+    [255, 128, 64], // 浅砖红色
+    [44, 175, 219], // 蓝色
+    [165, 198, 31], // 草绿色
+    [23, 177, 167], // 青色
+    [0, 128, 0], // 深绿色
+    [0, 0, 128], // 深蓝色
+    [128, 0, 0], // 深红色
+    [128, 64, 32], // 咖啡色
+    [128, 0, 128], // 紫色
+    [32, 32, 32] // 深黑色
+    ],
+
+    // 体力显示的属性
+    showphy_pros: {
+        width: 130,
+        height: 40,
+        radius: 6,
+        phy_num: 5,
+        // 赤橙黄绿青蓝紫
+        colors: [[255, 0, 0], [255, 165, 0], [255, 255, 0], [0, 255, 0], [0, 127, 255], [0, 0, 255], [139, 0, 255]]
+    }
+
+};
+
+module.exports = {
+    ShareConfig: ShareConfig,
+    GameCenterConfig: GameCenterConfig,
+    WXAdConfig: WXAdConfig
+};
+
+cc._RF.pop();

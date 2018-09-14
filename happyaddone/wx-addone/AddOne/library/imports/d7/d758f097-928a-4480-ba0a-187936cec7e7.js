@@ -12,6 +12,10 @@ cc.Class({
             default: [],
             type: cc.Node
         },
+        celltile: {
+            default: null,
+            type: cc.Prefab
+        },
         czNode: {
             default: null,
             type: cc.Node
@@ -30,19 +34,37 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function onLoad() {
-        this.allnumbers = [2, 3, 4, 4, 3, 5];
-        for (var tindex = 0; tindex < this.cells.length; tindex++) {
-            var tilescript = this.cells[tindex].getComponent("celltile");
-            tilescript.setCantClick(true);
-            tilescript.changeShow(this.allnumbers[tindex]);
-        }
-        this.cells[0].getComponent("celltile").playNewPlayerEff();
+        this.initCells();
     },
 
 
+    initCells: function initCells() {
+        if (!this.allcells) {
+            this.allcells = [];
+        } else {
+            return;
+        }
+        this.allnumbers = [2, 3, 4, 4, 3, 5];
+        for (var tindex = 0; tindex < this.cells.length; tindex++) {
+            var cellt = cc.instantiate(this.celltile);
+            var tilescript = cellt.getComponent("celltile");
+            tilescript.setCantClick(true);
+            tilescript.changeShow(this.allnumbers[tindex]);
+            cellt.scaleX = 0.65;
+            cellt.scaleY = 0.65;
+            cellt.y = cellt.y - 30;
+            cellt.x = cellt.x + 15;
+            cellt.parent = this.cells[tindex];
+            this.allcells.push(cellt);
+        }
+        // this.cells = allcell;
+
+
+        this.allcells[0].getComponent("celltile").playNewPlayerEff();
+    },
     addNumber: function addNumber(num) {
         var self = this;
-        var tilescript = this.cells[0].getComponent("celltile");
+        var tilescript = this.allcells[0].getComponent("celltile");
         tilescript.node.stopAllActions();
         var delay1 = cc.delayTime(1.5);
         var call = cc.callFunc(function () {
@@ -55,15 +77,20 @@ cc.Class({
         var seq = cc.sequence(delay1, call, delay2, call1);
         var rep = cc.repeatForever(seq);
 
-        this.cells[0].getComponent("celltile").node.runAction(rep);
+        this.allcells[0].getComponent("celltile").node.runAction(rep);
     },
 
-    start: function start() {},
+    start: function start() {
+        //    this.initCells();
+    },
 
 
     showChuiZi: function showChuiZi() {
-        this.cells[0].getComponent("celltile").changeShow(2);
-        this.cells[0].getComponent("celltile").node.stopAllActions();
+        if (!this.allcells) {
+            this.initCells();
+        }
+        this.allcells[0].getComponent("celltile").changeShow(2);
+        this.allcells[0].getComponent("celltile").node.stopAllActions();
         this.czNode.active = true;
         this.numNode.active = false;
         var anim = this.czNode.getComponent(cc.Animation);
@@ -72,6 +99,9 @@ cc.Class({
     },
 
     showNum: function showNum(num) {
+        if (!this.allcells) {
+            this.initCells();
+        }
         this.addNumber(num);
         this.czNode.active = false;
         this.numNode.active = true;
@@ -85,7 +115,11 @@ cc.Class({
     },
 
     hideView: function hideView() {
-        this.cells[0].getComponent("celltile").changeShow(2);
+        if (!this.allcells) {
+            this.initCells();
+        }
+
+        this.allcells[0].getComponent("celltile").changeShow(2);
         var anim = this.czNode.getComponent(cc.Animation);
         anim.stop("chuizi");
         this.czNode.active = false;

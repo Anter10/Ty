@@ -100,6 +100,11 @@ var Audio = function (_HTMLAudioElement) {
       _innerAudioContext.get(this).play();
     }
   }, {
+    key: 'resume',
+    value: function resume() {
+      _innerAudioContext.get(this).resume();
+    }
+  }, {
     key: 'pause',
     value: function pause() {
       _innerAudioContext.get(this).pause();

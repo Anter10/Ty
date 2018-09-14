@@ -50,25 +50,32 @@ cc.Class({
     lqCall: function lqCall() {},
 
     onLoad: function onLoad() {
+
         // 显示当前的所有道具
         var allitem = tywx.ado.Constants.GameCenterConfig.allitem;
+        var items = [];
+        for (var ti = 0; ti < allitem.length; ti++) {
+            var item = cc.instantiate(this.luckitem);
+            var itemsceipt = item.getComponent("luckitem");
+            itemsceipt.setParent(this);
+            itemsceipt.setItem(allitem[ti], this.allframe[ti]);
+            if (ti == 0) {
+                this.selectitem = itemsceipt;
+            }
+            item.parent = this.luckitems[ti];
+            items.push(item);
+        }
+
+        this.luckitems = items;
+
         var row = 0,
             column = 0,
             bottom = 120,
             padingleft = 60,
             margin = 80,
             width = 162;
-        // console.log("道具数据 = "+JSON.stringify(allitem));
 
-        for (var itemindex = 0; itemindex < allitem.length; itemindex++) {
-            var item = this.luckitems[itemindex];
-            var itemsceipt = item.getComponent("luckitem");
-            itemsceipt.setParent(this);
-            itemsceipt.setItem(allitem[itemindex], this.allframe[itemindex]);
-            if (itemindex == 0) {
-                this.selectitem = itemsceipt;
-            }
-        }
+
         this.selectitem.selected();
 
         var self = this;

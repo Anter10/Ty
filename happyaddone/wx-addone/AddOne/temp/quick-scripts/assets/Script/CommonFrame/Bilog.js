@@ -113,7 +113,7 @@ tywx.BiLog = {
                 'callback': null
             };
         }
-        tywx.ado.logWithColor(logtxt);
+        tywx.ado.logWithColor('BILOG===>' + logtxt);
         tywx.HttpUtil.httpPost(configObj, 'POST');
     },
 

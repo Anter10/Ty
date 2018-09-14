@@ -10,7 +10,7 @@ cc._RF.push(module, '7c2dbJUdiZLmIzaqT+PBih/', 'AddOneConfig', __filename);
    created by gyc on 2018-08-01.
 */
 var config = {
-    "auditing": false,
+    "auditing": true,
     "ruyiScore": 45000,
     "MUSICS": {
         "BG_MUSIC": "https://marketqn.nalrer.cn/teris/m/3.mp3"
@@ -22,15 +22,25 @@ var config = {
         "chui": 0.1
     },
     "luck_block": {
-        "score": [0, 100000, 200000, 250000, 300000, 400000, 100000000],
+        "score": [0, 100000, 120000, 150000, 180000, 200000, 100000000],
         "rate": [0.7, 0.65, 0.6, 0.55, 0.5, 0.3],
         "range": [3, 3.5, 3.5, 3.5, 4, 6]
     },
-    "combo_level": {
-        "good": [4, 0.3],
-        "cool": [5, 0.4],
-        "awesome": [6, 0.9],
-        "unbelive": [7, 1.0]
+    "combo_level_new": {
+        "good": 3,
+        "cool": 4,
+        "awesome": 5,
+        "unbelive": 6
+    },
+    "show_box_rate": {
+        "maxnum": [0, 8, 11, 14, 17, 20, 10000],
+        "comboz": 1.3,
+        "rate": [0, 0.03, 0.04, 0.05, 0.06, 0.1]
+    },
+    // * 能够CDN刷新的资源
+    "CDNImages": {
+        "GameOverPhotos": ["gameover_0.png", "gameover_1.png", "gameover_2.png", "gameover_3.png"],
+        "MergeBigNumPhotos": ["bignum_0.png", "bignum_1.png", "bignum_2.png", "bignum_3.png"]
     }
 };
 
