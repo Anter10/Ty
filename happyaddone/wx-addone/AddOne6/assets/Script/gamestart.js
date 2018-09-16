@@ -188,6 +188,8 @@ var gamestart = cc.Class({
             console.log("iphone x start game");
             this.addInMyMini.y = this.addInMyMini.y - 45;
         }
+        let an = tywx.AdManager.getAdNodeByTag('GAME_START');
+        if (an) an.showAdNode();
         // this.playSZAni(this.shouZHiNode, 1,1.2);
         // ! Modify by luning [06-09-18] 交叉导流icon,这个版本隐藏
         //tywx.AdManager.showAd(cc.v2(100, 100),'GAME_START');

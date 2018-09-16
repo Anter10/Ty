@@ -500,7 +500,7 @@ let Utils = class{
                     toast_str = '视频观看失败';
                     WXVedioCallback.fail && WXVedioCallback.fail();
                 }
-                tywx.ado.Utils.showWXModal(`${toast_str}`);
+                // tywx.ado.Utils.showWXModal(`${toast_str}`);
                 tywx.ado.Utils.showWXBanner();
             });
         }

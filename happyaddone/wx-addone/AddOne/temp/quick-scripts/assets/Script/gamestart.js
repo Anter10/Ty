@@ -626,7 +626,11 @@ var gamestart = cc.Class({
     startGame: function startGame() {
         if (!tywx.config) return;
         if (this.haveStoreGameData != -1) {
-            this.showGoonProgress();
+            if (this.haveStoreGameData.score >= tywx.ado.Constants.GameCenterConfig.prePlayGetScore) {
+                this.showGoonProgress();
+            } else {
+                this.goonProgressGame(true);
+            }
         } else {
             cc.director.loadScene("gamemain");
         }

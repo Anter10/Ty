@@ -74,7 +74,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 52,
+    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -106,8 +106,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 63,
-      "height": 55
+      "width": 120,
+      "height": 28
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -137,7 +137,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 2045,
+    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -154,8 +154,8 @@
     "_spriteFrame": {
       "__uuid__": "0b53c1d4-fe96-4b8f-a352-7cbf4ca53eca"
     },
-    "_type": 0,
-    "_sizeMode": 1,
+    "_type": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -167,7 +167,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "a5vdCX6pBLB4h1A/GWMrdy"
+    "_id": "d5dMi6Bt1MpJlh2PEx3u6+"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -188,7 +188,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {
@@ -208,8 +208,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 63,
-      "height": 55
+      "width": 120,
+      "height": 28
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -239,7 +239,7 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_localZOrder": 2046,
+    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -256,8 +256,8 @@
     "_spriteFrame": {
       "__uuid__": "2be082d9-3a2c-4a96-a1f3-e1b5f429a4b2"
     },
-    "_type": 0,
-    "_sizeMode": 1,
+    "_type": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -269,7 +269,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "0dIbrYr5ZM0qiAcvHBlAVa"
+    "_id": "4496hdobxNlb+QglJrLCMg"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -297,7 +297,7 @@
       "__id__": 5
     },
     "state": 1,
-    "_id": "98NdgPCrpPEq7esCBwQnXB"
+    "_id": "15tDpo72VLF7pg/J4ZonW+"
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -479,6 +479,9 @@ var gamemain = cc.Class({
      * @description: 场景加载完成后的一些UI逻辑处理 
      */
     onLoad: function () {
+        let an = tywx.AdManager.getAdNodeByTag('GAME_START');
+        console.log("IIIIIIIIIIAD....", an, tywx.AdManager.adNodeList.length);
+        if (an) an.hideAdNode();
         this.pos = this.gameOutRoot.convertToWorldSpace(this.gameOutRoot.position);
         console.log(JSON.stringify(this.pos1) + " v= " + JSON.stringify(cc.view.getVisibleSize()) + "尺寸= " + this.gameOutRoot.width + " z = " + this.gameOutRoot.height + " 坐标 = " + JSON.stringify(this.pos))
         tywx.gamecenter = this;
@@ -625,6 +628,7 @@ var gamemain = cc.Class({
 
         // 设置免费领取的回调
         let mflq = this.mflqBtn.getComponent("ShareButton");
+        this.produceHPAni(this.mflqBtn, 0.6, 1.1);
         if (tywx.config.auditing == true) {
             mflq.setReactCall(true);
         } else {
@@ -1907,6 +1911,7 @@ var gamemain = cc.Class({
         // 咋这里判断当前的血量是否为1 如果为1的话产生 动画提示和tips
         if (this.point == 1) {
             this.produceHPAni(this.stars[0]);
+            this.showAlertMSG("血量要耗光啦~");
         }
         this.prepoint = this.point;
         for (var starIndex = 0; starIndex < 5; starIndex++) {
@@ -1933,7 +1938,7 @@ var gamemain = cc.Class({
         var seq = cc.sequence(scaleBoom, scaleSmaller, delay);
         var rep = cc.repeatForever(seq);
         node.runAction(rep);
-        this.showAlertMSG("血量要耗光啦~");
+        
     },
 
     /**

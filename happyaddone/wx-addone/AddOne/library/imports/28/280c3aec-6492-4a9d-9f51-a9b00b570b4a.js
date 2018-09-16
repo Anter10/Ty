@@ -119,6 +119,10 @@ var gamemain = cc.Class({
             default: null,
             type: cc.Label
         },
+        maxScoreLabel: {
+            default: null,
+            type: cc.Label
+        },
 
         GameOver: {
             default: null,
@@ -129,6 +133,10 @@ var gamemain = cc.Class({
             type: cc.Node
         },
         pjlShareButtton: {
+            default: null,
+            type: cc.Node
+        },
+        topRootView: {
             default: null,
             type: cc.Node
         },
@@ -206,6 +214,10 @@ var gamemain = cc.Class({
             type: cc.Prefab
         },
         djitem: {
+            default: null,
+            type: cc.Prefab
+        },
+        lifeStarPrefab: {
             default: null,
             type: cc.Prefab
         },
@@ -646,8 +658,9 @@ var gamemain = cc.Class({
 
         var is_ipx = ch / cw >= 1.9;
         if (is_ipx) {
-            this.friendIcon.node.y = this.friendIcon.node.y + 40;
-            this.yyview.y = this.yyview.y - 30;
+            //    this.friendIcon.node.y = this.friendIcon.node.y + 40;
+            this.topRootView.y = this.topRootView.y - 110;
+            this.itemview.y = this.itemview.y - 90;
         }
 
         this.showBanner();
@@ -736,12 +749,11 @@ var gamemain = cc.Class({
         }
         for (var ti = 0; ti < this.curshowxhgs.length; ti++) {
             if (num == this.curshowxhgs[ti].num) {
-                // if ((Math.abs(id - this.curshowxhgs[ti].id) == 5 || Math.abs(id - this.curshowxhgs[ti].id) == 0)){
+                // if ((Math.abs(id - this.curshowxhgs[ti].id) % 5 == 0 || Math.abs(id - this.curshowxhgs[ti].id) == 0)){
                 return true;
-                // }else{
-
-                //    return true;
-                // }
+                //  }else{
+                //     return false;
+                //  }
             }
         }
         return false;
@@ -954,7 +966,9 @@ var gamemain = cc.Class({
             ch = _ref2[1];
 
         var is_ipx = ch / cw >= 1.9;
-
+        if (is_ipx) {
+            this.itemview.y = this.scoreLabel.node.y - 30;
+        }
         for (var itemIndex = 0; itemIndex < tywx.ado.Constants.GameCenterConfig.allitem.length; itemIndex++) {
             var item = cc.instantiate(this.djitem);
             var itemsceipt = item.getComponent("DjItem");
@@ -978,7 +992,7 @@ var gamemain = cc.Class({
                             // 加1血
                             tywx.LOGE("当前徐良= " + self.point + "," + tywx.ado.Constants.GameCenterConfig.maxphy_value);
                             if (self.point < tywx.ado.Constants.GameCenterConfig.maxphy_value) {
-                                self.showOneHpEf(item);
+                                // self.showOneHpEf(item);
                                 self.prepoint = self.point;
                                 self.point = self.point + 1;
                                 self.drawPhyPoint();
@@ -1016,11 +1030,11 @@ var gamemain = cc.Class({
                 }
             });
 
-            item.x = 165 + itemIndex * 125;
-            item.y = -55;
+            item.x = 280 + itemIndex * 120;
             if (is_ipx) {
-                item.y = item.y + 70;
-                //                item.y = item.y + 30; 
+                item.y = item.y - 75;
+            } else {
+                item.y = item.y - 70;
             }
             this.allOpenItems.push(item);
         }
@@ -1034,7 +1048,7 @@ var gamemain = cc.Class({
      */
     showOneHpEf: function showOneHpEf(item) {
         if ((this.point != 5 || this.point != 1) && item.xx1Icon.node.getNumberOfRunningActions() == 0) {
-            var node = this.stars[this.point];
+            var node = this.allstars[this.point];
             var newVec2 = node.convertToWorldSpace(cc.v2(node.x, node.y));
             var new1Vec2 = item.xx1Icon.node.convertToWorldSpace(cc.v2(item.xx1Icon.node.x, item.xx1Icon.node.y));
             var tmove = cc.moveTo(0.6, cc.p(newVec2.x - new1Vec2.x - node.x - 30, newVec2.y - Math.abs(new1Vec2.y) - node.y));
@@ -1465,6 +1479,7 @@ var gamemain = cc.Class({
 
         this.dealXhgCells();
 
+        this.setMaxScore();
         if (this.isShowFIcon) {
             this._updateSubDomainCanvas();
         }
@@ -1804,41 +1819,41 @@ var gamemain = cc.Class({
         }
     },
 
+    initStars: function initStars() {
+        if (!this.allstars) {
+            this.allstars = [];
+            for (var starIndex = 0; starIndex < 5; starIndex++) {
+                var item = cc.instantiate(this.lifeStarPrefab);
+                item.parent = this.stars[starIndex];
+                this.allstars.push(item);
+            }
+        }
+    },
+
     /**
      * @description：展示相关的特效UI
      */
     drawPhyPoint: function drawPhyPoint() {
-        // var ctx = this.bg.getComponent(cc.Graphics);
-        // ctx.clear();
-        // for(var i = 0;i< this.point; i++){
-        //     let color = tywx.ado.Constants.GameCenterConfig.showphy_pros.colors[i];
-        //     ctx.fillColor = cc.color(color[0],color[1],color[2]);
-        //     var x = (tywx.ado.Constants.GameCenterConfig.swidth - ((tywx.ado.Constants.GameCenterConfig.showphy_pros.phy_num - (tywx.ado.Constants.GameCenterConfig.maxphy_value - this.point)) * tywx.ado.Constants.GameCenterConfig.gezi_pitch)) / 2 + (tywx.ado.Constants.GameCenterConfig.showphy_pros.width + 10) * i;
-        //     var y = 980;
-        //     var w = tywx.ado.Constants.GameCenterConfig.showphy_pros.width;
-        //     var h = tywx.ado.Constants.GameCenterConfig.showphy_pros.height;
-        //     ctx.roundRect(x,y,w,h,tywx.ado.Constants.GameCenterConfig.showphy_pros.radius);
-        //     ctx.fill();
-        // }
+        this.initStars();
         if (this.point > 1) {
-            this.stars[0].scaleX = 1;
-            this.stars[0].scaleY = 1;
-            this.stars[0].stopAllActions();
+            this.allstars[0].scaleX = 1;
+            this.allstars[0].scaleY = 1;
+            this.allstars[0].stopAllActions();
         }
         if (this.prepoint == this.point) {
             return;
         }
         // 咋这里判断当前的血量是否为1 如果为1的话产生 动画提示和tips
         if (this.point == 1) {
-            this.produceHPAni(this.stars[0]);
+            this.produceHPAni(this.allstars[0]);
             this.showAlertMSG("血量要耗光啦~");
         }
         this.prepoint = this.point;
         for (var starIndex = 0; starIndex < 5; starIndex++) {
             if (this.point >= starIndex + 1) {
-                this.stars[starIndex].getComponent("LifeStar").show();
+                this.allstars[starIndex].getComponent("LifeStar").show();
             } else {
-                this.stars[starIndex].getComponent("LifeStar").hide();
+                this.allstars[starIndex].getComponent("LifeStar").hide();
             }
         }
     },
@@ -1879,7 +1894,7 @@ var gamemain = cc.Class({
     gameOverCallBack: function gameOverCallBack() {
         this.storeScore();
         tywx.ado.resetProgerss();
-
+        this.hadshowlqbox = false;
         this.produceHPAni(this.fuHuoBtn, 0.6, 1.1);
         this.isShowFIcon = false;
         this.friendIcon.node.active = false;
@@ -2055,8 +2070,18 @@ var gamemain = cc.Class({
         this.dealPlayerClickScreen();
         this.dealAddStoreMaxNum();
         this.showRYBoxButton();
+        // 刷新当前的最高分
+        this.storescorevalue = tywx.ado.Utils.loadItem("ADDONE_SCORE2", 0);
+        this.setMaxScore();
     },
 
+    setMaxScore: function setMaxScore() {
+        if (parseInt(this.storescorevalue) < this.score) {
+            this.maxScoreLabel.string = this.score;
+        } else {
+            this.maxScoreLabel.string = this.storescorevalue;
+        }
+    },
     /**
      * @description: 产生格子下落动画
      */
@@ -2173,6 +2198,7 @@ var gamemain = cc.Class({
         if (this.recoverNumber < tywx.ado.Constants.GameCenterConfig.maxrnum) {
             this.point = tywx.ado.Constants.GameCenterConfig.maxphy_value;
             this.drawPhyPoint();
+            this.showAnimationWhenScoreBiggerThanTen();
             this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
             this.addRecoverNumber();
             this.visibleControllButton(false);
@@ -2307,16 +2333,16 @@ var gamemain = cc.Class({
         var bpos = cc.v2(this.stopButton.x, this.stopButton.y);
         this.isShowFIcon = true;
         var rest = self.isRestartGame;
-        var pos = this.friendsNode.convertToWorldSpace(cc.p(this.friendsNode.x, this.friendsNode.y));
+        // var pos = this.friendsNode.convertToWorldSpace(cc.p(this.friendsNode.x, this.friendsNode.y))
         var screen = cc.view.getVisibleSizeInPixel();
         // console.log("y = " + pos.y + "x = " + pos.x + "screen = " + JSON.stringify(screen));
         wx.postMessage({
             method: 5,
             isrestart: rest,
             score: self.score,
-            width: screen.width,
-            x: pos.x,
-            y: screen.height - pos.y - 90
+            width: screen.width
+            // x: pos.x,
+            // y: screen.height - pos.y - 90,
         });
         self.isRestartGame = false;
     },
@@ -2533,7 +2559,7 @@ var gamemain = cc.Class({
 
             if (this.isIPHX()) {
                 this.cmergeAniNode.x = this.allpngs[this.g_clickid].x;
-                this.cmergeAniNode.y = this.allpngs[this.g_clickid].y - 30;
+                this.cmergeAniNode.y = this.allpngs[this.g_clickid].y;
             } else {
                 this.cmergeAniNode.position = this.allpngs[this.g_clickid].position;
             }

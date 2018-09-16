@@ -29,6 +29,8 @@ var WXAdConfig = {
 
 // 游戏的基础配置
 var GameCenterConfig = {
+    // 点击开始的时候判断玩家的分数是否大于 此值 不大于的话 则直接进入游戏
+    prePlayGetScore: 10000,
     //游戏开始的时候方块下落的时间
     mergeMaxNumberBaseScore: 700,
     //游戏开始的时候方块下落的时间

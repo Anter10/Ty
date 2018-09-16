@@ -128,6 +128,30 @@ cc.Class({
         this.shareGroupCallBack = sgroupCall;
     },
 
+    /**
+     * @description 播放微信视频广告
+     */
+    showWXVideo: function showWXVideo() {
+        var self = this;
+        if (this.reactcall) {
+            self.successCallBack(this);
+        } else {
+            if (tywx.IsWechatPlatform()) {
+
+                var param = {
+                    success: function success(res) {
+                        self.shareGroupCallBack && self.shareGroupCallBack(res);
+                    },
+                    fail: function fail(res) {
+                        tywx.ado.Utils.showWXModal('观看视频失败');
+                        self.errorCallBack && self.errorCallBack(null);
+                    }
+                };
+                tywx.ado.Utils.showWXVideo(param);
+            }
+        }
+    },
+
     /*
         调用: 使用此model分享功能的时候 
         功能: 给好友或者群分享小程序的相关信息

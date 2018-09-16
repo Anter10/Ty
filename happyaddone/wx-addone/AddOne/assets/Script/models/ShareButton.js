@@ -124,6 +124,30 @@ cc.Class({
         this.shareGroupCallBack = sgroupCall;
     },
     
+    
+    /**
+     * @description 播放微信视频广告
+     */
+    showWXVideo: function(){
+        var self = this;
+        if (this.reactcall) {
+            self.successCallBack(this);
+        } else {
+            if (tywx.IsWechatPlatform()) {
+
+                var param = {
+                    success:function(res){
+                         self.shareGroupCallBack && self.shareGroupCallBack(res);
+                    },
+                    fail: function (res) {
+                         tywx.ado.Utils.showWXModal('观看视频失败');
+                         self.errorCallBack && self.errorCallBack(null);
+                    }
+                }
+                tywx.ado.Utils.showWXVideo(param);
+            }
+        }
+    },
 
 
     /*
