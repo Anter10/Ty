@@ -1041,6 +1041,7 @@ var gamemain = cc.Class({
         } else if (is_ot) {
             // this.itemview.y = this.scoreLabel.node.y - 15;
         }
+
         for (var itemIndex = 0; itemIndex < tywx.ado.Constants.GameCenterConfig.allitem.length; itemIndex++) {
             var item = cc.instantiate(this.djitem);
             var itemsceipt = item.getComponent("DjItem");
@@ -1052,8 +1053,8 @@ var gamemain = cc.Class({
                 if (self.gamestate == tywx.ado.Constants.GameCenterConfig.gameState.waitclick) {
                     // 判断道具数量足不足
                     // 如果使用道具数量大于 则提示道具使用限制已达最大值
-                    if (self.useItemNumber > (tywx.ado.mjUseItemNumber || 10)) {
-                        self.showAlertMSG("道具使用次数已达" + tywx.ado.mjUseItemNumber + "次");
+                    if (self.useItemNumber > (tywx.config.mjUseItemNumber || 10)) {
+                        self.showAlertMSG("道具使用次数已达" + (tywx.config.mjUseItemNumber || 10) + "次");
                         return;
                     }
 

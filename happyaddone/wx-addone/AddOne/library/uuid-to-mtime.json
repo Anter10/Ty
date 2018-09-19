@@ -25,17 +25,17 @@
     "relativePath": "prefab"
   },
   "29f52784-2fca-467b-92e7-8fd9ef8c57b7": {
-    "asset": 1537356799436,
+    "asset": 1537342615426,
     "meta": 1534344981845,
     "relativePath": "Scene"
   },
   "4734c20c-0db8-4eb2-92ea-e692f4d70934": {
-    "asset": 1537358588039,
+    "asset": 1537342628102,
     "meta": 1534344981845,
     "relativePath": "Script"
   },
   "a2ae1837-2c5c-42fc-aa69-a629e06ce14f": {
-    "asset": 1537358588061,
+    "asset": 1537341387224,
     "meta": 1534344981845,
     "relativePath": "Script/models"
   },
@@ -135,7 +135,7 @@
     "relativePath": "Texture/animations/yindao_suofang.anim"
   },
   "f54453c4-8f2c-47d1-b029-fca889dc746a": {
-    "asset": 1537344575119,
+    "asset": 1537321763330,
     "meta": 1534970101605,
     "relativePath": "Texture/bg"
   },
@@ -760,7 +760,7 @@
     "relativePath": "Script/models/Audio.js"
   },
   "2a8c6051-f0a5-41d4-92d1-33939224a5bf": {
-    "asset": 1537358588042,
+    "asset": 1537264308269,
     "meta": 1535624352269,
     "relativePath": "Script/CommonFrame"
   },
@@ -900,7 +900,7 @@
     "relativePath": "resources"
   },
   "571e1706-0f0c-4f4f-acac-ac4fa664156d": {
-    "asset": 1537358588077,
+    "asset": 1537326336268,
     "meta": 1536125194208,
     "relativePath": "resources/prefabs"
   },
@@ -1579,16 +1579,6 @@
     "meta": 1537348464882,
     "relativePath": "Script/models/ado_view_lottery_layer.js"
   },
-  "ad8f24e3-3ec1-4c91-9fd1-6da1068e3111": {
-    "asset": 1537357065317,
-    "meta": 1537357065332,
-    "relativePath": "resources/prefabs/OpenRedPackView.prefab"
-  },
-  "2d2f792f-a40c-49bb-a189-ed176a246e49": {
-    "asset": 1537356134443,
-    "meta": 1537357056726,
-    "relativePath": "Scene/gamemain.fire"
-  },
   "905a3099-7e1d-43d9-afae-7f04c3eda863": {
     "asset": 1537356134443,
     "meta": 1537357058625,
@@ -1603,16 +1593,6 @@
     "asset": 1537358567562,
     "meta": 1537359205188,
     "relativePath": "resources/prefabs/red_packet_tansfer.prefab"
-  },
-  "12b5f3d7-1181-4b54-a8f6-91850ec4e76f": {
-    "asset": 1537357887818,
-    "meta": 1537359207060,
-    "relativePath": "Script/CommonFrame/GlobalInit.js"
-  },
-  "280c3aec-6492-4a9d-9f51-a9b00b570b4a": {
-    "asset": 1537358851390,
-    "meta": 1537359207322,
-    "relativePath": "Script/gamemain.js"
   },
   "8ba150c4-f5df-4e2b-9fdf-42db1ce3754d": {
     "asset": 1537357887818,
@@ -1629,9 +1609,29 @@
     "meta": 1537359207988,
     "relativePath": "Script/models/red_packet_transfer.js"
   },
+  "ad8f24e3-3ec1-4c91-9fd1-6da1068e3111": {
+    "asset": 1537354867104,
+    "meta": 1537375637798,
+    "relativePath": "resources/prefabs/OpenRedPackView.prefab"
+  },
+  "2d2f792f-a40c-49bb-a189-ed176a246e49": {
+    "asset": 1537359728127,
+    "meta": 1537375637803,
+    "relativePath": "Scene/gamemain.fire"
+  },
+  "12b5f3d7-1181-4b54-a8f6-91850ec4e76f": {
+    "asset": 1537359795953,
+    "meta": 1537375639342,
+    "relativePath": "Script/CommonFrame/GlobalInit.js"
+  },
+  "280c3aec-6492-4a9d-9f51-a9b00b570b4a": {
+    "asset": 1537361367733,
+    "meta": 1537375639792,
+    "relativePath": "Script/gamemain.js"
+  },
   "4b1413ec-6463-4397-b27a-f6a3fc682877": {
-    "asset": 1537356934492,
-    "meta": 1537359207989,
+    "asset": 1537361149304,
+    "meta": 1537375639870,
     "relativePath": "Script/models/Utils.js"
   }
 }

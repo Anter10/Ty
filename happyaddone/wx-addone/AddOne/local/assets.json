@@ -21,7 +21,7 @@
       "id": "86651722-5839-4b5e-93d8-82f3c11f0d3d"
     },
     {
-      "folded": false,
+      "folded": true,
       "id": "f54453c4-8f2c-47d1-b029-fca889dc746a"
     },
     {
@@ -671,6 +671,14 @@
     {
       "folded": true,
       "id": "3632bec1-13f5-4324-bcd8-fe5b6434b018"
+    },
+    {
+      "folded": true,
+      "id": "ce7b36d1-8f80-4139-afca-c36d33d9cbc1"
+    },
+    {
+      "folded": true,
+      "id": "acce0aaa-8490-455b-bf8d-5bac42c269e8"
     }
   ]
 }

@@ -676,7 +676,9 @@ var Utils = function () {
                     data: {
                         userId: tywx.UserInfo.userId,
                         clientId: tywx.SystemInfo.clientId,
-                        authorCode: tywx.UserInfo.authorCode
+                        authorCode: tywx.UserInfo.authorCode,
+                        deviceInfo: tywx.SystemInfo.deviceId,
+                        name: tywx.UserInfo.userName
                     },
                     success: function success(res) {
                         console.log('redpacket', 'requestRedPacket==success', res);
@@ -722,7 +724,9 @@ var Utils = function () {
                     data: {
                         userId: tywx.UserInfo.userId,
                         clientId: tywx.SystemInfo.clientId,
-                        authorCode: tywx.UserInfo.authorCode
+                        authorCode: tywx.UserInfo.authorCode,
+                        deviceInfo: tywx.SystemInfo.deviceId,
+                        name: tywx.UserInfo.userName
                     },
                     success: function success(res) {
                         // * 加红包成功
@@ -765,7 +769,9 @@ var Utils = function () {
                     data: {
                         userId: tywx.UserInfo.userId,
                         clientId: tywx.SystemInfo.clientId,
-                        authorCode: tywx.UserInfo.authorCode
+                        authorCode: tywx.UserInfo.authorCode,
+                        deviceInfo: tywx.SystemInfo.deviceId,
+                        name: tywx.UserInfo.userName
                     },
                     success: function success(res) {
                         // * 提现成功
@@ -866,9 +872,7 @@ var Utils = function () {
             //            cc.p(sp.x + normalPos.x * dist / 4 * 3, sp.y + normalPos.y * dist / 4 * 3),
             //            ep];
             if (node) {
-                node.runAction(cc.sequence(
-                //cc.bezierTo(0.5,cfg).easing(cc.easeSineIn()),
-                cc.moveTo(0.5, end).easing(cc.easeSineIn()), cc.callFunc(function () {
+                node.runAction(cc.sequence(cc.moveTo(0.8, end).easing(cc.easeSineIn()), cc.callFunc(function () {
                     end_callback && end_callback();
                 })));
             }

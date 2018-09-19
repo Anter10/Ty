@@ -8321,3 +8321,49 @@ tick@jsb-adapter/jsb-builtin.js:2023:16
 2018-09-19T12:13:34.926Z - normal: AddOne boot end
 2018-09-19T12:13:35.013Z - warn: Should not specify class name effect for Component which defines in project.
 2018-09-19T12:13:35.014Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-09-19T16:47:21.627Z - info: shutdown preview server
+2018-09-19T16:47:22.365Z - error: Error: ENOENT, node_modules/stream-browserify/index.js not found in /Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar
+    at notFoundError (ELECTRON_ASAR.js:133:19)
+    at Object.module.(anonymous function) [as open] (ELECTRON_ASAR.js:233:16)
+    at ReadStream.open (fs.js:1883:6)
+    at new ReadStream (fs.js:1870:10)
+    at Object.fs.createReadStream (fs.js:1824:10)
+    at Deps.readFile (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/module-deps/index.js:206:17)
+    at persistentCacheFallback (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/module-deps/index.js:390:71)
+    at /Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/module-deps/index.js:32:13
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)
+    at process._tickDomainCallback (internal/process/next_tick.js:128:9)
+    at process.on.e (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor/core/editor-init.js:1:345)
+    at emitOne (events.js:101:20)
+    at process.emit (events.js:191:7)
+    at process._fatalException (bootstrap_node.js:308:26)
+2018-09-19T16:47:22.432Z - error: Error: ENOENT, node_modules/string_decoder/index.js not found in /Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar
+    at notFoundError (ELECTRON_ASAR.js:133:19)
+    at Object.module.(anonymous function) [as open] (ELECTRON_ASAR.js:233:16)
+    at ReadStream.open (fs.js:1883:6)
+    at new ReadStream (fs.js:1870:10)
+    at Object.fs.createReadStream (fs.js:1824:10)
+    at Deps.readFile (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/module-deps/index.js:206:17)
+    at persistentCacheFallback (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/module-deps/index.js:390:71)
+    at /Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/module-deps/index.js:32:13
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)
+    at process._tickDomainCallback (internal/process/next_tick.js:128:9)
+    at process.on.e (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor/core/editor-init.js:1:345)
+    at emitOne (events.js:101:20)
+    at process.emit (events.js:191:7)
+    at process._fatalException (bootstrap_node.js:308:26)
+2018-09-19T16:47:23.739Z - error: Error: ENOENT, node_modules/vm-browserify/index.js not found in /Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar
+    at notFoundError (ELECTRON_ASAR.js:133:19)
+    at Object.module.(anonymous function) [as open] (ELECTRON_ASAR.js:233:16)
+    at ReadStream.open (fs.js:1883:6)
+    at new ReadStream (fs.js:1870:10)
+    at Object.fs.createReadStream (fs.js:1824:10)
+    at Deps.readFile (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/module-deps/index.js:206:17)
+    at persistentCacheFallback (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/module-deps/index.js:390:71)
+    at /Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/module-deps/index.js:32:13
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)
+    at process._tickDomainCallback (internal/process/next_tick.js:128:9)
+    at process.on.e (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor/core/editor-init.js:1:345)
+    at emitOne (events.js:101:20)
+    at process.emit (events.js:191:7)
+    at process._fatalException (bootstrap_node.js:308:26)
