@@ -18,14 +18,20 @@ var ShareConfig = {
     MAIN_BTN_SHARE: ['mainbtnshare', false], // 主界三点下面的分享
     POJILU_SHARE: ['pojilushare', false], // 得分破纪录分享
     RANK_SHARE: ['phbshare', true], // 排行榜界面分享
-    FREE_GIFT_SHARE: ['freegiftshare', true] // 免费领取
+    FREE_GIFT_SHARE: ['freegiftshare', true], // 免费领取--连击
+    GROUP_RANK_SHARE: ['group_rank_share', true], // 群排行
+    GIFT_GIFT_BOX_SHARE: ['free_gift_box_share', true], // 如意宝箱
+    OPEN_RED_PACKET_SHARE: ['open_red_packet_share', true] // 如意宝箱
 };
 // * 微信广告参数
 var WXAdConfig = {
     bannerId: 'adunit-652297ac130ea5be',
     vedioId: 'adunit-72772b75d8b17d65',
-    bannerRefreshTime: 20 // * Banner刷新时间
+    bannerRefreshTime: 200 // * Banner刷新时间
 };
+
+// * 微信红包提现报错
+var WXTransferRedPacketError = ['提现成功', '本日红包添加次数已用光，明日才能再次添加', '用户数据，登陆信息校验失败', 'clientId校验失败', '用户红包不足，不能提现', 'SDK网络请求错误', 'SDK网络请求成功，业务处理失败', '系统未捕获异常', '参数错误'];
 
 // 游戏的基础配置
 var GameCenterConfig = {
@@ -72,7 +78,7 @@ var GameCenterConfig = {
     // 提示用户点击轮播时间
     letUserClickTime: 3,
     // 初始化给玩家的道具数量
-    initGivePlayerItemNumber: 3,
+    initGivePlayerItemNumber: 1,
     // 初始化格子的最大数限制
     initGameMaxNum: 5,
     // 游戏中用到的道具数据
@@ -160,7 +166,8 @@ var GameCenterConfig = {
 module.exports = {
     ShareConfig: ShareConfig,
     GameCenterConfig: GameCenterConfig,
-    WXAdConfig: WXAdConfig
+    WXAdConfig: WXAdConfig,
+    WXTransferRedPacketError: WXTransferRedPacketError
 };
 
 cc._RF.pop();

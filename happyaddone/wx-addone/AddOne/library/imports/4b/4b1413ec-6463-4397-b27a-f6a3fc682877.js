@@ -17,7 +17,8 @@ var IsHideBanner = false; // * 是否显示Banner
 var WXVedioAD = null; // * 微信Vedio广告
 var WXVedioCallback = {
     success: null,
-    fail: null
+    fail: null,
+    err_cb: null
 }; // * 微信vedio回调
 var Utils = function () {
     function Utils() {
@@ -468,7 +469,7 @@ var Utils = function () {
                 style: {
                     left: 0,
                     top: 0,
-                    width: is_ipx ? s_w * 0.8 : s_w * 0.95
+                    width: is_ipx ? s_w * 0.88 : s_w * 0.95
                 }
             });
 
@@ -543,6 +544,7 @@ var Utils = function () {
          * @param {Object} params
          * @param {Function} params.success
          * @param {Function} params.fail
+         * @param {Function} params.error_callback
          */
 
     }, {
@@ -570,11 +572,13 @@ var Utils = function () {
             // * 成功和失败回调是变化的
             WXVedioCallback.success = params.success;
             WXVedioCallback.fail = params.fail;
+            WXVedioCallback.err_cb = params.error_callback | null;
 
             WXVedioAD.load().then(function () {
                 return WXVedioAD.show();
             }).catch(function (e) {
-                return console.log(e);
+                console.log(e);
+                WXVedioCallback.err_cb && WXVedioCallback.err_cb();
             });
             tywx.ado.Utils.hideWXBanner();
         }
@@ -629,6 +633,245 @@ var Utils = function () {
                     console.log("刷新CDN图片成功");
                 }
             });
+        }
+        /**
+         * @description
+         * @author lu ning
+         * @date 2018-09-17
+         * @static
+         * @param {Function} btn_sure_cb
+         * @param {string} content
+         */
+
+    }, {
+        key: 'showErrorGfitPop',
+        value: function showErrorGfitPop(btn_sure_cb, content) {
+            cc.loader.loadRes('prefabs/ado_view_error_gift', function (err, prefab) {
+                if (!err) {
+                    var size = cc.winSize;
+                    var prefabNode = cc.instantiate(prefab);
+                    cc.game.addPersistRootNode(prefabNode);
+                    prefabNode.position = cc.v2(size.width / 2, size.height / 2);
+                    prefabNode.getComponent('ado_view_error_gift').init(btn_sure_cb, content);
+                }
+            });
+        }
+        /**
+         * @description 获取红包,获取本次加红包的信息，
+         *     调用requestAddRedPacket接口后才能真正的加上
+         * @author lu ning
+         * @date 2018-09-18
+         * @static
+         * @param {Object} params
+         * @param {Function} params.success
+         * @param {Function} params.fail
+         */
+
+    }, {
+        key: 'requestRedPacket',
+        value: function requestRedPacket(params) {
+            try {
+                wx.request({
+                    url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/redenvelop/getinfo',
+                    data: {
+                        userId: tywx.UserInfo.userId,
+                        clientId: tywx.SystemInfo.clientId,
+                        authorCode: tywx.UserInfo.authorCode
+                    },
+                    success: function success(res) {
+                        console.log('redpacket', 'requestRedPacket==success', res);
+                        if (res.data && res.data.nextAmount > 0) {
+                            var red_packet = {
+                                current: tywx.ado.Utils.formatCashFen2Yuan(res.data.nextAmount), // 本次获取的金额
+                                max: tywx.ado.Utils.formatCashFen2Yuan(res.data.totalAmount), // 总共金额
+                                times: res.data.needShare ? 3 : 1, // 1,2 ==> 确定，直接领取，>= 3分享或看视频领取
+                                is_share: res.data.needShare
+                            };
+                            tywx.ado.RedPacketInfo = res.data;
+                            params.success && params.success(red_packet);
+                        } else {
+                            params.fail && params.fail(-1);
+                        }
+                    },
+                    fail: function fail(res) {
+                        params.fail && params.fail(-1);
+                        console.log('redpacket', 'requestRedPacket==fail', res);
+                    }
+                });
+            } catch (e) {
+                params.fail && params.fail(-1);
+                console.log('redpacket', 'requestRedPacket==error', e);
+            }
+        }
+        /**
+         * @description 请求加红包
+         * @param {Object} params
+         * @param {Function} params.success
+         * @param {Function} params.fail
+         * @author lu ning
+         * @date 2018-09-18
+         * @static
+         */
+
+    }, {
+        key: 'requestAddRedPacket',
+        value: function requestAddRedPacket(params) {
+            try {
+                wx.request({
+                    url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/redenvelop/add',
+                    data: {
+                        userId: tywx.UserInfo.userId,
+                        clientId: tywx.SystemInfo.clientId,
+                        authorCode: tywx.UserInfo.authorCode
+                    },
+                    success: function success(res) {
+                        // * 加红包成功
+                        console.log('redpacket', 'requestAddRedPacket==success', res);
+                        if (res.data && res.data.addAmount > 0) {
+                            var addAmount = tywx.ado.Utils.formatCashFen2Yuan(res.data.addAmount);
+                            tywx.ado.RedPacketInfo.totalAmount += res.data.addAmount;
+                            params.success && params.success(addAmount);
+                        } else {
+                            tywx.ado.Utils.showWXModal('加红包失败', '提示', false);
+                            params.fail && params.fail();
+                        }
+                    },
+                    fail: function fail(res) {
+                        // * 加红包失败
+                        console.log('redpacket', 'requestAddRedPacket==fail', res);
+                        tywx.ado.Utils.showWXModal('加红包失败', '提示', false);
+                        params.fail && params.fail();
+                    }
+                });
+            } catch (e) {
+                // * 加红包报错
+                console.log('redpacket', 'requestAddRedPacket==error', e);
+                tywx.ado.Utils.showWXModal('加红包失败', '提示', false);
+            }
+        }
+        /**
+         * @description 请求提现
+         * @author lu ning
+         * @date 2018-09-18
+         * @static
+         */
+
+    }, {
+        key: 'requestRedPacket2Cash',
+        value: function requestRedPacket2Cash() {
+            try {
+                wx.request({
+                    url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/redenvelop/transfer',
+                    data: {
+                        userId: tywx.UserInfo.userId,
+                        clientId: tywx.SystemInfo.clientId,
+                        authorCode: tywx.UserInfo.authorCode
+                    },
+                    success: function success(res) {
+                        // * 提现成功
+                        console.log('redpacket', 'requestRedPacket2Cash==success', res);
+                        if (res.data) {
+                            tywx.ado.Utils.showWXModal(tywx.ado.Constants.WXTransferRedPacketError[res.data.code], '提示', false);
+                        } else {
+                            // * 未知错误
+                        }
+                    },
+                    fail: function fail(res) {
+                        // * 提现失败
+                        //params.fail && params.fail(0);
+                        tywx.ado.Utils.showWXModal('提现请求失败，请稍后再试', '提示', false);
+                        console.log('redpacket', 'requestRedPacket2Cash==fail', res);
+                    }
+                });
+            } catch (e) {
+                // * 提现失败
+                //params.fail && params.fail(0);
+                tywx.ado.Utils.showWXModal('提现请求失败，请稍后再试', '提示', false);
+                console.log('redpacket', 'requestRedPacket2Cash==fail', e);
+            }
+        }
+
+        /**
+         * @description 现金转换==>分 to 元
+         * @author lu ning
+         * @date 2018-09-18
+         * @static
+         * @param {Number} cash 分为单位
+         * @returns {Number}
+         */
+
+    }, {
+        key: 'formatCashFen2Yuan',
+        value: function formatCashFen2Yuan(cash) {
+            var ret = 0;
+            ret = cash / 100;
+            return ret;
+        }
+        /**
+         * @description 显示提现弹窗
+         * @author lu ning
+         * @date 2018-09-19
+         * @static
+         * @param {string} [current_cash=null]
+         */
+
+    }, {
+        key: 'showRedPacketTransferPop',
+        value: function showRedPacketTransferPop() {
+            var current_cash = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+            cc.loader.loadRes('prefabs/red_packet_tansfer', function (err, prefab) {
+                if (!err) {
+                    var parent = tywx.ado.Utils.getPopRoot();
+                    var pop = cc.instantiate(prefab);
+                    pop.parent = parent;
+                    pop.getComponent('red_packet_transfer').init(current_cash);
+                }
+            });
+        }
+        /**
+         * @description 获取弹窗根节点
+         * @author lu ning
+         * @date 2018-09-19
+         * @static
+         * @returns
+         */
+
+    }, {
+        key: 'getPopRoot',
+        value: function getPopRoot() {
+            var scene = cc.director.getScene();
+            var pop_root = scene.getChildByName('Canvas').getChildByName('pop');
+            return pop_root;
+        }
+        /**
+         * @description 简单的贝塞尔曲线
+         * @author lu ning
+         * @date 2018-09-19
+         * @static
+         * @param {cc.Node} node
+         * @param {cc.Vec2} end
+         * @param {Function} end_callback
+         */
+
+    }, {
+        key: 'simpleBezierAction',
+        value: function simpleBezierAction(node, end, end_callback) {
+            //let sp        = node.position;
+            //let ep        = end;
+            // let dist      = Math.sqrt((sp.x - ep.x) * (sp.x - ep.x) + (sp.y - ep.y) * (sp.y - ep.y));//cc.pDistance(sp,ep);
+            // //cc.pSub();
+            // let normalPos = eq.sub(sp).normalizeSelf();//cc.pSub(ep,sp).normalizeSelf();
+            // let cfg = [cc.p(sp.x + 30, sp.y + normalPos.y * dist / 2),
+            //            cc.p(sp.x + normalPos.x * dist / 4 * 3, sp.y + normalPos.y * dist / 4 * 3),
+            //            ep];
+            if (node) {
+                node.runAction(cc.sequence(
+                //cc.bezierTo(0.5,cfg).easing(cc.easeSineIn()),
+                cc.moveTo(0.5, end).easing(cc.easeSineIn()), cc.callFunc(function () {
+                    end_callback && end_callback();
+                })));
+            }
         }
     }]);
 

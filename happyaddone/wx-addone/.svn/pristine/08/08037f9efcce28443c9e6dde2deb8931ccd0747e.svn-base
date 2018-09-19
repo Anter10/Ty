@@ -1,0 +1,19 @@
+ 
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        
+    },
+ 
+    onLoad () {
+
+    },
+    
+    /** 
+     * @description 提现的时候调用
+    */
+    getMoneyCall:function(){
+         tywx.ado.Utils.requestRedPacket2Cash();
+    }
+});

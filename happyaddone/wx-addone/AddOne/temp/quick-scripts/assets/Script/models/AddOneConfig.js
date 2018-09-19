@@ -19,7 +19,8 @@ var config = {
         "sub1": 0.5,
         "add2": 0.2,
         "heart": 0.2,
-        "chui": 0.1
+        "chui": 0.1,
+        "red_packet": 0.5
     },
     "luck_block": {
         "score": [0, 100000, 120000, 150000, 180000, 200000, 100000000],
@@ -41,7 +42,13 @@ var config = {
     "CDNImages": {
         "GameOverPhotos": ["gameover_0.png", "gameover_1.png", "gameover_2.png", "gameover_3.png"],
         "MergeBigNumPhotos": ["bignum_0.png", "bignum_1.png", "bignum_2.png", "bignum_3.png"]
-    }
+    },
+    "PYQImg": {
+        "GameOverPhotos": ["g0.png", "g1.png", "g2.png", "g3.png"],
+        "MergeBigNumPhotos": ["g0.png", "g1.png", "g2.png", "g3.png"]
+    },
+    // 每局使用道具数量
+    "mjUseItemNumber": 10
 };
 
 module.exports = config;

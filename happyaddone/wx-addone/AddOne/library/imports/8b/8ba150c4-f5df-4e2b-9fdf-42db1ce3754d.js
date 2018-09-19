@@ -122,7 +122,6 @@ var gamestart = cc.Class({
         requestTimes: 3,
         // 当前是否有保存的游戏数据
         haveStoreGameData: -1
-
     },
 
     start: function start() {
@@ -301,7 +300,28 @@ var gamestart = cc.Class({
 
         // ! 菜单不显示banner
         //this.showBanner();
+        this.btnGetMoney = this.node.getChildByName('GetMoneyButton');
+        this.btnGetMoney.active = false;
+
+        tywx.NotificationCenter.listen(tywx.EventType.SDK_LOGIN_SUCCESS, this.loginSuccess, this);
+        if (tywx.UserInfo.userId > 0 && tywx.config.auditing === false) {
+            // 
+            this.loginSuccess();
+        }
     },
+    loginSuccess: function loginSuccess() {
+        // ! 显示红包
+        var self = this;
+        tywx.ado.Utils.requestRedPacket({
+            success: function success(res) {
+                if (tywx.config.auditing === false) {
+                    self.btnGetMoney.active = true;
+                    self.btnGetMoney.getComponent('GetMoneyButton').init(res);
+                }
+            }
+        });
+    },
+
 
     /**
      * @description: 第一个星星产生一个放大缩小的动画 并且产生提示动画
@@ -497,6 +517,7 @@ var gamestart = cc.Class({
                 tywx.AdManager.showAd(cc.v2(100, 100), 'GAME_START');
             }
         }
+        this.loginSuccess();
     },
 
 
@@ -625,8 +646,10 @@ var gamestart = cc.Class({
         */
     startGame: function startGame() {
         if (!tywx.config) return;
+
         if (this.haveStoreGameData != -1) {
-            if (this.haveStoreGameData.score >= tywx.ado.Constants.GameCenterConfig.prePlayGetScore) {
+            console.log("this.haveStoreGameData " + JSON.stringify(this.haveStoreGameData));
+            if (this.haveStoreGameData.score && this.haveStoreGameData.score >= tywx.ado.Constants.GameCenterConfig.prePlayGetScore) {
                 this.showGoonProgress();
             } else {
                 this.goonProgressGame(true);
@@ -757,8 +780,18 @@ var gamestart = cc.Class({
                 });
             }
         }
+    },
+    btnShowLottery: function btnShowLottery() {
+        cc.loader.loadRes('prefabs/ado_view_lottery_layer', function (err, prefab) {
+            if (!err) {
+                var size = cc.winSize;
+                var prefabNode = cc.instantiate(prefab);
+                cc.game.addPersistRootNode(prefabNode);
+                prefabNode.position = cc.v2(size.width / 2, size.height / 2);
+                prefabNode.getComponent('ado_view_lottery_layer').init();
+            }
+        });
     }
-
 });
 
 cc._RF.pop();

@@ -2,7 +2,7 @@
 cc._RF.push(module, '2fada/8fPBHRZzD6uWmYAck', 'ShareButton', __filename);
 // Script/models/ShareButton.js
 
-"use strict";
+'use strict';
 
 /*
    游戏分享prefab
@@ -145,6 +145,16 @@ cc.Class({
                     fail: function fail(res) {
                         tywx.ado.Utils.showWXModal('观看视频失败');
                         self.errorCallBack && self.errorCallBack(null);
+                    },
+                    error_callback: function error_callback() {
+                        if (self.shareConfig === tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE || self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE) {
+                            var content = self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE ? '免费复活机会' : '如意宝箱';
+                            var end_str = self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE ? '一次' : '一个';
+                            content = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + content + '</color><color=#ffffff>' + end_str + '</c>';
+                            tywx.ado.Utils.showErrorGfitPop(function () {
+                                self.shareGroupCallBack && self.shareGroupCallBack(null);
+                            }, content);
+                        }
                     }
                 };
                 tywx.ado.Utils.showWXVideo(param);

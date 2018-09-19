@@ -94,7 +94,7 @@ cc.Class({
             tywx.gamecenter.lingQuItem(false, self.produceItem());
             self.close();
         });
-        mflq.setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE);
+        mflq.setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE);
     },
 
 

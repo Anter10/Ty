@@ -81,7 +81,10 @@ cc.Class({
         }
 
         // this.hadstorephotonumber = true;
-        var contentsize = { width: this.numberBj.width, height: this.numberBj.height };
+        var contentsize = {
+            width: this.numberBj.width,
+            height: this.numberBj.height
+        };
         console.log("contentsize  + " + JSON.stringify(contentsize));
         var _ref = [cc.game.canvas.width, cc.game.canvas.height],
             cw = _ref[0],
@@ -115,9 +118,11 @@ cc.Class({
             success: function success(res) {
                 //console.log(res);
                 tywx.ado.Utils.saveImage2PhoneByUrl(res.tempFilePath, function () {
-                    self.hadstorephotonumber = true;
-                    self.storesuccall && self.storesuccall();
-                    tywx.ado.Utils.showWXToast("领取成功", 1000);
+                    //  self.hadstorephotonumber = true;
+                    // 注释保存图片宋道具
+                    // self.storesuccall && self.storesuccall();
+                    //  tywx.ado.Utils.showWXToast("领取成功", 1000);
+                    tywx.ado.Utils.showWXToast("保存图片成功", 1000);
                 }, function () {
                     self.hadstorephotonumber = false;
                     tywx.ado.Utils.showWXToast("保存图片失败");
@@ -173,8 +178,8 @@ cc.Class({
     },
 
     /**
-      * @description 页面加载完成后的逻辑处理
-      */
+     * @description 页面加载完成后的逻辑处理
+     */
     onLoad: function onLoad() {
         this.hadstorephotonumber = false;
         // 设置分享点
@@ -222,7 +227,7 @@ cc.Class({
     },
 
     btnRefreshBgPhotoCallback: function btnRefreshBgPhotoCallback() {
-        var photo_urls = tywx.config.CDNImages.MergeBigNumPhotos;
+        var photo_urls = tywx.config.PYQImg.MergeBigNumPhotos;
         if (!this.showPicIndex || this.showPicIndex > photo_urls.length - 1) {
             this.showPicIndex = 0;
         }

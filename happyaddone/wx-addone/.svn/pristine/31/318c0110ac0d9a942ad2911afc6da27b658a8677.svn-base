@@ -1,0 +1,61 @@
+ 
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        redPackNumberLabel:{
+            default: null,
+            type: cc.Label,
+        },
+        kaibottomNode: {
+            default: null,
+            type: cc.Node,
+        },
+        isOpening:false,
+    },
+    
+    /** 
+     * @description 
+    */
+    close:function(){
+        this.node.destroy();
+    },
+    
+    /**
+     * @description 加载完成后调用
+     */
+    onLoad () {
+
+    },
+    
+     /**
+      * @description 加载完成后调用
+      * @param {Number} moneyNum 红包金额
+      */
+     setData(moneyNum) {
+         this.redPackNumberLabel.string = moneyNum  + " 元"
+     },
+
+     /** 
+      * @description 播放旋转动画
+     */
+    playRotate:function(){
+        if (this.isOpening){
+            return;
+        }
+        this.isOpening = true;
+        var self = this;
+        let scale1 = cc.scaleTo(0.5, 0, 1);
+        let scale2 = cc.scaleTo(0.5, 1, 1);
+        var open = cc.callFunc(function(){
+            self.kaibottomNode.active = false;
+            self.redPackNumberLabel.node.active = true;
+            let scale3 = cc.scaleTo(0.2, 0.8);
+            let scale4 = cc.scaleTo(0.2, 1);
+            self.redPackNumberLabel.node.runAction(cc.sequence(scale3, scale4));
+            self.isOpening = false;
+        })
+        var seq = cc.sequence(scale1, scale2, open);
+        this.kaibottomNode.runAction(seq);
+    },
+});

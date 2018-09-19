@@ -59,8 +59,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 1.2,
-      "y": 1.2,
+      "x": 1.14,
+      "y": 1.14,
       "z": 1
     },
     "_rotationX": 0,
@@ -252,7 +252,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "2f7txl3XJJ15+w416YXTyt"
+    "_id": "9azgQdJUVF06oYgcVGP1l6"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -354,7 +354,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "30cmkgc7xN9rVMi6XSPg/C"
+    "_id": "c34GrvFkNOvpG6S+1KtADL"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -456,7 +456,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "84S3wURlRC3Lu68wb3nIqr"
+    "_id": "12qaVVq25Bq7hQ0f1kttly"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -558,7 +558,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "90zQIbuSpNX6//WHoqX2rg"
+    "_id": "aa1/lZhV5P27HLE8xTRJbn"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -657,7 +657,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "bdXGNJeV5GBqj19QyTevE8"
+    "_id": "3fKWm8U2BBDpgIKaKEhIZv"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -756,7 +756,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "38P+bTQm5HQandFWNNFJ0H"
+    "_id": "a5PwUVMfBPzIMnUWvq5nZx"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -795,7 +795,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "0bwlv7fUpGLZ2AF/2xHQDV"
+    "_id": "b89oNPc0JNdpj1Dovy7R9Q"
   },
   {
     "__type__": "cc.Button",
@@ -852,7 +852,7 @@
     "_N$target": {
       "__id__": 2
     },
-    "_id": "53CpRxV7hG17r2ezh4NJXz"
+    "_id": "1a5AQ5NEVCMYBoXziboWdU"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -963,7 +963,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "cbuU/MMndGiqpdu2Uo5/Yx"
+    "_id": "73wFNRBqBNJKolAb4puXK8"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1009,7 +1009,7 @@
       "__id__": 26
     },
     "preParent": null,
-    "_id": "c7DutI6l9NFIPFlGTnBIaT"
+    "_id": "degpITFmdIhpdfIZZGeFsd"
   },
   {
     "__type__": "cc.PrefabInfo",
