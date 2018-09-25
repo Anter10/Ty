@@ -121,7 +121,8 @@ var gamestart = cc.Class({
         //! 请求次数上线
         requestTimes: 3,
         // 当前是否有保存的游戏数据
-        haveStoreGameData: -1
+        haveStoreGameData: -1,
+        nodeEveryDataLoginBtn: cc.Node
     },
 
     start: function start() {
@@ -303,21 +304,88 @@ var gamestart = cc.Class({
         this.btnGetMoney = this.node.getChildByName('GetMoneyButton');
         this.btnGetMoney.active = false;
 
-        tywx.NotificationCenter.listen(tywx.EventType.SDK_LOGIN_SUCCESS, this.loginSuccess, this);
         if (tywx.UserInfo.userId > 0 && tywx.config.auditing === false) {
             // 
             this.loginSuccess();
         }
+
+        tywx.NotificationCenter.listen(tywx.EventType.SDK_LOGIN_SUCCESS, this.loginSuccess, this);
+        tywx.NotificationCenter.listen(tywx.ado.Events.ADO_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
+        tywx.NotificationCenter.listen(tywx.ado.Events.ADO_EVENT_DESTROY_EVERY_DAY_LOGIN, this.onDestroyEveryDayLogin, this);
+    },
+    onDestroyEveryDayLogin: function onDestroyEveryDayLogin() {
+        this.everyDayLogin = null;
     },
     loginSuccess: function loginSuccess() {
         // ! 显示红包
         var self = this;
+        if (tywx.UserInfo.userId === 0 || tywx.config.auditing === true) return;
         tywx.ado.Utils.requestRedPacket({
             success: function success(res) {
                 if (tywx.config.auditing === false) {
                     self.btnGetMoney.active = true;
                     self.btnGetMoney.getComponent('GetMoneyButton').init(res);
+                    self.nodeEveryDataLoginBtn.active = true;
                 }
+            },
+            fail: function fail(res) {
+                if (tywx.config.auditing === false) {
+                    self.btnGetMoney.active = true;
+                    var cash = {
+                        max: tywx.ado.Utils.formatCashFen2Yuan(tywx.ado.RedPacketInfo.totalAmount)
+                    };
+                    self.btnGetMoney.getComponent('GetMoneyButton').init(cash);
+                    self.nodeEveryDataLoginBtn.active = true;
+                }
+            }
+        });
+
+        // ! 只有第一次进入菜单才主动弹出每日登陆
+        if (tywx.ado.isFirstLogin) {
+            this.showEveryDayLogin();
+        }
+
+        // ! 刷新每日登陆红点
+        tywx.ado.Utils.requestEveryLoginInfo({
+            success: function success() {
+                if (self.nodeEveryDataLoginBtn) {
+                    var node_red_point = self.nodeEveryDataLoginBtn.getChildByName('sprite_red_point');
+                    if (node_red_point) {
+                        node_red_point.active = !tywx.ado.EveryDataLoginInfo.rewad;
+                    }
+                }
+            },
+            fail: function fail() {
+                console.log('requestEveryLoginInfo fail');
+            }
+        });
+    },
+    onRedPacktChange: function onRedPacktChange() {
+        var cash = {
+            max: tywx.ado.Utils.formatCashFen2Yuan(tywx.ado.RedPacketInfo.totalAmount)
+        };
+        this.btnGetMoney.getComponent('GetMoneyButton').init(cash);
+    },
+
+    // * 展示每日登陆
+    showEveryDayLogin: function showEveryDayLogin() {
+        var self = this;
+        tywx.ado.Utils.requestEveryLoginInfo({
+            success: function success() {
+                var root = tywx.ado.Utils.getPopRoot();
+                if (root) {
+                    cc.loader.loadRes('prefabs/ado_view_every_day_login', function (err, prefab) {
+                        if (!err && !self.everyDayLogin) {
+                            var every_day_login = cc.instantiate(prefab);
+                            every_day_login.parent = root;
+                            every_day_login.getComponent('ado_view_every_day_login').init();
+                            self.everyDayLogin = every_day_login;
+                        }
+                    });
+                }
+            },
+            fail: function fail() {
+                console.log('showEveryDayLogin fail');
             }
         });
     },
@@ -341,6 +409,7 @@ var gamestart = cc.Class({
     onDestroy: function onDestroy() {
         tywx.ado.Utils.hideGameClub();
         tywx.ado.Utils.destroyWXBanner();
+        tywx.NotificationCenter.ignoreScope(this);
     },
 
 
@@ -791,6 +860,9 @@ var gamestart = cc.Class({
                 prefabNode.getComponent('ado_view_lottery_layer').init();
             }
         });
+    },
+    btnShowEveryDayLogin: function btnShowEveryDayLogin() {
+        this.showEveryDayLogin();
     }
 });
 

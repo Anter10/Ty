@@ -10,17 +10,17 @@ cc._RF.push(module, '7c2dbJUdiZLmIzaqT+PBih/', 'AddOneConfig', __filename);
    created by gyc on 2018-08-01.
 */
 var config = {
-    "auditing": true,
-    "ruyiScore": 45000,
+    "auditing": false,
+    "ruyiScore": 20000,
     "MUSICS": {
         "BG_MUSIC": "https://marketqn.nalrer.cn/teris/m/3.mp3"
     },
     "box_rate": {
-        "sub1": 0.5,
+        "sub1": 0.1,
         "add2": 0.2,
-        "heart": 0.2,
-        "chui": 0.1,
-        "red_packet": 0.5
+        "heart": 0.4,
+        "chui": 0.3,
+        "red_packet": 0.6
     },
     "luck_block": {
         "score": [0, 100000, 120000, 150000, 180000, 200000, 100000000],
@@ -35,17 +35,13 @@ var config = {
     },
     "show_box_rate": {
         "maxnum": [0, 8, 11, 14, 17, 20, 10000],
-        "comboz": 1.3,
-        "rate": [0, 0.03, 0.04, 0.05, 0.06, 0.1]
+        "comboz": 1.38,
+        "rate": [0.055, 0.06, 0.065, 0.07, 0.08, 0.1]
     },
     // * 能够CDN刷新的资源
-    "CDNImages": {
-        "GameOverPhotos": ["gameover_0.png", "gameover_1.png", "gameover_2.png", "gameover_3.png"],
-        "MergeBigNumPhotos": ["bignum_0.png", "bignum_1.png", "bignum_2.png", "bignum_3.png"]
-    },
     "PYQImg": {
-        "GameOverPhotos": ["g0.png", "g1.png", "g2.png", "g3.png"],
-        "MergeBigNumPhotos": ["g0.png", "g1.png", "g2.png", "g3.png"]
+        "GameOverPhotos": ["g1.png", "g2.png", "g3.png", "g4.png", "g5.png", "g6.png", "g7.png", "g8.png"],
+        "MergeBigNumPhotos": ["g1.png", "g2.png", "g3.png", "g4.png", "g5.png", "g6.png", "g7.png", "g8.png"]
     },
     // 每局使用道具数量
     "mjUseItemNumber": 10

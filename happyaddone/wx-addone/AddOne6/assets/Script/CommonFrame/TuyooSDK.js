@@ -201,7 +201,8 @@ tywx.TuyooSDK = {
                 method: 'POST',
 
                 success: function (params) {
-                    tywx.LOGE('tuyoo login success, params:' + JSON.stringify(params));
+                    //tywx.LOGE('tuyoo login success, params:' + JSON.stringify(params));
+                    console.log('tuyoo login success, params:' + JSON.stringify(params));
                     var checkData = params.data;
                     if ((checkData.error && checkData.error.code == 1) || !(checkData.result && checkData.result.userId)) {
                         // tywx.LOGE('tuyoo login fail...');

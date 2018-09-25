@@ -19,6 +19,12 @@ tywx.ado.inGame = game=>{
 tywx.ado.outGame = ()=>{
     tywx.ado.game = null;
 };
+// * 红包信息初始化
+tywx.ado.RedPacketInfo = {
+    nextAmount: 0,
+    totalAmount: 0,
+    needShare: false
+};
 // * 保存进度
 tywx.ado.saveProgress = ()=>{
     if(tywx.ado.game && tywx.ado.game.gamestate !== tywx.ado.Constants.GameCenterConfig.gameState.gameover){
@@ -32,6 +38,8 @@ tywx.ado.saveProgress = ()=>{
         let data = {
             life : tywx.ado.game.point || 0,
             score: tywx.ado.game.score || 0,
+            recovernumber: tywx.ado.game.recoverNumber || 0,
+            useitemnumber: tywx.ado.game.useItemNumber || 0,
             mask : mask,
             curmaxNumber:tywx.ado.game.curmaxNumber || 5,
         };

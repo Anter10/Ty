@@ -7,40 +7,61 @@
  */
 // * 分享标识
 let ShareConfig = {
-    FIRST_PAGE_SHARE  : ['firstpageshare', false],    // 首页分享
-    RECOVER_GAME_SHARE: ['recovergameshare', true],   // 分享复活
-    MAIN_BTN_SHARE    : ['mainbtnshare', false],      // 主界三点下面的分享
-    POJILU_SHARE      : ['pojilushare', false],       // 得分破纪录分享
-    RANK_SHARE        : ['phbshare', true],           // 排行榜界面分享
-    FREE_GIFT_SHARE   : ['freegiftshare', true],      // 免费领取
+    FIRST_PAGE_SHARE: ['firstpageshare', false], // 首页分享
+    RECOVER_GAME_SHARE: ['recovergameshare', true], // 分享复活
+    MAIN_BTN_SHARE: ['mainbtnshare', false], // 主界三点下面的分享
+    POJILU_SHARE: ['pojilushare', false], // 得分破纪录分享
+    RANK_SHARE: ['phbshare', true], // 排行榜界面分享
+    FREE_GIFT_SHARE: ['freegiftshare', true], // 免费领取--连击
+    GROUP_RANK_SHARE: ['group_rank_share', true], // 群排行
+    GIFT_GIFT_BOX_SHARE: ['free_gift_box_share', true], // 如意宝箱
+    OPEN_RED_PACKET_SHARE: ['open_red_packet_share', true], // 如意宝箱
 };
 // * 微信广告参数
 let WXAdConfig = {
-    bannerId         : 'adunit-652297ac130ea5be',
-    vedioId          : 'adunit-72772b75d8b17d65',
-    bannerRefreshTime: 20,                          // * Banner刷新时间
+    bannerId: 'adunit-652297ac130ea5be',
+    vedioId: 'adunit-72772b75d8b17d65',
+    bannerRefreshTime: 200, // * Banner刷新时间
 };
+
+// * 微信红包提现报错
+let WXTransferRedPacketError = [
+    '提现成功',
+    '本日红包添加次数已用光，明日才能再次添加',
+    '用户数据，登陆信息校验失败',
+    'clientId校验失败',
+    '用户红包不足，不能提现',
+    'SDK网络请求错误',
+    'SDK网络请求成功，业务处理失败',
+    '系统未捕获异常',
+    '参数错误'
+];
+
 // 游戏的基础配置
 let GameCenterConfig = {
+    // 点击开始的时候判断玩家的分数是否大于 此值 不大于的话 则直接进入游戏
+    prePlayGetScore: 10000,
     //游戏开始的时候方块下落的时间
     mergeMaxNumberBaseScore: 700,
     //游戏开始的时候方块下落的时间
-    startGameDropTime:0.3,
+    startGameDropTime: 0.3,
     // 当格子显示的数字超过此值时 显示皇冠
     moreThanTenNumber: 8,
     // 当格子显示的数字超过此值时 显示动画
     moreThanEightNumber: 8,
     // 分数大于这个值的时候 突破记录才显示 否则不限时
-    showPjlScore:8000,
+    showPjlScore: 8000,
     // 每个格子的大小（宽 高）
     gezi_size: 56,
     //每个格子的间隙
-    gezi_gap : 4,
+    gezi_gap: 4,
     gezi_h_s: 48.5,
     // 每个格子+间隙的大小 
     gezi_pitch: 140,
     // 格子移动一个的时间
     drop_time: 0.15,
+    gezi_offx: 30,
+    gezi_offy: 380,
     // 合并间歇时间
     merge_delay_time: 0.08,
     // 移动合并时间
@@ -52,7 +73,7 @@ let GameCenterConfig = {
     // 玩家最大体力
     maxphy_value: 5,
     // 公共格子数量 5 * 5
-    geziNumber: 98,
+    geziNumber: 25,
     // 最少连接多少个可以消除
     minCanRemoveNumber: 3,
     //玩家得分基数
@@ -63,12 +84,10 @@ let GameCenterConfig = {
     marginbottom: 358,
     // 即将超越对手多少分显示相应图标
     thanfriendScore: 300,
-    gezi_offx: 30,
-    gezi_offy: 380,
     // 提示用户点击轮播时间
     letUserClickTime: 3,
     // 初始化给玩家的道具数量
-    initGivePlayerItemNumber: 3,
+    initGivePlayerItemNumber: 1,
     // 初始化格子的最大数限制
     initGameMaxNum: 5,
     // 游戏中用到的道具数据
@@ -110,6 +129,10 @@ let GameCenterConfig = {
         MUSIC_LOGO: 'sounds/music_logo.mp3',
         POPUPCLOSE: 'sounds/PopupClose.mp3',
         UNBLIEVEABLE: 'sounds/unblieveable.mp3',
+        // 加钱的时候音效
+        ADDMONEY: 'sounds/coin.mp3',
+        // 飞红包时的音效
+        FLY_REDPACKET: 'sounds/redpack.mp3',
         COMBO: [
             'sounds/combo3.mp3',
             'sounds/combo4.mp3',
@@ -127,17 +150,16 @@ let GameCenterConfig = {
     },
     // 格子中数字的颜色值
     celltilenumColors: [
-        [154, 91, 1], // 1
-        [51, 112, 0], // 2
-        [161, 62, 3], // 3
-        [165, 14, 14], // 4
-        [1, 107, 98], // 5
-        [151, 0, 103], // 6
-        [0, 107, 160], // 7
-        [15, 84, 105], // 8
-        [107, 33, 207], // 9
-        [131, 0, 155], // 10
-        
+        [126, 84, 15], // 砖红色
+        [94, 120, 23], // 浅砖红色
+        [167, 82, 26], // 蓝色
+        [167, 46, 46], // 草绿色
+        [161, 31, 71], // 青色
+        [28, 118, 85], // 深绿色
+        [14, 110, 147], // 深蓝色
+        [29, 94, 155], // 深红色
+        [151, 53, 111], // 咖啡色
+        [111, 49, 126], // 紫色
     ],
     // 当前的游戏状态
     gameState: {
@@ -154,8 +176,8 @@ let GameCenterConfig = {
         [94, 120, 23], // 浅砖红色
         [167, 82, 26], // 蓝色
         [167, 46, 46], // 草绿色
-        [161, 31, 71], // 青色
         [28, 118, 85], // 深绿色
+        [161, 31, 71], // 青色
         [14, 110, 147], // 深蓝色
         [29, 94, 155], // 深红色
         [151, 53, 111], // 咖啡色
@@ -188,4 +210,5 @@ module.exports = {
     ShareConfig,
     GameCenterConfig,
     WXAdConfig,
+    WXTransferRedPacketError
 };

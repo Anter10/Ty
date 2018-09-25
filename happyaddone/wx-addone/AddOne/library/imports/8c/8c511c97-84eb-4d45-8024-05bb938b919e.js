@@ -49,7 +49,7 @@ cc.Class({
         if (this.info.totalAmount >= 2000) {
             tywx.ado.Utils.requestRedPacket2Cash();
         } else {
-            tywx.ado.Utils.showWXModal('低于20元不能提现', '提示', false);
+            tywx.ado.Utils.showWXModal('攒够20元再提现吧,加油!', '提示', false);
         }
     },
     init: function init(current_cash) {

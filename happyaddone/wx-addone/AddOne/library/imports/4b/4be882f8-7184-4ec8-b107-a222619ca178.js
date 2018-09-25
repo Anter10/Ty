@@ -11,6 +11,9 @@ tywx.ado.Configs = require('./models/AddOneConfig.js'); // * 配置文件
 tywx.ado.Utils = require('./models/Utils.js'); // * 工具类
 tywx.ado.AudioManager = require('./models/AudioManager.js'); // * 声音管理器
 tywx.ado.Constants = require('./models/Constants.js'); // * 常量
+tywx.ado.Events = require('./models/Events.js'); // * 事件
+
+tywx.ado.isFirstLogin = true; // * 是否是第一次进入菜单
 
 tywx.ado.boot = function () {
     cc.log('tywx.ado.boot');
@@ -30,6 +33,13 @@ tywx.ado.RedPacketInfo = {
     nextAmount: 0,
     totalAmount: 0,
     needShare: false
+};
+// * 每日登陆信息
+tywx.ado.EveryDataLoginInfo = {
+    totalAmount: 0,
+    count: 0,
+    amount: 0,
+    rewad: false
 };
 // * 保存进度
 tywx.ado.saveProgress = function () {

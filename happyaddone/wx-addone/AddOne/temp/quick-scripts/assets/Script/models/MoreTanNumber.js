@@ -56,6 +56,10 @@ cc.Class({
         spriteFrames: {
             default: [],
             type: cc.SpriteFrame
+        },
+        jlLabel: {
+            default: null,
+            type: cc.Label
         }
 
     },
@@ -67,7 +71,9 @@ cc.Class({
      * @param {String} 道具名称
      */
     setShowNumber: function setShowNumber(shownum, score, name) {
+        this.addscore = score;
         this.showNumber.string = shownum;
+        this.jlLabel.string = "奖励 " + score + "分";
         this.setDbByIndex(shownum, score, name);
     },
 
@@ -155,12 +161,25 @@ cc.Class({
         }
     },
 
+    closeCall: function closeCall() {
+        this.close();
+        if (tywx.gamecenter && tywx.gamecenter.shareDoubleScore) {
+            tywx.gamecenter.shareDoubleScore(this.addscore);
+        }
+    },
+
     /**
      * @description 设置关闭后的回调函数
      * @param {Function} clossc 关闭回调函数
      */
     setCloseCall: function setCloseCall(clossc) {
         this.clossc = clossc;
+    },
+
+    doubleScore: function doubleScore() {
+        if (tywx.gamecenter && tywx.gamecenter.shareDoubleScore) {
+            tywx.gamecenter.shareDoubleScore(this.addscore * 2);
+        }
     },
 
     /**
@@ -187,7 +206,7 @@ cc.Class({
         this.backSprite.node.on('touchstart', function (event) {
             return true;
         });
-        this.btnRefreshBgPhotoCallback();
+        //  this.btnRefreshBgPhotoCallback();
     },
 
 

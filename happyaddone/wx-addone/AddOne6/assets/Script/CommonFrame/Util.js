@@ -71,5 +71,5 @@ tywx.Util = {
         } catch (e) {
             tywx.LOGE("tywx.Util", "setItemToLocalStorage fail");
         }
-    }
+    },
 };

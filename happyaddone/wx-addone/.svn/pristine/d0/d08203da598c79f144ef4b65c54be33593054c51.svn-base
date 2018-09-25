@@ -1,0 +1,190 @@
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        nodeWatchVideoToggle: cc.Node,
+        nodeShareToggle: cc.Node
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+        this.isWatchVideo = true;
+        this.isShare = true;
+        if(cc.director.getScene()._name === 'gamestart'){
+            tywx.ado.Utils.hideGameClub();
+            let an = tywx.AdManager.getAdNodeByTag('GAME_START');
+            if(an) an.hideAdNode();
+        } else if (cc.director.getScene()._name === 'gamemain') {
+            tywx.ado.Utils.hideWXBanner();
+        }
+    },
+
+    start () {
+
+    },
+    onDestroy(){
+        if(cc.director.getScene()._name === 'gamestart'){
+            tywx.ado.Utils.showGameClub();
+            let an = tywx.AdManager.getAdNodeByTag('GAME_START');
+            if(an) an.showAdNode();
+        } else if (cc.director.getScene()._name === 'gamemain') {
+            tywx.ado.Utils.showWXBanner();
+        }
+    },
+
+    // update (dt) {},
+    btnClose(){
+        this.node.destroy();
+    },
+    itemTouched(idx){
+        console.log('itemTouched', idx);
+    },
+    changeWatchVideoStat(){
+        this.isWatchVideo = !this.isWatchVideo;
+        if(!this.isWatchVideo){
+            this.nodeShareToggle.active = true;
+            this.nodeWatchVideoToggle.active = false;
+            this.isShare = true;
+            let btn_get_label = this.root.getChildByName('btn_reward_double').getChildByName('label_reward').getComponent(cc.Label);
+            if(btn_get_label){
+                btn_get_label.string = '加倍领取';
+            }
+        }
+    },
+    changeShareStat(){
+        this.isShare = !this.isShare;
+        let btn_get_label = this.root.getChildByName('btn_reward_double').getChildByName('label_reward').getComponent(cc.Label);
+        if(!this.isShare) {
+            if(btn_get_label){
+                btn_get_label.string = '视频加倍';
+            }
+        }
+        else{
+            if(btn_get_label){
+                btn_get_label.string = '加倍领取';
+            }
+        }
+    },
+    getReward(){
+        let self = this;
+        if(this.info.rewad){
+            console.log('已经领取奖励');
+        }
+        else{
+            if(this.isShare){
+                window.wx.showShareMenu({withShareTicket: true});
+                let shareConfig = tywx.ado.Constants.ShareConfig.EVERY_DAY_GIFT_DOUBLE_SHARE;
+                let msg = tywx.ado.Utils.getRandomShareConfigByShareTag(shareConfig);
+                if(!msg){
+                    msg = {};
+                    msg.shareContent = "你知道" + "1 吗？";
+                    msg.sharePicUrl = "https://marketqn.nalrer.cn/teris/share_image/jiayi/jy03.jpg";
+                    msg.sharePointId = "766";
+                    msg.shareSchemeId = "1155";
+                }
+                if(msg){
+                    tywx.ShareInterface.share(
+                        msg.shareContent,
+                        msg.sharePicUrl,
+                        msg.sharePointId,
+                        msg.shareSchemeId,
+                        (res) => {
+                            tywx.LOGE("分享成功后的数据"+JSON.stringify(res));
+                            // * is share to group
+                            if(shareConfig && shareConfig[1]){
+                                // * froce share to group
+                                if (res.shareTickets !== undefined && res.shareTickets.length > 0) {
+                                    tywx.ado.Utils.share2GroupByTicket(
+                                        self.shareConfig[0], 
+                                        res, 
+                                        ()=>{ // * success callback
+                                            self.showOpenRedPacket();
+                                        },
+                                        ()=>{ // * failed callback
+                                            tywx.ado.Utils.showWXModal('请分享到不同群');
+                                            //self.errorCallBack && self.errorCallBack(null);                                           
+                                        }
+                                    );
+                                }
+                                else{
+                                    // * failed
+                                    tywx.ado.Utils.showWXModal('请分享到群');
+                                    //self.errorCallBack && self.errorCallBack(null);
+                                }
+                            }
+                            else{
+                                // * success
+                                self.showOpenRedPacket();
+                            }                          
+                         
+                        },
+                        function(data){
+                            tywx.LOGE("分享成功后的数2据"+JSON.stringify(data));
+                            //self.errorCallBack && self.errorCallBack(data);
+                        }
+                    );
+               }
+            }
+            else{
+                tywx.ado.Utils.showWXVideo({
+                    success:()=>{
+                        self.showOpenRedPacket();
+                    },
+                    fail:()=>{},
+                    error_callback:()=>{
+                        self.showOpenRedPacket();
+                    }
+                });
+            }
+            
+        }
+    },
+    btnGetRewardWithoutShareAndVideo(){
+        this.showOpenRedPacket();
+    },
+    showOpenRedPacket(){
+        this.node.destroy();
+        cc.loader.loadRes('prefabs/OpenRedPackView_2', function (err, prefab) {
+            if (!err) {
+                var prefabNode = cc.instantiate(prefab);
+                cc.game.addPersistRootNode(prefabNode);
+                prefabNode.x = 360;
+                prefabNode.y = 720;
+                tywx.ado.Utils.hideWXBanner();
+                prefabNode.getComponent('OpenRedPackView_2').showUI();
+                prefabNode.getComponent('OpenRedPackView_2').init();
+            }
+        });
+    },
+    init(){
+        let info = tywx.ado.EveryDataLoginInfo;
+        this.root = this.node.getChildByName('root');
+        this.info = info;
+        let btn_get_label = this.root.getChildByName('btn_reward_double').getChildByName('label_reward').getComponent(cc.Label);
+        if(btn_get_label){
+            btn_get_label.string = info.rewad ? '已领取' : '加倍领取';
+        }
+        for(let i = 0; i < 7; i++){
+            let child_name = `node_icon_${i}`;
+            let node_icon = this.root.getChildByName(child_name);
+            if(node_icon){
+                let mask = node_icon.getChildByName('mask');
+                let node_count = node_icon.getChildByName('label_count');
+                let label_count = node_count.getComponent(cc.Label);
+                if (i === info.count - 1){
+                    mask.active = false;
+                    node_count.active = false;
+                    label_count.string = `¥${tywx.ado.Utils.formatCashFen2Yuan(info.amount)}`;
+                }
+                else{
+                    mask.active = true;
+                    if(i > info.count -1){
+                        node_count.active = false;
+                    }
+                }
+            }
+        }
+    }
+});

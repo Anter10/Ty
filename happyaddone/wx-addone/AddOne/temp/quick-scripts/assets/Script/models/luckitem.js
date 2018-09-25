@@ -29,18 +29,29 @@ cc.Class({
         itemName: {
             default: null,
             type: cc.Label
-        }
+        },
+        unselectMask: cc.Node
 
     },
 
     selected: function selected() {
-        this.mask.active = true;
+        //    this.mask.active = true;
         if (this.parent && this.parent.hideOtherSelected) {
             this.parent.hideOtherSelected(this);
         }
     },
 
+    select: function select() {
+        this.unselectMask.active = false;
+        this.mask.active = true;
+    },
+
+    isSelected: function isSelected() {
+        return this.mask.active;
+    },
+
     unselected: function unselected() {
+        this.unselectMask.active = true;
         this.mask.active = false;
     },
 

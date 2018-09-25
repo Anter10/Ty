@@ -12,7 +12,12 @@ cc._RF.push(module, '2fada/8fPBHRZzD6uWmYAck', 'ShareButton', __filename);
 cc.Class({
     extends: cc.Component,
 
-    properties: {},
+    properties: {
+        callButton: {
+            default: null,
+            type: cc.Button
+        }
+    },
 
     /*
       调用: 场景加载完成后的回调
@@ -27,6 +32,8 @@ cc.Class({
     */
     onLoad: function onLoad() {
         this.data = {};
+
+        console.log("this.button" + this.button);
     },
 
     /*
@@ -81,6 +88,25 @@ cc.Class({
     */
     setSuccessCall: function setSuccessCall(successCall) {
         this.successCallBack = successCall;
+    },
+
+    /** 
+     * @description 切换按钮的调用类型 
+     * @param {Number} calltype  1 分享 2 视频
+    */
+    setButtonCallType: function setButtonCallType(calltype) {
+        if (!this.calltype) {
+            this.callButton.node.on('click', this.callBack, this);
+        }
+        this.calltype = calltype;
+    },
+
+    callBack: function callBack() {
+        if (this.calltype == 1) {
+            this.shareMiniApp();
+        } else {
+            this.showWXVideo();
+        }
     },
 
     /*
@@ -175,6 +201,7 @@ cc.Class({
     */
     shareMiniApp: function shareMiniApp() {
         var self = this;
+        console.log("当前分享" + this.reactcall);
         if (this.reactcall) {
             self.successCallBack(this);
         } else {

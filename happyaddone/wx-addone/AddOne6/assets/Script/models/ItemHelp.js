@@ -28,42 +28,33 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        this.initCells();
+      this.initCells();
     },
+    
+    initCells:function(){
+          if (!this.allcells) {
+              this.allcells = [];
+          }else{
+              return;
+          }
+          this.allnumbers = [2, 3, 4, 4, 3, 5];
+          for (var tindex = 0; tindex < this.cells.length; tindex++) {
+              var cellt = cc.instantiate(this.celltile);
+              var tilescript = cellt.getComponent("celltile");
+              tilescript.setCantClick(true);
+              tilescript.changeShow(this.allnumbers[tindex]);
+              cellt.scaleX = 0.65;
+              cellt.scaleY = 0.65;
+              cellt.y = cellt.y - 30;
+              cellt.x = cellt.x + 15;
+              cellt.parent = this.cells[tindex];
+              this.allcells.push(cellt);
 
-    initCells: function () {
-        if (!this.allcells) {
-            this.allcells = [];
-        } else {
-            return;
-        }
-        this.allnumbers = [2, 3, 4, 4, 3, 5];
-        for (var tindex = 0; tindex < this.cells.length; tindex++) {
-            var cellt = cc.instantiate(this.celltile);
-            var tilescript = cellt.getComponent("celltile");
-            tilescript.setCantClick(true);
-            tilescript.changeShow(this.allnumbers[tindex]);
-            cellt.parent = this.cells[tindex];
-            cellt.scaleX = 1;
-            cellt.scaleY = 1;
-            console.log("cellt.scaleX = " + cellt.scaleX);
-            if(tindex < 3){
-               cellt.x = cellt.x + 35;
-               cellt.y = cellt.y - 45;
-            }else{
-               cellt.y = cellt.y - 40;
-               cellt.x = cellt.x + 30;
-            }
-           
-            
-           
-            this.allcells.push(cellt);
-
-        }
-        // this.cells = allcell;
+          }
+          // this.cells = allcell;
 
 
-        this.allcells[0].getComponent("celltile").playNewPlayerEff();
+          this.allcells[0].getComponent("celltile").playNewPlayerEff();
     },
     addNumber: function (num) {
         var self = this;
@@ -85,7 +76,7 @@ cc.Class({
     },
 
     start() {
-        //    this.initCells();
+    //    this.initCells();
     },
 
 
@@ -105,7 +96,7 @@ cc.Class({
 
     showNum: function (num) {
         if (!this.allcells) {
-            this.initCells();
+             this.initCells();
         }
         this.addNumber(num);
         this.czNode.active = false;
@@ -120,10 +111,10 @@ cc.Class({
     },
 
     hideView: function () {
-        if (!this.allcells) {
-            this.initCells();
+        if (!this.allcells){
+           this.initCells();
         }
-
+        
         this.allcells[0].getComponent("celltile").changeShow(2);
         var anim = this.czNode.getComponent(cc.Animation);
         anim.stop("chuizi");

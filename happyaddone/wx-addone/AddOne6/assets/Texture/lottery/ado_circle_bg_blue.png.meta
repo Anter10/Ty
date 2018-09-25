@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "753e1a92-0355-4514-93a0-ccc229454cfe",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "ado_circle_bg_blue": {
+      "ver": "1.0.3",
+      "uuid": "299aecf7-3762-4061-947c-20738d38e22b",
+      "rawTextureUuid": "753e1a92-0355-4514-93a0-ccc229454cfe",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 130,
+      "height": 124,
+      "rawWidth": 130,
+      "rawHeight": 124,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

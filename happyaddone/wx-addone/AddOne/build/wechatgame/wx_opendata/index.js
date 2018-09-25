@@ -81,7 +81,7 @@ function loadData() {
         keyList: [CloudKeys.x1],
         success: result => {
             _friendCloudDatas = result.data;
-            console.log("当前请求下来的数据" + JSON.stringify(_friendCloudDatas));
+            //console.log("当前请求下来的数据" + JSON.stringify(_friendCloudDatas));
             _friendCloudDatas.sort((a, b) => {
                 if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
                     return 0;
@@ -96,7 +96,7 @@ function loadData() {
             });
         },
         fail: err => {
-            console.log("当前请求下来的数据21212" + JSON.stringify(err));
+            //console.log("当前请求下来的数据21212" + JSON.stringify(err));
         }
     });
     //* 自己的数据

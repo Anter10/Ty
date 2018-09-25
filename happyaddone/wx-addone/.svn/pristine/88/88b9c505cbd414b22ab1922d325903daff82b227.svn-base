@@ -1,0 +1,5 @@
+let Events = {
+    ADO_EVENT_RED_PACKET_CHANGE : 'ado_event_red_packet_change'
+};
+
+module.exports = Events;

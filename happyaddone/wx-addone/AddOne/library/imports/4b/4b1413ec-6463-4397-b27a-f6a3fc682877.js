@@ -464,12 +464,14 @@ var Utils = function () {
             var s_h = sys_info.screenHeight; // 220
             // ! 强制适配,主要是ipx有问题
             var is_ipx = tywx.ado.Utils.isIpx();
+            // ! 强制适配 pad(宽屏设备)
+            var is_pad = tywx.ado.Utils.isPad();
             WXBannerAD = wx.createBannerAd({
                 adUnitId: tywx.ado.Constants.WXAdConfig.bannerId,
                 style: {
                     left: 0,
                     top: 0,
-                    width: is_ipx ? s_w * 0.88 : s_w * 0.95
+                    width: is_ipx ? s_w * 0.88 : is_pad ? s_w * 0.6 : s_w * 0.95
                 }
             });
 
@@ -670,6 +672,7 @@ var Utils = function () {
     }, {
         key: 'requestRedPacket',
         value: function requestRedPacket(params) {
+            console.log('redpacket', 'requestRedPacket start');
             try {
                 wx.request({
                     url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/redenvelop/getinfo',
@@ -678,10 +681,12 @@ var Utils = function () {
                         clientId: tywx.SystemInfo.clientId,
                         authorCode: tywx.UserInfo.authorCode,
                         deviceInfo: tywx.SystemInfo.deviceId,
-                        name: tywx.UserInfo.userName
+                        name: tywx.UserInfo.userName,
+                        rand: Math.random() * 1000000
                     },
+                    //method:"POST",
                     success: function success(res) {
-                        console.log('redpacket', 'requestRedPacket==success', res);
+                        console.log('redpacket', 'requestRedPacket==success', JSON.stringify(res));
                         if (res.data && res.data.nextAmount > 0) {
                             var red_packet = {
                                 current: tywx.ado.Utils.formatCashFen2Yuan(res.data.nextAmount), // 本次获取的金额
@@ -691,18 +696,25 @@ var Utils = function () {
                             };
                             tywx.ado.RedPacketInfo = res.data;
                             params.success && params.success(red_packet);
+                            tywx.ado.Utils.uploadErrorMsg('redpacket;requestRedPacket==success;' + JSON.stringify(res));
                         } else {
+                            if (res.data && res.data.nextAmount === 0) {
+                                tywx.ado.RedPacketInfo = res.data;
+                            }
                             params.fail && params.fail(-1);
+                            tywx.ado.Utils.uploadErrorMsg('redpacket;requestRedPacket==success---fail;' + JSON.stringify(res));
                         }
                     },
                     fail: function fail(res) {
                         params.fail && params.fail(-1);
-                        console.log('redpacket', 'requestRedPacket==fail', res);
+                        console.log('redpacket', 'requestRedPacket==fail', JSON.stringify(res));
+                        tywx.ado.Utils.uploadErrorMsg('redpacket;requestRedPacket==fail;' + JSON.stringify(res));
                     }
                 });
             } catch (e) {
                 params.fail && params.fail(-1);
-                console.log('redpacket', 'requestRedPacket==error', e);
+                console.log('redpacket', 'requestRedPacket==error', JSON.stringify(e));
+                tywx.ado.Utils.uploadErrorMsg('redpacket;requestRedPacket==error;' + e.message);
             }
         }
         /**
@@ -718,19 +730,23 @@ var Utils = function () {
     }, {
         key: 'requestAddRedPacket',
         value: function requestAddRedPacket(params) {
+            console.log('redpacket', 'requestAddRedPacket start');
+
             try {
                 wx.request({
                     url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/redenvelop/add',
                     data: {
-                        userId: tywx.UserInfo.userId,
+                        userId: tywx.UserInfo.userId, // tywx.UserInfo.userId
                         clientId: tywx.SystemInfo.clientId,
                         authorCode: tywx.UserInfo.authorCode,
                         deviceInfo: tywx.SystemInfo.deviceId,
-                        name: tywx.UserInfo.userName
+                        name: tywx.UserInfo.userName,
+                        rand: Math.random() * 1000000
                     },
+                    //method:"POST",
                     success: function success(res) {
                         // * 加红包成功
-                        console.log('redpacket', 'requestAddRedPacket==success', res);
+                        console.log('redpacket', 'requestAddRedPacket==success', JSON.stringify(res));
                         if (res.data && res.data.addAmount > 0) {
                             var addAmount = tywx.ado.Utils.formatCashFen2Yuan(res.data.addAmount);
                             tywx.ado.RedPacketInfo.totalAmount += res.data.addAmount;
@@ -738,19 +754,22 @@ var Utils = function () {
                         } else {
                             tywx.ado.Utils.showWXModal('加红包失败', '提示', false);
                             params.fail && params.fail();
+                            tywx.ado.Utils.uploadErrorMsg('redpacket;requestAddRedPacket==success---fail;' + JSON.stringify(res));
                         }
                     },
                     fail: function fail(res) {
                         // * 加红包失败
-                        console.log('redpacket', 'requestAddRedPacket==fail', res);
+                        console.log('redpacket', 'requestAddRedPacket==fail', JSON.stringify(res));
                         tywx.ado.Utils.showWXModal('加红包失败', '提示', false);
                         params.fail && params.fail();
+                        tywx.ado.Utils.uploadErrorMsg('redpacket;requestAddRedPacket==fail;' + JSON.stringify(res));
                     }
                 });
             } catch (e) {
                 // * 加红包报错
-                console.log('redpacket', 'requestAddRedPacket==error', e);
+                console.log('redpacket', 'requestAddRedPacket==error', JSON.stringify(e));
                 tywx.ado.Utils.showWXModal('加红包失败', '提示', false);
+                tywx.ado.Utils.uploadErrorMsg('redpacket;requestAddRedPacket==error;' + e.message);
             }
         }
         /**
@@ -763,6 +782,7 @@ var Utils = function () {
     }, {
         key: 'requestRedPacket2Cash',
         value: function requestRedPacket2Cash() {
+            console.log('redpacket', 'requestRedPacket2Cash start');
             try {
                 wx.request({
                     url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/redenvelop/transfer',
@@ -771,29 +791,150 @@ var Utils = function () {
                         clientId: tywx.SystemInfo.clientId,
                         authorCode: tywx.UserInfo.authorCode,
                         deviceInfo: tywx.SystemInfo.deviceId,
-                        name: tywx.UserInfo.userName
+                        name: tywx.UserInfo.userName,
+                        rand: Math.random() * 1000000
                     },
+                    // method:"POST",
                     success: function success(res) {
                         // * 提现成功
-                        console.log('redpacket', 'requestRedPacket2Cash==success', res);
+                        console.log('redpacket', 'requestRedPacket2Cash==success', JSON.stringify(res));
                         if (res.data) {
                             tywx.ado.Utils.showWXModal(tywx.ado.Constants.WXTransferRedPacketError[res.data.code], '提示', false);
+                            if (res.data.code !== 0) {
+                                tywx.ado.Utils.uploadErrorMsg('redpacket;requestRedPacket2Cash==success--error-0;' + JSON.stringify(res));
+                            }
                         } else {
                             // * 未知错误
+                            tywx.ado.Utils.uploadErrorMsg('redpacket;requestRedPacket2Cash==success--error-1;' + JSON.stringify(res));
                         }
                     },
                     fail: function fail(res) {
                         // * 提现失败
                         //params.fail && params.fail(0);
                         tywx.ado.Utils.showWXModal('提现请求失败，请稍后再试', '提示', false);
-                        console.log('redpacket', 'requestRedPacket2Cash==fail', res);
+                        console.log('redpacket', 'requestRedPacket2Cash==fail', JSON.stringify(res));
+                        tywx.ado.Utils.uploadErrorMsg('redpacket;requestRedPacket2Cash==fail;' + JSON.stringify(res));
                     }
                 });
             } catch (e) {
                 // * 提现失败
                 //params.fail && params.fail(0);
                 tywx.ado.Utils.showWXModal('提现请求失败，请稍后再试', '提示', false);
-                console.log('redpacket', 'requestRedPacket2Cash==fail', e);
+                console.log('redpacket', 'requestRedPacket2Cash==fail', JSON.stringify(e));
+                tywx.ado.Utils.uploadErrorMsg('redpacket;requestRedPacket2Cash==error;' + e.message);
+            }
+        }
+        /**
+         * @description 请求每日登陆信息
+         * @author lu ning
+         * @date 2018-09-24
+         * @param {Object} params
+         * @param {Function} params.success
+         * @param {Function} params.fail
+         * @param {Function} params.error
+         * @static
+         */
+
+    }, {
+        key: 'requestEveryLoginInfo',
+        value: function requestEveryLoginInfo(params) {
+            try {
+                wx.request({
+                    url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/everydaylogin/getinfo',
+                    data: {
+                        userId: tywx.UserInfo.userId,
+                        clientId: tywx.SystemInfo.clientId,
+                        authorCode: tywx.UserInfo.authorCode,
+                        deviceInfo: tywx.SystemInfo.deviceId,
+                        name: tywx.UserInfo.userName,
+                        rand: Math.random() * 1000000
+                    },
+                    // method:"POST",
+                    success: function success(res) {
+                        // * 获取每日登陆信息成功
+                        console.log('redpacket', 'requestEveryLoginInfo==success', JSON.stringify(res));
+                        if (res.data) {
+                            if (res.data.code !== 0) {
+                                tywx.ado.Utils.showWXModal(tywx.ado.Constants.WXTransferRedPacketError[res.data.code], '提示', false);
+                                tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginInfo==success--error-0;' + JSON.stringify(res));
+                            } else {
+                                tywx.ado.EveryDataLoginInfo = res.data;
+                                params.success && params.success();
+                            }
+                        } else {
+                            // * 未知错误
+                            tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginInfo==success--error-1;' + JSON.stringify(res));
+                        }
+                    },
+                    fail: function fail(res) {
+                        // * 获取每日登陆信息失败
+                        params.fail && params.fail();
+                        console.log('redpacket', 'requestEveryLoginInfo==fail', JSON.stringify(res));
+                        tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginInfo==fail;' + JSON.stringify(res));
+                    }
+                });
+            } catch (e) {
+                // * 提现失败
+                console.log('redpacket', 'requestEveryLoginInfo==error', JSON.stringify(e));
+                tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginInfo==error;' + e.message);
+            }
+        }
+        /**
+         * @description 请求获得每日登陆奖励
+         * @author lu ning
+         * @date 2018-09-24
+         * @static
+         * @param {Object} params
+         * @param {Function} params.success
+         * @param {Function} params.fail
+         * @param {boolean} params.double
+         */
+
+    }, {
+        key: 'requestEveryLoginReward',
+        value: function requestEveryLoginReward(params) {
+            try {
+                wx.request({
+                    url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/everydaylogin/reward',
+                    data: {
+                        userId: tywx.UserInfo.userId,
+                        clientId: tywx.SystemInfo.clientId,
+                        authorCode: tywx.UserInfo.authorCode,
+                        deviceInfo: tywx.SystemInfo.deviceId,
+                        name: tywx.UserInfo.userName,
+                        double: params.double,
+                        rand: Math.random() * 1000000
+                    },
+                    // method:"POST",
+                    success: function success(res) {
+                        // * 请求每日登陆奖励成功
+                        console.log('redpacket', 'requestEveryLoginReward==success', JSON.stringify(res));
+                        if (res.data) {
+                            if (res.data.code !== 0) {
+                                tywx.ado.Utils.showWXModal(tywx.ado.Constants.WXTransferRedPacketError[res.data.code], '提示', false);
+                                tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginReward==success--error-0;' + JSON.stringify(res));
+                            } else {
+                                //tywx.ado.EveryDataLoginInfo = res.data;
+                                tywx.ado.RedPacketInfo.totalAmount += tywx.ado.EveryDataLoginInfo.amount;
+                                tywx.NotificationCenter.trigger(tywx.ado.Events.ADO_EVENT_RED_PACKET_CHANGE, null);
+                                params.success && params.success();
+                            }
+                        } else {
+                            // * 未知错误
+                            tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginReward==success--error-1;' + JSON.stringify(res));
+                        }
+                    },
+                    fail: function fail(res) {
+                        // * 请求每日登陆奖励失败
+                        params.fail && params.fail();
+                        console.log('redpacket', 'requestEveryLoginReward==fail', JSON.stringify(res));
+                        tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginReward==fail;' + JSON.stringify(res));
+                    }
+                });
+            } catch (e) {
+                // * 请求每日登陆奖励失败
+                console.log('redpacket', 'requestEveryLoginInfo==error', JSON.stringify(e));
+                tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginInfo==error;' + e.message);
             }
         }
 
@@ -876,6 +1017,23 @@ var Utils = function () {
                     end_callback && end_callback();
                 })));
             }
+        }
+        /**
+         * @description 是否是平板
+         * @author lu ning
+         * @date 2018-09-20
+         * @static
+         */
+
+    }, {
+        key: 'isPad',
+        value: function isPad() {
+            var ret = false;
+            var sys_info = wx.getSystemInfoSync();
+            if (sys_info.windowHeight / sys_info.windowWidth < 1.777) {
+                return true;
+            }
+            return ret;
         }
     }]);
 

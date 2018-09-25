@@ -8,10 +8,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        redPackNumberLabel: {
-            default: null,
-            type: cc.Label
-        },
+
         kaibottomNode: {
             default: null,
             type: cc.Node
@@ -63,7 +60,7 @@ cc.Class({
     setData: function setData(data) {
         this.data = data;
         console.log("当前的设置数据 = " + JSON.stringify(this.data));
-        this.redPackNumberLabel.string = tywx.ado.Utils.formatCashFen2Yuan(this.data.nextAmount) + " 元";
+        //  this.redPackNumberLabel.string = tywx.ado.Utils.formatCashFen2Yuan(this.data.nextAmount) + " 元"
         this.initOpenLogic();
     },
 
@@ -72,6 +69,9 @@ cc.Class({
      * @description 点击开红包的时候调用
      */
     open: function open() {
+        if (!tywx.StateInfo.networkConnected) {
+            return;
+        }
         var self = this;
         var param = {
             success: function success() {
@@ -127,10 +127,10 @@ cc.Class({
         var scale2 = cc.scaleTo(0.5, 1, 1);
         var open = cc.callFunc(function () {
             self.kaibottomNode.active = false;
-            self.redPackNumberLabel.node.active = true;
-            var scale3 = cc.scaleTo(0.2, 0.8);
-            var scale4 = cc.scaleTo(0.2, 1);
-            self.redPackNumberLabel.node.runAction(cc.sequence(scale3, scale4));
+            //  self.redPackNumberLabel.node.active = true;
+            //  let scale3 = cc.scaleTo(0.2, 0.8);
+            //  let scale4 = cc.scaleTo(0.2, 1);
+            //  self.redPackNumberLabel.node.runAction(cc.sequence(scale3, scale4));
             self.isOpening = false;
         });
         var tcall = cc.callFunc(function () {
