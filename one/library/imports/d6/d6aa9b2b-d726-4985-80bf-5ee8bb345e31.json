@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "efsawesome",
+    "texture": "728868ea-72e9-4f58-8ff5-7c64daeb1320",
+    "atlas": "",
+    "rect": [
+      2,
+      2,
+      422,
+      76
+    ],
+    "offset": [
+      0,
+      -0.5
+    ],
+    "originalSize": [
+      426,
+      79
+    ]
+  }
+}

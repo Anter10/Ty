@@ -60,6 +60,10 @@ cc.Class({
         jlLabel: {
             default: null,
             type: cc.Label
+        },
+        shareButton: {
+            type: cc.Node,
+            default: null
         }
 
     },
@@ -193,7 +197,21 @@ cc.Class({
      * @description 播放界面通用动画
      */
     uiAni: function uiAni() {
+        this.doubleAddInit();
         tywx.ado.Utils.commonScaleIn(this.rootNode);
+    },
+
+    /** 
+     * @description 判断是什么类型的加倍 视频 或者 分享
+    */
+    doubleAddInit: function doubleAddInit() {
+        if (tywx.config.share_control.bigdouble == "video") {
+            this.shareButton.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO);
+            this.shareButton.getComponent("ShareButton").setButtonCallType(2);
+        } else if (tywx.config.share_control.bigdouble == "share") {
+            this.shareButton.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE);
+            this.shareButton.getComponent("ShareButton").setButtonCallType(1);
+        }
     },
 
     /**
@@ -202,7 +220,7 @@ cc.Class({
     onLoad: function onLoad() {
         this.hadstorephotonumber = false;
         // 设置分享点
-        this.shareNode.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE);
+        this.doubleAddInit();
         this.backSprite.node.on('touchstart', function (event) {
             return true;
         });

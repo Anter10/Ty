@@ -28,6 +28,12 @@ cc.Class({
             default: null,
             type: cc.Label,
         },
+
+         // 格子的原始坐标
+         allgzPos:{
+             default: [],
+             type:cc.Node,
+         },
         allhelpCells: [],
         // 是否是在游戏里面弹出来的帮助 1是 0不是 
         isgame: 0,
@@ -39,7 +45,7 @@ cc.Class({
         curgzPos: [],
         // 当前步数的引导是否完成
         curGuidefinish: false,
-      
+       
     },
 
     /*
@@ -60,17 +66,15 @@ cc.Class({
         });
         
         this.newGuideLabel.string = "点击1，加1变2";
-        this.allhelpdata = [3, 4, 5, 2, 1, 2];
+        this.allhelpdata = [8,1, 2, 7,6,7,2,6,6,4,5,8,7];
         // 初始化道具
         for (var hindex = 0; hindex < this.allhelpdata.length; hindex++) {
             var item = cc.instantiate(this.cellTile);
-            if (hindex < 3) {
-                item.y = 80;
-                item.x = hindex * 150 + 90;
-            } else {
-                item.y = 220;
-                item.x = (hindex - 3) * 150 + 90;
-            }
+            var pos = this.allgzPos[hindex].position;
+            // item.scaleX = 0.8;
+            // item.scaleY = 0.8;
+            item.y = pos.y;
+            item.x = pos.x;
             this.curgzPos.push({
                 x: item.x,
                 y: item.y
@@ -83,7 +87,7 @@ cc.Class({
             tilescript.visByNum(pngnum, this.allhelpdata[hindex]);
             let colors = tywx.ado.Constants.GameCenterConfig.celltilenumColors[pngnum - 1];
             tilescript.setColor(new cc.color(colors[0], colors[1], colors[2], 255));
-            if (hindex == 4) {
+            if (hindex == 1) {
                 var self = this;
                 tilescript.playNewPlayerEff();
                 this.curClickScript = tilescript;
@@ -141,26 +145,27 @@ cc.Class({
             var delay2 = cc.delayTime(1.4)
             this.newGuideLabel.string = "三个相同即可合成";
             var call1 = cc.callFunc(function () {
-                var mv1 = cc.moveTo(0.2, cc.p(self.allhelpCells[4].x, self.allhelpCells[4].y));
-                var mv2 = cc.moveTo(0.2, cc.p(self.allhelpCells[4].x, self.allhelpCells[4].y));
-                self.allhelpCells[3].getComponent("celltile").node.runAction(mv1);
-                self.allhelpCells[5].getComponent("celltile").node.runAction(mv2);
+                var mv1 = cc.moveTo(0.2, cc.p(self.allhelpCells[1].x, self.allhelpCells[1].y));
+                var mv2 = cc.moveTo(0.2, cc.p(self.allhelpCells[1].x, self.allhelpCells[1].y));
+                self.allhelpCells[2].getComponent("celltile").node.runAction(mv1);
+                self.allhelpCells[6].getComponent("celltile").node.runAction(mv2);
             }, this);
 
             var call2 = cc.callFunc(function () {
                 self.updateAddGz(self.curClickScript, 0);
-                self.allhelpCells[4].getComponent("celltile").playZhEff();
-                self.allhelpCells[3].getComponent("celltile").node.x = self.curgzPos[3].x;
-                self.allhelpCells[3].getComponent("celltile").node.y = self.curgzPos[3].y + 65;
+                self.allhelpCells[1].getComponent("celltile").playZhEff();
+                self.allhelpCells[2].getComponent("celltile").node.x = self.curgzPos[2].x;
+                self.allhelpCells[2].getComponent("celltile").node.y = self.curgzPos[2].y + 65;
 
-                self.updateAddGz(self.allhelpCells[5].getComponent("celltile"), 1);
+                self.updateAddGz(self.allhelpCells[2].getComponent("celltile"), 1);
+                self.updateAddGz(self.allhelpCells[6].getComponent("celltile"), 1);
                 this.newGuideLabel.string = "点击3，加1变4";
-                self.allhelpCells[5].getComponent("celltile").node.x = self.curgzPos[5].x;
-                self.allhelpCells[5].getComponent("celltile").node.y = self.curgzPos[5].y + 65;
+                self.allhelpCells[6].getComponent("celltile").node.x = self.curgzPos[6].x;
+                self.allhelpCells[6].getComponent("celltile").node.y = self.curgzPos[6].y + 65;
                 var mv1 = cc.moveBy(0.2, cc.p(0, -65));
                 var mv2 = cc.moveBy(0.2, cc.p(0, -65));
-                self.allhelpCells[3].getComponent("celltile").node.runAction(mv1);
-                self.allhelpCells[5].getComponent("celltile").node.runAction(mv2);
+                self.allhelpCells[2].getComponent("celltile").node.runAction(mv1);
+                self.allhelpCells[6].getComponent("celltile").node.runAction(mv2);
                 this.curGuidefinish = true;
             }, this);
             var seq = cc.sequence(delay1, call1, delay2, call2);
@@ -174,30 +179,30 @@ cc.Class({
             var delay2 = cc.delayTime(1.4)
             this.newGuideLabel.string = "三个相同即可合成";
             var call1 = cc.callFunc(function () {
-                var mv1 = cc.moveTo(0.2, cc.p(self.allhelpCells[4].x, self.allhelpCells[4].y));
-                var mv2 = cc.moveTo(0.2, cc.p(self.allhelpCells[4].x, self.allhelpCells[4].y));
-                self.allhelpCells[1].getComponent("celltile").node.runAction(mv1);
-                self.allhelpCells[5].getComponent("celltile").node.runAction(mv2);
+                var mv1 = cc.moveTo(0.2, cc.p(self.allhelpCells[1].x, self.allhelpCells[1].y));
+                var mv2 = cc.moveTo(0.2, cc.p(self.allhelpCells[1].x, self.allhelpCells[1].y));
+                self.allhelpCells[2].getComponent("celltile").node.runAction(mv1);
+                self.allhelpCells[6].getComponent("celltile").node.runAction(mv2);
             }, this);
 
             var call2 = cc.callFunc(function () {
                 self.updateAddGz(self.curClickScript, 0);
                 self.updateAddGz(self.allhelpCells[2].getComponent("celltile"), -3);
-                self.updateAddGz(self.allhelpCells[1].getComponent("celltile"), 2);
+                self.updateAddGz(self.allhelpCells[6].getComponent("celltile"), 2);
                 self.curClickScript.playZhEff();
-                var mv2 = cc.moveTo(0.15, cc.p(self.curgzPos[1].x, self.curgzPos[1].y));
-                self.allhelpCells[4].getComponent("celltile").node.runAction(mv2);
-                self.allhelpCells[4].getComponent("celltile").stopZhEff();
+                var mv2 = cc.moveTo(0.15, cc.p(self.curgzPos[6].x, self.curgzPos[6].y));
+                self.allhelpCells[1].getComponent("celltile").node.runAction(mv2);
+                self.allhelpCells[1].getComponent("celltile").stopZhEff();
                 this.newGuideLabel.string = "快开始吧";
-                self.allhelpCells[1].getComponent("celltile").node.x = self.curgzPos[4].x;
-                self.allhelpCells[1].getComponent("celltile").node.y = self.curgzPos[4].y + 65;
-                var mv3 = cc.moveTo(0.15, cc.p(self.curgzPos[4].x, self.curgzPos[4].y));
-                self.allhelpCells[1].getComponent("celltile").node.runAction(mv3);
+                self.allhelpCells[2].getComponent("celltile").node.x = self.curgzPos[2].x;
+                self.allhelpCells[2].getComponent("celltile").node.y = self.curgzPos[2].y + 65;
+                var mv3 = cc.moveTo(0.15, cc.p(self.curgzPos[2].x, self.curgzPos[2].y));
+                self.allhelpCells[2].getComponent("celltile").node.runAction(mv3);
 
-                self.allhelpCells[5].getComponent("celltile").node.x = self.curgzPos[5].x;
-                self.allhelpCells[5].getComponent("celltile").node.y = self.curgzPos[5].y + 65;
-                var mv3 = cc.moveTo(0.15, cc.p(self.curgzPos[5].x, self.curgzPos[5].y));
-                self.allhelpCells[5].getComponent("celltile").node.runAction(mv3);
+                self.allhelpCells[6].getComponent("celltile").node.x = self.curgzPos[1].x;
+                self.allhelpCells[6].getComponent("celltile").node.y = self.curgzPos[1].y + 65;
+                var mv3 = cc.moveTo(0.15, cc.p(self.curgzPos[1].x, self.curgzPos[1].y));
+                self.allhelpCells[6].getComponent("celltile").node.runAction(mv3);
                 this.curGuidefinish = true;
                 this.startBtn.node.active = true;
                 // this.closeBtn.node.active = false;
@@ -205,7 +210,7 @@ cc.Class({
             var seq = cc.sequence(delay1, call1, delay2, call2);
             this.node.runAction(seq);
         } else if (this.curHelpNumber == 2 && this.curGuidefinish == true) {
-            cc.director.loadScene("gamemain");
+            // cc.director.loadScene("gamemain");
         }
     },
 

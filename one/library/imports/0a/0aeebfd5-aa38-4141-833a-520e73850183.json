@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "itempng",
+    "texture": "28d87b52-6f5a-469b-89f2-d3162655c138",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      107,
+      109
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      107,
+      109
+    ]
+  }
+}

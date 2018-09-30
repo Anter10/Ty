@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "hbbj",
+    "texture": "babb229b-d7c4-4db1-92fc-19669bcf5bbe",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      266,
+      233
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      266,
+      233
+    ]
+  }
+}

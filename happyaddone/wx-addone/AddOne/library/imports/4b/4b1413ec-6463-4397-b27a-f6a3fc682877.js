@@ -574,7 +574,7 @@ var Utils = function () {
             // * 成功和失败回调是变化的
             WXVedioCallback.success = params.success;
             WXVedioCallback.fail = params.fail;
-            WXVedioCallback.err_cb = params.error_callback | null;
+            WXVedioCallback.err_cb = params.error_callback || null;
 
             WXVedioAD.load().then(function () {
                 return WXVedioAD.show();
@@ -627,11 +627,14 @@ var Utils = function () {
 
     }, {
         key: 'refreshSpriteByUrl',
-        value: function refreshSpriteByUrl(sprite, url) {
+        value: function refreshSpriteByUrl(sprite, url, size) {
             cc.loader.load(url, function (err, texture) {
                 if (!err) {
                     var new_sprite_frame = new cc.SpriteFrame(texture);
                     sprite.spriteFrame = new_sprite_frame;
+                    if (size) {
+                        sprite.node.setContentSize(size);
+                    }
                     console.log("刷新CDN图片成功");
                 }
             });
@@ -802,6 +805,9 @@ var Utils = function () {
                             tywx.ado.Utils.showWXModal(tywx.ado.Constants.WXTransferRedPacketError[res.data.code], '提示', false);
                             if (res.data.code !== 0) {
                                 tywx.ado.Utils.uploadErrorMsg('redpacket;requestRedPacket2Cash==success--error-0;' + JSON.stringify(res));
+                            } else {
+                                tywx.ado.RedPacketInfo.totalAmount = 0;
+                                tywx.NotificationCenter.trigger(tywx.ado.Events.ADO_EVENT_RED_PACKET_CHANGE, null);
                             }
                         } else {
                             // * 未知错误
@@ -902,7 +908,7 @@ var Utils = function () {
                         authorCode: tywx.UserInfo.authorCode,
                         deviceInfo: tywx.SystemInfo.deviceId,
                         name: tywx.UserInfo.userName,
-                        double: params.double,
+                        double: params.double ? 1 : 0,
                         rand: Math.random() * 1000000
                     },
                     // method:"POST",
@@ -915,9 +921,11 @@ var Utils = function () {
                                 tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginReward==success--error-0;' + JSON.stringify(res));
                             } else {
                                 //tywx.ado.EveryDataLoginInfo = res.data;
-                                tywx.ado.RedPacketInfo.totalAmount += tywx.ado.EveryDataLoginInfo.amount;
+                                var addAmount = tywx.ado.EveryDataLoginInfo.amounts[tywx.ado.EveryDataLoginInfo.count - 1];
+                                addAmount = params.double ? addAmount * 2 : addAmount;
+                                tywx.ado.RedPacketInfo.totalAmount += addAmount;
                                 tywx.NotificationCenter.trigger(tywx.ado.Events.ADO_EVENT_RED_PACKET_CHANGE, null);
-                                params.success && params.success();
+                                params.success && params.success(addAmount);
                             }
                         } else {
                             // * 未知错误
@@ -935,6 +943,162 @@ var Utils = function () {
                 // * 请求每日登陆奖励失败
                 console.log('redpacket', 'requestEveryLoginInfo==error', JSON.stringify(e));
                 tywx.ado.Utils.uploadErrorMsg('redpacket;requestEveryLoginInfo==error;' + e.message);
+            }
+        }
+        /**
+         * @description 上报邀请信息
+         * @author lu ning
+         * @date 2018-09-26
+         * @param {Number} inviteId
+         * @static
+         */
+
+    }, {
+        key: 'requestInviteLogin',
+        value: function requestInviteLogin(inviteId) {
+            try {
+                wx.request({
+                    url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/invite/login',
+                    data: {
+                        userId: tywx.UserInfo.userId,
+                        clientId: tywx.SystemInfo.clientId,
+                        authorCode: tywx.UserInfo.authorCode,
+                        deviceInfo: tywx.SystemInfo.deviceId,
+                        name: tywx.UserInfo.userName,
+                        rand: Math.random() * 1000000,
+                        inviteId: inviteId
+                    },
+                    // method:"POST",
+                    success: function success(res) {
+                        // * 上报邀请信息
+                        console.log('invite', 'requestInviteLogin==success', JSON.stringify(res));
+                        if (res.data) {
+                            if (res.data.code !== 0) {
+                                // tywx.ado.Utils.showWXModal(
+                                //     tywx.ado.Constants.WXTransferRedPacketError[res.data.code],
+                                //     '提示',
+                                //     false);
+                                tywx.ado.Utils.uploadErrorMsg('invite;requestInviteLogin==success--error-0;' + JSON.stringify(res));
+                            } else {
+                                console.log('invite requestInviteLogin success');
+                            }
+                        } else {
+                            // * 未知错误
+                            tywx.ado.Utils.uploadErrorMsg('invite;requestInviteLogin==success--error-1;' + JSON.stringify(res));
+                        }
+                    },
+                    fail: function fail(res) {
+                        // * 请求每日登陆奖励失败
+                        console.log('invite', 'requestInviteLogin==fail', JSON.stringify(res));
+                        tywx.ado.Utils.uploadErrorMsg('invite;requestInviteLogin==fail;' + JSON.stringify(res));
+                    }
+                });
+            } catch (e) {
+                // * 请求每日登陆奖励失败
+                console.log('invite', 'requestInviteLogin==error', JSON.stringify(e));
+                tywx.ado.Utils.uploadErrorMsg('invite;requestInviteLogin==error;' + e.message);
+            }
+        }
+        /**
+         * @description 请求邀请信息
+         * @author lu ning
+         * @date 2018-09-26
+         * @static
+         */
+
+    }, {
+        key: 'requestInviteGetInfo',
+        value: function requestInviteGetInfo(params) {
+            try {
+                wx.request({
+                    url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/invite/getinfo',
+                    data: {
+                        userId: tywx.UserInfo.userId,
+                        clientId: tywx.SystemInfo.clientId,
+                        authorCode: tywx.UserInfo.authorCode,
+                        deviceInfo: tywx.SystemInfo.deviceId,
+                        name: tywx.UserInfo.userName,
+                        rand: Math.random() * 1000000
+                    },
+                    // method:"POST",
+                    success: function success(res) {
+                        // * 上报邀请信息
+                        console.log('invite', 'requestInviteGetInfo==success', JSON.stringify(res));
+                        if (res.data) {
+                            if (res.data.code !== 0) {
+                                tywx.ado.Utils.showWXModal(tywx.ado.Constants.WXTransferRedPacketError[res.data.code], '提示', false);
+                                tywx.ado.Utils.uploadErrorMsg('invite;requestInviteGetInfo==success--error-0;' + JSON.stringify(res));
+                            } else {
+                                console.log('invite requestInviteGetInfo success');
+                                tywx.ado.InviteInfo = res.data;
+                                params.success && params.success();
+                            }
+                        } else {
+                            // * 未知错误
+                            tywx.ado.Utils.uploadErrorMsg('invite;requestInviteGetInfo==success--error-1;' + JSON.stringify(res));
+                        }
+                    },
+                    fail: function fail(res) {
+                        // * 请求每日登陆奖励失败
+                        console.log('invite', 'requestInviteGetInfo==fail', JSON.stringify(res));
+                        tywx.ado.Utils.uploadErrorMsg('invite;requestInviteGetInfo==fail;' + JSON.stringify(res));
+                    }
+                });
+            } catch (e) {
+                // * 请求每日登陆奖励失败
+                console.log('invite', 'requestInviteGetInfo==error', JSON.stringify(e));
+                tywx.ado.Utils.uploadErrorMsg('invite;requestInviteGetInfo==error;' + e.message);
+            }
+        }
+        /**
+         * @description 请求邀请奖励
+         * @author lu ning
+         * @date 2018-09-26
+         * @static
+         */
+
+    }, {
+        key: 'requestInviteReward',
+        value: function requestInviteReward() {
+            try {
+                wx.request({
+                    url: tywx.SystemInfo.loginUrl + 'api/huanlejiayi/invite/reward',
+                    data: {
+                        userId: tywx.UserInfo.userId,
+                        clientId: tywx.SystemInfo.clientId,
+                        authorCode: tywx.UserInfo.authorCode,
+                        deviceInfo: tywx.SystemInfo.deviceId,
+                        name: tywx.UserInfo.userName,
+                        rand: Math.random() * 1000000
+                    },
+                    // method:"POST",
+                    success: function success(res) {
+                        // * 上报邀请信息
+                        console.log('invite', 'requestInviteReward==success', JSON.stringify(res));
+                        if (res.data) {
+                            if (res.data.code !== 0) {
+                                tywx.ado.Utils.showWXModal(tywx.ado.Constants.WXTransferRedPacketError[res.data.code], '提示', false);
+                                tywx.ado.Utils.uploadErrorMsg('invite;requestInviteReward==success--error-0;' + JSON.stringify(res));
+                            } else {
+                                console.log('invite requestInviteReward success');
+                                tywx.ado.Utils.InviteInfo.reward = true;
+                                tywx.ado.hpvalue = 6;
+                            }
+                        } else {
+                            // * 未知错误
+                            tywx.ado.Utils.uploadErrorMsg('invite;requestInviteReward==success--error-1;' + JSON.stringify(res));
+                        }
+                    },
+                    fail: function fail(res) {
+                        // * 请求每日登陆奖励失败
+                        console.log('invite', 'requestInviteReward==fail', JSON.stringify(res));
+                        tywx.ado.Utils.uploadErrorMsg('invite;requestInviteReward==fail;' + JSON.stringify(res));
+                    }
+                });
+            } catch (e) {
+                // * 请求每日登陆奖励失败
+                console.log('invite', 'requestInviteReward==error', JSON.stringify(e));
+                tywx.ado.Utils.uploadErrorMsg('invite;requestInviteReward==error;' + e.message);
             }
         }
 
@@ -1034,6 +1198,130 @@ var Utils = function () {
                 return true;
             }
             return ret;
+        }
+        /**
+         * @description 通过appid获取游戏交叉导流信息
+         * @author lu ning
+         * @date 2018-09-29
+         * @static
+         * @param {String} wx_app_id
+         */
+
+    }, {
+        key: 'getCrossAdConfigByAppId',
+        value: function getCrossAdConfigByAppId(wx_app_id) {
+            var ret = null;
+            var list = tywx.AdManager.rawAdInfoList;
+            for (var i = 0; i < list.length; ++i) {
+                var tmp_c = list[i];
+                if (tmp_c.toappid === wx_app_id) {
+                    ret = tmp_c;
+                    break;
+                }
+            }
+            return ret;
+        }
+        /**
+         * @description 游戏跳转
+         * @author lu ning
+         * @date 2018-09-29
+         * @static
+         * @param {*} config
+         * @returns
+         */
+
+    }, {
+        key: 'jump2MiniProgramByConfig',
+        value: function jump2MiniProgramByConfig(config) {
+            try {
+
+                // this.genRandomSecondAdInfo();
+
+                //先尝试直接跳转
+                var skip_type = config.icon_skip_type;
+                var toappid = config.toappid;
+                var togame = config.togame;
+                var topath = config.path;
+                var second_toappid = config.second_toappid;
+
+                console.log('topath ====>' + topath);
+
+                var that = this;
+
+                var icon_id = config.icon_id;
+                var config_id = '0';
+                var webpage_url = '';
+                var webpage_id = '0';
+
+                var bi_paramlist = [icon_id, config_id, webpage_url, toappid, togame, webpage_id, that.adType];
+
+                console.log('bi_paramlist ====> ' + JSON.stringify(bi_paramlist));
+
+                tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeClickAdBtn, bi_paramlist);
+
+                //! 先尝试直接跳转
+                if (wx && wx.navigateToMiniProgram) {
+
+                    if (1 === skip_type) {
+
+                        wx.navigateToMiniProgram({
+                            appId: toappid,
+                            path: topath ? topath : '?from=adcross',
+                            envVersion: 'release',
+                            extraData: {
+                                from: topath ? topath : '?from=adcross'
+                            },
+                            success: function success(res) {
+
+                                tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeClickDirectToMiniGameSuccess, bi_paramlist);
+
+                                console.log('wx.navigateToMiniProgram success');
+                                console.log(res);
+                            },
+                            fail: function fail(res) {
+                                tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeClickDirectToMiniGameFail, bi_paramlist);
+                                console.log('wx.navigateToMiniProgram fail');
+                                console.log(res);
+                            },
+                            complete: function complete(res) {
+                                console.log('navigateToMiniProgram ==== complete');
+                                //that.resetBtnIcon();
+                            }
+                        });
+
+                        return;
+                    } else if (2 === skip_type) {
+                        wx.navigateToMiniProgram({
+                            appId: second_toappid,
+                            path: topath ? topath : '?from=adcross',
+                            envVersion: 'release',
+                            extraData: {
+                                from: topath ? topath : '?from=adcross'
+                            },
+                            success: function success(res) {
+                                tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeClickDirectToMiniGameSuccess, bi_paramlist);
+                                console.log('wx.navigateToMiniProgram success');
+                                console.log(res);
+                            },
+                            fail: function fail(res) {
+                                tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeClickDirectToMiniGameFail, bi_paramlist);
+                                console.log('wx.navigateToMiniProgram fail');
+                                console.log(res);
+                            },
+                            complete: function complete(res) {
+                                //that.resetBtnIcon();
+                                console.log('navigateToMiniProgram ==== complete');
+                            }
+                        });
+                    } else {
+                        console.error('Unsupported skip type! Please Check!');
+                    }
+
+                    return;
+                }
+            } catch (err) {
+                console.log("error:", "tywx.AdManager.onClickAdIconBtn——" + JSON.stringify(err));
+            }
         }
     }]);
 

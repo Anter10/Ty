@@ -118,11 +118,15 @@ var gamestart = cc.Class({
         },
 
         icon: cc.Sprite,
+        version: cc.Label,
         //! 请求次数上线
         requestTimes: 3,
         // 当前是否有保存的游戏数据
         haveStoreGameData: -1,
-        nodeEveryDataLoginBtn: cc.Node
+        nodeEveryDataLoginBtn: cc.Node,
+        nodeMoreGame: cc.Node,
+        //nodeEveryDayLogin: cc.Node,
+        nodeInviteGift: cc.Node
     },
 
     start: function start() {
@@ -186,6 +190,7 @@ var gamestart = cc.Class({
             method: "load_data",
             MAIN_MENU_NUM: "ADDONE_SCORE2"
         });
+        this.version.string = tywx.SystemInfo.version + '';
         this.haveStoreGameData = tywx.ado.loadProgress();
         tywx.ado.Utils.showGameClub();
         var _ref = [cc.game.canvas.width, cc.game.canvas.height],
@@ -197,8 +202,9 @@ var gamestart = cc.Class({
             console.log("iphone x start game");
             this.addInMyMini.y = this.addInMyMini.y - 45;
         }
-        var an = tywx.AdManager.getAdNodeByTag('GAME_START');
-        if (an) an.showAdNode();
+        // ! Modify by luning [29-09-2018] 添加更多游戏，单独的交叉导流暂时去掉
+        // let an = tywx.AdManager.getAdNodeByTag('GAME_START');
+        // if(an) an.showAdNode();
         // this.playSZAni(this.shouZHiNode, 1,1.2);
 
 
@@ -242,6 +248,7 @@ var gamestart = cc.Class({
                     } else {
                         self.phbView.active = true;
                         self.showPhb = true;
+                        curscene.showBack();
                         tywx.ado.Utils.hideGameClub();
                         window.wx.postMessage({
                             method: 2,
@@ -340,14 +347,45 @@ var gamestart = cc.Class({
             }
         });
 
-        // ! 只有第一次进入菜单才主动弹出每日登陆
+        if (!tywx.config.auditing) {
+            this.nodeInviteGift.active = true;
+        } else {
+            this.nodeInviteGift.active = false;
+        }
+
+        // ! 登陆游戏后第一次进入菜单特殊处理
         if (tywx.ado.isFirstLogin) {
-            this.showEveryDayLogin();
+            // ! 只有第一次进入菜单才主动弹出每日登陆, 非审核状态
+            if (!tywx.ado.EveryDataLoginInfo.rewad && tywx.config.auditing === false) {
+                this.showEveryDayLogin(true);
+            }
+            // ! 上报邀请信息
+            if (tywx.UserInfo.invite_id > 0) {
+                tywx.ado.Utils.requestInviteLogin(tywx.UserInfo.invite_id);
+            }
+            // ! 请求邀请信息
+            tywx.ado.Utils.requestInviteGetInfo({ success: function success() {
+                    return console.log('request invite getinfo success');
+                } });
         }
 
         // ! 刷新每日登陆红点
+        this.refreshEveryDayLoginRedPoint();
+    },
+    onRedPacktChange: function onRedPacktChange() {
+        // ! 余额刷新
+        var cash = {
+            max: tywx.ado.Utils.formatCashFen2Yuan(tywx.ado.RedPacketInfo.totalAmount)
+        };
+        this.btnGetMoney.getComponent('GetMoneyButton').init(cash);
+        // ! 红点刷新
+        this.refreshEveryDayLoginRedPoint();
+    },
+    refreshEveryDayLoginRedPoint: function refreshEveryDayLoginRedPoint() {
+        var self = this;
         tywx.ado.Utils.requestEveryLoginInfo({
             success: function success() {
+
                 if (self.nodeEveryDataLoginBtn) {
                     var node_red_point = self.nodeEveryDataLoginBtn.getChildByName('sprite_red_point');
                     if (node_red_point) {
@@ -360,18 +398,17 @@ var gamestart = cc.Class({
             }
         });
     },
-    onRedPacktChange: function onRedPacktChange() {
-        var cash = {
-            max: tywx.ado.Utils.formatCashFen2Yuan(tywx.ado.RedPacketInfo.totalAmount)
-        };
-        this.btnGetMoney.getComponent('GetMoneyButton').init(cash);
-    },
 
     // * 展示每日登陆
     showEveryDayLogin: function showEveryDayLogin() {
+        var is_canncle_when_reward = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
         var self = this;
         tywx.ado.Utils.requestEveryLoginInfo({
             success: function success() {
+                if (is_canncle_when_reward) {
+                    if (tywx.ado.EveryDataLoginInfo.rewad) return;
+                }
                 var root = tywx.ado.Utils.getPopRoot();
                 if (root) {
                     cc.loader.loadRes('prefabs/ado_view_every_day_login', function (err, prefab) {
@@ -380,6 +417,7 @@ var gamestart = cc.Class({
                             every_day_login.parent = root;
                             every_day_login.getComponent('ado_view_every_day_login').init();
                             self.everyDayLogin = every_day_login;
+                            tywx.ado.isFirstLogin = false;
                         }
                     });
                 }
@@ -579,12 +617,17 @@ var gamestart = cc.Class({
         // ! Modify by luning [06-09-18] 交叉导流icon,这个版本隐藏
         // ! Modify by luning [12-09-2018] 显示交叉导流,添加提审状态不显示
         if (!tywx.config.auditing) {
-            var adNode = tywx.AdManager.getAdNodeByTag('GAME_START');
-            if (adNode) {
-                adNode.showAdNode();
-            } else {
-                tywx.AdManager.showAd(cc.v2(100, 100), 'GAME_START');
-            }
+            // ! Modify by luning [29-09-2018] 添加更多游戏，单独的交叉导流暂时去掉
+            // let adNode = tywx.AdManager.getAdNodeByTag('GAME_START');
+            // if(adNode){
+            //     adNode.showAdNode();
+            // }
+            // else{
+            //     tywx.AdManager.showAd(cc.v2(100, 100),'GAME_START');
+            // }
+            this.nodeMoreGame.active = true;
+        } else {
+            this.nodeMoreGame.active = false;
         }
         this.loginSuccess();
     },
@@ -642,8 +685,10 @@ var gamestart = cc.Class({
             }
             tywx.ado.Configs = config;
             tywx.config = config;
+            //config.auditing = false;
             that.refreshAfterGetConfig();
             console.log('CONFIG ' + JSON.stringify(config));
+            tywx.NotificationCenter.trigger(tywx.ado.Events.ADO_EVENT_RESUEST_CONFIG_END, null);
         };
 
         var failcb = function failcb(ret) {
@@ -762,7 +807,7 @@ var gamestart = cc.Class({
         tywx.ado.Utils.showWXModal(contentTxt, '发现游戏进度', true,
         // 确定
         function () {
-            var config = tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE;
+            var config = tywx.ado.Constants.ShareConfig.RECOVER_SHARE_GAME_SHARE;
             var groupSucCall = function groupSucCall() {
                 self.goonProgressGame();
             };
@@ -799,7 +844,7 @@ var gamestart = cc.Class({
             var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(shareconfig[0]);
             if (!msg) {
                 msg = {};
-                msg.shareContent = "你知道" + "1 吗？";
+                msg.shareContent = "你知道 +1 吗？";
                 msg.sharePicUrl = "https://marketqn.nalrer.cn/teris/share_image/jiayi/jy03.jpg";
                 msg.sharePointId = "766";
                 msg.shareSchemeId = "1155";
@@ -863,6 +908,22 @@ var gamestart = cc.Class({
     },
     btnShowEveryDayLogin: function btnShowEveryDayLogin() {
         this.showEveryDayLogin();
+    },
+    showInviteGift: function showInviteGift() {
+        console.log('showInviteGift click');
+        tywx.ado.Utils.requestInviteGetInfo({
+            success: function success(res) {
+                cc.loader.loadRes('prefabs/ado_view_invite_gift', function (err, prefab) {
+                    if (!err) {
+                        var size = cc.winSize;
+                        var prefabNode = cc.instantiate(prefab);
+                        cc.game.addPersistRootNode(prefabNode);
+                        prefabNode.position = cc.v2(size.width / 2, size.height / 2);
+                        prefabNode.getComponent('ado_view_invite_gift').init(res);
+                    }
+                });
+            }
+        });
     }
 });
 

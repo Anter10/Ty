@@ -1,0 +1,203 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "unbli",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.83,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "paths": {
+      "anim": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0,
+              "value": 3,
+              "curve": [
+                0.4,
+                0.4,
+                0.6,
+                0.6
+              ]
+            },
+            {
+              "frame": 0.1,
+              "value": 0.9
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": 1
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0,
+              "value": 3,
+              "curve": [
+                0.4,
+                0.4,
+                0.6,
+                0.6
+              ]
+            },
+            {
+              "frame": 0.1,
+              "value": 1.1
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": 1
+            }
+          ],
+          "position": [
+            {
+              "frame": 0.16666666666666666,
+              "value": [
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": [
+                0,
+                43
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.3333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "anim/awesometx": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.1,
+              "value": 0
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": 255
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "anim/particlesystem5": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.06666666666666667,
+                "value": 0
+              },
+              {
+                "frame": 0.13333333333333333,
+                "value": 55
+              },
+              {
+                "frame": 0.23333333333333334,
+                "value": 0
+              }
+            ]
+          }
+        }
+      },
+      "anim/particlesystem4": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.06666666666666667,
+                "value": 0
+              },
+              {
+                "frame": 0.13333333333333333,
+                "value": 55
+              },
+              {
+                "frame": 0.23333333333333334,
+                "value": 0
+              }
+            ]
+          }
+        }
+      },
+      "anim/particlesystem3": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.06666666666666667,
+                "value": 0
+              },
+              {
+                "frame": 0.13333333333333333,
+                "value": 55
+              },
+              {
+                "frame": 0.23333333333333334,
+                "value": 0
+              }
+            ]
+          }
+        }
+      },
+      "anim/particlesystem2": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.06666666666666667,
+                "value": 0
+              },
+              {
+                "frame": 0.13333333333333333,
+                "value": 55
+              },
+              {
+                "frame": 0.23333333333333334,
+                "value": 0
+              }
+            ]
+          }
+        }
+      },
+      "anim/particlesystem1": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.06666666666666667,
+                "value": 0
+              },
+              {
+                "frame": 0.13333333333333333,
+                "value": 55
+              },
+              {
+                "frame": 0.23333333333333334,
+                "value": 0
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "events": []
+}

@@ -62,14 +62,14 @@ cc.Class({
      * @param {Object} toggle 复选框本身
      */
     toggleChecked: function toggleChecked(toggle) {
-        if (toggle.isChecked) {
-            this.hideLabel.string = "看视频领取";
-            this.showLabel.string = "看视频领取";
-            this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE);
+        if (!toggle.isChecked) {
+            this.hideLabel.string = "视频领取";
+            this.showLabel.string = "视频领取";
+            this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE_VIDEO);
             this.mflqBtn.getComponent("ShareButton").setButtonCallType(2);
         } else {
-            this.hideLabel.string = "分享领取";
-            this.showLabel.string = "分享领取";
+            this.hideLabel.string = "免费领取";
+            this.showLabel.string = "免费领取";
             this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_SHARE_BOX_SHARE);
             this.mflqBtn.getComponent("ShareButton").setButtonCallType(1);
         }
@@ -137,10 +137,19 @@ cc.Class({
                 itemsceipt.unselected();
             }
         }
-        this.hideLabel.string = "分享领取";
-        this.showLabel.string = "分享领取";
-        this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_SHARE_BOX_SHARE);
-        this.mflqBtn.getComponent("ShareButton").setButtonCallType(1);
+        if (tywx.config.share_control.ruyibox == "video") {
+            this.hideLabel.string = "视频领取";
+            this.showLabel.string = "视频领取";
+            this.node.getChildByName("luckboxroot").getChildByName("checkbox").getComponent("cc.Toggle").uncheck();
+            this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_SHARE_BOX_SHARE);
+            this.mflqBtn.getComponent("ShareButton").setButtonCallType(2);
+        } else if (tywx.config.share_control.ruyibox == "share") {
+            this.hideLabel.string = "免费领取";
+            this.showLabel.string = "免费领取";
+            this.node.getChildByName("luckboxroot").getChildByName("checkbox").getComponent("cc.Toggle").check();
+            this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_SHARE_BOX_SHARE);
+            this.mflqBtn.getComponent("ShareButton").setButtonCallType(1);
+        }
     },
 
     /**

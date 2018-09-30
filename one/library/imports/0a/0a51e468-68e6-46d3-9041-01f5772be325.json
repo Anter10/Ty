@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "chuizijia1_yindao_chuizi04",
+    "texture": "c0304183-6672-4557-bd5c-bb6bb4fe7a0d",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      640,
+      286
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      640,
+      286
+    ]
+  }
+}

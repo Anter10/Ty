@@ -48,7 +48,7 @@ cc.Class({
 
     /** 
      * @description 界面弹出的时候调用
-    */
+     */
     showUI: function showUI() {
         tywx.ado.Utils.commonScaleIn(this.bottomNode);
     },
@@ -99,6 +99,14 @@ cc.Class({
         this.openRedPackBtn.setSuccessCall(function () {
             self.playRotate();
         });
+        // 处理配置控制信息
+        if (tywx.config.share_control.redpack == "video") {
+            this.openRedPackBtn.setShareConfig(tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO);
+            this.openRedPackBtn.setButtonCallType(2);
+        } else if (tywx.config.share_control.redpack == "share") {
+            this.openRedPackBtn.setShareConfig(tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE);
+            this.openRedPackBtn.setButtonCallType(1);
+        }
         if (this.data.needShare == false) {
             this.openRedPackBtn.setReactCall(true);
         } else {
@@ -110,7 +118,6 @@ cc.Class({
             this.openRedPackBtn.setShareGroupCall(function () {
                 self.playRotate();
             });
-            this.openRedPackBtn.setShareConfig(tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE);
         }
     },
 

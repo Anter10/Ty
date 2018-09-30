@@ -432,7 +432,14 @@ var gamemain = cc.Class({
         },
         fhShowLabel: cc.Label,
         fhHideLabel: cc.Label,
-        fhDjsLabel: cc.Label
+        fhDjsLabel: cc.Label,
+        adNode: cc.Node,
+        quanSprite: cc.Node,
+        mflqhideLabel: cc.Label,
+        mflqshowLabel: cc.Label,
+        mflqshareNode: cc.Node,
+        returnBtnNode: cc.Node,
+        closeBtnNode: cc.Node
     },
 
     /**
@@ -539,8 +546,8 @@ var gamemain = cc.Class({
      */
     onLoad: function onLoad() {
         var an = tywx.AdManager.getAdNodeByTag('GAME_START');
-        console.log("IIIIIIIIIIAD....", an, tywx.AdManager.adNodeList.length);
         if (an) an.hideAdNode();
+        this.maxpoint = tywx.ado.hpvalue;
         this.pos = this.gameOutRoot.convertToWorldSpace(this.gameOutRoot.position);
         console.log(JSON.stringify(this.pos1) + " v= " + JSON.stringify(cc.view.getVisibleSize()) + "尺寸= " + this.gameOutRoot.width + " z = " + this.gameOutRoot.height + " 坐标 = " + JSON.stringify(this.pos));
         tywx.gamecenter = this;
@@ -719,6 +726,7 @@ var gamemain = cc.Class({
             self.lingQuItem(true);
             // console.log("当前已经领取成功");
         });
+
         // this.showAnimationWhenScoreBiggerThanTen(14);
         this.firstShowHelpView();
         self.friendIcon.node.active = true;
@@ -746,7 +754,7 @@ var gamemain = cc.Class({
         }
         this.btnRefreshGameOverPhotoCallback();
         this.flushRedPacketBtns(0);
-
+        this.initShowBoxButton();
         // 设置当前红包的显示金额
         console.log("RedPacketInfo = " + JSON.stringify(tywx.ado.RedPacketInfo));
         this.moneyLabel.string = "\xA5" + (tywx.ado.Utils.formatCashFen2Yuan(tywx.ado.RedPacketInfo.totalAmount) || 0.0);
@@ -763,6 +771,40 @@ var gamemain = cc.Class({
             tmp_view_screen.scale = s1_scale;
             tmp_view_top_screen.scale = s2_scale;
         }
+
+        // this.toggleChecked
+        // ! 显示交叉导流广告
+        this.showCrossAd();
+        // 监听红包事件
+        // tywx.NotificationCenter.listen(tywx.ado.Events.ADO_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
+    },
+
+    /**
+     * @description 初始化领取的
+     */
+    initShowBoxButton: function initShowBoxButton() {
+        if (tywx.config.share_control.comboitem == "video") {
+            this.mflqshareNode.active = true;
+            this.mflqhideLabel.string = "视频领取";
+            this.mflqshowLabel.string = "视频领取";
+            this.mflqshareNode.getComponent("cc.Toggle").uncheck();
+            this.mflq.setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE_VIDEO);
+            this.mflq.setButtonCallType(2);
+        } else if (tywx.config.share_control.comboitem == "share") {
+            this.mflqshareNode.active = true;
+            this.mflqhideLabel.string = "免费领取";
+            this.mflqshowLabel.string = "免费领取";
+            this.mflqshareNode.getComponent("cc.Toggle").check();
+            this.mflq.setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE);
+            this.mflq.setButtonCallType(1);
+        }
+    },
+
+    /** 
+     * @description 红包数量变化
+     */
+    onRedPacktChange: function onRedPacktChange() {
+        this.flushMoneyNumber();
     },
 
     /**
@@ -773,6 +815,30 @@ var gamemain = cc.Class({
         tywx.ado.outGame();
 
         tywx.ado.Utils.destroyWXBanner();
+    },
+    showCrossAd: function showCrossAd() {
+        // 审核状态不显示
+        if (tywx.config.auditing === true) return;
+
+        var adInfos = tywx.AdManager.rawAdInfoList;
+        if (!adInfos || adInfos.length <= 0) return;
+        var tmpAdInfo = adInfos[0];
+        var adButton = this.adNode.getChildByName('adButton');
+        adButton.on('click', function () {
+            tywx.ado.Utils.jump2MiniProgramByConfig(tmpAdInfo);
+        });
+        var spriteIco = this.adNode.getChildByName('adIcon').getComponent(cc.Sprite);
+        var self = this;
+        cc.loader.load(tmpAdInfo.icon_url[0], function (err, texture) {
+            if (!err) {
+                /*let new_sprite_frame = new cc.SpriteFrame(texture);
+                spriteIco.spriteFrame = new_sprite_frame;
+                spriteIco.node.setContentSize(cc.size(100, 100));*/
+                self.adNode.active = true;
+                console.log("刷新CDN图片成功");
+            }
+        });
+        //tywx.ado.Utils.refreshSpriteByUrl(spriteIco,tmpAdInfo.icon_url[0],cc.size(100,100));
     },
 
 
@@ -785,7 +851,11 @@ var gamemain = cc.Class({
             this.fuHuo.active = false;
             this.loseRestartGameBtn.active = true;
         } else {
-            this.fuHuo.active = true;
+            if (this.recoverNumber == tywx.ado.Constants.GameCenterConfig.maxrnum) {
+                this.fuHuo.active = false;
+            } else {
+                this.fuHuo.active = true;
+            }
             // this.loseRestartGameBtn.active = false;
         }
     },
@@ -800,6 +870,24 @@ var gamemain = cc.Class({
             id: id,
             num: num
         };
+    },
+
+    /**
+     * @description 复选框点击回调
+     * @param {Object} toggle 复选框本身
+     */
+    toggleChecked: function toggleChecked(toggle) {
+        if (!toggle.isChecked) {
+            this.mflqhideLabel.string = "视频领取";
+            this.mflqshowLabel.string = "视频领取";
+            this.mflq.setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE_VIDEO);
+            this.mflq.setButtonCallType(2);
+        } else {
+            this.mflqhideLabel.string = "免费领取";
+            this.mflqshowLabel.string = "免费领取";
+            this.mflq.setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE);
+            this.mflq.setButtonCallType(1);
+        }
     },
 
     /**
@@ -918,6 +1006,9 @@ var gamemain = cc.Class({
                 //animation.play("daiji");
             }
         } else if (this.score < tywx.config.ruyiScore) {
+            this.ryBoxBtn.active = false;
+        }
+        if (tywx.config.auditing == true) {
             this.ryBoxBtn.active = false;
         }
         // this.ryBoxBtn.active = true;
@@ -1086,7 +1177,7 @@ var gamemain = cc.Class({
                     if (data.num > 0) {
                         var canupdate = true;
                         if (data.id == 4) {
-                            if (self.point == tywx.ado.Constants.GameCenterConfig.maxphy_value) {
+                            if (self.point == self.maxpoint) {
                                 self.showAlert("当前生命值已满。");
                                 canupdate = false;
                             } else {
@@ -1094,8 +1185,8 @@ var gamemain = cc.Class({
                             }
                         } else if (data.id == 5) {
                             // 加1血
-                            tywx.LOGE("当前徐良= " + self.point + "," + tywx.ado.Constants.GameCenterConfig.maxphy_value);
-                            if (self.point < tywx.ado.Constants.GameCenterConfig.maxphy_value) {
+                            console.log("当前徐良= " + self.point + "," + self.maxpoint);
+                            if (self.point < self.maxpoint) {
                                 // self.showOneHpEf(item);
                                 self.prepoint = self.point;
                                 self.point = self.point + 1;
@@ -1152,7 +1243,7 @@ var gamemain = cc.Class({
      * @param {Object} item 具体的某个道具对象
      */
     showOneHpEf: function showOneHpEf(item) {
-        if ((this.point != 5 || this.point != 1) && item.xx1Icon.node.getNumberOfRunningActions() == 0) {
+        if ((this.point != this.maxpoint || this.point != 1) && item.xx1Icon.node.getNumberOfRunningActions() == 0) {
             var node = this.allstars[this.point];
             var newVec2 = node.convertToWorldSpace(cc.v2(node.x, node.y));
             var new1Vec2 = item.xx1Icon.node.convertToWorldSpace(cc.v2(item.xx1Icon.node.x, item.xx1Icon.node.y));
@@ -1772,7 +1863,7 @@ var gamemain = cc.Class({
                 bfound = true;
                 this.g_clickid = j;
                 this.allmergecellIds[0] = this.g_clickid;
-                if (this.point < 5) {
+                if (this.point < this.maxpoint) {
                     this.point++;
                 }
                 this.drawPhyPoint();
@@ -1932,9 +2023,15 @@ var gamemain = cc.Class({
     initStars: function initStars() {
         if (!this.allstars) {
             this.allstars = [];
-            for (var starIndex = 0; starIndex < 5; starIndex++) {
+            for (var starIndex = 0; starIndex < this.maxpoint; starIndex++) {
                 var item = cc.instantiate(this.lifeStarPrefab);
                 item.parent = this.stars[starIndex];
+                if (this.maxpoint == 6) {
+                    if (starIndex > 0) {
+                        this.stars[starIndex].x = this.stars[starIndex].x - starIndex * 28;
+                    }
+                    this.stars[starIndex].scaleX = 0.8;
+                }
                 this.allstars.push(item);
             }
         }
@@ -1959,7 +2056,7 @@ var gamemain = cc.Class({
             this.showAlertMSG("血量要耗光啦~");
         }
         this.prepoint = this.point;
-        for (var starIndex = 0; starIndex < 5; starIndex++) {
+        for (var starIndex = 0; starIndex < this.maxpoint; starIndex++) {
             if (this.point >= starIndex + 1) {
                 this.allstars[starIndex].getComponent("LifeStar").show();
             } else {
@@ -1997,6 +2094,17 @@ var gamemain = cc.Class({
         }
     },
 
+    returnBtnCall: function returnBtnCall() {
+        this.fhDjsLabel.node.active = false;
+        this.quanSprite.active = false;
+        this.gameOverMaxRoot.active = true;
+        this.closeBtnNode.active = true;
+        this.returnBtnNode.active = false;
+        this.fuHuo.active = false;
+        this.fhDjsLabel.node.stopAllActions();
+        this.gameOutRoot.stopAllActions();
+        tywx.ado.Utils.commonScaleIn(this.gameOverMaxRoot);
+    },
     /**
      * @description: 游戏结束的逻辑
      */
@@ -2029,16 +2137,20 @@ var gamemain = cc.Class({
         var tdjs = 5;
         self.fhDjsLabel.string = tdjs;
         var totalPassTime = 0;
-
+        var totalrepeate = 5;
         this.fhBtnShow();
+        self.closeBtnNode.active = false;
+        self.returnBtnNode.active = true;
         this.fhDjsLabel.node.scale = 1;
+        this.fhDjsLabel.node.stopAllActions();
+        this.gameOutRoot.stopAllActions();
         var djsCall = cc.callFunc(function () {
             self.fhDjsLabel.node.scale = 1;
             totalPassTime++;
             tdjs = tdjs - 1;
             if (tdjs == 0) {
                 tdjs = 5;
-                if (totalPassTime < 10) {
+                if (totalPassTime < totalrepeate) {
                     self.fhDjsLabel.string = "" + tdjs;
                 }
                 self.setFHBtnCallBack(2);
@@ -2046,38 +2158,64 @@ var gamemain = cc.Class({
                 self.fhDjsLabel.string = tdjs;
             }
 
-            if (totalPassTime == 10) {
+            if (totalPassTime == totalrepeate) {
                 // 显示UI
                 self.fhDjsLabel.string = "";
+                self.quanSprite.active = false;
                 self.gameOverMaxRoot.active = true;
                 tywx.ado.Utils.commonScaleIn(self.gameOverMaxRoot);
                 self.fuHuo.active = false;
+                self.closeBtnNode.active = true;
+                self.returnBtnNode.active = false;
+                self.fhDjsLabel.node.active = false;
             }
             var scale = cc.scaleTo(0.3, 0);
-            var delay = cc.delayTime(0.5);
-            var tseq = cc.sequence(delay, scale);
+            var delay = cc.delayTime(1);
+            var call = cc.callFunc(function () {
+
+                if (totalPassTime == totalrepeate - 1) {
+                    self.fhDjsLabel.string = "";
+                    self.quanSprite.active = false;
+                    self.closeBtnNode.active = true;
+                    self.returnBtnNode.active = false;
+                } else {
+                    if (totalPassTime != totalrepeate - 1) {
+                        self.fhDjsLabel.string = tdjs - 1;
+                    }
+                }
+
+                self.fhDjsLabel.node.scale = 1;
+            });
+            var tseq = cc.sequence(delay, scale, call);
             self.fhDjsLabel.node.runAction(tseq);
         });
 
         // 如果是提审状态 直接显示 不走倒计时
-        if (tywx.config.auditing == true) {
+        if (this.recoverNumber == tywx.ado.Constants.GameCenterConfig.maxrnum) {
+            this.fhDjsLabel.node.active = false;
+            this.quanSprite.active = false;
             this.gameOverMaxRoot.active = true;
-            this.fhDjsLabel.string = "";
+            tywx.ado.Utils.commonScaleIn(this.gameOverMaxRoot);
         } else {
             this.gameOverMaxRoot.active = false;
-
+            this.fhDjsLabel.node.active = true;
+            this.quanSprite.active = true;
             this.fhDjsLabel.string = 5;
             // 倒计时动画
             var scale = cc.scaleTo(0.3, 0);
-            var delay = cc.delayTime(0.5);
-            var tseq = cc.sequence(delay, scale);
+            var delay = cc.delayTime(1);
+            var call = cc.callFunc(function () {
+                self.fhDjsLabel.string = 4;
+                self.fhDjsLabel.node.scale = 1;
+            });
+            var tseq = cc.sequence(delay, scale, call);
             this.fhDjsLabel.node.runAction(tseq);
 
             // 倒计时逻辑
-            var seq = cc.sequence(cc.delayTime(1), djsCall);
-            var fiverepeat = cc.repeat(seq, 10);
+            self.setFHBtnCallBack(2);
+            var seq = cc.sequence(cc.delayTime(1.5), djsCall);
+            var fiverepeat = cc.repeat(seq, totalrepeate);
             this.gameOutRoot.runAction(fiverepeat);
-            this.setFHBtnCallBack(1);
         }
     },
 
@@ -2085,16 +2223,17 @@ var gamemain = cc.Class({
      * @description 复活按钮的回调类型设置
      */
     setFHBtnCallBack: function setFHBtnCallBack(calltype) {
-        if (calltype == 2) {
-            this.fhShowLabel.string = "看视频复活";
-            this.fhHideLabel.string = "看视频复活";
-            this.fuHuo.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE);
-        } else if (calltype == 1) {
-            this.fhShowLabel.string = "分享复活";
-            this.fhHideLabel.string = "分享复活";
+        if (tywx.config.share_control.fuhuo == "video") {
+            this.fhShowLabel.string = "视频复活";
+            this.fhHideLabel.string = "视频复活";
+            this.fuHuo.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE_VIDEO);
+            this.fuHuo.getComponent("ShareButton").setButtonCallType(2);
+        } else if (tywx.config.share_control.fuhuo == "share") {
+            this.fhShowLabel.string = "免费复活";
+            this.fhHideLabel.string = "免费复活";
             this.fuHuo.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.RECOVER_SHARE_GAME_SHARE);
+            this.fuHuo.getComponent("ShareButton").setButtonCallType(1);
         }
-        this.fuHuo.getComponent("ShareButton").setButtonCallType(calltype);
     },
 
     /**
@@ -2208,9 +2347,9 @@ var gamemain = cc.Class({
             method: 9
         });
         this.scoreLabel.string = this.score;
-        this.point = tmp_progress === -1 ? tywx.ado.Constants.GameCenterConfig.maxphy_value : tmp_progress.life;
+        this.point = tmp_progress === -1 ? this.maxpoint : tmp_progress.life;
         this.drawPhyPoint();
-        this.maxnum = tywx.ado.Constants.GameCenterConfig.maxphy_value;
+        this.maxnum = 5;
         this.recoverNumber = tmp_progress === -1 ? 0 : tmp_progress.recovernumber;
         this.fhBtnShow();
         this.isRestartGame = true;
@@ -2376,7 +2515,7 @@ var gamemain = cc.Class({
      */
     recoverGame: function recoverGame() {
         if (this.recoverNumber < tywx.ado.Constants.GameCenterConfig.maxrnum) {
-            this.point = tywx.ado.Constants.GameCenterConfig.maxphy_value;
+            this.point = this.maxpoint;
             this.drawPhyPoint();
             this.showAnimationWhenScoreBiggerThanTen();
             this.gamestate = tywx.ado.Constants.GameCenterConfig.gameState.waitclick;
@@ -2600,14 +2739,20 @@ var gamemain = cc.Class({
      * @description 一次给多个道具
      * @param {Boolean} dontsetnull 是否需要设置成领取一次
      * @param {Object} giveitems 给定的所有道具
-    */
+     */
     giveItems: function giveItems(dontsetnull, giveitems) {
+        // var name = "";
         if (giveitems && giveitems.length > 0) {
             for (var itemIndex = 0; itemIndex < giveitems.length; itemIndex++) {
                 var giveitem = giveitems[itemIndex];
-                this.lingQuItem(dontsetnull, giveitem);
+                // if (itemIndex < (giveitems.length - 1)){
+                //     name = name + giveitem.name;
+                // }else{
+                //     name = name + giveitem.name + " ";
+                // }
+                this.lingQuItem(dontsetnull, giveitem, true);
             }
-            this.showAlertMSG("领取成功 " + giveitems.length + "个道具");
+            this.showAlertMSG("成功领取 " + giveitems.length + " 个道具");
         }
     },
 
@@ -2616,7 +2761,7 @@ var gamemain = cc.Class({
      * @param {Boolean} dontsetnull 是否需要设置成领取一次
      * @param {Object} giveitem 给定的道具
      */
-    lingQuItem: function lingQuItem(dontsetnull, giveitem) {
+    lingQuItem: function lingQuItem(dontsetnull, giveitem, notneedshow) {
         if (giveitem) {
             this.produceItem = giveitem;
         }
@@ -2653,7 +2798,7 @@ var gamemain = cc.Class({
                 }
             }
 
-            if (item != null) {
+            if (item != null && !notneedshow) {
                 this.showAlertMSG("领取成功 " + item.name + " 道具");
             }
             if (!dontsetnull) {
@@ -2684,6 +2829,7 @@ var gamemain = cc.Class({
      * @param maxnum Number 此次宝箱对应的连接数产生的值
      */
     showBox: function showBox(maxnum) {
+        console.log("进来没有dddd");
         var rvalue = 0;
         var cn = this.curmaxNumber;
         var sbr = tywx.config.show_box_rate;
@@ -2698,6 +2844,7 @@ var gamemain = cc.Class({
 
         tywx.ado.logWithColor("combonum:" + maxnum + ",maxnum:" + this.curmaxNumber + ",rvalue:" + rvalue + ",ran:" + ran + ",is_show:" + is_show);
         var self = this;
+        // is_show = true;
         if (is_show) {
             // 产生道具
             self.curmflqIsRedPacket = false;
@@ -2745,6 +2892,7 @@ var gamemain = cc.Class({
                         self.stopV.active = false;
                         self.openboxview.active = true;
                         self.showCDAni();
+                        self.initShowBoxButton();
                         tywx.ado.Utils.commonScaleIn(self.openboxview);
                     } else {
                         // 设置当前红包的显示金额
@@ -2778,7 +2926,6 @@ var gamemain = cc.Class({
             };
             // 如果满足概率 请求红包数据
             var ranRate = Math.random();
-
             if (ranRate > (tywx.config.box_rate.red_packet || 0.5)) {
                 dealData(-1, true);
             } else {

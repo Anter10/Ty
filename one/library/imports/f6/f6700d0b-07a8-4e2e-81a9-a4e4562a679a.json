@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "imgyuan",
+    "texture": "c34f9a4a-8b64-4a24-8ccf-8d01f6406b79",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      125,
+      128
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      125,
+      128
+    ]
+  }
+}

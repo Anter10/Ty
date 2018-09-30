@@ -22,15 +22,29 @@ cc.Class({
             var an = tywx.AdManager.getAdNodeByTag('GAME_START');
             if (an) an.hideAdNode();
         } else if (cc.director.getScene()._name === 'gamemain') {
-            tywx.ado.Utils.hideWXBanner();
+            //tywx.ado.Utils.hideWXBanner();
+        }
+
+        if (tywx.config.share_control.dailydouble === "video") {
+            //this.isShare = false;
+            if (!this.root) this.root = this.node.getChildByName('root');
+            var toggle_share = this.root.getChildByName('toggle_share').getComponent(cc.Toggle);
+            if (toggle_share) {
+                toggle_share.isChecked = false;
+                this.changeShareStat();
+            }
         }
     },
-    start: function start() {},
+    start: function start() {
+        tywx.ado.Utils.showWXBanner();
+        tywx.ado.Utils.commonScaleIn(this.root);
+    },
     onDestroy: function onDestroy() {
         if (cc.director.getScene()._name === 'gamestart') {
             tywx.ado.Utils.showGameClub();
             var an = tywx.AdManager.getAdNodeByTag('GAME_START');
             if (an) an.showAdNode();
+            tywx.ado.Utils.hideWXBanner();
         } else if (cc.director.getScene()._name === 'gamemain') {
             tywx.ado.Utils.showWXBanner();
         }
@@ -85,22 +99,22 @@ cc.Class({
             if (this.isShare) {
                 window.wx.showShareMenu({ withShareTicket: true });
                 var shareConfig = tywx.ado.Constants.ShareConfig.EVERY_DAY_GIFT_DOUBLE_SHARE;
-                var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(shareConfig);
+                var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(shareConfig[0]);
                 if (!msg) {
                     msg = {};
-                    msg.shareContent = "你知道" + "1 吗？";
+                    msg.shareContent = "你知道 +1 吗？";
                     msg.sharePicUrl = "https://marketqn.nalrer.cn/teris/share_image/jiayi/jy03.jpg";
                     msg.sharePointId = "766";
                     msg.shareSchemeId = "1155";
                 }
                 if (msg) {
                     tywx.ShareInterface.share(msg.shareContent, msg.sharePicUrl, msg.sharePointId, msg.shareSchemeId, function (res) {
-                        tywx.LOGE("分享成功后的数据" + JSON.stringify(res));
+                        console.log("分享成功后的数据" + JSON.stringify(res));
                         // * is share to group
                         if (shareConfig && shareConfig[1]) {
                             // * froce share to group
                             if (res.shareTickets !== undefined && res.shareTickets.length > 0) {
-                                tywx.ado.Utils.share2GroupByTicket(self.shareConfig[0], res, function () {
+                                tywx.ado.Utils.share2GroupByTicket(shareConfig[0], res, function () {
                                     // * success callback
                                     self.showOpenRedPacket(true);
                                 }, function () {
@@ -118,7 +132,7 @@ cc.Class({
                             self.showOpenRedPacket(true);
                         }
                     }, function (data) {
-                        tywx.LOGE("分享成功后的数2据" + JSON.stringify(data));
+                        console.log("分享成功后的数2据" + JSON.stringify(data));
                         //self.errorCallBack && self.errorCallBack(data);
                     });
                 }
@@ -161,8 +175,8 @@ cc.Class({
         var btn_get_label = this.root.getChildByName('btn_reward_double').getChildByName('label_reward').getComponent(cc.Label);
         var btn_get_label_shadow = this.root.getChildByName('btn_reward_double').getChildByName('label_reward_shadow').getComponent(cc.Label);
         if (btn_get_label) {
-            btn_get_label.string = info.rewad ? '已领取' : '加倍领取';
-            btn_get_label_shadow.string = info.rewad ? '已领取' : '加倍领取';
+            btn_get_label.string = info.rewad ? '已领取' : this.isShare ? '加倍领取' : '视频加倍';
+            btn_get_label_shadow.string = info.rewad ? '已领取' : this.isShare ? '加倍领取' : '视频加倍';
             this.root.getChildByName('toggle_share').active = !info.rewad;
             this.root.getChildByName('btn_reward').active = !info.rewad;
         }
@@ -174,15 +188,18 @@ cc.Class({
                 var node_count = node_icon.getChildByName('label_count');
                 var label_count = node_count.getComponent(cc.Label);
                 var bg = node_icon.getChildByName('sprite_icon');
+                var amount = info.amounts[i] >= 0 ? info.amounts[i] : -info.amounts[i];
+                label_count.string = '\xA5' + tywx.ado.Utils.formatCashFen2Yuan(amount);
                 if (i === info.count - 1) {
                     mask.active = false;
-                    node_count.active = false;
-                    label_count.string = '\xA5' + tywx.ado.Utils.formatCashFen2Yuan(info.amount);
+                    node_count.active = info.rewad;
                 } else {
                     mask.active = true;
                     bg.active = false;
                     if (i > info.count - 1) {
                         node_count.active = false;
+                    } else {
+                        node_count.active = true;
                     }
                 }
             }

@@ -149,11 +149,11 @@ function loadGroupCloudDataByShareTicket(share_ticket, success_cb) {
 function drawImage(url, x, y, w, h, callback = null) {
     let img = wx.createImage();
 
-    console.log("刷图url= " + url);
+    //console.log("刷图url= " + url);
     img.onload = event => {
         let t_img = event.target;
         _shareCanvas.drawImage(t_img, x, y, w, h);
-        console.log("创建成功");
+        //console.log("创建成功");
         callback && callback();
     };
     img.src = url;
@@ -447,7 +447,7 @@ function drawFriendRank(drawdata) {
  * 得到群组的的好友数据 用于显示群组排行榜使用
  * tshareTicket: String 群组的shareticketID
  */
-getGroupFriendData = function (tshareTicket) {
+let getGroupFriendData = function (tshareTicket) {
     var shareTicket = tshareTicket;
     wx.getUserInfo({
         openIdList: ['selfOpenId'],

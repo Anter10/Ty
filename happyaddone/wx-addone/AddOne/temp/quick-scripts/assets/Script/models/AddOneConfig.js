@@ -11,16 +11,24 @@ cc._RF.push(module, '7c2dbJUdiZLmIzaqT+PBih/', 'AddOneConfig', __filename);
 */
 var config = {
     "auditing": false,
-    "ruyiScore": 20000,
+    "ruyiScore": 2000,
     "MUSICS": {
         "BG_MUSIC": "https://marketqn.nalrer.cn/teris/m/3.mp3"
+    },
+    "share_control": {
+        "dailydouble": "video",
+        "comboitem": "video",
+        "ruyibox": "share",
+        "bigdouble": "share",
+        "redpack": "share",
+        "fuhuo": "video"
     },
     "box_rate": {
         "sub1": 0.1,
         "add2": 0.2,
         "heart": 0.4,
         "chui": 0.3,
-        "red_packet": 0.6
+        "red_packet": 0.85
     },
     "luck_block": {
         "score": [0, 100000, 120000, 150000, 180000, 200000, 100000000],
@@ -44,7 +52,28 @@ var config = {
         "MergeBigNumPhotos": ["g1.png", "g2.png", "g3.png", "g4.png", "g5.png", "g6.png", "g7.png", "g8.png"]
     },
     // 每局使用道具数量
-    "mjUseItemNumber": 10
+    "mjUseItemNumber": 10,
+    "cross_ad_more_game": [{
+        "appid": "wx1668490543c6bae9",
+        "name": "更多游戏",
+        "icon_url": "daoliu01.png"
+    }, {
+        "appid": "wxb92d4d650d51eda8",
+        "name": "2048",
+        "icon_url": "daoliu05.png"
+    }, {
+        "appid": "wx7e3b12072efbfc27",
+        "name": "俄罗斯方块",
+        "icon_url": "daoliu04.png"
+    }, {
+        "appid": "wxa9b801abd43333d9",
+        "name": "四川麻将",
+        "icon_url": "daoliu03.png"
+    }, {
+        "appid": "wx785e80cff6120de5",
+        "name": "途游斗地主",
+        "icon_url": "daoliu02.png"
+    }]
 };
 
 module.exports = config;

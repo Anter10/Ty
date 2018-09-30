@@ -135,7 +135,6 @@ tywx.AdManager = {
                 });
             }
         },
-
         genRandomFirstAdInfo: function genRandomFirstAdInfo() {
 
             var that = this;

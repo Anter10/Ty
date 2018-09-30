@@ -173,13 +173,27 @@ cc.Class({
                         self.errorCallBack && self.errorCallBack(null);
                     },
                     error_callback: function error_callback() {
-                        if (self.shareConfig === tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE || self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE) {
+                        if (self.shareConfig === tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE_VIDEO || self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE_VIDEO) {
                             var content = self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE ? '免费复活机会' : '如意宝箱';
                             var end_str = self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE ? '一次' : '一个';
                             content = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + content + '</color><color=#ffffff>' + end_str + '</c>';
                             tywx.ado.Utils.showErrorGfitPop(function () {
                                 self.shareGroupCallBack && self.shareGroupCallBack(null);
                             }, content);
+                        } else if (self.shareConfig === tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO || self.shareConfig === tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO) {
+                            var _content = self.shareConfig === tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO ? '免费红包' : '免费双倍加分';
+                            var _end_str = self.shareConfig === tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO ? '一个' : '一次';
+                            _content = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + _content + '</color><color=#ffffff>' + _end_str + '</c>';
+                            tywx.ado.Utils.showErrorGfitPop(function () {
+                                self.shareGroupCallBack && self.shareGroupCallBack(null);
+                            }, _content);
+                        } else if (self.shareConfig === tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE_VIDEO) {
+                            var _content2 = '免费道具';
+                            var _end_str2 = "一个";
+                            _content2 = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + _content2 + '</color><color=#ffffff>' + _end_str2 + '</c>';
+                            tywx.ado.Utils.showErrorGfitPop(function () {
+                                self.shareGroupCallBack && self.shareGroupCallBack(null);
+                            }, _content2);
                         }
                     }
                 };
@@ -210,7 +224,7 @@ cc.Class({
                 var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(this.shareConfig[0]);
                 if (!msg) {
                     msg = {};
-                    msg.shareContent = "你知道" + "1 吗？";
+                    msg.shareContent = "你知道" + "+1 吗？";
                     msg.sharePicUrl = "https://marketqn.nalrer.cn/teris/share_image/jiayi/jy03.jpg";
                     msg.sharePointId = "766";
                     msg.shareSchemeId = "1155";

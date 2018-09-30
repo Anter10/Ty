@@ -1,0 +1,52 @@
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+        this.node.active = false;
+        tywx.NotificationCenter.listen(tywx.EventType.GET_ADMANAGER_ICON_INFO_SUCCESS, this.onGetCrossAdInfoSuccess, this);
+        if(tywx.AdManager.rawAdInfoList.length > 0 ){
+            this.onGetCrossAdInfoSuccess();
+        }
+    },
+    onDestroy(){
+        tywx.NotificationCenter.ignoreScope(this);
+    },
+
+    start () {
+
+    },
+
+    // update (dt) {},
+
+    onGetCrossAdInfoSuccess(){
+        let ad_list = tywx.AdManager.rawAdInfoList;
+        let root = this.node.getChildByName('root');
+        this.node.active = true;
+        for(let i = 0; i < 5; i++){
+            let adNode = root.getChildByName(`adNode_${i}`);
+            let adConfig = ad_list[i];
+            if(adConfig && adNode){
+                var adButton = adNode.getChildByName('adButton');
+                adButton.on('click', function () {
+                    tywx.ado.Utils.jump2MiniProgramByConfig(adConfig);
+                });
+                let spriteIco = adNode.getChildByName('adIcon').getComponent(cc.Sprite);
+                cc.loader.load(adConfig.icon_url[0], (err,texture)=>{
+                    if(!err){
+                        let new_sprite_frame = new cc.SpriteFrame(texture);
+                        spriteIco.spriteFrame = new_sprite_frame;
+                        spriteIco.node.setContentSize(cc.size(120,120));
+                        console.log("刷新CDN图片成功");
+                    }
+                });
+            }
+        }
+    }
+});

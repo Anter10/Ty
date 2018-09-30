@@ -15,6 +15,9 @@ tywx.ado.Events = require('./models/Events.js'); // * 事件
 
 tywx.ado.isFirstLogin = true; // * 是否是第一次进入菜单
 
+// 玩家当前的最大血量
+tywx.ado.hpvalue = 5;
+
 tywx.ado.boot = function () {
     cc.log('tywx.ado.boot');
 };
@@ -25,9 +28,11 @@ tywx.ado.shut = function () {
 tywx.ado.inGame = function (game) {
     tywx.ado.game = game;
 };
+
 tywx.ado.outGame = function () {
     tywx.ado.game = null;
 };
+
 // * 红包信息初始化
 tywx.ado.RedPacketInfo = {
     nextAmount: 0,
@@ -38,8 +43,14 @@ tywx.ado.RedPacketInfo = {
 tywx.ado.EveryDataLoginInfo = {
     totalAmount: 0,
     count: 0,
-    amount: 0,
+    amounts: [0, 0, 0, 0, 0, 0, 0],
     rewad: false
+};
+// * 邀请请好友信息
+tywx.ado.InviteInfo = {
+    code: 0,
+    reward: false,
+    invite_users: []
 };
 // * 保存进度
 tywx.ado.saveProgress = function () {
