@@ -2,31 +2,37 @@
 cc._RF.push(module, '2fada/8fPBHRZzD6uWmYAck', 'ShareButton');
 // Script/models/ShareButton.js
 
-"use strict";
+'use strict';
 
 /*
-    游戏分享prefab
-    游戏的分享操作的主要逻辑在这个module里面编写
-    created by gyc on 2018-08-08.
+   游戏分享prefab
+   游戏的分享操作的主要逻辑在这个module里面编写
+   created by gyc on 2018-08-08.
 */
 cc.Class({
     extends: cc.Component,
 
-    properties: {},
+    properties: {
+        callButton: {
+            default: null,
+            type: cc.Button
+        }
+    },
 
     /*
-       调用: 场景加载完成后的回调
-       功能: 场景加载完成后的一些UI逻辑处理
-       参数: [
-           无
-       ]
-       返回值:[
-           无
-       ]
-       思路: 系统自带
+      调用: 场景加载完成后的回调
+      功能: 场景加载完成后的一些UI逻辑处理
+      参数: [
+          无
+      ]
+      返回值:[
+          无
+      ]
+      思路: 系统自带
     */
     onLoad: function onLoad() {
         this.data = {};
+        console.log("this.button" + this.button);
     },
 
     /*
@@ -69,18 +75,37 @@ cc.Class({
 
 
     /*
-       调用: 使用此model分享功能的时候 
-       功能: 手动设置分享成功后的回调函数
-       参数: [
-           successCall: 分享成功后的回调方法 类型Function
-       ]
-       返回值:[
-           无
-       ]
-       思路: 逻辑需要
+    调用: 使用此model分享功能的时候 
+    功能: 手动设置分享成功后的回调函数
+    参数: [
+        successCall: 分享成功后的回调方法 类型Function
+    ]
+    返回值:[
+        无
+    ]
+    思路: 逻辑需要
     */
     setSuccessCall: function setSuccessCall(successCall) {
         this.successCallBack = successCall;
+    },
+
+    /** 
+     * @description 切换按钮的调用类型 
+     * @param {Number} calltype  1 分享 2 视频
+    */
+    setButtonCallType: function setButtonCallType(calltype) {
+        if (!this.calltype) {
+            this.callButton.node.on('click', this.callBack, this);
+        }
+        this.calltype = calltype;
+    },
+
+    callBack: function callBack() {
+        if (tywx.ado.isMinGanIP || this.calltype == 2) {
+            this.showWXVideo();
+        } else if (this.calltype == 1) {
+            this.shareMiniApp();
+        }
     },
 
     /*
@@ -128,6 +153,63 @@ cc.Class({
         this.shareGroupCallBack = sgroupCall;
     },
 
+    /**
+     * @description 播放微信视频广告
+     */
+    showWXVideo: function showWXVideo() {
+        var self = this;
+        if (!this.hadclicknumber || this.hadclicknumber == 0) {
+            this.hadclicknumber = 1;
+        } else {
+            return;
+        }
+        if (this.reactcall) {
+            self.successCallBack(this);
+            self.hadclicknumber = 0;
+        } else {
+            if (tywx.IsWechatPlatform()) {
+
+                var param = {
+                    success: function success(res) {
+                        self.shareGroupCallBack && self.shareGroupCallBack(res);
+                        self.hadclicknumber = 0;
+                    },
+                    fail: function fail(res) {
+                        tywx.ado.Utils.showWXModal('观看视频失败');
+                        self.errorCallBack && self.errorCallBack(null);
+                        self.hadclicknumber = 0;
+                    },
+                    error_callback: function error_callback() {
+                        self.hadclicknumber = 0;
+                        if (self.shareConfig === tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE_VIDEO || self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE_VIDEO) {
+                            var content = self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE ? '免费复活机会' : '如意宝箱';
+                            var end_str = self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE ? '一次' : '一个';
+                            content = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + content + '</color><color=#ffffff>' + end_str + '</c>';
+                            tywx.ado.Utils.showErrorGfitPop(function () {
+                                self.shareGroupCallBack && self.shareGroupCallBack(null);
+                            }, content);
+                        } else if (self.shareConfig === tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO || self.shareConfig === tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO) {
+                            var _content = self.shareConfig === tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO ? '免费红包' : '免费双倍加分';
+                            var _end_str = self.shareConfig === tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO ? '一个' : '一次';
+                            _content = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + _content + '</color><color=#ffffff>' + _end_str + '</c>';
+                            tywx.ado.Utils.showErrorGfitPop(function () {
+                                self.shareGroupCallBack && self.shareGroupCallBack(null);
+                            }, _content);
+                        } else if (self.shareConfig === tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE_VIDEO) {
+                            var _content2 = '免费道具';
+                            var _end_str2 = "一个";
+                            _content2 = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + _content2 + '</color><color=#ffffff>' + _end_str2 + '</c>';
+                            tywx.ado.Utils.showErrorGfitPop(function () {
+                                self.shareGroupCallBack && self.shareGroupCallBack(null);
+                            }, _content2);
+                        }
+                    }
+                };
+                tywx.ado.Utils.showWXVideo(param);
+            }
+        }
+    },
+
     /*
         调用: 使用此model分享功能的时候 
         功能: 给好友或者群分享小程序的相关信息
@@ -141,15 +223,20 @@ cc.Class({
     */
     shareMiniApp: function shareMiniApp() {
         var self = this;
+        console.log("当前分享" + this.reactcall);
         if (this.reactcall) {
             self.successCallBack(this);
         } else {
             if (tywx.IsWechatPlatform()) {
-                window.wx.showShareMenu({
-                    withShareTicket: true
-                });
+                window.wx.showShareMenu({ withShareTicket: true });
                 var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(this.shareConfig[0]);
-                tywx.LOGE("msg = " + JSON.stringify(msg));
+                if (!msg) {
+                    msg = {};
+                    msg.shareContent = "你知道" + "+1 吗？";
+                    msg.sharePicUrl = "https://marketqn.nalrer.cn/teris/share_image/jiayi/jy03.jpg";
+                    msg.sharePointId = "766";
+                    msg.shareSchemeId = "1155";
+                }
                 if (msg) {
                     tywx.ShareInterface.share(msg.shareContent, msg.sharePicUrl, msg.sharePointId, msg.shareSchemeId, function (res) {
                         tywx.LOGE("分享成功后的数据" + JSON.stringify(res));

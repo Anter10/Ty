@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "red_packet_transfer_bg",
+    "texture": "acce0aaa-8490-455b-bf8d-5bac42c269e8",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      567,
+      752
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      567,
+      752
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

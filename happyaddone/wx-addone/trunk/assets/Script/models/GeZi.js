@@ -1,4 +1,3 @@
-
 /*
     游戏的基本单元：格子（真实的格子）
     定义他的数字和颜色，色块的所有者
@@ -6,25 +5,25 @@
 */
 
 var config = require("AddOneConfig")
-var block =  require("GeZiData")
+var block = require("GeZiData")
 
 
-module.exports = function(id,parent){
+module.exports = function (id, parent) {
     // 格子的ID
     this.id = id;
     // 格子的颜色
-    this.color = cc.color(0,0,0,0);
+    this.color = cc.color(0, 0, 0, 0);
     // 格子现实的的数字
     this.num = 0;
     // 格子的容器
     this.parent = parent;
     // 格子的x坐标
-    this.posx = 25 + (config.swidth - (5 * config.gezi_pitch)) / 2 + (id % 5) * (config.gezi_pitch) + 2;
+    this.posx = 25 + (tywx.ado.Constants.GameCenterConfig.swidth - (5 * tywx.ado.Constants.GameCenterConfig.gezi_pitch)) / 2 + (id % 5) * (tywx.ado.Constants.GameCenterConfig.gezi_pitch) + 2;
     // 格子的Y坐标
-    this.posy = 304 + parseInt(id / 5) * (config.gezi_pitch);
+    this.posy = 304 + parseInt(id / 5) * (tywx.ado.Constants.GameCenterConfig.gezi_pitch);
     // 格子的数据层
     this.block = new block(this);
-    
+
     /*
         调用: 更新Num的时候调用
         功能: 更新当前的num 并根据num来更新显示的颜色
@@ -36,19 +35,58 @@ module.exports = function(id,parent){
         ]
         思路: 逻辑需要
     */
-    this.setnum = function(num){
-        config = tywx.config != null?tywx.config : config;
-        this.num = num;
-        var colorindex = num - 1;
-        if(this.num > config.color_list.length){
-           colorindex = colorindex % config.color_list.length;
+    this.setnum = function (num) {
+        if (num) {
+            if (num % 2 == 0 && num > 7 && !this.hasout) {
+                if (this.block) {
+                    // this.block.printMSG();
+                    //   console.log(this.id + " cell gz num  = " + num + " " + tywx.gamecenter.hasShowxhgNum(num));
+                    if (this.block.id_keep == -1 && this.block.id_dest == -1) {
+                        if (tywx.gamecenter.hasShowxhgNum(num) == false) {
+                            tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").showThanTenIcon();
+                            tywx.gamecenter.addxhgNumber(num, this.id);
+                        } else {
+                            tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").hideThanTenIcon();
+                            //  tywx.gamecenter.removexhgNumber(num);
+                        }
+                    } else if (this.block.id_keep != -1 && this.block.id_dest != -1) {
+                        // console.log(JSON.stringify(tywx.gamecenter.curshowxhgs) + "keep ahd = " + tywx.gamecenter.hasShowxhgId(this.block.id_keep));
+                        if (tywx.gamecenter.hasShowxhgId(this.block.id_keep) == true) {
+                            tywx.gamecenter.allpngs[this.block.id_dest] && tywx.gamecenter.allpngs[this.block.id_dest].getComponent("celltile").showThanTenIcon();
+                            tywx.gamecenter.addxhgNumber(num, this.block.id_dest);
+                        }
+                        tywx.gamecenter.removexhgId(this.block.id_keep);
+                        tywx.gamecenter.allpngs[this.block.id_keep] && tywx.gamecenter.allpngs[this.block.id_keep].getComponent("celltile").hideThanTenIcon();
+                    } else if (this.block.id_keep != -1 && this.block.id_dest == -1) {
+                        if (tywx.gamecenter.hasShowxhgNum(num) == false) {
+                            tywx.gamecenter.addxhgNumber(num, this.block.id_keep);
+                            tywx.gamecenter.allpngs[this.block.id_keep] && tywx.gamecenter.allpngs[this.block.id_keep].getComponent("celltile").showThanTenIcon();
+                        }
+                    }
+                }
+            } else {
+                if (this.block) {
+                    if (num > 8) {
+                        if (tywx.gamecenter.hasShowxhgId(this.block.id_keep) == true) {
+                            tywx.gamecenter.removexhgId(this.block.id_keep);
+                            tywx.gamecenter.allpngs[this.block.id_keep] && tywx.gamecenter.allpngs[this.block.id_keep].getComponent("celltile").hideThanTenIcon();
+                        }
+                    }
+                    tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").hideThanTenIcon();
+                }
+            }
+            config = tywx.config != null ? tywx.config : config;
+            this.num = num;
+            var colorindex = num - 1;
+            if (this.num > tywx.ado.Constants.GameCenterConfig.color_list.length) {
+                colorindex = colorindex % tywx.ado.Constants.GameCenterConfig.color_list.length;
+            }
+            let colors = tywx.ado.Constants.GameCenterConfig.color_list[colorindex];
+            var color = cc.color(colors[0], colors[1], colors[2]);
+            this.setColor(color);
         }
-        let colors = config.color_list[colorindex];
-        var color = cc.color(colors[0],colors[1],colors[2]);
-        this.setColor(color);
     }
 
-    
     /*
         调用: 更新颜色的时候调用
         功能: 更新当前的颜色值
@@ -60,10 +98,10 @@ module.exports = function(id,parent){
         ]
         思路: 逻辑需要
     */
-    this.setColor = function(color){
+    this.setColor = function (color) {
         this.color = color;
     }
-    
+
     /*
         调用: GeZiData,GeZi中都有调用
         功能: 得到游戏的格子容器
@@ -75,10 +113,10 @@ module.exports = function(id,parent){
         ]
         思路: 逻辑需要
     */
-    this.getAllgz = function(){
+    this.getAllgz = function () {
         return this.parent.getAllgz();
     }
-    
+
     /*
         调用: GeZiData,GeZi中都有调用
         功能: 得到游戏的mask容器
@@ -90,28 +128,28 @@ module.exports = function(id,parent){
         ]
         思路: 逻辑需要
     */
-    this.getAllmask= function(){
+    this.getAllmask = function () {
         return this.parent.getAllmask();
     }
-    
-   /*
-        调用: gamemain中调用
-        功能: 更新自身block的数据
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要
-    */
-    this.settoblock=function(){
-        this.block.setinfo(this.color,this.num);
-        this.block.setpos(this.posx,this.posy);
+
+    /*
+         调用: gamemain中调用
+         功能: 更新自身block的数据
+         参数: [
+             无
+         ]
+         返回值:[
+             无
+         ]
+         思路: 逻辑需要
+     */
+    this.settoblock = function () {
+        this.block.setinfo(this.color, this.num);
+        this.block.setpos(this.posx, this.posy);
     }
 
 
-        /*
+    /*
                调用: gamemain中调用
                功能: 更新自身block的数据
                参数: [
@@ -122,77 +160,69 @@ module.exports = function(id,parent){
                ]
                思路: 逻辑需要
        */
-       this.settoblockAndNumber = function (num) {
-           if(this.block.posx != this.posx && this.block.posy != this.block.posy){
-              this.block.setinfo(this.color, num);
-              console.log("位置不对的时候补出来的数 = " + num);
-           }
-        //    console.log("位置相同的时候补出来的数 = " + num);
-           this.block.setpos(this.posx, this.posy);
-       }
-    
-
-        
-   /*
-        调用: gamemain中调用
-        功能: 更新自身block的数据
-        参数: [
-            无
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要
-    */
-    this.settoblockvalue=function(){
-        this.block.setinfo(this.color,this.num);
-    }
-    
-        
-   /*
-        调用: gamemain中调用
-        功能: 绘制当前的节点
-        参数: [
-            ctx: 绘制节点的句柄
-            label:显示的label
-        ]
-        返回值:[
-            无
-        ]
-        思路: 逻辑需要
-    */
-    this.draw = function(cell){
-        config = tywx.config != null?tywx.config : config;
-        // ctx.fillColor = this.block.color;
-        // ctx.roundRect(this.block.posx,this.block.posy,config.gezi_size,config.gezi_size,8);
-        // ctx.fill();
-        // lable.string = this.block.num;
-        // lable.node.x = this.block.posx-360+config.gezi_size/2;
-        // lable.node.y = this.block.posy-640+config.gezi_size/2;
-
-        var tilescript = cell.getComponent("celltile");
-        var pngnum = this.block.num;
-        if(pngnum > config.celltilenumColors.length){
-           pngnum = pngnum % config.celltilenumColors.length;
+    this.settoblockAndNumber = function (num) {
+        if (this.block.posx != this.posx && this.block.posy != this.block.posy) {
+            this.block.setinfo(this.color, num);
         }
-        tilescript.visByNum(pngnum,this.block.num);
-        var cindex = pngnum - 1;
-        let colors = config.celltilenumColors[cindex];
-        tilescript.setColor(new cc.color(colors[0],colors[1],colors[2],255));
-        cell.getComponent(cc.Sprite).node.x = this.block.posx-360+config.gezi_size/2;
-        cell.getComponent(cc.Sprite).node.y = this.block.posy-640+config.gezi_size/2;
+        this.block.setpos(this.posx, this.posy);
     }
+
+
+
+    /*
+         调用: gamemain中调用
+         功能: 更新自身block的数据
+         参数: [
+             无
+         ]
+         返回值:[
+             无
+         ]
+         思路: 逻辑需要
+     */
+    this.settoblockvalue = function () {
+            this.block.setinfo(this.color, this.num);
+        },
+
+
+
+        /*
+             调用: gamemain中调用
+             功能: 绘制当前的节点
+             参数: [
+                 ctx: 绘制节点的句柄
+                 label:显示的label
+             ]
+             返回值:[
+                 无
+             ]
+             思路: 逻辑需要
+         */
+        this.draw = function (cell) {
+            config = tywx.config != null ? tywx.config : config;
+            // ctx.fillColor = this.block.color;
+            // ctx.roundRect(this.block.posx,this.block.posy,tywx.ado.Constants.GameCenterConfig.gezi_size,tywx.ado.Constants.GameCenterConfig.gezi_size,8);
+            // ctx.fill();
+            // lable.string = this.block.num;
+            // lable.node.x = this.block.posx-360+tywx.ado.Constants.GameCenterConfig.gezi_size/2;
+            // lable.node.y = this.block.posy-640+tywx.ado.Constants.GameCenterConfig.gezi_size/2;
+
+            var tilescript = cell.getComponent("celltile");
+            var pngnum = this.block.num;
+            if (pngnum > tywx.ado.Constants.GameCenterConfig.celltilenumColors.length) {
+                pngnum = pngnum % tywx.ado.Constants.GameCenterConfig.celltilenumColors.length;
+            }
+
+
+            tilescript.visByNum(pngnum, this.block.num);
+            var cindex = pngnum - 1;
+            if (cindex < 0) {
+                cindex = 0;
+            }
+            tilescript.setCurNum(this.getAllmask()[this.id].num);
+            let colors = tywx.ado.Constants.GameCenterConfig.celltilenumColors[cindex];
+            tilescript.setColor(new cc.color(colors[0], colors[1], colors[2], 255));
+            cell.getComponent(cc.Sprite).node.x = this.block.posx - 360 + tywx.ado.Constants.GameCenterConfig.gezi_size / 2;
+            cell.getComponent(cc.Sprite).node.y = this.block.posy - 640 + tywx.ado.Constants.GameCenterConfig.gezi_size / 2;
+        }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

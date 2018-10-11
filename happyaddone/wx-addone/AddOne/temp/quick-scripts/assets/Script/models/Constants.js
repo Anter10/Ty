@@ -31,6 +31,26 @@ var ShareConfig = {
     FREE_DOUBLE_SCORE_SHARE: ['freeaddscorebigdouble', true], // 分享到群大数得分加倍
     FREE_DOUBLE_SCORE_SHARE_VIDEO: ['freedoublescorevideo', true] // 看视频大数得分加倍
 };
+// ! Modify by luning [09-10-2018] 微信限制分享回调的情况下，所有分享都不再限制必须分享到群
+// let ShareConfig = {
+//     FIRST_PAGE_SHARE             : ['firstpageshare', false],                // 首页分享
+//     RECOVER_GAME_SHARE_VIDEO     : ['recoversharegameshare', false],         // 看视频复活
+//     RECOVER_SHARE_GAME_SHARE     : ['recovergameshare', false],              // 分享到群复活
+//     MAIN_BTN_SHARE               : ['mainbtnshare', false],                  // 主界三点下面的分享
+//     POJILU_SHARE                 : ['pojilushare', false],                   // 得分破纪录分享
+//     RANK_SHARE                   : ['phbshare', false],                      // 排行榜界面分享
+//     FREE_GIFT_SHARE              : ['freegiftshare', false],                 // 免费领取--连击
+//     FREE_GIFT_SHARE_VIDEO        : ['freegiftsharevideo', false],            // 看视频免费领取道具
+//     GROUP_RANK_SHARE             : ['group_rank_share',false],               // 群排行
+//     GIFT_GIFT_BOX_SHARE_VIDEO    : ['free_gift_box_share', false],           // 如意宝箱看视频领取
+//     GIFT_GIFT_SHARE_BOX_SHARE    : ['free_gift_share_box_share', false],     // 如意宝箱直接分享
+//     OPEN_RED_PACKET_SHARE        : ['open_red_packet_share', false],         // 打开红包分享
+//     OPEN_RED_PACKET_SHARE_VIDEO  : ['open_red_packet_share_video', false],   // 打开红包看视频领取
+//     EVERY_DAY_GIFT_DOUBLE_SHARE  : ['every_day_gift_double_share', false],   // 每日登陆奖励
+//     INVITE_FIREND_SHARE          : ['invite_friend_share', false],           // 邀请好友分享
+//     FREE_DOUBLE_SCORE_SHARE      : ['freeaddscorebigdouble', false],         // 分享到群大数得分加倍
+//     FREE_DOUBLE_SCORE_SHARE_VIDEO: ['freedoublescorevideo', false]           // 看视频大数得分加倍
+// };
 // * 分享缺省配置
 var DefaultShareConfig = {
     shareContent: "你知道 +1 吗？",
@@ -44,6 +64,8 @@ var WXAdConfig = {
     vedioId: 'adunit-72772b75d8b17d65',
     bannerRefreshTime: 200 // * Banner刷新时间
 };
+// * 敏感ip
+var MinGanIp = [['北京', ['北京']], ['上海', ['上海']], ['广东', ['广州', '深圳']], ['湖南', ['长沙']], ['天津', ['天津']], ['浙江', ['杭州']], ['四川', ['成都']]];
 // * 交叉导流默认配置
 var CrossAdDefaultConfig = {
     "icon_interval": 10,
@@ -237,7 +259,8 @@ module.exports = {
     WXTransferRedPacketError: WXTransferRedPacketError,
     DefaultShareConfig: DefaultShareConfig,
     CrossAdDefaultConfig: CrossAdDefaultConfig,
-    CrossAdAppId2Name: CrossAdAppId2Name
+    CrossAdAppId2Name: CrossAdAppId2Name,
+    MinGanIp: MinGanIp
 };
 
 cc._RF.pop();

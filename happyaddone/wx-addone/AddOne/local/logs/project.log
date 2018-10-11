@@ -1,235 +1,70 @@
-2018-09-29T08:08:37.818Z - normal: Load ~/.CocosCreator/settings.json
-2018-09-29T08:08:37.821Z - normal: checking language setting...
-2018-09-29T08:08:37.821Z - normal: Language: zh
-2018-09-29T08:08:38.321Z - success: protocol editor-framework registered
-2018-09-29T08:08:38.322Z - success: protocol app registered
-2018-09-29T08:08:38.322Z - success: protocol theme registered
-2018-09-29T08:08:38.322Z - success: protocol packages registered
-2018-09-29T08:08:38.322Z - success: protocol unpack registerred
-2018-09-29T08:08:38.323Z - success: protocol disable-commonjs registerred
-2018-09-29T08:08:38.448Z - normal: connected!
-2018-09-29T08:08:38.451Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
-2018-09-29T08:08:38.455Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
-2018-09-29T08:08:38.459Z - normal: Initializing Cocos2d
-2018-09-29T08:08:39.139Z - normal: Initializing Asset Database
-2018-09-29T08:08:39.183Z - success: protocol uuid registerred
-2018-09-29T08:08:39.183Z - success: protocol db registerred
-2018-09-29T08:08:39.184Z - success: protocol thumbnail registerred
-2018-09-29T08:08:39.184Z - normal: Loading editor/builtin packages
-2018-09-29T08:08:39.342Z - success: assets loaded
-2018-09-29T08:08:39.347Z - success: builder loaded
-2018-09-29T08:08:39.349Z - success: cocos-analytics loaded
-2018-09-29T08:08:39.355Z - success: console loaded
-2018-09-29T08:08:39.392Z - success: fb-instant-games loaded
-2018-09-29T08:08:39.398Z - success: hierarchy loaded
-2018-09-29T08:08:39.402Z - success: inspector loaded
-2018-09-29T08:08:39.404Z - success: keystore loaded
-2018-09-29T08:08:39.409Z - success: node-library loaded
-2018-09-29T08:08:39.413Z - success: package-asset loaded
-2018-09-29T08:08:39.415Z - success: preferences loaded
-2018-09-29T08:08:39.418Z - success: project-exporter loaded
-2018-09-29T08:08:39.442Z - success: project-importer loaded
-2018-09-29T08:08:39.447Z - success: project-settings loaded
-2018-09-29T08:08:39.452Z - success: ui-kit loaded
-2018-09-29T08:08:39.457Z - success: scene loaded
-2018-09-29T08:08:39.458Z - success: sprite-editor loaded
-2018-09-29T08:08:39.464Z - success: store loaded
-2018-09-29T08:08:39.469Z - success: timeline loaded
-2018-09-29T08:08:39.469Z - normal: Loading builtin packages
-2018-09-29T08:08:39.474Z - success: asset-db-debugger loaded
-2018-09-29T08:08:39.475Z - success: color-picker loaded
-2018-09-29T08:08:39.476Z - success: jsb-adapter loaded
-2018-09-29T08:08:39.480Z - success: package-manager loaded
-2018-09-29T08:08:39.592Z - success: qqplay-adapter loaded
-2018-09-29T08:08:39.599Z - success: sdkbox loaded
-2018-09-29T08:08:39.605Z - success: tester loaded
-2018-09-29T08:08:39.610Z - success: ui-grid loaded
-2018-09-29T08:08:39.614Z - success: ui-kit-preview-extra loaded
-2018-09-29T08:08:39.617Z - success: ui-kit-preview loaded
-2018-09-29T08:08:39.621Z - success: ui-tree loaded
-2018-09-29T08:08:39.623Z - success: weapp-adapter loaded
-2018-09-29T08:08:40.893Z - normal: Loading packages
-2018-09-29T08:08:40.900Z - normal: Watching packages
-2018-09-29T08:08:41.007Z - normal: Run Application
-2018-09-29T08:08:42.017Z - success: preview server running at http://localhost:7456
-2018-09-29T08:08:53.254Z - normal: AddOne boot start
-2018-09-29T08:08:53.266Z - normal: AddOne boot end
-2018-09-29T08:08:53.339Z - warn: Should not specify class name effect for Component which defines in project.
-2018-09-29T08:08:53.340Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-09-29T08:09:42.595Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:1971
-2018-09-29T10:24:23.637Z - normal: AddOne boot start
-2018-09-29T10:24:23.645Z - normal: AddOne boot end
-2018-09-29T10:24:23.692Z - warn: Should not specify class name effect for Component which defines in project.
-2018-09-29T10:24:23.693Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-09-29T11:16:13.543Z - normal: AddOne boot start
-2018-09-29T11:16:13.545Z - normal: AddOne boot end
-2018-09-29T11:16:13.572Z - warn: Should not specify class name effect for Component which defines in project.
-2018-09-29T11:16:13.573Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-09-29T11:17:03.033Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:17:03.370Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:17:22.866Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:17:23.789Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:17:24.128Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:18:06.825Z - normal: AddOne boot start
-2018-09-29T11:18:06.832Z - normal: AddOne boot end
-2018-09-29T11:18:06.871Z - warn: Should not specify class name effect for Component which defines in project.
-2018-09-29T11:18:06.871Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-09-29T11:19:53.430Z - normal: AddOne boot start
-2018-09-29T11:19:53.438Z - normal: AddOne boot end
-2018-09-29T11:19:53.470Z - warn: Should not specify class name effect for Component which defines in project.
-2018-09-29T11:19:53.470Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-09-29T11:20:28.454Z - normal: AddOne boot start
-2018-09-29T11:20:28.455Z - normal: AddOne boot end
-2018-09-29T11:20:28.485Z - warn: Should not specify class name effect for Component which defines in project.
-2018-09-29T11:20:28.485Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-09-29T11:20:49.434Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:49.748Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:51.102Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:51.450Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:51.766Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:52.081Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:56.257Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:56.592Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:56.902Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:58.138Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:58.514Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:58.848Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:59.161Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:59.489Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:20:59.776Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:00.071Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:00.366Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:01.293Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:01.602Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:02.785Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:03.135Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:03.622Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:03.956Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:04.247Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:05.244Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:21:05.549Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:25:33.613Z - failed: [db-task][sync-changes] Failed to import asset /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne/assets/Script/gamemain.js, message: Compile error: SyntaxError: /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne/assets/Script/gamemain.js: Unexpected token, expected ; (2171:12)
-  2169 |         self.closeBtnNode.active = false;
-  2170 |         self.returnBtnNode.active = true;
-> 2171 |         this.8722.node.scale = 1;
-       |             ^
-  2172 |         this.fhDjsLabel.node.stopAllActions();
-  2173 |         this.gameOutRoot.stopAllActions();
-  2174 |         var djsCall = cc.callFunc(
-    at Parser.pp$5.raise (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp.semicolon (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1742:38)
-    at Parser.pp$1.parseExpressionStatement (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2236:8)
-    at Parser.pp$1.parseStatement (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1911:17)
-    at Parser.pp$1.parseBlockBody (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
-    at Parser.pp$1.parseBlock (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
-    at Parser.pp$3.parseFunctionBody (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
-    at Parser.pp$1.parseFunction (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2386:8)
-    at Parser.pp$3.parseFunctionExpression (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3760:17)
-2018-09-29T11:26:30.747Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:26:31.124Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:26:31.481Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:26:31.916Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:26:32.386Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:26:35.545Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:26:35.928Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:26:36.436Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:26:36.992Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
-Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
-
-2018-09-29T11:27:59.246Z - failed: [db-task][sync-changes] Failed to import asset /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne/assets/Script/gamemain.js, message: Compile error: SyntaxError: /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne/assets/Script/gamemain.js: Unexpected token, expected ; (2171:12)
-  2169 |         self.closeBtnNode.active = false;
-  2170 |         self.returnBtnNode.active = true;
-> 2171 |         this.8722.node.scale = 1;
-       |             ^
-  2172 |         this.fhDjsLabel.node.stopAllActions();
-  2173 |         this.gameOutRoot.stopAllActions();
-  2174 |         var djsCall = cc.callFunc(
-    at Parser.pp$5.raise (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
-    at Parser.pp.unexpected (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
-    at Parser.pp.semicolon (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1742:38)
-    at Parser.pp$1.parseExpressionStatement (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2236:8)
-    at Parser.pp$1.parseStatement (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1911:17)
-    at Parser.pp$1.parseBlockBody (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2268:21)
-    at Parser.pp$1.parseBlock (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2247:8)
-    at Parser.pp$3.parseFunctionBody (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4235:22)
-    at Parser.pp$1.parseFunction (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2386:8)
-    at Parser.pp$3.parseFunctionExpression (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3760:17)
+2018-10-10T08:20:49.551Z - normal: Load ~/.CocosCreator/settings.json
+2018-10-10T08:20:49.557Z - normal: checking language setting...
+2018-10-10T08:20:49.558Z - normal: Language: zh
+2018-10-10T08:20:50.526Z - success: protocol editor-framework registered
+2018-10-10T08:20:50.526Z - success: protocol app registered
+2018-10-10T08:20:50.527Z - success: protocol theme registered
+2018-10-10T08:20:50.527Z - success: protocol packages registered
+2018-10-10T08:20:50.528Z - success: protocol unpack registerred
+2018-10-10T08:20:50.528Z - success: protocol disable-commonjs registerred
+2018-10-10T08:20:50.976Z - normal: connected!
+2018-10-10T08:20:50.979Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
+2018-10-10T08:20:50.986Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
+2018-10-10T08:20:50.993Z - normal: Initializing Cocos2d
+2018-10-10T08:20:52.051Z - normal: Initializing Asset Database
+2018-10-10T08:20:52.103Z - success: protocol uuid registerred
+2018-10-10T08:20:52.104Z - success: protocol db registerred
+2018-10-10T08:20:52.104Z - success: protocol thumbnail registerred
+2018-10-10T08:20:52.104Z - normal: Loading editor/builtin packages
+2018-10-10T08:20:52.311Z - success: assets loaded
+2018-10-10T08:20:52.316Z - success: builder loaded
+2018-10-10T08:20:52.321Z - success: cocos-analytics loaded
+2018-10-10T08:20:52.328Z - success: console loaded
+2018-10-10T08:20:52.385Z - success: fb-instant-games loaded
+2018-10-10T08:20:52.394Z - success: hierarchy loaded
+2018-10-10T08:20:52.400Z - success: inspector loaded
+2018-10-10T08:20:52.403Z - success: keystore loaded
+2018-10-10T08:20:52.419Z - success: node-library loaded
+2018-10-10T08:20:52.422Z - success: package-asset loaded
+2018-10-10T08:20:52.424Z - success: preferences loaded
+2018-10-10T08:20:52.429Z - success: project-exporter loaded
+2018-10-10T08:20:52.457Z - success: project-importer loaded
+2018-10-10T08:20:52.462Z - success: project-settings loaded
+2018-10-10T08:20:52.470Z - success: ui-kit loaded
+2018-10-10T08:20:52.477Z - success: scene loaded
+2018-10-10T08:20:52.479Z - success: sprite-editor loaded
+2018-10-10T08:20:52.485Z - success: store loaded
+2018-10-10T08:20:52.493Z - success: timeline loaded
+2018-10-10T08:20:52.493Z - normal: Loading builtin packages
+2018-10-10T08:20:52.500Z - success: asset-db-debugger loaded
+2018-10-10T08:20:52.502Z - success: color-picker loaded
+2018-10-10T08:20:52.503Z - success: jsb-adapter loaded
+2018-10-10T08:20:52.509Z - success: package-manager loaded
+2018-10-10T08:20:52.650Z - success: qqplay-adapter loaded
+2018-10-10T08:20:52.661Z - success: sdkbox loaded
+2018-10-10T08:20:52.668Z - success: tester loaded
+2018-10-10T08:20:52.677Z - success: ui-grid loaded
+2018-10-10T08:20:52.682Z - success: ui-kit-preview-extra loaded
+2018-10-10T08:20:52.687Z - success: ui-kit-preview loaded
+2018-10-10T08:20:52.692Z - success: ui-tree loaded
+2018-10-10T08:20:52.693Z - success: weapp-adapter loaded
+2018-10-10T08:20:54.269Z - normal: Loading packages
+2018-10-10T08:20:54.279Z - normal: Watching packages
+2018-10-10T08:20:54.408Z - normal: Run Application
+2018-10-10T08:20:57.723Z - success: preview server running at http://localhost:7456
+2018-10-10T08:21:21.417Z - normal: AddOne boot start
+2018-10-10T08:21:21.434Z - normal: AddOne boot end
+2018-10-10T08:21:21.543Z - warn: Should not specify class name effect for Component which defines in project.
+2018-10-10T08:21:21.544Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-10-10T08:24:18.153Z - normal: AddOne boot start
+2018-10-10T08:24:18.180Z - normal: AddOne boot end
+2018-10-10T08:24:18.326Z - warn: Should not specify class name effect for Component which defines in project.
+2018-10-10T08:24:18.327Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-10-10T08:25:45.053Z - normal: AddOne boot start
+2018-10-10T08:25:45.058Z - normal: AddOne boot end
+2018-10-10T08:25:45.132Z - warn: Should not specify class name effect for Component which defines in project.
+2018-10-10T08:25:45.133Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-10-10T08:36:22.605Z - normal: AddOne boot start
+2018-10-10T08:36:22.641Z - normal: AddOne boot end
+2018-10-10T08:36:22.788Z - warn: Should not specify class name effect for Component which defines in project.
+2018-10-10T08:36:22.789Z - warn: Can not instantiate CCClass 'effect' with arguments.

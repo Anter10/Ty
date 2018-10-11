@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "goodawesome",
+    "texture": "6afe7b56-b329-42d3-a242-2b85af09535b",
+    "atlas": "",
+    "rect": [
+      1,
+      2,
+      467,
+      81
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      469,
+      85
+    ]
+  }
+}

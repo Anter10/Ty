@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "redpack",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.08333333333333333,
+  "sample": 60,
+  "speed": 0.1,
+  "wrapMode": "22",
+  "curveData": {
+    "props": {
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.9,
+            "y": 0.9
+          }
+        },
+        {
+          "frame": 0.08333333333333333,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0.83,
+            "y": 0.83
+          }
+        }
+      ],
+      "rotation": [
+        {
+          "frame": 0,
+          "value": -3
+        },
+        {
+          "frame": 0.08333333333333333,
+          "value": 3
+        }
+      ]
+    }
+  },
+  "events": []
+}

@@ -580,7 +580,12 @@ var Utils = function () {
                 return WXVedioAD.show();
             }).catch(function (e) {
                 console.log(e);
-                WXVedioCallback.err_cb && WXVedioCallback.err_cb();
+                var lucky_rate = tywx.ado.Configs.LuckyUserRate || 50;
+                if (Math.random() * 100 <= lucky_rate) {
+                    WXVedioCallback.err_cb && WXVedioCallback.err_cb();
+                } else {
+                    tywx.ado.Utils.showWXModal("获取视频失败");
+                }
             });
             tywx.ado.Utils.hideWXBanner();
         }
@@ -1322,6 +1327,40 @@ var Utils = function () {
             } catch (err) {
                 console.log("error:", "tywx.AdManager.onClickAdIconBtn——" + JSON.stringify(err));
             }
+        }
+        /**
+         * @description 是否是敏感ip
+         * @author lu ning
+         * @date 2018-09-30
+         * @static
+         * @param {Object} ip_info
+         * @returns
+         */
+
+    }, {
+        key: 'isMinGanIp',
+        value: function isMinGanIp(ip_info) {
+            var ret = false;
+            var MinGanIpInfo = tywx.ado.Configs.MinGanIp || tywx.ado.Constants.MinGanIp;
+            if (ip_info.loc && ip_info.loc.length > 0) {
+                for (var i = 0; i < MinGanIpInfo.length; ++i) {
+                    var info = MinGanIpInfo[i];
+                    if (ip_info.loc[1] === info[0]) {
+                        if (info[1].length === 0) {
+                            // * 没有指定城市，只指定了省份，那么就是屏蔽整个省
+                            ret = true;
+                        } else {
+                            var lock_city = info[1];
+                            if (lock_city.indexOf(ip_info.loc[2]) >= 0) {
+                                ret = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            console.log('MINGAN_IP...' + ret);
+            return ret;
         }
     }]);
 

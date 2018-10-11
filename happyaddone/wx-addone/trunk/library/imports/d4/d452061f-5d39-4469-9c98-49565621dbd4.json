@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "kaibottom",
+    "texture": "0818e587-4751-4a02-ae5c-aa1e2be243be",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      182,
+      191
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      182,
+      191
+    ]
+  }
+}

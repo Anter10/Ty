@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "ado_lottery_title",
+    "texture": "af0aca6b-edb2-4035-80a2-85ec2b48e083",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      495,
+      125
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      495,
+      125
+    ]
+  }
+}

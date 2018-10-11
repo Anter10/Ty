@@ -113,32 +113,31 @@ cc.Class({
     },
 
     showHG: function showHG() {
-        var renum = this.scn;
+        // var renum = this.scn;
 
-        if (renum && renum != 0) {
-            //
-            if (renum < tywx.ado.Constants.GameCenterConfig.moreThanTenNumber || renum % 2 != 0) {
-                this.hideThanTenIcon();
-                if (this.prenum != 0) {
-                    console.log("前一个值 = " + this.prenum);
-                    if (this.prenum >= tywx.ado.Constants.GameCenterConfig.moreThanTenNumber && this.prenum % 2 == 0) {
-                        tywx.gamecenter.removexhgNumber(this.prenum);
-                    }
-                    this.prenum = 0;
-                }
-            } else {
-                if (tywx.gamecenter.hasShowxhgNum(renum, this.id) == false && tywx.gamecenter.hadXHGId(renum) == false) {
-                    this.showThanTenIcon();
-                    this.prenum = renum;
-                    tywx.gamecenter.addxhgNumber(renum, this.id);
-                    tywx.gamecenter.showmsm1();
-                    // tywx.gamecenter.addXHGCell(this);
-                    //  tywx.gamecenter.setWaitNum(renum);
-                } else if (tywx.gamecenter.hadXHGId(renum) == true) {
-                    this.hideThanTenIcon();
-                }
-            }
-        }
+        // if (renum && renum != 0) { //
+        //     if (renum < tywx.ado.Constants.GameCenterConfig.moreThanTenNumber || renum % 2 != 0) {
+        //         this.hideThanTenIcon();
+        //         if (this.prenum != 0){
+        //            console.log("前一个值 = " + this.prenum);
+        //            if (this.prenum >= tywx.ado.Constants.GameCenterConfig.moreThanTenNumber && this.prenum % 2 == 0) {
+        //                tywx.gamecenter.removexhgNumber(this.prenum);
+        //            }
+        //            this.prenum = 0;
+        //         }
+        //     } else {
+        //         if (tywx.gamecenter.hasShowxhgNum(renum, this.id) == false && tywx.gamecenter.hadXHGId(renum) == false) {
+        //             this.showThanTenIcon();
+        //             this.prenum = renum;
+        //             tywx.gamecenter.addxhgNumber(renum, this.id);
+        //             tywx.gamecenter.showmsm1();
+        //             // tywx.gamecenter.addXHGCell(this);
+        //             //  tywx.gamecenter.setWaitNum(renum);
+        //         } else if (tywx.gamecenter.hadXHGId(renum) == true){
+        //              this.hideThanTenIcon();
+        //         }
+        //     }
+        // } 
     },
 
     setCurNum: function setCurNum(scn) {

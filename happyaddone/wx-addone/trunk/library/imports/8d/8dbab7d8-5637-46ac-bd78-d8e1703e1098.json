@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "ado_invite_nick_name_bg",
+    "texture": "93f68eac-b826-498b-b07b-0cfc72f2ca56",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      66,
+      43
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      66,
+      43
+    ],
+    "capInsets": [
+      25,
+      19,
+      23,
+      21
+    ]
+  }
+}

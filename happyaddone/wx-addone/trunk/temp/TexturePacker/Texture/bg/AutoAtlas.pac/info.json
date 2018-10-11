@@ -1,0 +1,31 @@
+{
+  "packedTextures": [
+    {
+      "path": "/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne/temp/TexturePacker/Texture/bg/AutoAtlas.pac/AutoAtlas-1.png",
+      "name": "AutoAtlas-1.png",
+      "size": "1024x1024"
+    },
+    {
+      "path": "/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne/temp/TexturePacker/Texture/bg/AutoAtlas.pac/AutoAtlas-2.png",
+      "name": "AutoAtlas-2.png",
+      "size": "1024x1024"
+    },
+    {
+      "path": "/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne/temp/TexturePacker/Texture/bg/AutoAtlas.pac/AutoAtlas-3.png",
+      "name": "AutoAtlas-3.png",
+      "size": "512x256"
+    }
+  ],
+  "unpackedTextures": [
+    {
+      "path": "/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne/assets/Texture/bg/gamebj.png",
+      "name": "gamebj.png",
+      "size": "644x1140"
+    },
+    {
+      "path": "/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne/assets/Texture/bg/imgbj.png",
+      "name": "imgbj.png",
+      "size": "724x1284"
+    }
+  ]
+}

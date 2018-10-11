@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "efsgood",
+    "texture": "28eb6fec-37a9-4681-9c73-77ae35cc1735",
+    "atlas": "",
+    "rect": [
+      2,
+      2,
+      368,
+      137
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      372,
+      141
+    ]
+  }
+}

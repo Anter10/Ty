@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "luckitembottom",
+    "texture": "df7da1b3-00f0-4d48-b037-117992f91c2c",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      162,
+      162
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      162,
+      162
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

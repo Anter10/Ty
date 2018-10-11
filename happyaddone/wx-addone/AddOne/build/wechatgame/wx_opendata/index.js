@@ -2,14 +2,14 @@ let events = require('./open_data_config.js').events;
 let CloudKeys = require('./open_data_config.js').CloudDataKey;
 const _shareCanvas = wx.getSharedCanvas().getContext('2d');
 var canvas = wx.getSharedCanvas();
-let orwidth = canvas.width;
-let orheight = canvas.height;
+//let orwidth = canvas.width;
+//let orheight = canvas.height;
 let _friendCloudDatas = null;
 let _groupfriendCloudDatas = null;
 let _selfCloudDatas = null;
 let _selfUserInfo = null;
 //  玩家发送给子域的数据类型
-var prePersonIconUrl = null;
+//var prePersonIconUrl = null;
 
 // 预先加载本地的图片
 let bottom = wx.createImage()
@@ -486,6 +486,47 @@ let getGroupFriendData = function (tshareTicket) {
             // this.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
         }
     });
+};
+
+function renderInviteUsrInfo(open_id){
+    wx.getUserInfo({
+        openIdList: [open_id],
+        lang: 'zh_CN',
+        success: function (params) {
+            console.log('OpenRegion | getUserInfo | success | ' + JSON.stringify(params));
+            if(params.data[0]){
+                _shareCanvas.clearRect(0, 0, 3222, 3222);
+                let tmp_data   = params.data[0];
+                let [x,y]      = [0,0];
+                let [w,h]      = [160, 200];
+                let [a_w, a_h] = [138, 138];
+                let padding_y  = 20;
+
+                x = (w - a_w) / 2;
+                y = x;
+                _shareCanvas.save();
+                _shareCanvas.beginPath();
+                _shareCanvas.arc(x + a_w / 2, y + a_h / 2, 60, 0, 2 * Math.PI, false);
+                _shareCanvas.clip();
+                drawImage(tmp_data.avatarUrl+"?aaa=aa.png",x,y, a_w, a_h, ()=>{
+                    _shareCanvas.restore();
+                    console.log('draw img success');
+
+                    _shareCanvas.fillStyle = "#ffffff";
+                    _shareCanvas.font      = "25px Arial";
+                    _shareCanvas.textAlign = 'center';
+                    x = w / 2;
+                    y = y + a_h + padding_y + 15; 
+                    drawText(stringSlice(tmp_data.nickName, 11), x, y);
+                    console.log('render end');
+                });
+            }
+
+        },
+        fail: function (params) {
+            console.log('OpenRegion | getUserInfo | fail | ' + JSON.stringify(params));
+        }
+    });
 }
 
 
@@ -497,19 +538,20 @@ wx.onMessage(data => {
     console.log("当前传进来的消息数据 = " + JSON.stringify(data));
     if (data.method === events.LOAD_DATA) {
         loadData();
-    } else if (data.method == events.friends) {
+    } else if (data.method === events.friends) {
         drawFriendRank(_friendCloudDatas);
-    } else if (data.method == events.group) {
+    } else if (data.method === events.group) {
         getGroupFriendData(data.shareTicket);
-    } else if (data.method == events.storefris) {
-        drawThanFriend(data.score, data.x, data.y, data.width)
-    } else if (data.method == events.overphb) {
+    } else if (data.method === events.storefris) {
+        drawThanFriend(data.score, data.x, data.y, data.width);
+    } else if (data.method === events.overphb) {
         loadData();
-    }else if (data.method == 8) {
+    }else if (data.method === 8) {
         showOverphb()
-    }else if (data.method == 9) {
+    }else if (data.method === 9) {
         _shareCanvas.clearRect(0, 0, 32222, 3222);
     }
-
-
+    else if(data.method === events.RENDER_INVITE_USRR_INFO){
+        renderInviteUsrInfo(data.openId);
+    }
 });

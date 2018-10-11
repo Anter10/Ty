@@ -1,0 +1,353 @@
+2018-09-28T15:26:33.904Z - normal: Load ~/.CocosCreator/settings.json
+2018-09-28T15:26:33.907Z - normal: checking language setting...
+2018-09-28T15:26:33.908Z - normal: Language: zh
+2018-09-28T15:26:34.353Z - success: protocol editor-framework registered
+2018-09-28T15:26:34.353Z - success: protocol app registered
+2018-09-28T15:26:34.354Z - success: protocol theme registered
+2018-09-28T15:26:34.354Z - success: protocol packages registered
+2018-09-28T15:26:34.354Z - success: protocol unpack registerred
+2018-09-28T15:26:34.354Z - success: protocol disable-commonjs registerred
+2018-09-28T15:26:34.757Z - normal: connected!
+2018-09-28T15:26:34.759Z - normal: Check project /Users/guoyouchao/Desktop/addone738
+2018-09-28T15:26:34.762Z - normal: Initializing project /Users/guoyouchao/Desktop/addone738
+2018-09-28T15:26:34.765Z - normal: Initializing Cocos2d
+2018-09-28T15:26:35.384Z - normal: Initializing Asset Database
+2018-09-28T15:26:35.430Z - success: protocol uuid registerred
+2018-09-28T15:26:35.431Z - success: protocol db registerred
+2018-09-28T15:26:35.431Z - success: protocol thumbnail registerred
+2018-09-28T15:26:35.431Z - normal: Loading editor/builtin packages
+2018-09-28T15:26:35.574Z - success: assets loaded
+2018-09-28T15:26:35.577Z - success: builder loaded
+2018-09-28T15:26:35.579Z - success: cocos-analytics loaded
+2018-09-28T15:26:35.584Z - success: console loaded
+2018-09-28T15:26:35.620Z - success: fb-instant-games loaded
+2018-09-28T15:26:35.626Z - success: hierarchy loaded
+2018-09-28T15:26:35.630Z - success: inspector loaded
+2018-09-28T15:26:35.631Z - success: keystore loaded
+2018-09-28T15:26:35.636Z - success: node-library loaded
+2018-09-28T15:26:35.638Z - success: package-asset loaded
+2018-09-28T15:26:35.639Z - success: preferences loaded
+2018-09-28T15:26:35.642Z - success: project-exporter loaded
+2018-09-28T15:26:35.659Z - success: project-importer loaded
+2018-09-28T15:26:35.662Z - success: project-settings loaded
+2018-09-28T15:26:35.665Z - success: ui-kit loaded
+2018-09-28T15:26:35.670Z - success: scene loaded
+2018-09-28T15:26:35.671Z - success: sprite-editor loaded
+2018-09-28T15:26:35.675Z - success: store loaded
+2018-09-28T15:26:35.680Z - success: timeline loaded
+2018-09-28T15:26:35.680Z - normal: Loading builtin packages
+2018-09-28T15:26:35.685Z - success: asset-db-debugger loaded
+2018-09-28T15:26:35.686Z - success: color-picker loaded
+2018-09-28T15:26:35.687Z - success: jsb-adapter loaded
+2018-09-28T15:26:35.690Z - success: package-manager loaded
+2018-09-28T15:26:35.781Z - success: qqplay-adapter loaded
+2018-09-28T15:26:35.788Z - success: sdkbox loaded
+2018-09-28T15:26:35.791Z - success: tester loaded
+2018-09-28T15:26:35.796Z - success: ui-grid loaded
+2018-09-28T15:26:35.802Z - success: ui-kit-preview-extra loaded
+2018-09-28T15:26:35.805Z - success: ui-kit-preview loaded
+2018-09-28T15:26:35.808Z - success: ui-tree loaded
+2018-09-28T15:26:35.809Z - success: weapp-adapter loaded
+2018-09-28T15:26:36.783Z - normal: Loading packages
+2018-09-28T15:26:36.790Z - normal: Watching packages
+2018-09-28T15:26:36.870Z - normal: Run Application
+2018-09-28T15:26:43.288Z - success: preview server running at http://localhost:7457
+2018-09-28T15:26:51.548Z - normal: AddOne boot start
+2018-09-28T15:26:51.557Z - normal: AddOne boot end
+2018-09-28T15:26:51.595Z - warn: Should not specify class name effect for Component which defines in project.
+2018-09-28T15:26:51.595Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-09-28T15:28:39.784Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:28:40.106Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:28:57.891Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:28:58.200Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:28:58.506Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:28:58.799Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:28:59.112Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:00.480Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:00.799Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:01.120Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:03.354Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:03.712Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:04.038Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:04.342Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:05.944Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:06.459Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:06.762Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:07.064Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:07.897Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:08.246Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:12.126Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:12.485Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:12.787Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:15.062Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:15.533Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:15.865Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:17.254Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:28.326Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:28.645Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:49.991Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:50.342Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:29:50.650Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:06.425Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:06.729Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:07.048Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:08.281Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:08.593Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:11.457Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:13.945Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:14.756Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:15.131Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:22.578Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:25.484Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:25.770Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:30:27.113Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:32:50.054Z - normal: AddOne boot start
+2018-09-28T15:32:50.060Z - normal: AddOne boot end
+2018-09-28T15:32:50.101Z - warn: Should not specify class name effect for Component which defines in project.
+2018-09-28T15:32:50.101Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-09-28T15:36:34.386Z - normal: AddOne boot start
+2018-09-28T15:36:34.392Z - normal: AddOne boot end
+2018-09-28T15:36:34.431Z - warn: Should not specify class name effect for Component which defines in project.
+2018-09-28T15:36:34.432Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-09-28T15:36:35.099Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T15:36:52.062Z - normal: Start building with options : {
+  "actualPlatform": "wechatgame",
+  "apiLevel": "",
+  "appABIs": [],
+  "appKey": "",
+  "appSecret": "",
+  "buildPath": "/Users/guoyouchao/Desktop/addone738/build",
+  "debug": false,
+  "dest": "/Users/guoyouchao/Desktop/addone738/build/wechatgame",
+  "embedWebDebugger": false,
+  "encryptJs": true,
+  "excludeScenes": [],
+  "excludedModules": [
+    "TiledMap",
+    "Spine Skeleton",
+    "DragonBones",
+    "VideoPlayer",
+    "WebView",
+    "Collider",
+    "Physics"
+  ],
+  "fb-instant-games": {},
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": false,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": true,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.helloworld",
+  "platform": "wechatgame",
+  "previewHeight": "720",
+  "previewWidth": "1280",
+  "privateKey": "",
+  "qqplay": {
+    "REMOTE_SERVER_ROOT": "",
+    "orientation": "portrait"
+  },
+  "scenes": [
+    "905a3099-7e1d-43d9-afae-7f04c3eda863",
+    "2d2f792f-a40c-49bb-a189-ed176a246e49"
+  ],
+  "sourceMaps": false,
+  "startScene": "905a3099-7e1d-43d9-afae-7f04c3eda863",
+  "template": "link",
+  "title": "addone",
+  "useDebugKeystore": true,
+  "vsVersion": "auto",
+  "webOrientation": "auto",
+  "wechatgame": {
+    "REMOTE_SERVER_ROOT": "",
+    "appid": "wxd9dac6412c7dab7b",
+    "isSubdomain": false,
+    "orientation": "portrait",
+    "subContext": ""
+  },
+  "xxteaKey": "b552544a-ae1d-4d",
+  "zipCompressJs": true,
+  "project": "/Users/guoyouchao/Desktop/addone738",
+  "projectName": "addone",
+  "debugBuildWorker": false
+}
+2018-09-28T15:36:52.064Z - normal: Building /Users/guoyouchao/Desktop/addone738
+2018-09-28T15:36:52.064Z - normal: Destination /Users/guoyouchao/Desktop/addone738/build/wechatgame
+2018-09-28T15:36:52.326Z - normal: Delete /Users/guoyouchao/Desktop/addone738/build/wechatgame/**/*
+2018-09-28T15:37:03.125Z - normal: Start building assets
+2018-09-28T15:37:03.125Z - normal: Start spawn build-worker
+2018-09-28T15:37:03.875Z - normal: Finish spawn build-worker
+2018-09-28T15:37:03.875Z - normal: Start init build-worker
+2018-09-28T15:37:07.152Z - normal: AddOne boot start
+2018-09-28T15:37:07.160Z - normal: AddOne boot end
+2018-09-28T15:37:07.224Z - normal: Finish init build-worker
+2018-09-28T15:37:07.224Z - normal: Start build-assets in worker
+2018-09-28T15:37:16.888Z - normal: Finish build-assets in worker
+2018-09-28T15:37:16.890Z - normal: Finish building assets
+2018-09-28T15:37:16.921Z - normal: Start building plugin scripts
+2018-09-28T15:37:17.545Z - normal: Finish building plugin scripts
+2018-09-28T15:37:17.567Z - normal: Generating main.js from /Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/static/build-templates/shares/main.js
+2018-09-28T15:37:18.742Z - normal: Built to "/Users/guoyouchao/Desktop/addone738/build/wechatgame" successfully
+2018-09-28T15:37:35.086Z - normal: AddOne boot start
+2018-09-28T15:37:35.087Z - normal: AddOne boot end
+2018-09-28T15:37:35.105Z - warn: Should not specify class name effect for Component which defines in project.
+2018-09-28T15:37:35.105Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-09-28T15:37:36.237Z - normal: Initializing...
+
+2018-09-28T15:37:36.243Z - normal: idePortFile: /Users/guoyouchao/Library/Application Support/微信web开发者工具/Default/.ide
+
+2018-09-28T15:37:36.264Z - normal: IDE server has started, listening on http://127.0.0.1:39231
+
+2018-09-28T15:37:36.264Z - normal: initialization finished
+
+2018-09-28T15:37:36.479Z - error: StatusCodeError: 400 - "{\"code\":40000,\"error\":\"错误 {\\\"code\\\":400003,\\\"error\\\":\\\"已存在相同 AppID 和 projectname 的项目（路径），请修改后重试\\\"}\"}"
+
+    at Socket.<anonymous> (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor/core/wechat-game.js:1:900)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:191:7)
+    at readableAddChunk (_stream_readable.js:178:18)
+    at Socket.Readable.push (_stream_readable.js:136:10)
+    at Pipe.onread (net.js:560:20)
+2018-09-28T15:37:49.205Z - normal: Initializing...
+
+2018-09-28T15:37:49.210Z - normal: idePortFile: /Users/guoyouchao/Library/Application Support/微信web开发者工具/Default/.ide
+
+2018-09-28T15:37:49.227Z - normal: IDE server has started, listening on http://127.0.0.1:39231
+
+2018-09-28T15:37:49.227Z - normal: initialization finished
+
+2018-09-28T15:37:49.419Z - error: StatusCodeError: 400 - "{\"code\":40000,\"error\":\"错误 {\\\"code\\\":400003,\\\"error\\\":\\\"已存在相同 AppID 和 projectname 的项目（路径），请修改后重试\\\"}\"}"
+
+    at Socket.<anonymous> (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator.app/Contents/Resources/app.asar/editor/core/wechat-game.js:1:900)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:191:7)
+    at readableAddChunk (_stream_readable.js:178:18)
+    at Socket.Readable.push (_stream_readable.js:136:10)
+    at Pipe.onread (net.js:560:20)
+2018-09-28T15:38:03.464Z - normal: Initializing...
+
+2018-09-28T15:38:03.469Z - normal: idePortFile: /Users/guoyouchao/Library/Application Support/微信web开发者工具/Default/.ide
+
+2018-09-28T15:38:03.486Z - normal: IDE server has started, listening on http://127.0.0.1:39231
+
+2018-09-28T15:38:03.486Z - normal: initialization finished
+
+2018-09-28T15:38:04.152Z - normal: open IDE success
+
+2018-09-28T15:56:56.458Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T16:01:29.696Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T16:01:30.212Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T16:01:35.420Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T16:01:35.715Z - warn: The SpriteFrame used by component "cc.ParticleSystem" is missing. Detailed information:
+Node path: "Canvas/topscreen/uproot/itemview/rybox/fire"
+
+2018-09-28T16:01:37.764Z - info: shutdown preview server

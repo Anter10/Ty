@@ -776,17 +776,20 @@ var gamemain = cc.Class({
         // ! 显示交叉导流广告
         this.showCrossAd();
         // 监听红包事件
-        // tywx.NotificationCenter.listen(tywx.ado.Events.ADO_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
+        tywx.NotificationCenter.listen(tywx.ado.Events.ADO_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
     },
 
     /**
      * @description 初始化领取的
      */
     initShowBoxButton: function initShowBoxButton() {
-        if (tywx.config.share_control.comboitem == "video") {
+        if (tywx.config.share_control.comboitem == "video" || tywx.ado.isMinGanIP) {
             this.mflqshareNode.active = true;
             this.mflqhideLabel.string = "视频领取";
             this.mflqshowLabel.string = "视频领取";
+            if (tywx.ado.isMinGanIP) {
+                this.mflqshareNode.active = false;
+            }
             this.mflqshareNode.getComponent("cc.Toggle").uncheck();
             this.mflq.setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE_VIDEO);
             this.mflq.setButtonCallType(2);
@@ -818,10 +821,9 @@ var gamemain = cc.Class({
     },
     showCrossAd: function showCrossAd() {
         // 审核状态不显示
-        if (tywx.config.auditing === true) return;
-
         var adInfos = tywx.AdManager.rawAdInfoList;
-        if (!adInfos || adInfos.length <= 0) return;
+        if (tywx.config.auditing === true || !adInfos || adInfos.length <= 0) return;
+
         var tmpAdInfo = adInfos[0];
         var adButton = this.adNode.getChildByName('adButton');
         adButton.on('click', function () {
@@ -888,6 +890,10 @@ var gamemain = cc.Class({
             this.mflq.setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE);
             this.mflq.setButtonCallType(1);
         }
+        if (tywx.ado.isMinGanIP) {
+            this.mflq.setShareConfig(tywx.ado.Constants.ShareConfig.FREE_GIFT_SHARE_VIDEO);
+            this.mflq.setButtonCallType(2);
+        }
     },
 
     /**
@@ -895,14 +901,25 @@ var gamemain = cc.Class({
      * @param {Number} num 移除显示的格子数字
      */
     removexhgNumber: function removexhgNumber(num) {
-        // console.log("当前的ID是1 = " + JSON.stringify(this.curshowxhgs));
         for (var thn = 0; thn < this.curshowxhgs.length; thn++) {
             if (this.curshowxhgs[thn].num == num) {
-                this.curshowxhgs.splice(thn, 1);
-                break;
+                // this.curshowxhgs.splice(thn, 1);
+                this.curshowxhgs[thn].num = -1;
             }
         }
-        // console.log("当前的ID是2 = " + JSON.stringify(this.curshowxhgs));
+    },
+
+    /**
+     * @description 根据数字移除格子的数据
+     * @param {Number} num 移除显示的格子数字
+     */
+    removexhgId: function removexhgId(id) {
+        for (var thn = 0; thn < this.curshowxhgs.length; thn++) {
+            if (this.curshowxhgs[thn].id == id) {
+                // this.curshowxhgs.splice(thn, 1);
+                this.curshowxhgs[thn].id = -1;
+            }
+        }
     },
 
     /**
@@ -917,6 +934,23 @@ var gamemain = cc.Class({
      */
     showmsm1: function showmsm1() {
         // console.log("showmsm1 = " + JSON.stringify(this.curshowxhgs));
+    },
+
+    /**
+     * @description 判断当前的数字是否显示小皇冠
+     * @param {Number} num 显示的数字
+     * @param {Number} id 显示格子的ID
+     */
+    hasShowxhgId: function hasShowxhgId(id) {
+        if (this.curshowxhgs.length == 0) {
+            return false;
+        }
+        for (var ti = 0; ti < this.curshowxhgs.length; ti++) {
+            if (id == this.curshowxhgs[ti].id) {
+                return true;
+            }
+        }
+        return false;
     },
 
     /**
@@ -1678,7 +1712,7 @@ var gamemain = cc.Class({
             }
         }
 
-        this.dealXhgCells();
+        // this.dealXhgCells();
 
         this.setMaxScore();
         if (this.isShowFIcon) {
@@ -2359,8 +2393,6 @@ var gamemain = cc.Class({
             var num = tmp_progress === -1 ? this.getrandomnum() : tmp_progress.mask[i];
             this.getAllgz()[i].setnum(num);
             this.getAllgz()[i].settoblock();
-            // this.allpngs[i].getComponent("celltile").setCurNum(this.getAllmask()[i].num);
-            this.allpngs[i].getComponent("celltile").showHG();
         }
 
         var needcheck = tmp_progress === -1;

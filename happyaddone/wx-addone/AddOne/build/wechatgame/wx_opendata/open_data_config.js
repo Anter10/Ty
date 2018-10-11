@@ -21,6 +21,7 @@ let events = {
     hideUi: 6,
     // 游戏结束后的排行榜显示
     overphb:7,
+    RENDER_INVITE_USRR_INFO: 'render_invite_usr_info'
 };
 
 let CloudDataKey = {

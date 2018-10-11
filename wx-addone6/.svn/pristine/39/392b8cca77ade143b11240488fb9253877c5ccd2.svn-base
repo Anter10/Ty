@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "ado_btn_show_lottery",
+    "texture": "d3c4bf28-4396-432d-b38d-ab6b4462eea8",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      102,
+      123
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      102,
+      123
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -32,7 +32,6 @@ cc.Class({
     */
     onLoad: function onLoad() {
         this.data = {};
-
         console.log("this.button" + this.button);
     },
 
@@ -102,10 +101,10 @@ cc.Class({
     },
 
     callBack: function callBack() {
-        if (this.calltype == 1) {
-            this.shareMiniApp();
-        } else {
+        if (tywx.ado.isMinGanIP || this.calltype == 2) {
             this.showWXVideo();
+        } else if (this.calltype == 1) {
+            this.shareMiniApp();
         }
     },
 
@@ -159,20 +158,29 @@ cc.Class({
      */
     showWXVideo: function showWXVideo() {
         var self = this;
+        if (!this.hadclicknumber || this.hadclicknumber == 0) {
+            this.hadclicknumber = 1;
+        } else {
+            return;
+        }
         if (this.reactcall) {
             self.successCallBack(this);
+            self.hadclicknumber = 0;
         } else {
             if (tywx.IsWechatPlatform()) {
 
                 var param = {
                     success: function success(res) {
                         self.shareGroupCallBack && self.shareGroupCallBack(res);
+                        self.hadclicknumber = 0;
                     },
                     fail: function fail(res) {
                         tywx.ado.Utils.showWXModal('观看视频失败');
                         self.errorCallBack && self.errorCallBack(null);
+                        self.hadclicknumber = 0;
                     },
                     error_callback: function error_callback() {
+                        self.hadclicknumber = 0;
                         if (self.shareConfig === tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE_VIDEO || self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE_VIDEO) {
                             var content = self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE ? '免费复活机会' : '如意宝箱';
                             var end_str = self.shareConfig === tywx.ado.Constants.ShareConfig.RECOVER_GAME_SHARE ? '一次' : '一个';

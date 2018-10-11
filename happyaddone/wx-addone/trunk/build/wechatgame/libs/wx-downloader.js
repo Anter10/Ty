@@ -26,7 +26,7 @@
 var ID = 'WXDownloader';
 
 var non_text_format = [
-    'js','png','jpg','bmp','jpeg','gif','ico','tiff','webp','image','mp3','ogg','wav','m4a','font','eot','ttf','woff','svg','ttc'
+    'js','png','jpg','bmp','jpeg','gif','ico','tiff','webp','image','pvr','etc','mp3','ogg','wav','m4a','font','eot','ttf','woff','svg','ttc'
 ];
 
 const REGEX = /^\w+:\/\/.*/;
@@ -36,12 +36,14 @@ var isSubdomain = !wx.getFileSystemManager;
 
 var fs = isSubdomain ? {} : wx.getFileSystemManager();
 
+var _newAssets = [];
 var WXDownloader = window.WXDownloader = function () {
     this.id = ID;
     this.async = true;
     this.pipeline = null;
     this.REMOTE_SERVER_ROOT = '';
     this.SUBCONTEXT_ROOT = '';
+    _newAssets = [];
 };
 WXDownloader.ID = ID;
 
@@ -98,58 +100,80 @@ WXDownloader.prototype.handle = function (item, callback) {
 };
 
 WXDownloader.prototype.cleanOldAssets = function () {
-    fs.getSavedFileList({
-        success: function (res) {
-            var list = res.fileList;
-            if (list) {
-                for (var i = 0; i < list.length; i++) {
-                    var path = list[i].filePath;
-                    fs.unlink({
-                        filePath: list[i].filePath,
-                        success: function () {
-                            cc.log('Removed local file ' + path + ' successfully!');
-                        },
-                        fail: function (res) {
-                            cc.warn('Failed to remove file(' + path + '): ' + res ? res.errMsg : 'unknown error');
-                        }
-                    });
-                }
+    cleanAllFiles(wx.env.USER_DATA_PATH, _newAssets, function (err) {
+        if (err) {
+            cc.warn(err);
+        }
+        else {
+            for (var i = 0; i < _newAssets.length; ++i) {
+                cc.log('reserve local file: ' + _newAssets[i]);
             }
-        },
-        fail: function (res) {
-            cc.warn('Failed to list all saved files: ' + res ? res.errMsg : 'unknown error');
+            cc.log('Clean old Assets successfully!');
         }
     });
 };
 
-WXDownloader.prototype.cleanAllAssets = function () {
-    fs.getSavedFileList({
+function cleanAllFiles(path, newAssets, finish) {
+    fs.readdir({
+        dirPath: path,
         success: function (res) {
-            var list = res.fileList;
-            if (list) {
-                for (var i = 0; i < list.length; i++) {
-                    var path = list[i].filePath;
-                    fs.unlink({
-                        filePath: list[i].filePath,
-                        success: function () {
-                            cc.log('Removed local file ' + path + ' successfully!');
-                        },
-                        fail: function (res) {
-                            cc.warn('Failed to remove file(' + path + '): ' + res ? res.errMsg : 'unknown error');
+            var files = res.files;
+            (function next(idx) {
+                if (idx < files.length) {
+                    var dirPath = path + '/' + files[idx];
+                    var stat = fs.statSync(dirPath);
+                    if (stat.isDirectory()) {
+                        cleanAllFiles(dirPath, newAssets, function () {
+                            next(idx + 1);
+                        });
+                    }
+                    else {
+                        // remove old assets
+                        if (newAssets && newAssets.indexOf(dirPath) !== -1) {
+                            next(idx + 1);
+                            return;
                         }
-                    });
+                        fs.unlink({
+                            filePath: dirPath,
+                            success: function () {
+                                cc.log('unlink local file ' + dirPath + ' successfully!');
+                            },
+                            fail: function (res) {
+                                cc.warn('failed to unlink file(' + dirPath + '): ' + res ? res.errMsg : 'unknown error');
+                            },
+                            complete: function () {
+                                next(idx + 1);
+                            }
+                        });
+                    }
                 }
-            }
+                else {
+                    finish && finish();
+                }
+
+            })(0);
         },
         fail: function (res) {
-            cc.warn('Failed to list all saved files: ' + res ? res.errMsg : 'unknown error');
+            finish && finish();
+        },
+    });
+}
+
+WXDownloader.prototype.cleanAllAssets = function () {
+    _newAssets = [];
+    cleanAllFiles(wx.env.USER_DATA_PATH, null, function (err) {
+        if (err) {
+            cc.warn(err);
+        }
+        else {
+            cc.log('Clean all Assets successfully!');
         }
     });
 };
 
 var wxDownloader = window.wxDownloader = new WXDownloader();
 
-function nextPipe (item, callback) {
+function nextPipe(item, callback) {
     var queue = cc.LoadingItems.getQueue(item);
     queue.addListener(item.id, function (item) {
         if (item.error) {
@@ -191,10 +215,15 @@ function readText (item, callback) {
 
 function readFromLocal (item, callback) {
     var localPath = wx.env.USER_DATA_PATH + '/' + item.url;
+
     // Read from local file cache
     fs.access({
         path: localPath,
         success: function () {
+
+            // cache new asset
+            _newAssets.push(localPath);
+
             item.url = localPath;
             if (item.type && non_text_format.indexOf(item.type) !== -1) {
                 nextPipe(item, callback);

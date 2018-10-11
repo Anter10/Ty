@@ -4,6 +4,8 @@
 
 tywx.ShareInterface = {
     OnShareAppMessageInfo: null,   //右上角转发对应的分享点信息
+    ShareTimeStamp: 0,
+    IsWaitingCallback: false,
 
     /**
      * 设置右上角"转发"对应的分享信息
@@ -72,6 +74,7 @@ tywx.ShareInterface = {
             if (tywx.IsWechatPlatform()) {
                 tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeUserShare, [sharePointId, 1, shareSchemeId]);
                 let query = 'inviteCode=' + tywx.UserInfo.userId + '&sourceCode=' + sharePointId + "&inviteName=" + tywx.UserInfo.userName + "&imageType=" + shareSchemeId + "&extraInfo=" + (extraInfo ? extraInfo : ''); 
+                tywx.ShareInterface.ShareTimeStamp = Date.parse(new Date());
                 wx.shareAppMessage({
                     title: title,
                     imageUrl: imageUrl,
@@ -97,6 +100,69 @@ tywx.ShareInterface = {
         catch(err) {
             tywx.LOGE("error:", "tywx.ShareInterface.share——" + JSON.stringify(err));
         }
+    },
+
+    share2: function(title, imageUrl, sharePointId, shareSchemeId, successCallback, failCallback, extraInfo) {
+        try {
+            if (tywx.IsWechatPlatform()) {
+                tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeUserShare, [sharePointId, 1, shareSchemeId]);
+                let query = 'inviteCode=' + tywx.UserInfo.userId + '&sourceCode=' + sharePointId + "&inviteName=" + tywx.UserInfo.userName + "&imageType=" + shareSchemeId + "&extraInfo=" + (extraInfo ? extraInfo : ''); 
+                tywx.ShareInterface.ShareTimeStamp = new Date().getTime();
+                tywx.ShareInterface.IsWaitingCallback = true;
+                tywx.ShareInterface.CurrentShareParams = {
+                    title: title,
+                    imageUrl: imageUrl,
+                    sharePointId: sharePointId,
+                    shareSchemeId: shareSchemeId,
+                    successCallback: successCallback,
+                    failCallback: failCallback,
+                    extraInfo: extraInfo
+                };
+                wx.shareAppMessage({
+                    title: title,
+                    imageUrl: imageUrl,
+                    query: query,
+                    success: function (result) {
+                        console.log("share success");
+                        // //分享成功相关处理
+                        // if (successCallback) {
+                        //     successCallback(result);
+                        // }
+                        // tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeUserShare, [sharePointId, 2, shareSchemeId]);
+                    },
+                    fail: function (result) {
+                        console.log("share fail");
+                        //分享失败相关处理
+                        // if (failCallback) {
+                        //     failCallback(result);
+                        // }
+                    },
+                    complete: function () {
+                        console.log("share complete");
+                    }
+                });
+            }
+        }
+        catch(err) {
+            tywx.LOGE("error:", "tywx.ShareInterface.share——" + JSON.stringify(err));
+        }
+    },
+    shareBack: function(){
+        let time_stack = new Date().getTime();
+        let wait_time = time_stack - tywx.ShareInterface.ShareTimeStamp;
+        let shareParams = tywx.ShareInterface.CurrentShareParams;
+        let [min_time, max_time] = tywx.ado.Configs.ShareLimit || [500, 2000];
+        if(shareParams){
+            if(wait_time >= min_time && wait_time <= max_time){
+                shareParams.successCallback && shareParams.successCallback(null);
+                tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeUserShare, [shareParams.sharePointId, 2, shareParams.shareSchemeId]);
+           }
+           else{
+                shareParams.failCallback && shareParams.failCallback();   
+           }
+        }
+        tywx.ShareInterface.IsWaitingCallback = false;
+        tywx.ShareInterface.CurrentShareParams = null;
     }
 };
 

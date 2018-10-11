@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "redpackbottom",
+    "texture": "ed09eaa8-a1eb-4ac5-845f-ea1068ba5e2b",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      567,
+      752
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      567,
+      752
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

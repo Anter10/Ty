@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "miniaddone",
+    "texture": "f6713537-80f4-44da-95d1-68d5cd442e63",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      208,
+      208
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      208,
+      208
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

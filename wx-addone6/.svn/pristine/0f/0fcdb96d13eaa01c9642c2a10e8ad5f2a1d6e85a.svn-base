@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "luckitemmask",
+    "texture": "8064491c-5a1d-49e6-acaa-78b8a47afa38",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      162,
+      162
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      162,
+      162
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -3,7 +3,7 @@
     "miniprogramRoot": "./",
     "setting": {
         "urlCheck": true,
-        "es6": false,
+        "es6": true,
         "postcss": true,
         "minified": true,
         "newFeature": false
@@ -11,7 +11,7 @@
     "compileType": "game",
     "libVersion": "game",
     "appid": "wxd9dac6412c7dab7b",
-    "projectname": "adotrunk",
+    "projectname": "addone",
     "condition": {
         "search": {
             "current": -1,

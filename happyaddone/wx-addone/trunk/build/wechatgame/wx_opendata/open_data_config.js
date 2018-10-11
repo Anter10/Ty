@@ -4,12 +4,29 @@
  * @author: lu ning
  * @email: luning@tuyoogame.com
  * @date: 2018-08-24
-*/
+ */
 let events = {
-    LOAD_DATA: 'load_data'
+    LOAD_DATA: 'load_data',
+    // 得到微信好友的信息
+    friends: 1,
+    // 得到某个群的信息
+    group: 2,
+    // 得到玩家的基础信息
+    userinfo: 3,
+    // 提交当前的得分
+    submitscore: 4,
+    // 存储好友数据
+    storefris: 5,
+    // 隐藏UI
+    hideUi: 6,
+    // 游戏结束后的排行榜显示
+    overphb:7,
+    RENDER_INVITE_USRR_INFO: 'render_invite_usr_info'
 };
 
-let CloudDataKey = {};
+let CloudDataKey = {
+    x1:"ADDONE_SCORE2",
+};
 
 module.exports = {
     events,

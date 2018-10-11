@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "baoxinag8",
+    "texture": "2effaed6-4cb0-41da-a32d-ed472bda0790",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      188,
+      217
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      188,
+      217
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

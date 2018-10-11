@@ -12,11 +12,11 @@ tywx.ado.Utils = require('./models/Utils.js'); // * 工具类
 tywx.ado.AudioManager = require('./models/AudioManager.js'); // * 声音管理器
 tywx.ado.Constants = require('./models/Constants.js'); // * 常量
 tywx.ado.Events = require('./models/Events.js'); // * 事件
-
 tywx.ado.isFirstLogin = true; // * 是否是第一次进入菜单
 
 // 玩家当前的最大血量
 tywx.ado.hpvalue = 5;
+tywx.ado.isRequestedConfig = false; // ! 是否已经完成confgi请求
 
 tywx.ado.boot = function () {
     cc.log('tywx.ado.boot');
@@ -52,6 +52,8 @@ tywx.ado.InviteInfo = {
     reward: false,
     invite_users: []
 };
+// * 敏感ip
+tywx.ado.isMinGanIP = true; // 缺省为敏感ip
 // * 保存进度
 tywx.ado.saveProgress = function () {
     if (tywx.ado.game && tywx.ado.game.gamestate !== tywx.ado.Constants.GameCenterConfig.gameState.gameover) {
@@ -109,10 +111,14 @@ tywx.ado.onShow = function (result) {
     tywx.ado.AudioManager.playMusic(tywx.ado.Configs.MUSICS.BG_MUSIC);
     tywx.ado.logWithColor('tywx.ado.onShow');
     tywx.AdManager.init();
+    if (tywx.ShareInterface.IsWaitingCallback) {
+        tywx.ShareInterface.shareBack();
+    }
 };
 //! 插件onHide, 与插件相关的处理尽量放在这里
 tywx.ado.onHide = function () {
     tywx.ado.saveProgress();
+    console.log('tywx.ado.onHide');
 };
 
 cc.log('AddOne boot end');

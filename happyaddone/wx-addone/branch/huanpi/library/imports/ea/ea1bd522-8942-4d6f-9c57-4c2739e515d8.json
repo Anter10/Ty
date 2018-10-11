@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "hgpng",
+    "texture": "dd32414b-cb62-450b-8426-3535488d0459",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      78,
+      77
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      78,
+      77
+    ]
+  }
+}

@@ -1,8 +1,8 @@
 /**
  * Created by xiaochuntian on 2018/5/2.
  */
-tywx = {};
-
+window.tywx = {};
+tywx.isInWXChat = ("wechatgame"===cc.sys.browserType);
 //基础状态信息
 tywx.StateInfo = {
     networkConnected: true,   //网络状态
@@ -15,21 +15,23 @@ tywx.StateInfo = {
 tywx.SystemInfo = {
     clientId: 'H5_2.0_weixin.weixin.0-hall20122.weixin.huanljy',
     intClientId: 24347,
-    cloudId:34,
-    version:101,
+    cloudId:36,
+    version:1.62,
     webSocketUrl: 'ws://192.168.10.88/',
-    loginUrl : 'https://openwaxiaofz.nalrer.cn/',//'https://openelsfk.nalrer.cn/',
+    loginUrl : 'https://openelsfk.nalrer.cn/', // 线上
+    //loginUrl : 'https://openwaxiaofz.nalrer.cn/', // 仿真
     shareManagerUrl : 'https://market.touch4.me/',
     deviceId: 'wechatGame',
     wxAppId: 'wxd9dac6412c7dab7b', // wxd9dac6412c7dab7b
     appId: 9999,
     gameId: 20122,
     hall_version: "hall37",
-    cdnPath:"https://marketqn.nalrer.cn/teris/",
+    cdnPath:"https://elsfkws.nalrer.cn/teris/",
     remotePackPath:"remote_res/res.zip",
     biLogServer : "https://cbi.touch4.me/api/bilog5/text",
     biJsonLogServer : "https://cbi.touch4.me/api/bilog5/report",
     errorLogServer : "https://clienterr.touch4.me/api/bilog5/clientlog",
+    errorTxtServer : "https://clienterr.touch4.me/api/bilog5/text/error",
 };
 
 tywx.UserInfo = {
@@ -45,6 +47,7 @@ tywx.UserInfo = {
     scene_id : "",
     scene_param : "",
     invite_id : 0,
+    ip:0,
     wxgame_session_key: ""
 };
 

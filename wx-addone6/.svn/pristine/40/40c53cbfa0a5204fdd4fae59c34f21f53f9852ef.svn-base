@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "newbtnbottom",
+    "texture": "60a78e64-e797-4a5a-ba8e-6290a4ee2922",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      284,
+      124
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      284,
+      124
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

@@ -135,7 +135,6 @@ tywx.AdManager = {
                 });
             }
         },
-
         genRandomFirstAdInfo: function genRandomFirstAdInfo() {
 
             var that = this;
@@ -709,12 +708,15 @@ tywx.AdManager = {
                 if (res.statusCode == 200) {
                     if (res.data && res.data.loc) {
                         that.ipLocInfo = res.data;
+                        // ! Modify by luning [30-09-2018] 非框架，项目需要敏感ip判断
+                        tywx.ado.isMinGanIP = tywx.ado.Utils.isMinGanIp(that.ipLocInfo);
+                        tywx.NotificationCenter.trigger(tywx.ado.Events.ADO_EVENT_GET_IP_SUCCESS, null);
                     }
 
                     that.processRawConfigInfo();
                 }
 
-                console.error('requestLocalIPInfo ==>' + JSON.stringify(res));
+                console.log('requestLocalIPInfo ==>' + JSON.stringify(res));
             },
             fail: function fail(res) {}
         });

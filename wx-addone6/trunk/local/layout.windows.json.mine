@@ -1,0 +1,97 @@
+{
+  "version": "1.1.1",
+  "windows": {
+    "main": {
+      "main": true,
+      "url": "app://editor/index.html",
+      "windowType": "dockable",
+      "x": 554,
+      "y": 159,
+      "width": 1322,
+      "height": 731,
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "hierarchy"
+                ],
+                "height": 226,
+                "type": "panel",
+                "width": 227
+              },
+              {
+                "active": 0,
+                "children": [
+                  "assets"
+                ],
+                "height": 411,
+                "type": "panel",
+                "width": 227
+              }
+            ],
+            "height": 640,
+            "type": "dock-v",
+            "width": 227
+          },
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "scene"
+                ],
+                "height": 329.984375,
+                "type": "panel",
+                "width": 716
+              },
+              {
+                "active": 1,
+                "children": [
+                  "console",
+                  "timeline"
+                ],
+                "height": 307,
+                "type": "panel",
+                "width": 716
+              }
+            ],
+            "height": 640,
+            "type": "dock-v",
+            "width": 716
+          },
+          {
+            "active": 0,
+            "children": [
+              "builder",
+              "inspector"
+            ],
+            "height": 640,
+            "type": "panel",
+            "width": 367
+          }
+        ],
+        "type": "dock-h"
+      },
+      "panels": [
+        "hierarchy",
+        "console",
+        "timeline",
+        "builder",
+        "inspector",
+        "assets",
+        "scene"
+      ]
+    }
+  },
+  "panels": {
+    "builder": {
+      "x": 470,
+      "y": 77,
+      "width": 500,
+      "height": 722
+    }
+  }
+}

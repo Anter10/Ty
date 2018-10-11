@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "red_packet_transfer_btn",
+    "texture": "ffec2c30-38d8-4c04-adec-a8b733fa056c",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      116,
+      121
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      116,
+      121
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

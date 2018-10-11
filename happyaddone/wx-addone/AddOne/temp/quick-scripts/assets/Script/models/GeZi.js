@@ -41,15 +41,55 @@ module.exports = function (id, parent) {
         思路: 逻辑需要
     */
     this.setnum = function (num) {
-        config = tywx.config != null ? tywx.config : config;
-        this.num = num;
-        var colorindex = num - 1;
-        if (this.num > tywx.ado.Constants.GameCenterConfig.color_list.length) {
-            colorindex = colorindex % tywx.ado.Constants.GameCenterConfig.color_list.length;
+        if (num) {
+            if (num % 2 == 0 && num > 7 && !this.hasout) {
+                if (this.block) {
+                    // this.block.printMSG();
+                    //   console.log(this.id + " cell gz num  = " + num + " " + tywx.gamecenter.hasShowxhgNum(num));
+                    if (this.block.id_keep == -1 && this.block.id_dest == -1) {
+                        if (tywx.gamecenter.hasShowxhgNum(num) == false) {
+                            tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").showThanTenIcon();
+                            tywx.gamecenter.addxhgNumber(num, this.id);
+                        } else {
+                            tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").hideThanTenIcon();
+                            //  tywx.gamecenter.removexhgNumber(num);
+                        }
+                    } else if (this.block.id_keep != -1 && this.block.id_dest != -1) {
+                        // console.log(JSON.stringify(tywx.gamecenter.curshowxhgs) + "keep ahd = " + tywx.gamecenter.hasShowxhgId(this.block.id_keep));
+                        if (tywx.gamecenter.hasShowxhgId(this.block.id_keep) == true) {
+                            tywx.gamecenter.allpngs[this.block.id_dest] && tywx.gamecenter.allpngs[this.block.id_dest].getComponent("celltile").showThanTenIcon();
+                            tywx.gamecenter.addxhgNumber(num, this.block.id_dest);
+                        }
+                        tywx.gamecenter.removexhgId(this.block.id_keep);
+                        tywx.gamecenter.allpngs[this.block.id_keep] && tywx.gamecenter.allpngs[this.block.id_keep].getComponent("celltile").hideThanTenIcon();
+                    } else if (this.block.id_keep != -1 && this.block.id_dest == -1) {
+                        if (tywx.gamecenter.hasShowxhgNum(num) == false) {
+                            tywx.gamecenter.addxhgNumber(num, this.block.id_keep);
+                            tywx.gamecenter.allpngs[this.block.id_keep] && tywx.gamecenter.allpngs[this.block.id_keep].getComponent("celltile").showThanTenIcon();
+                        }
+                    }
+                }
+            } else {
+                if (this.block) {
+                    if (num > 8) {
+                        if (tywx.gamecenter.hasShowxhgId(this.block.id_keep) == true) {
+                            tywx.gamecenter.removexhgId(this.block.id_keep);
+                            tywx.gamecenter.allpngs[this.block.id_keep] && tywx.gamecenter.allpngs[this.block.id_keep].getComponent("celltile").hideThanTenIcon();
+                        }
+                    }
+                    tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").hideThanTenIcon();
+                }
+            }
+            config = tywx.config != null ? tywx.config : config;
+            this.num = num;
+            var colorindex = num - 1;
+            if (this.num > tywx.ado.Constants.GameCenterConfig.color_list.length) {
+                colorindex = colorindex % tywx.ado.Constants.GameCenterConfig.color_list.length;
+            }
+            var colors = tywx.ado.Constants.GameCenterConfig.color_list[colorindex];
+            var color = cc.color(colors[0], colors[1], colors[2]);
+            this.setColor(color);
         }
-        var colors = tywx.ado.Constants.GameCenterConfig.color_list[colorindex];
-        var color = cc.color(colors[0], colors[1], colors[2]);
-        this.setColor(color);
     };
 
     /*
@@ -114,16 +154,16 @@ module.exports = function (id, parent) {
     };
 
     /*
-           调用: gamemain中调用
-           功能: 更新自身block的数据
-           参数: [
-               无
-           ]
-           返回值:[
-               无
-           ]
-           思路: 逻辑需要
-    */
+               调用: gamemain中调用
+               功能: 更新自身block的数据
+               参数: [
+                   无
+               ]
+               返回值:[
+                   无
+               ]
+               思路: 逻辑需要
+       */
     this.settoblockAndNumber = function (num) {
         if (this.block.posx != this.posx && this.block.posy != this.block.posy) {
             this.block.setinfo(this.color, num);
