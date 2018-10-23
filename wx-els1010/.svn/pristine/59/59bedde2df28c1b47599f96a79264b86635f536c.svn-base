@@ -1,0 +1,86 @@
+ const lotery_get_view_path = "prefabs/lottery_get_view";
+
+ const lottery_get_view = cc.Class({
+     extends: cc.Component,
+
+     properties: {
+         nameLabel: cc.Label,
+         icon: cc.Sprite,
+         mfjbBtnNode: cc.Node,
+     },
+
+
+     close: function () {
+         lottery_get_view.get_view_node.removeFromParent(true);
+         lottery_get_view.get_view_node = null;
+     },
+
+
+     // 加倍领取奖励
+     addDoubleJL: function () {
+         console.log("加倍奖励哦");
+     },
+
+     onLoad() {
+         // 视频抽奖
+         const videoBtnScript = this.mfjbBtnNode.getComponent("ShareButton");
+         videoBtnScript.setButtonCallType(1);
+         videoBtnScript.setShareConfig(tywx.tt.constants.ShareConfig.HOME_ZP_GET_VIDEO);
+         videoBtnScript.setSuccessCall(function () {
+             self.addDoubleJL();
+         });
+     },
+
+     start() {
+
+     },
+
+     setData: function (data) {
+         this.data = data;
+         console.log("this = data = "+JSON.stringify(this.data));
+         this.flushNameLabel();
+         this.flushIconLabel();
+     },
+
+     flushNameLabel: function () {
+         this.nameLabel.string = this.data.name;
+     },
+
+     flushIconLabel: function () {
+         var self = this;
+         cc.loader.load(
+             'https://elsfkws.nalrer.cn/teris/lottery/' + this.data.icon,
+             (err, texture) => {
+                 if (!err) {
+                     let new_sprite_frame = new cc.SpriteFrame(texture);
+                     self.icon.spriteFrame = new_sprite_frame;
+                     self.icon.node.setContentSize(cc.size(90, 90));
+                 } else {
+
+                 }
+             });
+     },
+
+     statics: {
+         get_view_node: null,
+         show: function (tdata) {
+             const data = tdata;
+             cc.loader.loadRes(lotery_get_view_path, (err, prefab) => {
+                 if (!err) {
+                     let getlotterynode = cc.instantiate(prefab);
+                     let ads_script = getlotterynode.getComponent('lottery_get_view');
+                     getlotterynode.x = 360;
+                     getlotterynode.y = 640;
+                     ads_script.setData(data);
+                     lottery_get_view.get_view_node = getlotterynode;
+                     cc.director.getScene().addChild(getlotterynode);
+                 }
+             });
+         }
+     }
+
+     // update (dt) {},
+ });
+
+
+ module.exports = lottery_get_view;

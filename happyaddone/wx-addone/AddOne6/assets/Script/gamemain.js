@@ -541,7 +541,6 @@ var gamemain = cc.Class({
                 this.allpngs[mai].getComponent("celltile").setCurNum(this.getAllmask()[mai].num);
                 this.allpngs[mai].getComponent("celltile").showHG();
             }
-
         }
     },
 

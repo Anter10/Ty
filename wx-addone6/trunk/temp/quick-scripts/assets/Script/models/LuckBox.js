@@ -123,10 +123,16 @@ cc.Class({
         }
         mflq.setSuccessCall(function () {
             tywx.gamecenter.giveItems(false, self.produceItem());
+            tywx.gamecenter.ryBoxBtn.active = false;
+            tywx.gamecenter.sharedelaytime = new Date().getTime();
+
             self.close();
         });
         mflq.setShareGroupCall(function () {
             tywx.gamecenter.giveItems(false, self.produceItem());
+            tywx.gamecenter.ryBoxBtn.active = false;
+            tywx.gamecenter.sharedelaytime = new Date().getTime();
+
             self.close();
         });
         this.init();
@@ -145,19 +151,23 @@ cc.Class({
                 itemsceipt.unselected();
             }
         }
-        if ((tywx.config.share_control.ruyibox == "video" || tywx.ado.isMinGanIP) && tywx.ado.isCanWatchVideo) {
-            this.hideLabel.string = "视频领取";
-            this.showLabel.string = "视频领取";
-            this.node.getChildByName("luckboxroot").getChildByName("checkbox").getComponent("cc.Toggle").uncheck();
-            this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE_VIDEO);
-            this.mflqBtn.getComponent("ShareButton").setButtonCallType(2);
-        } else if (tywx.config.share_control.ruyibox == "share" || !tywx.ado.isCanWatchVideo) {
-            this.hideLabel.string = "免费领取";
-            this.showLabel.string = "免费领取";
-            this.node.getChildByName("luckboxroot").getChildByName("checkbox").getComponent("cc.Toggle").check();
-            this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_SHARE_BOX_SHARE);
-            this.mflqBtn.getComponent("ShareButton").setButtonCallType(1);
+        var share_control = tywx.config.share_control_2.ruyibox;
+        var random = parseInt(Math.random() * 100);
+
+        if ((share_control[0] == "video" || tywx.ado.isMinGanIP) && tywx.ado.isCanWatchVideo) {
+            if (random <= share_control[1] || tywx.ado.isMinGanIP) {
+                this.videoGet();
+            } else {
+                this.shareGet();
+            }
+        } else if (share_control[0] == "share" || !tywx.ado.isCanWatchVideo) {
+            if (random <= share_control[1]) {
+                this.shareGet();
+            } else {
+                this.videoGet();
+            }
         }
+
         if (tywx.ado.isMinGanIP || !tywx.ado.isCanWatchVideo) {
             this.needHelpNode.active = false;
         } else {
@@ -165,6 +175,21 @@ cc.Class({
         }
     },
 
+    shareGet: function shareGet() {
+        this.hideLabel.string = "免费领取";
+        this.showLabel.string = "免费领取";
+        this.node.getChildByName("luckboxroot").getChildByName("checkbox").getComponent("cc.Toggle").check();
+        this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_SHARE_BOX_SHARE);
+        this.mflqBtn.getComponent("ShareButton").setButtonCallType(1);
+    },
+
+    videoGet: function videoGet() {
+        this.hideLabel.string = "视频领取";
+        this.showLabel.string = "视频领取";
+        this.node.getChildByName("luckboxroot").getChildByName("checkbox").getComponent("cc.Toggle").uncheck();
+        this.mflqBtn.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.GIFT_GIFT_BOX_SHARE_VIDEO);
+        this.mflqBtn.getComponent("ShareButton").setButtonCallType(2);
+    },
     /**
      * @description 点击道具回调
      */

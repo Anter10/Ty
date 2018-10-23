@@ -16,7 +16,7 @@ tywx.SystemInfo = {
    clientId       : 'H5_2.0_weixin.weixin.0-hall20187.weixin.jiay666',
    intClientId    : 24623,
    cloudId        : 36,
-   version        : 1.01,
+   version        : 1.03,
    webSocketUrl   : 'ws://192.168.10.88/',
    loginUrl       : 'https://openelsfk.nalrer.cn/',                        // 线上
    //loginUrl       : 'http://openelsfkfz.nalrer.cn/',                       // 仿真

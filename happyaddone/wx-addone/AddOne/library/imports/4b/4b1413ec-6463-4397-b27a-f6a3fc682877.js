@@ -1037,6 +1037,7 @@ var Utils = function () {
                                 console.log('invite requestInviteGetInfo success');
                                 tywx.ado.InviteInfo = res.data;
                                 params.success && params.success();
+                                if (tywx.ado.InviteInfo.reward) tywx.ado.hpvalue = 6;
                             }
                         } else {
                             // * 未知错误
@@ -1086,8 +1087,9 @@ var Utils = function () {
                                 tywx.ado.Utils.uploadErrorMsg('invite;requestInviteReward==success--error-0;' + JSON.stringify(res));
                             } else {
                                 console.log('invite requestInviteReward success');
-                                tywx.ado.Utils.InviteInfo.reward = true;
+                                tywx.ado.InviteInfo.reward = true;
                                 tywx.ado.hpvalue = 6;
+                                tywx.ado.Utils.showWXModal("领取成功", '提示', false);
                             }
                         } else {
                             // * 未知错误

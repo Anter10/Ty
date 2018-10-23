@@ -1,0 +1,151 @@
+/**
+ * @file: AudioManager.js
+ * @description: 声音管理器
+ * @author: lu ning
+ * @email: luning@tuyoogame.com
+ * @date: 2018-08-22
+*/
+let _instance = null;  //! 单例，私有
+let LOCAL_MUTE_KEY = 'ado_mute';
+let AudioManager = class{
+
+    /**
+     * @description
+     * @author lu ning
+     * @date 2018-08-22
+     * @static
+     * @returns
+     */
+    static getInstance(){
+        if(!_instance) _instance = new AudioManager();
+        return _instance;
+    }
+    constructor(){
+        this.bgMusicContext = null;
+        this.isMute = false; //* 是否静音
+        this.bgMusicCache = new Map();
+        this.soundsCache = new Map();
+
+        
+    }
+    /**
+     * @description 资源预加载
+     * @author lu ning
+     * @date 2018-08-23
+     */
+    loadAudioRes(){
+        let sounds_config = tywx.ado.Constants.GameCenterConfig.SOUNDS;
+        let music_config = tywx.ado.Configs.MUSICS;
+        let sound_keys = Reflect.ownKeys(sounds_config);
+        let music_keys = Reflect.ownKeys(music_config);
+        let self = this;
+        sound_keys.forEach(sound_key=>{
+            if(!self.soundsCache.has(sounds_config[sound_key])){
+                self.addSound2CacheByUrl(sounds_config[sound_key]);
+            }
+        });
+        music_keys.forEach(music_key=>{
+            if(!self.bgMusicCache.has(music_config[music_key])){
+                self.addMusic2CacheByUrl(music_config[music_key]);
+            }
+        });
+    }
+    /**
+     * @description 根据url添加声音资源到缓存池
+     * @author lu ning
+     * @date 2018-08-23
+     * @param {String} url 路径
+     * @param {boolean} [is_play=false] 是否播放
+     */
+    addSound2CacheByUrl(url, is_play = false){
+        try{
+            let tmp_sound_context = wx.createInnerAudioContext();
+            tmp_sound_context.src = url;
+            tmp_sound_context.autoPlay = false;
+            tmp_sound_context.loop = false;
+            tmp_sound_context.volume = 1.0;
+            this.soundsCache.set(url,tmp_sound_context);
+            is_play && tmp_sound_context.play();
+        }catch(e){
+            cc.error(`addSound2CacheByUrl error ${url}`);
+        }
+    }
+    /**
+     * @description 添加背景音乐到缓存池
+     * @author lu ning
+     * @date 2018-08-23
+     * @param {String} url 路径
+     * @param {boolean} [is_play=false] 是否播放
+     */
+    addMusic2CacheByUrl(url, is_play = false){
+        try{
+            let tmp_music_context = wx.createInnerAudioContext();
+            tmp_music_context.src = url;
+            tmp_music_context.autoPlay = false;
+            tmp_music_context.loop = true; //* 所有的背景音乐都默认循环
+            tmp_music_context.volume = 1.0;
+            this.bgMusicCache.set(url, tmp_music_context);
+            if(is_play){
+                tmp_music_context.play();
+                this.bgMusicContext = tmp_music_context;
+            }
+        }
+        catch(e){
+            cc.error(`addMusic2CacheByUrl error ${url}`);
+        }
+    }
+    /**
+     * * 播放背景音乐 
+     *
+     * @param {String} url 背景音乐url
+     * @param {boolean} [loop=true] 是否循环 废弃
+     * @param {number} [valume=1.0] 音量 废弃
+     */
+    playMusic(url, loop = true, volume = 1.0){
+        this.stopMusic();
+        this.isMute = tywx.tt.Utils.loadItem(LOCAL_MUTE_KEY, false);
+        if(this.isMute) return; //! 静音
+        if(this.bgMusicCache.has(url)){
+            this.bgMusicContext = this.bgMusicCache.get(url);
+            this.bgMusicContext.play();
+        }
+        else{
+            this.addMusic2CacheByUrl(url, true);
+        }
+    }
+    /**
+     * @description 播放声效
+     * @author lu ning
+     * @date 2018-08-23
+     * @param {String} url
+     */
+    playSound(url){
+        this.isMute = tywx.tt.Utils.loadItem(LOCAL_MUTE_KEY, false);
+        if (this.isMute) return; //! 静音
+        if(this.soundsCache.has(url)){
+            let tmp_context = this.soundsCache.get(url);
+            tmp_context.play();
+        }
+        else{
+            this.addSound2CacheByUrl(url, true);
+        }
+    }
+    /**
+     * * 停止播放背景音乐
+     *
+     */
+    stopMusic(){
+        if(this.bgMusicContext){
+            this.bgMusicContext.stop();
+        }
+        this.bgMusicContext = null;
+    }
+    setIsMute(is_mute){
+        this.isMute = is_mute;
+        tywx.tt.Utils.saveItem(LOCAL_MUTE_KEY,this.isMute,false);
+    }
+    getIsMute(){ return this.isMute;}
+
+};
+
+module.exports = AudioManager.getInstance();

@@ -1,0 +1,702 @@
+let TAG = '[tt_view_play_board]';
+let Board = require('../model/tt_model_board.js');
+let friend = require('../rank/friend.js');
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        prefabBlock: cc.Prefab,
+        prefabPreview: cc.Prefab,
+        labelScore: cc.Label,
+        czNumberLabel: cc.Label,
+        repNumberLabel: cc.Label,
+        friendnode: cc.Node,
+        maxScoreLabel: cc.Label,
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad() {
+        this.node.width = cc.game.canvas.width;
+        this.node.height = cc.game.canvas.height;
+        this.root = this.node.getChildByName('root');
+        this.root.width = cc.game.canvas.width;
+        this.root.height = cc.game.canvas.height;
+        this.hammerTouch = this.node.getChildByName('hammer_touch');
+        this.hammerTouch.active = false;
+        this.hammerIcon = this.hammerTouch.getChildByName('hammer_icon');
+        this.hammerIcon.active = false;
+        this.board = new Board();
+        this.previews = [];
+        this.previewsPos = [];
+        this.touchIdx = -1;
+        this.touchHeight = 240;
+        this.isTouchLocked = false; // *  点击是否被锁住
+        this.isUsingHammer = false; // * 是否在使用 锤子道具
+        this.board.reset();
+        tywx.tt.BoardView = this;
+        tywx.tt.Board = this.board;
+        friend.addIcon(this.friendnode, this.score);
+
+        this.initLayout();
+        this.initBoardView();
+        this.initPreviewBlocks();
+        this.initTouch();
+        this.initHammerTouch();
+        this.initChuiZiAndRepeate();
+        this.onRefreshScore();
+
+        this.storescorevalue = tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0);
+        this.flushMaxScore();
+        // this.addCZCallBack(1);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_FILL_BOARD, this.onFillBoard, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_RESET_PREVIEWS, this.onResetPreviews, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_CLEAR_ROW, this.onClearRow, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_REFRESH_SCORE, this.onRefreshScore, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_CLEAR_HAMMER, this.onClearHammer, this);
+    },
+
+    /**
+     * @description 刷新最高分
+     */
+    flushMaxScore: function () {
+        if (parseInt(this.storescorevalue) < this.board.score) {
+            this.maxScoreLabel.string = "历史最佳:"+this.board.score;
+        } else {
+            this.maxScoreLabel.string = "历史最佳:" + this.storescorevalue;
+        }
+    },
+
+    start() {
+
+    },
+    onDestroy() {
+        tywx.NotificationCenter.ignoreScope(this);
+    },
+
+    // update (dt) {},
+    initLayout() {
+        this.layout = this.root.getChildByName('layout');
+        this.nodeTop = this.layout.getChildByName('node_top');
+        this.nodeBoard = this.layout.getChildByName('node_board');
+        this.nodeBoardBottom = this.layout.getChildByName('node_board_bottom');
+        this.nodeBottom = this.layout.getChildByName('node_bottom');
+    },
+
+
+
+    initBoardView() {
+        // * init board view
+        let [w, h] = [tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth];
+        let c_s = tywx.tt.constants.BlockSize;
+        let size = this.root.getBoundingBox();
+        // let block_scale = size.width / 720;
+        // c_s.width = c_s.width * block_scale;
+        // c_s.height = c_s.height * block_scale;
+
+        let scalebl = 720 / this.root.width;
+        let theight = 1280 / this.root.height;
+        let ttheight = theight / 2;
+        let padding_left = (this.root.width * scalebl - w * c_s.width) / 2;
+        var bpos = this.nodeBoard.position;
+        let padding_bottom = bpos.y; //size.height * 0.35; //(size.height - h * c_s.height) / 2;
+        // new cc.Node().
+
+        let tpos = this.root.getChildByName("layout").convertToWorldSpaceAR(bpos)
+
+        let [cw, ch] = [cc.game.canvas.width, cc.game.canvas.height];
+        let is_ipx = ch / cw >= 1.9; // *
+        if (is_ipx) {
+            padding_bottom = tpos.y - 195 - this.nodeBoard.height / 2;
+        }
+
+        // tywx.tt.log(TAG, `initBaordView==${w},${h},${c_s},${size},${padding_left},${padding_bottom}`);
+        this.blockViews = [];
+
+        let [x, y] = [0, 0];
+        let [lb_x, lb_y, rt_x, rt_y] = [0, 0, 0, 0];
+        let idx = true;
+        for (let i = 0; i < h; ++i) {
+            y = padding_bottom + i * c_s.height;
+            this.blockViews[i] = [];
+            idx = i % 2 === 0 ? true : false;
+            for (let j = 0; j < w; ++j) {
+                x = padding_left + j * c_s.width;
+                let tmp_block = cc.instantiate(this.prefabBlock);
+                tmp_block.parent = this.root;
+                tmp_block.getComponent('tt_view_block').setStat(-2);
+                tmp_block.getComponent('tt_view_block').setBgColor(idx ? cc.color('#092D41') : cc.color('#FFFFFF'));
+                idx = !idx;
+                tmp_block.position = cc.v2(x, y);
+                this.blockViews[i][j] = tmp_block;
+                lb_x = x <= lb_x ? x : lb_x;
+                rt_x = x >= rt_x ? x : rt_x;
+            }
+            lb_y = y <= lb_y ? y : lb_y;
+            rt_y = y >= rt_y ? y : rt_y;
+        }
+        this.lbPos = cc.v2(lb_x, lb_y);
+        this.rtPos = cc.v2(rt_x + c_s.width, rt_y + c_s.height);
+    },
+    initPreviewBlocks() {
+        this.previews = [];
+        let self = this;
+        let [x, y] = [0, this.nodeBoardBottom.y];
+        var bpos = this.nodeBoardBottom.getChildByName("root").position;
+        var padding_bottom = bpos.y; //size.height * 0.35; //(size.height - h * c_s.height) / 2;
+        let tpos = this.root.getChildByName("layout").convertToWorldSpaceAR(bpos)
+        let [cw, ch] = [cc.game.canvas.width, cc.game.canvas.height];
+        let is_ipx = ch / cw >= 1.9; // *
+
+        if (is_ipx) {
+            padding_bottom = tpos.y - 257 + 45;
+        }else{
+            padding_bottom += this.nodeBoardBottom.height + 90;
+        }
+
+        console.log(is_ipx + tpos + "theight = " + "bpos = " + bpos + "padding_bottom position = " + padding_bottom);
+
+        
+
+        let previewConfigs = this.board.getPreviewConfigs();
+        for (let i = 0; i < previewConfigs.length; i++) {
+            let tmp_preview = cc.instantiate(this.prefabPreview);
+            tmp_preview.parent = this.root;
+            tmp_preview.getComponent('tt_view_priview_blocks').init(previewConfigs[i]);
+            self.previews.push(tmp_preview);
+            x = (i + 1) * 144 + 144 / 2;
+            tmp_preview.position = cc.v2(x, padding_bottom);
+            this.previewsPos.push(cc.v2(x, padding_bottom));
+        }
+    },
+    initTouch() {
+        let self = this;
+        this.root.on(cc.Node.EventType.TOUCH_START, event => {
+            if (self.isTouchLocked) return;
+            tywx.tt.log(TAG, 'touch start');
+            let pos = event.getLocation();
+            self.pretouchpos = pos;
+            self.touchIdx = -1;
+            for (let i = 0; i < self.previews.length; i++) {
+                let preview = self.previews[i];
+                let [x, y] = [preview.x, preview.y];
+                let [w, h] = [130, 130]; //[preview.width,preview.height];
+                let [lb_x, lb_y] = [x - w / 2, y - h / 2];
+                let [rt_x, rt_y] = [x + w / 2, y + h / 2];
+                if (pos.x >= lb_x && pos.x <= rt_x && pos.y >= lb_y && pos.y <= rt_y) {
+                    self.touchIdx = i;
+                    preview.position = cc.v2(pos.x, pos.y);
+                    preview.getComponent('tt_view_priview_blocks').touch();
+                    tywx.tt.log(TAG, `x[${lb_x},${pos.x},${rt_x}],y[${lb_y},${pos.y},${rt_y}]`);
+                }
+            }
+        });
+        this.root.on(cc.Node.EventType.TOUCH_MOVE, event => {
+            if (self.isTouchLocked) return;
+            let pos = event.getLocation();
+            if (Math.abs(self.pretouchpos.x - pos.x) < 10 && Math.abs(self.pretouchpos.y - pos.y) < 10) {
+                return;
+            }
+            if (self.touchIdx !== -1 && self.touchIdx < self.previews.length) {
+                let preview = self.previews[self.touchIdx];
+                preview.position = cc.v2(pos.x, pos.y + this.touchHeight);
+                self.refreshShadowFrame();
+            }
+        });
+        this.root.on(cc.Node.EventType.TOUCH_END, event => {
+            if (self.isTouchLocked) return;
+            tywx.tt.log(TAG, 'touch end');
+
+            let pos = event.getLocation();
+
+
+            if (self.touchIdx !== -1 && self.touchIdx < self.previews.length) {
+                let is_put_success = false;
+                if (pos.x >= self.lbPos.x &&
+                    pos.x <= self.rtPos.x &&
+                    pos.y + this.touchHeight >= self.lbPos.y &&
+                    pos.y + this.touchHeight <= self.rtPos.y) {
+                    is_put_success = true;
+                }
+                let preview = self.previews[self.touchIdx];
+
+                preview.position = self.previewsPos[self.touchIdx];
+                let preview_sc = preview.getComponent('tt_view_priview_blocks');
+                if (Math.abs(self.pretouchpos.x - pos.x) < 10 && Math.abs(self.pretouchpos.y - pos.y) < 10) {
+                    preview_sc.touchCancle();
+                    return;
+                }
+                if (is_put_success) {
+                    let config = preview_sc.config;
+                    if (self.fillBoard(cc.v2(pos.x, pos.y + this.touchHeight), config)) {
+                        preview_sc.put();
+                        self.board.resetPreviews();
+                        self.board.checkClear();
+                    } else {
+                        preview_sc.touchCancle();
+                        self.changePreviewSameTypeByConfig(preview_sc);
+                    }
+                } else {
+                    preview_sc.touchCancle();
+                    console.log("getConfig2 = " + preview_sc.getConfig())
+                }
+            }
+            self.hideAllBlockFrames();
+            self.touchIdx = -1;
+        });
+    },
+
+    initHammerTouch() {
+        let self = this;
+        this.hammerTouch.on(cc.Node.EventType.TOUCH_START, event => {
+            self.hammerIcon.active = true;
+            let pos = event.getLocation();
+            self.showHammerSelectFrameByPosition(pos);
+        });
+        this.hammerTouch.on(cc.Node.EventType.TOUCH_MOVE, event => {
+            let pos = event.getLocation();
+            self.showHammerSelectFrameByPosition(pos);
+        });
+        this.hammerTouch.on(cc.Node.EventType.TOUCH_END, event => {
+            let pos = event.getLocation();
+            self.hammerTouch.active = false;
+            self.hammerIcon.active = false;
+            self.useHammerByPosition(pos);
+            self.hideAllBlockMask();
+        });
+    },
+    refreshShadowFrame() {
+        if (this.touchIdx < 0 || this.touchIdx >= this.previews.length) {
+            // tywx.tt.warn(TAG, `wrong touch index when call refreshShadowFrame , touchIdx=${this.touchIdx}`);
+            return;
+        }
+        //tywx.tt.log(TAG,`refreshShadowFrame touchIdx=${this.touchIdx}`);
+        let select_preview = this.previews[this.touchIdx];
+        let select_pos = select_preview.position;
+        let select_config = select_preview.getComponent('tt_view_priview_blocks').getConfig();
+        let [c_r, c_c] = [-1, -1];
+        let [m_r, m_c] = [tywx.tt.constants.BoardHeight, tywx.tt.constants.BoardWidth];
+
+        let row = this.blockViews.length;
+        for (let r = 0; r < row; ++r) {
+            let col = this.blockViews[r].length;
+            for (let c = 0; c < col; ++c) {
+                let tmp_block_view = this.blockViews[r][c];
+                let tmp_block_sc = tmp_block_view.getComponent('tt_view_block');
+                let [x, y, w, h] = [tmp_block_view.x, tmp_block_view.y, tmp_block_view.width, tmp_block_view.height];
+                let [lb_x, lb_y, rt_x, rt_y] = [x, y, x + w, y + h];
+                if (select_pos.x >= lb_x &&
+                    select_pos.x <= rt_x &&
+                    select_pos.y >= lb_y &&
+                    select_pos.y <= rt_y) {
+                    [c_r, c_c] = [r, c];
+                    tmp_block_sc.setStat(-1);
+                } else {
+                    tmp_block_sc.setStat(-2);
+                }
+            }
+        }
+
+        if (c_r !== -1 && c_c !== -1) {
+            let BlockMap = tywx.tt.constants.BlockMap;
+            let debug_infos = [];
+            for (let r = 0; r < select_config.length; ++r) {
+                let line = select_config[r];
+                for (let c = 0; c < line.length; ++c) {
+                    let dis = BlockMap[r][c];
+                    if (select_config[r][c] !== 0) {
+                        let [b_r, b_c] = [c_r + dis[1], c_c + dis[0]];
+                        if (b_r >= 0 && b_r < m_r &&
+                            b_c >= 0 && b_c < m_c) {
+                            let tmp_block_view = this.blockViews[b_r][b_c];
+                            let tmp_block_sc = tmp_block_view.getComponent('tt_view_block');
+                            tmp_block_sc.setStat(-1);
+                            debug_infos.push(`{c=${b_c},r=${b_r}}`);
+                        }
+                    }
+                }
+            }
+            if (debug_infos.length < 4) {
+                tywx.tt.warn(TAG, `{cr=${c_r},cc=${c_c}}`, [...debug_infos]);
+            }
+        }
+    },
+    fillBoard(pos, config) {
+        let ret = false;
+        let view_data = this.getBlockViewByPosition(pos);
+        // console.log("viewData = " + view_data.centerRow, view_data.centerCol);
+        if (view_data.blockView) {
+            if (this.board.isCanFill(view_data.centerRow, view_data.centerCol, config)) {
+                ret = true;
+                this.board.fillBaordByConfig(view_data.centerRow, view_data.centerCol, config, this.touchIdx);
+
+                console.log("this.bord = " + JSON.stringify(this.board.board));
+            } else {
+                ret = false;
+            }
+        }
+        return ret;
+    },
+    /**
+     * @description
+     * @author lu ning
+     * @date 2018-10-09
+     * @param {cc.Vec2} pos 指定坐标
+     * @returns {Object} ret 
+     *    ret.blockView
+     *    ret.centerRow
+     *    ret.centerCol
+     */
+    getBlockViewByPosition(pos) {
+        let ret = null;
+        let [m_r, m_c] = [tywx.tt.constants.BoardHeight, tywx.tt.constants.BoardWidth];
+        let [c_r, c_c] = [-1, -1];
+        let block_view = null;
+        for (let r = 0; r < m_r; ++r) {
+            for (let c = 0; c < m_c; ++c) {
+                let tmp_block_view = this.blockViews[r][c];
+                let [x, y, w, h] = [tmp_block_view.x, tmp_block_view.y, tmp_block_view.width, tmp_block_view.height];
+                let [lb_x, lb_y, rt_x, rt_y] = [x, y, x + w, y + h];
+                if (pos.x >= lb_x &&
+                    pos.x <= rt_x &&
+                    pos.y >= lb_y &&
+                    pos.y <= rt_y) {
+                    [c_r, c_c] = [r, c];
+                    block_view = tmp_block_view;
+                    break;
+                }
+            }
+        }
+        ret = {
+            blockView: block_view,
+            centerRow: c_r,
+            centerCol: c_c
+        };
+        return ret;
+    },
+    onFillBoard(params) {
+        tywx.tt.log(TAG, 'onFillBoard' + JSON.stringify(params));
+        let self = this;
+        params.forEach(e => {
+            let tmp_block_view = self.blockViews[e[0]][e[1]];
+            let tmp_block_sc = tmp_block_view.getComponent('tt_view_block');
+            tmp_block_sc.setStat(e[2]);
+        });
+    },
+    onResetPreviews() {
+        let previewConfigs = this.board.getPreviewConfigs();
+        tywx.tt.log(TAG, 'onResetPreviews==>' + previewConfigs.length);
+        for (let i = 0; i < previewConfigs.length; i++) {
+            let config = previewConfigs[i];
+            let view = this.previews[i];
+            tywx.tt.log(TAG, 'onResetPreviews==>' + i);
+            view.getComponent('tt_view_priview_blocks').resetByConfig(config);
+        }
+    },
+    onClearRow() {
+        let clear_rows = this.board.clearRows;
+        let clear_cols = this.board.clearCols;
+        let clear_blocks = [];
+        let [w, h] = [tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth];
+        let self = this;
+        clear_rows.forEach(e => {
+            tywx.tt.log(TAG, `onClearRow:==${e}`);
+            for (let c = 0; c < w; ++c) {
+                let tmp_block_view = self.blockViews[e][c];
+                if (clear_blocks.indexOf(tmp_block_view) < 0) {
+                    clear_blocks.push(tmp_block_view);
+                }
+            }
+        });
+        clear_cols.forEach(e => {
+            tywx.tt.log(TAG, `onClearRow:==${e}`);
+            for (let r = 0; r < h; ++r) {
+                let tmp_block_view = self.blockViews[r][e];
+                if (clear_blocks.indexOf(tmp_block_view) < 0) {
+                    clear_blocks.push(tmp_block_view);
+                }
+            }
+        });
+        let ani_time = 0.2;
+        let delay_time = 0.05;
+        if (clear_blocks.length > 0) {
+            this.isTouchLocked = true;
+            for (let i = 0; i < clear_blocks.length; ++i) {
+                let tmp_block_view = clear_blocks[i];
+                let is_last = i === (clear_blocks.length - 1);
+                let display = tmp_block_view.getChildByName('display');
+                display.runAction(
+                    cc.sequence(
+                        cc.delayTime(i * delay_time),
+                        cc.spawn(
+                            cc.scaleTo(ani_time, 0.1),
+                            cc.fadeOut(ani_time)
+                        ),
+                        cc.callFunc(() => {
+                            if (is_last) {
+                                self.board.clearBlocks();
+                                self.isTouchLocked = false;
+                            }
+                            display.scale = 1.0;
+                            display.opacity = 255;
+                            tmp_block_view.getComponent('tt_view_block').setStat(0);
+                        })
+                    )
+                );
+            }
+        }
+    },
+    onBtnResetPreviews() {
+        if (this.isTouchLocked) return;
+        tywx.tt.log(TAG, 'onBtnResetPreviews');
+        if (this.repeatNumber > 0) {
+            this.useRepeateCall();
+            this.board.forseResetPreviews();
+        } else {
+            var calltype = 1;
+            const self = this;
+            tywx.tt.Utils.hideWXBanner();
+            tywx.tt.tipview.show({
+                success: function () {
+                    self.repeateRepeatNumberCall();
+                },
+                tip: "免费获得3次换一换！",
+                config: calltype == 1 ? tywx.tt.constants.ShareConfig.GET_HUNAYIHUAN_NUMBER_SHARE : tywx.tt.constants.ShareConfig.GET_HUNAYIHUAN_NUMBER_VIEDO,
+                calltype: calltype,
+            });
+
+        }
+    },
+    onBtnUseHammer() {
+        if (this.isTouchLocked) return;
+        tywx.tt.log(TAG, 'onBtnUseHammer');
+        if (this.czInitNumber > 0) {
+            this.hammerTouch.active = true;
+        } else {
+            const self = this;
+            var calltype = 1;
+            tywx.tt.Utils.hideWXBanner();
+            tywx.tt.tipview.show({
+                success: function () {
+                    self.addCZCallBack(1);
+                },
+                tip: "免费获得1个锤子！",
+                config: calltype == 1 ? tywx.tt.constants.ShareConfig.GET_CHUIZI_NUMBER_SHARE : tywx.tt.constants.ShareConfig.GET_CHUIZI_NUMBER_VIEDO,
+                calltype: calltype,
+            });
+        }
+    },
+    hideAllBlockFrames() {
+        let [w, h] = [tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth];
+        for (let r = 0; r < h; ++r) {
+            for (let c = 0; c < w; ++c) {
+                let tmp_view = this.blockViews[r][c];
+                let tmp_block_sc = tmp_view.getComponent('tt_view_block');
+                tmp_block_sc.setStat(-2);
+            }
+        }
+    },
+    onRefreshScore() {
+        if (this.board.score > 70) {
+            tywx.tt.fuhuo.show({
+                score: this.board.score,
+            })
+        }
+        friend.setScore(this.board.score);
+        this.labelScore.string = `${this.board.score}`;
+    },
+    showHammerSelectFrameByPosition(pos) {
+        let [w, h] = [tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth];
+        for (let r = 0; r < h; ++r) {
+            for (let c = 0; c < w; ++c) {
+                let tmp_block_view = this.blockViews[r][c];
+                let [x, y, b_w, b_h] = [tmp_block_view.x, tmp_block_view.y, tmp_block_view.width, tmp_block_view.height];
+                let [lb_x, lb_y, rt_x, rt_y] = [x, y, x + b_w, y + b_h];
+                if (pos.x >= lb_x && pos.x <= rt_x &&
+                    pos.y >= lb_y && pos.y <= rt_y) {
+                    tywx.tt.log(TAG, `showHammerSelectFrameByPosition==>${r},${c}`);
+                    this.showHammerShadowByRowAndCol(r, c);
+                    this.hammerIcon.position = tmp_block_view.position;
+                    break;
+                }
+            }
+        }
+    },
+    hideAllBlockMask() {
+        for (let r = 0; r < this.blockViews.length; ++r) {
+            for (let c = 0; c < this.blockViews[r].length; ++c) {
+                this.blockViews[r][c].getComponent('tt_view_block').hideMask();
+            }
+        }
+    },
+    showHammerShadowByRowAndCol(row, col) {
+        let shadow_blocks = [
+            [
+                [-1, 1],
+                [0, 1],
+                [1, 1]
+            ],
+            [
+                [-1, 0],
+                [0, 0],
+                [1, 0]
+            ],
+            [
+                [-1, -1],
+                [0, -1],
+                [1, -1]
+            ]
+        ];
+        let [w, h] = [tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth];
+        this.hideAllBlockMask();
+        for (let r = 0; r < 3; ++r) {
+            for (let c = 0; c < 3; ++c) {
+                let data = shadow_blocks[r][c];
+                let tmp_col = col + data[0];
+                let tmp_row = row + data[1];
+                if (tmp_col >= 0 && tmp_row >= 0 && tmp_col < w && tmp_row < h) {
+                    let tmp_block = this.blockViews[tmp_row][tmp_col];
+                    let tmp_block_sc = tmp_block.getComponent('tt_view_block');
+                    tmp_block_sc.showMask();
+                }
+            }
+        }
+    },
+    useHammerByPosition(pos) {
+        let data = this.getBlockViewByPosition(pos);
+        tywx.tt.log(TAG, `usehammerByPosition>>>row:${data.centerRow},col:${data.centerCol}`);
+        if (data.blockView) {
+            this.board.hammerClearByRowAndCol(data.centerRow, data.centerCol);
+            // 刷新锤子的显示
+            this.useCZNumber(-1);
+        }
+    },
+    onClearHammer(blocks) {
+        if (blocks.length > 0) this.isTouchLocked = true;
+        else return;
+        let self = this;
+        let delay_time = 0.05;
+        let ani_time = 0.2;
+        for (let i = 0; i < blocks.length; i++) {
+            let is_last = i === (blocks.length - 1);
+            let tmp_row = blocks[i][0];
+            let tmp_col = blocks[i][1];
+            let tmp_block_view = this.blockViews[tmp_row][tmp_col];
+            let display = tmp_block_view.getChildByName('display');
+            display.runAction(
+                cc.sequence(
+                    cc.delayTime(i * delay_time),
+                    cc.spawn(
+                        cc.scaleTo(ani_time, 0.1),
+                        cc.fadeOut(ani_time)
+                    ),
+                    cc.callFunc(() => {
+                        if (is_last) {
+                            self.isTouchLocked = false;
+                        }
+                        display.scale = 1.0;
+                        display.opacity = 255;
+                        tmp_block_view.getComponent('tt_view_block').setStat(0);
+                    })
+                )
+            );
+        }
+    },
+
+    // 初始化锤子数量和重置次数
+    initChuiZiAndRepeate: function () {
+        const items = JSON.parse(tywx.tt.Utils.loadItem("tt-items", "[]"));
+        var czNumber = 0;
+        for (var tiIndex = 0; tiIndex < items.length; tiIndex++) {
+
+            const titem = items[tiIndex];
+            tywx.tt.log("cz item = " + JSON.stringify(titem));
+            if (titem.id == 2 || titem.id == 4 || titem.id == 6) {
+                czNumber = czNumber + titem.num;
+            }
+        }
+        this.czInitNumber = czNumber;
+        this.czNumberLabel.string = czNumber + "";
+        // 重置次数
+        this.repeatNumber = 3;
+        this.repNumberLabel.string = this.repeatNumber + "/3";
+    },
+
+    // 使用锤子回调
+    useCZNumber: function (add) {
+        const items = JSON.parse(tywx.tt.Utils.loadItem("tt-items", "[]"));
+        var czNumber = 0;
+        var hadcut = false;
+        for (var tiIndex = 0; tiIndex < items.length; tiIndex++) {
+            if ((items[tiIndex].id == 2 || items[tiIndex].id == 4 || items[tiIndex].id == 6) && items[tiIndex].num > 0) {
+                if (!hadcut) {
+                    hadcut = true;
+                    items[tiIndex].num = items[tiIndex].num + add;
+                }
+                if (items[tiIndex].num > 0) {
+                    czNumber = czNumber + items[tiIndex].num;
+                }
+            }
+        }
+        tywx.tt.Utils.saveItem("tt-items", JSON.stringify(items), false);
+
+        this.czInitNumber = czNumber;
+        this.czNumberLabel.string = czNumber + "";
+    },
+
+    // 使用重复次数回调
+    useRepeateCall: function () {
+        if (this.repeatNumber > 0) {
+            this.repeatNumber--;
+            this.repNumberLabel.string = this.repeatNumber + "/3";
+        } else {
+            tywx.tt.error(TAG, "换一换的使用次数为 " + this.repeatNumber)
+        }
+    },
+
+    repeateRepeatNumberCall: function () {
+        this.repeatNumber = this.repeatNumber + 3;
+        this.repNumberLabel.string = this.repeatNumber + "/3";
+    },
+
+    addCZCallBack: function (num) {
+        var items = JSON.parse(tywx.tt.Utils.loadItem("tt-items", "[]"));
+        var czNumber = 0;
+        var hadadd = false;
+        if (items.length == 0) {
+            items = [];
+            var item = {};
+            item.id = 2;
+            item.num = num;
+            item.name = "锤子";
+            items[0] = item;
+            czNumber = num;
+        } else {
+            for (var tiIndex = 0; tiIndex < items.length; tiIndex++) {
+                if ((items[tiIndex].id == 2 || items[tiIndex].id == 4 || items[tiIndex].id == 6)) {
+                    if (!hadadd) {
+                        hadadd = true;
+                        items[tiIndex].num = items[tiIndex].num + num;
+                    }
+                    if (items[tiIndex].num > 0) {
+                        czNumber = czNumber + items[tiIndex].num;
+                    }
+                }
+            }
+        }
+
+        tywx.tt.log("锤子的数量  = " + czNumber);
+        tywx.tt.Utils.saveItem("tt-items", JSON.stringify(items), false);
+        this.czInitNumber = czNumber;
+        this.czNumberLabel.string = czNumber + "";
+    },
+
+    changePreviewSameTypeByConfig: function (pre_block) {
+        let tconfig = pre_block.getConfig();
+
+        console.log("changePreviewSameTypeByConfig = " + tconfig);
+
+    },
+
+
+});

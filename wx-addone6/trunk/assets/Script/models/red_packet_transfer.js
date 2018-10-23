@@ -40,7 +40,6 @@ cc.Class({
     // update (dt) {},
 
     motaiCallback(){
-
         this.node.destroy();
     },
     btnTransferClickCallback(){

@@ -1,165 +1,59 @@
-2018-10-11T02:15:52.073Z - normal: Load ~/.CocosCreator/settings.json
-2018-10-11T02:15:52.076Z - normal: checking language setting...
-2018-10-11T02:15:52.076Z - normal: Language: zh
-2018-10-11T02:15:52.562Z - success: protocol editor-framework registered
-2018-10-11T02:15:52.563Z - success: protocol app registered
-2018-10-11T02:15:52.563Z - success: protocol theme registered
-2018-10-11T02:15:52.563Z - success: protocol packages registered
-2018-10-11T02:15:52.564Z - success: protocol unpack registerred
-2018-10-11T02:15:52.564Z - success: protocol disable-commonjs registerred
-2018-10-11T02:15:52.678Z - normal: connected!
-2018-10-11T02:15:52.681Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk
-2018-10-11T02:15:52.687Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk
-2018-10-11T02:15:52.689Z - normal: Initializing Cocos2d
-2018-10-11T02:15:53.309Z - normal: Initializing Asset Database
-2018-10-11T02:15:53.354Z - success: protocol uuid registerred
-2018-10-11T02:15:53.355Z - success: protocol db registerred
-2018-10-11T02:15:53.355Z - success: protocol thumbnail registerred
-2018-10-11T02:15:53.355Z - normal: Loading editor/builtin packages
-2018-10-11T02:15:53.508Z - success: assets loaded
-2018-10-11T02:15:53.511Z - success: builder loaded
-2018-10-11T02:15:53.515Z - success: cocos-analytics loaded
-2018-10-11T02:15:53.520Z - success: console loaded
-2018-10-11T02:15:53.553Z - success: fb-instant-games loaded
-2018-10-11T02:15:53.559Z - success: hierarchy loaded
-2018-10-11T02:15:53.562Z - success: inspector loaded
-2018-10-11T02:15:53.564Z - success: keystore loaded
-2018-10-11T02:15:53.569Z - success: node-library loaded
-2018-10-11T02:15:53.571Z - success: package-asset loaded
-2018-10-11T02:15:53.572Z - success: preferences loaded
-2018-10-11T02:15:53.575Z - success: project-exporter loaded
-2018-10-11T02:15:53.591Z - success: project-importer loaded
-2018-10-11T02:15:53.594Z - success: project-settings loaded
-2018-10-11T02:15:53.599Z - success: ui-kit loaded
-2018-10-11T02:15:53.603Z - success: scene loaded
-2018-10-11T02:15:53.604Z - success: sprite-editor loaded
-2018-10-11T02:15:53.608Z - success: store loaded
-2018-10-11T02:15:53.613Z - success: timeline loaded
-2018-10-11T02:15:53.613Z - normal: Loading builtin packages
-2018-10-11T02:15:53.618Z - success: asset-db-debugger loaded
-2018-10-11T02:15:53.618Z - success: color-picker loaded
-2018-10-11T02:15:53.619Z - success: jsb-adapter loaded
-2018-10-11T02:15:53.622Z - success: package-manager loaded
-2018-10-11T02:15:53.715Z - success: qqplay-adapter loaded
-2018-10-11T02:15:53.722Z - success: sdkbox loaded
-2018-10-11T02:15:53.726Z - success: tester loaded
-2018-10-11T02:15:53.734Z - success: ui-grid loaded
-2018-10-11T02:15:53.736Z - success: ui-kit-preview-extra loaded
-2018-10-11T02:15:53.739Z - success: ui-kit-preview loaded
-2018-10-11T02:15:53.742Z - success: ui-tree loaded
-2018-10-11T02:15:53.743Z - success: weapp-adapter loaded
-2018-10-11T02:15:54.750Z - normal: Loading packages
-2018-10-11T02:15:54.756Z - normal: Watching packages
-2018-10-11T02:15:54.836Z - normal: Run Application
-2018-10-11T02:15:55.562Z - success: preview server running at http://localhost:7456
-2018-10-11T02:16:03.704Z - normal: AddOne boot start
-2018-10-11T02:16:03.713Z - normal: AddOne boot end
-2018-10-11T02:16:03.751Z - warn: Should not specify class name effect for Component which defines in project.
-2018-10-11T02:16:03.751Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-10-11T02:16:23.558Z - normal: Initializing...
-
-2018-10-11T02:16:23.563Z - normal: idePortFile: /Users/guoyouchao/Library/Application Support/微信web开发者工具/Default/.ide
-
-2018-10-11T02:16:23.581Z - normal: IDE server has started, listening on http://127.0.0.1:34180
-
-2018-10-11T02:16:23.582Z - normal: initialization finished
-
-2018-10-11T02:16:23.757Z - normal: open IDE success
-
-2018-10-11T02:16:26.952Z - normal: Start building with options : {
-  "actualPlatform": "wechatgame",
-  "apiLevel": "",
-  "appABIs": [],
-  "appKey": "",
-  "appSecret": "",
-  "buildPath": "/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/build",
-  "debug": false,
-  "dest": "/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/build/wechatgame",
-  "embedWebDebugger": false,
-  "encryptJs": true,
-  "excludeScenes": [],
-  "excludedModules": [
-    "TiledMap",
-    "Spine Skeleton",
-    "DragonBones",
-    "VideoPlayer",
-    "WebView",
-    "Collider",
-    "Physics"
-  ],
-  "fb-instant-games": {},
-  "includeAnySDK": false,
-  "includeSDKBox": false,
-  "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
-  "jailbreakPlatform": false,
-  "md5Cache": false,
-  "mergeStartScene": false,
-  "oauthLoginServer": "",
-  "optimizeHotUpdate": true,
-  "orientation": {
-    "landscapeLeft": true,
-    "landscapeRight": true,
-    "portrait": false,
-    "upsideDown": false
-  },
-  "packageName": "org.cocos2d.helloworld",
-  "platform": "wechatgame",
-  "previewHeight": "720",
-  "previewWidth": "1280",
-  "privateKey": "",
-  "qqplay": {
-    "REMOTE_SERVER_ROOT": "",
-    "orientation": "portrait"
-  },
-  "scenes": [
-    "905a3099-7e1d-43d9-afae-7f04c3eda863",
-    "2d2f792f-a40c-49bb-a189-ed176a246e49"
-  ],
-  "sourceMaps": false,
-  "startScene": "905a3099-7e1d-43d9-afae-7f04c3eda863",
-  "template": "link",
-  "title": "addone",
-  "useDebugKeystore": true,
-  "vsVersion": "auto",
-  "webOrientation": "auto",
-  "wechatgame": {
-    "REMOTE_SERVER_ROOT": "",
-    "appid": "wxd9dac6412c7dab7b",
-    "isSubdomain": false,
-    "orientation": "portrait",
-    "subContext": ""
-  },
-  "xxteaKey": "b552544a-ae1d-4d",
-  "zipCompressJs": true,
-  "project": "/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk",
-  "projectName": "addone",
-  "debugBuildWorker": false
-}
-2018-10-11T02:16:26.954Z - normal: Building /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk
-2018-10-11T02:16:26.955Z - normal: Destination /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/build/wechatgame
-2018-10-11T02:16:27.199Z - normal: Delete /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/build/wechatgame/**/*
-2018-10-11T02:16:37.972Z - normal: Start building assets
-2018-10-11T02:16:37.972Z - normal: Start spawn build-worker
-2018-10-11T02:16:38.632Z - normal: Finish spawn build-worker
-2018-10-11T02:16:38.633Z - normal: Start init build-worker
-2018-10-11T02:16:41.589Z - normal: AddOne boot start
-2018-10-11T02:16:41.597Z - normal: AddOne boot end
-2018-10-11T02:16:41.647Z - normal: Finish init build-worker
-2018-10-11T02:16:41.647Z - normal: Start build-assets in worker
-2018-10-11T02:16:50.215Z - normal: Finish build-assets in worker
-2018-10-11T02:16:50.219Z - normal: Finish building assets
-2018-10-11T02:16:50.252Z - normal: Start building plugin scripts
-2018-10-11T02:16:50.932Z - normal: Finish building plugin scripts
-2018-10-11T02:16:50.936Z - normal: Generating main.js from /Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/static/build-templates/shares/main.js
-2018-10-11T02:16:52.412Z - normal: Built to "/Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk/build/wechatgame" successfully
-2018-10-11T02:17:12.739Z - normal: Initializing...
-
-2018-10-11T02:17:12.744Z - normal: idePortFile: /Users/guoyouchao/Library/Application Support/微信web开发者工具/Default/.ide
-
-2018-10-11T02:17:12.760Z - normal: IDE server has started, listening on http://127.0.0.1:34180
-initialization finished
-
-2018-10-11T02:17:12.905Z - normal: open IDE success
-
-2018-10-11T02:17:32.231Z - info: shutdown preview server
+2018-10-16T06:47:55.809Z - normal: Load ~/.CocosCreator/settings.json
+2018-10-16T06:47:55.813Z - normal: checking language setting...
+2018-10-16T06:47:55.813Z - normal: Language: zh
+2018-10-16T06:47:56.459Z - success: protocol editor-framework registered
+2018-10-16T06:47:56.459Z - success: protocol app registered
+2018-10-16T06:47:56.459Z - success: protocol theme registered
+2018-10-16T06:47:56.459Z - success: protocol packages registered
+2018-10-16T06:47:56.460Z - success: protocol unpack registerred
+2018-10-16T06:47:56.460Z - success: protocol disable-commonjs registerred
+2018-10-16T06:47:56.612Z - normal: connected!
+2018-10-16T06:47:56.614Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk
+2018-10-16T06:47:56.619Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/trunk
+2018-10-16T06:47:56.625Z - normal: Initializing Cocos2d
+2018-10-16T06:47:57.516Z - normal: Initializing Asset Database
+2018-10-16T06:47:57.581Z - success: protocol uuid registerred
+2018-10-16T06:47:57.581Z - success: protocol db registerred
+2018-10-16T06:47:57.581Z - success: protocol thumbnail registerred
+2018-10-16T06:47:57.582Z - normal: Loading editor/builtin packages
+2018-10-16T06:47:57.771Z - success: assets loaded
+2018-10-16T06:47:57.775Z - success: builder loaded
+2018-10-16T06:47:57.780Z - success: cocos-analytics loaded
+2018-10-16T06:47:57.785Z - success: console loaded
+2018-10-16T06:47:57.831Z - success: fb-instant-games loaded
+2018-10-16T06:47:57.838Z - success: hierarchy loaded
+2018-10-16T06:47:57.845Z - success: inspector loaded
+2018-10-16T06:47:57.847Z - success: keystore loaded
+2018-10-16T06:47:57.857Z - success: node-library loaded
+2018-10-16T06:47:57.859Z - success: package-asset loaded
+2018-10-16T06:47:57.861Z - success: preferences loaded
+2018-10-16T06:47:57.865Z - success: project-exporter loaded
+2018-10-16T06:47:57.888Z - success: project-importer loaded
+2018-10-16T06:47:57.892Z - success: project-settings loaded
+2018-10-16T06:47:57.898Z - success: ui-kit loaded
+2018-10-16T06:47:57.903Z - success: scene loaded
+2018-10-16T06:47:57.905Z - success: sprite-editor loaded
+2018-10-16T06:47:57.912Z - success: store loaded
+2018-10-16T06:47:57.918Z - success: timeline loaded
+2018-10-16T06:47:57.918Z - normal: Loading builtin packages
+2018-10-16T06:47:57.924Z - success: asset-db-debugger loaded
+2018-10-16T06:47:57.925Z - success: color-picker loaded
+2018-10-16T06:47:57.926Z - success: jsb-adapter loaded
+2018-10-16T06:47:57.932Z - success: package-manager loaded
+2018-10-16T06:47:58.059Z - success: qqplay-adapter loaded
+2018-10-16T06:47:58.069Z - success: sdkbox loaded
+2018-10-16T06:47:58.077Z - success: tester loaded
+2018-10-16T06:47:58.084Z - success: ui-grid loaded
+2018-10-16T06:47:58.088Z - success: ui-kit-preview-extra loaded
+2018-10-16T06:47:58.092Z - success: ui-kit-preview loaded
+2018-10-16T06:47:58.097Z - success: ui-tree loaded
+2018-10-16T06:47:58.098Z - success: weapp-adapter loaded
+2018-10-16T06:47:59.582Z - normal: Loading packages
+2018-10-16T06:47:59.590Z - normal: Watching packages
+2018-10-16T06:47:59.699Z - normal: Run Application
+2018-10-16T06:48:04.179Z - success: preview server running at http://localhost:7457
+2018-10-16T06:48:21.533Z - normal: AddOne boot start
+2018-10-16T06:48:21.555Z - normal: AddOne boot end
+2018-10-16T06:48:21.670Z - warn: Should not specify class name effect for Component which defines in project.
+2018-10-16T06:48:21.671Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-10-16T06:48:56.630Z - info: shutdown preview server

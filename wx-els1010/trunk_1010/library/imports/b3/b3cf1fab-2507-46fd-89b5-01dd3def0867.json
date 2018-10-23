@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "waiyuan",
+    "texture": "cd1b2329-8959-40d9-bbbc-6e29b79ace23",
+    "atlas": "",
+    "rect": [
+      25,
+      0,
+      607,
+      708
+    ],
+    "offset": [
+      8.5,
+      0
+    ],
+    "originalSize": [
+      640,
+      708
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

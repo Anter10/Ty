@@ -79,7 +79,9 @@ var config = {
         "video": "",
         "banner": ""
     },
-    "LuckyUserRate": 50 // ! 取值范围[0,100]
+    "LuckyUserRate": 50, // ! 取值范围[0,100]
+    "ShareLimit": [1000, 10000], // ! 分享时间限制，在[min, max]之间算分享成功
+    "ruyiButtonDelaytime": 40 // ! 如意宝箱时间限制
 };
 
 module.exports = config;

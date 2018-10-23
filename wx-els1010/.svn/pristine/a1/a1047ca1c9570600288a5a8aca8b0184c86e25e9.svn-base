@@ -1,0 +1,149 @@
+/** 
+ * @description 
+ * created by gyc on 20181012
+ */
+
+let TAG = "[game/cross_ad/ads_node.js]";
+let node_path = "prefabs/ads_node";
+
+let ads_node = cc.Class({
+    extends: cc.Component,
+    properties: {
+        rootnode: cc.Node,
+        adnode: cc.Prefab,
+        data: null,
+
+    },
+
+    /**
+     * @description 设置交叉倒流的数据
+     * @param {Object} data 交叉倒流的数据
+     */
+    setData: function (data) {
+        this.data = data;
+        tywx.tt.log(TAG, "广告设置了数据 " + JSON.stringify(data));
+        this.initUI();
+    },
+
+    /**
+     * 
+     * @param {*} ads_type 
+     */ 
+    initUI:function(){
+        for (var t = 0; t < this.data.ads_data.length; t ++){
+             let data = this.data.ads_data[t];
+             let adnode = cc.instantiate(this.adnode);
+             let ads_script = adnode.getComponent('ad_node')
+             ads_script.setData(data);
+             adnode.position = cc.v2((t - 1) * 130 + 60,60);
+             this.node.addChild(adnode);
+        }
+    },
+
+    
+
+    // use this for initialization
+    onLoad: function () {
+
+    },
+    statics: {
+        ads_data: null,
+        /**
+         * @description 得到某种类型的交叉倒流数据
+         * @param {String} ads_type  交叉倒流的类型
+         */
+        getTypeData: function (ads_type) {
+            if (ads_node.ads_data) {
+                if (ads_node.ads_data[ads_type]) {
+                    const ad_ids = ads_node.ads_data[ads_type].ads;
+                    var alliddata = [];
+                    var ads = ads_node.ads_data.ads;
+                    for (var idIndex = 0; idIndex < ad_ids.length; idIndex++) {
+                        var finddata = null;
+                        for (var tadIndex = 0; tadIndex < ads.length; tadIndex++) {
+                            if (ads[tadIndex].id == ad_ids[idIndex]) {
+                                finddata = ads[tadIndex];
+                                break;
+                            }
+                        }
+                        if (finddata) {
+                            alliddata.push(finddata);
+                        } else {
+                            tywx.tt.error(TAG, "没有ID " + ad_ids[idIndex] + "的倒流数据");
+                        }
+                    }
+                    var typedata = {};
+                    typedata.type = ads_type;
+                    typedata.ads_data = alliddata;
+                    tywx.tt.error(TAG, "节点数据s " + JSON.stringify(typedata));
+                    return typedata;
+                } else {
+                    tywx.tt.error(TAG, "没有" + ads_type + "这种类型的交叉倒流数据");
+                }
+            } else {
+                tywx.tt.error(TAG, "没有设置交叉倒流数据");
+            }
+            return null;
+        },
+        addAdsNode: function (paraent,pos,ads_type) {
+            tywx.tt.log("Hello ccd" + !ads_node.ads_data);
+            
+            ads_node.paraent = paraent;
+            ads_node.ads_type = ads_type;
+            ads_node.pos = pos;
+            if (!ads_node.ads_data) {
+                ads_node.waitadd = true;
+                tywx.tt.error(TAG, "没有设置交叉倒流数据1");
+            } else {
+                ads_node.dataCall();
+            }
+        },
+        listenCDNData: function () {
+            tywx.NotificationCenter.listen(tywx.tt.events.TT_GET_CONFIG_SUCCESS, ads_node.setData, ads_node);
+        },
+
+        listenADManagerData: function () {
+            tywx.tt.log("开始监听Admanager倒流数据回调");
+            tywx.NotificationCenter.listen(tywx.EventType.GET_ADMANAGER_ICON_INFO_SUCCESS, ads_node.AdmanagerCall, ads_node);
+        },
+        
+        // 
+        AdmanagerCall:function(){
+
+        },
+        /** 
+         * @description 设置小程序的数据
+         * @param {Object} data CDN 上的网络配置数据
+         */
+        setData: function (data) {
+            ads_node.ads_data = data.default.cross_ad;
+            tywx.tt.log(TAG, "交叉倒流的数据  = " + JSON.stringify(ads_node.ads_data));
+            if (this.waitadd == true){
+                this.waitadd = false; 
+                this.dataCall();
+            }
+        },
+
+        dataCall: function () {
+            if (ads_node.ads_data) {
+                cc.loader.loadRes(node_path, (err, prefab) => {
+                    console.log("err " + err);
+                    if (!err) {
+                        let adsnode = cc.instantiate(prefab);
+                        let ads_script = adsnode.getComponent('ads_node')
+                        ads_script.setData(ads_node.getTypeData(ads_node.ads_type));
+                        adsnode.position = ads_node.pos;
+                        ads_node.paraent.addChild(adsnode);
+                    }
+                });
+            }else{
+                tywx.tt.error(TAG,"没有交叉倒流的数据2");
+            }
+        }
+
+    }
+
+});
+
+
+module.exports = ads_node;

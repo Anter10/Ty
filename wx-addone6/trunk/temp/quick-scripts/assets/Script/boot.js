@@ -107,10 +107,13 @@ tywx.ado.logWithColor = function (info) {
 //! 插件onShow, 与插件相关的处理尽量放在这里
 tywx.ado.onShow = function (result) {
     tywx.ado.AudioManager.loadAudioRes();
-    console.log("播放背景音乐配置 " + JSON.stringify(tywx.ado.Configs));
+    //console.log("播放背景音乐配置 " + JSON.stringify(tywx.ado.Configs));
     tywx.ado.AudioManager.playMusic(tywx.ado.Configs.MUSICS.BG_MUSIC);
-    tywx.ado.logWithColor('tywx.ado.onShow');
+    tywx.ado.logWithColor('tywx.ado.onShow', tywx.ShareInterface.IsWaitingCallback);
     tywx.AdManager.init();
+    if (tywx.ShareInterface.IsWaitingCallback) {
+        tywx.ShareInterface.shareBack();
+    }
 };
 //! 插件onHide, 与插件相关的处理尽量放在这里
 tywx.ado.onHide = function () {

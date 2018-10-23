@@ -99,14 +99,25 @@ cc.Class({
         this.openRedPackBtn.setSuccessCall(function () {
             self.playRotate();
         });
-
+        var share_control = tywx.config.share_control_2.redpack;
+        var random = parseInt(Math.random() * 100);
         // 处理配置控制信息
-        if ((tywx.config.share_control.redpack == "video" || tywx.ado.isMinGanIP) && tywx.ado.isCanWatchVideo) {
+        if ((share_control[0] == "video" || tywx.ado.isMinGanIP) && tywx.ado.isCanWatchVideo) {
             this.openRedPackBtn.setShareConfig(tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO);
-            this.openRedPackBtn.setButtonCallType(2);
-        } else if (tywx.config.share_control.redpack == "share" || tywx.ado.isCanWatchVideo) {
+            if (random <= share_control[1] || tywx.ado.isMinGanIP) {
+                this.openRedPackBtn.setButtonCallType(2);
+            } else {
+                this.openRedPackBtn.setShareConfig(tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE);
+                this.openRedPackBtn.setButtonCallType(1);
+            }
+        } else if (share_control[0] == "share" || !tywx.ado.isCanWatchVideo) {
             this.openRedPackBtn.setShareConfig(tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE);
-            this.openRedPackBtn.setButtonCallType(1);
+            if (random <= share_control[1]) {
+                this.openRedPackBtn.setButtonCallType(1);
+            } else {
+                this.openRedPackBtn.setShareConfig(tywx.ado.Constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO);
+                this.openRedPackBtn.setButtonCallType(2);
+            }
         }
 
         if (this.data.needShare == false) {

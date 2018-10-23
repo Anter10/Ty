@@ -1,0 +1,90 @@
+const stopview_path = "prefabs/stop_view";
+
+const stop_view = cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        audioNormal: cc.Node,
+        audioEnable: cc.Node,
+    },
+
+    goOnGameCall: function () {
+
+        this.closeCall();
+    },
+
+    returnHomeCall: function () {
+        cc.director.loadScene("scene_menu");
+    },
+
+    changeButtonTexture: function () {
+        tywx.LOGE(this.audioRes[0]);
+        if (curAudioState == 0) {
+            this.audioRes[0].node.active = false;
+            this.audioRes[1].node.active = true;
+        } else if (curAudioState == 1) {
+            this.audioRes[0].node.active = true;
+            this.audioRes[1].node.active = false;
+        } else {
+            tywx.LOGE("状态不对");
+        }
+    },
+
+    repeateGameCall: function () {
+
+        this.closeCall();
+    },
+
+    helpCall: function () {
+
+    },
+
+    audioCall: function () {
+        if (curAudioState == 1) {
+            this.pause();
+            //tywx.stopMusic();
+            tywx.tt.AudioManager.stopMusic();
+            curAudioState = 0;
+            tywx.tt.AudioManager.setIsMute(true);
+        } else if (curAudioState == 0) {
+            this.play();
+            //tywx.playMusic();
+            tywx.tt.AudioManager.setIsMute(false);
+            tywx.tt.AudioManager.playMusic(tywx.tt.Configs.MUSICS.BG_MUSIC);
+            curAudioState = 1;
+        }
+    },
+
+
+    onLoad() {
+
+    },
+
+    start() {
+
+    },
+
+    closeCall: function () {
+        stop_view.stopview.removeFromParent(true);
+        stop_view.stopview = null;
+    },
+
+    statics: {
+        stopview: null,
+        showStopView: function () {
+            cc.loader.loadRes(stopview_path, (err, prefab) => {
+                if (!err) {
+                    let stopview = cc.instantiate(prefab);
+                    let ads_script = stopview.getComponent('stop_view');
+                    stopview.x = 360;
+                    stopview.y = 640;
+                    stop_view.stopview = stopview;
+                    cc.director.getScene().addChild(stopview);
+                }
+            });
+        }
+    }
+    // update (dt) {},
+});
+
+module.exports = stop_view;

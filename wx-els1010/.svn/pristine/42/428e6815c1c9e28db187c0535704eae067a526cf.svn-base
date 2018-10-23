@@ -1,0 +1,11 @@
+let Events = {
+    TT_FILL_BOARD: 'tt_fill_baord', // * 填充棋盘
+    TT_GET_CONFIG_SUCCESS: 'tt_get_config_success', // * 获取配置成功
+    TT_RESET_PREVIEWS: 'tt_reset_previews', 
+    TT_CLEAR_ROW: 'tt_clear_row',
+    TT_REFRESH_SCORE: 'tt_refresh_score',
+    TT_CLEAR_HAMMER: 'tt_clear_hammer',
+    TT_REFRESH_PREVIEW_STAT: 'tt_refresh_preview_stat',
+};
+
+module.exports = Events;

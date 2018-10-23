@@ -1,0 +1,83 @@
+let TAG = '[tt_scene_play]';
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad() {
+        this.root = this.node.getChildByName('root');
+        this.pop = this.node.getChildByName('pop');
+        this.loadPlayView();
+        this.showBanner();
+        tywx.tt.curgamescene = this;
+        let canshowads = true;
+        if (canshowads) {
+            tywx.tt.ads.addAdsNode("list_menu", this.node, cc.v2(220, 222));
+        }
+    },
+
+
+
+    // 点击暂停回调
+    stopCall: function () {
+        tywx.tt.stop_view.showStopView();
+    },
+
+    start() {
+
+    },
+    
+    /**
+     * @description: 存储当前的分数
+     */
+    storeScore: function () {
+        if (parseInt(tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0)) < this.playviewscript.board.score) {
+            tywx.tt.Utils.saveItem(tywx.tt.constants.TT_SCORE, this.playviewscript.board.score, false);
+        }
+    },
+ 
+
+    onDestroy() {
+        tywx.tt.log("主页退出 ");
+        tywx.tt.Utils.destroyWXBanner();
+    },
+
+
+    /**
+     * @description 展示广告
+     */
+    showBanner: function () {
+
+        tywx.tt.Utils.createAndcreateAndShowWXBanner();
+        this.schedule(this.bannerRefresh, tywx.tt.constants.WXAdConfig.bannerRefreshTime);
+    },
+
+
+    /**
+     * @description 刷新广告的显示
+     */
+    bannerRefresh: function () {
+        tywx.tt.Utils.createAndcreateAndShowWXBanner();
+    },
+
+    // update (dt) {},
+    loadPlayView() {
+        let self = this;
+        cc.loader.loadRes('prefabs/tt_view_play_board', (err, prefab) => {
+            if (!err) {
+                self.playView = cc.instantiate(prefab);
+                self.playView.parent = self.root;
+                self.playviewscript = self.playView.getComponent("tt_view_play_board");
+                tywx.tt.log(TAG, 'load play view success');
+                //self.playView.getComponent('tt_view_play_board').init();
+            } else {
+                tywx.tt.error(TAG, 'load play view failed', JSON.stringify(err));
+            }
+        });
+    }
+
+});

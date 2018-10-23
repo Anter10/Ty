@@ -182,7 +182,7 @@ var gamestart = cc.Class({
     onLoad: function () {
         wx.postMessage({
             method: "load_data",
-            MAIN_MENU_NUM: "ADDONE_SCORE2",
+            MAIN_MENU_NUM: "TT_SCORE",
         });
         this.version.string = tywx.SystemInfo.version + '';
         this.haveStoreGameData = tywx.ado.loadProgress();

@@ -1,70 +1,58 @@
-2018-10-10T08:20:49.551Z - normal: Load ~/.CocosCreator/settings.json
-2018-10-10T08:20:49.557Z - normal: checking language setting...
-2018-10-10T08:20:49.558Z - normal: Language: zh
-2018-10-10T08:20:50.526Z - success: protocol editor-framework registered
-2018-10-10T08:20:50.526Z - success: protocol app registered
-2018-10-10T08:20:50.527Z - success: protocol theme registered
-2018-10-10T08:20:50.527Z - success: protocol packages registered
-2018-10-10T08:20:50.528Z - success: protocol unpack registerred
-2018-10-10T08:20:50.528Z - success: protocol disable-commonjs registerred
-2018-10-10T08:20:50.976Z - normal: connected!
-2018-10-10T08:20:50.979Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
-2018-10-10T08:20:50.986Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
-2018-10-10T08:20:50.993Z - normal: Initializing Cocos2d
-2018-10-10T08:20:52.051Z - normal: Initializing Asset Database
-2018-10-10T08:20:52.103Z - success: protocol uuid registerred
-2018-10-10T08:20:52.104Z - success: protocol db registerred
-2018-10-10T08:20:52.104Z - success: protocol thumbnail registerred
-2018-10-10T08:20:52.104Z - normal: Loading editor/builtin packages
-2018-10-10T08:20:52.311Z - success: assets loaded
-2018-10-10T08:20:52.316Z - success: builder loaded
-2018-10-10T08:20:52.321Z - success: cocos-analytics loaded
-2018-10-10T08:20:52.328Z - success: console loaded
-2018-10-10T08:20:52.385Z - success: fb-instant-games loaded
-2018-10-10T08:20:52.394Z - success: hierarchy loaded
-2018-10-10T08:20:52.400Z - success: inspector loaded
-2018-10-10T08:20:52.403Z - success: keystore loaded
-2018-10-10T08:20:52.419Z - success: node-library loaded
-2018-10-10T08:20:52.422Z - success: package-asset loaded
-2018-10-10T08:20:52.424Z - success: preferences loaded
-2018-10-10T08:20:52.429Z - success: project-exporter loaded
-2018-10-10T08:20:52.457Z - success: project-importer loaded
-2018-10-10T08:20:52.462Z - success: project-settings loaded
-2018-10-10T08:20:52.470Z - success: ui-kit loaded
-2018-10-10T08:20:52.477Z - success: scene loaded
-2018-10-10T08:20:52.479Z - success: sprite-editor loaded
-2018-10-10T08:20:52.485Z - success: store loaded
-2018-10-10T08:20:52.493Z - success: timeline loaded
-2018-10-10T08:20:52.493Z - normal: Loading builtin packages
-2018-10-10T08:20:52.500Z - success: asset-db-debugger loaded
-2018-10-10T08:20:52.502Z - success: color-picker loaded
-2018-10-10T08:20:52.503Z - success: jsb-adapter loaded
-2018-10-10T08:20:52.509Z - success: package-manager loaded
-2018-10-10T08:20:52.650Z - success: qqplay-adapter loaded
-2018-10-10T08:20:52.661Z - success: sdkbox loaded
-2018-10-10T08:20:52.668Z - success: tester loaded
-2018-10-10T08:20:52.677Z - success: ui-grid loaded
-2018-10-10T08:20:52.682Z - success: ui-kit-preview-extra loaded
-2018-10-10T08:20:52.687Z - success: ui-kit-preview loaded
-2018-10-10T08:20:52.692Z - success: ui-tree loaded
-2018-10-10T08:20:52.693Z - success: weapp-adapter loaded
-2018-10-10T08:20:54.269Z - normal: Loading packages
-2018-10-10T08:20:54.279Z - normal: Watching packages
-2018-10-10T08:20:54.408Z - normal: Run Application
-2018-10-10T08:20:57.723Z - success: preview server running at http://localhost:7456
-2018-10-10T08:21:21.417Z - normal: AddOne boot start
-2018-10-10T08:21:21.434Z - normal: AddOne boot end
-2018-10-10T08:21:21.543Z - warn: Should not specify class name effect for Component which defines in project.
-2018-10-10T08:21:21.544Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-10-10T08:24:18.153Z - normal: AddOne boot start
-2018-10-10T08:24:18.180Z - normal: AddOne boot end
-2018-10-10T08:24:18.326Z - warn: Should not specify class name effect for Component which defines in project.
-2018-10-10T08:24:18.327Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-10-10T08:25:45.053Z - normal: AddOne boot start
-2018-10-10T08:25:45.058Z - normal: AddOne boot end
-2018-10-10T08:25:45.132Z - warn: Should not specify class name effect for Component which defines in project.
-2018-10-10T08:25:45.133Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-10-10T08:36:22.605Z - normal: AddOne boot start
-2018-10-10T08:36:22.641Z - normal: AddOne boot end
-2018-10-10T08:36:22.788Z - warn: Should not specify class name effect for Component which defines in project.
-2018-10-10T08:36:22.789Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-10-15T08:47:41.834Z - normal: Load ~/.CocosCreator/settings.json
+2018-10-15T08:47:41.837Z - normal: checking language setting...
+2018-10-15T08:47:41.837Z - normal: Language: zh
+2018-10-15T08:47:42.340Z - success: protocol editor-framework registered
+2018-10-15T08:47:42.341Z - success: protocol app registered
+2018-10-15T08:47:42.341Z - success: protocol theme registered
+2018-10-15T08:47:42.341Z - success: protocol packages registered
+2018-10-15T08:47:42.341Z - success: protocol unpack registerred
+2018-10-15T08:47:42.341Z - success: protocol disable-commonjs registerred
+2018-10-15T08:47:42.463Z - normal: connected!
+2018-10-15T08:47:42.465Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
+2018-10-15T08:47:42.469Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/happyaddone/wx-addone/AddOne
+2018-10-15T08:47:42.472Z - normal: Initializing Cocos2d
+2018-10-15T08:47:43.154Z - normal: Initializing Asset Database
+2018-10-15T08:47:43.202Z - success: protocol uuid registerred
+2018-10-15T08:47:43.202Z - success: protocol db registerred
+2018-10-15T08:47:43.203Z - success: protocol thumbnail registerred
+2018-10-15T08:47:43.203Z - normal: Loading editor/builtin packages
+2018-10-15T08:47:43.365Z - success: assets loaded
+2018-10-15T08:47:43.369Z - success: builder loaded
+2018-10-15T08:47:43.372Z - success: cocos-analytics loaded
+2018-10-15T08:47:43.376Z - success: console loaded
+2018-10-15T08:47:43.410Z - success: fb-instant-games loaded
+2018-10-15T08:47:43.416Z - success: hierarchy loaded
+2018-10-15T08:47:43.420Z - success: inspector loaded
+2018-10-15T08:47:43.421Z - success: keystore loaded
+2018-10-15T08:47:43.427Z - success: node-library loaded
+2018-10-15T08:47:43.429Z - success: package-asset loaded
+2018-10-15T08:47:43.430Z - success: preferences loaded
+2018-10-15T08:47:43.433Z - success: project-exporter loaded
+2018-10-15T08:47:43.449Z - success: project-importer loaded
+2018-10-15T08:47:43.452Z - success: project-settings loaded
+2018-10-15T08:47:43.457Z - success: ui-kit loaded
+2018-10-15T08:47:43.461Z - success: scene loaded
+2018-10-15T08:47:43.463Z - success: sprite-editor loaded
+2018-10-15T08:47:43.467Z - success: store loaded
+2018-10-15T08:47:43.472Z - success: timeline loaded
+2018-10-15T08:47:43.472Z - normal: Loading builtin packages
+2018-10-15T08:47:43.477Z - success: asset-db-debugger loaded
+2018-10-15T08:47:43.479Z - success: color-picker loaded
+2018-10-15T08:47:43.481Z - success: jsb-adapter loaded
+2018-10-15T08:47:43.485Z - success: package-manager loaded
+2018-10-15T08:47:43.581Z - success: qqplay-adapter loaded
+2018-10-15T08:47:43.589Z - success: sdkbox loaded
+2018-10-15T08:47:43.594Z - success: tester loaded
+2018-10-15T08:47:43.600Z - success: ui-grid loaded
+2018-10-15T08:47:43.604Z - success: ui-kit-preview-extra loaded
+2018-10-15T08:47:43.607Z - success: ui-kit-preview loaded
+2018-10-15T08:47:43.611Z - success: ui-tree loaded
+2018-10-15T08:47:43.612Z - success: weapp-adapter loaded
+2018-10-15T08:47:44.663Z - normal: Loading packages
+2018-10-15T08:47:44.668Z - normal: Watching packages
+2018-10-15T08:47:44.751Z - normal: Run Application
+2018-10-15T08:47:46.023Z - success: preview server running at http://localhost:7456
+2018-10-15T08:47:54.923Z - normal: AddOne boot start
+2018-10-15T08:47:54.934Z - normal: AddOne boot end
+2018-10-15T08:47:54.996Z - warn: Should not specify class name effect for Component which defines in project.
+2018-10-15T08:47:54.997Z - warn: Can not instantiate CCClass 'effect' with arguments.

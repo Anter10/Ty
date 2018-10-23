@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "imghide",
+    "texture": "c44a8fd2-6af6-4397-9c0e-85b02f420fc3",
+    "atlas": "",
+    "rect": [
+      1,
+      1,
+      105,
+      105
+    ],
+    "offset": [
+      -1,
+      1
+    ],
+    "originalSize": [
+      109,
+      109
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

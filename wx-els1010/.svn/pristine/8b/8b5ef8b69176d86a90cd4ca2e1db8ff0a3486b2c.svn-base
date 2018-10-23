@@ -1,0 +1,144 @@
+ let TAG = '[game/lottery/lottery_view.js]]';
+
+ cc.Class({
+     extends: cc.Component,
+     properties: {
+         nodeDisk: cc.Node,
+         lottery_item: cc.Prefab,
+         background: cc.Node,
+         alltnode: {
+             type: cc.Node,
+             default: [],
+         },
+         allbtnnode: {
+             type: cc.Node,
+             default: [],
+         },
+         videoBtn:cc.Node,
+         shareBtn:cc.Node,
+         freeBtn: cc.Node,
+     },
+
+     onLoad() {
+         this.background.on('touchstart', function (event) {
+             return true;
+         });
+     },
+
+     start() {
+
+     },
+
+     setData: function (data) {
+         if (data) {
+             this.data = data;
+             this.initUI();
+         } else {
+             tywx.tt.error(TAG, "没有抽奖数据");
+         }
+     },
+
+     closeView: function () {
+         tywx.tt.lottery.removeLotteryView();
+     },
+
+     initUI: function () {
+         // 初始化道具UI
+         var pre = 0;
+         for (var ti = 0; ti < 6; ti++) {
+             let lotteryItem = cc.instantiate(this.lottery_item);
+             pre = ti * 60;
+             lotteryItem.rotation = pre;
+             let item_script = lotteryItem.getComponent('lottery_item');
+             var data = this.data.items[ti];
+             item_script.setData(data);
+             this.alltnode[ti].addChild(lotteryItem);
+         }
+         // 初始化按钮UI
+         this.initUiButton();
+     },
+
+     /**
+      * @description 控制按钮的显示
+      */
+     initUiButton: function () {
+         const buttypes = this.data.button_types;
+         const buttonindex = buttypes[0];
+         const buttontype = buttypes[1][buttonindex];
+         const buttons = buttontype.split("_");
+
+         tywx.tt.log("当前显示的buttons = " + JSON.stringify(buttons));
+         var typebtn = [];
+         var btntype = buttons[0];
+         
+         for(var tin = 0; tin < buttons.length; tin ++){
+             if(buttons[tin] == "share"){
+                typebtn[tin] = this.shareBtn;
+                this.shareBtn.active = true;
+             }else if (buttons[tin] == "video") {
+                typebtn[tin] = this.videoBtn;
+                this.videoBtn.active = true;
+             }else if (buttons[tin] == "free") {
+                typebtn[tin] = this.freeBtn;
+                this.freeBtn.active = true;
+             }
+         }
+         if (typebtn.length == 1){
+             typebtn[0].position = this.allbtnnode[1];
+         }
+         if (typebtn.length == 2) {
+             typebtn[0].position = this.allbtnnode[0];
+             typebtn[1].position = this.allbtnnode[2];
+         }
+        
+ 
+
+     },
+
+     // update (dt) {},
+     btnStartLottery() {
+         if (this.isLottering) return;
+         this.lottery();
+     },
+     lottery() {
+         let aims = [0, 1, 2, 3, 4, 5];
+         let aim_id = aims[parseInt(Math.random() * aims.length)];
+         this.item = this.data.items[aim_id];
+         this.storeCurrentItem();
+         let self = this;
+         let current_rotate = this.nodeDisk.rotation % 360;
+         //let last_aim_id = parseInt(current_rotate / 60);
+         this.isLottering = true;
+         this.nodeDisk.runAction(
+             cc.sequence(
+                 cc.rotateBy(1, 360 * 2 - current_rotate).easing(cc.easeIn(2.0)),
+                 cc.rotateBy(2, 360 * 5),
+                 cc.rotateBy(1, 360 * 2 - aim_id * 60).easing(cc.easeOut(1.0)),
+                 cc.callFunc(() => {
+                     self.isLottering = false;
+                 })
+             )
+         );
+     },
+
+     init() {
+         this.aim_id = 0;
+         for (let i = 0; i < 6; ++i) {
+             let lable_name = `label_${i}`;
+             let label_node = this.nodeLabelRoot.getChildByName(lable_name);
+             if (label_node) {
+                 label_node.getComponent(cc.Label).string = `礼物${i}`;
+             }
+         }
+     },
+
+    /**
+      * @description 存储当前的转到的道具
+      */
+     storeCurrentItem: function () {
+         tywx.tt.log("当前所转到的道具数据  = " + JSON.stringify(this.item));
+     }
+
+
+
+ });

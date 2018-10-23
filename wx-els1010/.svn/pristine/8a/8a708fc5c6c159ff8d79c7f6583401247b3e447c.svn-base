@@ -1,0 +1,8 @@
+let configs = {};
+
+configs.BG_MUSIC ={
+    BG_MUSIC:"https: //elsfkws.nalrer.cn/teris/m/3.mp3",
+}
+
+ 
+module.exports = configs;

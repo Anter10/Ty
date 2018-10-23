@@ -1,0 +1,94 @@
+let TAG = '[tt_view_priview_blocks]';
+let SCALE_TOUCH = 1.0;
+let SCALE_NORMAL = 0.34;
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        prefabBlock: cc.Prefab
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+        this.hadPut = false; // * 是否已经放置到棋盘
+        this.blockViews = []; 
+    },
+
+    start () {
+
+    },
+
+    // update (dt) {},
+    init(config){
+        this.config = config;
+        this.blockViews = [];
+        tywx.tt.log(TAG, JSON.stringify(config));
+        let [x, y, w, h] = [0,0,380,380];
+        let b_s = tywx.tt.constants.BlockSize;
+        x = -w/2;
+        y = -h/2;
+        this.root = this.node.getChildByName('root');
+        let max = config.length - 1;
+        for(let i = config.length - 1; i >= 0; --i){
+            y = b_s.height * (max - i) + (-h/2);
+            this.blockViews[i] = [];
+            for(let j = 0; j < config[i].length; ++j){
+                x = b_s.width * j + (-w/2);
+                let stat = config[i][j];
+                let tmp_block = cc.instantiate(this.prefabBlock);
+                tmp_block.parent = this.root;
+                tmp_block.position = cc.v2(x,y);
+                tmp_block.getComponent('tt_view_block').setStat(stat);
+                tmp_block.getComponent('tt_view_block').hideBg();
+                this.blockViews[i].push(tmp_block);
+            }
+            tywx.tt.log(TAG,`y=${y}`);
+        }
+        this.root.scale = 0.8;
+    },
+    touch(){
+        tywx.tt.log(TAG,'touch');
+        this.node.runAction(
+            cc.scaleTo(0.2,SCALE_TOUCH)
+        );
+    },
+    touchCancle(){
+        tywx.tt.log(TAG,'touch cancle');
+        this.node.runAction(
+            cc.scaleTo(0.2,SCALE_NORMAL)
+        );
+    },
+    put(){
+        this.root.active = false;
+        this.node.runAction(
+            cc.scaleTo(0.2, SCALE_NORMAL)
+        );
+        this.hadPut = true;
+    },
+    getConfig(){
+        if(!this.config){
+            tywx.tt.error(TAG, `getConfig error, config=${this.config}`);
+            return null;
+        }
+        return this.config;
+    },
+    isCanPut(){
+        return this.hadPut;
+    },
+    resetByConfig(config){
+        this.config = config;
+        this.root.active = true;
+        this.hadPut = false;
+        for(let i = config.length - 1; i >= 0; --i){
+            //this.blockViews[i] = [];
+            for(let j = 0; j < config[i].length; ++j){
+                let stat = config[i][j];
+                let tmp_block = this.blockViews[i][j];
+                tmp_block.getComponent('tt_view_block').setStat(stat);
+                tmp_block.getComponent('tt_view_block').hideBg();
+            }
+        }
+    }
+
+});

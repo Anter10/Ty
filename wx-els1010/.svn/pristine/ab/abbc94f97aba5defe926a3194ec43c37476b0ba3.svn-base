@@ -1,0 +1,44 @@
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        gqnumberLabel: cc.Label,
+        zpbtnNode: cc.Node,
+        bannerNode: cc.Node,
+
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad() {
+        tywx.tt.Utils.sendWXMsg({
+            method: "load_data",
+            MAIN_MENU_NUM: tywx.tt.constants.TT_SCORE,
+        })
+        tywx.tt.boot();
+        tywx.tt.lottery.addZPIcon("home", this.zpbtnNode, cc.v2(0, 0));
+        tywx.tt.ads.addAdsNode("banner_menu", this.bannerNode, cc.v2(0, 0));
+        // 当前最大分数
+        this.gqnumberLabel.string = parseInt(tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0)) + "";
+    },
+    
+    onDestroy() {
+        tywx.tt.Utils.hideGameClub();
+        tywx.tt.Utils.destroyWXBanner();
+        tywx.NotificationCenter.ignoreScope(this);
+    },
+
+    startGame: function (e) {
+        cc.director.loadScene("scene_play");
+    },
+
+    showPhb: function () {
+        tywx.tt.rank_manager.showRank();
+    },
+
+    start() {
+
+    },
+
+    // update (dt) {},
+});

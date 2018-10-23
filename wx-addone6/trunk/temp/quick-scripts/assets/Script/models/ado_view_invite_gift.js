@@ -97,7 +97,11 @@ cc.Class({
                         var sp_head = node_head.getComponent(cc.Sprite);
                         var tmp_texture = new cc.Texture2D();
                         btn_invite.active = false;
-                        btn_invite2.active = false;
+                        btn_invite2.active = true;
+                        var btn_invite_com = btn_invite2.getComponent(cc.Button);
+                        if (btn_invite_com) {
+                            btn_invite_com.interactable = false;
+                        }
                         setTimeout(function () {
                             window.sharedCanvas.width = 160;
                             window.sharedCanvas.height = 200;

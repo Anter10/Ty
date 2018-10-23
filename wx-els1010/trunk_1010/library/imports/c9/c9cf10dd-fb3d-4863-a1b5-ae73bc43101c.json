@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "phbicon",
+    "texture": "d1ef0bf3-c859-4f2d-be76-74a9633c3505",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      93,
+      124
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      93,
+      124
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

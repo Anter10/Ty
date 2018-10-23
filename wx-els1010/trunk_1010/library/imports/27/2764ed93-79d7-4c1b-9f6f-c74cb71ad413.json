@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "changebottom",
+    "texture": "bd49bc8f-46f9-4ed4-8570-38a2f2273bb6",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      95,
+      100
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      95,
+      100
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

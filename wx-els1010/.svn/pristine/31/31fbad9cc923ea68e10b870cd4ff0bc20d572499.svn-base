@@ -1,0 +1,95 @@
+let TAG = '[tt.model.board]';
+let ModelBoard = class{
+    constructor(){
+        this.board = [];
+        this.w     = tywx.tt.constants.BoardWidth;
+        this.h     = tywx.tt.constants.BoardHeight;
+        this.score = 0;
+        this.willFillBlocks = [];
+        this.previewConfigs = []; // * 预览配置
+    }
+    reset(){
+        this.score = 0;
+        this.resetBoard();
+        this.resetPreviewConfigs();
+    }
+    resetBoard(){
+        this.board = [];
+        for(let i = 0; i < this.h; ++i){
+            this.board[i] = [];
+            for(let j = 0; j < this.w; ++j){
+                this.board[i][j] = 0;
+            }
+        }
+        
+    }
+
+    resetPreviewConfigs(){
+        // * reset preview config
+        this.previewConfigs = [];
+        let Constants = tywx.tt.constants;
+        let block_configs = Constants.Blocks;
+        for(let i = 0; i < 3; ++i){
+            this.previewConfigs[i] = block_configs[parseInt(block_configs.length * Math.random())];
+        }
+    }
+
+    isCanFill(center_row,center_col, config){
+        let ret = false;
+        let [c_r, c_c] = [center_row, center_col];
+        let [m_r,m_c] = [tywx.tt.constants.BoardHeight, tywx.tt.constants.BoardWidth];
+        let BlockMap = tywx.tt.constants.BlockMap;
+        let fill_blocks = [];
+        let need_fill_num = 0;
+        for(let r = 0; r < config.length; ++r){
+            let line = config[r];
+            for(let c = 0; c < line.length; ++c){
+                let dis = BlockMap[r][c];
+                if(config[r][c] !== 0){
+                    let [b_r,b_c] = [c_r + dis[1],c_c + dis[0]];
+                    if(b_r >= 0
+                    && b_r < m_r
+                    && b_c >= 0
+                    && b_c < m_c
+                    && this.board[b_r][b_c] === 0){
+                        fill_blocks.push([b_r, b_c]);
+                    }
+                    need_fill_num++;
+                }
+            }
+        }
+        ret = fill_blocks.length === need_fill_num;
+        if(ret) this.willFillBlocks = fill_blocks;
+        else this.willFillBlocks = [];
+        tywx.tt.warn(TAG, 'isCanFill ',ret ? 'can fill' : 'can not fill');
+        return ret;
+    }
+
+    fillBaordByConfig(center_row, center_col, config){
+        tywx.tt.warn(TAG, 'start to fillBaord');
+        if(!this.willFillBlocks || this.willFillBlocks.length === 0){
+            tywx.tt.warn(TAG, `fillBoard error, this.willFillBlocks=${this.willFillBlocks}`);
+            return;
+        }
+        this.willFillBlocks.forEach(e=>{
+            let [r,c] = [e[0],e[1]];
+            if(this.board[r][c] === 0){
+                this.board[r][c] = 1;
+            }
+            else{
+                tywx.tt.warn(TAG, `fillBoardByConfig error r=${r} c=${c}`);
+            }
+        });
+        tywx.NotificationCenter.trigger(tywx.tt.events.TT_FILL_BOARD,this.willFillBlocks);
+        this.willFillBlocks = [];
+        tywx.tt.warn(TAG, 'fillBaord end');
+    }
+
+    getPreviewConfigs(){
+        return this.previewConfigs;
+    }
+    
+    
+};
+
+module.exports = ModelBoard;

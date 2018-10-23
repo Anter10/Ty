@@ -1,0 +1,29 @@
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        gqnumberLabel: cc.Label,
+        zpbtnNode: cc.Node,
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad() {
+        tywx.tt.boot();
+        tywx.tt.lottery.addZPIcon("home", this.zpbtnNode, cc.v2(0, 0));
+    },
+
+    startGame: function (e) {
+        cc.director.loadScene("scene_play");
+    },
+
+    showPhb: function () {
+        tywx.tt.rank_manager.showRank();
+    },
+
+    start() {
+
+    },
+
+    // update (dt) {},
+});

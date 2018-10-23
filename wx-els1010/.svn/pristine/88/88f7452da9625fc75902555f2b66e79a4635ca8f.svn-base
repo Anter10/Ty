@@ -1,0 +1,38 @@
+
+let TAG = '[tt_scene_play]';
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+        this.root = this.node.getChildByName('root');
+        this.pop = this.node.getChildByName('pop');
+
+        this.loadPlayView();
+    },
+
+    start () {
+
+    },
+
+    // update (dt) {},
+    loadPlayView(){
+        let self = this;
+        cc.loader.loadRes('prefabs/tt_view_play_board',(err, prefab)=>{
+            if(!err){
+                self.playView = cc.instantiate(prefab);
+                self.playView.parent = self.root;
+                tywx.tt.log(TAG, 'load play view success');
+                //self.playView.getComponent('tt_view_play_board').init();
+            }
+            else{
+                tywx.tt.error(TAG, 'load play view failed' , JSON.stringify(err));
+            }
+        });
+    }
+});

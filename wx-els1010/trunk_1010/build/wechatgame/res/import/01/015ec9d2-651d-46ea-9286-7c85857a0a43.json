@@ -1,0 +1,27 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "imghide",
+    "texture": "c4So/SavZDl5wOhbAvQg/D",
+    "rect": [
+      1,
+      1,
+      105,
+      105
+    ],
+    "offset": [
+      -1,
+      1
+    ],
+    "originalSize": [
+      109,
+      109
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

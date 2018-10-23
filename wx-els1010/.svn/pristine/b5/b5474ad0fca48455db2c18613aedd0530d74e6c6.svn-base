@@ -1,0 +1,102 @@
+const stopview_path = "prefabs/stop_view";
+
+const stop_view = cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        audioNormal: cc.Sprite,
+        audioEnable: cc.Sprite,
+    },
+
+    goOnGameCall: function () {
+        tywx.tt.Utils.showWXBanner();
+        this.closeCall();
+    },
+
+    returnHomeCall: function () {
+        tywx.tt.Utils.showWXBanner();
+        cc.director.loadScene("scene_menu");
+    },
+
+    changeButtonTexture: function () {
+        if (tywx.tt.AudioManager.getInstance().getIsMute()) {
+            this.audioNormal.node.active = false;
+            this.audioEnable.node.active = true;
+        } else if (!tywx.tt.AudioManager.getInstance().getIsMute()) {
+            this.audioNormal.node.active = true;
+            this.audioEnable.node.active = false;
+        } else {
+            // tywx.LOGE("状态不对");
+        }
+
+    },
+
+    repeateGameCall: function () {
+        tywx.tt.Utils.showWXBanner();
+        this.closeCall();
+    },
+
+    helpCall: function () {
+        tywx.tt.help.show();
+    },
+
+    audioCall: function () {
+        tywx.tt.log("curAudioState1 = " + tywx.tt.AudioManager.getInstance().getIsMute());
+        if (tywx.tt.AudioManager.getInstance().getIsMute() == false) {
+            tywx.tt.AudioManager.getInstance().stopMusic();
+            tywx.tt.AudioManager.getInstance().setIsMute(true);
+            tywx.tt.log("curAudioState2 = " + tywx.tt.AudioManager.getInstance().getIsMute());
+        } else if (tywx.tt.AudioManager.getInstance().getIsMute() == true) {
+            tywx.tt.AudioManager.getInstance().setIsMute(false);
+            tywx.tt.log("curAudioState3 = " + tywx.tt.AudioManager.getInstance().getIsMute());
+            tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.Configs.MUSICS.BG_MUSIC);
+        }
+        this.changeTexture();
+        tywx.tt.log(typeof (tywx.tt.AudioManager.getInstance().getIsMute()) +
+            "curAudioState4 = " + tywx.tt.AudioManager.getInstance().getIsMute());
+    },
+
+    changeTexture: function () {
+        this.changeButtonTexture();
+    },
+
+
+
+    onLoad() {
+        this.changeTexture();
+    },
+
+    start() {
+
+    },
+
+    closeBtnCall: function () {
+        tywx.tt.Utils.showWXBanner();
+        this.closeCall();
+    },
+
+    closeCall: function () {
+        stop_view.stopview.removeFromParent(true);
+        stop_view.stopview = null;
+    },
+
+    statics: {
+        stopview: null,
+        showStopView: function () {
+            cc.loader.loadRes(stopview_path, (err, prefab) => {
+                if (!err) {
+                    let stopview = cc.instantiate(prefab);
+                    let ads_script = stopview.getComponent('stop_view');
+                    stopview.x = 360;
+                    stopview.y = 640;
+                    stop_view.stopview = stopview;
+                    cc.director.getScene().addChild(stopview);
+                    tywx.tt.Utils.hideWXBanner();
+                }
+            });
+        }
+    }
+    // update (dt) {},
+});
+
+module.exports = stop_view;

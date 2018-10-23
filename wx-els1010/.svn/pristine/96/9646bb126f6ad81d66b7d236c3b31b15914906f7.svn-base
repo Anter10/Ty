@@ -1,0 +1,46 @@
+tywx.tt = tywx.tt || {};
+tywx.tt.isDebug = true;
+
+tywx.tt.constants = require('./common/tt_constants'); // * 常量
+tywx.tt.events = require('./common/tt_events'); // * 事件
+tywx.tt.configs = require('./common/tt_configs'); // * 配置文件
+tywx.tt.ads = require('./cross_ad/ads_manager'); //* 交叉倒流管理
+ 
+tywx.tt.configManager = require('./model/tt_model_config_manager'); 
+
+tywx.tt.log = (...args)=>{
+    if(!tywx.tt.isDebug) return;
+    let log_info = 'tywx.tt.log ====> ';
+    args.forEach(e=>{
+        log_info += e.toString() + ' ';
+    });
+    console.log(log_info);
+};
+tywx.tt.warn = (...args)=>{
+    let log_info = '%ctywx.tt.warn ====> %c';
+    args.forEach(e=>{
+        log_info += e.toString() + ' ';
+    });
+    console.log(log_info,'color:#FF00FF','color:#00FF00');
+};
+tywx.tt.error = (...args)=>{
+    let log_info = '%ctywx.tt.error ====> %c';
+    args.forEach(e=>{
+        log_info += e.toString() + ' ';
+    });
+    console.log(log_info,'color:#FF0000','color:#0000FF');
+};
+
+tywx.tt.boot = ()=>{
+    tywx.tt.configManager.requestConfig();
+};
+tywx.tt.shut = ()=>{
+
+};
+
+tywx.tt.onShow = res=>{
+    tywx.tt.log('[boot]', 'tywx.tt.onShow');
+};
+tywx.tt.onHide = ()=>{
+    tywx.tt.log('[boot]', 'tywx.tt.onHide');
+};

@@ -1,0 +1,60 @@
+ cc.Class({
+     extends: cc.Component,
+
+     properties: {
+         phbSprite: cc.Sprite,
+         rankShareButton: cc.Node,
+     },
+
+
+     onLoad() {
+            wx.postMessage({
+                method: 1,
+                MAIN_MENU_NUM: tywx.tt.constants.TT_SCORE,
+            });
+            var self = this;
+            tywx.Timer.setTimer(this, function () {
+                self._updateSubDomainCanvas();
+            }, 1, 10, 0);
+
+            const rankBtnScript = this.rankShareButton.getComponent("ShareButton")
+            rankBtnScript.setButtonCallType(1);
+            rankBtnScript.setShareConfig(tywx.tt.constants.ShareConfig.HOME_RANK_SHARE);
+            rankBtnScript.setSuccessCall(function () {
+                 self.shareSuc();
+            });
+     },
+
+     // 分享成功
+     shareSuc:function(){
+
+     },
+
+     closeRankView: function () {
+         tywx.tt.rank_manager.friendsRankView.removeFromParent(false);
+         tywx.tt.rank_manager.friendsRankView = null;
+     },
+
+     start() {
+         this.tex = new cc.Texture2D();
+         window.sharedCanvas.width = 635;
+         window.sharedCanvas.height = 60 * 30;
+     },
+
+     /**
+      * 刷新子域的canvas
+      */
+     _updateSubDomainCanvas: function () {
+         if (!this.tex) {
+             return;
+         }
+         var openDataContext = wx.getOpenDataContext();
+         var sharedCanvas = openDataContext.canvas;
+         this.tex.initWithElement(sharedCanvas);
+         this.tex.handleLoadedTexture();
+         this.phbSprite.spriteFrame = new cc.SpriteFrame(this.tex);
+     },
+
+
+     // update (dt) {},
+ });

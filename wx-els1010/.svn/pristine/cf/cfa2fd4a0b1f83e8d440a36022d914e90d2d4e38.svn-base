@@ -1,0 +1,20 @@
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad () {
+        tywx.tt.boot();
+    },
+
+    start () {
+
+    },
+
+    // update (dt) {},
+});

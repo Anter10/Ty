@@ -1,0 +1,38 @@
+ 
+ let rankview_path = "prefabs/rank_view";
+
+ const rank_manager = cc.Class({
+     extends: cc.Component,
+
+     properties: {
+
+     },
+
+     statics: {
+         showRank: function () {
+             cc.loader.loadRes(rankview_path, (err, prefab) => {
+                 if (!err) {
+                     let adsnode = cc.instantiate(prefab);
+                     let ads_script = adsnode.getComponent('rank_view');
+                     adsnode.x = 360;
+                     adsnode.y = 640;
+                     cc.director.getScene().addChild(adsnode);
+                 }
+             });
+
+         }
+     },
+
+     // LIFE-CYCLE CALLBACKS:
+
+     onLoad() {},
+
+     start() {
+
+     },
+
+     // update (dt) {},
+ });
+
+
+ module.exports = rank_manager;

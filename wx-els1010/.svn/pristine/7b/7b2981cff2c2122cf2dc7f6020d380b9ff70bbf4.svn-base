@@ -1,0 +1,85 @@
+/** 
+ * @description 
+ * created by gyc on 20181012
+ */
+
+let TAG = "[game/cross_ad/ads_blink.js]";
+let node_path = "prefabs/ads_blink";
+
+let ads_blink = cc.Class({
+    extends: cc.Component,
+    properties: {
+        adnode: cc.Prefab,
+        data: null,
+    },
+
+    /**
+     * @description 设置交叉倒流的数据
+     * @param {Object} data 交叉倒流的数据
+     */
+    setData: function (data) {
+        this.data = data;
+        tywx.tt.log(TAG, "广告设置了数据 " + JSON.stringify(data));
+        this.initUI();
+    },
+ 
+     
+    /**
+     * 
+     * @param {*} ads_type 
+     */
+    initUI: function () {
+          this.alladnode = [];
+          for (var t = 0; t < this.data.ads_data.length; t++) {
+              let data = this.data.ads_data[t];
+              let adnode = cc.instantiate(this.adnode);
+              let ads_script = adnode.getComponent('ad_node');
+              ads_script.setData(data);
+              let vpos = cc.v2(this.node.width / 2, this.node.height / 2);
+              adnode.position = vpos;
+              adnode.active = false;
+              this.node.addChild(adnode);
+              this.alladnode.push(adnode);
+          }
+          this.blinkindex = this.getBlinkIndex();
+          this.alladnode[this.blinkindex].active = true;
+          this.blink_display = this.data.blink_display;
+          this.blink();
+    },
+
+    blink: function() {
+        const delay = cc.delayTime(this.blink_display);
+        const self = this;
+        const call = function () {
+            self.alladnode[self.blinkindex].active = false;
+            self.blinkindex = self.getBlinkIndex();
+            self.alladnode[self.blinkindex].active = true;
+        }
+        const callFunc = cc.callFunc(call);
+        const seq = cc.sequence(delay, callFunc);
+        const repeatef = cc.repeatForever(seq);
+        this.node.runAction(repeatef);
+    },
+
+    getBlinkIndex:function(){
+        let random = Math.random() * 100;
+        var trand = 0;
+        for (var qzindex = 0; qzindex < this.data.ads_qz.length; qzindex ++){
+            if (qzindex <= this.data.ads_qz.length - 2) {
+                 trand = trand + this.data.ads_qz[qzindex];
+                 if (random < trand) {
+                     return qzindex;
+                 }
+             }else{
+                 return qzindex;
+             }
+        }
+    },
+
+    onLoad: function () {
+          
+    },
+ 
+
+});
+

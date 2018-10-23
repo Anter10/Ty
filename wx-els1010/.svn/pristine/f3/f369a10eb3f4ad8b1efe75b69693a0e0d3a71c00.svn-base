@@ -1,0 +1,54 @@
+/** 
+ * @description 
+ * created by gyc on 20181012
+ */
+
+let TAG = "[game/cross_ad/ads_node.js]";
+let node_path = "prefabs/ads_node";
+
+let ads_node = cc.Class({
+    extends: cc.Component,
+    properties: {
+        rootnode: cc.Node,
+        adnode: cc.Prefab,
+        listBackbtn:cc.Button,
+        data: null,
+    },
+
+    /**
+     * @description 设置交叉倒流的数据
+     * @param {Object} data 交叉倒流的数据
+     */
+    setData: function (data) {
+        this.data = data;
+        tywx.tt.log(TAG, "广告设置了数据 " + JSON.stringify(data));
+        this.initUI();
+    },
+
+    /**
+     * 
+     * @param {*} ads_type 
+     */
+    initUI: function () {
+        for (var t = 0; t < this.data.ads_data.length; t++) {
+            let data = this.data.ads_data[t];
+            let adnode = cc.instantiate(this.adnode);
+            let ads_script = adnode.getComponent('ad_node');
+            ads_script.setData(data);
+            let vpos = cc.v2(90 + (t * 150) - 360, 0);
+            tywx.tt.error(TAG, "vpos = " + JSON.stringify(vpos));
+            adnode.position = vpos;
+            this.node.addChild(adnode);
+        }
+    },
+
+
+
+    // use this for initialization
+    onLoad: function () {
+
+    },
+    
+
+});
+

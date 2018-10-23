@@ -1,0 +1,110 @@
+{
+  "version": "1.1.1",
+  "windows": {
+    "main": {
+      "main": true,
+      "url": "app://editor/index.html",
+      "windowType": "dockable",
+      "x": 312,
+      "y": 23,
+      "width": 1300,
+      "height": 877,
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "hierarchy"
+                ],
+                "height": 347,
+                "type": "panel",
+                "width": 270
+              },
+              {
+                "active": 0,
+                "children": [
+                  "assets"
+                ],
+                "height": 435.984375,
+                "type": "panel",
+                "width": 270
+              }
+            ],
+            "height": 786,
+            "type": "dock-v",
+            "width": 270
+          },
+          {
+            "active": 0,
+            "children": [
+              "scene"
+            ],
+            "height": 786,
+            "type": "panel",
+            "width": 447
+          },
+          {
+            "active": 0,
+            "children": [
+              "node-library"
+            ],
+            "height": 786,
+            "type": "panel",
+            "width": 264
+          },
+          {
+            "active": 0,
+            "children": [
+              "inspector"
+            ],
+            "height": 786,
+            "type": "panel",
+            "width": 304
+          }
+        ],
+        "type": "dock-h"
+      },
+      "panels": [
+        "hierarchy",
+        "node-library",
+        "inspector",
+        "assets",
+        "scene"
+      ]
+    }
+  },
+  "panels": {
+    "preferences": {
+      "x": 680,
+      "y": 267,
+      "width": 584,
+      "height": 548
+    },
+    "sprite-editor": {
+      "x": 375,
+      "y": 212,
+      "width": 500,
+      "height": 522
+    },
+    "builder": {
+      "x": 727,
+      "y": 23,
+      "width": 500,
+      "height": 646
+    },
+    "project-settings": {
+      "x": 469,
+      "y": 164,
+      "width": 584,
+      "height": 548
+    },
+    "console": {
+      "x": 520,
+      "y": 277,
+      "width": 400,
+      "height": 322
+    }
+  }
+}

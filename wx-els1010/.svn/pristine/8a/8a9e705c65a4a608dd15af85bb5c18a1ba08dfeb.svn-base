@@ -1,0 +1,89 @@
+ let friend_path = "prefabs/friend"; 
+ var self = null;
+ const friend = cc.Class({
+     extends: cc.Component,
+
+     properties: {
+         friendIcon: cc.Sprite,
+     },
+
+     // LIFE-CYCLE CALLBACKS:
+     
+     onLoad() {
+         this.tex = new cc.Texture2D();
+         window.sharedCanvas.width = 211;
+         window.sharedCanvas.height = 98;
+         this.updatetime = 15;
+         this.score = 0;
+         self = this;
+     },
+
+     /**
+      * @description: 刷新子域即将超越的玩家Canvas
+      */
+     updateFriendCanvas: function () {
+         //return;
+         if (!this.tex || !wx) {
+             return;
+         }
+         var openDataContext = wx.getOpenDataContext();
+         var sharedCanvas = openDataContext.canvas;
+         this.tex.initWithElement(sharedCanvas);
+         this.tex.handleLoadedTexture();
+         this.friendIcon.spriteFrame = new cc.SpriteFrame(this.tex);
+         this.friendIcon.node.active = true;
+     },
+
+     /**
+      * 设置当前玩家的分数 
+      * @param {Number} score 设置当前玩家的分数刷新当前显示的好友分数
+      */
+     setScoreFlush: function (score) {
+         this.score = score || 0;
+         this.updateFriendCanvas();
+     },
+
+
+     start() {
+
+     },
+
+     update(dt) {
+         this.updatetime = this.updatetime - dt;
+         if (this.updatetime < 0) {
+             this.updatetime = 10;
+             tywx.tt.Utils.sendWXMsg({
+                 method: 5,
+                 isrestart: true,
+                 score: self.score,
+             });
+         }
+         if(this.updatetime > 7){
+            this.updateFriendCanvas();
+         }
+     },
+
+     statics: {
+         iconnode: null,
+         iconscript: null,
+         addIcon: function (node, score, pos) {
+             cc.loader.loadRes(friend_path, (err, prefab) => {
+                 if (!err) {
+                     let ranknode = cc.instantiate(prefab);
+                     let friend_script = ranknode.getComponent('friend');
+                     friend_script.setScoreFlush(friend_script);
+                     friend.iconscript = friend_script;
+                     friend.iconnode = ranknode;
+                     node.addChild(ranknode);
+                 }
+             });
+         },
+         setScore: function (score) {
+             if (friend.iconscript) {
+                 friend.iconscript.setScoreFlush(score);
+             }
+         }
+     }
+ });
+
+ module.exports = friend;

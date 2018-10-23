@@ -1,0 +1,66 @@
+ /** 
+  * @description 
+  * created by gyc on 20181012
+  */
+ let TAG = '[game/cross_ad/ad_node.js]]';
+
+ cc.Class({
+     extends: cc.Component,
+     properties: {
+         nameLabel: {
+             default: null,
+             type: cc.Label,
+         },
+         icon: {
+             default: null,
+             type: cc.Sprite,
+         },
+
+     },
+
+     onLoad() {
+
+     },
+
+     /**
+      * @description 设置倒流的数据
+      */
+     setData: function (data) {
+         this.data = data;
+         this.flushIcon();
+         this.flushName();
+     },
+
+     /** 
+      * @description 刷新倒流图标 
+      */
+     flushIcon: function () {
+         var self = this;
+         cc.loader.load(
+             "https://elsfkws.nalrer.cn/teris/" + 'share_image/jiayi/daoliu/' + this.data.icon_url,
+             (err, texture) => {
+                 if (!err) {
+                     let new_sprite_frame = new cc.SpriteFrame(texture);
+                     self.icon.spriteFrame = new_sprite_frame;
+                     self.icon.node.setContentSize(cc.size(90, 90));
+                 } else {
+
+                 }
+             });
+     },
+
+     /** 
+      * @description 刷新倒流名称
+      */
+     flushName: function () {
+         this.nameLabel.string = this.data.name;
+     },
+
+     /** 
+      * @description  跳转到对应的游戏
+      */
+     intoMiniPrograme: function () {
+        tywx.tt.Utils.jump2MiniProgramByConfig(tywx.tt.Utils.getCrossAdConfigByAppId(this.data.appid));
+     }
+
+ });

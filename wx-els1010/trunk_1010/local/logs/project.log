@@ -1,0 +1,254 @@
+2018-10-23T01:32:44.447Z - normal: Load ~/.CocosCreator/settings.json
+2018-10-23T01:32:44.450Z - normal: checking language setting...
+2018-10-23T01:32:44.450Z - normal: Language: zh
+2018-10-23T01:32:45.024Z - success: protocol editor-framework registered
+2018-10-23T01:32:45.025Z - success: protocol app registered
+2018-10-23T01:32:45.025Z - success: protocol theme registered
+2018-10-23T01:32:45.025Z - success: protocol packages registered
+2018-10-23T01:32:45.026Z - success: protocol unpack registerred
+2018-10-23T01:32:45.026Z - success: protocol disable-commonjs registerred
+2018-10-23T01:32:45.541Z - normal: connected!
+2018-10-23T01:32:45.544Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/wx-els1010/trunk_1010
+2018-10-23T01:32:45.547Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/wx-els1010/trunk_1010
+2018-10-23T01:32:45.550Z - normal: Initializing Cocos2d
+2018-10-23T01:32:46.231Z - normal: Initializing Asset Database
+2018-10-23T01:32:46.282Z - success: protocol uuid registerred
+2018-10-23T01:32:46.282Z - success: protocol db registerred
+2018-10-23T01:32:46.282Z - success: protocol thumbnail registerred
+2018-10-23T01:32:46.282Z - normal: Loading editor/builtin packages
+2018-10-23T01:32:46.440Z - success: assets loaded
+2018-10-23T01:32:46.444Z - success: builder loaded
+2018-10-23T01:32:46.447Z - success: cocos-analytics loaded
+2018-10-23T01:32:46.453Z - success: console loaded
+2018-10-23T01:32:46.486Z - success: fb-instant-games loaded
+2018-10-23T01:32:46.492Z - success: hierarchy loaded
+2018-10-23T01:32:46.497Z - success: inspector loaded
+2018-10-23T01:32:46.499Z - success: keystore loaded
+2018-10-23T01:32:46.505Z - success: node-library loaded
+2018-10-23T01:32:46.507Z - success: package-asset loaded
+2018-10-23T01:32:46.509Z - success: preferences loaded
+2018-10-23T01:32:46.512Z - success: project-exporter loaded
+2018-10-23T01:32:46.529Z - success: project-importer loaded
+2018-10-23T01:32:46.533Z - success: project-settings loaded
+2018-10-23T01:32:46.537Z - success: ui-kit loaded
+2018-10-23T01:32:46.543Z - success: scene loaded
+2018-10-23T01:32:46.550Z - success: sprite-editor loaded
+2018-10-23T01:32:46.556Z - success: store loaded
+2018-10-23T01:32:46.562Z - success: timeline loaded
+2018-10-23T01:32:46.562Z - normal: Loading builtin packages
+2018-10-23T01:32:46.571Z - success: asset-db-debugger loaded
+2018-10-23T01:32:46.572Z - success: color-picker loaded
+2018-10-23T01:32:46.573Z - success: jsb-adapter loaded
+2018-10-23T01:32:46.577Z - success: package-manager loaded
+2018-10-23T01:32:46.692Z - success: qqplay-adapter loaded
+2018-10-23T01:32:46.700Z - success: sdkbox loaded
+2018-10-23T01:32:46.706Z - success: tester loaded
+2018-10-23T01:32:46.711Z - success: ui-grid loaded
+2018-10-23T01:32:46.715Z - success: ui-kit-preview-extra loaded
+2018-10-23T01:32:46.718Z - success: ui-kit-preview loaded
+2018-10-23T01:32:46.722Z - success: ui-tree loaded
+2018-10-23T01:32:46.723Z - success: weapp-adapter loaded
+2018-10-23T01:32:47.810Z - normal: Loading packages
+2018-10-23T01:32:47.835Z - normal: Watching packages
+2018-10-23T01:32:47.920Z - normal: Run Application
+2018-10-23T01:32:48.598Z - success: preview server running at http://localhost:7456
+2018-10-23T01:39:44.163Z - warn: Script attached to "red_packet_tansfer" in prefab "red_packet_tansfer.prefab" is missing or invalid. Detailed information:
+Node path: "red_packet_tansfer"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Script UUID: "8c511c97-84eb-4d45-8024-05bb938b919e"
+Class ID: "8c511yXhOtNRYAkBbuTi5Ge"
+
+2018-10-23T01:39:44.193Z - warn: The Asset used by node "motai" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/motai"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.193Z - warn: The Asset used by component "cc.Sprite" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/sprite_bg"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "b7e22f5b-7684-436a-8d9a-45a742d5bf6b"
+
+2018-10-23T01:39:44.194Z - warn: The Asset used by node "sprite_bg" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/sprite_bg"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.194Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_title"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
+
+2018-10-23T01:39:44.195Z - warn: The Asset used by node "label_title" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_title"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.195Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_max"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
+
+2018-10-23T01:39:44.195Z - warn: The Asset used by node "label_max" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_max"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.196Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_rules"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
+
+2018-10-23T01:39:44.196Z - warn: The Asset used by node "label_rules" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_rules"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.196Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_current"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
+
+2018-10-23T01:39:44.197Z - warn: The Asset used by node "label_current" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_current"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.197Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_tips"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
+
+2018-10-23T01:39:44.198Z - warn: The Asset used by node "label_tips" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/label_tips"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.198Z - warn: The Asset used by component "cc.Sprite" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/btn_close"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "135f5126-138f-44a6-bb30-f98e257b3746"
+
+2018-10-23T01:39:44.198Z - warn: The Asset used by component "cc.Button" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/btn_close"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "135f5126-138f-44a6-bb30-f98e257b3746"
+
+2018-10-23T01:39:44.198Z - warn: The Asset used by node "btn_close" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/btn_close"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.198Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/btn_transfer/Label"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
+
+2018-10-23T01:39:44.199Z - warn: The Asset used by node "Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/btn_transfer/Label"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.200Z - warn: The Asset used by node "label_line" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/btn_transfer/label_line"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.200Z - warn: The Asset used by node "btn_transfer" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root/btn_transfer"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.200Z - warn: The Asset used by node "root" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer/root"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:39:44.201Z - warn: The Asset used by node "red_packet_tansfer" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
+Node path: "red_packet_tansfer"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+
+2018-10-23T01:40:42.368Z - warn: Script attached to "red_packet_tansfer" in prefab "red_packet_tansfer.prefab" is missing or invalid. Detailed information:
+Node path: "red_packet_tansfer"
+Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
+Script UUID: "8c511c97-84eb-4d45-8024-05bb938b919e"
+Class ID: "8c511yXhOtNRYAkBbuTi5Ge"
+
+2018-10-23T01:43:48.024Z - warn: Script attached to "GetMoneyButton" in prefab "GetMoneyButton.prefab" is missing or invalid. Detailed information:
+Node path: "GetMoneyButton"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Script UUID: "411983d0-0967-4790-9d85-10124c7a635a"
+Class ID: "41198PQCWdHkJ2FEBJMemNa"
+
+2018-10-23T01:43:48.050Z - warn: The Asset used by node "Label" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton/getmoneyBtn/Label"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
+
+2018-10-23T01:43:48.051Z - warn: The Asset used by component "cc.Sprite" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton/getmoneyBtn"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "da3b7436-feb3-4420-82e2-bab005d98e6e"
+
+2018-10-23T01:43:48.051Z - warn: The Asset used by component "cc.Button" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton/getmoneyBtn"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "da3b7436-feb3-4420-82e2-bab005d98e6e"
+
+2018-10-23T01:43:48.052Z - warn: The Asset used by node "getmoneyBtn" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton/getmoneyBtn"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
+
+2018-10-23T01:43:48.052Z - warn: The Asset used by node "GetMoneyButton" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
+
+2018-10-23T01:44:14.643Z - warn: Script attached to "GetMoneyButton" in prefab "GetMoneyButton.prefab" is missing or invalid. Detailed information:
+Node path: "GetMoneyButton"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Script UUID: "411983d0-0967-4790-9d85-10124c7a635a"
+Class ID: "41198PQCWdHkJ2FEBJMemNa"
+
+2018-10-23T01:44:14.663Z - warn: The Asset used by node "Label" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton/getmoneyBtn/Label"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
+
+2018-10-23T01:44:14.663Z - warn: The Asset used by component "cc.Sprite" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton/getmoneyBtn"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "da3b7436-feb3-4420-82e2-bab005d98e6e"
+
+2018-10-23T01:44:14.664Z - warn: The Asset used by component "cc.Button" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton/getmoneyBtn"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "da3b7436-feb3-4420-82e2-bab005d98e6e"
+
+2018-10-23T01:44:14.664Z - warn: The Asset used by node "getmoneyBtn" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton/getmoneyBtn"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
+
+2018-10-23T01:44:14.664Z - warn: The Asset used by node "GetMoneyButton" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
+Node path: "GetMoneyButton"
+Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
+Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
+
+2018-10-23T01:46:27.325Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:5858
+2018-10-23T03:09:40.247Z - error: TypeError: Cannot read property '$el' of null
+    at requestAnimationFrame (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/editor/builtin/hierarchy/panel/component/node.js:1:3250)
+2018-10-23T03:09:40.250Z - error: TypeError: Cannot read property '$el' of null
+    at requestAnimationFrame (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/editor/builtin/hierarchy/panel/component/node.js:1:3250)
+2018-10-23T07:54:49.824Z - error: Widget target must be one of the parent nodes of it
+    at Object.cc.errorID (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDebug.js:167:16)
+    at cc_Widget.cc.Class._validateTargetInDEV (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/components/CCWidget.js:286:28)
+    at visitNode (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/base-ui/CCWidgetManager.js:184:28)
+    at visitNode (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/base-ui/CCWidgetManager.js:197:21)
+    at visitNode (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/base-ui/CCWidgetManager.js:197:21)
+    at refreshScene (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/base-ui/CCWidgetManager.js:243:21)
+    at cc.Director.CallbacksInvoker.invoke (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/platform/callbacks-invoker.js:167:29)
+    at cc.Director.mainLoop.CC_EDITOR._purgeDirectorInNextLoop [as mainLoop] (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDirector.js:438:26)
+    at EditorEngine.tickInEditMode (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/editor/page/scene-utils/editor-engine/index.js:1:2597)
+    at EditorEngine._tick (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/editor/page/scene-utils/editor-engine/index.js:1:5622)

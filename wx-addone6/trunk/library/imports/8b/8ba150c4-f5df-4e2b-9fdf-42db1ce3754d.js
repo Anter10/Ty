@@ -709,8 +709,8 @@ var gamestart = cc.Class({
             tywx.ado.isRequestedConfig = true;
             tywx.ado.Configs = config;
             tywx.config = config;
-            tywx.ado.Constants.WXAdConfig.bannerId = config.WXAd.banner;
-            tywx.ado.Constants.WXAdConfig.vedioId = config.WXAd.video;
+            tywx.ado.Constants.WXAdConfig.bannerId = config.WXAd2.banner;
+            tywx.ado.Constants.WXAdConfig.vedioId = config.WXAd2.video;
             if (tywx.ado.Constants.WXAdConfig.vedioId === '') tywx.ado.isCanWatchVideo = false;else tywx.ado.isCanWatchVideo = true;
             //config.auditing = false;
             that.refreshAfterGetConfig();
@@ -873,11 +873,7 @@ var gamestart = cc.Class({
             });
             var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(shareconfig[0]);
             if (!msg) {
-                msg = {};
-                msg.shareContent = "你知道 +1 吗？";
-                msg.sharePicUrl = "https://elsfkws.nalrer.cn/teris/share_image/jiayi/jy03.jpg";
-                msg.sharePointId = "766";
-                msg.shareSchemeId = "1155";
+                msg = tywx.ado.Constants.DefaultShareConfig;
             }
             if (msg) {
                 tywx.ShareInterface.share(msg.shareContent, msg.sharePicUrl, msg.sharePointId, msg.shareSchemeId, function (res) {

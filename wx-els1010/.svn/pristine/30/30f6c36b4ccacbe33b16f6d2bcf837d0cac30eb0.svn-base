@@ -1,0 +1,43 @@
+cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        gqnumberLabel: cc.Label,
+        zpbtnNode: cc.Node,
+        bannerNode: cc.Node,
+
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad() {
+        wx.postMessage({
+            method: "load_data",
+            MAIN_MENU_NUM: tywx.tt.constants.TT_SCORE,
+        });
+        tywx.tt.boot();
+        tywx.tt.Utils.saveItem(tywx.tt.constants.TT_SCORE, 120);
+        tywx.tt.lottery.addZPIcon("home", this.zpbtnNode, cc.v2(0, 0));
+        tywx.tt.ads.addAdsNode("banner_menu", this.bannerNode, cc.v2(0, 0));
+    },
+    
+    onDestroy() {
+        tywx.tt.Utils.hideGameClub();
+        tywx.tt.Utils.destroyWXBanner();
+        tywx.NotificationCenter.ignoreScope(this);
+    },
+
+    startGame: function (e) {
+        cc.director.loadScene("scene_play");
+    },
+
+    showPhb: function () {
+        tywx.tt.rank_manager.showRank();
+    },
+
+    start() {
+
+    },
+
+    // update (dt) {},
+});

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "dzb_icon",
+    "texture": "4347df4c-2b54-41e4-972a-c4e51675a527",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      96,
+      116
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      96,
+      116
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

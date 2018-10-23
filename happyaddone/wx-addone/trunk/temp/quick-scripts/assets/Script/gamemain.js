@@ -2229,6 +2229,9 @@ var gamemain = cc.Class({
             this.fhDjsLabel.node.active = false;
             this.quanSprite.active = false;
             this.gameOverMaxRoot.active = true;
+            this.fuHuo.active = false;
+            self.closeBtnNode.active = true;
+            self.returnBtnNode.active = false;
             tywx.ado.Utils.commonScaleIn(this.gameOverMaxRoot);
         } else {
             this.gameOverMaxRoot.active = false;
@@ -3228,7 +3231,7 @@ var gamemain = cc.Class({
         var rate_width = dcs.width / ds.width,
             rate_height = dcs.height / ds.height;
         var d_x = (ds.width - dcs.width) / 2,
-            d_y = (ds.height - dcs.height) / 2 - 71;
+            d_y = (ds.height - dcs.height) / 2 - 30;
         var rate_x = d_x / ds.width,
             rate_y = d_y / ds.height;
 

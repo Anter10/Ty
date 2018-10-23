@@ -1,0 +1,36 @@
+"use strict";
+cc._RF.push(module, '0748epyd6dCdaTmHXD3L/V+', 'testscene');
+// scripts/game/cross_ad/testscene.js
+
+"use strict";
+
+// Learn cc.Class:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
+// Learn Attribute:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
+// Learn life-cycle callbacks:
+//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
+//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+
+cc.Class({
+    extends: cc.Component,
+
+    properties: {},
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad: function onLoad() {
+        tywx.tt.boot();
+        //  tywx.tt.ads.addAdsNode( "blink_menu",this.node, cc.v2(0, 0));
+        //  tywx.tt.ads.addAdsNode("banner_gameover",this.node, cc.v2(0, 533));
+        //  tywx.tt.ads.addAdsNode("list_menu",this.node, cc.v2(220, 222));
+    },
+    start: function start() {}
+}
+
+// update (dt) {},
+);
+
+cc._RF.pop();

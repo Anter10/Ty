@@ -225,12 +225,24 @@ cc.Class({
      * @description 判断是什么类型的加倍 视频 或者 分享
      */
     doubleAddInit: function doubleAddInit() {
-        if ((tywx.config.share_control.bigdouble == "video" || tywx.ado.isMinGanIP) && tywx.ado.isCanWatchVideo) {
+        var share_control = tywx.config.share_control_2.bigdouble;
+        var random = parseInt(Math.random() * 100);
+        if ((share_control[0] == "video" || tywx.ado.isMinGanIP) && tywx.ado.isCanWatchVideo) {
             this.shareButton.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO);
-            this.shareButton.getComponent("ShareButton").setButtonCallType(2);
-        } else if (tywx.config.share_control.bigdouble == "share" || !tywx.ado.isCanWatchVideo) {
+            if (random <= share_control[1] || tywx.ado.isMinGanIP) {
+                this.shareButton.getComponent("ShareButton").setButtonCallType(2);
+            } else {
+                this.shareButton.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE);
+                this.shareButton.getComponent("ShareButton").setButtonCallType(1);
+            }
+        } else if (share_control[0] == "share" || !tywx.ado.isCanWatchVideo) {
             this.shareButton.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE);
-            this.shareButton.getComponent("ShareButton").setButtonCallType(1);
+            if (random <= share_control[1]) {
+                this.shareButton.getComponent("ShareButton").setButtonCallType(1);
+            } else {
+                this.shareButton.getComponent("ShareButton").setShareConfig(tywx.ado.Constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO);
+                this.shareButton.getComponent("ShareButton").setButtonCallType(2);
+            }
         }
     },
 

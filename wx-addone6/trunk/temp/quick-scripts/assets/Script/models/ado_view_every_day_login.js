@@ -26,23 +26,31 @@ cc.Class({
         } else if (cc.director.getScene()._name === 'gamemain') {
             //tywx.ado.Utils.hideWXBanner();
         }
-
-        if (tywx.config.share_control.dailydouble === "video") {
-            if (!this.root) this.root = this.node.getChildByName('root');
+        if (!this.root) this.root = this.node.getChildByName('root');
+        var share_control = tywx.config.share_control_2.dailydouble;
+        var random = parseInt(Math.random() * 100);
+        if ((share_control[0] === "video" || tywx.ado.isMinGanIP) && tywx.ado.isCanWatchVideo) {
             var toggle_share = this.root.getChildByName('toggle_share').getComponent(cc.Toggle);
-            if (toggle_share) {
+            // 如果没有在概率内 则直接看视频
+            if (random <= share_control[1] && toggle_share || tywx.ado.isMinGanIP) {
                 toggle_share.isChecked = false;
                 this.changeShareStat();
+            } else {
+                this.root.getChildByName('toggle_share').active = false;
+                toggle_share.isChecked = true;
             }
-        }
-
-        // ! Modify by luning [08-10-2018] 如果不能看视频，强制只能分享
-        if (!tywx.ado.isCanWatchVideo) {
+        } else if (share_control[0] === "share") {
             this.root.getChildByName('toggle_share').active = false;
             var _toggle_share = this.root.getChildByName('toggle_share').getComponent(cc.Toggle);
             _toggle_share.isChecked = true;
-            this.changeShareStat();
+            // 如果没有在概率内 则直接看视频
+            if (random > share_control[1] && tywx.ado.isCanWatchVideo) {
+                this.root.getChildByName('toggle_share').active = true;
+                _toggle_share.isChecked = false;
+                this.changeShareStat();
+            }
         }
+        console.log(share_control[0] + random + "当前的数据 =  " + share_control[1] + this.isShare);
     },
     start: function start() {
         tywx.ado.Utils.showWXBanner();
@@ -112,11 +120,7 @@ cc.Class({
                 var shareConfig = tywx.ado.Constants.ShareConfig.EVERY_DAY_GIFT_DOUBLE_SHARE;
                 var msg = tywx.ado.Utils.getRandomShareConfigByShareTag(shareConfig[0]);
                 if (!msg) {
-                    msg = {};
-                    msg.shareContent = "你知道 +1 吗？";
-                    msg.sharePicUrl = "https://elsfkws.nalrer.cn/teris/share_image/jiayi/jy03.jpg";
-                    msg.sharePointId = "766";
-                    msg.shareSchemeId = "1155";
+                    msg = tywx.ado.Constants.DefaultShareConfig;
                 }
                 if (msg) {
                     tywx.ShareInterface.share(msg.shareContent, msg.sharePicUrl, msg.sharePointId, msg.shareSchemeId, function (res) {

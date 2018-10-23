@@ -1,0 +1,58 @@
+ const lotery_get_view_path = "prefabs/lottery_get_view";
+
+ const lottery_get_view = cc.Class({
+     extends: cc.Component,
+
+     properties: {
+         nameLabel: cc.Label,
+         icon: cc.Sprite,
+         mfjbBtnNode: cc.Node,
+     },
+
+
+     close: function () {
+         lottery_get_view.get_view_node.removeFromParent(true);
+         lottery_get_view.get_view_node = null;
+     },
+
+     
+     // 加倍领取奖励
+     addDoubleJL:function(){
+        console.log("加倍奖励哦");
+     },
+
+     onLoad() {
+         // 视频抽奖
+         const videoBtnScript = this.videoBtn.getComponent("ShareButton")
+         videoBtnScript.setButtonCallType(1);
+         videoBtnScript.setShareConfig(tywx.tt.constants.ShareConfig.HOME_ZP_GET_VIDEO);
+         videoBtnScript.setSuccessCall(function () {
+             self.addDoubleJL();
+         });
+     },
+
+     start() {
+
+     },
+
+     statics: {
+         get_view_node: null,
+         show: function () {
+             cc.loader.loadRes(lotery_get_view_path, (err, prefab) => {
+                 if (!err) {
+                     let getlotterynode = cc.instantiate(prefab);
+                     let ads_script = getlotterynode.getComponent('lottery_get_view');
+                     getlotterynode.x = 360;
+                     getlotterynode.y = 640;
+                     lottery_get_view.get_view_node = getlotterynode;
+                     cc.director.getScene().addChild(getlotterynode);
+                 }
+             });
+         }
+     }
+
+     // update (dt) {},
+ });
+
+
+ module.exports = lottery_get_view;

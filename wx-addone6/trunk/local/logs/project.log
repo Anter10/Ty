@@ -1,62 +1,75 @@
-2018-10-11T02:58:56.022Z - normal: Load ~/.CocosCreator/settings.json
-2018-10-11T02:58:56.025Z - normal: checking language setting...
-2018-10-11T02:58:56.025Z - normal: Language: zh
-2018-10-11T02:58:56.494Z - success: protocol editor-framework registered
-2018-10-11T02:58:56.494Z - success: protocol app registered
-2018-10-11T02:58:56.494Z - success: protocol theme registered
-2018-10-11T02:58:56.494Z - success: protocol packages registered
-2018-10-11T02:58:56.495Z - success: protocol unpack registerred
-2018-10-11T02:58:56.495Z - success: protocol disable-commonjs registerred
-2018-10-11T02:58:56.665Z - normal: connected!
-2018-10-11T02:58:56.668Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/wx-addone6/trunk
-2018-10-11T02:58:56.672Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/wx-addone6/trunk
-2018-10-11T02:58:56.676Z - normal: Initializing Cocos2d
-2018-10-11T02:58:57.275Z - normal: Initializing Asset Database
-2018-10-11T02:58:57.320Z - success: protocol uuid registerred
-2018-10-11T02:58:57.321Z - success: protocol db registerred
-2018-10-11T02:58:57.321Z - success: protocol thumbnail registerred
-2018-10-11T02:58:57.321Z - normal: Loading editor/builtin packages
-2018-10-11T02:58:57.462Z - success: assets loaded
-2018-10-11T02:58:57.465Z - success: builder loaded
-2018-10-11T02:58:57.468Z - success: cocos-analytics loaded
-2018-10-11T02:58:57.473Z - success: console loaded
-2018-10-11T02:58:57.506Z - success: fb-instant-games loaded
-2018-10-11T02:58:57.512Z - success: hierarchy loaded
-2018-10-11T02:58:57.516Z - success: inspector loaded
-2018-10-11T02:58:57.517Z - success: keystore loaded
-2018-10-11T02:58:57.525Z - success: node-library loaded
-2018-10-11T02:58:57.527Z - success: package-asset loaded
-2018-10-11T02:58:57.529Z - success: preferences loaded
-2018-10-11T02:58:57.532Z - success: project-exporter loaded
-2018-10-11T02:58:57.548Z - success: project-importer loaded
-2018-10-11T02:58:57.551Z - success: project-settings loaded
-2018-10-11T02:58:57.555Z - success: ui-kit loaded
-2018-10-11T02:58:57.560Z - success: scene loaded
-2018-10-11T02:58:57.561Z - success: sprite-editor loaded
-2018-10-11T02:58:57.566Z - success: store loaded
-2018-10-11T02:58:57.572Z - success: timeline loaded
-2018-10-11T02:58:57.572Z - normal: Loading builtin packages
-2018-10-11T02:58:57.576Z - success: asset-db-debugger loaded
-2018-10-11T02:58:57.577Z - success: color-picker loaded
-2018-10-11T02:58:57.578Z - success: jsb-adapter loaded
-2018-10-11T02:58:57.582Z - success: package-manager loaded
-2018-10-11T02:58:57.681Z - success: qqplay-adapter loaded
-2018-10-11T02:58:57.689Z - success: sdkbox loaded
-2018-10-11T02:58:57.693Z - success: tester loaded
-2018-10-11T02:58:57.697Z - success: ui-grid loaded
-2018-10-11T02:58:57.700Z - success: ui-kit-preview-extra loaded
-2018-10-11T02:58:57.703Z - success: ui-kit-preview loaded
-2018-10-11T02:58:57.706Z - success: ui-tree loaded
-2018-10-11T02:58:57.707Z - success: weapp-adapter loaded
-2018-10-11T02:58:58.693Z - normal: Loading packages
-2018-10-11T02:58:58.702Z - normal: Watching packages
-2018-10-11T02:58:58.777Z - normal: Run Application
-2018-10-11T02:59:01.772Z - success: preview server running at http://localhost:7456
-2018-10-11T02:59:10.916Z - normal: AddOne boot start
-2018-10-11T02:59:10.929Z - normal: AddOne boot end
-2018-10-11T02:59:10.990Z - warn: Should not specify class name effect for Component which defines in project.
-2018-10-11T02:59:10.991Z - warn: Can not instantiate CCClass 'effect' with arguments.
-2018-10-11T05:53:31.640Z - normal: AddOne boot start
-2018-10-11T05:53:31.654Z - normal: AddOne boot end
-2018-10-11T05:53:31.732Z - warn: Should not specify class name effect for Component which defines in project.
-2018-10-11T05:53:31.733Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-10-23T01:36:02.182Z - normal: Load ~/.CocosCreator/settings.json
+2018-10-23T01:36:02.186Z - normal: checking language setting...
+2018-10-23T01:36:02.187Z - normal: Language: zh
+2018-10-23T01:36:02.666Z - success: protocol editor-framework registered
+2018-10-23T01:36:02.666Z - success: protocol app registered
+2018-10-23T01:36:02.667Z - success: protocol theme registered
+2018-10-23T01:36:02.667Z - success: protocol packages registered
+2018-10-23T01:36:02.667Z - success: protocol unpack registerred
+2018-10-23T01:36:02.667Z - success: protocol disable-commonjs registerred
+2018-10-23T01:36:02.813Z - normal: connected!
+2018-10-23T01:36:02.816Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/wx-addone6/trunk
+2018-10-23T01:36:02.819Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/wx-addone6/trunk
+2018-10-23T01:36:02.826Z - normal: Initializing Cocos2d
+2018-10-23T01:36:03.463Z - normal: Initializing Asset Database
+2018-10-23T01:36:03.509Z - success: protocol uuid registerred
+2018-10-23T01:36:03.509Z - success: protocol db registerred
+2018-10-23T01:36:03.510Z - success: protocol thumbnail registerred
+2018-10-23T01:36:03.510Z - normal: Loading editor/builtin packages
+2018-10-23T01:36:03.654Z - success: assets loaded
+2018-10-23T01:36:03.657Z - success: builder loaded
+2018-10-23T01:36:03.659Z - success: cocos-analytics loaded
+2018-10-23T01:36:03.664Z - success: console loaded
+2018-10-23T01:36:03.697Z - success: fb-instant-games loaded
+2018-10-23T01:36:03.703Z - success: hierarchy loaded
+2018-10-23T01:36:03.707Z - success: inspector loaded
+2018-10-23T01:36:03.708Z - success: keystore loaded
+2018-10-23T01:36:03.713Z - success: node-library loaded
+2018-10-23T01:36:03.714Z - success: package-asset loaded
+2018-10-23T01:36:03.715Z - success: preferences loaded
+2018-10-23T01:36:03.718Z - success: project-exporter loaded
+2018-10-23T01:36:03.733Z - success: project-importer loaded
+2018-10-23T01:36:03.737Z - success: project-settings loaded
+2018-10-23T01:36:03.740Z - success: ui-kit loaded
+2018-10-23T01:36:03.744Z - success: scene loaded
+2018-10-23T01:36:03.745Z - success: sprite-editor loaded
+2018-10-23T01:36:03.750Z - success: store loaded
+2018-10-23T01:36:03.755Z - success: timeline loaded
+2018-10-23T01:36:03.755Z - normal: Loading builtin packages
+2018-10-23T01:36:03.759Z - success: asset-db-debugger loaded
+2018-10-23T01:36:03.760Z - success: color-picker loaded
+2018-10-23T01:36:03.761Z - success: jsb-adapter loaded
+2018-10-23T01:36:03.764Z - success: package-manager loaded
+2018-10-23T01:36:03.853Z - success: qqplay-adapter loaded
+2018-10-23T01:36:03.858Z - success: sdkbox loaded
+2018-10-23T01:36:03.863Z - success: tester loaded
+2018-10-23T01:36:03.867Z - success: ui-grid loaded
+2018-10-23T01:36:03.872Z - success: ui-kit-preview-extra loaded
+2018-10-23T01:36:03.875Z - success: ui-kit-preview loaded
+2018-10-23T01:36:03.878Z - success: ui-tree loaded
+2018-10-23T01:36:03.879Z - success: weapp-adapter loaded
+2018-10-23T01:36:04.859Z - normal: Loading packages
+2018-10-23T01:36:04.865Z - normal: Watching packages
+2018-10-23T01:36:04.945Z - normal: Run Application
+2018-10-23T01:36:05.739Z - success: preview server running at http://localhost:7457
+2018-10-23T01:36:14.612Z - normal: AddOne boot start
+2018-10-23T01:36:14.622Z - normal: AddOne boot end
+2018-10-23T01:36:14.664Z - warn: Should not specify class name effect for Component which defines in project.
+2018-10-23T01:36:14.664Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-10-23T01:43:02.700Z - warn: object already destroyed
+2018-10-23T01:43:02.703Z - warn: object already destroyed
+2018-10-23T01:43:25.884Z - warn: object already destroyed
+2018-10-23T01:43:25.885Z - warn: object already destroyed
+2018-10-23T02:37:08.768Z - normal: AddOne boot start
+2018-10-23T02:37:08.785Z - normal: AddOne boot end
+2018-10-23T02:37:08.873Z - warn: Should not specify class name effect for Component which defines in project.
+2018-10-23T02:37:08.874Z - warn: Can not instantiate CCClass 'effect' with arguments.
+2018-10-23T03:33:20.320Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:57013
+2018-10-23T06:26:10.425Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:88484
+2018-10-23T06:48:53.222Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:91424
+2018-10-23T07:33:01.268Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:97371
+2018-10-23T07:35:08.165Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:97608
+2018-10-23T08:16:14.399Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:119654
+2018-10-23T08:22:56.106Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:123537
+2018-10-23T08:23:01.798Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:123539
+2018-10-23T08:42:00.722Z - info: shutdown preview server
