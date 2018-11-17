@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "huanyihuanpng",
+    "texture": "6cf9028a-7f7d-4d3b-8700-a6b65532ec01",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      90,
+      92
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      90,
+      92
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

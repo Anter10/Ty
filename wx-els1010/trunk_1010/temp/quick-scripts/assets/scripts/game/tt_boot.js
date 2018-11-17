@@ -61,7 +61,7 @@ tywx.tt.error = function () {
 };
 
 tywx.tt.boot = function () {
-    tywx.tt.configManager.requestConfig();
+    tywx.tt.configManager.getInstance().requestConfig();
 };
 tywx.tt.shut = function () {};
 
@@ -74,9 +74,12 @@ tywx.tt.onShow = function (result) {
     tywx.tt.log('[boot]', 'tywx.tt.onShow');
     tywx.tt.AudioManager.getInstance().loadAudioRes();
     tywx.tt.log("播放背景音乐配置 " + JSON.stringify(tywx.tt.Configs));
-    tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.Configs.MUSICS.BG_MUSIC);
+    tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.AudioManager.getInstance().getBGMusic());
     // tywx.tt.logWithColor('tywx.tt.onShow');
     tywx.AdManager.init();
+    if (tywx.ShareInterface.IsWaitingCallback) {
+        tywx.ShareInterface.shareBack();
+    }
 };
 
 cc._RF.pop();

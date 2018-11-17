@@ -8,7 +8,9 @@ var TAG = '[tt_view_block]';
 cc.Class({
     extends: cc.Component,
 
-    properties: {},
+    properties: {
+        blink: cc.Sprite
+    },
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -27,6 +29,20 @@ cc.Class({
     },
 
 
+    blockBlink: function blockBlink() {
+        this.blink.node.active = true;
+        var scale1 = cc.scaleTo(0.5, 1.1);
+        var scale2 = cc.scaleTo(0.5, 1);
+        var seq = cc.sequence(scale1, scale2);
+        var rep = cc.repeatForever(seq);
+        this.blink.node.runAction(rep);
+    },
+
+    blockHide: function blockHide() {
+        this.blink.node.active = false;
+        this.blink.node.stopAllActions();
+    },
+
     // update (dt) {},
     refresh: function refresh() {},
     setStat: function setStat(stat) {
@@ -35,12 +51,33 @@ cc.Class({
         this.frameIdx = -1;
         this.init();
     },
+    getStat: function getStat() {
+        return this.stat;
+    },
     hideBg: function hideBg() {
         this.node.getChildByName('bg').active = false;
     },
     setBgColor: function setBgColor(color) {
-        this.node.getChildByName('bg').color = color;
-        this.node.getChildByName('bg').opacity = 11;
+        // this.node.getChildByName('bg').color = color;
+        // this.node.getChildByName('bg').opacity = 35;
+        var self = this;
+        if (color == 1) {
+            cc.loader.loadRes('images/tt_blocks/greyblack', cc.SpriteFrame, function (err, sprite_frame) {
+                if (!err) {
+                    self.node.getChildByName('bg').getComponent(cc.Sprite).spriteFrame = sprite_frame;
+                } else {
+                    tywx.tt.log(TAG, "ddda error");
+                }
+            });
+        } else {
+            cc.loader.loadRes('images/tt_blocks/hideblack', cc.SpriteFrame, function (err, sprite_frame) {
+                if (!err) {
+                    self.node.getChildByName('bg').getComponent(cc.Sprite).spriteFrame = sprite_frame;
+                } else {
+                    tywx.tt.log(TAG, "ddda error");
+                }
+            });
+        }
     },
     init: function init() {
         this.display = this.node.getChildByName('display');
@@ -58,6 +95,7 @@ cc.Class({
             this.frame.active = false;
             this.display.active = false;
         } else {
+
             this.frame.active = false;
             this.display.active = true;
             this.frameIdx = this.stat;
@@ -65,8 +103,23 @@ cc.Class({
             cc.loader.loadRes('images/tt_blocks/b' + this.stat, cc.SpriteFrame, function (err, sprite_frame) {
                 if (!err) {
                     self.displaySprite.spriteFrame = sprite_frame;
+                } else {
+                    tywx.tt.log(TAG, "ddda error");
                 }
             });
+            this.blinkDisplay();
+        }
+    },
+    blinkDisplay: function blinkDisplay() {
+        this.displaySprite.node.stopAllActions();
+        if (this.stat == 12) {
+            var scale1 = cc.scaleTo(0.6, 1.1);
+            var scale2 = cc.scaleTo(0.6, 1);
+            var seq = cc.sequence(scale1, scale2);
+            var rep = cc.repeatForever(seq);
+            this.displaySprite.node.runAction(rep);
+        } else {
+            this.displaySprite.node.scale = 1;
         }
     },
     showMask: function showMask() {

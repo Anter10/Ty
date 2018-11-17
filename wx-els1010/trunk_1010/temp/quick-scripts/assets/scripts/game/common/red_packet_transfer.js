@@ -2,7 +2,7 @@
 cc._RF.push(module, '29e57pwKshPcpoalpAKS2sM', 'red_packet_transfer', __filename);
 // scripts/game/common/red_packet_transfer.js
 
-'use strict';
+"use strict";
 
 cc.Class({
     extends: cc.Component,
@@ -12,37 +12,42 @@ cc.Class({
         labelRules: cc.Label,
         labelTips: cc.Label,
         labelCurrent: cc.Label,
-        nodeCurrent: cc.Node
+        nodeCurrent: cc.Node,
+        background: cc.Node
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function onLoad() {
-        if (cc.director.getScene()._name === 'gamestart') {
-            tywx.tt.Utils.hideGameClub();
-            var an = tywx.AdManager.getAdNodeByTag('GAME_START');
-            if (an) an.hideAdNode();
-        } else if (cc.director.getScene()._name === 'gamemain') {
-            tywx.tt.Utils.hideWXBanner();
-        }
+        var self = this;
+        tywx.tt.Utils.hideWXBanner();
+        this.background.getComponent("background").setTouchEndCall(function () {
+            self.motaiCallback();
+        });
+        var ani = this.node.getComponent(cc.Animation);
+        ani.play("show_hide");
         tywx.tt.Utils.commonScaleIn(this.node.getChildByName('root'));
     },
     start: function start() {},
     onDestroy: function onDestroy() {
-        if (cc.director.getScene()._name === 'gamestart') {
-            tywx.tt.Utils.showGameClub();
-            var an = tywx.AdManager.getAdNodeByTag('GAME_START');
-            if (an) an.showAdNode();
-        } else if (cc.director.getScene()._name === 'gamemain') {
-            tywx.tt.Utils.showWXBanner();
-        }
+        tywx.tt.Utils.showWXBanner();
     },
 
 
     // update (dt) {},
 
     motaiCallback: function motaiCallback() {
-        this.node.destroy();
+        if (this.closeing) {
+            return;
+        }
+        this.closeing = true;
+        var self = this;
+        var call = function call() {
+            self.node.destroy();
+        };
+        var ani = this.node.getComponent(cc.Animation);
+        ani.on("finished", call, this);
+        ani.play("hide_ui");
     },
     btnTransferClickCallback: function btnTransferClickCallback() {
         if (this.currentcash >= 20) {
@@ -53,7 +58,7 @@ cc.Class({
     },
     init: function init(current_cash) {
         this.currentcash = current_cash;
-        this.labelMax.string = '\u4F59\u989D:\xA5' + this.currentcash;
+        this.labelMax.string = "\u4F59\u989D:\xA5" + this.currentcash;
         this.labelCurrent.node.active = false;
     }
 });

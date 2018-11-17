@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "d92bc640-25f0-40cb-8236-c957496cc1be",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "commont_btn_1": {
+      "ver": "1.0.3",
+      "uuid": "f63b725a-95ac-4211-ad63-385bbcbc624b",
+      "rawTextureUuid": "d92bc640-25f0-40cb-8236-c957496cc1be",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -0.5,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 362,
+      "height": 135,
+      "rawWidth": 363,
+      "rawHeight": 136,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -16,14 +16,19 @@ cc.Class({
 
     /** 
      * @description 提现的时候调用
-    */
+     */
     getMoneyCall: function getMoneyCall() {
+        console.log("money node scale = " + this.node.scale);
+        this.showCall && this.showCall();
         tywx.tt.Utils.showRedPacketTransferPop(this.cash);
     },
 
     init: function init(cash) {
         this.cash = cash.max;
         this.labelMaxCash.string = "\xA5" + cash.max;
+    },
+    setShowCall: function setShowCall(sc) {
+        this.showCall = sc;
     },
 
 

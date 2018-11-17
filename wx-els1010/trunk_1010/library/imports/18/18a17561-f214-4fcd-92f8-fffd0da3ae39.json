@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "blackyjjx",
+    "texture": "2af45d64-478b-4531-ac96-0676b36e63f4",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      37,
+      97
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      37,
+      97
+    ],
+    "capInsets": [
+      4,
+      7,
+      4,
+      5
+    ]
+  }
+}

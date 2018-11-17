@@ -13,7 +13,22 @@
   ],
   "design-resolution-height": 720,
   "design-resolution-width": 1280,
-  "excluded-modules": [],
+  "excluded-modules": [
+    "TiledMap",
+    "Spine Skeleton",
+    "DragonBones",
+    "RichText",
+    "MotionStreak",
+    "PageView",
+    "PageViewIndicator",
+    "Slider",
+    "EditBox",
+    "VideoPlayer",
+    "WebView",
+    "Collider",
+    "Physics",
+    "Native NetWork"
+  ],
   "fit-height": true,
   "fit-width": false,
   "group-list": [
@@ -24,7 +39,7 @@
     "height": 640,
     "width": 960
   },
-  "start-scene": "9d9fc92c-b634-4c09-8813-f1969216dd3b",
+  "start-scene": "8fe1c67f-ac56-4388-b31d-98936d2a3049",
   "use-customize-simulator": false,
   "use-project-simulator-setting": false
 }

@@ -19,7 +19,8 @@ var ads_node = cc.Class({
         listBackbtn: cc.Button,
         contentnode: cc.Node,
         background: cc.Node,
-        scrollNode: cc.Node
+        scrollNode: cc.Node,
+        bottom: cc.Node
     },
 
     /**
@@ -41,10 +42,16 @@ var ads_node = cc.Class({
     },
 
     hide: function hide() {
+        if (this.showing) {
+            return;
+        }
         this.state = 0;
     },
 
     show: function show() {
+        if (this.hiding) {
+            return;
+        }
         this.state = 1;
     },
 
@@ -61,8 +68,8 @@ var ads_node = cc.Class({
         for (var t = 0; t < this.data.ads_data.length; t++) {
             if ((t + 1) % 3 == 1) {
                 tnode = new cc.Node();
-                tnode.width = 560;
-                tnode.height = 120;
+                tnode.width = 460;
+                tnode.height = 140;
                 tnode.anchorX = 0;
                 tnode.anchorY = 0;
                 tindex = 0;
@@ -75,7 +82,7 @@ var ads_node = cc.Class({
             var adnode = cc.instantiate(this.adnode);
             var ads_script = adnode.getComponent('ad_node');
             ads_script.setData(data);
-            var vpos = cc.v2(90 + tindex * 160 - 280, -70);
+            var vpos = cc.v2(140 + tindex * 140 - 280, -90);
             tywx.tt.error(TAG, "vpos = " + JSON.stringify(vpos));
             adnode.position = vpos;
             tnode.addChild(adnode);
@@ -89,6 +96,16 @@ var ads_node = cc.Class({
         this.node.height = cc.game.canvas.height;
         this.scrollNode.position.x = -this.scrollNode.width;
         this.background.active = false;
+        var self = this;
+        this.background.getComponent("background").setTouchEndCall(function () {
+            self.hide();
+        });
+        //    this.bottom.on('touchstart', function (event) {
+        //        return true;
+        //    });
+        //    this.bottom.on('touchend', function (event) {
+        //        self.hide();
+        //    });
         this.state = 0;
         this.scrollNode.x = -Math.abs(this.scrollNode.width + 360);
     },
@@ -97,18 +114,22 @@ var ads_node = cc.Class({
         if (this.state == 0) {
             if (Math.abs(this.scrollNode.x - 30) < Math.abs(this.scrollNode.width + 360)) {
                 this.scrollNode.x = this.scrollNode.x - 30;
-            } else {
+                this.hiding = true;
+            } else if (this.background.active == true) {
                 this.background.active = false;
-                this.listBackbtn.node.scaleX = 1;
+                this.listBackbtn.node.scaleX = -1;
+                this.hiding = false;
                 this.scrollNode.x = -Math.abs(this.scrollNode.width + 360);
             }
         } else if (this.state == 1) {
             if (this.scrollNode.x + 25 < -360) {
+                this.showing = true;
                 this.scrollNode.x = this.scrollNode.x + 25;
-            } else {
+            } else if (this.background.active == false) {
                 this.background.active = true;
-                this.listBackbtn.node.scaleX = -1;
+                this.listBackbtn.node.scaleX = 1;
                 this.scrollNode.x = -360;
+                this.showing = false;
             }
         }
     }

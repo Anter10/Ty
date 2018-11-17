@@ -111,9 +111,18 @@ cc.Class({
         } else {
             this.shadow.string = renum;
         }
+        if (renum > 9 && renum < 100) {
+            this.shadow.fontSize = parseInt(30 * 0.9);
+            this.number.fontSize = parseInt(29 * 0.9);
+        } else if (renum >= 100) {
+            this.shadow.fontSize = 24;
+            this.number.fontSize = 22;
+        } else {
+            this.shadow.fontSize = 30;
+            this.number.fontSize = 29;
+        }
         //console.log("SHADOW:", typeof(this.shadow));
         this.renumber = renum;
-        // this.showHG();
     },
 
     showHG: function showHG() {
@@ -122,7 +131,7 @@ cc.Class({
 
     setCurNum: function setCurNum(scn) {
         this.scn = scn;
-        if (this.scn % 2 == 0 && this.scn > 7 && !this.hadout) {
+        if (this.scn % 2 == 0 && this.scn > tywx.ado.Constants.GameCenterConfig.moreThanTenNumber - 1 && !this.hadout) {
             this.hadout = true;
             console.log("Hec = " + this.scn);
         }
@@ -188,6 +197,10 @@ cc.Class({
         this.idLabel.string = this.id + "";
     },
 
+    getId: function getId() {
+        return this.id;
+    },
+
     setCantClick: function setCantClick(cantclick) {
         this.cantclick = cantclick;
     },
@@ -227,8 +240,11 @@ cc.Class({
             }
             self.touchEft.node.active = false;
             self.playTouchEndEff();
-            if (self.clickcall != null) {
+            if (self.clickcall != null && self.xhgIcon.active == false) {
                 self.clickcall(self.id, self);
+            } else if (self.clickcall != null && tywx.gamecenter.isWaiting()) {
+                self.hideThanTenIcon();
+                tywx.gamecenter.addMoreThanNumberEffect(self.id, self.id);
             }
         });
 
@@ -238,6 +254,9 @@ cc.Class({
     },
 
 
+    isShowMf: function isShowMf() {
+        return this.xhgIcon.active == true;
+    },
     setSSId: function setSSId(id) {
         this.ssid = id;
     },
@@ -354,6 +373,14 @@ cc.Class({
     showThanTenIcon: function showThanTenIcon() {
         if (this.xhgIcon && this.xhgIcon.active == false) {
             this.xhgIcon.active = true;
+            this.node.getChildByName("imgcell11").active = true;
+        }
+    },
+
+    // 被动调用点击
+    clickCell: function clickCell(qzaddcall) {
+        if (this.clickcall != null) {
+            this.clickcall(this.id, this, qzaddcall);
         }
     },
 
@@ -364,6 +391,7 @@ cc.Class({
         if (this.xhgIcon && this.xhgIcon.active == true) {
             console.log("当前我的数是多少 " + this.renumber);
             this.xhgIcon.active = false;
+            this.node.getChildByName("imgcell11").active = false;
         }
     }
 

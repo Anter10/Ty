@@ -173,7 +173,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "a9RZdQ/3BDWbqdRUF7Dvf8"
+    "_id": ""
   },
   {
     "__type__": "cc.Widget",
@@ -202,7 +202,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 720,
     "_originalHeight": 1280,
-    "_id": "4653HA9i9INopBFd0BMrvL"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -259,8 +259,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 567,
-      "height": 752
+      "width": 564,
+      "height": 747
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -382,7 +382,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "47sKqO+4dEdI9FzDUnMRwV"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -483,7 +483,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "3fj+9qJ6xHJJIiGlbm3bf8"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -584,7 +584,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "286Nh8KVFDF4CLd4JMXn2i"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -756,7 +756,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "12AjO7pgpHiKJu1Alx3KEG"
+    "_id": ""
   },
   {
     "__type__": "cc.Button",
@@ -813,7 +813,7 @@
     "_N$target": {
       "__id__": 17
     },
-    "_id": "6ezYVYEu9BKZjI3NOz8bDM"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -890,7 +890,7 @@
     "_N$target": {
       "__id__": 16
     },
-    "_id": "daaLKsJelDfI+CqQUX2T6K"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -1068,7 +1068,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "33pjQeK01J+bQ+MzSDFLi3"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1107,7 +1107,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "2eKNClFX9HIYD8ZjPSWDgJ"
+    "_id": ""
   },
   {
     "__type__": "cc.Button",
@@ -1170,7 +1170,7 @@
     "_N$target": {
       "__id__": 25
     },
-    "_id": "dcFfbRBSRBsJuB7i3z9mGI"
+    "_id": ""
   },
   {
     "__type__": "cc.ClickEvent",
@@ -1218,7 +1218,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "ca3e+XClRDKLFflaBfNAyI"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1256,7 +1256,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 720,
     "_originalHeight": 1280,
-    "_id": "dddJ27OxZJuouy23Gqa52A"
+    "_id": ""
   },
   {
     "__type__": "1e158NqM09GK4uWdcCDSCAD",
@@ -1277,7 +1277,7 @@
     },
     "shareButtonNode": null,
     "isOpening": false,
-    "_id": "854I16XxhGNYvWS6+Mg3k3"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

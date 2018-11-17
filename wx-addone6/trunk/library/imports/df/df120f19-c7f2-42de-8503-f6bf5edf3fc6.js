@@ -60,8 +60,8 @@ var DefaultShareConfig = {
 };
 // * 微信广告参数
 var WXAdConfig = {
-    bannerId: 'adunit-652297ac130ea5be',
-    vedioId: 'adunit-72772b75d8b17d65',
+    bannerId: 'adunit-e77b6d7fd3b11bde',
+    vedioId: 'adunit-da8d2afe4a05aa16',
     bannerRefreshTime: 200 // * Banner刷新时间
 };
 // * 敏感ip
@@ -126,10 +126,10 @@ var GameCenterConfig = {
     mergeMaxNumberBaseScore: 700,
     //游戏开始的时候方块下落的时间
     startGameDropTime: 0.3,
-    // 当格子显示的数字超过此值时 显示皇冠
-    moreThanTenNumber: 8,
-    // 当格子显示的数字超过此值时 显示动画
-    moreThanEightNumber: 8,
+    // 控制显不显示蜜蜂
+    moreThanTenNumber: 10,
+    // 暂时没用  换成了合出最大数（20181114）
+    moreThanEightNumber: 10,
     // 分数大于这个值的时候 突破记录才显示 否则不限时
     showPjlScore: 8000,
     // 每个格子的大小（宽 高）
@@ -147,9 +147,9 @@ var GameCenterConfig = {
     // 格子移动一个的时间
     drop_time: 0.15,
     // 合并间歇时间
-    merge_delay_time: 0.08,
+    merge_delay_time: 0.12,
     // 移动合并时间
-    merge_time: 0.25,
+    merge_time: 0.3,
     // 宽
     swidth: 720,
     //高
@@ -172,7 +172,7 @@ var GameCenterConfig = {
     // 初始化给玩家的道具数量
     initGivePlayerItemNumber: 1,
     // 初始化格子的最大数限制
-    initGameMaxNum: 5,
+    initGameMaxNum: 8,
     // 游戏中用到的道具数据
     allitem: [{
         id: 1,
@@ -207,6 +207,11 @@ var GameCenterConfig = {
         MUSIC_LOGO: 'sounds/music_logo.mp3',
         POPUPCLOSE: 'sounds/PopupClose.mp3',
         UNBLIEVEABLE: 'sounds/unblieveable.mp3',
+        NICE: 'sounds/nice.mp3',
+        GREAT: 'sounds/great.mp3',
+        SUPER: 'sounds/super.mp3',
+        // 蜜蜂爆炸
+        BOOM: 'sounds/boom.mp3',
         // 加钱的时候音效
         ADDMONEY: 'sounds/coin.mp3',
         // 飞红包时的音效
@@ -214,16 +219,27 @@ var GameCenterConfig = {
         COMBO: ['sounds/combo3.mp3', 'sounds/combo4.mp3', 'sounds/combo5.mp3', 'sounds/combo6.mp3', 'sounds/combo7.mp3', 'sounds/combo8.mp3', 'sounds/combo9.mp3', 'sounds/combo10.mp3', 'sounds/combo11.mp3', 'sounds/combo12.mp3', 'sounds/combo13.mp3', 'sounds/combo14.mp3']
     },
     // 格子中数字的颜色值
-    celltilenumColors: [[126, 84, 15], // 砖红色
-    [94, 120, 23], // 浅砖红色
-    [167, 82, 26], // 蓝色
-    [167, 46, 46], // 草绿色
-    [161, 31, 71], // 青色
-    [28, 118, 85], // 深绿色
-    [14, 110, 147], // 深蓝色
-    [29, 94, 155], // 深红色
-    [151, 53, 111], // 咖啡色
-    [111, 49, 126]],
+    celltilenumColors: ["#146F5D", // 砖红色
+    "#BB251F", // 浅砖红色
+    "#327D12", // 蓝色
+    "#9B5801", // 草绿色
+    "#0B4386", // 青色
+    "#8C4608", // 深绿色
+    "#086F86", // 深蓝色
+    "#990A39", // 深红色
+    "#5D2493", // 咖啡色
+    "#910F9D"],
+    // 格子中数字的颜色值
+    celltileColors: ["#2AC3A4", // 砖红色
+    "#F9514A", // 浅砖红色
+    "#58CE26", // 蓝色
+    "#E7C41A", // 草绿色
+    "#137FFF", // 青色
+    "#FE851A", // 深绿色
+    "#2FC5E7", // 深蓝色
+    "#D5376B", // 深红色
+    "#9E4FE8", // 咖啡色
+    "#EB1AFE"],
     // 当前的游戏状态
     gameState: {
         checkclick: 1, // 玩家点击格子的状态

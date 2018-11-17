@@ -1,0 +1,477 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "great",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.4333333333333333,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "txt": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.13333333333333333,
+              "value": 1
+            },
+            {
+              "frame": 0.26666666666666666,
+              "value": 1
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1
+            },
+            {
+              "frame": 1,
+              "value": 1.1
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 0.5
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 1,
+              "value": 255
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 0
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0,
+              "value": 1.5
+            },
+            {
+              "frame": 0.13333333333333333,
+              "value": 1
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1
+            },
+            {
+              "frame": 1,
+              "value": 1.1
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 0.5
+            }
+          ]
+        }
+      },
+      "txt/shuzi_sanxiao_js_nicetx": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.26666666666666666,
+              "value": 150
+            },
+            {
+              "frame": 1,
+              "value": 0
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.26666666666666666,
+              "value": 1
+            },
+            {
+              "frame": 1,
+              "value": 1.1
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.26666666666666666,
+              "value": 1
+            },
+            {
+              "frame": 1,
+              "value": 1.1
+            }
+          ]
+        }
+      },
+      "xingxing/shuzi_sanxiao_js_lizi1": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.3333333333333333,
+              "value": 0
+            },
+            {
+              "frame": 0.5,
+              "value": 1.1
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0.8
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1.1
+            },
+            {
+              "frame": 1,
+              "value": 0.8
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 1.1
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 0.8
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.3333333333333333,
+              "value": 0
+            },
+            {
+              "frame": 0.5,
+              "value": 1.1
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0.8
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1.1
+            },
+            {
+              "frame": 1,
+              "value": 0.8
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 1.1
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 0.8
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 1.1666666666666667,
+              "value": 255
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "xingxing/shuzi_sanxiao_js_lizi2": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.43333333333333335,
+              "value": 0
+            },
+            {
+              "frame": 0.6,
+              "value": 1.2
+            },
+            {
+              "frame": 0.8,
+              "value": 0.8
+            },
+            {
+              "frame": 0.9666666666666667,
+              "value": 1.2
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 0
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.43333333333333335,
+              "value": 0
+            },
+            {
+              "frame": 0.6,
+              "value": 1.2
+            },
+            {
+              "frame": 0.8,
+              "value": 0.8
+            },
+            {
+              "frame": 0.9666666666666667,
+              "value": 1.2
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "xingxing/particlesystem": {
+        "comps": {
+          "cc.ParticleSystem": {
+            "emissionRate": [
+              {
+                "frame": 0.16666666666666666,
+                "value": 0
+              },
+              {
+                "frame": 0.43333333333333335,
+                "value": 15
+              },
+              {
+                "frame": 0.8333333333333334,
+                "value": 0
+              }
+            ]
+          }
+        }
+      },
+      "xingxing/shuzi_sanxiao_js_lizi3": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.3333333333333333,
+              "value": 0
+            },
+            {
+              "frame": 0.5,
+              "value": 1.2
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0.8
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1.2
+            },
+            {
+              "frame": 1,
+              "value": 0.8
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 1.2
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 0
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.3333333333333333,
+              "value": 0
+            },
+            {
+              "frame": 0.5,
+              "value": 1.2
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 0.8
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1.2
+            },
+            {
+              "frame": 1,
+              "value": 0.8
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 1.2
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "xingxing/shuzi_sanxiao_js_lizi4": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.5,
+              "value": 0
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 1.2
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1
+            },
+            {
+              "frame": 1,
+              "value": 1.2
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 1
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 0
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.5,
+              "value": 0
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 1.2
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1
+            },
+            {
+              "frame": 1,
+              "value": 1.2
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": 1
+            },
+            {
+              "frame": 1.3333333333333333,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "xingxing/shuzi_sanxiao_js_lizi5": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0.26666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 0.43333333333333335,
+              "value": 1.2
+            },
+            {
+              "frame": 0.6,
+              "value": 1
+            },
+            {
+              "frame": 0.7666666666666667,
+              "value": 1.2
+            },
+            {
+              "frame": 0.9333333333333333,
+              "value": 1
+            },
+            {
+              "frame": 1.1,
+              "value": 1.2
+            },
+            {
+              "frame": 1.2666666666666666,
+              "value": 1
+            },
+            {
+              "frame": 1.4333333333333333,
+              "value": 0
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.26666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 0.43333333333333335,
+              "value": 1.2
+            },
+            {
+              "frame": 0.6,
+              "value": 1
+            },
+            {
+              "frame": 0.7666666666666667,
+              "value": 1.2
+            },
+            {
+              "frame": 0.9333333333333333,
+              "value": 1
+            },
+            {
+              "frame": 1.1,
+              "value": 1.2
+            },
+            {
+              "frame": 1.2666666666666666,
+              "value": 1
+            },
+            {
+              "frame": 1.4333333333333333,
+              "value": 0
+            }
+          ]
+        }
+      },
+      "shuzi_sanxiao_js_super1": {
+        "props": {
+          "scaleY": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.13333333333333333,
+              "value": 1.2
+            },
+            {
+              "frame": 0.36666666666666664,
+              "value": 0.8
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.13333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 0.36666666666666664,
+              "value": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

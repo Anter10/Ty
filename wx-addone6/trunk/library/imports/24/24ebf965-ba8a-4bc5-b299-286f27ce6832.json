@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "commont_btn_2",
+    "texture": "1e31f677-a7d9-4307-be33-ddaaef7b6bb8",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      362,
+      135
+    ],
+    "offset": [
+      -0.5,
+      0.5
+    ],
+    "originalSize": [
+      363,
+      136
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

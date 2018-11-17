@@ -1,0 +1,285 @@
+2018-10-30T07:00:42.352Z - normal: Load ~/.CocosCreator/settings.json
+2018-10-30T07:00:42.355Z - normal: checking language setting...
+2018-10-30T07:00:42.355Z - normal: Language: zh
+2018-10-30T07:00:42.827Z - success: protocol editor-framework registered
+2018-10-30T07:00:42.827Z - success: protocol app registered
+2018-10-30T07:00:42.827Z - success: protocol theme registered
+2018-10-30T07:00:42.827Z - success: protocol packages registered
+2018-10-30T07:00:42.828Z - success: protocol unpack registerred
+2018-10-30T07:00:42.828Z - success: protocol disable-commonjs registerred
+2018-10-30T07:00:42.944Z - normal: connected!
+2018-10-30T07:00:42.946Z - normal: Check project /Users/tu/work/code/ty-gamebox/els1010/trunk/els1010
+2018-10-30T07:00:42.958Z - normal: Initializing project /Users/tu/work/code/ty-gamebox/els1010/trunk/els1010
+2018-10-30T07:00:42.962Z - normal: Initializing Cocos2d
+2018-10-30T07:00:43.192Z - normal: Initializing Asset Database
+2018-10-30T07:00:43.230Z - success: protocol uuid registerred
+2018-10-30T07:00:43.230Z - success: protocol db registerred
+2018-10-30T07:00:43.230Z - success: protocol thumbnail registerred
+2018-10-30T07:00:43.230Z - normal: Loading editor/builtin packages
+2018-10-30T07:00:43.363Z - success: assets loaded
+2018-10-30T07:00:43.368Z - success: builder loaded
+2018-10-30T07:00:43.370Z - success: cocos-analytics loaded
+2018-10-30T07:00:43.375Z - success: console loaded
+2018-10-30T07:00:43.409Z - success: fb-instant-games loaded
+2018-10-30T07:00:43.416Z - success: hierarchy loaded
+2018-10-30T07:00:43.421Z - success: inspector loaded
+2018-10-30T07:00:43.422Z - success: keystore loaded
+2018-10-30T07:00:43.429Z - success: node-library loaded
+2018-10-30T07:00:43.431Z - success: package-asset loaded
+2018-10-30T07:00:43.433Z - success: preferences loaded
+2018-10-30T07:00:43.436Z - success: project-exporter loaded
+2018-10-30T07:00:43.455Z - success: project-importer loaded
+2018-10-30T07:00:43.459Z - success: project-settings loaded
+2018-10-30T07:00:43.467Z - success: ui-kit loaded
+2018-10-30T07:00:43.473Z - success: scene loaded
+2018-10-30T07:00:43.474Z - success: sprite-editor loaded
+2018-10-30T07:00:43.479Z - success: store loaded
+2018-10-30T07:00:43.486Z - success: timeline loaded
+2018-10-30T07:00:43.486Z - normal: Loading builtin packages
+2018-10-30T07:00:43.496Z - success: asset-db-debugger loaded
+2018-10-30T07:00:43.497Z - success: color-picker loaded
+2018-10-30T07:00:43.501Z - success: package-manager loaded
+2018-10-30T07:00:43.503Z - success: qqplay-adapter loaded
+2018-10-30T07:00:43.508Z - success: sdkbox loaded
+2018-10-30T07:00:43.514Z - success: tester loaded
+2018-10-30T07:00:43.521Z - success: ui-grid loaded
+2018-10-30T07:00:43.525Z - success: ui-kit-preview-extra loaded
+2018-10-30T07:00:43.530Z - success: ui-kit-preview loaded
+2018-10-30T07:00:43.534Z - success: ui-tree loaded
+2018-10-30T07:00:43.535Z - success: weapp-adapter loaded
+2018-10-30T07:00:44.610Z - normal: Loading packages
+2018-10-30T07:00:44.616Z - normal: Watching packages
+2018-10-30T07:00:44.674Z - normal: Run Application
+2018-10-30T07:00:45.162Z - success: preview server running at http://localhost:7458
+2018-10-30T07:01:51.791Z - normal: Start building with options : {
+  "actualPlatform": "Web Mobile",
+  "apiLevel": "",
+  "appABIs": [],
+  "appKey": "",
+  "appSecret": "",
+  "buildPath": "/Users/tu/work/code/ty-gamebox/els1010/trunk/www",
+  "debug": false,
+  "dest": "/Users/tu/work/code/ty-gamebox/els1010/trunk/www/web-mobile",
+  "embedWebDebugger": false,
+  "encryptJs": true,
+  "excludeScenes": [],
+  "excludedModules": [],
+  "fb-instant-games": {},
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": false,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.helloworld",
+  "platform": "web-mobile",
+  "previewHeight": "720",
+  "previewWidth": "1280",
+  "privateKey": "",
+  "qqplay": {
+    "REMOTE_SERVER_ROOT": "",
+    "orientation": "portrait"
+  },
+  "renderMode": "0",
+  "scenes": [
+    "2d2f792f-a40c-49bb-a189-ed176a246e49"
+  ],
+  "sourceMaps": false,
+  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
+  "template": "link",
+  "title": "els1010",
+  "useDebugKeystore": true,
+  "vsVersion": "auto",
+  "webOrientation": "portrait",
+  "wechatgame": {
+    "REMOTE_SERVER_ROOT": "",
+    "appid": "wx6ac3f5090a6b99c5",
+    "isSubdomain": false,
+    "orientation": "portrait",
+    "subContext": ""
+  },
+  "xxteaKey": "1991aa0a-86bc-45",
+  "zipCompressJs": true,
+  "project": "/Users/tu/work/code/ty-gamebox/els1010/trunk/els1010",
+  "projectName": "els1010",
+  "debugBuildWorker": false
+}
+2018-10-30T07:01:51.795Z - normal: Building /Users/tu/work/code/ty-gamebox/els1010/trunk/els1010
+2018-10-30T07:01:51.795Z - normal: Destination /Users/tu/work/code/ty-gamebox/els1010/trunk/www/web-mobile
+2018-10-30T07:01:52.071Z - normal: Delete /Users/tu/work/code/ty-gamebox/els1010/trunk/www/web-mobile/**/*
+2018-10-30T07:01:54.065Z - normal: Start building assets
+2018-10-30T07:01:54.065Z - normal: Start spawn build-worker
+2018-10-30T07:01:54.743Z - normal: Finish spawn build-worker
+2018-10-30T07:01:54.743Z - normal: Start init build-worker
+2018-10-30T07:01:56.843Z - normal: Finish init build-worker
+2018-10-30T07:01:56.843Z - normal: Start build-assets in worker
+2018-10-30T07:01:57.120Z - normal: Finish build-assets in worker
+2018-10-30T07:01:57.123Z - normal: Finish building assets
+2018-10-30T07:01:57.133Z - normal: Start building plugin scripts
+2018-10-30T07:01:57.178Z - normal: Generating main.js from /Applications/CocosCreator1.10.1.app/Contents/Resources/static/build-templates/shares/main.js
+2018-10-30T07:01:57.187Z - normal: Generating html from /Applications/CocosCreator1.10.1.app/Contents/Resources/static/build-templates/web-mobile/template/index.html
+2018-10-30T07:01:57.217Z - normal: Built to "/Users/tu/work/code/ty-gamebox/els1010/trunk/www/web-mobile" successfully
+2018-10-30T07:03:15.481Z - normal: Start building with options : {
+  "actualPlatform": "Web Mobile",
+  "apiLevel": "",
+  "appABIs": [],
+  "appKey": "",
+  "appSecret": "",
+  "buildPath": "/Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build",
+  "debug": false,
+  "dest": "/Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build/web-mobile",
+  "embedWebDebugger": false,
+  "encryptJs": true,
+  "excludeScenes": [],
+  "excludedModules": [],
+  "fb-instant-games": {},
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": false,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.helloworld",
+  "platform": "web-mobile",
+  "previewHeight": "720",
+  "previewWidth": "1280",
+  "privateKey": "",
+  "qqplay": {
+    "REMOTE_SERVER_ROOT": "",
+    "orientation": "portrait"
+  },
+  "renderMode": "0",
+  "scenes": [
+    "2d2f792f-a40c-49bb-a189-ed176a246e49"
+  ],
+  "sourceMaps": false,
+  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
+  "template": "link",
+  "title": "els1010",
+  "useDebugKeystore": true,
+  "vsVersion": "auto",
+  "webOrientation": "portrait",
+  "wechatgame": {
+    "REMOTE_SERVER_ROOT": "",
+    "appid": "wx6ac3f5090a6b99c5",
+    "isSubdomain": false,
+    "orientation": "portrait",
+    "subContext": ""
+  },
+  "xxteaKey": "1991aa0a-86bc-45",
+  "zipCompressJs": true,
+  "project": "/Users/tu/work/code/ty-gamebox/els1010/trunk/els1010",
+  "projectName": "els1010",
+  "debugBuildWorker": false
+}
+2018-10-30T07:03:15.482Z - normal: Building /Users/tu/work/code/ty-gamebox/els1010/trunk/els1010
+2018-10-30T07:03:15.482Z - normal: Destination /Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build/web-mobile
+2018-10-30T07:03:15.482Z - normal: Delete /Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build/web-mobile/**/*
+2018-10-30T07:03:17.388Z - normal: Start building assets
+2018-10-30T07:03:17.388Z - normal: Start spawn build-worker
+2018-10-30T07:03:18.037Z - normal: Finish spawn build-worker
+2018-10-30T07:03:18.037Z - normal: Start init build-worker
+2018-10-30T07:03:20.010Z - normal: Finish init build-worker
+2018-10-30T07:03:20.010Z - normal: Start build-assets in worker
+2018-10-30T07:03:20.258Z - normal: Finish build-assets in worker
+2018-10-30T07:03:20.260Z - normal: Finish building assets
+2018-10-30T07:03:20.266Z - normal: Start building plugin scripts
+2018-10-30T07:03:20.302Z - normal: Generating main.js from /Applications/CocosCreator1.10.1.app/Contents/Resources/static/build-templates/shares/main.js
+2018-10-30T07:03:20.307Z - normal: Generating html from /Applications/CocosCreator1.10.1.app/Contents/Resources/static/build-templates/web-mobile/template/index.html
+2018-10-30T07:03:20.330Z - normal: Built to "/Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build/web-mobile" successfully
+2018-10-30T07:17:51.572Z - normal: Start building with options : {
+  "actualPlatform": "Web Mobile",
+  "apiLevel": "",
+  "appABIs": [],
+  "appKey": "",
+  "appSecret": "",
+  "buildPath": "/Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build",
+  "debug": false,
+  "dest": "/Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build/web-mobile",
+  "embedWebDebugger": false,
+  "encryptJs": true,
+  "excludeScenes": [],
+  "excludedModules": [],
+  "fb-instant-games": {},
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": false,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": false,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.helloworld",
+  "platform": "web-mobile",
+  "previewHeight": "720",
+  "previewWidth": "1280",
+  "privateKey": "",
+  "qqplay": {
+    "REMOTE_SERVER_ROOT": "",
+    "orientation": "portrait"
+  },
+  "renderMode": "0",
+  "scenes": [
+    "2d2f792f-a40c-49bb-a189-ed176a246e49"
+  ],
+  "sourceMaps": false,
+  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
+  "template": "link",
+  "title": "els1010",
+  "useDebugKeystore": true,
+  "vsVersion": "auto",
+  "webOrientation": "portrait",
+  "wechatgame": {
+    "REMOTE_SERVER_ROOT": "",
+    "appid": "wx6ac3f5090a6b99c5",
+    "isSubdomain": false,
+    "orientation": "portrait",
+    "subContext": ""
+  },
+  "xxteaKey": "1991aa0a-86bc-45",
+  "zipCompressJs": true,
+  "project": "/Users/tu/work/code/ty-gamebox/els1010/trunk/els1010",
+  "projectName": "els1010",
+  "debugBuildWorker": false
+}
+2018-10-30T07:17:51.577Z - normal: Building /Users/tu/work/code/ty-gamebox/els1010/trunk/els1010
+2018-10-30T07:17:51.577Z - normal: Destination /Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build/web-mobile
+2018-10-30T07:17:51.580Z - normal: Delete /Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build/web-mobile/**/*
+2018-10-30T07:17:53.667Z - normal: Start building assets
+2018-10-30T07:17:53.667Z - normal: Start spawn build-worker
+2018-10-30T07:17:54.354Z - normal: Finish spawn build-worker
+2018-10-30T07:17:54.354Z - normal: Start init build-worker
+2018-10-30T07:17:56.608Z - normal: Finish init build-worker
+2018-10-30T07:17:56.609Z - normal: Start build-assets in worker
+2018-10-30T07:17:56.896Z - normal: Finish build-assets in worker
+2018-10-30T07:17:56.900Z - normal: Finish building assets
+2018-10-30T07:17:56.908Z - normal: Start building plugin scripts
+2018-10-30T07:17:56.950Z - normal: Generating main.js from /Applications/CocosCreator1.10.1.app/Contents/Resources/static/build-templates/shares/main.js
+2018-10-30T07:17:56.956Z - normal: Generating html from /Applications/CocosCreator1.10.1.app/Contents/Resources/static/build-templates/web-mobile/template/index.html
+2018-10-30T07:17:56.985Z - normal: Built to "/Users/tu/work/code/ty-gamebox/els1010/trunk/els1010/build/web-mobile" successfully
+2018-10-30T09:19:11.722Z - info: shutdown preview server

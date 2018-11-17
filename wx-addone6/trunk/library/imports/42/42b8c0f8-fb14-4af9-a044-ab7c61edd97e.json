@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "mifeng",
+    "texture": "dea327ba-7fbc-4578-a06b-5fa7a26ce86b",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      54,
+      58
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      54,
+      58
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

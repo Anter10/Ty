@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "qipanbottom",
+    "texture": "8d6be667-c97c-4ef9-bfd2-eb4044ae09a3",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      61,
+      61
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      61,
+      61
+    ],
+    "capInsets": [
+      6,
+      6,
+      6,
+      6
+    ]
+  }
+}

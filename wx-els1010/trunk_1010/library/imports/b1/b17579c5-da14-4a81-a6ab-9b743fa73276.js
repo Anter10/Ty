@@ -24,7 +24,9 @@ cc.Class({
         },
         videoBtn: cc.Node,
         shareBtn: cc.Node,
-        freeBtn: cc.Node
+        freeBtn: cc.Node,
+        centerNode: cc.Node,
+        videoLabel: cc.Label
     },
 
     chouJiangCall: function chouJiangCall() {
@@ -43,6 +45,15 @@ cc.Class({
         videoBtnScript.setSuccessCall(function () {
             self.chouJiangCall();
         });
+        if (!tywx.tt.isCanWatchVideo) {
+            videoBtnScript.setButtonCallType(1);
+            videoBtnScript.setShareConfig(tywx.tt.constants.ShareConfig.HOME_ZP_GET_SHARE);
+            this.videoLabel.string = "免费领取";
+        }
+        if (tywx.tt.configManager.getInstance().auditing == true) {
+            videoBtnScript.setReactCall(true);
+            this.videoLabel.string = "免费领取";
+        }
         // 分享抽奖
         var shareBtnScript = this.shareBtn.getComponent("ShareButton");
         shareBtnScript.setButtonCallType(1);
@@ -50,6 +61,14 @@ cc.Class({
         shareBtnScript.setSuccessCall(function () {
             self.chouJiangCall();
         });
+
+        if (tywx.tt.isMinGanIP && tywx.tt.isCanWatchVideo) {
+            shareBtnScript.setButtonCallType(2);
+            shareBtnScript.setShareConfig(tywx.tt.constants.ShareConfig.HOME_ZP_GET_VIDEO);
+        }
+        if (tywx.tt.configManager.getInstance().auditing == true) {
+            shareBtnScript.setReactCall(true);
+        }
         // 免费抽奖
         var freeBtnScript = this.freeBtn.getComponent("ShareButton");
         freeBtnScript.setButtonCallType(1);
@@ -58,7 +77,18 @@ cc.Class({
         freeBtnScript.setSuccessCall(function () {
             self.chouJiangCall();
         });
-        //  this.freeBtn.active = true;
+        //   this.freeBtn.active = true;
+
+        var _ref = [cc.game.canvas.width, cc.game.canvas.height],
+            cw = _ref[0],
+            ch = _ref[1];
+
+        var top_y = 80 / 1280 * ch;
+        this.centerNode.position.y = top_y;
+
+        this.background.getComponent("background").setTouchEndCall(function () {
+            self.closeView();
+        });
     },
     start: function start() {},
 
@@ -73,6 +103,10 @@ cc.Class({
     },
 
     closeView: function closeView() {
+        if (this.closeing) {
+            return;
+        }
+        this.closeing = true;
         tywx.tt.lottery.removeLotteryView();
     },
 
@@ -137,12 +171,16 @@ cc.Class({
     getCjType: function getCjType() {},
 
     lottery: function lottery() {
-        console.log("当前的红包数据 = " + JSON.stringify(tywx.tt.RedPacketInfo));
+        var _this = this;
+
+        tywx.tt.log(TAG, "当前的红包数据 = " + JSON.stringify(tywx.tt.RedPacketInfo));
         var aims = [0, 1, 2, 3, 4, 5];
-        var czaim = [1, 3, 5];
-        var hbaim = [0, 1, 2];
-        var aim_id = czaim[parseInt(Math.random() * czaim.length)];
-        if (tywx.tt.RedPacketInfo && tywx.tt.RedPacketInfo.nextAmount > 0) {
+        var czaim = [1, 3];
+        var hbaim = [0, 2, 4];
+        var hyhaim = [5];
+        var aim_id = Math.random() > 0.5 ? 5 : czaim[parseInt(Math.random() * czaim.length)];
+        var random = Math.random();
+        if (tywx.tt.RedPacketInfo && tywx.tt.RedPacketInfo.nextAmount > 0 && random > 1 - random) {
             aim_id = hbaim[parseInt(Math.random() * hbaim.length)];
         }
 
@@ -154,6 +192,7 @@ cc.Class({
         this.nodeDisk.runAction(cc.sequence(cc.rotateBy(1, 360 * 2 - current_rotate).easing(cc.easeIn(2.0)), cc.rotateBy(2, 360 * 3), cc.rotateBy(1, 360 * 2 - aim_id * 60).easing(cc.easeOut(1.0)), cc.callFunc(function () {
             self.storeCurrentItem();
             self.isLottering = false;
+            _this.finishcall && _this.finishcall();
         })));
     },
     init: function init() {
@@ -220,6 +259,10 @@ cc.Class({
         titem.name = this.item.name;
         titem.icon = this.item.icon;
         return titem;
+    },
+
+    setFinishCall: function setFinishCall(call) {
+        this.finishcall = call;
     }
 
 });

@@ -1,0 +1,129 @@
+/** 
+ * @description 
+ * created by gyc on 20181012
+ */
+
+let TAG = "[game/cross_ad/ads_node.js]";
+let node_path = "prefabs/ads_node";
+
+let ads_node = cc.Class({
+    extends: cc.Component,
+    properties: {
+        adnode: cc.Prefab,
+        listBackbtn:cc.Button,
+        contentnode: cc.Node,
+        background:cc.Node,
+        scrollNode:cc.Node,
+        bottom:cc.Node,
+    },
+
+    /**
+     * @description 设置交叉倒流的数据
+     * @param {Object} data 交叉倒流的数据
+     */
+    setData: function (data) {
+        this.data = data;
+        tywx.tt.log(TAG, "广告设置了数据 " + JSON.stringify(data));
+        this.initUI();
+    },
+
+
+    showOrHide:function(){
+         if (this.state == 0){
+             this.show();
+         }else{
+             this.hide();
+         }
+    },
+
+    hide:function(){
+       this.state = 0;
+    },
+    
+
+    show: function () {
+        this.state = 1;
+    },
+
+    /**
+     * @description 初始化UI
+     */
+    initUI: function () {
+        var tnode = new cc.Node();
+        tnode.width = 560;
+        tnode.height = 120;
+        this.contentnode.addChild(tnode);
+        var tindex = 0;
+        var trow = 1;
+        for (var t = 0; t < this.data.ads_data.length; t++) {
+            if((t + 1) % 3 == 1){
+               tnode = new cc.Node();
+               tnode.width = 560;
+               tnode.height = 120;
+               tnode.anchorX = 0;
+               tnode.anchorY = 0;
+               tindex = 0;
+               trow ++;
+               this.contentnode.addChild(tnode);
+            }
+            tnode.x = 0;
+            tnode.y = (trow - 2) * -160;
+            let data = this.data.ads_data[t];
+            let adnode = cc.instantiate(this.adnode);
+            let ads_script = adnode.getComponent('ad_node');
+            ads_script.setData(data);
+            let vpos = cc.v2(90 + (tindex * 160) - 280, -70);
+            tywx.tt.error(TAG, "vpos = " + JSON.stringify(vpos));
+            adnode.position = vpos;
+            tnode.addChild(adnode)
+            tindex ++;
+            
+        }
+    },
+
+
+
+    // use this for initialization
+    onLoad: function () {
+           this.node.width = cc.game.canvas.width;
+           this.node.height = cc.game.canvas.height;
+           this.scrollNode.position.x = -this.scrollNode.width;
+           this.background.active = false;
+           var self = this;
+           this.background.getComponent("background").setTouchEndCall(function () {
+               self.hide();
+           });
+           this.bottom.on('touchstart', function (event) {
+               return true;
+           });
+           this.bottom.on('touchend', function (event) {
+               self.hide();
+           });
+           this.state = 0;
+           this.scrollNode.x = -Math.abs(this.scrollNode.width + 360);
+          
+    },
+
+    update:function(){
+        if(this.state == 0){
+           if (Math.abs(this.scrollNode.x - 30) < Math.abs(this.scrollNode.width + 360)) {
+               this.scrollNode.x = this.scrollNode.x - 30;
+           } else if (this.background.active == true) {
+               this.background.active = false;
+               this.listBackbtn.node.scaleX = 1;
+               this.scrollNode.x = -Math.abs(this.scrollNode.width + 360);
+           }
+        } else if(this.state == 1) {
+           if (this.scrollNode.x + 25 < -360) {
+               this.scrollNode.x = this.scrollNode.x + 25;
+           } else if (this.background.active == false ){
+               this.background.active = true;
+               this.listBackbtn.node.scaleX = -1;
+               this.scrollNode.x = -360;
+           }
+        }
+    }
+    
+
+});
+

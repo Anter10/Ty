@@ -413,18 +413,19 @@ var Utils = function () {
          * @description 显示游戏圈
          * @author lu ning
          * @date 2018-09-05
-         * @static
+         * @static 
          */
 
     }, {
         key: 'showGameClub',
         value: function showGameClub() {
             if (!GameClubBtn && wx.createGameClubButton) {
+                var top = tywx.ado.Utils.isIpx() ? .4 * canvas.height : .39 * canvas.height;
                 GameClubBtn = wx.createGameClubButton({
                     icon: 'green',
                     style: {
-                        left: 10,
-                        top: 30,
+                        left: 20,
+                        top: top,
                         width: 40,
                         height: 40
                     }
@@ -570,7 +571,7 @@ var Utils = function () {
                         WXVedioCallback.fail && WXVedioCallback.fail();
                     }
                     // tywx.ado.Utils.showWXModal(`${toast_str}`);
-                    tywx.ado.Utils.showWXBanner();
+                    // tywx.ado.Utils.showWXBanner();
                 });
             }
             // * 成功和失败回调是变化的
@@ -1040,7 +1041,8 @@ var Utils = function () {
                                 console.log('invite requestInviteGetInfo success');
                                 tywx.ado.InviteInfo = res.data;
                                 params.success && params.success();
-                                if (tywx.ado.InviteInfo.reward) tywx.ado.hpvalue = 6;
+                                // ! Modify by luning [14-11-2018] 暂时去掉最大血量为6
+                                //if(tywx.ado.InviteInfo.reward) tywx.ado.hpvalue = 6;
                             }
                         } else {
                             // * 未知错误
@@ -1369,6 +1371,11 @@ var Utils = function () {
             }
             console.log('MINGAN_IP...' + ret);
             return ret;
+        }
+    }, {
+        key: 'distance',
+        value: function distance(p1, p2) {
+            return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
         }
     }]);
 

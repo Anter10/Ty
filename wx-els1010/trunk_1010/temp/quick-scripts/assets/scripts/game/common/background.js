@@ -32,6 +32,7 @@ cc.Class({
             return true;
         });
         this.background.on('touchend', function (event) {
+            self.touchendcall && self.touchendcall();
             self.state = 0;
         });
     },
@@ -39,6 +40,10 @@ cc.Class({
     close: function close() {
         this.node.removeFromParent(true);
         this.destroy();
+    },
+
+    setTouchEndCall: function setTouchEndCall(endcall) {
+        this.touchendcall = endcall;
     },
 
     start: function start() {}

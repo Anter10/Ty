@@ -4,6 +4,8 @@ cc._RF.push(module, '68b47bUNBZKFo2vkf9uElWn', 'tt_scene_menu');
 
 "use strict";
 
+var TAG = "[view/tt_scene_menu]";
+
 cc.Class({
     extends: cc.Component,
 
@@ -22,25 +24,31 @@ cc.Class({
             MAIN_MENU_NUM: tywx.tt.constants.TT_SCORE
         });
         tywx.tt.boot();
-        tywx.tt.lottery.addZPIcon("home", this.zpbtnNode, cc.v2(0, 0));
-        tywx.tt.ads.addAdsNode("banner_menu", this.bannerNode, cc.v2(0, 0));
+        tywx.PropagateInterface.getShareConfigInfo(); //! 获取所有分享点信息
         // 当前最大分数
         this.gqnumberLabel.string = parseInt(tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0)) + "";
         tywx.NotificationCenter.listen(tywx.tt.events.TT_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
         tywx.NotificationCenter.listen(tywx.tt.events.TT_EVENT_GET_IP_SUCCESS, this.getIPSuccess, this);
+        var self = this;
         tywx.Timer.setTimer(this, function () {
+            tywx.tt.lottery.addZPIcon("home", self.zpbtnNode, cc.v2(0, 0));
+            tywx.tt.ads.addAdsNode("banner_menu", self.bannerNode, cc.v2(0, 0));
             tywx.tt.isMinGanIP = tywx.tt.Utils.isMinGanIp(tywx.AdManager.ipLocInfo);
-            // console.log("是否为敏感IP = " + JSON.stringify(tywx.tt.configManager.share_control));
-            this.loginSuccess();
-        }, 1, 1, 1);
+            // console.log("是否为敏感IP = " + JSON.stringify(tywx.tt.configManager.getInstance().share_control));
+            self.loginSuccess();
+        }, 1, 0, 1);
+
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_GET_CONFIG_SUCCESS, this.dealConfig, this);
     },
 
+
+    dealConfig: function dealConfig() {},
 
     /**
      * @param {Object} res 得到IP的回调
      */
     getIPSuccess: function getIPSuccess(res) {
-        console.log("IP信息 = " + JSON.stringify(res));
+        tywx.tt.log(TAG, "IP信息 = " + JSON.stringify(res));
     },
 
     /**
@@ -52,7 +60,7 @@ cc.Class({
             data.max = tywx.tt.Utils.formatCashFen2Yuan(res.data.totalAmount);
             this.btnGetMoney.getComponent('GetMoneyButton').init(data);
         } else {
-            console.log("通知事件中的红包数据 = " + JSON.stringify(res));
+            tywx.tt.log(TAG, "通知事件中的红包数据 = " + JSON.stringify(res));
         }
     },
 
@@ -62,13 +70,17 @@ cc.Class({
     loginSuccess: function loginSuccess() {
         // ! 显示红包
         var self = this;
-        console.log("tywx.UserInfo.userId = " + tywx.UserInfo.userId);
+        tywx.tt.log(TAG, "tywx.UserInfo.userId = " + tywx.UserInfo.userId);
         // if (tywx.UserInfo.userId === 0 || tywx.config.auditing === true) return;
         tywx.tt.Utils.requestRedPacket({
             success: function success(res) {
-                self.btnGetMoney.active = true;
-                console.log("huuu = " + JSON.stringify(res));
-                self.btnGetMoney.getComponent('GetMoneyButton').init(res);
+                tywx.tt.log(TAG, "审核状态 = " + tywx.tt.configManager.getInstance().auditing + "玩家红包数据= " + JSON.stringify(res));
+                if (res.current && tywx.tt.configManager.getInstance().auditing == false) {
+                    self.btnGetMoney.active = true;
+                    self.btnGetMoney.getComponent('GetMoneyButton').init(res);
+                } else {
+                    self.btnGetMoney.active = false;
+                }
             },
             fail: function fail(res) {
                 self.btnGetMoney.active = false;

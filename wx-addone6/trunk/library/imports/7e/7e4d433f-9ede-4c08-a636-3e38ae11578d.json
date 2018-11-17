@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "shuzi_sanxiao_js_nice",
+    "texture": "6e17e1c7-8c39-4481-b2de-8c739f46245d",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      380,
+      162
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      380,
+      162
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

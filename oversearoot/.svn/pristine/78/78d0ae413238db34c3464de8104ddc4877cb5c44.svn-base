@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/tu/work/code/ty-gamebox/els1010/trunk/platforms/android/app/build/intermediates/transforms/desugar/release/0.jar"
+        jumboMode="false"
+        min-sdk-version="19"
+        optimize="true"
+        revision="28.0.3"
+        sha1="5ef3a59916ad5c47ce67cec749f14d73f9f7d0af">
+        <dex dex="/Users/tu/work/code/ty-gamebox/els1010/trunk/platforms/android/app/build/intermediates/transforms/preDex/release/1.jar" />
+    </item>
+
+</items>

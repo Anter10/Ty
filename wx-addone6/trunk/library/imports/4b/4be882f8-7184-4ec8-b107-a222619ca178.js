@@ -69,9 +69,12 @@ tywx.ado.saveProgress = function () {
         var data = {
             life: tywx.ado.game.point || 0,
             score: tywx.ado.game.score || 0,
+            curshowxhgs: tywx.ado.game.curshowxhgs || [],
             recovernumber: tywx.ado.game.recoverNumber || 0,
             useitemnumber: tywx.ado.game.useItemNumber || 0,
             mask: mask,
+            useryboxnumber: tywx.ado.game.useryboxnumber || 0,
+            mfids: tywx.ado.game.getMfData() || [],
             curmaxNumber: tywx.ado.game.curmaxNumber || 5
         };
         tywx.ado.Utils.saveItem('ADO_PROGRESS', JSON.stringify(data));
@@ -108,7 +111,7 @@ tywx.ado.logWithColor = function (info) {
 tywx.ado.onShow = function (result) {
     tywx.ado.AudioManager.loadAudioRes();
     //console.log("播放背景音乐配置 " + JSON.stringify(tywx.ado.Configs));
-    tywx.ado.AudioManager.playMusic(tywx.ado.Configs.MUSICS.BG_MUSIC);
+    // tywx.ado.AudioManager.playMusic(tywx.ado.Configs.MUSICS.BG_MUSIC);
     tywx.ado.logWithColor('tywx.ado.onShow', tywx.ShareInterface.IsWaitingCallback);
     tywx.AdManager.init();
     if (tywx.ShareInterface.IsWaitingCallback) {

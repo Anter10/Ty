@@ -202,6 +202,9 @@ var gamestart = cc.Class({
         if (is_ipx) {
             console.log("iphone x start game");
             this.addInMyMini.y = this.addInMyMini.y - 45;
+
+            var widget = this.icon.node.getComponent(cc.Widget);
+            widget._top = 150;
         }
         // ! Modify by luning [29-09-2018] 添加更多游戏，单独的交叉导流暂时去掉
         // let an = tywx.AdManager.getAdNodeByTag('GAME_START');
@@ -323,6 +326,25 @@ var gamestart = cc.Class({
         tywx.NotificationCenter.listen(tywx.ado.Events.ADO_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
         tywx.NotificationCenter.listen(tywx.ado.Events.ADO_EVENT_DESTROY_EVERY_DAY_LOGIN, this.onDestroyEveryDayLogin, this);
         tywx.NotificationCenter.listen(tywx.ado.Events.ADO_EVENT_GET_IP_SUCCESS, this.onDestroyEveryDayLogin, this);
+
+        this.showStartBtnAnimation();
+
+        this.nodeInviteGift.active = false;
+    },
+    showStartBtnAnimation: function showStartBtnAnimation() {
+        var animation = this.startButton.getComponent(cc.Animation);
+        animation.play();
+        animation.on('finished', function () {
+            var delayTime = parseInt(Math.random() * 2000 + 1000);
+            setTimeout(function () {
+                try {
+                    animation.play();
+                } catch (error) {
+                    console.log('showStartBtnAnimation error==>', animation, animation.play);
+                    console.log(error);
+                }
+            }, delayTime);
+        });
     },
     onDestroyEveryDayLogin: function onDestroyEveryDayLogin() {
         this.everyDayLogin = null;
@@ -362,11 +384,14 @@ var gamestart = cc.Class({
         });
 
         // ! 邀请有礼
-        if (!tywx.config.auditing && tywx.ado.isRequestedConfig) {
-            this.nodeInviteGift.active = true;
-        } else {
-            this.nodeInviteGift.active = false;
-        }
+        // ! Modify by luning [14-11-2018] 暂时去掉邀请好友奖励
+        this.nodeInviteGift.active = false;
+        // if (!tywx.config.auditing && tywx.ado.isRequestedConfig) {
+        //     this.nodeInviteGift.active = true;
+        // }
+        // else {
+        //     this.nodeInviteGift.active = false;
+        // }
 
         // ! 登陆游戏后第一次进入菜单特殊处理
         if (tywx.ado.isFirstLogin) {
@@ -639,7 +664,7 @@ var gamestart = cc.Class({
         tywx.ado.isMinGanIP = tywx.ado.Utils.isMinGanIp(tywx.AdManager.ipLocInfo);
         // ! Modify by luning [06-09-18] 交叉导流icon,这个版本隐藏
         // ! Modify by luning [12-09-2018] 显示交叉导流,添加提审状态不显示
-        if (tywx.config.auditing || tywx.ado.isMinGanIP) {
+        if (tywx.config.auditing) {
             this.nodeMoreGame.active = false;
         } else {
             // ! Modify by luning [29-09-2018] 添加更多游戏，单独的交叉导流暂时去掉
@@ -828,28 +853,36 @@ var gamestart = cc.Class({
             this.goonProgressGame(true);
             return;
         }
+
+        // if (progress.score > 0) {
+        //     this.goonProgressGame(false);
+        //     return;
+        // }
+
+
         var contentTxt = "\u4E0A\u6B21\u5F97\u5206" + progress.score + "\uFF0C\u60A8\u60F3\u7EE7\u7EED\u6E38\u620F\u5417\uFF1F";
         var self = this;
         self.hasgononstate = false;
         tywx.ado.Utils.showWXModal(contentTxt, '发现游戏进度', true,
         // 确定
         function () {
-            var config = tywx.ado.Constants.ShareConfig.RECOVER_SHARE_GAME_SHARE;
-            var groupSucCall = function groupSucCall() {
-                self.goonProgressGame();
-            };
-            var succall = function succall() {
-                self.hasgononstate = true;
-            };
+            // var config = tywx.ado.Constants.ShareConfig.RECOVER_SHARE_GAME_SHARE;
+            // var groupSucCall = function () {
+            //     self.goonProgressGame();
+            // };
+            // var succall = function () {
+            //     self.hasgononstate = true;
+            //     self.goonProgressGame();
+            // };
 
-            var failcall = function failcall() {
-                self.hasgononstate = true;
-            };
-            if (tywx.ado.isMinGanIP) {
-                self.goonProgressGame();
-            } else {
-                self.shareMiniApp(config, groupSucCall, succall, failcall);
-            }
+            // var failcall = function () {
+            //     self.hasgononstate = true;
+            // };
+            // if (tywx.ado.isMinGanIP) {
+            self.goonProgressGame(false);
+            // } else {
+            //     self.shareMiniApp(config, groupSucCall, succall, failcall);
+            // }
         },
         // 取消
         function () {
@@ -881,35 +914,7 @@ var gamestart = cc.Class({
                     // * is share to group
                     if (shareconfig && shareconfig[1]) {
                         // * froce share to group
-                        if (res.shareTickets !== undefined && res.shareTickets.length > 0) {
-                            if (shareconfig[0] === tywx.ado.Constants.ShareConfig.RANK_SHARE[0]) {
-                                shareGroupCallBack && shareGroupCallBack(res);
-                            } else {
-                                tywx.ado.Utils.share2GroupByTicket(shareconfig[0], res, function () {
-                                    // * success callback
-                                    shareGroupCallBack && shareGroupCallBack(res);
-                                }, function () {
-                                    // * failed callback
-                                    // tywx.ado.Utils.showWXModal('请分享到不同群', "", false, function () {
-                                    // if (self.hasgononstate) {
-                                    self.goonProgressGame();
-                                    // self.showGoonProgress()
-                                    // self.hasgononstate = false;
-                                    // }
-                                    // });
-                                    // errorCallBack && errorCallBack(null);
-                                });
-                            }
-                        } else {
-                            // * failed
-                            tywx.ado.Utils.showWXModal('请分享到群', "", false, function () {
-                                if (self.hasgononstate) {
-                                    self.showGoonProgress();
-                                    self.hasgononstate = false;
-                                }
-                            });
-                            errorCallBack && errorCallBack(null);
-                        }
+                        successCallBack && successCallBack(res);
                     } else {
                         // * success
                         successCallBack && successCallBack(res);

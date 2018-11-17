@@ -46,10 +46,10 @@
         76
       ],
       "capInsets": [
-        9,
-        11,
-        10,
-        9
+        5,
+        7,
+        5,
+        7
       ]
     }
   },
@@ -1314,18 +1314,18 @@
       "name": "ej07",
       "texture": "dbpAc7tbRNRajVvlmMxMhw",
       "rect": [
-        0,
-        0,
-        64,
-        56
+        2,
+        2,
+        76,
+        70
       ],
       "offset": [
         0,
         0
       ],
       "originalSize": [
-        64,
-        56
+        80,
+        74
       ],
       "capInsets": [
         0,
@@ -1341,18 +1341,18 @@
       "name": "ej04",
       "texture": "88+jciHulAuKXVWPH2cY9a",
       "rect": [
-        0,
-        0,
-        61,
-        56
+        2,
+        2,
+        76,
+        70
       ],
       "offset": [
         0,
         0
       ],
       "originalSize": [
-        61,
-        56
+        80,
+        74
       ],
       "capInsets": [
         0,
@@ -1530,24 +1530,24 @@
       "name": "imgreback",
       "texture": "46S/GfPR5ABLuNN8R+S1eQ",
       "rect": [
-        0,
-        0,
-        79,
-        79
+        2,
+        2,
+        76,
+        70
       ],
       "offset": [
         0,
         0
       ],
       "originalSize": [
-        79,
-        79
+        80,
+        74
       ],
       "capInsets": [
-        0,
-        0,
-        0,
-        0
+        10,
+        9,
+        10,
+        9
       ]
     }
   }

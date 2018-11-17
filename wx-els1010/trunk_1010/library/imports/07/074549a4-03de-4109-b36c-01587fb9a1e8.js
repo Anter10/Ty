@@ -12,17 +12,37 @@ var tip_view = cc.Class({
     properties: {
         titleLabel: cc.Label,
         tapLabel: cc.Label,
-        shareBtn: cc.Node
+        shareBtn: cc.Node,
+        background: cc.Node
     },
 
     closeCall: function closeCall() {
+        if (this.closeing) {
+            return;
+        }
+        this.closeing = true;
         tywx.tt.Utils.showWXBanner();
-        tip_view.curnode.removeFromParent(true);
-        tip_view.curnode = null;
+        var call = function call() {
+            tip_view.curnode.removeFromParent(true);
+            tip_view.curnode = null;
+        };
+        var ani = tip_view.curnode.getComponent(cc.Animation);
+        ani.on("finished", call, this);
+        ani.play("hide_ui");
     },
 
-    onLoad: function onLoad() {},
+    onLoad: function onLoad() {
+        var self = this;
+        this.background.getComponent("background").setTouchEndCall(function () {
+            self.btnClose();
+        });
+    },
 
+
+    btnClose: function btnClose() {
+        this.closecall && this.closecall();
+        this.closeCall();
+    },
 
     /**
      * 初始化
@@ -43,6 +63,12 @@ var tip_view = cc.Class({
      */
     setCallType: function setCallType(calltype) {
         this.shareBtnScript.setButtonCallType(calltype);
+        if (calltype == -1) {
+            this.shareBtnScript.setReactCall(true);
+        }
+        if (tywx.tt.configManager.getInstance().auditing == true) {
+            this.shareBtnScript.setReactCall(true);
+        }
     },
 
     /**
@@ -70,6 +96,14 @@ var tip_view = cc.Class({
     },
 
     /**
+     * @description 设置看视频或者分享的回调
+     * @param {Function} success 看视频或分享成功后的回调
+     */
+    setCloseCallBack: function setCloseCallBack(closecall) {
+        this.closecall = closecall;
+    },
+
+    /**
      * @description 设置分享或者视频的类型
      * @param {Object} config 配置分享点的参数
      */
@@ -93,9 +127,14 @@ var tip_view = cc.Class({
          * calltype: Number 回调类型
          */
         show: function show(config) {
+            if (tip_view.curnode) {
+                return;
+            }
             cc.loader.loadRes(tip_view_path, function (err, prefab) {
                 if (!err) {
                     var tipview = cc.instantiate(prefab);
+                    var ani = tipview.getComponent(cc.Animation);
+                    ani.play("show_hide");
                     var tip_view_script = tipview.getComponent('tip_view');
                     tip_view_script.init();
                     tip_view_script.setTap(config.tip || "请设置提示类容");
@@ -103,6 +142,7 @@ var tip_view = cc.Class({
                     tip_view_script.setShareConfig(config.config);
                     tip_view_script.setSuccessCallBack(config.success);
                     tip_view_script.setCallType(config.calltype);
+                    tip_view_script.setCloseCallBack(config.closecall);
                     tip_view.curnode = tipview;
                     tywx.tt.log("当前的VIE");
                     cc.director.getScene().addChild(tipview, 999999);

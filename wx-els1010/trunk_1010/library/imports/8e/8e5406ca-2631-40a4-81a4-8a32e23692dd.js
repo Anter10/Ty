@@ -4,6 +4,8 @@ cc._RF.push(module, '8e540bKJjFApIGkijLiNpLd', 'AudioManager');
 
 "use strict";
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18,6 +20,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var _instance = null; //! 单例，私有
 var LOCAL_MUTE_KEY = 'ado_mute';
+var curplaymusicurl = null;
 var AudioManager = function () {
     function AudioManager() {
         _classCallCheck(this, AudioManager);
@@ -46,19 +49,21 @@ var AudioManager = function () {
     }, {
         key: "loadAudioRes",
         value: function loadAudioRes() {
-            // let sounds_config = tywx.tt.Constants.GameCenterConfig.SOUNDS;
-            var music_config = tywx.tt.Configs.MUSICS;
-            // let sound_keys = Reflect.ownKeys(sounds_config);
+            var sounds_config = tywx.tt.constants.SOUNDS;
+            var music_config = tywx.tt.configManager.getInstance().MUSICS;
+
+            console.log("music_config " + JSON.stringify(sounds_config));
+            var sound_keys = Reflect.ownKeys(sounds_config);
             var music_keys = Reflect.ownKeys(music_config);
             var self = this;
-            // sound_keys.forEach(sound_key => {
-            //     if (!self.soundsCache.has(sounds_config[sound_key])) {
-            //         self.addSound2CacheByUrl(sounds_config[sound_key]);
-            //     }
-            // });
+            sound_keys.forEach(function (sound_key) {
+                if (!self.soundsCache.has(sounds_config[sound_key])) {
+                    self.addSound2CacheByUrl(sounds_config[sound_key]);
+                }
+            });
             music_keys.forEach(function (music_key) {
                 if (!self.bgMusicCache.has(music_config[music_key])) {
-                    self.addMusic2CacheByUrl(music_config[music_key]);
+                    self.addMusic2CacheByUrl(tywx.SystemInfo.musicurl + music_config[music_key]);
                 }
             });
         }
@@ -100,6 +105,7 @@ var AudioManager = function () {
         value: function addMusic2CacheByUrl(url) {
             var is_play = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
+            console.log("music = " + url);
             try {
                 var tmp_music_context = wx.createInnerAudioContext();
                 tmp_music_context.src = url;
@@ -131,7 +137,6 @@ var AudioManager = function () {
 
             tywx.tt.log("播放音乐22  = " + this.isMute);
             this.stopMusic();
-
             if (this.isMute) return; //! 静音
             if (this.bgMusicCache.has(url)) {
                 this.bgMusicContext = this.bgMusicCache.get(url);
@@ -182,6 +187,21 @@ var AudioManager = function () {
         key: "getIsMute",
         value: function getIsMute() {
             return this.isMute;
+        }
+    }, {
+        key: "getBGMusic",
+        value: function getBGMusic() {
+            if (curplaymusicurl == null) {
+                var bgmusics = tywx.tt.configManager.getInstance().MUSICS.BG_MUSIC;
+                if (bgmusics && (typeof bgmusics === "undefined" ? "undefined" : _typeof(bgmusics)) == "object" && bgmusics.length > 0) {
+                    curplaymusicurl = bgmusics[parseInt(Math.random() * bgmusics.length)];
+                } else {
+                    curplaymusicurl = "ocean1.mp3";
+                }
+                curplaymusicurl = tywx.SystemInfo.musicurl + curplaymusicurl;
+            }
+            console.log("当前播放的背景音乐", curplaymusicurl);
+            return curplaymusicurl;
         }
     }], [{
         key: "getInstance",

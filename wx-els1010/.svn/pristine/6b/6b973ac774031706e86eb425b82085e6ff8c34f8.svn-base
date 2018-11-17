@@ -1,0 +1,42 @@
+let score_path = "prefabs/AddScoreLabel";
+
+let AddScoreLabel = cc.Class({
+    extends: cc.Component,
+
+    properties: {
+        addscoreLabel: cc.Label,
+    },
+
+    // LIFE-CYCLE CALLBACKS:
+
+    onLoad() {
+
+    },
+
+    setScore: function (score = 0) {
+        this.addscoreLabel.string = score;
+    },
+
+    show: function () {
+        let self = this;
+        this.addscoreLabel.node.scale = 1;
+        let scale = cc.scaleTo(0.4, 1.5);
+        let delay = cc.delayTime(0.1);
+        let hide = cc.scaleTo(0.3, 0);
+        let call = cc.callFunc(function () {
+            self.addscoreLabel.node.stopAllActions();
+        })
+        let seq = cc.sequence(scale, delay, hide, call);
+        this.addscoreLabel.node.runAction(seq);
+    },
+
+    start() {
+
+    },
+
+
+    // update (dt) {},
+});
+
+
+module.exports = AddScoreLabel;

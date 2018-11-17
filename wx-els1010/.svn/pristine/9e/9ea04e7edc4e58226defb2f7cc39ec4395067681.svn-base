@@ -1,0 +1,193 @@
+ const gameover_view_path = "prefabs/gameover_view";
+ let gameover_rank = require('../gameover/gameover_rank.js');
+ const gameover_view = cc.Class({
+     extends: cc.Component,
+     properties: {
+         scoreLabel: cc.Label,
+         restartBtn: cc.Node,
+         jcdlNode: cc.Node,
+         maxScoreLabel: cc.Label,
+         phbnode: cc.Node,
+         shareNode: cc.Node,
+         background: cc.Node,
+         root: cc.Node,
+         btnGetMoney: cc.Node,
+     },
+
+
+     restartGame: function () {
+         this.closeCall();
+     },
+
+     rankBtnCall: function () {
+         tywx.tt.rank_manager.showRank();
+     },
+
+     shareCall: function () {
+
+     },
+
+     closeCall: function () {
+         if (this.closeing) {
+             return;
+         }
+         this.closeing = true;
+         tywx.tt.Utils.sendWXMsg({
+             method: 9,
+         });
+         this.hideChilds();
+     },
+
+     onLoad() {
+         var self = this;
+         // 存储分数
+         tywx.tt.curgamescene.storeScore();
+         tywx.NotificationCenter.listen(tywx.tt.events.TT_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
+         this.btnGetMoney.active = false;
+         console.log("红包数据 = " + JSON.stringify(tywx.tt.RedPacketInfo));
+         if (tywx.tt.configManager.getInstance().auditing == false && tywx.tt.RedPacketInfo) {
+             self.btnGetMoney.active = true;
+             let data = {}
+             data.max = tywx.tt.Utils.formatCashFen2Yuan(tywx.tt.RedPacketInfo.totalAmount);
+             self.btnGetMoney.getComponent('GetMoneyButton').init(data);
+             self.btnGetMoney.getComponent('GetMoneyButton').setShowCall(function () {
+                 console.log("主界面的红包");
+             })
+         } else {
+             self.btnGetMoney.active = false;
+         }
+         //  this.background.getComponent("background").setTouchEndCall(function () {
+         //      self.restartGame();
+         //  });
+         // 初始化复活按钮的相关设置
+         //  this.fuhuoScript = this.restartBtn.getComponent("ShareButton")
+         //  this.fuhuoScript.setButtonCallType(1);
+         //  let share = false;
+         //  let calltype = share ? 1 : 2;
+         //  const config = calltype == 1 ? tywx.tt.constants.ShareConfig.GAMEOVER_FUHUO_SHARE : tywx.tt.constants.ShareConfig.GAMEOVER_FUHUO_VIDEO;
+         //  this.fuhuoScript.setShareConfig(config);
+         //  this.fuhuoScript.setSuccessCall(function () {
+         //      self.fuHuoCall();
+         //  });
+
+         this.sharescript = this.shareNode.getComponent("ShareButton")
+         var self = this;
+         //  const share_control = tywx.tt.configManager.getInstance().share_control ? tywx.tt.configManager.getInstance().share_control.recovergame : ["share", 100];
+         const calltype = 1; //tywx.tt.Utils.shareVideoCtr(share_control);
+         const config = calltype == 1 ? tywx.tt.constants.ShareConfig.GAMEOVER_SHARE : tywx.tt.constants.ShareConfig.GAMEOVER_VIDEO;
+         this.sharescript.setShareConfig(config);
+         this.sharescript.setButtonCallType(calltype);
+         this.sharescript.setSuccessCall(function () {
+             //  self.fuHuoCall();
+             tywx.tt.log(TAG, "分享成功");
+         });
+
+         // 添加交叉倒流节点
+         var canadd = true;
+         canadd && tywx.tt.ads.addAdsNode("blink_play", this.jcdlNode, cc.v2(0, 0));
+         // 开始倒计时
+         // 添加好友排行的界面
+         gameover_rank.addIcon(this.phbnode);
+         this.maxScoreLabel.string = parseInt(tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0)) + "";
+     },
+
+     /**
+      * @description 红包数据变化的时候调用
+      * @param {Object} res 红包变化的数据
+      */
+     onRedPacktChange: function (res) {
+         console.log("红包数据 = " + JSON.stringify(res));
+         if (res.data && res.data.totalAmount) {
+             let data = {}
+             data.max = tywx.tt.Utils.formatCashFen2Yuan(res.data.totalAmount);
+             this.btnGetMoney.getComponent('GetMoneyButton').init(data);
+         } else {
+             tywx.tt.log(TAG, "通知事件中的红包数据 = " + JSON.stringify(res));
+         }
+     },
+
+
+     fuHuoCall: function () {
+         this.closeCall();
+     },
+
+     hideChilds: function () {
+         let childs = this.root.children;
+
+         var self = this;
+         let tindex = 0;
+
+         let call = cc.callFunc(function () {
+             let node = childs[tindex];
+             let seq = cc.sequence(cc.scaleTo(0.12, 1.2), cc.scaleTo(0.12, 0));
+             node.runAction(seq);
+             tindex = tindex + 1;
+             if (tindex == childs.length) {
+                 let call = cc.callFunc(function () {
+                     gameover_view.curnode.removeFromParent(true);
+                     gameover_view.curnode = null;
+                     tywx.tt.friend.setStop(false);
+                     tywx.tt.Utils.showWXBanner();
+                     tywx.tt.BoardView.reset();
+                     tywx.tt.BoardView.blocksAni();
+                 });
+                 let seq1 = cc.sequence(cc.delayTime(0.3), call);
+                 gameover_view.curnode.runAction(seq1);
+             }
+         });
+         let delay = cc.delayTime(0.15);
+         let seq = cc.sequence(call, delay);
+         let rep = cc.repeat(seq, childs.length);
+         this.node.runAction(rep);
+     },
+
+     setData(data) {
+         this.data = data;
+         let self = this;
+         let scorecz = data.score;
+         if (scorecz > 0) {
+             let tscore = 0;
+             let call = cc.callFunc(function () {
+                 tscore = tscore + 2;
+                 self.scoreLabel.string = tscore;
+             });
+             let time = 2 / scorecz;
+             let delay = cc.delayTime(time);
+             let seq = cc.sequence(delay, call);
+             let rep = cc.repeat(seq, scorecz / 2);
+             this.scoreLabel.node.stopAllActions();
+             this.scoreLabel.node.runAction(rep);
+         } else {
+             this.scoreLabel.string = "0";
+         }
+     },
+
+     start() {
+
+     },
+
+     statics: {
+         curnode: null,
+         /**
+          * @description 显示gameOver的视图
+          * @param {Object} data gameover的显示数据
+          */
+         show: function (data) {
+             cc.loader.loadRes(gameover_view_path, (err, prefab) => {
+                 if (!err) {
+                     let gameovernode = cc.instantiate(prefab);
+                     let ani = gameovernode.getComponent(cc.Animation);
+                     ani.play("show_hide");
+                     let ads_script = gameovernode.getComponent('gameover_view');
+                     ads_script.setData(data);
+                     gameover_view.curnode = gameovernode;
+                     tywx.tt.Utils.commonScaleIn(ads_script.root);
+                     cc.director.getScene().addChild(gameovernode);
+                 }
+             });
+         }
+     },
+ });
+
+
+ module.exports = gameover_view;

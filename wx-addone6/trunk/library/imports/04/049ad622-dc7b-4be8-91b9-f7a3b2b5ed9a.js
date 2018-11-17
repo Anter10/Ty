@@ -63,6 +63,8 @@ cc.Class({
         this.data = data;
         this.itemName.string = data.name;
         this.itemIcon.spriteFrame = frame;
+        this.itemIcon.node.width = 169;
+        this.itemIcon.node.height = 169;
     },
 
     getData: function getData() {

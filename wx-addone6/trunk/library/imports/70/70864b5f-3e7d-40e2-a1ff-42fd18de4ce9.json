@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "redpacketicon2",
+    "texture": "bfe6c3ba-f3e2-4d84-9cda-2bf8405962ed",
+    "atlas": "",
+    "rect": [
+      4,
+      1,
+      70,
+      81
+    ],
+    "offset": [
+      1,
+      4
+    ],
+    "originalSize": [
+      76,
+      91
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

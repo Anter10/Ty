@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "shuzi_sanxiao_js_great",
+    "texture": "ba876660-8ff4-47ea-8653-6e11dca03a64",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      526,
+      162
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      526,
+      162
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

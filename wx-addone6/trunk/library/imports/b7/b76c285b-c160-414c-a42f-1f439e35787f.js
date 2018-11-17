@@ -78,27 +78,30 @@ cc.Class({
         this.initRoot();
         var info = tywx.ado.InviteInfo;
         this.info = info;
+        var wait_time = 1000;
         for (var i = 0; i < 5; ++i) {
             var tmp_item_name = 'node_invite_' + i;
             var tmp_item = this.root.getChildByName(tmp_item_name);
             var is_invited = info.invite_users[i] ? true : false;
             //is_invited = true;
             if (tmp_item) {
-                var node_head = tmp_item.getChildByName('head_icon');
-                var btn_invite = tmp_item.getChildByName('btn_invite');
-                var btn_invite2 = tmp_item.getChildByName('head_bg');
-                var node_nick_name = tmp_item.getChildByName('nick_name');
-                //let label_nick_name = node_nick_name.getComponent(cc.Label);
-                if (!is_invited) {
-                    node_nick_name.active = false;
-                } else {
-                    (function () {
+                (function () {
+                    var node_head = tmp_item.getChildByName('head_icon');
+                    var btn_invite = tmp_item.getChildByName('btn_invite');
+                    var btn_invite2 = tmp_item.getChildByName('head_bg');
+                    var node_nick_name = tmp_item.getChildByName('nick_name');
+                    var invite_mask = tmp_item.getChildByName('invite_mask');
+                    //let label_nick_name = node_nick_name.getComponent(cc.Label);
+                    if (!is_invited) {
+                        node_nick_name.active = false;
+                    } else {
                         var usr_info = info.invite_users[i];
                         var sp_head = node_head.getComponent(cc.Sprite);
                         var tmp_texture = new cc.Texture2D();
                         btn_invite.active = false;
-                        btn_invite2.active = true;
+                        btn_invite2.active = false;
                         var btn_invite_com = btn_invite2.getComponent(cc.Button);
+                        invite_mask.active = true;
                         if (btn_invite_com) {
                             btn_invite_com.interactable = false;
                         }
@@ -109,17 +112,17 @@ cc.Class({
                                 method: 'render_invite_usr_info',
                                 openId: usr_info.wxOpenId
                             });
-                        }, i * 500);
+                        }, i * wait_time);
                         setTimeout(function () {
                             var openDataContext = wx.getOpenDataContext();
                             var sharedCanvas = openDataContext.canvas;
                             tmp_texture.initWithElement(sharedCanvas);
                             tmp_texture.handleLoadedTexture();
                             sp_head.spriteFrame = new cc.SpriteFrame(tmp_texture);
-                            console.log();
-                        }, i * 500 + 400);
-                    })();
-                }
+                            invite_mask.active = false;
+                        }, i * wait_time + 800);
+                    }
+                })();
             }
         }
     },

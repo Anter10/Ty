@@ -609,8 +609,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 124.67,
-      "height": 36.67
+      "width": 132.46,
+      "height": 38.96
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -657,7 +657,7 @@
     "_useOriginalSize": false,
     "_string": "余额:¥0.0",
     "_N$string": "余额:¥0.0",
-    "_fontSize": 32,
+    "_fontSize": 34,
     "_lineHeight": 55,
     "_enableWrapText": true,
     "_N$file": {
@@ -703,15 +703,15 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 66,
-      "g": 32,
-      "b": 25,
+      "r": 128,
+      "g": 54,
+      "b": 39,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 195,
-      "height": 15
+      "width": 211.25,
+      "height": 16.25
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -758,7 +758,7 @@
     "_useOriginalSize": false,
     "_string": "红包满20元可提现",
     "_N$string": "红包满20元可提现",
-    "_fontSize": 24,
+    "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": {
@@ -905,15 +905,15 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 66,
-      "g": 32,
-      "b": 25,
+      "r": 252,
+      "g": 172,
+      "b": 153,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 300,
-      "height": 15.63
+      "width": 312,
+      "height": 16.25
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -960,7 +960,7 @@
     "_useOriginalSize": false,
     "_string": "游戏中连击有机会获得红包",
     "_N$string": "游戏中连击有机会获得红包",
-    "_fontSize": 25,
+    "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
     "_N$file": {

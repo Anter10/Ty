@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "tsbtn",
+    "texture": "35b7ff04-82e1-45b0-a5af-7ffcb7ccc475",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      410,
+      143
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      410,
+      143
+    ],
+    "capInsets": [
+      0,
+      6,
+      0,
+      17
+    ]
+  }
+}

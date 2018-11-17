@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "nonecz",
+    "texture": "1b285ee7-3019-4510-bde9-e3bbd3725cbd",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      83,
+      86
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      83,
+      86
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

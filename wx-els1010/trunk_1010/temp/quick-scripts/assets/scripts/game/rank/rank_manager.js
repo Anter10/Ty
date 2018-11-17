@@ -14,14 +14,19 @@ var rank_manager = cc.Class({
     statics: {
         friendsRankView: null,
         showRank: function showRank() {
-            cc.loader.loadRes(rankview_path, function (err, prefab) {
-                if (!err) {
-                    var ranknode = cc.instantiate(prefab);
-                    var ads_script = ranknode.getComponent('rank_view');
-                    rank_manager.friendsRankView = ranknode;
-                    cc.director.getScene().addChild(ranknode);
-                }
-            });
+            if (!rank_manager.friendsRankView) {
+                cc.loader.loadRes(rankview_path, function (err, prefab) {
+                    if (!err) {
+                        var ranknode = cc.instantiate(prefab);
+                        var ani = ranknode.getComponent(cc.Animation);
+                        ani.play("show_hide");
+                        var ads_script = ranknode.getComponent('rank_view');
+                        rank_manager.friendsRankView = ranknode;
+                        tywx.tt.Utils.commonScaleIn(ranknode.getChildByName("rank_view"));
+                        cc.director.getScene().addChild(ranknode);
+                    }
+                });
+            }
         }
     },
 

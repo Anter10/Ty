@@ -12,6 +12,7 @@ var gameover_rank = cc.Class({
 
     properties: {
         phbSprite: cc.Sprite
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -29,11 +30,13 @@ var gameover_rank = cc.Class({
         tywx.tt.Utils.sendWXMsg({
             method: 9
         });
+        wx.postMessage({
+            method: 8
+        });
+
         tywx.Timer.setTimer(self, function () {
-            wx.postMessage({
-                method: 8
-            });
-        }, 1, 1, 1);
+            this.updateFriendCanvas();
+        }, 0.5, 0, 0);
     },
 
 
@@ -64,13 +67,14 @@ var gameover_rank = cc.Class({
     },
 
     start: function start() {},
-    update: function update(dt) {
-        this.updatetime = this.updatetime - dt;
-        if (this.updatetime > 0) {
-            this.updateFriendCanvas();
-        }
-    },
 
+
+    //  update(dt) {
+    //      this.updatetime = this.updatetime - dt;
+    //      if (this.updatetime > 0) {
+    //          this.updateFriendCanvas();
+    //      }
+    //  },
 
     statics: {
         gamoverranknode: null,

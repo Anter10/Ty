@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "shuzi_sanxiao_js_lizi2",
+    "texture": "15f0b651-0d49-48fa-9ef0-14f382b2eab1",
+    "atlas": "",
+    "rect": [
+      9,
+      0,
+      69,
+      88
+    ],
+    "offset": [
+      -0.5,
+      0
+    ],
+    "originalSize": [
+      88,
+      88
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

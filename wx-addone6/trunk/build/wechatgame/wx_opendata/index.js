@@ -80,12 +80,12 @@ function stringSlice(str, length) {
  */
 function loadData() {
     //* 好友数据
-    console.log("开始请求好友数据");
+    // console.log("开始请求好友数据");
     wx.getFriendCloudStorage({
         keyList: [CloudKeys.x1],
         success: result => {
             _friendCloudDatas = result.data;
-            console.log("当前请求下来的数据" + JSON.stringify(_friendCloudDatas));
+            // console.log("当前请求下来的数据" + JSON.stringify(_friendCloudDatas));
             _friendCloudDatas.sort((a, b) => {
                 if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
                     return 0;
@@ -100,24 +100,24 @@ function loadData() {
             });
         },
         fail: err => {
-            console.log("当前请求下来的数据21212" + JSON.stringify(err));
+            // console.log("当前请求下来的数据21212" + JSON.stringify(err));
         }
     });
     //* 自己的数据
     wx.getUserCloudStorage({
         keyList: [CloudKeys.x1],
         success: result => {
-            console.log('获取自己的数据', result);
+            // console.log('获取自己的数据', result);
             _selfCloudDatas = result;
             wx.getUserInfo({
                 openIdList: ['selfOpenId'],
                 lang: 'zh_CN',
                 success: function (params) {
-                    console.log('OpenRegion | getUserInfo | success | ' + JSON.stringify(params));
+                    // console.log('OpenRegion | getUserInfo | success | ' + JSON.stringify(params));
                     _selfUserInfo = params.data[0];
                 },
                 fail: function (params) {
-                    console.log('OpenRegion | getUserInfo | fail | ' + JSON.stringify(params));
+                    // console.log('OpenRegion | getUserInfo | fail | ' + JSON.stringify(params));
                 }
             });
         }
@@ -153,11 +153,11 @@ function loadGroupCloudDataByShareTicket(share_ticket, success_cb) {
 function drawImage(url, x, y, w, h, callback = null) {
     let img = wx.createImage();
 
-    console.log("刷图url= " + url);
+    // console.log("刷图url= " + url);
     img.onload = event => {
         let t_img = event.target;
         _shareCanvas.drawImage(t_img, x, y, w, h);
-        console.log("创建成功");
+        // console.log("创建成功");
         callback && callback();
     };
     img.src = url;
@@ -192,7 +192,7 @@ function drawThanFriend(score, x, y, width) {
         loadData();
         return;
     }
-    _shareCanvas.clearRect(0, 0, 32222, 3222)
+    _shareCanvas.clearRect(0, 0, 32222, 3222);
     var frdata = null;
     //console.log("canvaswid" + canvas.width + "canvasheight" + canvas.height +
     //    "好友数据 = " + JSON.stringify(_friendCloudDatas));
@@ -200,16 +200,34 @@ function drawThanFriend(score, x, y, width) {
         var tdata = _friendCloudDatas[i];
         var fscore = tdata.KVDataList[0] == null ? 0 : tdata.KVDataList[0].value;
         var chazhi = fscore - score;
-
-        if (chazhi > 0 && !isMySelf(tdata, _selfUserInfo)) {
-            frdata = tdata;
-            frdata.score = fscore;
-            // prePersonIconUrl = tdata.avatarUrl;
-            break;
+        if (chazhi > 0) {
+           if ((isMySelf(tdata, _selfUserInfo) && i == 0) || !isMySelf(tdata, _selfUserInfo)) {
+               frdata = tdata;
+               frdata.score = fscore;
+               break;
+           }
         }
     }
+    // 判断当前是否为最大值
+    if (!frdata && _friendCloudDatas.length > 0) {
+        let tfscore = _friendCloudDatas[0].KVDataList[0] == null ? 0 : _friendCloudDatas[0].KVDataList[0].value;
+        if (score >= tfscore) {
+            frdata = {};
+            frdata.score = score+"";
+            frdata.nickname = _selfUserInfo.nickName;
+            frdata.avatarUrl = _selfUserInfo.avatarUrl;
+            frdata.KVDataList = _selfCloudDatas.KVDataList;
+        }
+    } else if (!frdata && (!_friendCloudDatas || _friendCloudDatas.length == 0)) {
+        frdata = {};
+        frdata.score = score + "";
+        frdata.nickname = _selfUserInfo.nickName;
+        frdata.avatarUrl = _selfUserInfo.avatarUrl;
+        frdata.KVDataList = _selfCloudDatas.KVDataList;
+    }
+    
 
-    console.log("x =" + x + "y= " + y + "当前是否存储2 " + JSON.stringify(frdata)); // prePersonIconUrl != tdata.avatarUrl &&
+    // console.log("当前是否存储frdata 2 " + JSON.stringify(frdata)); // prePersonIconUrl != tdata.avatarUrl &&
     // 如果有玩家的分数大于自己的 则显示
     if (frdata) {
         y = 0;
@@ -225,19 +243,28 @@ function drawThanFriend(score, x, y, width) {
 
         x += padding_x;
         y = padding_y;
-        drawImage(frdata.avatarUrl, x + 115, y - 10, 80, 80);
+        drawImage(frdata.avatarUrl, x /*x + 115*/ , y - 2, 63, 63);
 
-        _shareCanvas.fillStyle = "#ffffff";
-        _shareCanvas.font = "25px Arial";
+        _shareCanvas.fillStyle = "#CDC0FF";
+        _shareCanvas.font = "20px Arial";
         _shareCanvas.textAlign = 'left';
-        x = 8;
-        _shareCanvas.fillText('即将超越', x, 32);
+        //x = 8;
+        x += 66;
+      
+        if (isMySelf(frdata, _selfUserInfo)) {
+            _shareCanvas.fillText("一马当先", x, 50);
+        }else{
+            _shareCanvas.fillText("即将超越", x, 36);
+        }
+        
         y += 32 / 2 + 28 / 2 + 7;
-        drawText(stringSlice(frdata.nickname, 11), x, 32 + 30);
-        _shareCanvas.fillStyle = "#FFD700";
-        _shareCanvas.font = "28px Arial";
+        //drawText(stringSlice(frdata.nickname, 11), x, 32 + 30);
+        _shareCanvas.fillStyle = "#FFFFFF";
+        _shareCanvas.font = "20px Arial";
         y += 28 + 5;
-        drawText(stringSlice(frdata.score, 11), x, 32 + 30 + 30);
+        if(!isMySelf(frdata, _selfUserInfo)) {
+            drawText(stringSlice(frdata.score, 11), x, 32 + 30 + 10);
+        }
 
     }
 }
@@ -290,7 +317,7 @@ function drawOverphb(friendsdata) {
 
     function drawIcon(data, index) {
         setTimeout(() => {
-            drawImage(data.avatarUrl+"?aa=aa.png", x + ((index - 1) * (width + margin)), y + 5, width, height);
+            drawImage(data.avatarUrl + "?aa=aa.png", x + ((index - 1) * (width + margin)), y + 5, width, height);
             _shareCanvas.fillStyle = "#361348";
             _shareCanvas.font = "27px Arial";
             _shareCanvas.textAlign = 'center';
@@ -299,7 +326,7 @@ function drawOverphb(friendsdata) {
             _shareCanvas.fillStyle = "#361348";
             _shareCanvas.font = "25px Arial";
             _shareCanvas.textAlign = 'center';
-            console.log("好友数据 = " + JSON.stringify(data));
+            // console.log("好友数据 = " + JSON.stringify(data));
             _shareCanvas.fillText(`` + data.KVDataList[0].value, x + ((index - 1) * (width + margin)) + width / 2, height + y + 70);
 
             _shareCanvas.fillStyle = "#361348";
@@ -350,7 +377,7 @@ function drawFriendRank(drawdata) {
 
         //y += h / 2;
         // * rank label
-        console.log("当前的绘制数据 = " + JSON.stringify(data));
+        // console.log("当前的绘制数据 = " + JSON.stringify(data));
         if (index < curbzcount) {
             if (index == 0) {
                 if (data.pm < 3) {
@@ -380,12 +407,12 @@ function drawFriendRank(drawdata) {
 
         setTimeout(() => {
             drawImage(data.avatarUrl, 130, avatar_y + 5, 65, 65);
-           
-        }, posi==0?100:0+posi * 400);
+
+        }, posi == 0 ? 100 : 0 + posi * 400);
         setTimeout(() => {
-          _shareCanvas.drawImage(quan, 130 - 2.5, avatar_y + 2.5, 72, 72);
+            _shareCanvas.drawImage(quan, 130 - 2.5, avatar_y + 2.5, 72, 72);
         }, posi == 0 ? 150 : 0 + posi * 450);
-         
+
         // * name label
         x += 120;
         _shareCanvas.fillStyle = "#6495ED";
@@ -398,7 +425,7 @@ function drawFriendRank(drawdata) {
         _shareCanvas.font = "28px Arial";
         _shareCanvas.textAlign = 'left';
         data.KVDataList.forEach(e => {
-            console.log('kvdatalist', e);
+            // console.log('kvdatalist', e);
             if (e.key === CloudKeys.x1) {
                 _shareCanvas.fillText(e.value + '分', x, label_y);
             }
@@ -498,13 +525,53 @@ let getGroupFriendData = function (tshareTicket) {
     });
 }
 
+function renderInviteUsrInfo(open_id) {
+    wx.getUserInfo({
+        openIdList: [open_id],
+        lang: 'zh_CN',
+        success: function (params) {
+            // console.log('OpenRegion | getUserInfo | success | ' + JSON.stringify(params));
+            if (params.data[0]) {
+                _shareCanvas.clearRect(0, 0, 3222, 3222);
+                let tmp_data = params.data[0];
+                let [x, y] = [0, 0];
+                let [w, h] = [160, 200];
+                let [a_w, a_h] = [138, 138];
+                let padding_y = 20;
+
+                x = (w - a_w) / 2;
+                y = x;
+                _shareCanvas.save();
+                _shareCanvas.beginPath();
+                _shareCanvas.arc(x + a_w / 2, y + a_h / 2, 60, 0, 2 * Math.PI, false);
+                _shareCanvas.clip();
+                drawImage(tmp_data.avatarUrl + "?aaa=aa.png", x, y, a_w, a_h, () => {
+                    _shareCanvas.restore();
+                    // console.log('draw img success');
+
+                    _shareCanvas.fillStyle = "#ffffff";
+                    _shareCanvas.font = "25px Arial";
+                    _shareCanvas.textAlign = 'center';
+                    x = w / 2;
+                    y = y + a_h + padding_y + 15;
+                    drawText(stringSlice(tmp_data.nickName, 11), x, y);
+                    // console.log('render end');
+                });
+            }
+
+        },
+        fail: function (params) {
+            // console.log('OpenRegion | getUserInfo | fail | ' + JSON.stringify(params));
+        }
+    });
+}
 
 /**
  * 处理主域给子域发送的消息
  * data: type: Object 主域给子域发送的数据
  */
 wx.onMessage(data => {
-    console.log("当前传进来的消息数据 = " + JSON.stringify(data));
+    // console.log("当前传进来的消息数据 = " + JSON.stringify(data));
     if (data.method === events.LOAD_DATA) {
         loadData();
     } else if (data.method == events.friends) {
@@ -519,6 +586,8 @@ wx.onMessage(data => {
         showOverphb()
     } else if (data.method == 9) {
         _shareCanvas.clearRect(0, 0, 32222, 3222);
+    } else if (data.method === events.RENDER_INVITE_USRR_INFO) {
+        renderInviteUsrInfo(data.openId);
     }
 
 

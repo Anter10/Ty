@@ -50,11 +50,17 @@ var ModelBoard = function () {
         key: 'resetPreviewConfigs',
         value: function resetPreviewConfigs() {
             var is_use_prop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+            var checkpreviewnumber = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
             // * reset preview config
             this.previewConfigs = [];
             this.previewStat = [];
-
+            var checkgameover = true;
+            if (checkpreviewnumber) {
+                if (tywx.tt.BoardView.checkPreviewActives() == 0) {
+                    checkgameover = false;
+                }
+            }
             var Constants = tywx.tt.constants;
             var block_configs = Constants.Blocks;
             if (is_use_prop) {
@@ -74,53 +80,59 @@ var ModelBoard = function () {
                     //TODO: 特殊的默认都能填充，有需要再修改
                     this.previewStat[i] = 1;
                     config_idx = Constants.ForceRestBlocks[i];
+                    var _block_dis = Constants.BlockDis[config_idx];
+                    var _is_can_fill = this.isPreviewCanFill(_block_dis);
+                    this.previewStat[i] = _is_can_fill ? 1 : 0;
                 }
                 this.previewIndex[i] = config_idx;
             }
-            tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
+            tywx.tt.log("出发了gameover 检测事件 tt_ model_bord 69 行 是否需要检测 = ", checkgameover);
+            if (checkgameover) {
+                tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
+            }
         }
     }, {
         key: 'refreshPreviewStat',
-        value: function refreshPreviewStat() {
+        value: function refreshPreviewStat(refresh) {
             tywx.tt.log(TAG, 'refreshPreviewStat');
             var Constants = tywx.tt.constants;
             for (var i = 0; i < this.previewIndex.length; ++i) {
                 var config_dis = Constants.BlockDis[this.previewIndex[i]];
                 var is_can_fill = this.isPreviewCanFill(config_dis);
+                if (!this.previewConfigs[i]) is_can_fill = false;
                 this.previewStat[i] = is_can_fill ? 1 : 0;
+                tywx.tt.log(TAG, 'refreshPreviewStat', 'idx:' + i + ',stat:' + this.previewStat[i]);
             }
-            tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
+            tywx.tt.log("出发了gameover 检测事件 tt_ model_bord 79 行" + refresh);
+            if (!refresh) {
+                tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
+            }
         }
     }, {
         key: 'isPreviewCanFill',
         value: function isPreviewCanFill(block_dis) {
-            var _this = this;
-
-            var self = this;
-
-            var _loop = function _loop(r) {
-                var line = _this.board[r];
-
-                var _loop2 = function _loop2(c) {
-                    block_dis.forEach(function (data) {
-                        var rr = r + data[0],
-                            cc = c + data[1];
-
-                        if (rr >= 0 && rr < self.board.length && cc >> 0 && cc < line.length && self.board[r][c] > 0) {
-                            return false;
-                        }
-                    });
-                };
-
-                for (var c = 0; c < line.length; ++c) {
-                    _loop2(c);
-                }
-            };
-
             for (var r = 0; r < this.board.length; ++r) {
-                _loop(r);
+                var line = this.board[r];
+                for (var c = 0; c < line.length; ++c) {
+                    var tmp_fill_length = 0;
+                    var fill_blocks = [];
+                    for (var i = 0; i < block_dis.length; i++) {
+                        var tmp_data = block_dis[i];
+                        var rr = r + tmp_data[0],
+                            cc = c + tmp_data[1];
+
+                        if (rr >= 0 && rr < this.h && cc >= 0 && cc < this.w && this.board[rr][cc] <= 0) {
+                            tmp_fill_length++;
+                            fill_blocks.push([rr, cc]);
+                        }
+                    }
+                    if (tmp_fill_length === block_dis.length) {
+                        tywx.tt.log(TAG, 'isPreviewCanFill');
+                        return true;
+                    }
+                }
             }
-            return true;
+            return false;
         }
     }, {
         key: 'isCanFill',
@@ -136,8 +148,8 @@ var ModelBoard = function () {
             var fill_blocks = [];
             var need_fill_num = 0;
             for (var r = 0; r < config.length; ++r) {
-                var _line = config[r];
-                for (var c = 0; c < _line.length; ++c) {
+                var line = config[r];
+                for (var c = 0; c < line.length; ++c) {
                     var dis = BlockMap[r][c];
                     if (config[r][c] !== 0) {
                         var b_r = c_r + dis[1],
@@ -158,9 +170,9 @@ var ModelBoard = function () {
     }, {
         key: 'fillBaordByConfig',
         value: function fillBaordByConfig(center_row, center_col, config, touch_idx) {
-            var _this2 = this;
+            var _this = this;
 
-            tywx.tt.warn(TAG, 'start to fillBaord');
+            tywx.tt.warn(TAG, 'start to fillBaord' + touch_idx);
             if (!this.willFillBlocks || this.willFillBlocks.length === 0) {
                 tywx.tt.warn(TAG, 'fillBoard error, this.willFillBlocks=' + this.willFillBlocks);
                 return;
@@ -169,6 +181,35 @@ var ModelBoard = function () {
                 var _ref2 = [e[0], e[1]],
                     r = _ref2[0],
                     c = _ref2[1];
+
+                if (_this.board[r][c] === 0) {
+                    _this.board[r][c] = e[2];
+                    _this.emptyBlocks.delete(r + '_' + c);
+                } else {
+                    tywx.tt.warn(TAG, 'fillBoardByConfig error r=' + r + ' c=' + c);
+                }
+            });
+            tywx.NotificationCenter.trigger(tywx.tt.events.TT_FILL_BOARD, this.willFillBlocks);
+            this.willFillBlocks = [];
+            tywx.NotificationCenter.trigger(tywx.tt.events.HELP_ADD, null);
+            this.previewConfigs[touch_idx] = null;
+            // this.refreshPreviewStat(true);
+            this.outPutBoard();
+            tywx.tt.warn(TAG, 'fillBaord end');
+        }
+
+        // 填充给定的格子
+
+    }, {
+        key: 'fillBord',
+        value: function fillBord(alle) {
+            var _this2 = this;
+
+            this.willFillBlocks = alle;
+            this.willFillBlocks.forEach(function (e) {
+                var _ref3 = [e[0], e[1]],
+                    r = _ref3[0],
+                    c = _ref3[1];
 
                 if (_this2.board[r][c] === 0) {
                     _this2.board[r][c] = e[2];
@@ -179,31 +220,27 @@ var ModelBoard = function () {
             });
             tywx.NotificationCenter.trigger(tywx.tt.events.TT_FILL_BOARD, this.willFillBlocks);
             this.willFillBlocks = [];
-            this.previewConfigs[touch_idx] = null;
-            this.refreshPreviewStat();
-            this.outPutBoard();
-            tywx.tt.warn(TAG, 'fillBaord end');
         }
     }, {
         key: 'outPutBoard',
         value: function outPutBoard() {
             for (var r = this.h - 1; r >= 0; --r) {
-                var _line2 = 'Row:' + r + '===>';
+                var line = 'Row:' + r + '===>';
                 for (var c = 0; c < this.w; ++c) {
-                    _line2 += this.board[r][c] + ',';
+                    line += this.board[r][c] + ',';
                 }
-                tywx.tt.log(TAG, _line2);
+                tywx.tt.log(TAG, line);
             }
         }
     }, {
         key: 'resetPreviews',
-        value: function resetPreviews() {
+        value: function resetPreviews(checkpreviewnumber) {
             if (this.previewConfigs.every(function (e) {
                 return e === null;
             })) {
                 // * reset preview
                 tywx.tt.log(TAG, 'reset previews');
-                this.resetPreviewConfigs();
+                this.resetPreviewConfigs(false, checkpreviewnumber);
                 tywx.NotificationCenter.trigger(tywx.tt.events.TT_RESET_PREVIEWS, null);
             }
         }
@@ -223,9 +260,9 @@ var ModelBoard = function () {
             for (var i = 0; i < this.w; ++i) {
                 tmp_col_fill.push(0);
             }for (var r = 0; r < this.board.length; ++r) {
-                var _line3 = this.board[r];
+                var line = this.board[r];
                 var fill_num = 0;
-                for (var c = 0; c < _line3.length; ++c) {
+                for (var c = 0; c < line.length; ++c) {
                     if (this.board[r][c] >= 1) {
                         tmp_col_fill[c]++;
                         fill_num++;
@@ -240,9 +277,31 @@ var ModelBoard = function () {
                 if (tmp_col_fill[_i] === this.h) this.clearCols.push(_i);
             }
             if (this.clearCols.length > 0 || this.clearRows.length > 0) {
+                this.hasclear = true;
                 tywx.NotificationCenter.trigger(tywx.tt.events.TT_CLEAR_ROW, null);
+            } else {
+                this.hasclear = false;
+                this.refreshPreviewStat();
             }
+
             tywx.tt.log(TAG, 'clearRow:' + this.clearRows + ',\nclearCols:' + this.clearCols);
+        }
+    }, {
+        key: 'getAddScoreByClear',
+        value: function getAddScoreByClear(rows, cols) {
+            var add_score = 0;
+            var self = this;
+            rows.forEach(function (e) {
+                for (var c = 0; c < self.w; ++c) {
+                    add_score += tywx.tt.constants.AddScore;
+                }
+            });
+            cols.forEach(function (e) {
+                for (var r = 0; r < self.h; ++r) {
+                    add_score += tywx.tt.constants.AddScore;
+                }
+            });
+            return add_score;
         }
     }, {
         key: 'clearBlocks',
@@ -264,10 +323,19 @@ var ModelBoard = function () {
                     add_score += tywx.tt.constants.AddScore;
                 }
             });
+
+            var cleardata = {};
+            cleardata.rows = this.clearRows;
+            cleardata.cols = this.clearCols;
+            // console.log("方块清空数据 = "+JSON.stringify(cleardata));
+            tywx.NotificationCenter.trigger(tywx.tt.events.HELP_ADD, null);
             this.score += add_score;
-            tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_SCORE, null);
             this.clearCols = [];
             this.clearRows = [];
+            this.outPutBoard();
+            this.refreshPreviewStat();
+            tywx.tt.log(TAG, 'clearBlocks end');
+            tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_SCORE, cleardata);
         }
     }, {
         key: 'hammerClearByRowAndCol',
@@ -297,6 +365,18 @@ var ModelBoard = function () {
         key: 'getPreviewConfigs',
         value: function getPreviewConfigs() {
             return this.previewConfigs;
+        }
+
+        /**
+         * 设置玩家的分数
+         * @param {Number} score 玩家的分数
+         */
+
+    }, {
+        key: 'setScore',
+        value: function setScore(score) {
+            this.score = score;
+            tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_SCORE, null);
         }
     }]);
 

@@ -13,10 +13,15 @@ var lottery_get_view = cc.Class({
     properties: {
         nameLabel: cc.Label,
         icon: cc.Sprite,
-        mfjbBtnNode: cc.Node
+        mfjbBtnNode: cc.Node,
+        background: cc.Node
     },
 
     close: function close() {
+        if (this.closeing) {
+            return;
+        }
+        this.closeing = true;
         lottery_get_view.get_view_node.removeFromParent(true);
         lottery_get_view.get_view_node = null;
     },
@@ -48,7 +53,6 @@ var lottery_get_view = cc.Class({
             }
             tywx.tt.Utils.saveItem(LOCAL_STOREITEM_KEY, JSON.stringify(allitems), false);
             this.close();
-            console.log("关闭了 close 吗");
         } else {
             tywx.tt.Utils.requestAddRedPacket({
                 success: function success(res) {
@@ -76,14 +80,16 @@ var lottery_get_view = cc.Class({
         var self = this;
         // 视频抽奖
         var videoBtnScript = this.mfjbBtnNode.getComponent("ShareButton");
-        var share_control = tywx.tt.configManager.share_control.recovergame;
+        var share_control = tywx.tt.configManager.getInstance().share_control ? tywx.tt.configManager.getInstance().share_control.recovergame : ["share", 50];
         var calltype = tywx.tt.Utils.shareVideoCtr(share_control);
-        console.log("calltype = " + calltype);
         videoBtnScript.setButtonCallType(calltype);
         var config = calltype == 1 ? tywx.tt.constants.ShareConfig.ZPADDDOUBLE_SHARE : tywx.tt.constants.ShareConfig.ZPADDDOUBLE_VIDEO;
         videoBtnScript.setShareConfig(config);
         videoBtnScript.setSuccessCall(function () {
             self.addDoubleJL();
+        });
+        this.background.getComponent("background").setTouchEndCall(function () {
+            self.close();
         });
     },
     start: function start() {},

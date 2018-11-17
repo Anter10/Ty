@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "jumpnext",
+    "texture": "95319d84-6c76-4246-8b71-c7bfe440affc",
+    "atlas": "",
+    "rect": [
+      37,
+      10,
+      81,
+      42
+    ],
+    "offset": [
+      2,
+      0
+    ],
+    "originalSize": [
+      151,
+      62
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

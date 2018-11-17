@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "title_bg_silk_red",
+    "texture": "a0fd4e62-32f3-4154-9584-fc4e9173bd5d",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      1072,
+      270
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      1072,
+      270
+    ],
+    "capInsets": [
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

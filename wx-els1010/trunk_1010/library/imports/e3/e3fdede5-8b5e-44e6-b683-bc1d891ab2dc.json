@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "loadbottom",
+    "texture": "c6e5efae-6049-4cf7-ac25-08dbe1301261",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      598,
+      66
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      598,
+      66
+    ],
+    "capInsets": [
+      42,
+      13,
+      33,
+      12
+    ]
+  }
+}

@@ -20,6 +20,8 @@ var WXVedioCallback = {
     fail: null,
     err_cb: null
 }; // * 微信vedio回调
+
+var TAG = "[model.Utils.js]";
 var Utils = function () {
     function Utils() {
         _classCallCheck(this, Utils);
@@ -583,7 +585,7 @@ var Utils = function () {
                 return WXVedioAD.show();
             }).catch(function (e) {
                 tywx.tt.log(e);
-                var lucky_rate = tywx.tt.Configs.LuckyUserRate || 50;
+                var lucky_rate = tywx.tt.configManager.getInstance().LuckyUserRate || 50;
                 if (Math.random() * 100 <= lucky_rate) {
                     WXVedioCallback.err_cb && WXVedioCallback.err_cb();
                 } else {
@@ -617,12 +619,24 @@ var Utils = function () {
     }, {
         key: 'isIpx',
         value: function isIpx() {
+            if (!window.wx) {
+                return false;
+            }
             var ret = false;
             var sys_info = wx.getSystemInfoSync();
             if (sys_info.model.indexOf('iPhone X') >= 0 || sys_info.system.indexOf('iOS') >= 0 && sys_info.windowHeight / sys_info.windowWidth > 1.9) {
                 return true;
             }
             return ret;
+        }
+    }, {
+        key: 'is2To1',
+        value: function is2To1() {
+            if (!window.wx) {
+                return false;
+            }
+            var sys_info = wx.getSystemInfoSync();
+            return sys_info.windowHeight / sys_info.windowWidth > 1.9;
         }
         /**
          * @description 根据url刷新sprite
@@ -1226,6 +1240,7 @@ var Utils = function () {
         value: function getCrossAdConfigByAppId(wx_app_id) {
             var ret = null;
             var list = tywx.AdManager.rawAdInfoList;
+
             for (var i = 0; i < list.length; ++i) {
                 var tmp_c = list[i];
                 if (tmp_c.toappid === wx_app_id) {
@@ -1247,6 +1262,7 @@ var Utils = function () {
     }, {
         key: 'jump2MiniProgramByConfig',
         value: function jump2MiniProgramByConfig(config) {
+
             try {
 
                 // this.genRandomSecondAdInfo();
@@ -1351,7 +1367,7 @@ var Utils = function () {
         value: function isMinGanIp(ip_info) {
             var ret = false;
             console.log(ip_info.loc.length + "敏感IP信息 = " + JSON.stringify(ip_info));
-            var MinGanIpInfo = tywx.tt.Configs.MinGanIp || tywx.tt.constants.MinGanIp;
+            var MinGanIpInfo = tywx.tt.configManager.getInstance().MinGanIp || tywx.tt.constants.MinGanIp;
             if (ip_info.loc && ip_info.loc.length > 0) {
                 for (var i = 0; i < MinGanIpInfo.length; ++i) {
                     var info = MinGanIpInfo[i];
@@ -1398,6 +1414,52 @@ var Utils = function () {
                 }
             }
             return calltype;
+        }
+        /**
+         * @description 得到玩家的记录数据
+         * @param {String} key 存储玩家记录的键
+         */
+
+    }, {
+        key: 'getPlayDataByKey',
+        value: function getPlayDataByKey(key) {
+            var data = tywx.tt.Utils.loadItem(key, -1);
+            return data;
+        }
+
+        /**
+         * 清空某个键值
+         * @param {String} key 键
+         * @param {Object} value 值
+         */
+
+    }, {
+        key: 'clearPlayDataByKey',
+        value: function clearPlayDataByKey(key) {
+            var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : -1;
+            var local = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+            tywx.tt.Utils.saveItem(key, value, local);
+        }
+
+        /** 
+         * @description 显示提示框
+         */
+
+    }, {
+        key: 'showAlert',
+        value: function showAlert(text) {
+            cc.loader.loadRes('prefabs/AlertView', function (err, prefab) {
+                if (!err) {
+                    console.log("show text" + text);
+                    var pop = cc.instantiate(prefab);
+                    cc.director.getScene().addChild(pop, 99999);
+                    pop.getComponent('AlertView').setText(text);
+                    pop.getComponent('AlertView').popView();
+                } else {
+                    tywx.tt.log(TAG, "显示提示框失败");
+                }
+            });
         }
     }]);
 

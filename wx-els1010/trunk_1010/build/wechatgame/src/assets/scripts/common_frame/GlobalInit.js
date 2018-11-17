@@ -12,18 +12,20 @@ tywx.StateInfo = {
 
 //应用系统信息
 tywx.SystemInfo = {
-        clientId: 'H5_2.0_weixin.weixin.0-hall20122.weixin.huanljy',
-            intClientId: 24347,
+            clientId: 'H5_2.0_weixin.weixin.0-hall20197.weixin.elsfkpt',
+            intClientId: 24724,
             cloudId: 36,
-            version: 1.62,
-            webSocketUrl: 'ws://192.168.10.88/',
-            // loginUrl: 'https://openelsfk.nalrer.cn/', // 线上
-             loginUrl : 'https://openwaxiaofz.nalrer.cn/', // 仿真
+            version: 1.0,
+            //webSocketUrl: 'ws://192.168.10.88/',
+//             loginUrl: 'https://openelsfk.nalrer.cn/', // 线上
+            loginUrl : 'https://openelsfkfz.nalrer.cn/', // 仿真
+            //loginUrl : 'http://62.234.201.32',
             shareManagerUrl: 'https://market.touch4.me/',
             deviceId: 'wechatGame',
-            wxAppId: 'wxd9dac6412c7dab7b', // wxd9dac6412c7dab7b
+            wxAppId: 'wx45e02fc734c7b568', // wxd9dac6412c7dab7b
             appId: 9999,
-            gameId: 20122,
+            gameId: 20197,
+            musicurl:"https://elsfkws.nalrer.cn/teris/m/pintu/",
             hall_version: "hall37",
             cdnPath: "https://elsfkws.nalrer.cn/teris/",
             remotePackPath: "remote_res/res.zip",

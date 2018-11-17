@@ -15,6 +15,10 @@ var _configUrl = 'https://elsfkws.nalrer.cn/teris/config/els1010.json';
 var ConfigManager = function () {
     function ConfigManager() {
         _classCallCheck(this, ConfigManager);
+
+        for (var att in tywx.tt.Configs.default) {
+            this[att] = tywx.tt.Configs.default[att];
+        }
     }
 
     _createClass(ConfigManager, [{
@@ -44,6 +48,8 @@ var ConfigManager = function () {
 
                     tywx.tt.log(TAG, 'request config success' + JSON.stringify(response));
                     tywx.NotificationCenter.trigger(tywx.tt.events.TT_GET_CONFIG_SUCCESS, response);
+                } else {
+                    tywx.NotificationCenter.trigger(tywx.tt.events.TT_GET_CONFIG_FAIL, null);
                 }
             };
             xhr.open("GET", _configUrl, true);
@@ -61,6 +67,6 @@ var ConfigManager = function () {
 }();
 
 ConfigManager[_instance] = null;
-module.exports = ConfigManager.getInstance();
+module.exports = ConfigManager;
 
 cc._RF.pop();

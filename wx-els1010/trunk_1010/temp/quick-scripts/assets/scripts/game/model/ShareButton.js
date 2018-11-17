@@ -183,28 +183,33 @@ cc.Class({
                     },
                     error_callback: function error_callback() {
                         self.hadclicknumber = 0;
-                        if (self.shareConfig === tywx.tt.constants.ShareConfig.GIFT_GIFT_BOX_SHARE_VIDEO || self.shareConfig === tywx.tt.constants.ShareConfig.RECOVER_GAME_SHARE_VIDEO) {
-                            var content = self.shareConfig === tywx.tt.constants.ShareConfig.RECOVER_GAME_SHARE ? '免费复活机会' : '如意宝箱';
-                            var end_str = self.shareConfig === tywx.tt.constants.ShareConfig.RECOVER_GAME_SHARE ? '一次' : '一个';
-                            content = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + content + '</color><color=#ffffff>' + end_str + '</c>';
-                            tywx.tt.Utils.showErrorGfitPop(function () {
-                                self.successCallBack && self.successCallBack(null);
-                            }, content);
-                        } else if (self.shareConfig === tywx.tt.constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO || self.shareConfig === tywx.tt.constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO) {
-                            var _content = self.shareConfig === tywx.tt.constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO ? '免费红包' : '免费双倍加分';
-                            var _end_str = self.shareConfig === tywx.tt.constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO ? '一个' : '一次';
-                            _content = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + _content + '</color><color=#ffffff>' + _end_str + '</c>';
-                            tywx.tt.Utils.showErrorGfitPop(function () {
-                                self.successCallBack && self.successCallBack(null);
-                            }, _content);
-                        } else if (self.shareConfig === tywx.tt.constants.ShareConfig.FREE_GIFT_SHARE_VIDEO) {
-                            var _content2 = '免费道具';
-                            var _end_str2 = "一个";
-                            _content2 = '<color=#ffffff>\u8D60\u9001</c><color=#ff0000>' + _content2 + '</color><color=#ffffff>' + _end_str2 + '</c>';
-                            tywx.tt.Utils.showErrorGfitPop(function () {
-                                self.successCallBack && self.successCallBack(null);
-                            }, _content2);
+                        var content = "恭喜你是幸运用户,";
+                        if (self.shareConfig === tywx.tt.constants.ShareConfig.HOME_ZP_GET_VIDEO) {
+                            content = content + '成功获得抽奖机会!';
+                        } else if (self.shareConfig === tywx.tt.constants.ShareConfig.GET_HUNAYIHUAN_NUMBER_VIEDO) {
+                            content = content + '成功获得3次换一换!';
+                        } else if (self.shareConfig === tywx.tt.constants.ShareConfig.GET_CHUIZI_NUMBER_VIEDO) {
+                            content = content + '成功获得锤子道具!';
+                        } else if (self.shareConfig === tywx.tt.constants.ShareConfig.GAMEOVER_FUHUO_VIDEO) {
+                            content = content + '成功复活!';
+                        } else if (self.shareConfig === tywx.tt.constants.ShareConfig.ZPADDDOUBLE_VIDEO) {
+                            content = content + '成功获得加倍机会!';
+                        } else if (self.shareConfig === tywx.tt.constants.ShareConfig.GAMEOVER_VIDEO) {
+                            content = content + '成功获得看视频!';
                         }
+
+                        // 弹出提示框
+                        tywx.tt.tipview.show({
+                            success: function success() {
+                                self.successCallBack && self.successCallBack(null);
+                            },
+                            tip: content,
+                            config: -1,
+                            calltype: -1,
+                            closecall: function closecall() {
+                                self.successCallBack && self.successCallBack(null);
+                            }
+                        });
                     }
                 };
                 tywx.tt.Utils.showWXVideo(param);
@@ -233,6 +238,7 @@ cc.Class({
                 window.wx.showShareMenu({
                     withShareTicket: true
                 });
+                console.log("分享信息 " + this.shareConfig[0]);
                 var msg = tywx.tt.Utils.getRandomShareConfigByShareTag(this.shareConfig[0]);
                 if (!msg) {
                     msg = tywx.tt.constants.DefaultShareConfig;

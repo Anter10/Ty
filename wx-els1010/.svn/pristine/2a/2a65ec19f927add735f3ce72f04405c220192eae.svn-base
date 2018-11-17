@@ -1,0 +1,47 @@
+let TAG = '[tt.model.ConfigManager]';
+let _instance = Symbol(TAG);
+let _configUrl = 'https://elsfkws.nalrer.cn/teris/config/els1010.json';
+
+class ConfigManager {
+    constructor() {
+        this.MUSICS = {
+            BG_MUSIC: "https://elsfkws.nalrer.cn/teris/m/3.mp3",
+        }
+    }
+    static getInstance() {
+        if (!ConfigManager[_instance]) ConfigManager[_instance] = new ConfigManager();
+        return ConfigManager[_instance];
+    }
+    requestConfig() {
+        tywx.tt.log(TAG, 'requestConfig');
+        // * 成功通知
+        tywx.tt.ads.listenCDNData();
+        tywx.tt.lottery.listenCDNConfigData();
+        tywx.tt.ads.listenADManagerData();
+        let self = this;
+        let xhr = cc.loader.getXMLHttpRequest();
+        //TODO: 添加审核判断
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 400)) {
+                let response = JSON.parse(xhr.responseText);
+                for (let att in response.default) {
+                    self[att] = response.default[att];
+                }
+                tywx.tt.constants.WXAdConfig.bannerId = self.WXAd.banner;
+                tywx.tt.constants.WXAdConfig.vedioId = self.WXAd.video;
+                if (tywx.tt.constants.WXAdConfig.vedioId === '') {
+                    tywx.tt.isCanWatchVideo = false;
+                } else {
+                    tywx.tt.isCanWatchVideo = true;
+                }
+
+                tywx.tt.log(TAG, 'request config success' + JSON.stringify(response));
+                tywx.NotificationCenter.trigger(tywx.tt.events.TT_GET_CONFIG_SUCCESS, response);
+            }
+        };
+        xhr.open("GET", _configUrl, true);
+        xhr.send();
+    }
+}
+ConfigManager[_instance] = null;
+module.exports = ConfigManager.getInstance();

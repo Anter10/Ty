@@ -1,0 +1,97 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "jiaxing",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.83,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": 2,
+  "curveData": {
+    "paths": {
+      "01": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.26666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 0.4666666666666667,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "01tx": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.3,
+              "value": 0
+            },
+            {
+              "frame": 0.5333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 0
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0.5333333333333333,
+              "value": 1
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1.1
+            }
+          ],
+          "scaleX": [
+            {
+              "frame": 0.5333333333333333,
+              "value": 1
+            },
+            {
+              "frame": 0.8333333333333334,
+              "value": 1.1
+            }
+          ]
+        }
+      },
+      "zhezhao/zhezhao": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -15.6,
+                -78.2
+              ]
+            },
+            {
+              "frame": 0.3,
+              "value": [
+                0.9,
+                -1
+              ]
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0.3,
+              "value": 255
+            },
+            {
+              "frame": 0.5333333333333333,
+              "value": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

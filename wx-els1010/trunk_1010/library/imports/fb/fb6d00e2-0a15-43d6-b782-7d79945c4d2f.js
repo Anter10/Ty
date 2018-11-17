@@ -16,10 +16,12 @@ var friend = cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad: function onLoad() {
+
         this.tex = new cc.Texture2D();
         window.sharedCanvas.width = 211;
         window.sharedCanvas.height = 98;
-        this.updatetime = 10;
+        this.totaltime = 5;
+        this.updatetime = this.totaltime;
         this.score = 0;
         self = this;
     },
@@ -32,6 +34,9 @@ var friend = cc.Class({
     setStop: function setStop(stop) {
         this.stop = stop;
         if (!stop) {
+            tywx.tt.Utils.sendWXMsg({
+                method: 9
+            });
             window.sharedCanvas.width = 211;
             window.sharedCanvas.height = 98;
         }
@@ -42,7 +47,7 @@ var friend = cc.Class({
      */
     updateFriendCanvas: function updateFriendCanvas() {
         //return;
-        if (!this.tex || !wx) {
+        if (!this.tex || !window.wx) {
             return;
         }
         var openDataContext = wx.getOpenDataContext();
@@ -51,6 +56,11 @@ var friend = cc.Class({
         this.tex.handleLoadedTexture();
         this.friendIcon.spriteFrame = new cc.SpriteFrame(this.tex);
         this.friendIcon.node.active = true;
+        tywx.tt.Utils.sendWXMsg({
+            method: 5,
+            isrestart: true,
+            score: this.score
+        });
     },
 
     /**
@@ -69,14 +79,14 @@ var friend = cc.Class({
         }
         this.updatetime = this.updatetime - dt;
         if (this.updatetime < 0) {
-            this.updatetime = 10;
+            this.updatetime = this.totaltime;
             tywx.tt.Utils.sendWXMsg({
                 method: 5,
                 isrestart: true,
-                score: self.score
+                score: this.score
             });
         }
-        if (this.updatetime > 7) {
+        if (this.updatetime > this.totaltime - 1) {
             this.updateFriendCanvas();
         }
     },

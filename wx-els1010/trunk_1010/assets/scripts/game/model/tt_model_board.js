@@ -1,9 +1,9 @@
 let TAG = '[tt.model.board]';
-let ModelBoard = class{
-    constructor(){
+let ModelBoard = class {
+    constructor() {
         this.board = [];
-        this.w     = tywx.tt.constants.BoardWidth;
-        this.h     = tywx.tt.constants.BoardHeight;
+        this.w = tywx.tt.constants.BoardWidth;
+        this.h = tywx.tt.constants.BoardHeight;
         this.score = 0;
         this.willFillBlocks = [];
         this.previewConfigs = []; // * 预览配置
@@ -13,101 +13,124 @@ let ModelBoard = class{
         this.clearCols = [];
         this.emptyBlocks = new Map();
     }
-    reset(){
+    reset() {
         this.score = 0;
         this.resetBoard();
         this.resetPreviewConfigs();
     }
-    resetBoard(){
+    resetBoard() {
         this.board = [];
         this.emptyBlocks.clear();
-        for(let i = 0; i < this.h; ++i){
+        for (let i = 0; i < this.h; ++i) {
             this.board[i] = [];
-            for(let j = 0; j < this.w; ++j){
+            for (let j = 0; j < this.w; ++j) {
                 this.board[i][j] = 0;
-                this.emptyBlocks.set(`${i}_${j}`,0);
+                this.emptyBlocks.set(`${i}_${j}`, 0);
             }
         }
-        
+
     }
 
-    resetPreviewConfigs(is_use_prop = false){
+    resetPreviewConfigs(is_use_prop = false, checkpreviewnumber = false) {
         // * reset preview config
         this.previewConfigs = [];
         this.previewStat = [];
-
+        let checkgameover = true;
+        if (checkpreviewnumber){
+            if (tywx.tt.BoardView.checkPreviewActives() == 0) {
+                checkgameover = false;
+            }
+        }
         let Constants = tywx.tt.constants;
         let block_configs = Constants.Blocks;
-        if(is_use_prop){
+        if (is_use_prop) {
             block_configs = [];
-            Constants.ForceRestBlocks.forEach(e=>{
+            Constants.ForceRestBlocks.forEach(e => {
                 block_configs.push(Constants.Blocks[e]);
             });
         }
-        for(let i = 0; i < 3; ++i){
+        for (let i = 0; i < 3; ++i) {
             let config_idx = parseInt(block_configs.length * Math.random());
             this.previewConfigs[i] = block_configs[config_idx];
-            if(!is_use_prop){
+            if (!is_use_prop) {
+                let block_dis = Constants.BlockDis[config_idx];
+                let is_can_fill = this.isPreviewCanFill(block_dis);
+                this.previewStat[i] = is_can_fill ? 1 : 0;
+            } else {
+                //TODO: 特殊的默认都能填充，有需要再修改
+                this.previewStat[i] = 1;
+                config_idx = Constants.ForceRestBlocks[i];
                 let block_dis = Constants.BlockDis[config_idx];
                 let is_can_fill = this.isPreviewCanFill(block_dis);
                 this.previewStat[i] = is_can_fill ? 1 : 0;
             }
-            else{
-                //TODO: 特殊的默认都能填充，有需要再修改
-                this.previewStat[i] = 1;
-                config_idx = Constants.ForceRestBlocks[i];
-            }
             this.previewIndex[i] = config_idx;
         }
-        tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT,null);
+        tywx.tt.log("出发了gameover 检测事件 tt_ model_bord 69 行 是否需要检测 = ", checkgameover);
+        if (checkgameover){
+           tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
+        }
     }
-    refreshPreviewStat(){
+
+    refreshPreviewStat(refresh) {
         tywx.tt.log(TAG, 'refreshPreviewStat');
         let Constants = tywx.tt.constants;
-        for(let i = 0; i < this.previewIndex.length; ++i){
+        for (let i = 0; i < this.previewIndex.length; ++i) {
             let config_dis = Constants.BlockDis[this.previewIndex[i]];
             let is_can_fill = this.isPreviewCanFill(config_dis);
+            if (!this.previewConfigs[i]) is_can_fill = false;
             this.previewStat[i] = is_can_fill ? 1 : 0;
+            tywx.tt.log(TAG, 'refreshPreviewStat', `idx:${i},stat:${this.previewStat[i]}`);
         }
-        tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT,null);
+        tywx.tt.log("出发了gameover 检测事件 tt_ model_bord 79 行" + refresh);
+        if (!refresh) {
+            tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
+        }
     }
 
-    isPreviewCanFill(block_dis){
-        let self = this;
-        for(let r = 0; r < this.board.length; ++r){
+    isPreviewCanFill(block_dis) {
+        for (let r = 0; r < this.board.length; ++r) {
             let line = this.board[r];
-            for(let c = 0; c < line.length; ++c){
-                block_dis.forEach(data=>{
-                    let [rr,cc] = [r + data[0], c + data[1]];
-                    if(rr >= 0 && rr < self.board.length 
-                       && cc >> 0 && cc < line.length
-                       && self.board[r][c] > 0){
-                       return false;
+            for (let c = 0; c < line.length; ++c) {
+                let tmp_fill_length = 0;
+                let fill_blocks = [];
+                for (let i = 0; i < block_dis.length; i++) {
+                    let tmp_data = block_dis[i];
+                    let [rr, cc] = [r + tmp_data[0], c + tmp_data[1]];
+                    if (rr >= 0 && rr < this.h &&
+                        cc >= 0 && cc < this.w &&
+                        this.board[rr][cc] <= 0) {
+                        tmp_fill_length++;
+                        fill_blocks.push([rr, cc]);
                     }
-                });
+                }
+                if (tmp_fill_length === block_dis.length) {
+                    tywx.tt.log(TAG, 'isPreviewCanFill');
+                    return true;
+                }
             }
         }
-        return true;
+        return false;
     }
 
-    isCanFill(center_row,center_col, config){
+    isCanFill(center_row, center_col, config) {
         let ret = false;
         let [c_r, c_c] = [center_row, center_col];
-        let [m_r,m_c] = [tywx.tt.constants.BoardHeight, tywx.tt.constants.BoardWidth];
+        let [m_r, m_c] = [tywx.tt.constants.BoardHeight, tywx.tt.constants.BoardWidth];
         let BlockMap = tywx.tt.constants.BlockMap;
         let fill_blocks = [];
         let need_fill_num = 0;
-        for(let r = 0; r < config.length; ++r){
+        for (let r = 0; r < config.length; ++r) {
             let line = config[r];
-            for(let c = 0; c < line.length; ++c){
+            for (let c = 0; c < line.length; ++c) {
                 let dis = BlockMap[r][c];
-                if(config[r][c] !== 0){
-                    let [b_r,b_c] = [c_r + dis[1],c_c + dis[0]];
-                    if(b_r >= 0
-                    && b_r < m_r
-                    && b_c >= 0
-                    && b_c < m_c
-                    && this.board[b_r][b_c] === 0){
+                if (config[r][c] !== 0) {
+                    let [b_r, b_c] = [c_r + dis[1], c_c + dis[0]];
+                    if (b_r >= 0 &&
+                        b_r < m_r &&
+                        b_c >= 0 &&
+                        b_c < m_c &&
+                        this.board[b_r][b_c] === 0) {
                         fill_blocks.push([b_r, b_c, config[r][c]]);
                     }
                     need_fill_num++;
@@ -115,145 +138,215 @@ let ModelBoard = class{
             }
         }
         ret = fill_blocks.length === need_fill_num;
-        if(ret) this.willFillBlocks = fill_blocks;
+        if (ret) this.willFillBlocks = fill_blocks;
         else this.willFillBlocks = [];
-        tywx.tt.warn(TAG, 'isCanFill ',ret ? 'can fill' : 'can not fill');
+        tywx.tt.warn(TAG, 'isCanFill ', ret ? 'can fill' : 'can not fill');
         return ret;
     }
 
-    fillBaordByConfig(center_row, center_col, config, touch_idx){
-        tywx.tt.warn(TAG, 'start to fillBaord');
-        if(!this.willFillBlocks || this.willFillBlocks.length === 0){
+    fillBaordByConfig(center_row, center_col, config, touch_idx) {
+        tywx.tt.warn(TAG, 'start to fillBaord' + touch_idx);
+        if (!this.willFillBlocks || this.willFillBlocks.length === 0) {
             tywx.tt.warn(TAG, `fillBoard error, this.willFillBlocks=${this.willFillBlocks}`);
             return;
         }
-        this.willFillBlocks.forEach(e=>{
-            let [r,c] = [e[0],e[1]];
-            if(this.board[r][c] === 0){
+        this.willFillBlocks.forEach(e => {
+            let [r, c] = [e[0], e[1]];
+            if (this.board[r][c] === 0) {
                 this.board[r][c] = e[2];
                 this.emptyBlocks.delete(`${r}_${c}`);
-            }
-            else{
+            } else {
                 tywx.tt.warn(TAG, `fillBoardByConfig error r=${r} c=${c}`);
             }
         });
-        tywx.NotificationCenter.trigger(tywx.tt.events.TT_FILL_BOARD,this.willFillBlocks);
+        tywx.NotificationCenter.trigger(tywx.tt.events.TT_FILL_BOARD, this.willFillBlocks);
         this.willFillBlocks = [];
+        tywx.NotificationCenter.trigger(tywx.tt.events.HELP_ADD, null);
         this.previewConfigs[touch_idx] = null;
-        this.refreshPreviewStat();
+        // this.refreshPreviewStat(true);
         this.outPutBoard();
         tywx.tt.warn(TAG, 'fillBaord end');
     }
-    outPutBoard(){
-        for(let r = this.h - 1; r >= 0; --r){
+
+
+
+    // 填充给定的格子
+    fillBord(alle) {
+        this.willFillBlocks = alle;
+        this.willFillBlocks.forEach(e => {
+            let [r, c] = [e[0], e[1]];
+            if (this.board[r][c] === 0) {
+                this.board[r][c] = e[2];
+                this.emptyBlocks.delete(`${r}_${c}`);
+            } else {
+                tywx.tt.warn(TAG, `fillBoardByConfig error r=${r} c=${c}`);
+            }
+        });
+        tywx.NotificationCenter.trigger(tywx.tt.events.TT_FILL_BOARD, this.willFillBlocks);
+        this.willFillBlocks = [];
+    }
+
+    outPutBoard() {
+        for (let r = this.h - 1; r >= 0; --r) {
             let line = `Row:${r}===>`;
-            for(let c = 0; c < this.w; ++c){
+            for (let c = 0; c < this.w; ++c) {
                 line += this.board[r][c] + ',';
             }
             tywx.tt.log(TAG, line);
         }
     }
 
-    resetPreviews(){
-        if(this.previewConfigs.every(e=>e === null)){
+    resetPreviews(checkpreviewnumber) {
+        if (this.previewConfigs.every(e => e === null)) {
             // * reset preview
             tywx.tt.log(TAG, 'reset previews');
-            this.resetPreviewConfigs();
-            tywx.NotificationCenter.trigger(tywx.tt.events.TT_RESET_PREVIEWS,null);
+            this.resetPreviewConfigs(false, checkpreviewnumber);
+            tywx.NotificationCenter.trigger(tywx.tt.events.TT_RESET_PREVIEWS, null);
         }
     }
 
-    forseResetPreviews(){
+    forseResetPreviews() {
         tywx.tt.log(TAG, 'forseResetPreviews');
         this.resetPreviewConfigs(true);
-        tywx.NotificationCenter.trigger(tywx.tt.events.TT_RESET_PREVIEWS,null);
+        tywx.NotificationCenter.trigger(tywx.tt.events.TT_RESET_PREVIEWS, null);
     }
 
-    checkClear(){
+    checkClear() {
         this.clearRows = [];
         this.clearCols = [];
         let tmp_col_fill = [];
-        for(let i = 0; i < this.w; ++i) tmp_col_fill.push(0);
-        for(let r = 0; r < this.board.length; ++r){
+        for (let i = 0; i < this.w; ++i) tmp_col_fill.push(0);
+        for (let r = 0; r < this.board.length; ++r) {
             let line = this.board[r];
             let fill_num = 0;
-            for(let c = 0; c < line.length; ++c){
-                if(this.board[r][c] >= 1) {
+            for (let c = 0; c < line.length; ++c) {
+                if (this.board[r][c] >= 1) {
                     tmp_col_fill[c]++;
                     fill_num++;
                 }
             }
-            if(fill_num === this.w){
+            if (fill_num === this.w) {
                 this.clearRows.push(r);
             }
             tywx.tt.log(TAG, `row:${r},file_num=${fill_num}`)
         }
-        for(let i = 0; i < tmp_col_fill.length; ++i){
-            if(tmp_col_fill[i] === this.h) this.clearCols.push(i);
+        for (let i = 0; i < tmp_col_fill.length; ++i) {
+            if (tmp_col_fill[i] === this.h) this.clearCols.push(i);
         }
-        if(this.clearCols.length > 0 || this.clearRows.length > 0){
-            tywx.NotificationCenter.trigger(tywx.tt.events.TT_CLEAR_ROW,null);            
+        if (this.clearCols.length > 0 || this.clearRows.length > 0) {
+            this.hasclear = true;
+            tywx.NotificationCenter.trigger(tywx.tt.events.TT_CLEAR_ROW, null);
+        }else{
+            this.hasclear = false;
+            this.refreshPreviewStat();
         }
+         
         tywx.tt.log(TAG, `clearRow:${this.clearRows},\nclearCols:${this.clearCols}`);
     }
     
-    clearBlocks(){
+    getAddScoreByClear(rows, cols){
+           let add_score = 0;
+           var self = this;
+           rows.forEach(e => {
+               for (let c = 0; c < self.w; ++c) {
+                   add_score += tywx.tt.constants.AddScore;
+               }
+           });
+           cols.forEach(e => {
+               for (let r = 0; r < self.h; ++r) {
+                   add_score += tywx.tt.constants.AddScore;
+               }
+           });
+           return add_score;
+    }
+
+    clearBlocks() {
         //this.clearRows, this.clearCols
         let self = this;
         let add_score = 0;
-        this.clearRows.forEach(e=>{
-            for(let c = 0; c < self.w; ++c){
+        this.clearRows.forEach(e => {
+            for (let c = 0; c < self.w; ++c) {
                 self.board[e][c] = 0;
                 add_score += tywx.tt.constants.AddScore;
-                self.emptyBlocks.set(`${e}_${c}`,0);
+                self.emptyBlocks.set(`${e}_${c}`, 0);
             }
         });
-        this.clearCols.forEach(e=>{
-            for(let r = 0; r < self.h; ++r){
+        this.clearCols.forEach(e => {
+            for (let r = 0; r < self.h; ++r) {
                 self.board[r][e] = 0;
-                self.emptyBlocks.set(`${r}_${e}`,0);
+                self.emptyBlocks.set(`${r}_${e}`, 0);
                 add_score += tywx.tt.constants.AddScore;
             }
         });
+
+        let cleardata = {};
+        cleardata.rows = this.clearRows;
+        cleardata.cols = this.clearCols;
+        // console.log("方块清空数据 = "+JSON.stringify(cleardata));
+        tywx.NotificationCenter.trigger(tywx.tt.events.HELP_ADD, null);
         this.score += add_score;
-        tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_SCORE,null);
         this.clearCols = [];
         this.clearRows = [];
+        this.outPutBoard();
+        this.refreshPreviewStat();
+        tywx.tt.log(TAG, 'clearBlocks end');
+        tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_SCORE, cleardata);
     }
 
-    hammerClearByRowAndCol(row, col){
+    hammerClearByRowAndCol(row, col) {
         let shadow_blocks = [
-            [[-1,1],[0,1],[1,1]],
-            [[-1,0],[0,0],[1,0]],
-            [[-1,-1],[0,-1],[1,-1]]
+            [
+                [-1, 1],
+                [0, 1],
+                [1, 1]
+            ],
+            [
+                [-1, 0],
+                [0, 0],
+                [1, 0]
+            ],
+            [
+                [-1, -1],
+                [0, -1],
+                [1, -1]
+            ]
         ];
         let clear_blocks = [];
-        for(let r = 0; r < 3; ++r){
-            for(let c = 0; c < 3; ++c){
+        for (let r = 0; r < 3; ++r) {
+            for (let c = 0; c < 3; ++c) {
                 let data = shadow_blocks[r][c];
                 let tmp_col = col + data[0];
                 let tmp_row = row + data[1];
-                if(tmp_col >= 0 && tmp_row >= 0 && tmp_col < this.w && tmp_row < this.h){
-                    if(this.board[tmp_row][tmp_col] > 0){
+                if (tmp_col >= 0 && tmp_row >= 0 && tmp_col < this.w && tmp_row < this.h) {
+                    if (this.board[tmp_row][tmp_col] > 0) {
                         this.board[tmp_row][tmp_col] = 0;
-                        this.emptyBlocks.set(`${tmp_row}_${tmp_col}`,0);
-                        clear_blocks.push([tmp_row,tmp_col]);
+                        this.emptyBlocks.set(`${tmp_row}_${tmp_col}`, 0);
+                        clear_blocks.push([tmp_row, tmp_col]);
                     }
                 }
             }
         }
-        if(clear_blocks.length > 0){
+        if (clear_blocks.length > 0) {
             tywx.tt.log(TAG, 'hammerClearByRowAndCol:' + clear_blocks.length);
             tywx.NotificationCenter.trigger(tywx.tt.events.TT_CLEAR_HAMMER, clear_blocks);
         }
     }
 
 
-    getPreviewConfigs(){
+    getPreviewConfigs() {
         return this.previewConfigs;
     }
-    
-    
+
+    /**
+     * 设置玩家的分数
+     * @param {Number} score 玩家的分数
+     */
+    setScore(score) {
+        this.score = score;
+        tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_SCORE, null);
+    }
+
+
 };
 
 module.exports = ModelBoard;

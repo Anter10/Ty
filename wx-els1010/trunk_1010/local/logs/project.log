@@ -1,254 +1,197 @@
-2018-10-23T01:32:44.447Z - normal: Load ~/.CocosCreator/settings.json
-2018-10-23T01:32:44.450Z - normal: checking language setting...
-2018-10-23T01:32:44.450Z - normal: Language: zh
-2018-10-23T01:32:45.024Z - success: protocol editor-framework registered
-2018-10-23T01:32:45.025Z - success: protocol app registered
-2018-10-23T01:32:45.025Z - success: protocol theme registered
-2018-10-23T01:32:45.025Z - success: protocol packages registered
-2018-10-23T01:32:45.026Z - success: protocol unpack registerred
-2018-10-23T01:32:45.026Z - success: protocol disable-commonjs registerred
-2018-10-23T01:32:45.541Z - normal: connected!
-2018-10-23T01:32:45.544Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/wx-els1010/trunk_1010
-2018-10-23T01:32:45.547Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/wx-els1010/trunk_1010
-2018-10-23T01:32:45.550Z - normal: Initializing Cocos2d
-2018-10-23T01:32:46.231Z - normal: Initializing Asset Database
-2018-10-23T01:32:46.282Z - success: protocol uuid registerred
-2018-10-23T01:32:46.282Z - success: protocol db registerred
-2018-10-23T01:32:46.282Z - success: protocol thumbnail registerred
-2018-10-23T01:32:46.282Z - normal: Loading editor/builtin packages
-2018-10-23T01:32:46.440Z - success: assets loaded
-2018-10-23T01:32:46.444Z - success: builder loaded
-2018-10-23T01:32:46.447Z - success: cocos-analytics loaded
-2018-10-23T01:32:46.453Z - success: console loaded
-2018-10-23T01:32:46.486Z - success: fb-instant-games loaded
-2018-10-23T01:32:46.492Z - success: hierarchy loaded
-2018-10-23T01:32:46.497Z - success: inspector loaded
-2018-10-23T01:32:46.499Z - success: keystore loaded
-2018-10-23T01:32:46.505Z - success: node-library loaded
-2018-10-23T01:32:46.507Z - success: package-asset loaded
-2018-10-23T01:32:46.509Z - success: preferences loaded
-2018-10-23T01:32:46.512Z - success: project-exporter loaded
-2018-10-23T01:32:46.529Z - success: project-importer loaded
-2018-10-23T01:32:46.533Z - success: project-settings loaded
-2018-10-23T01:32:46.537Z - success: ui-kit loaded
-2018-10-23T01:32:46.543Z - success: scene loaded
-2018-10-23T01:32:46.550Z - success: sprite-editor loaded
-2018-10-23T01:32:46.556Z - success: store loaded
-2018-10-23T01:32:46.562Z - success: timeline loaded
-2018-10-23T01:32:46.562Z - normal: Loading builtin packages
-2018-10-23T01:32:46.571Z - success: asset-db-debugger loaded
-2018-10-23T01:32:46.572Z - success: color-picker loaded
-2018-10-23T01:32:46.573Z - success: jsb-adapter loaded
-2018-10-23T01:32:46.577Z - success: package-manager loaded
-2018-10-23T01:32:46.692Z - success: qqplay-adapter loaded
-2018-10-23T01:32:46.700Z - success: sdkbox loaded
-2018-10-23T01:32:46.706Z - success: tester loaded
-2018-10-23T01:32:46.711Z - success: ui-grid loaded
-2018-10-23T01:32:46.715Z - success: ui-kit-preview-extra loaded
-2018-10-23T01:32:46.718Z - success: ui-kit-preview loaded
-2018-10-23T01:32:46.722Z - success: ui-tree loaded
-2018-10-23T01:32:46.723Z - success: weapp-adapter loaded
-2018-10-23T01:32:47.810Z - normal: Loading packages
-2018-10-23T01:32:47.835Z - normal: Watching packages
-2018-10-23T01:32:47.920Z - normal: Run Application
-2018-10-23T01:32:48.598Z - success: preview server running at http://localhost:7456
-2018-10-23T01:39:44.163Z - warn: Script attached to "red_packet_tansfer" in prefab "red_packet_tansfer.prefab" is missing or invalid. Detailed information:
-Node path: "red_packet_tansfer"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Script UUID: "8c511c97-84eb-4d45-8024-05bb938b919e"
-Class ID: "8c511yXhOtNRYAkBbuTi5Ge"
+2018-11-16T03:05:57.560Z - normal: Load ~/.CocosCreator/settings.json
+2018-11-16T03:05:57.566Z - normal: checking language setting...
+2018-11-16T03:05:57.566Z - normal: Language: zh
+2018-11-16T03:05:58.532Z - success: protocol editor-framework registered
+2018-11-16T03:05:58.533Z - success: protocol app registered
+2018-11-16T03:05:58.533Z - success: protocol theme registered
+2018-11-16T03:05:58.533Z - success: protocol packages registered
+2018-11-16T03:05:58.534Z - success: protocol unpack registerred
+2018-11-16T03:05:58.534Z - success: protocol disable-commonjs registerred
+2018-11-16T03:05:58.757Z - normal: connected!
+2018-11-16T03:05:58.763Z - normal: Check project /Users/guoyouchao/Desktop/work/Ty/wx-els1010/trunk_1010
+2018-11-16T03:05:58.768Z - normal: Initializing project /Users/guoyouchao/Desktop/work/Ty/wx-els1010/trunk_1010
+2018-11-16T03:05:58.775Z - normal: Initializing Cocos2d
+2018-11-16T03:05:59.977Z - normal: Initializing Asset Database
+2018-11-16T03:06:00.037Z - success: protocol uuid registerred
+2018-11-16T03:06:00.038Z - success: protocol db registerred
+2018-11-16T03:06:00.038Z - success: protocol thumbnail registerred
+2018-11-16T03:06:00.038Z - normal: Loading editor/builtin packages
+2018-11-16T03:06:00.272Z - success: assets loaded
+2018-11-16T03:06:00.280Z - success: builder loaded
+2018-11-16T03:06:00.285Z - success: cocos-analytics loaded
+2018-11-16T03:06:00.293Z - success: console loaded
+2018-11-16T03:06:00.352Z - success: fb-instant-games loaded
+2018-11-16T03:06:00.363Z - success: hierarchy loaded
+2018-11-16T03:06:00.370Z - success: inspector loaded
+2018-11-16T03:06:00.372Z - success: keystore loaded
+2018-11-16T03:06:00.381Z - success: node-library loaded
+2018-11-16T03:06:00.384Z - success: package-asset loaded
+2018-11-16T03:06:00.386Z - success: preferences loaded
+2018-11-16T03:06:00.392Z - success: project-exporter loaded
+2018-11-16T03:06:00.431Z - success: project-importer loaded
+2018-11-16T03:06:00.437Z - success: project-settings loaded
+2018-11-16T03:06:00.445Z - success: ui-kit loaded
+2018-11-16T03:06:00.452Z - success: scene loaded
+2018-11-16T03:06:00.455Z - success: sprite-editor loaded
+2018-11-16T03:06:00.464Z - success: store loaded
+2018-11-16T03:06:00.472Z - success: timeline loaded
+2018-11-16T03:06:00.472Z - normal: Loading builtin packages
+2018-11-16T03:06:00.480Z - success: asset-db-debugger loaded
+2018-11-16T03:06:00.481Z - success: color-picker loaded
+2018-11-16T03:06:00.482Z - success: jsb-adapter loaded
+2018-11-16T03:06:00.489Z - success: package-manager loaded
+2018-11-16T03:06:00.665Z - success: qqplay-adapter loaded
+2018-11-16T03:06:00.676Z - success: sdkbox loaded
+2018-11-16T03:06:00.683Z - success: tester loaded
+2018-11-16T03:06:00.692Z - success: ui-grid loaded
+2018-11-16T03:06:00.697Z - success: ui-kit-preview-extra loaded
+2018-11-16T03:06:00.703Z - success: ui-kit-preview loaded
+2018-11-16T03:06:00.709Z - success: ui-tree loaded
+2018-11-16T03:06:00.712Z - success: weapp-adapter loaded
+2018-11-16T03:06:02.575Z - normal: Loading packages
+2018-11-16T03:06:02.584Z - normal: Watching packages
+2018-11-16T03:06:02.731Z - normal: Run Application
+2018-11-16T03:06:03.770Z - failed: [db-task][init] Failed to import asset /Users/guoyouchao/Desktop/work/Ty/wx-els1010/trunk_1010/assets/scripts/game/view/tt_scene_play.js, message: Compile error: SyntaxError: /Users/guoyouchao/Desktop/work/Ty/wx-els1010/trunk_1010/assets/scripts/game/view/tt_scene_play.js: Unexpected token (48:9)
+  46 |         //
+  47 |         let topy = 
+> 48 |          if (tywx.tt.Utils.isIpx()) {
+     |          ^
+  49 |              top_y -= 30;
+  50 |              board_y += 50;
+  51 |          } else if (tywx.tt.Utils.is2To1()) {
+    at Parser.pp$5.raise (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:4454:13)
+    at Parser.pp.unexpected (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:1761:8)
+    at Parser.pp$3.parseExprAtom (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3750:12)
+    at Parser.pp$3.parseExprSubscripts (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3494:19)
+    at Parser.pp$3.parseMaybeUnary (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3474:19)
+    at Parser.pp$3.parseExprOps (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3404:19)
+    at Parser.pp$3.parseMaybeConditional (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3381:19)
+    at Parser.pp$3.parseMaybeAssign (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:3344:19)
+    at Parser.pp$1.parseVar (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2340:24)
+    at Parser.pp$1.parseVarStatement (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/node_modules/babylon/lib/index.js:2169:8)
+2018-11-16T03:06:04.315Z - success: preview server running at http://localhost:7456
+2018-11-16T03:06:19.964Z - warn: Script attached to "Canvas" in scene "scene_play.fire" is missing or invalid. Detailed information:
+Node path: "Canvas"
+Asset url: "db://assets/scenes/scene_play.fire"
+Script UUID: "4805c2df-532f-4111-9bdc-910ec4f96049"
+Class ID: "4805cLfUy9BEZvckQ7E+WBJ"
 
-2018-10-23T01:39:44.193Z - warn: The Asset used by node "motai" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/motai"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
+2018-11-16T03:06:51.296Z - warn: Script attached to "Canvas" is missing or invalid. Detailed information:
+Node path: "Canvas"
+Script UUID: "4805c2df-532f-4111-9bdc-910ec4f96049"
+Class ID: "4805cLfUy9BEZvckQ7E+WBJ"
 
-2018-10-23T01:39:44.193Z - warn: The Asset used by component "cc.Sprite" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/sprite_bg"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "b7e22f5b-7684-436a-8d9a-45a742d5bf6b"
+2018-11-16T03:06:51.610Z - warn: Script attached to "Canvas" is missing or invalid. Detailed information:
+Node path: "Canvas"
+Script UUID: "4805c2df-532f-4111-9bdc-910ec4f96049"
+Class ID: "4805cLfUy9BEZvckQ7E+WBJ"
 
-2018-10-23T01:39:44.194Z - warn: The Asset used by node "sprite_bg" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/sprite_bg"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.194Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_title"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
-
-2018-10-23T01:39:44.195Z - warn: The Asset used by node "label_title" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_title"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.195Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_max"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
-
-2018-10-23T01:39:44.195Z - warn: The Asset used by node "label_max" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_max"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.196Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_rules"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
-
-2018-10-23T01:39:44.196Z - warn: The Asset used by node "label_rules" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_rules"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.196Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_current"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
-
-2018-10-23T01:39:44.197Z - warn: The Asset used by node "label_current" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_current"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.197Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_tips"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
-
-2018-10-23T01:39:44.198Z - warn: The Asset used by node "label_tips" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/label_tips"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.198Z - warn: The Asset used by component "cc.Sprite" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/btn_close"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "135f5126-138f-44a6-bb30-f98e257b3746"
-
-2018-10-23T01:39:44.198Z - warn: The Asset used by component "cc.Button" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/btn_close"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "135f5126-138f-44a6-bb30-f98e257b3746"
-
-2018-10-23T01:39:44.198Z - warn: The Asset used by node "btn_close" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/btn_close"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.198Z - warn: The Asset used by component "cc.Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/btn_transfer/Label"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "6b629fb7-3c43-4301-9d74-8a7759bb230b"
-
-2018-10-23T01:39:44.199Z - warn: The Asset used by node "Label" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/btn_transfer/Label"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.200Z - warn: The Asset used by node "label_line" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/btn_transfer/label_line"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.200Z - warn: The Asset used by node "btn_transfer" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root/btn_transfer"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.200Z - warn: The Asset used by node "root" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer/root"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:39:44.201Z - warn: The Asset used by node "red_packet_tansfer" in prefab "red_packet_tansfer.prefab" is missing. Detailed information:
-Node path: "red_packet_tansfer"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Missing uuid: "7297eb3e-580b-4471-a184-a398315c96e3"
-
-2018-10-23T01:40:42.368Z - warn: Script attached to "red_packet_tansfer" in prefab "red_packet_tansfer.prefab" is missing or invalid. Detailed information:
-Node path: "red_packet_tansfer"
-Asset url: "db://assets/resources/prefabs/red_packet_tansfer.prefab"
-Script UUID: "8c511c97-84eb-4d45-8024-05bb938b919e"
-Class ID: "8c511yXhOtNRYAkBbuTi5Ge"
-
-2018-10-23T01:43:48.024Z - warn: Script attached to "GetMoneyButton" in prefab "GetMoneyButton.prefab" is missing or invalid. Detailed information:
-Node path: "GetMoneyButton"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Script UUID: "411983d0-0967-4790-9d85-10124c7a635a"
-Class ID: "41198PQCWdHkJ2FEBJMemNa"
-
-2018-10-23T01:43:48.050Z - warn: The Asset used by node "Label" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton/getmoneyBtn/Label"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
-
-2018-10-23T01:43:48.051Z - warn: The Asset used by component "cc.Sprite" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton/getmoneyBtn"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "da3b7436-feb3-4420-82e2-bab005d98e6e"
-
-2018-10-23T01:43:48.051Z - warn: The Asset used by component "cc.Button" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton/getmoneyBtn"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "da3b7436-feb3-4420-82e2-bab005d98e6e"
-
-2018-10-23T01:43:48.052Z - warn: The Asset used by node "getmoneyBtn" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton/getmoneyBtn"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
-
-2018-10-23T01:43:48.052Z - warn: The Asset used by node "GetMoneyButton" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
-
-2018-10-23T01:44:14.643Z - warn: Script attached to "GetMoneyButton" in prefab "GetMoneyButton.prefab" is missing or invalid. Detailed information:
-Node path: "GetMoneyButton"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Script UUID: "411983d0-0967-4790-9d85-10124c7a635a"
-Class ID: "41198PQCWdHkJ2FEBJMemNa"
-
-2018-10-23T01:44:14.663Z - warn: The Asset used by node "Label" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton/getmoneyBtn/Label"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
-
-2018-10-23T01:44:14.663Z - warn: The Asset used by component "cc.Sprite" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton/getmoneyBtn"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "da3b7436-feb3-4420-82e2-bab005d98e6e"
-
-2018-10-23T01:44:14.664Z - warn: The Asset used by component "cc.Button" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton/getmoneyBtn"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "da3b7436-feb3-4420-82e2-bab005d98e6e"
-
-2018-10-23T01:44:14.664Z - warn: The Asset used by node "getmoneyBtn" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton/getmoneyBtn"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
-
-2018-10-23T01:44:14.664Z - warn: The Asset used by node "GetMoneyButton" in prefab "GetMoneyButton.prefab" is missing. Detailed information:
-Node path: "GetMoneyButton"
-Asset url: "db://assets/resources/prefabs/GetMoneyButton.prefab"
-Missing uuid: "559474f2-df54-4f27-8464-ee2ab6ba1c06"
-
-2018-10-23T01:46:27.325Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:5858
-2018-10-23T03:09:40.247Z - error: TypeError: Cannot read property '$el' of null
-    at requestAnimationFrame (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/editor/builtin/hierarchy/panel/component/node.js:1:3250)
-2018-10-23T03:09:40.250Z - error: TypeError: Cannot read property '$el' of null
-    at requestAnimationFrame (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/editor/builtin/hierarchy/panel/component/node.js:1:3250)
-2018-10-23T07:54:49.824Z - error: Widget target must be one of the parent nodes of it
+2018-11-16T03:10:31.563Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:3697
+2018-11-16T03:32:19.406Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:13817
+2018-11-16T03:32:19.410Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:13818
+2018-11-16T03:32:19.411Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:13819
+2018-11-16T03:33:36.191Z - error: animation not added or already removed
     at Object.cc.errorID (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDebug.js:167:16)
-    at cc_Widget.cc.Class._validateTargetInDEV (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/components/CCWidget.js:286:28)
-    at visitNode (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/base-ui/CCWidgetManager.js:184:28)
-    at visitNode (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/base-ui/CCWidgetManager.js:197:21)
-    at visitNode (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/base-ui/CCWidgetManager.js:197:21)
-    at refreshScene (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/base-ui/CCWidgetManager.js:243:21)
-    at cc.Director.CallbacksInvoker.invoke (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/platform/callbacks-invoker.js:167:29)
-    at cc.Director.mainLoop.CC_EDITOR._purgeDirectorInNextLoop [as mainLoop] (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDirector.js:438:26)
-    at EditorEngine.tickInEditMode (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/editor/page/scene-utils/editor-engine/index.js:1:2597)
-    at EditorEngine._tick (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/app.asar/editor/page/scene-utils/editor-engine/index.js:1:5622)
+    at AnimationAnimator.p.removeAnimation (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-animator.js:72:20)
+    at AnimationState.proto.onStop (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-state.js:107:31)
+    at AnimationState.prototype.stop (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/playable.js:52:22)
+    at AnimationState.process [as _process] (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-state.js:145:22)
+    at AnimationState.proto.update (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-state.js:189:18)
+    at CCClass.update (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-manager.js:28:30)
+    at cc.Scheduler.update (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCScheduler.js:262:38)
+    at cc.Director.mainLoop.CC_EDITOR._purgeDirectorInNextLoop [as mainLoop] (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDirector.js:435:41)
+2018-11-16T05:47:28.251Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:68537
+2018-11-16T06:01:12.769Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:75831
+2018-11-16T06:01:16.209Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:75833
+2018-11-16T06:07:12.148Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:78360
+2018-11-16T06:19:18.172Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:79791
+2018-11-16T06:26:40.247Z - normal: ScaleX != ScaleY. Don't know which one to return
+2018-11-16T06:27:30.308Z - normal: ScaleX != ScaleY. Don't know which one to return
+2018-11-16T06:41:14.919Z - normal: ScaleX != ScaleY. Don't know which one to return
+2018-11-16T07:26:00.997Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:29.720Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:31.283Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:32.086Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:38.988Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:39.768Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:40.868Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:42.128Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:43.113Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:43.973Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:27:59.701Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:28:00.082Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:28:00.470Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:28:01.348Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:28:02.000Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:28:02.182Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:28:02.568Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:28:19.323Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:28:20.276Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:28:21.967Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:11.660Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:15.682Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:17.515Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:37.307Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:38.075Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:52.444Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:53.316Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:53.594Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:54.706Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:34:56.136Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:35:47.521Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:35:48.351Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:35:49.529Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:35:50.918Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:35:52.826Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:35:53.590Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:35:54.254Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:35:55.013Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:36:01.437Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:36:02.419Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:36:03.894Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:36:04.258Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:36:04.615Z - warn: ProgressBar FILLED mode only works when barSprite's Type is FILLED!
+2018-11-16T07:44:50.945Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:106573
+2018-11-16T07:44:50.949Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:106575
+2018-11-16T07:45:54.673Z - warn: ProgressBar non-FILLED mode only works when barSprite's Type is non-FILLED!
+2018-11-16T07:45:55.537Z - warn: ProgressBar non-FILLED mode only works when barSprite's Type is non-FILLED!
+2018-11-16T07:45:58.348Z - warn: ProgressBar non-FILLED mode only works when barSprite's Type is non-FILLED!
+2018-11-16T07:46:00.424Z - warn: ProgressBar non-FILLED mode only works when barSprite's Type is non-FILLED!
+2018-11-16T07:46:01.170Z - warn: ProgressBar non-FILLED mode only works when barSprite's Type is non-FILLED!
+2018-11-16T07:46:02.007Z - warn: ProgressBar non-FILLED mode only works when barSprite's Type is non-FILLED!
+2018-11-16T07:55:32.715Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:113592
+2018-11-16T10:02:18.766Z - normal: ScaleX != ScaleY. Don't know which one to return
+2018-11-16T10:12:44.580Z - normal: ScaleX != ScaleY. Don't know which one to return
+2018-11-16T10:18:42.563Z - warn: Error: ipc timeout. message: scene:query-node, session: scene@renderer:155056
+2018-11-16T10:20:40.239Z - error: animation not added or already removed
+    at Object.cc.errorID (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDebug.js:167:16)
+    at AnimationAnimator.p.removeAnimation (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-animator.js:72:20)
+    at AnimationState.proto.onStop (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-state.js:107:31)
+    at AnimationState.prototype.stop (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/playable.js:52:22)
+    at AnimationState.process [as _process] (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-state.js:145:22)
+    at AnimationState.proto.update (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-state.js:189:18)
+    at CCClass.update (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/animation/animation-manager.js:28:30)
+    at cc.Scheduler.update (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCScheduler.js:262:38)
+    at cc.Director.mainLoop.CC_EDITOR._purgeDirectorInNextLoop [as mainLoop] (/Users/guoyouchao/Desktop/work/Cocos官方版本/CocosCreator2.0.2.app/Contents/Resources/engine/bin/.cache/dev/cocos2d/core/CCDirector.js:435:41)
+2018-11-16T10:24:02.369Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:08.177Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:08.424Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:10.336Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:10.587Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:10.808Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:11.824Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:12.696Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:13.562Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:14.596Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:15.873Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:16.139Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:24:17.529Z - info: 只有预制节点 "lottery_get_view" 及其子节点会被保存。
+2018-11-16T10:26:47.503Z - warn: The Asset used by component "cc.Sprite" is missing. Detailed information:
+Node path: "bushu2"
+Missing uuid: "51ca3ad4-e7fb-4900-9d42-ae746bd10fd0"
+
+2018-11-16T10:26:47.539Z - warn: The Asset used by component "cc.Sprite" is missing. Detailed information:
+Node path: "bushu1"
+Missing uuid: "3788534c-947c-4222-8d4d-462b0da7be42"
+
+2018-11-16T12:55:21.402Z - info: shutdown preview server

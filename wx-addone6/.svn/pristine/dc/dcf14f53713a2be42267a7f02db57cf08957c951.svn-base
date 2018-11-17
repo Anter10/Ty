@@ -1,0 +1,33 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "mifeng",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.2833333333333333,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": "54",
+  "curveData": {
+    "props": {
+      "scaleY": [
+        {
+          "frame": 0,
+          "value": 0.8
+        },
+        {
+          "frame": 0.05,
+          "value": 0.8630514705882353
+        },
+        {
+          "frame": 0.13333333333333333,
+          "value": 0.8720588235294118
+        },
+        {
+          "frame": 0.2833333333333333,
+          "value": 1
+        }
+      ]
+    }
+  },
+  "events": []
+}

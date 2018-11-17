@@ -111,7 +111,7 @@ var ads_manager = cc.Class({
         },
 
         dataCall: function dataCall() {
-            if (ads_manager.ads_data) {
+            if (ads_manager.ads_data && tywx.tt.configManager.getInstance().auditing == false) {
                 var parent = ads_manager.paraent;
                 var pos = ads_manager.pos;
                 var data = ads_manager.getTypeData(ads_manager.ads_type);

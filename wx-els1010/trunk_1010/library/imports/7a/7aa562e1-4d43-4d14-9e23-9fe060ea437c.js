@@ -27,11 +27,24 @@ var lottery_manager = cc.Class({
         },
 
         /**
+         * @description 设置抽奖结束后的回调方法
+         * @param {Function} call 设置抽奖结束后的回调方法
+         */
+        setFinishCall: function setFinishCall(call) {
+            lottery_manager.lotterynode.getComponent('lottery_view').setFinishCall(call);
+        },
+
+        /**
          * @description 删除抽奖界面
          */
         removeLotteryView: function removeLotteryView() {
-            lottery_manager.lotterynode.removeFromParent(false);
-            lottery_manager.lotterynode = null;
+            var call = function call() {
+                lottery_manager.lotterynode.removeFromParent(false);
+                lottery_manager.lotterynode = null;
+            };
+            var ani = lottery_manager.lotterynode.getComponent(cc.Animation);
+            ani.on("finished", call, this);
+            ani.play("hide_ui");
         },
 
         /**
@@ -75,15 +88,19 @@ var lottery_manager = cc.Class({
          * @description 展示抽奖界面
          * @param {String} lot_type 抽奖类型
          */
-        showLottery: function showLottery(lot_type) {
-            if (lottery_manager.data) {
+        showLottery: function showLottery(lot_type, loterycall) {
+            if (!lottery_manager.lotterynode && lottery_manager.data && tywx.tt.configManager.getInstance().auditing == false) {
                 var tlot_type = lot_type;
                 cc.loader.loadRes(lotery_view_path, function (err, prefab) {
                     if (!err) {
                         var lotterynode = cc.instantiate(prefab);
                         var ads_script = lotterynode.getComponent('lottery_view');
+                        var ani = lotterynode.getComponent(cc.Animation);
+                        ani.play("show_hide");
                         ads_script.setData(lottery_manager.getLotteryDataByType(tlot_type));
                         lottery_manager.lotterynode = lotterynode;
+                        lottery_manager.setFinishCall(loterycall);
+                        tywx.tt.Utils.commonScaleIn(lotterynode.getChildByName("centnode"));
                         cc.director.getScene().addChild(lotterynode);
                     }
                 });

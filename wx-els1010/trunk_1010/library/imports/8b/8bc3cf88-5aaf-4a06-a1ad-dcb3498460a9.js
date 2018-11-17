@@ -68,7 +68,7 @@ cc.Class({
         tywx.tt.log(TAG, 'touch cancle');
         this.node.runAction(cc.scaleTo(0.2, SCALE_NORMAL));
         // 在这里处理变形
-        this.changeType();
+        // this.changeType();
     },
     put: function put() {
         this.root.active = false;
@@ -100,13 +100,41 @@ cc.Class({
                 tmp_block.getComponent('tt_view_block').hideBg();
             }
         }
-        this.setSameTypeConfig();
+        //this.setSameTypeConfig();
     },
 
 
+    setGrey: function setGrey() {
+        for (var i = 0; i < this.config.length; i++) {
+            //this.blockViews[i] = [];
+            for (var j = 0; j < this.config[i].length; j++) {
+                var tmp_block = this.blockViews[i][j];
+                var script = tmp_block.getComponent('tt_view_block');
+                if (script.getStat() > 0) {
+                    script.setStat(13);
+                }
+            }
+        }
+    },
+
+    hideGrey: function hideGrey() {
+        console.log("hide state -= ");
+        for (var i = 0; i < this.config.length; i++) {
+            for (var j = 0; j < this.config[i].length; j++) {
+                var tmp_block = this.blockViews[i][j];
+                var script = tmp_block.getComponent('tt_view_block');
+
+                if (this.config[i][j] > 0) {
+
+                    script.setStat(this.config[i][j]);
+                }
+            }
+        }
+    },
+
     getCongifTypeNumber: function getCongifTypeNumber() {
         var tconfig = this.getConfig();
-        console.log("tconfig -= " + tconfig);
+        tywx.tt.log(TAG, "tconfig -= " + tconfig);
         var findit = false;
         var findnumber = null;
         var findcount = 0;
@@ -167,7 +195,7 @@ cc.Class({
         this.samekey = [];
         this.pretypenumber = info.number;
         this.precount = info.count;
-        console.log("typenumber = " + JSON.stringify(info));
+        tywx.tt.log(TAG, "typenumber = " + JSON.stringify(info));
         var blocks = tywx.tt.constants.Blocks;
         var blockindex = 0;
 
@@ -259,8 +287,8 @@ cc.Class({
         if (tconfig) {
             this.resetByConfig(tconfig);
         }
-        console.log("index = " + this.sameindex);
-        console.log("当前= " + JSON.stringify(tconfig) + " 全部" + this.samekey.length + "changeType sametype = " + JSON.stringify(this.sametype));
+        tywx.tt.log(TAG, "index = " + this.sameindex);
+        tywx.tt.log(TAG, "当前= " + JSON.stringify(tconfig) + " 全部" + this.samekey.length + "changeType sametype = " + JSON.stringify(this.sametype));
 
         this.sameindex = this.sameindex + 1;
         if (this.sameindex > this.samekey.length) {

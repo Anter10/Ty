@@ -164,10 +164,17 @@ tywx.ShareInterface = {
             } else {
                 console.log('tywx.ShareInterface.shareBack', 'fail');
                 shareParams.failCallback && shareParams.failCallback();
+                tywx.ShareInterface.commonFialedCallback();
             }
         }
         tywx.ShareInterface.IsWaitingCallback = false;
         tywx.ShareInterface.CurrentShareParams = null;
+    },
+    commonFialedCallback: function commonFialedCallback() {
+        if (tywx.ado.Configs.auditing || tywx.ado.isMinGanIP || !tywx.ado.Configs.ShareToast.show) {
+            return;
+        }
+        tywx.ado.Utils.showWXModal(tywx.ado.Configs.ShareToast.content, '温馨提示');
     }
 };
 

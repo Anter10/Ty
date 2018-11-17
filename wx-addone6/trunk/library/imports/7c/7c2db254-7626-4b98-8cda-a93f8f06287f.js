@@ -13,7 +13,7 @@ var config = {
     "auditing": false,
     "ruyiScore": 2000,
     "MUSICS": {
-        "BG_MUSIC": "https://elsfkws.nalrer.cn/teris/m/3.mp3"
+        "BG_MUSIC": "https://elsfkws.nalrer.cn/teris/m/addone6.mp3"
     },
     "share_control": {
         "dailydouble": "video",
@@ -76,12 +76,24 @@ var config = {
     }],
     "MinGanIp": [['北京', ['北京']], ['上海', ['上海']], ['广东', ['广州', '深圳']], ['湖南', ['长沙']], ['天津', ['天津']], ['浙江', ['杭州']], ['四川', ['成都']]],
     "WXAd": {
-        "video": "",
-        "banner": ""
+        "video": "adunit-da8d2afe4a05aa16",
+        "banner": "adunit-e77b6d7fd3b11bde"
     },
     "LuckyUserRate": 50, // ! 取值范围[0,100]
     "ShareLimit": [1000, 10000], // ! 分享时间限制，在[min, max]之间算分享成功
-    "ruyiButtonDelaytime": 40 // ! 如意宝箱时间限制
+    "ruyiButtonDelaytime": 40, // ! 如意宝箱时间限制
+    "show_gift_box_combo": 6, // ! 展示道具弹窗的连击数限制
+    "change_create_num": 20, // ! 创建数字的时候的算法限制
+    "create_num_config": {
+        "max_nums": [1, 10, 15, 20, 25, 30, 35, 40, 45, 50],
+        "pj_rate": [1, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55]
+    },
+    "combo_density_config": [6, 5, 5, 4, 3, 2], // ! 连击与密度的关系配置 最大密度=config[combo]
+    "red_pack_share_warn": {
+        "is_show": true,
+        "content": "分享到群,领取红包"
+    }, // ! 红包弹窗中的提醒配置
+    "ru_yi_box_limit_num": 10
 };
 
 module.exports = config;

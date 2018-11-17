@@ -129,7 +129,24 @@
           },
           "nodeCurrent": {
             "__id__": 10
+          },
+          "background": {
+            "__id__": 2
           }
+        },
+        {
+          "__type__": "cc.Animation",
+          "node": {
+            "__id__": 1
+          },
+          "_clips": [
+            {
+              "__uuid__": "833aV5lLVIKr16hJu5mScb"
+            },
+            {
+              "__uuid__": "73Yjw4aCBEq5FEzNoV1Gq/"
+            }
+          ]
         }
       ],
       "_prefab": {
@@ -206,7 +223,7 @@
         },
         "fileId": "ceLqkWS8NBuI1NCgJCfDWy"
       },
-      "_opacity": 166,
+      "_opacity": 100,
       "_color": {
         "__type__": "cc.Color",
         "r": 5,

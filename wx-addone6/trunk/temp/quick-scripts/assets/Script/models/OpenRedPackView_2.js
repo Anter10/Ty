@@ -111,8 +111,8 @@ cc.Class({
         }
         this.isOpening = true;
         var self = this;
-        var scale1 = cc.scaleTo(0.5, 0, 1);
-        var scale2 = cc.scaleTo(0.5, 1, 1);
+        var scale1 = cc.scaleTo(0.25, 0, 1);
+        var scale2 = cc.scaleTo(0.25, 1, 1);
         var open = cc.callFunc(function () {
             self.kaibottomNode.active = false;
             self.isOpening = false;

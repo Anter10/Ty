@@ -231,7 +231,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 1,
-    "_id": ""
+    "_id": "72PuqcRslC/ZmpLe4iqqLq"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -270,7 +270,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": ""
+    "_id": "55G8gvOG9BhZm1VJrM0apv"
   },
   {
     "__type__": "cc.Button",
@@ -339,7 +339,7 @@
     "_N$target": {
       "__id__": 2
     },
-    "_id": ""
+    "_id": "8coo8gHrhDGJvjtreo71Ik"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -372,7 +372,7 @@
     "labelMaxCash": {
       "__id__": 4
     },
-    "_id": ""
+    "_id": "32E7xNjI9Ec6yPtLI1daOq"
   },
   {
     "__type__": "cc.PrefabInfo",

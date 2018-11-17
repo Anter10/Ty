@@ -38,7 +38,7 @@ module.exports = function (id, parent, label_id) {
     this.posx = tywx.ado.Constants.GameCenterConfig.gezi_offx + id % tywx.ado.Constants.GameCenterConfig.rowcellNumber * tmp_pitchw + tywx.ado.Constants.GameCenterConfig.gezi_h_s;
     // 格子的Y坐标
     this.posy = tywx.ado.Constants.GameCenterConfig.gezi_offy + parseInt(id / tywx.ado.Constants.GameCenterConfig.rowcellNumber) * tmp_pitchh;
-    console.log(id + "当前格子的位置 = " + "x = " + this.posx + " y = " + this.posy);
+    // console.log(id + "当前格子的位置 = " + "x = " + this.posx + " y = " + this.posy)
 
     // 格子的数据层
     if (this.label_id >= 0) this.block = new block(this);else this.block = null;
@@ -54,9 +54,9 @@ module.exports = function (id, parent, label_id) {
         ]
         思路: 逻辑需要
     */
-    this.setnum = function (num) {
+    this.setnum = function (num, click) {
         if (num) {
-            if (num % 2 == 0 && num > 7 && !this.hasout) {
+            if (!click && num % 2 == 0 && num > tywx.ado.Constants.GameCenterConfig.moreThanTenNumber - 1 && !this.hasout) {
                 if (this.block) {
                     this.block.printMSG();
                     //   console.log(this.id + " cell gz num  = " + num + " " + tywx.gamecenter.hasShowxhgNum(num));
@@ -65,12 +65,16 @@ module.exports = function (id, parent, label_id) {
                             tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").showThanTenIcon();
                             tywx.gamecenter.addxhgNumber(num, this.id);
                         } else {
+                            if (tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").xhgIcon.active == true) {
+                                console.log("移除皇冠4");
+                                tywx.gamecenter.addMoreThanNumberEffect(this.id);
+                            }
                             tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").hideThanTenIcon();
                             //  tywx.gamecenter.removexhgNumber(num);
                         }
                     } else if (this.block.id_keep != -1 && this.block.id_dest != -1) {
                         // console.log(JSON.stringify(tywx.gamecenter.curshowxhgs) + "keep ahd = " + tywx.gamecenter.hasShowxhgId(this.block.id_keep));
-                        if (tywx.gamecenter.hasShowxhgId(this.block.id_keep) == true) {
+                        if (tywx.gamecenter.hasShowxhgId(this.block.id_keep) == true && tywx.gamecenter.allpngs[this.block.id_keep].getComponent("celltile").xhgIcon.active == true) {
                             tywx.gamecenter.allpngs[this.block.id_dest] && tywx.gamecenter.allpngs[this.block.id_dest].getComponent("celltile").showThanTenIcon();
                             tywx.gamecenter.addxhgNumber(num, this.block.id_dest);
                         }
@@ -85,11 +89,19 @@ module.exports = function (id, parent, label_id) {
                 }
             } else {
                 if (this.block) {
-                    if (num > 8) {
+                    if (num > tywx.ado.Constants.GameCenterConfig.moreThanTenNumber) {
                         if (tywx.gamecenter.hasShowxhgId(this.block.id_keep) == true) {
+                            if (tywx.gamecenter.allpngs[this.block.id_keep] && tywx.gamecenter.allpngs[this.block.id_keep].getComponent("celltile").xhgIcon.active == true) {
+                                console.log("移除皇冠2");
+                                tywx.gamecenter.addMoreThanNumberEffect(this.block.id_keep);
+                            }
                             tywx.gamecenter.removexhgId(this.block.id_keep);
                             tywx.gamecenter.allpngs[this.block.id_keep] && tywx.gamecenter.allpngs[this.block.id_keep].getComponent("celltile").hideThanTenIcon();
                         }
+                    }
+                    if (tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").xhgIcon.active == true) {
+                        console.log("移除皇冠1");
+                        tywx.gamecenter.addMoreThanNumberEffect(this.id);
                     }
                     tywx.gamecenter.allpngs[this.id] && tywx.gamecenter.allpngs[this.id].getComponent("celltile").hideThanTenIcon();
                 }
@@ -234,8 +246,8 @@ module.exports = function (id, parent, label_id) {
             cindex = 0;
         }
         tilescript.setCurNum(this.getAllmask()[this.id].num);
-        var colors = tywx.ado.Constants.GameCenterConfig.celltilenumColors[cindex];
-        tilescript.setColor(new cc.color(colors[0], colors[1], colors[2], 255));
+        var color = tywx.ado.Constants.GameCenterConfig.celltilenumColors[cindex];
+        tilescript.setColor(cc.Color.BLACK.fromHEX(color));
         cell.getComponent(cc.Sprite).node.x = this.block.posx - 360;
         cell.getComponent(cc.Sprite).node.y = this.block.posy - 640;
     };

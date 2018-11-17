@@ -15533,10 +15533,79 @@ window.__require = function e(t, n, r) {
     tywx.AdManager.adNodeClass.prototype = tywx.AdManager.adNodeObj;
     cc._RF.pop();
   }, {} ],
+  AddScoreLabel: [ function(require, module, exports) {
+    "use strict";
+    cc._RF.push(module, "3335694BnlHBLbDemUUePLO", "AddScoreLabel");
+    "use strict";
+    var score_path = "prefabs/AddScoreLabel";
+    var AddScoreLabel = cc.Class({
+      extends: cc.Component,
+      properties: {
+        addscoreLabel: cc.Label
+      },
+      onLoad: function onLoad() {},
+      setScore: function setScore() {
+        var score = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : 0;
+        this.addscoreLabel.string = "+" + score;
+      },
+      show: function show() {
+        var self = this;
+        this.addscoreLabel.node.scale = 1;
+        var scale = cc.scaleTo(.3, 1.5);
+        var delay = cc.delayTime(.2);
+        var hide = cc.scaleTo(.2, 0);
+        var call = cc.callFunc(function() {
+          self.addscoreLabel.node.stopAllActions();
+        });
+        var seq = cc.sequence(scale, delay, hide, call);
+        this.addscoreLabel.node.runAction(seq);
+      },
+      start: function start() {}
+    });
+    module.exports = AddScoreLabel;
+    cc._RF.pop();
+  }, {} ],
+  AlertView: [ function(require, module, exports) {
+    "use strict";
+    cc._RF.push(module, "cf4bbvTYuVCQIyPEw6OE38K", "AlertView");
+    "use strict";
+    cc.Class({
+      extends: cc.Component,
+      properties: {
+        alertLabel: cc.Label
+      },
+      onLoad: function onLoad() {
+        this.setText("");
+      },
+      setText: function setText(alert) {
+        this.alertLabel.string = alert;
+      },
+      popView: function popView() {
+        this.node.position = cc.v2(cc.winSize.width / 2, cc.winSize.height / 2);
+        this.node.stopAllActions();
+        var mby = cc.moveBy(1.5, cc.v2(0, 220));
+        var self = this;
+        var call = cc.callFunc(function() {
+          self.node.stopAllActions();
+          self.node.destroy();
+          console.log("hellog");
+        });
+        var seq = cc.sequence(mby, call);
+        this.node.runAction(seq);
+      },
+      start: function start() {}
+    });
+    cc._RF.pop();
+  }, {} ],
   AudioManager: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "8e540bKJjFApIGkijLiNpLd", "AudioManager");
     "use strict";
+    var _typeof = "function" === typeof Symbol && "symbol" === typeof Symbol.iterator ? function(obj) {
+      return typeof obj;
+    } : function(obj) {
+      return obj && "function" === typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
     var _createClass = function() {
       function defineProperties(target, props) {
         for (var i = 0; i < props.length; i++) {
@@ -15558,6 +15627,7 @@ window.__require = function e(t, n, r) {
     }
     var _instance = null;
     var LOCAL_MUTE_KEY = "ado_mute";
+    var curplaymusicurl = null;
     var AudioManager = function() {
       function AudioManager() {
         _classCallCheck(this, AudioManager);
@@ -15575,11 +15645,17 @@ window.__require = function e(t, n, r) {
       }, {
         key: "loadAudioRes",
         value: function loadAudioRes() {
-          var music_config = tywx.tt.Configs.MUSICS;
+          var sounds_config = tywx.tt.constants.SOUNDS;
+          var music_config = tywx.tt.configManager.getInstance().MUSICS;
+          console.log("music_config " + JSON.stringify(sounds_config));
+          var sound_keys = Reflect.ownKeys(sounds_config);
           var music_keys = Reflect.ownKeys(music_config);
           var self = this;
+          sound_keys.forEach(function(sound_key) {
+            self.soundsCache.has(sounds_config[sound_key]) || self.addSound2CacheByUrl(sounds_config[sound_key]);
+          });
           music_keys.forEach(function(music_key) {
-            self.bgMusicCache.has(music_config[music_key]) || self.addMusic2CacheByUrl(music_config[music_key]);
+            self.bgMusicCache.has(music_config[music_key]) || self.addMusic2CacheByUrl(tywx.SystemInfo.musicurl + music_config[music_key]);
           });
         }
       }, {
@@ -15602,6 +15678,7 @@ window.__require = function e(t, n, r) {
         key: "addMusic2CacheByUrl",
         value: function addMusic2CacheByUrl(url) {
           var is_play = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
+          console.log("music = " + url);
           try {
             var tmp_music_context = wx.createInnerAudioContext();
             tmp_music_context.src = url;
@@ -15656,6 +15733,17 @@ window.__require = function e(t, n, r) {
         key: "getIsMute",
         value: function getIsMute() {
           return this.isMute;
+        }
+      }, {
+        key: "getBGMusic",
+        value: function getBGMusic() {
+          if (null == curplaymusicurl) {
+            var bgmusics = tywx.tt.configManager.getInstance().MUSICS.BG_MUSIC;
+            curplaymusicurl = bgmusics && "object" == ("undefined" === typeof bgmusics ? "undefined" : _typeof(bgmusics)) && bgmusics.length > 0 ? bgmusics[parseInt(Math.random() * bgmusics.length)] : "ocean1.mp3";
+            curplaymusicurl = tywx.SystemInfo.musicurl + curplaymusicurl;
+          }
+          console.log("\u5f53\u524d\u64ad\u653e\u7684\u80cc\u666f\u97f3\u4e50", curplaymusicurl);
+          return curplaymusicurl;
         }
       } ], [ {
         key: "getInstance",
@@ -16010,11 +16098,16 @@ window.__require = function e(t, n, r) {
       },
       onLoad: function onLoad() {},
       getMoneyCall: function getMoneyCall() {
+        console.log("money node scale = " + this.node.scale);
+        this.showCall && this.showCall();
         tywx.tt.Utils.showRedPacketTransferPop(this.cash);
       },
       init: function init(cash) {
         this.cash = cash.max;
         this.labelMaxCash.string = "\xa5" + cash.max;
+      },
+      setShowCall: function setShowCall(sc) {
+        this.showCall = sc;
       },
       statics: {
         addBtn: function addBtn(node) {}
@@ -16310,28 +16403,19 @@ window.__require = function e(t, n, r) {
             },
             error_callback: function error_callback() {
               self.hadclicknumber = 0;
-              if (self.shareConfig === tywx.tt.constants.ShareConfig.GIFT_GIFT_BOX_SHARE_VIDEO || self.shareConfig === tywx.tt.constants.ShareConfig.RECOVER_GAME_SHARE_VIDEO) {
-                var content = self.shareConfig === tywx.tt.constants.ShareConfig.RECOVER_GAME_SHARE ? "\u514d\u8d39\u590d\u6d3b\u673a\u4f1a" : "\u5982\u610f\u5b9d\u7bb1";
-                var end_str = self.shareConfig === tywx.tt.constants.ShareConfig.RECOVER_GAME_SHARE ? "\u4e00\u6b21" : "\u4e00\u4e2a";
-                content = "<color=#ffffff>\u8d60\u9001</c><color=#ff0000>" + content + "</color><color=#ffffff>" + end_str + "</c>";
-                tywx.tt.Utils.showErrorGfitPop(function() {
+              var content = "\u606d\u559c\u4f60\u662f\u5e78\u8fd0\u7528\u6237,";
+              self.shareConfig === tywx.tt.constants.ShareConfig.HOME_ZP_GET_VIDEO ? content += "\u6210\u529f\u83b7\u5f97\u62bd\u5956\u673a\u4f1a!" : self.shareConfig === tywx.tt.constants.ShareConfig.GET_HUNAYIHUAN_NUMBER_VIEDO ? content += "\u6210\u529f\u83b7\u5f973\u6b21\u6362\u4e00\u6362!" : self.shareConfig === tywx.tt.constants.ShareConfig.GET_CHUIZI_NUMBER_VIEDO ? content += "\u6210\u529f\u83b7\u5f97\u9524\u5b50\u9053\u5177!" : self.shareConfig === tywx.tt.constants.ShareConfig.GAMEOVER_FUHUO_VIDEO ? content += "\u6210\u529f\u590d\u6d3b!" : self.shareConfig === tywx.tt.constants.ShareConfig.ZPADDDOUBLE_VIDEO ? content += "\u6210\u529f\u83b7\u5f97\u52a0\u500d\u673a\u4f1a!" : self.shareConfig === tywx.tt.constants.ShareConfig.GAMEOVER_VIDEO && (content += "\u6210\u529f\u83b7\u5f97\u770b\u89c6\u9891!");
+              tywx.tt.tipview.show({
+                success: function success() {
                   self.successCallBack && self.successCallBack(null);
-                }, content);
-              } else if (self.shareConfig === tywx.tt.constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO || self.shareConfig === tywx.tt.constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO) {
-                var _content = self.shareConfig === tywx.tt.constants.ShareConfig.OPEN_RED_PACKET_SHARE_VIDEO ? "\u514d\u8d39\u7ea2\u5305" : "\u514d\u8d39\u53cc\u500d\u52a0\u5206";
-                var _end_str = self.shareConfig === tywx.tt.constants.ShareConfig.FREE_DOUBLE_SCORE_SHARE_VIDEO ? "\u4e00\u4e2a" : "\u4e00\u6b21";
-                _content = "<color=#ffffff>\u8d60\u9001</c><color=#ff0000>" + _content + "</color><color=#ffffff>" + _end_str + "</c>";
-                tywx.tt.Utils.showErrorGfitPop(function() {
+                },
+                tip: content,
+                config: -1,
+                calltype: -1,
+                closecall: function closecall() {
                   self.successCallBack && self.successCallBack(null);
-                }, _content);
-              } else if (self.shareConfig === tywx.tt.constants.ShareConfig.FREE_GIFT_SHARE_VIDEO) {
-                var _content2 = "\u514d\u8d39\u9053\u5177";
-                var _end_str2 = "\u4e00\u4e2a";
-                _content2 = "<color=#ffffff>\u8d60\u9001</c><color=#ff0000>" + _content2 + "</color><color=#ffffff>" + _end_str2 + "</c>";
-                tywx.tt.Utils.showErrorGfitPop(function() {
-                  self.successCallBack && self.successCallBack(null);
-                }, _content2);
-              }
+                }
+              });
             }
           };
           tywx.tt.Utils.showWXVideo(param);
@@ -16344,6 +16428,7 @@ window.__require = function e(t, n, r) {
           window.wx.showShareMenu({
             withShareTicket: true
           });
+          console.log("\u5206\u4eab\u4fe1\u606f " + this.shareConfig[0]);
           var msg = tywx.tt.Utils.getRandomShareConfigByShareTag(this.shareConfig[0]);
           msg || (msg = tywx.tt.constants.DefaultShareConfig);
           msg && tywx.ShareInterface.share(msg.shareContent, msg.sharePicUrl, msg.sharePointId, msg.shareSchemeId, function(res) {
@@ -16366,30 +16451,39 @@ window.__require = function e(t, n, r) {
     "use strict";
     cc._RF.push(module, "e4b6chWbQ9JTYaXQLP5aFym", "ShareInterface");
     "use strict";
-    tywx.ShareInterface = {
-      OnShareAppMessageInfo: null,
-      shareWithSharePoint: function shareWithSharePoint(sharePointStr, successCallback, failCallback, extraInfo) {
-        if (!tywx.PropagateInterface._cachedShareConfig) return null;
-        var randomShareInfo = tywx.PropagateInterface._shuffleByWeights();
-        if (randomShareInfo && randomShareInfo[sharePointStr]) {
-          var sharePointInfo = randomShareInfo[sharePointStr];
-          tywx.ShareInterface.share(sharePointInfo.shareContent, sharePointInfo.sharePicUrl, sharePointInfo.sharePointId, sharePointInfo.shareSchemeId, successCallback, failCallback, extraInfo);
-        }
-      },
-      setOnShareAppMessageInfoWithSharePoint: function setOnShareAppMessageInfoWithSharePoint(sharePointStr) {
-        if (tywx.PropagateInterface._cachedShareConfig) {
-          var randomShareInfo = tywx.PropagateInterface._shuffleByWeights();
-          if (randomShareInfo && randomShareInfo[sharePointStr]) {
-            var sharePointInfo = randomShareInfo[sharePointStr];
-            this.OnShareAppMessageInfo = {
-              title: sharePointInfo.shareContent,
-              imageUrl: sharePointInfo.sharePicUrl,
-              sharePointId: sharePointInfo.sharePointId,
-              shareSchemeId: sharePointInfo.shareSchemeId
-            };
+    var _slicedToArray = function() {
+      function sliceIterator(arr, i) {
+        var _arr = [];
+        var _n = true;
+        var _d = false;
+        var _e = void 0;
+        try {
+          for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+            _arr.push(_s.value);
+            if (i && _arr.length === i) break;
+          }
+        } catch (err) {
+          _d = true;
+          _e = err;
+        } finally {
+          try {
+            !_n && _i["return"] && _i["return"]();
+          } finally {
+            if (_d) throw _e;
           }
         }
-      },
+        return _arr;
+      }
+      return function(arr, i) {
+        if (Array.isArray(arr)) return arr;
+        if (Symbol.iterator in Object(arr)) return sliceIterator(arr, i);
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      };
+    }();
+    tywx.ShareInterface = {
+      OnShareAppMessageInfo: null,
+      ShareTimeStamp: 0,
+      IsWaitingCallback: false,
       setOnShareAppMessageInfo: function setOnShareAppMessageInfo(title, imageUrl, sharePointId, shareSchemeId) {
         this.OnShareAppMessageInfo = {
           title: title,
@@ -16422,33 +16516,70 @@ window.__require = function e(t, n, r) {
         return null;
       },
       share: function share(title, imageUrl, sharePointId, shareSchemeId, successCallback, failCallback, extraInfo) {
+        return tywx.ShareInterface.share2(title, imageUrl, sharePointId, shareSchemeId, successCallback, failCallback, extraInfo);
+      },
+      share2: function share2(title, imageUrl, sharePointId, shareSchemeId, successCallback, failCallback, extraInfo) {
         try {
           if (tywx.IsWechatPlatform()) {
             tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeUserShare, [ sharePointId, 1, shareSchemeId ]);
+            var query = "inviteCode=" + tywx.UserInfo.userId + "&sourceCode=" + sharePointId + "&inviteName=" + tywx.UserInfo.userName + "&imageType=" + shareSchemeId + "&extraInfo=" + (extraInfo || "");
+            tywx.ShareInterface.ShareTimeStamp = new Date().getTime();
+            tywx.ShareInterface.IsWaitingCallback = true;
+            tywx.ShareInterface.CurrentShareParams = {
+              title: title,
+              imageUrl: imageUrl,
+              sharePointId: sharePointId,
+              shareSchemeId: shareSchemeId,
+              successCallback: successCallback,
+              failCallback: failCallback,
+              extraInfo: extraInfo
+            };
             wx.shareAppMessage({
               title: title,
               imageUrl: imageUrl,
-              query: "inviteCode=" + tywx.UserInfo.userId + "&sourceCode=" + sharePointId + "&inviteName=" + tywx.UserInfo.userName + "&imageType=" + shareSchemeId + "&extraInfo=" + (extraInfo || ""),
+              query: query,
               success: function success(result) {
-                successCallback && successCallback(result);
-                tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeUserShare, [ sharePointId, 2, shareSchemeId ]);
-                tywx.SystemInfo.openLocalRecord && tywx.TuyooSDK.freshLocalShareTimes();
+                console.log("share success");
               },
               fail: function fail(result) {
-                failCallback && failCallback(result);
+                console.log("share fail");
               },
-              complete: function complete() {}
+              complete: function complete() {
+                console.log("share complete");
+              }
             });
           }
         } catch (err) {
           tywx.LOGE("error:", "tywx.ShareInterface.share\u2014\u2014" + JSON.stringify(err));
         }
+      },
+      shareBack: function shareBack() {
+        console.log("tywx.ShareInterface.shareBack");
+        var time_stack = new Date().getTime();
+        var wait_time = time_stack - tywx.ShareInterface.ShareTimeStamp;
+        var shareParams = tywx.ShareInterface.CurrentShareParams;
+        var _ref = tywx.tt.configManager.getInstance().ShareLimit || [ 3e3, 1e4 ], _ref2 = _slicedToArray(_ref, 2), min_time = _ref2[0], max_time = _ref2[1];
+        console.log("tywx.ShareInterface.shareBack", wait_time, min_time, max_time, JSON.stringify(shareParams));
+        if (shareParams) if (wait_time >= min_time) {
+          console.log("tywx.ShareInterface.shareBack", "success");
+          shareParams.successCallback && shareParams.successCallback(null);
+          tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeUserShare, [ shareParams.sharePointId, 2, shareParams.shareSchemeId ]);
+        } else {
+          console.log("tywx.ShareInterface.shareBack", "fail");
+          shareParams.failCallback && shareParams.failCallback();
+          tywx.ShareInterface.commonFialedCallback();
+        }
+        tywx.ShareInterface.IsWaitingCallback = false;
+        tywx.ShareInterface.CurrentShareParams = null;
+      },
+      commonFialedCallback: function commonFialedCallback() {
+        if (tywx.tt.configManager.getInstance().auditing || tywx.tt.isMinGanIP || !tywx.tt.configManager.getInstance().ShareToast.show) return;
+        tywx.tt.Utils.showWXModal(tywx.tt.configManager.getInstance().ShareToast.content, "\u6e29\u99a8\u63d0\u793a");
       }
     };
     tywx.onShareAppMessageInit = function() {
       try {
         tywx.IsWechatPlatform() && wx.onShareAppMessage(function(result) {
-          tywx.ShareInterface.setOnShareAppMessageInfoWithSharePoint("defaultSharePoint");
           var config = tywx.ShareInterface.getOnShareAppMessageInfo();
           null == config && (config = tywx.ShareInterface.getRandomOnShareAppMessageInfo());
           tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeUserShare, [ config.sharePointId, 1, config.shareSchemeId ]);
@@ -16458,7 +16589,6 @@ window.__require = function e(t, n, r) {
             query: "inviteCode=" + tywx.UserInfo.userId + "&sourceCode=" + config.sharePointId + "&inviteName=" + tywx.UserInfo.userName + "&imageType=" + config.shareSchemeId,
             success: function success(shareTickets, groupMsgInfos) {
               tywx.BiLog.clickStat(tywx.clickStatEventType.clickStatEventTypeUserShare, [ config.sharePointId, 2, config.shareSchemeId ]);
-              tywx.SystemInfo.openLocalRecord && tywx.TuyooSDK.freshLocalShareTimes();
             },
             fail: function fail() {},
             complete: function complete() {}
@@ -16694,7 +16824,7 @@ window.__require = function e(t, n, r) {
                   appId: tywx.SystemInfo.appId
                 },
                 success: function success(params) {
-                  tywx.LOGD(null, "tuyoo login success, params:" + JSON.stringify(params));
+                  tywx.LOGD(null, "tuyoo login success 1, params:" + JSON.stringify(params));
                 },
                 fail: function fail(params) {
                   tywx.LOGD(null, "tuyoo login fail, params:" + JSON.stringify(params));
@@ -16743,7 +16873,7 @@ window.__require = function e(t, n, r) {
             data: dataObj,
             method: "POST",
             success: function success(params) {
-              tywx.LOGD(null, "tuyoo login success, params:" + JSON.stringify(params));
+              tywx.LOGD(null, "tuyoo login success 2, params:" + JSON.stringify(params));
               var checkData = params.data;
               if (checkData.error && 1 == checkData.error.code || !(checkData.result && checkData.result.userId)) {
                 tywx.LOGE("TUYOO_SDK_LOGIN_FAIL", JSON.stringify(params));
@@ -16756,7 +16886,10 @@ window.__require = function e(t, n, r) {
               tywx.UserInfo.authorCode = result.authorCode;
               tywx.UserInfo.wxgame_session_key = result.wxgame_session_key;
               tywx.LOGD(null, "userId:" + tywx.UserInfo.userId + " userName:" + tywx.UserInfo.userName + " userPic:" + tywx.UserInfo.userPic);
-              tywx.UserInfo.userId && tywx.UserInfo.userName ? tywx.LOGE("TUYOO_SDK_LOGIN_SUCCESS", JSON.stringify(params)) : tywx.LOGE("TUYOO_SDK_LOGIN_FAIL", JSON.stringify(params));
+              if (tywx.UserInfo.userId && tywx.UserInfo.userName) {
+                tywx.NotificationCenter.trigger(tywx.tt.events.LOGIN_SUCCESS);
+                tywx.LOGD("TUYOO_SDK_LOGIN_SUCCESS", JSON.stringify(params));
+              } else tywx.LOGE("TUYOO_SDK_LOGIN_FAIL", JSON.stringify(params));
               var token = result.token;
               tywx.LOGD(null, "token:" + token);
               wx.setStorage({
@@ -17247,6 +17380,7 @@ window.__require = function e(t, n, r) {
         fail: null,
         err_cb: null
       };
+      var TAG = "[model.Utils.js]";
       var Utils = function() {
         function Utils() {
           _classCallCheck(this, Utils);
@@ -17605,7 +17739,7 @@ window.__require = function e(t, n, r) {
               return WXVedioAD.show();
             }).catch(function(e) {
               tywx.tt.log(e);
-              var lucky_rate = tywx.tt.Configs.LuckyUserRate || 50;
+              var lucky_rate = tywx.tt.configManager.getInstance().LuckyUserRate || 50;
               100 * Math.random() <= lucky_rate ? WXVedioCallback.err_cb && WXVedioCallback.err_cb() : tywx.tt.Utils.showWXModal("\u83b7\u53d6\u89c6\u9891\u5931\u8d25");
             });
             tywx.tt.Utils.hideWXBanner();
@@ -17619,10 +17753,18 @@ window.__require = function e(t, n, r) {
         }, {
           key: "isIpx",
           value: function isIpx() {
+            if (!window.wx) return false;
             var ret = false;
             var sys_info = wx.getSystemInfoSync();
             if (sys_info.model.indexOf("iPhone X") >= 0 || sys_info.system.indexOf("iOS") >= 0 && sys_info.windowHeight / sys_info.windowWidth > 1.9) return true;
             return ret;
+          }
+        }, {
+          key: "is2To1",
+          value: function is2To1() {
+            if (!window.wx) return false;
+            var sys_info = wx.getSystemInfoSync();
+            return sys_info.windowHeight / sys_info.windowWidth > 1.9;
           }
         }, {
           key: "refreshSpriteByUrl",
@@ -18083,7 +18225,7 @@ window.__require = function e(t, n, r) {
           value: function isMinGanIp(ip_info) {
             var ret = false;
             console.log(ip_info.loc.length + "\u654f\u611fIP\u4fe1\u606f = " + JSON.stringify(ip_info));
-            var MinGanIpInfo = tywx.tt.Configs.MinGanIp || tywx.tt.constants.MinGanIp;
+            var MinGanIpInfo = tywx.tt.configManager.getInstance().MinGanIp || tywx.tt.constants.MinGanIp;
             if (ip_info.loc && ip_info.loc.length > 0) for (var i = 0; i < MinGanIpInfo.length; ++i) {
               var info = MinGanIpInfo[i];
               if (ip_info.loc[1] === info[0]) if (0 === info[1].length) ret = true; else {
@@ -18116,6 +18258,32 @@ window.__require = function e(t, n, r) {
               random > share_control[1] && tywx.tt.isCanWatchVideo && (calltype = 2);
             }
             return calltype;
+          }
+        }, {
+          key: "getPlayDataByKey",
+          value: function getPlayDataByKey(key) {
+            var data = tywx.tt.Utils.loadItem(key, -1);
+            return data;
+          }
+        }, {
+          key: "clearPlayDataByKey",
+          value: function clearPlayDataByKey(key) {
+            var value = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : -1;
+            var local = !(arguments.length > 2 && void 0 !== arguments[2]) || arguments[2];
+            tywx.tt.Utils.saveItem(key, value, local);
+          }
+        }, {
+          key: "showAlert",
+          value: function showAlert(text) {
+            cc.loader.loadRes("prefabs/AlertView", function(err, prefab) {
+              if (err) tywx.tt.log(TAG, "\u663e\u793a\u63d0\u793a\u6846\u5931\u8d25"); else {
+                console.log("show text" + text);
+                var pop = cc.instantiate(prefab);
+                cc.director.getScene().addChild(pop, 99999);
+                pop.getComponent("AlertView").setText(text);
+                pop.getComponent("AlertView").popView();
+              }
+            });
           }
         } ]);
         return Utils;
@@ -18315,7 +18483,8 @@ window.__require = function e(t, n, r) {
         listBackbtn: cc.Button,
         contentnode: cc.Node,
         background: cc.Node,
-        scrollNode: cc.Node
+        scrollNode: cc.Node,
+        bottom: cc.Node
       },
       setData: function setData(data) {
         this.data = data;
@@ -18326,9 +18495,11 @@ window.__require = function e(t, n, r) {
         0 == this.state ? this.show() : this.hide();
       },
       hide: function hide() {
+        if (this.showing) return;
         this.state = 0;
       },
       show: function show() {
+        if (this.hiding) return;
         this.state = 1;
       },
       initUI: function initUI() {
@@ -18341,8 +18512,8 @@ window.__require = function e(t, n, r) {
         for (var t = 0; t < this.data.ads_data.length; t++) {
           if ((t + 1) % 3 == 1) {
             tnode = new cc.Node();
-            tnode.width = 560;
-            tnode.height = 120;
+            tnode.width = 460;
+            tnode.height = 140;
             tnode.anchorX = 0;
             tnode.anchorY = 0;
             tindex = 0;
@@ -18355,7 +18526,7 @@ window.__require = function e(t, n, r) {
           var adnode = cc.instantiate(this.adnode);
           var ads_script = adnode.getComponent("ad_node");
           ads_script.setData(data);
-          var vpos = cc.v2(90 + 160 * tindex - 280, -70);
+          var vpos = cc.v2(140 + 140 * tindex - 280, -90);
           tywx.tt.error(TAG, "vpos = " + JSON.stringify(vpos));
           adnode.position = vpos;
           tnode.addChild(adnode);
@@ -18367,18 +18538,32 @@ window.__require = function e(t, n, r) {
         this.node.height = cc.game.canvas.height;
         this.scrollNode.position.x = -this.scrollNode.width;
         this.background.active = false;
+        var self = this;
+        this.background.getComponent("background").setTouchEndCall(function() {
+          self.hide();
+        });
         this.state = 0;
         this.scrollNode.x = -Math.abs(this.scrollNode.width + 360);
       },
       update: function update() {
-        if (0 == this.state) if (Math.abs(this.scrollNode.x - 30) < Math.abs(this.scrollNode.width + 360)) this.scrollNode.x = this.scrollNode.x - 30; else {
-          this.background.active = false;
-          this.listBackbtn.node.scaleX = 1;
-          this.scrollNode.x = -Math.abs(this.scrollNode.width + 360);
-        } else if (1 == this.state) if (this.scrollNode.x + 25 < -360) this.scrollNode.x = this.scrollNode.x + 25; else {
+        if (0 == this.state) {
+          if (Math.abs(this.scrollNode.x - 30) < Math.abs(this.scrollNode.width + 360)) {
+            this.scrollNode.x = this.scrollNode.x - 30;
+            this.hiding = true;
+          } else if (true == this.background.active) {
+            this.background.active = false;
+            this.listBackbtn.node.scaleX = -1;
+            this.hiding = false;
+            this.scrollNode.x = -Math.abs(this.scrollNode.width + 360);
+          }
+        } else if (1 == this.state) if (this.scrollNode.x + 25 < -360) {
+          this.showing = true;
+          this.scrollNode.x = this.scrollNode.x + 25;
+        } else if (false == this.background.active) {
           this.background.active = true;
-          this.listBackbtn.node.scaleX = -1;
+          this.listBackbtn.node.scaleX = 1;
           this.scrollNode.x = -360;
+          this.showing = false;
         }
       }
     });
@@ -18468,7 +18653,7 @@ window.__require = function e(t, n, r) {
           } else ads_manager.allevents = [];
         },
         dataCall: function dataCall() {
-          if (ads_manager.ads_data) {
+          if (ads_manager.ads_data && false == tywx.tt.configManager.getInstance().auditing) {
             var parent = ads_manager.paraent;
             var pos = ads_manager.pos;
             var data = ads_manager.getTypeData(ads_manager.ads_type);
@@ -18558,12 +18743,16 @@ window.__require = function e(t, n, r) {
           return true;
         });
         this.background.on("touchend", function(event) {
+          self.touchendcall && self.touchendcall();
           self.state = 0;
         });
       },
       close: function close() {
         this.node.removeFromParent(true);
         this.destroy();
+      },
+      setTouchEndCall: function setTouchEndCall(endcall) {
+        this.touchendcall = endcall;
       },
       start: function start() {}
     });
@@ -18584,25 +18773,34 @@ window.__require = function e(t, n, r) {
         this.tex = new cc.Texture2D();
         window.sharedCanvas.width = 211;
         window.sharedCanvas.height = 98;
-        this.updatetime = 10;
+        this.totaltime = 5;
+        this.updatetime = this.totaltime;
         this.score = 0;
         self = this;
       },
       setStop: function setStop(stop) {
         this.stop = stop;
         if (!stop) {
+          tywx.tt.Utils.sendWXMsg({
+            method: 9
+          });
           window.sharedCanvas.width = 211;
           window.sharedCanvas.height = 98;
         }
       },
       updateFriendCanvas: function updateFriendCanvas() {
-        if (!this.tex || !wx) return;
+        if (!this.tex || !window.wx) return;
         var openDataContext = wx.getOpenDataContext();
         var sharedCanvas = openDataContext.canvas;
         this.tex.initWithElement(sharedCanvas);
         this.tex.handleLoadedTexture();
         this.friendIcon.spriteFrame = new cc.SpriteFrame(this.tex);
         this.friendIcon.node.active = true;
+        tywx.tt.Utils.sendWXMsg({
+          method: 5,
+          isrestart: true,
+          score: this.score
+        });
       },
       setScoreFlush: function setScoreFlush(score) {
         this.score = score || 0;
@@ -18613,14 +18811,14 @@ window.__require = function e(t, n, r) {
         if (this.stop) return;
         this.updatetime = this.updatetime - dt;
         if (this.updatetime < 0) {
-          this.updatetime = 10;
+          this.updatetime = this.totaltime;
           tywx.tt.Utils.sendWXMsg({
             method: 5,
             isrestart: true,
-            score: self.score
+            score: this.score
           });
         }
-        this.updatetime > 7 && this.updateFriendCanvas();
+        this.updatetime > this.totaltime - 1 && this.updateFriendCanvas();
       },
       statics: {
         iconnode: null,
@@ -18655,11 +18853,15 @@ window.__require = function e(t, n, r) {
     var fuhuo_view_path = "prefabs/fuhuo_view";
     var fuhuo_view = cc.Class({
       extends: cc.Component,
+      djsLabel: cc.Label,
       properties: {
         scoreLabel: cc.Label,
         fhBtn: cc.Node,
-        djsTime: cc.Node,
-        jcdlNode: cc.Node
+        djsTimeLabel: cc.Label,
+        jcdlNode: cc.Node,
+        background: cc.Node,
+        root: cc.Node,
+        progress: cc.ProgressBar
       },
       restartGame: function restartGame() {
         this.closeCall();
@@ -18671,7 +18873,8 @@ window.__require = function e(t, n, r) {
       },
       onLoad: function onLoad() {
         this.fuhuoScript = this.fhBtn.getComponent("ShareButton");
-        var share_control = tywx.tt.configManager.share_control.recovergame;
+        var self = this;
+        var share_control = tywx.tt.configManager.getInstance().share_control ? tywx.tt.configManager.getInstance().share_control.recovergame : [ "share", 50 ];
         var calltype = tywx.tt.Utils.shareVideoCtr(share_control);
         var config = 1 == calltype ? tywx.tt.constants.ShareConfig.GAMEOVER_FUHUO_SHARE : tywx.tt.constants.ShareConfig.GAMEOVER_FUHUO_VIDEO;
         this.fuhuoScript.setShareConfig(config);
@@ -18680,11 +18883,86 @@ window.__require = function e(t, n, r) {
           self.fuHuoCall();
         });
         tywx.tt.Utils.hideWXBanner();
+        this.background.getComponent("background").setTouchEndCall(function() {
+          self.restartGame();
+        });
+        true == tywx.tt.configManager.getInstance().auditing && this.fuhuoScript.setReactCall(true);
         var canadd = true;
         canadd && tywx.tt.ads.addAdsNode("blink_play", this.jcdlNode, cc.v2(0, 0));
+        this.startDjs();
+        this.startZhuan();
+      },
+      startZhuan: function startZhuan() {
+        var alltime = 6;
+        var speed = 400;
+        var repeate = 1 / speed;
+        var self = this;
+        var total = 0;
+        var actions = cc.callFunc(function() {
+          total += repeate;
+          var per = 1 - total;
+          self.progress.progress = per;
+        });
+        var delay = cc.delayTime(repeate);
+        var repeatea = cc.repeat(actions, delay, speed / alltime);
+        this.node.runAction(repeatea);
+      },
+      startDjs: function startDjs() {
+        this.djstime = 5;
+        var self = this;
+        var tdjs = 5;
+        self.djsTimeLabel.string = tdjs;
+        var totalPassTime = 0;
+        var totalrepeate = 5;
+        var djsCall = cc.callFunc(function() {
+          self.djsTimeLabel.node.scale = 1;
+          totalPassTime++;
+          tdjs -= 1;
+          if (0 == tdjs) {
+            tdjs = 5;
+            totalPassTime < totalrepeate && (self.djsTimeLabel.string = "" + tdjs);
+            self.restartGame();
+          } else {
+            tywx.tt.AudioManager.getInstance().playSound(tywx.tt.constants.SOUNDS.COMBO[4]);
+            var ttdjs = 1 - (5 - tdjs) / 5;
+            self.djsTimeLabel.string = tdjs;
+          }
+          totalPassTime == totalrepeate && (self.djsTimeLabel.string = "");
+          var scale = cc.scaleTo(.3, 0);
+          var delay = cc.delayTime(1);
+          var call = cc.callFunc(function() {
+            if (totalPassTime == totalrepeate - 1) {
+              self.djsTimeLabel.string = "";
+              tywx.tt.AudioManager.getInstance().playSound(tywx.tt.constants.SOUNDS.COMBO[4]);
+            } else if (totalPassTime != totalrepeate - 1) {
+              self.djsTimeLabel.string = tdjs - 1;
+              var _ttdjs = 1 - (5 - tdjs) / 5;
+              console.log("ttdjsttdjsttdjs  =", _ttdjs);
+            }
+            self.djsTimeLabel.node.scale = 1;
+          });
+          var tseq = cc.sequence(delay, scale, call);
+          self.djsTimeLabel.node.runAction(tseq);
+        });
+        var scale = cc.scaleTo(.3, 0);
+        var delay1 = cc.delayTime(1);
+        tywx.tt.AudioManager.getInstance().playSound(tywx.tt.constants.SOUNDS.COMBO[4]);
+        var call = cc.callFunc(function() {
+          self.djsTimeLabel.string = 4;
+          self.djsTimeLabel.node.scale = 1;
+        });
+        var tseq = cc.sequence(delay1, scale, call);
+        this.djsTimeLabel.node.runAction(tseq);
+        var delay = cc.delayTime(1.5);
+        var seq = cc.sequence(delay, djsCall);
+        var repeate = cc.repeat(seq, this.djstime);
+        this.node.stopAllActions();
+        this.node.runAction(repeate);
       },
       fuHuoCall: function fuHuoCall() {
-        this.closeCall();
+        tywx.tt.BoardView.recoverGame();
+        fuhuo_view.curnode.removeFromParent(true);
+        fuhuo_view.curnode = null;
       },
       setData: function setData(data) {
         this.data = data;
@@ -18694,12 +18972,15 @@ window.__require = function e(t, n, r) {
       statics: {
         curnode: null,
         show: function show(data) {
-          cc.loader.loadRes(fuhuo_view_path, function(err, prefab) {
+          fuhuo_view.curnode || cc.loader.loadRes(fuhuo_view_path, function(err, prefab) {
             if (!err) {
               var fuhuonode = cc.instantiate(prefab);
+              var ani = fuhuonode.getComponent(cc.Animation);
+              ani.play("show_hide");
               var ads_script = fuhuonode.getComponent("fuhuo_view");
               ads_script.setData(data);
               fuhuo_view.curnode = fuhuonode;
+              tywx.tt.Utils.commonScaleIn(ads_script.root);
               cc.director.getScene().addChild(fuhuonode);
             }
           });
@@ -18733,11 +19014,12 @@ window.__require = function e(t, n, r) {
         tywx.tt.Utils.sendWXMsg({
           method: 9
         });
+        wx.postMessage({
+          method: 8
+        });
         tywx.Timer.setTimer(self, function() {
-          wx.postMessage({
-            method: 8
-          });
-        }, 1, 1, 1);
+          this.updateFriendCanvas();
+        }, .5, 0, 0);
       },
       updateFriendCanvas: function updateFriendCanvas() {
         if (!this.tex || !wx) return;
@@ -18753,10 +19035,6 @@ window.__require = function e(t, n, r) {
         this.updateFriendCanvas();
       },
       start: function start() {},
-      update: function update(dt) {
-        this.updatetime = this.updatetime - dt;
-        this.updatetime > 0 && this.updateFriendCanvas();
-      },
       statics: {
         gamoverranknode: null,
         gameover_rank_script: null,
@@ -18789,42 +19067,111 @@ window.__require = function e(t, n, r) {
         restartBtn: cc.Node,
         jcdlNode: cc.Node,
         maxScoreLabel: cc.Label,
-        phbnode: cc.Node
+        phbnode: cc.Node,
+        shareNode: cc.Node,
+        background: cc.Node,
+        root: cc.Node,
+        btnGetMoney: cc.Node
       },
       restartGame: function restartGame() {
         this.closeCall();
       },
+      rankBtnCall: function rankBtnCall() {
+        tywx.tt.rank_manager.showRank();
+      },
+      shareCall: function shareCall() {},
       closeCall: function closeCall() {
+        if (this.closeing) return;
+        this.closeing = true;
         tywx.tt.Utils.sendWXMsg({
           method: 9
         });
-        tywx.tt.friend.setStop(false);
-        tywx.tt.Utils.showWXBanner();
-        gameover_view.curnode.removeFromParent(true);
-        gameover_view.curnode = null;
+        this.hideChilds();
       },
       onLoad: function onLoad() {
+        var self = this;
         tywx.tt.curgamescene.storeScore();
-        this.fuhuoScript = this.restartBtn.getComponent("ShareButton");
-        this.fuhuoScript.setButtonCallType(1);
-        var share = false;
-        var calltype = share ? 1 : 2;
-        var config = 1 == calltype ? tywx.tt.constants.ShareConfig.GAMEOVER_FUHUO_SHARE : tywx.tt.constants.ShareConfig.GAMEOVER_FUHUO_VIDEO;
-        this.fuhuoScript.setShareConfig(config);
-        this.fuhuoScript.setSuccessCall(function() {
-          self.fuHuoCall();
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
+        this.btnGetMoney.active = false;
+        console.log("\u7ea2\u5305\u6570\u636e = " + JSON.stringify(tywx.tt.RedPacketInfo));
+        if (false == tywx.tt.configManager.getInstance().auditing && tywx.tt.RedPacketInfo) {
+          self.btnGetMoney.active = true;
+          var data = {};
+          data.max = tywx.tt.Utils.formatCashFen2Yuan(tywx.tt.RedPacketInfo.totalAmount);
+          self.btnGetMoney.getComponent("GetMoneyButton").init(data);
+          self.btnGetMoney.getComponent("GetMoneyButton").setShowCall(function() {
+            console.log("\u4e3b\u754c\u9762\u7684\u7ea2\u5305");
+          });
+        } else self.btnGetMoney.active = false;
+        this.sharescript = this.shareNode.getComponent("ShareButton");
+        var self = this;
+        var calltype = 1;
+        var config = 1 == calltype ? tywx.tt.constants.ShareConfig.GAMEOVER_SHARE : tywx.tt.constants.ShareConfig.GAMEOVER_VIDEO;
+        this.sharescript.setShareConfig(config);
+        this.sharescript.setButtonCallType(calltype);
+        this.sharescript.setSuccessCall(function() {
+          tywx.tt.log(TAG, "\u5206\u4eab\u6210\u529f");
         });
         var canadd = true;
         canadd && tywx.tt.ads.addAdsNode("blink_play", this.jcdlNode, cc.v2(0, 0));
         gameover_rank.addIcon(this.phbnode);
         this.maxScoreLabel.string = parseInt(tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0)) + "";
       },
+      onRedPacktChange: function onRedPacktChange(res) {
+        console.log("\u7ea2\u5305\u6570\u636e = " + JSON.stringify(res));
+        if (res.data && res.data.totalAmount) {
+          var data = {};
+          data.max = tywx.tt.Utils.formatCashFen2Yuan(res.data.totalAmount);
+          this.btnGetMoney.getComponent("GetMoneyButton").init(data);
+        } else tywx.tt.log(TAG, "\u901a\u77e5\u4e8b\u4ef6\u4e2d\u7684\u7ea2\u5305\u6570\u636e = " + JSON.stringify(res));
+      },
       fuHuoCall: function fuHuoCall() {
         this.closeCall();
       },
+      hideChilds: function hideChilds() {
+        var childs = this.root.children;
+        var self = this;
+        var tindex = 0;
+        var call = cc.callFunc(function() {
+          var node = childs[tindex];
+          var seq = cc.sequence(cc.scaleTo(.12, 1.2), cc.scaleTo(.12, 0));
+          node.runAction(seq);
+          tindex += 1;
+          if (tindex == childs.length) {
+            var _call = cc.callFunc(function() {
+              gameover_view.curnode.removeFromParent(true);
+              gameover_view.curnode = null;
+              tywx.tt.friend.setStop(false);
+              tywx.tt.Utils.showWXBanner();
+              tywx.tt.BoardView.reset();
+              tywx.tt.BoardView.blocksAni();
+            });
+            var seq1 = cc.sequence(cc.delayTime(.3), _call);
+            gameover_view.curnode.runAction(seq1);
+          }
+        });
+        var delay = cc.delayTime(.12);
+        var seq = cc.sequence(call, delay);
+        var rep = cc.repeat(seq, childs.length);
+        this.node.runAction(rep);
+      },
       setData: function setData(data) {
         this.data = data;
-        this.scoreLabel.string = data.score;
+        var self = this;
+        var scorecz = data.score;
+        if (scorecz > 0) {
+          var tscore = 0;
+          var call = cc.callFunc(function() {
+            tscore += 2;
+            self.scoreLabel.string = tscore;
+          });
+          var time = 2 / scorecz;
+          var delay = cc.delayTime(time);
+          var seq = cc.sequence(delay, call);
+          var rep = cc.repeat(seq, scorecz / 2);
+          this.scoreLabel.node.stopAllActions();
+          this.scoreLabel.node.runAction(rep);
+        } else this.scoreLabel.string = "0";
       },
       start: function start() {},
       statics: {
@@ -18833,9 +19180,12 @@ window.__require = function e(t, n, r) {
           cc.loader.loadRes(gameover_view_path, function(err, prefab) {
             if (!err) {
               var gameovernode = cc.instantiate(prefab);
+              var ani = gameovernode.getComponent(cc.Animation);
+              ani.play("show_hide");
               var ads_script = gameovernode.getComponent("gameover_view");
               ads_script.setData(data);
               gameover_view.curnode = gameovernode;
+              tywx.tt.Utils.commonScaleIn(ads_script.root);
               cc.director.getScene().addChild(gameovernode);
             }
           });
@@ -18878,6 +19228,70 @@ window.__require = function e(t, n, r) {
     module.exports = helpview;
     cc._RF.pop();
   }, {} ],
+  loadingscene: [ function(require, module, exports) {
+    "use strict";
+    cc._RF.push(module, "0748epyd6dCdaTmHXD3L/V+", "loadingscene");
+    "use strict";
+    var TAG = "[view/tt_scene_menu]";
+    cc.Class({
+      extends: cc.Component,
+      properties: {
+        loadingProgress: cc.ProgressBar,
+        loadingLabel: cc.Label
+      },
+      onLoad: function onLoad() {
+        tywx.tt.Utils.sendWXMsg({
+          method: "load_data",
+          MAIN_MENU_NUM: tywx.tt.constants.TT_SCORE
+        });
+        tywx.tt.boot();
+        tywx.PropagateInterface.getShareConfigInfo();
+        var self = this;
+        this.progressNumber = 0;
+        this.caninto = false;
+        tywx.NotificationCenter.listen(tywx.tt.events.LOGIN_SUCCESS, this.loginSuccess, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_GET_CONFIG_FAIL, this.dealConfig, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_GET_CONFIG_SUCCESS, this.dealFailConfig, this);
+      },
+      dealConfig: function dealConfig() {
+        this.caninto = true;
+        console.log("\u5f97\u5230\u914d\u7f6e \u5f00\u59cb\u6e38\u620f ");
+        tywx.tt.isMinGanIP = tywx.tt.Utils.isMinGanIp(tywx.AdManager.ipLocInfo);
+      },
+      dealFailConfig: function dealFailConfig() {
+        this.caninto = true;
+        console.log("\u6ca1\u6709\u5f97\u5230\u914d\u7f6e \u5f00\u59cb\u6e38\u620f ");
+      },
+      getIPSuccess: function getIPSuccess(res) {
+        tywx.tt.log(TAG, "IP\u4fe1\u606f = " + JSON.stringify(res));
+      },
+      loginSuccess: function loginSuccess() {
+        var self = this;
+        if (tywx.tt.configManager.getInstance().auditing) return;
+        tywx.tt.Utils.requestRedPacket({
+          success: function success(res) {
+            tywx.tt.log(TAG, "\u5ba1\u6838\u72b6\u6001 = " + tywx.tt.configManager.getInstance().auditing + "\u73a9\u5bb6\u7ea2\u5305\u6570\u636e= " + JSON.stringify(res));
+          },
+          fail: function fail(res) {}
+        });
+      },
+      startGame: function startGame(e) {
+        console.log("\u5f00\u59cb\u6e38\u620f\u4e86");
+        cc.director.loadScene("scene_play");
+      },
+      update: function update(dt) {
+        if (this.progressNumber < 1) {
+          this.progressNumber = this.progressNumber + dt / 1.6;
+          this.loadingProgress.progress = this.progressNumber;
+          this.progressNumber >= 1 && (this.loadingLabel.string = "\u7a0d\u7b49...");
+        } else if (!this.hadinto && this.caninto) {
+          this.hadinto = true;
+          this.startGame();
+        }
+      }
+    });
+    cc._RF.pop();
+  }, {} ],
   lottery_button: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "9b5345xpA9NYbIFgQ1+60mM", "lottery_button");
@@ -18911,9 +19325,12 @@ window.__require = function e(t, n, r) {
       properties: {
         nameLabel: cc.Label,
         icon: cc.Sprite,
-        mfjbBtnNode: cc.Node
+        mfjbBtnNode: cc.Node,
+        background: cc.Node
       },
       close: function close() {
+        if (this.closeing) return;
+        this.closeing = true;
         lottery_get_view.get_view_node.removeFromParent(true);
         lottery_get_view.get_view_node = null;
       },
@@ -18943,7 +19360,6 @@ window.__require = function e(t, n, r) {
           }
           tywx.tt.Utils.saveItem(LOCAL_STOREITEM_KEY, JSON.stringify(allitems), false);
           this.close();
-          console.log("\u5173\u95ed\u4e86 close \u5417");
         } else tywx.tt.Utils.requestAddRedPacket({
           success: function success(res) {
             self.close();
@@ -18966,14 +19382,16 @@ window.__require = function e(t, n, r) {
       onLoad: function onLoad() {
         var self = this;
         var videoBtnScript = this.mfjbBtnNode.getComponent("ShareButton");
-        var share_control = tywx.tt.configManager.share_control.recovergame;
+        var share_control = tywx.tt.configManager.getInstance().share_control ? tywx.tt.configManager.getInstance().share_control.recovergame : [ "share", 50 ];
         var calltype = tywx.tt.Utils.shareVideoCtr(share_control);
-        console.log("calltype = " + calltype);
         videoBtnScript.setButtonCallType(calltype);
         var config = 1 == calltype ? tywx.tt.constants.ShareConfig.ZPADDDOUBLE_SHARE : tywx.tt.constants.ShareConfig.ZPADDDOUBLE_VIDEO;
         videoBtnScript.setShareConfig(config);
         videoBtnScript.setSuccessCall(function() {
           self.addDoubleJL();
+        });
+        this.background.getComponent("background").setTouchEndCall(function() {
+          self.close();
         });
       },
       start: function start() {},
@@ -19071,9 +19489,17 @@ window.__require = function e(t, n, r) {
           tywx.tt.error(TAG, "\u6ca1\u6709\u4f60\u7ed9" + lot_type + "\u7c7b\u578b\u7684\u7ea2\u5305\u6570\u636e");
           return null;
         },
+        setFinishCall: function setFinishCall(call) {
+          lottery_manager.lotterynode.getComponent("lottery_view").setFinishCall(call);
+        },
         removeLotteryView: function removeLotteryView() {
-          lottery_manager.lotterynode.removeFromParent(false);
-          lottery_manager.lotterynode = null;
+          var call = function call() {
+            lottery_manager.lotterynode.removeFromParent(false);
+            lottery_manager.lotterynode = null;
+          };
+          var ani = lottery_manager.lotterynode.getComponent(cc.Animation);
+          ani.on("finished", call, this);
+          ani.play("hide_ui");
         },
         setData: function setData(data) {
           lottery_manager.data = data.default.turning_disc;
@@ -19096,15 +19522,19 @@ window.__require = function e(t, n, r) {
         listenCDNConfigData: function listenCDNConfigData() {
           tywx.NotificationCenter.listen(tywx.tt.events.TT_GET_CONFIG_SUCCESS, lottery_manager.setData, lottery_manager);
         },
-        showLottery: function showLottery(lot_type) {
-          if (lottery_manager.data) {
+        showLottery: function showLottery(lot_type, loterycall) {
+          if (!lottery_manager.lotterynode && lottery_manager.data && false == tywx.tt.configManager.getInstance().auditing) {
             var tlot_type = lot_type;
             cc.loader.loadRes(lotery_view_path, function(err, prefab) {
               if (!err) {
                 var lotterynode = cc.instantiate(prefab);
                 var ads_script = lotterynode.getComponent("lottery_view");
+                var ani = lotterynode.getComponent(cc.Animation);
+                ani.play("show_hide");
                 ads_script.setData(lottery_manager.getLotteryDataByType(tlot_type));
                 lottery_manager.lotterynode = lotterynode;
+                lottery_manager.setFinishCall(loterycall);
+                tywx.tt.Utils.commonScaleIn(lotterynode.getChildByName("centnode"));
                 cc.director.getScene().addChild(lotterynode);
               }
             });
@@ -19138,7 +19568,9 @@ window.__require = function e(t, n, r) {
         },
         videoBtn: cc.Node,
         shareBtn: cc.Node,
-        freeBtn: cc.Node
+        freeBtn: cc.Node,
+        centerNode: cc.Node,
+        videoLabel: cc.Label
       },
       chouJiangCall: function chouJiangCall() {
         if (this.isLottering) return;
@@ -19152,18 +19584,38 @@ window.__require = function e(t, n, r) {
         videoBtnScript.setSuccessCall(function() {
           self.chouJiangCall();
         });
+        if (!tywx.tt.isCanWatchVideo) {
+          videoBtnScript.setButtonCallType(1);
+          videoBtnScript.setShareConfig(tywx.tt.constants.ShareConfig.HOME_ZP_GET_SHARE);
+          this.videoLabel.string = "\u514d\u8d39\u9886\u53d6";
+        }
+        if (true == tywx.tt.configManager.getInstance().auditing) {
+          videoBtnScript.setReactCall(true);
+          this.videoLabel.string = "\u514d\u8d39\u9886\u53d6";
+        }
         var shareBtnScript = this.shareBtn.getComponent("ShareButton");
         shareBtnScript.setButtonCallType(1);
         shareBtnScript.setShareConfig(tywx.tt.constants.ShareConfig.HOME_ZP_GET_SHARE);
         shareBtnScript.setSuccessCall(function() {
           self.chouJiangCall();
         });
+        if (tywx.tt.isMinGanIP && tywx.tt.isCanWatchVideo) {
+          shareBtnScript.setButtonCallType(2);
+          shareBtnScript.setShareConfig(tywx.tt.constants.ShareConfig.HOME_ZP_GET_VIDEO);
+        }
+        true == tywx.tt.configManager.getInstance().auditing && shareBtnScript.setReactCall(true);
         var freeBtnScript = this.freeBtn.getComponent("ShareButton");
         freeBtnScript.setButtonCallType(1);
         freeBtnScript.setReactCall(true);
         freeBtnScript.setShareConfig(tywx.tt.constants.ShareConfig.HOME_ZP_FREE_SHARE);
         freeBtnScript.setSuccessCall(function() {
           self.chouJiangCall();
+        });
+        var _ref = [ cc.game.canvas.width, cc.game.canvas.height ], cw = _ref[0], ch = _ref[1];
+        var top_y = .0625 * ch;
+        this.centerNode.position.y = top_y;
+        this.background.getComponent("background").setTouchEndCall(function() {
+          self.closeView();
         });
       },
       start: function start() {},
@@ -19174,6 +19626,8 @@ window.__require = function e(t, n, r) {
         } else tywx.tt.error(TAG, "\u6ca1\u6709\u62bd\u5956\u6570\u636e");
       },
       closeView: function closeView() {
+        if (this.closeing) return;
+        this.closeing = true;
         tywx.tt.lottery.removeLotteryView();
       },
       initUI: function initUI() {
@@ -19219,12 +19673,15 @@ window.__require = function e(t, n, r) {
       },
       getCjType: function getCjType() {},
       lottery: function lottery() {
-        console.log("\u5f53\u524d\u7684\u7ea2\u5305\u6570\u636e = " + JSON.stringify(tywx.tt.RedPacketInfo));
+        var _this = this;
+        tywx.tt.log(TAG, "\u5f53\u524d\u7684\u7ea2\u5305\u6570\u636e = " + JSON.stringify(tywx.tt.RedPacketInfo));
         var aims = [ 0, 1, 2, 3, 4, 5 ];
-        var czaim = [ 1, 3, 5 ];
-        var hbaim = [ 0, 1, 2 ];
-        var aim_id = czaim[parseInt(Math.random() * czaim.length)];
-        tywx.tt.RedPacketInfo && tywx.tt.RedPacketInfo.nextAmount > 0 && (aim_id = hbaim[parseInt(Math.random() * hbaim.length)]);
+        var czaim = [ 1, 3 ];
+        var hbaim = [ 0, 2, 4 ];
+        var hyhaim = [ 5 ];
+        var aim_id = Math.random() > .5 ? 5 : czaim[parseInt(Math.random() * czaim.length)];
+        var random = Math.random();
+        tywx.tt.RedPacketInfo && tywx.tt.RedPacketInfo.nextAmount > 0 && random > 1 - random && (aim_id = hbaim[parseInt(Math.random() * hbaim.length)]);
         this.item = this.data.items[aim_id];
         var self = this;
         var current_rotate = this.nodeDisk.rotation % 360;
@@ -19232,6 +19689,7 @@ window.__require = function e(t, n, r) {
         this.nodeDisk.runAction(cc.sequence(cc.rotateBy(1, 720 - current_rotate).easing(cc.easeIn(2)), cc.rotateBy(2, 1080), cc.rotateBy(1, 720 - 60 * aim_id).easing(cc.easeOut(1)), cc.callFunc(function() {
           self.storeCurrentItem();
           self.isLottering = false;
+          _this.finishcall && _this.finishcall();
         })));
       },
       init: function init() {},
@@ -19276,6 +19734,9 @@ window.__require = function e(t, n, r) {
         titem.name = this.item.name;
         titem.icon = this.item.icon;
         return titem;
+      },
+      setFinishCall: function setFinishCall(call) {
+        this.finishcall = call;
       }
     });
     cc._RF.pop();
@@ -19293,11 +19754,14 @@ window.__require = function e(t, n, r) {
       statics: {
         friendsRankView: null,
         showRank: function showRank() {
-          cc.loader.loadRes(rankview_path, function(err, prefab) {
+          rank_manager.friendsRankView || cc.loader.loadRes(rankview_path, function(err, prefab) {
             if (!err) {
               var ranknode = cc.instantiate(prefab);
+              var ani = ranknode.getComponent(cc.Animation);
+              ani.play("show_hide");
               var ads_script = ranknode.getComponent("rank_view");
               rank_manager.friendsRankView = ranknode;
+              tywx.tt.Utils.commonScaleIn(ranknode.getChildByName("rank_view"));
               cc.director.getScene().addChild(ranknode);
             }
           });
@@ -19317,19 +19781,23 @@ window.__require = function e(t, n, r) {
       extends: cc.Component,
       properties: {
         phbSprite: cc.Sprite,
-        rankShareButton: cc.Node
+        selfPmSprite: cc.Sprite,
+        rankShareButton: cc.Node,
+        background: cc.Node,
+        touchNode: cc.Node
       },
       onLoad: function onLoad() {
+        tywx.tt.friend.setStop(true);
+        tywx.tt.Utils.sendWXMsg({
+          method: 9
+        });
         var self = this;
         this.tex = new cc.Texture2D();
+        this.tex1 = new cc.Texture2D();
         window.sharedCanvas.width = 635;
-        window.sharedCanvas.height = 1800;
-        tywx.Timer.setTimer(this, function() {
-          self._updateSubDomainCanvas();
-        }, 1, 11, 0);
-        wx.postMessage({
-          method: 1,
-          MAIN_MENU_NUM: tywx.tt.constants.TT_SCORE
+        window.sharedCanvas.height = 120;
+        tywx.tt.Utils.sendWXMsg({
+          method: 20
         });
         var rankBtnScript = this.rankShareButton.getComponent("ShareButton");
         rankBtnScript.setButtonCallType(1);
@@ -19337,20 +19805,71 @@ window.__require = function e(t, n, r) {
         rankBtnScript.setSuccessCall(function() {
           self.shareSuc();
         });
+        this.background.getComponent("background").setTouchEndCall(function() {
+          self.closeRankView();
+        });
+        var delay = cc.delayTime(.7);
+        var delay1 = cc.delayTime(.5);
+        var dscall = cc.callFunc(function() {
+          self._updateSelfPM();
+        });
+        var call = cc.callFunc(function() {
+          self.drawrank();
+        });
+        var seq = cc.sequence(delay1, dscall, delay, call);
+        this.node.stopAllActions();
+        this.node.runAction(seq);
+      },
+      drawrank: function drawrank() {
+        this.isdrawranking = true;
+        window.sharedCanvas.width = 635;
+        window.sharedCanvas.height = 2e3;
+        tywx.tt.Utils.sendWXMsg({
+          method: 9
+        });
+        tywx.tt.Utils.sendWXMsg({
+          method: 1,
+          MAIN_MENU_NUM: tywx.tt.constants.TT_SCORE
+        });
+        var self = this;
+        tywx.Timer.setTimer(this, function() {
+          self._updateSubDomainCanvas();
+        }, .5, 11, 0);
       },
       shareSuc: function shareSuc() {},
       closeRankView: function closeRankView() {
-        tywx.tt.rank_manager.friendsRankView.removeFromParent(true);
-        tywx.tt.rank_manager.friendsRankView = null;
+        if (this.closeing) return;
+        tywx.tt.Utils.sendWXMsg({
+          method: 9
+        });
+        this.closeing = true;
+        tywx.tt.friend.setStop(false);
+        window.sharedCanvas.width = 211;
+        window.sharedCanvas.height = 98;
+        var call = function call() {
+          tywx.tt.rank_manager.friendsRankView.removeFromParent(true);
+          tywx.tt.rank_manager.friendsRankView = null;
+        };
+        var ani = tywx.tt.rank_manager.friendsRankView.getComponent(cc.Animation);
+        ani.on("finished", call, this);
+        ani.play("hide_ui");
       },
       start: function start() {},
       _updateSubDomainCanvas: function _updateSubDomainCanvas() {
-        if (!this.tex) return;
+        if (!this.tex || !window.wx) return;
         var openDataContext = wx.getOpenDataContext();
         var sharedCanvas = openDataContext.canvas;
         this.tex.initWithElement(sharedCanvas);
         this.tex.handleLoadedTexture();
         this.phbSprite.spriteFrame = new cc.SpriteFrame(this.tex);
+      },
+      _updateSelfPM: function _updateSelfPM() {
+        if (!this.tex1 || !window.wx || this.isdrawranking) return;
+        var openDataContext = wx.getOpenDataContext();
+        var sharedCanvas = openDataContext.canvas;
+        this.tex1.initWithElement(sharedCanvas);
+        this.tex1.handleLoadedTexture();
+        this.selfPmSprite.spriteFrame = new cc.SpriteFrame(this.tex1);
       }
     });
     cc._RF.pop();
@@ -19366,26 +19885,33 @@ window.__require = function e(t, n, r) {
         labelRules: cc.Label,
         labelTips: cc.Label,
         labelCurrent: cc.Label,
-        nodeCurrent: cc.Node
+        nodeCurrent: cc.Node,
+        background: cc.Node
       },
       onLoad: function onLoad() {
-        if ("gamestart" === cc.director.getScene()._name) {
-          tywx.tt.Utils.hideGameClub();
-          var an = tywx.AdManager.getAdNodeByTag("GAME_START");
-          an && an.hideAdNode();
-        } else "gamemain" === cc.director.getScene()._name && tywx.tt.Utils.hideWXBanner();
+        var self = this;
+        tywx.tt.Utils.hideWXBanner();
+        this.background.getComponent("background").setTouchEndCall(function() {
+          self.motaiCallback();
+        });
+        var ani = this.node.getComponent(cc.Animation);
+        ani.play("show_hide");
         tywx.tt.Utils.commonScaleIn(this.node.getChildByName("root"));
       },
       start: function start() {},
       onDestroy: function onDestroy() {
-        if ("gamestart" === cc.director.getScene()._name) {
-          tywx.tt.Utils.showGameClub();
-          var an = tywx.AdManager.getAdNodeByTag("GAME_START");
-          an && an.showAdNode();
-        } else "gamemain" === cc.director.getScene()._name && tywx.tt.Utils.showWXBanner();
+        tywx.tt.Utils.showWXBanner();
       },
       motaiCallback: function motaiCallback() {
-        this.node.destroy();
+        if (this.closeing) return;
+        this.closeing = true;
+        var self = this;
+        var call = function call() {
+          self.node.destroy();
+        };
+        var ani = this.node.getComponent(cc.Animation);
+        ani.on("finished", call, this);
+        ani.play("hide_ui");
       },
       btnTransferClickCallback: function btnTransferClickCallback() {
         this.currentcash >= 20 ? tywx.tt.Utils.requestRedPacket2Cash() : tywx.tt.Utils.showWXModal("\u6512\u591f20\u5143\u518d\u63d0\u73b0\u5427,\u52a0\u6cb9!", "\u63d0\u793a", false);
@@ -19435,11 +19961,13 @@ window.__require = function e(t, n, r) {
       },
       repeateGameCall: function repeateGameCall() {
         tywx.tt.friend.setStop(false);
-        tywx.tt.Board.reset();
-        tywx.tt.BoardView.initBoardView();
-        tywx.tt.BoardView.initPreviewBlocks();
+        tywx.tt.BoardView.reset();
+        tywx.tt.BoardView.blocksAni();
         tywx.tt.Utils.showWXBanner();
         this.closeCall();
+      },
+      showRankCall: function showRankCall() {
+        tywx.tt.rank_manager.showRank();
       },
       helpCall: function helpCall() {
         tywx.tt.help.show();
@@ -19453,7 +19981,7 @@ window.__require = function e(t, n, r) {
         } else if (true == tywx.tt.AudioManager.getInstance().getIsMute()) {
           tywx.tt.AudioManager.getInstance().setIsMute(false);
           tywx.tt.log("curAudioState3 = " + tywx.tt.AudioManager.getInstance().getIsMute());
-          tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.Configs.MUSICS.BG_MUSIC);
+          tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.AudioManager.getInstance().getBGMusic());
         }
         this.changeTexture();
         tywx.tt.log(_typeof(tywx.tt.AudioManager.getInstance().getIsMute()) + "curAudioState4 = " + tywx.tt.AudioManager.getInstance().getIsMute());
@@ -19468,10 +19996,7 @@ window.__require = function e(t, n, r) {
         tywx.tt.Utils.showWXBanner();
         this.closeCall();
       },
-      closeCall: function closeCall() {
-        stop_view.stopview.removeFromParent(true);
-        stop_view.stopview = null;
-      },
+      closeCall: function closeCall() {},
       statics: {
         stopview: null,
         showStopView: function showStopView() {
@@ -19507,20 +20032,6 @@ window.__require = function e(t, n, r) {
     window.Symbol = _Symbol;
     cc._RF.pop();
   }, {} ],
-  testscene: [ function(require, module, exports) {
-    "use strict";
-    cc._RF.push(module, "0748epyd6dCdaTmHXD3L/V+", "testscene");
-    "use strict";
-    cc.Class({
-      extends: cc.Component,
-      properties: {},
-      onLoad: function onLoad() {
-        tywx.tt.boot();
-      },
-      start: function start() {}
-    });
-    cc._RF.pop();
-  }, {} ],
   tip_view: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "07454mkA95BCbNsAVh/uaHo", "tip_view");
@@ -19531,14 +20042,31 @@ window.__require = function e(t, n, r) {
       properties: {
         titleLabel: cc.Label,
         tapLabel: cc.Label,
-        shareBtn: cc.Node
+        shareBtn: cc.Node,
+        background: cc.Node
       },
       closeCall: function closeCall() {
+        if (this.closeing) return;
+        this.closeing = true;
         tywx.tt.Utils.showWXBanner();
-        tip_view.curnode.removeFromParent(true);
-        tip_view.curnode = null;
+        var call = function call() {
+          tip_view.curnode.removeFromParent(true);
+          tip_view.curnode = null;
+        };
+        var ani = tip_view.curnode.getComponent(cc.Animation);
+        ani.on("finished", call, this);
+        ani.play("hide_ui");
       },
-      onLoad: function onLoad() {},
+      onLoad: function onLoad() {
+        var self = this;
+        this.background.getComponent("background").setTouchEndCall(function() {
+          self.btnClose();
+        });
+      },
+      btnClose: function btnClose() {
+        this.closecall && this.closecall();
+        this.closeCall();
+      },
       init: function init() {
         var self = this;
         this.shareBtnScript = this.shareBtn.getComponent("ShareButton");
@@ -19550,6 +20078,8 @@ window.__require = function e(t, n, r) {
       },
       setCallType: function setCallType(calltype) {
         this.shareBtnScript.setButtonCallType(calltype);
+        -1 == calltype && this.shareBtnScript.setReactCall(true);
+        true == tywx.tt.configManager.getInstance().auditing && this.shareBtnScript.setReactCall(true);
       },
       setTitle: function setTitle(title) {
         this.titleLabel.string = title;
@@ -19560,6 +20090,9 @@ window.__require = function e(t, n, r) {
       setSuccessCallBack: function setSuccessCallBack(success) {
         this.success = success;
       },
+      setCloseCallBack: function setCloseCallBack(closecall) {
+        this.closecall = closecall;
+      },
       setShareConfig: function setShareConfig(config) {
         this.shareBtnScript.setShareConfig(config);
       },
@@ -19567,9 +20100,12 @@ window.__require = function e(t, n, r) {
       statics: {
         curnode: null,
         show: function show(config) {
+          if (tip_view.curnode) return;
           cc.loader.loadRes(tip_view_path, function(err, prefab) {
             if (!err) {
               var tipview = cc.instantiate(prefab);
+              var ani = tipview.getComponent(cc.Animation);
+              ani.play("show_hide");
               var tip_view_script = tipview.getComponent("tip_view");
               tip_view_script.init();
               tip_view_script.setTap(config.tip || "\u8bf7\u8bbe\u7f6e\u63d0\u793a\u7c7b\u5bb9");
@@ -19577,6 +20113,7 @@ window.__require = function e(t, n, r) {
               tip_view_script.setShareConfig(config.config);
               tip_view_script.setSuccessCallBack(config.success);
               tip_view_script.setCallType(config.calltype);
+              tip_view_script.setCloseCallBack(config.closecall);
               tip_view.curnode = tipview;
               tywx.tt.log("\u5f53\u524d\u7684VIE");
               cc.director.getScene().addChild(tipview, 999999);
@@ -19636,7 +20173,7 @@ window.__require = function e(t, n, r) {
       tywx.tt.log(log_info, "color:#FF0000", "color:#0000FF");
     };
     tywx.tt.boot = function() {
-      tywx.tt.configManager.requestConfig();
+      tywx.tt.configManager.getInstance().requestConfig();
     };
     tywx.tt.shut = function() {};
     tywx.tt.onHide = function() {
@@ -19646,8 +20183,9 @@ window.__require = function e(t, n, r) {
       tywx.tt.log("[boot]", "tywx.tt.onShow");
       tywx.tt.AudioManager.getInstance().loadAudioRes();
       tywx.tt.log("\u64ad\u653e\u80cc\u666f\u97f3\u4e50\u914d\u7f6e " + JSON.stringify(tywx.tt.Configs));
-      tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.Configs.MUSICS.BG_MUSIC);
+      tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.AudioManager.getInstance().getBGMusic());
       tywx.AdManager.init();
+      tywx.ShareInterface.IsWaitingCallback && tywx.ShareInterface.shareBack();
     };
     cc._RF.pop();
   }, {
@@ -19670,10 +20208,183 @@ window.__require = function e(t, n, r) {
     "use strict";
     cc._RF.push(module, "5b4cdtjJkVLb5heSGEO80SO", "tt_configs");
     "use strict";
+    var _configs$default;
+    function _defineProperty(obj, key, value) {
+      key in obj ? Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      }) : obj[key] = value;
+      return obj;
+    }
     var configs = {};
-    configs.MUSICS = {
-      BG_MUSIC: "https: //elsfkws.nalrer.cn/teris/m/3.mp3"
-    };
+    configs.default = (_configs$default = {
+      auditing: false,
+      MUSICS: {
+        BG_MUSIC: [ "ocean1.mp3", "ocean2.mp3", "ocean3.mp3", "eris/m/pintu/ocean4.mp3" ]
+      },
+      share_control: {
+        getchuizi: [ "share", 80 ],
+        gethuanyihuan: [ "share", 80 ],
+        recovergame: [ "share", 80 ],
+        zpdouble: [ "share", 80 ]
+      },
+      MinGanIp: [ [ "\u5317\u4eac", [ "\u5317\u4eac" ] ], [ "\u4e0a\u6d77", [ "\u4e0a\u6d77" ] ], [ "\u5e7f\u4e1c", [ "\u5e7f\u5dde", "\u6df1\u5733" ] ], [ "\u6e56\u5357", [ "\u957f\u6c99" ] ], [ "\u5929\u6d25", [ "\u5929\u6d25" ] ], [ "\u6d59\u6c5f", [ "\u676d\u5dde" ] ], [ "\u56db\u5ddd", [ "\u6210\u90fd" ] ] ],
+      WXAd: {
+        video: "",
+        banner: ""
+      },
+      LuckyUserRate: 50,
+      ShareLimit: [ 1e3, 1e4 ],
+      cross_ad: {
+        ads: [ {
+          id: 1,
+          appid: "wx1668490543c6bae9",
+          name: "\u66f4\u591a\u6e38\u620f",
+          icon_url: "daoliu01.png"
+        }, {
+          id: 2,
+          appid: "wxb92d4d650d51eda8",
+          name: "2048",
+          icon_url: "daoliu05.png"
+        }, {
+          id: 3,
+          appid: "wx7e3b12072efbfc27",
+          name: "\u4fc4\u7f57\u65af\u65b9\u5757",
+          icon_url: "daoliu04.png"
+        }, {
+          id: 4,
+          appid: "wxa9b801abd43333d9",
+          name: "\u56db\u5ddd\u9ebb\u5c06",
+          icon_url: "daoliu03.png"
+        }, {
+          id: 5,
+          appid: "wx785e80cff6120de5",
+          name: "\u9014\u6e38\u6597\u5730\u4e3b",
+          icon_url: "daoliu02.png"
+        } ],
+        blink_display: 5,
+        banner_menu: {
+          type: "banner",
+          ads: [ 1, 2, 3, 4 ]
+        },
+        banner_gameover: {
+          type: "banner",
+          ads: [ 1, 2, 3, 4 ]
+        },
+        blink_menu: {
+          type: "blink",
+          ads: [ [ 1, 50 ], [ 2, 20 ], [ 3, 30 ] ]
+        },
+        blink_play: {
+          type: "blink",
+          ads: [ [ 1, 50 ], [ 2, 20 ], [ 3, 30 ] ]
+        },
+        list_menu: {
+          type: "list",
+          ads: [ 1, 2, 3, 4 ]
+        },
+        list_play: {
+          type: "list",
+          ads: [ 1, 2, 3, 4 ]
+        }
+      },
+      turning_disc: {
+        home: {
+          items: [ {
+            name: "0.01\u5143",
+            gift_id: 1,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "\u9524\u5b50x1",
+            gift_id: 2,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "0.03\u5143",
+            gift_id: 3,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "\u9524\u5b50x2",
+            gift_id: 4,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "0.05\u5143",
+            gift_id: 5,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "\u9524\u5b50x3",
+            gift_id: 6,
+            icon: "lottery_icon_0.png"
+          } ],
+          button_types: [ 0, [ "video", "video_share", "share", "free" ] ]
+        },
+        home_day_1st: {
+          items: [ {
+            name: "0.01\u5143",
+            gift_id: 1,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "\u9524\u5b50x1",
+            gift_id: 2,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "0.03\u5143",
+            gift_id: 3,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "\u9524\u5b50x2",
+            gift_id: 4,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "0.05\u5143",
+            gift_id: 5,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "\u9524\u5b50x3",
+            gift_id: 6,
+            icon: "lottery_icon_0.png"
+          } ],
+          button_types: [ 0, [ "video", "video_share", "share", "free" ] ]
+        },
+        game: {
+          items: [ {
+            name: "0.01\u5143",
+            gift_id: 1,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "\u9524\u5b50x1",
+            gift_id: 2,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "0.03\u5143",
+            gift_id: 3,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "\u9524\u5b50x2",
+            gift_id: 4,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "0.05\u5143",
+            gift_id: 5,
+            icon: "lottery_icon_0.png"
+          }, {
+            name: "\u9524\u5b50x3",
+            gift_id: 6,
+            icon: "lottery_icon_0.png"
+          } ],
+          button_types: [ 0, [ "video", "video_share", "share", "free" ] ]
+        }
+      },
+      lottery: {
+        score: [ 100, 200, 300, 500, 1e3, 2e3, 4e3, 8e3, 16e3, 32e3, 64e3, 128e3 ],
+        rate: [ .8, .7, .6, .6, .6, .6, .6, .6, .6, .6, .6, .6 ],
+        max: [ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ]
+      }
+    }, _defineProperty(_configs$default, "ShareLimit", [ 3e3, 1e7 ]), _defineProperty(_configs$default, "ShareToast", {
+      show: true,
+      content: "\u5206\u4eab\u5931\u8d25\uff0c\u8bf7\u5206\u4eab\u5230\u7fa4"
+    }), _configs$default);
     module.exports = configs;
     cc._RF.pop();
   }, {} ],
@@ -19687,9 +20398,9 @@ window.__require = function e(t, n, r) {
     var AddScore = 10;
     var BlockMap = [ [ [ -2, 2 ], [ -1, 2 ], [ 0, 2 ], [ 1, 2 ], [ 2, 2 ] ], [ [ -2, 1 ], [ -1, 1 ], [ 0, 1 ], [ 1, 1 ], [ 2, 1 ] ], [ [ -2, 0 ], [ -1, 0 ], [ 0, 0 ], [ 1, 0 ], [ 2, 0 ] ], [ [ -2, -1 ], [ -1, -1 ], [ 0, -1 ], [ 1, -1 ], [ 2, -1 ] ], [ [ -2, -2 ], [ -1, -2 ], [ 0, -2 ], [ 1, -2 ], [ 2, -2 ] ] ];
     var MinGanIp = [ [ "\u5317\u4eac", [ "\u5317\u4eac" ] ], [ "\u4e0a\u6d77", [ "\u4e0a\u6d77" ] ], [ "\u5e7f\u4e1c", [ "\u5e7f\u5dde" ] ], [ "\u6e56\u5357", [ "\u957f\u6c99" ] ], [ "\u5929\u6d25", [ "\u5929\u6d25" ] ], [ "\u6d59\u6c5f", [ "\u676d\u5dde" ] ], [ "\u56db\u5ddd", [ "\u6210\u90fd" ] ] ];
-    var Blocks = [ [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 2, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 3, 0, 0 ], [ 0, 0, 3, 0, 0 ], [ 0, 0, 3, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 3, 3, 3, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 4, 4, 4, 4 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 4, 0, 0 ], [ 0, 0, 4, 0, 0 ], [ 0, 0, 4, 0, 0 ], [ 0, 0, 4, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 5, 0, 0 ], [ 0, 0, 5, 0, 0 ], [ 0, 0, 5, 0, 0 ], [ 0, 0, 5, 0, 0 ], [ 0, 0, 5, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 5, 5, 5, 5, 5 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 6, 6, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 6, 6, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 6, 0 ], [ 0, 6, 6, 6, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 6, 0, 0, 0 ], [ 0, 6, 6, 6, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 1, 1, 0, 0 ], [ 0, 1, 1, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 3, 3, 3, 0 ], [ 0, 0, 0, 3, 0 ], [ 0, 0, 0, 3, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 3, 0, 0, 0 ], [ 0, 3, 0, 0, 0 ], [ 0, 3, 3, 3, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 4, 4, 4, 0 ], [ 0, 4, 0, 0, 0 ], [ 0, 4, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 5, 0 ], [ 0, 0, 0, 5, 0 ], [ 0, 5, 5, 5, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 6, 0, 0, 0 ], [ 0, 6, 6, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 1, 1, 0 ], [ 0, 1, 1, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 2, 2, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 2, 2, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 0, 0, 0 ] ] ];
-    var ForceRestBlocks = [ 0, 1, 2, 3 ];
-    var BlockDis = [ [ [ 0, 0 ] ], [ [ 0, 0 ], [ 0, 1 ] ], [ [ 0, 0 ], [ 1, 0 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ] ], [ [ 0, 0 ], [ 1, 0 ], [ 2, 0 ] ], [ [ 0, 0 ], [ 1, 0 ], [ 2, 0 ], [ 3, 0 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ], [ 0, 3 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ], [ 0, 3 ], [ 0, 4 ] ], [ [ 0, 0 ], [ 1, 0 ], [ 2, 0 ], [ 3, 0 ], [ 4, 0 ] ], [ [ 0, 0 ], [ 0, 1 ], [ -1, 2 ], [ 0, 2 ] ], [ [ 0, 0 ], [ 1, 0 ], [ 1, 1 ], [ 1, 2 ] ], [ [ 0, 0 ], [ -2, 1 ], [ -1, 1 ], [ 0, 1 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 1, 1 ], [ 2, 1 ] ], [ [ 0, 0 ], [ 1, 0 ], [ 0, 1 ], [ 1, 1 ] ], [ [ 0, 0 ], [ 1, 0 ], [ 2, 0 ], [ 0, 1 ], [ 1, 1 ], [ 2, 1 ], [ 0, 2 ], [ 1, 2 ], [ 2, 2 ] ], [ [ 0, 0 ], [ 1, 0 ], [ 2, 0 ], [ 2, 1 ], [ 2, 2 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ], [ 1, 2 ], [ 2, 2 ] ], [ [ 0, 0 ], [ 1, 0 ], [ 2, 0 ], [ 0, 1 ], [ 0, 2 ] ], [ [ 0, 0 ], [ 0, 1 ], [ -2, 2 ], [ -1, 2 ], [ 0, 2 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 1, 1 ], [ 1, 2 ] ], [ [ 0, 0 ], [ 1, 0 ], [ -1, 1 ], [ 0, 1 ] ], [ [ 0, 0 ], [ -1, 1 ], [ 0, 1 ], [ 1, 1 ] ], [ [ 0, 0 ], [ -1, 1 ], [ 0, 1 ], [ 0, 2 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 1, 1 ], [ 0, 2 ] ], [ [ 0, 0 ], [ 1, 0 ], [ 2, 0 ], [ 1, 1 ] ] ];
+    var Blocks = [ [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 2, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 3, 0, 0 ], [ 0, 0, 3, 0, 0 ], [ 0, 0, 3, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 3, 3, 3, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 4, 4, 4, 4 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 4, 0, 0 ], [ 0, 0, 4, 0, 0 ], [ 0, 0, 4, 0, 0 ], [ 0, 0, 4, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 5, 0, 0 ], [ 0, 0, 5, 0, 0 ], [ 0, 0, 5, 0, 0 ], [ 0, 0, 5, 0, 0 ], [ 0, 0, 5, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 5, 5, 5, 5, 5 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 6, 6, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 6, 6, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 6, 0 ], [ 0, 6, 6, 6, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 6, 0, 0, 0 ], [ 0, 6, 6, 6, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 1, 1, 0, 0 ], [ 0, 1, 1, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 3, 3, 3, 0 ], [ 0, 0, 0, 3, 0 ], [ 0, 0, 0, 3, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 3, 0, 0, 0 ], [ 0, 3, 0, 0, 0 ], [ 0, 3, 3, 3, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 4, 4, 4, 0 ], [ 0, 4, 0, 0, 0 ], [ 0, 4, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 5, 0 ], [ 0, 0, 0, 5, 0 ], [ 0, 5, 5, 5, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 6, 0, 0, 0 ], [ 0, 6, 6, 0, 0 ], [ 0, 0, 6, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 1, 1, 0 ], [ 0, 1, 1, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 2, 2, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 2, 2, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 0, 0, 0 ] ], [ [ 0, 0, 0, 0, 0 ], [ 0, 0, 0, 0, 0 ], [ 0, 2, 2, 2, 0 ], [ 0, 0, 2, 0, 0 ], [ 0, 0, 0, 0, 0 ] ] ];
+    var ForceRestBlocks = [ 0, 1, 2 ];
+    var BlockDis = [ [ [ 0, 0 ] ], [ [ 0, 0 ], [ -1, 0 ] ], [ [ 0, 0 ], [ 0, 1 ] ], [ [ 0, 0 ], [ -1, 0 ], [ -2, 0 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ], [ 0, 3 ] ], [ [ 0, 0 ], [ -1, 0 ], [ -2, 0 ], [ -3, 0 ] ], [ [ 0, 0 ], [ -1, 0 ], [ -2, 0 ], [ -3, 0 ], [ -4, 0 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ], [ 0, 3 ], [ 0, 4 ] ], [ [ 0, 0 ], [ -1, 0 ], [ -2, -1 ], [ -2, 0 ] ], [ [ 0, 0 ], [ 0, 1 ], [ -1, 1 ], [ -2, 1 ] ], [ [ 0, 0 ], [ -1, -2 ], [ -1, -1 ], [ -1, 0 ] ], [ [ 0, 0 ], [ -1, 0 ], [ -1, 1 ], [ -1, 2 ] ], [ [ 0, 0 ], [ 0, 1 ], [ -1, 0 ], [ -1, 1 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ], [ -1, 0 ], [ -1, 1 ], [ -1, 2 ], [ -2, 0 ], [ -2, 1 ], [ -2, 2 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ], [ -1, 2 ], [ -2, 2 ] ], [ [ 0, 0 ], [ -1, 0 ], [ -2, 0 ], [ -2, 1 ], [ -2, 2 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ], [ -1, 0 ], [ -2, 0 ] ], [ [ 0, 0 ], [ -1, 0 ], [ -2, -2 ], [ -2, -1 ], [ -2, 0 ] ], [ [ 0, 0 ], [ -1, 0 ], [ -1, 1 ], [ -2, 1 ] ], [ [ 0, 0 ], [ 0, 1 ], [ -1, -1 ], [ -1, 0 ] ], [ [ 0, 0 ], [ -1, -1 ], [ -1, 0 ], [ -1, 1 ] ], [ [ 0, 0 ], [ -1, -1 ], [ -1, 0 ], [ -2, 0 ] ], [ [ 0, 0 ], [ -1, 0 ], [ -1, 1 ], [ -2, 0 ] ], [ [ 0, 0 ], [ 0, 1 ], [ 0, 2 ], [ -1, 1 ] ] ];
     var TT_SCORE = "TT_SCORE";
     var ShareConfig = {
       HOME_ZP_GET_SHARE: [ "homezpgetshare", false ],
@@ -19703,11 +20414,13 @@ window.__require = function e(t, n, r) {
       GAMEOVER_FUHUO_SHARE: [ "gameoverfuhuoshare", false ],
       GAMEOVER_FUHUO_VIDEO: [ "gameoverfuhuovideo", false ],
       ZPADDDOUBLE_SHARE: [ "zpadddouble_share", false ],
-      ZPADDDOUBLE_VIDEO: [ "zpadddouble_video", false ]
+      ZPADDDOUBLE_VIDEO: [ "zpadddouble_video", false ],
+      GAMEOVER_SHARE: [ "gameover_share", false ],
+      GAMEOVER_VIDEO: [ "gameover_video", false ]
     };
     var DefaultShareConfig = {
-      shareContent: "\u4f60\u77e5\u9053 \u4fc4\u7f57\u65af1010 \u5417\uff1f",
-      sharePicUrl: "https://elsfkws.nalrer.cn/teris/share_image/jiayi/jy03.jpg",
+      shareContent: "\u4fc4\u7f57\u65af\u65b9\u5757\u5c45\u7136\u8fd8\u80fd\u8fd9\u4e48\u73a9~",
+      sharePicUrl: "https://elsfkws.nalrer.cn/teris/share_image/pintu/pt001.png",
       sharePointId: "766",
       shareSchemeId: "1155"
     };
@@ -19715,6 +20428,21 @@ window.__require = function e(t, n, r) {
       bannerId: "adunit-652297ac130ea5be",
       vedioId: "adunit-72772b75d8b17d65",
       bannerRefreshTime: 200
+    };
+    var PlayDataKeys = {
+      ttplaydata: "ttplaydata"
+    };
+    var SOUNDS = {
+      AWESOME: "sounds/awesome.mp3",
+      COOL: "sounds/cool.mp3",
+      GOOD: "sounds/good.mp3",
+      MUSIC_LOGO: "sounds/music_logo.mp3",
+      POPUPCLOSE: "sounds/PopupClose.mp3",
+      UNBLIEVEABLE: "sounds/unblieveable.mp3",
+      SHUIXIAQIPAO: "sounds/shuixiaqipao.mp3",
+      ADDMONEY: "sounds/coin.mp3",
+      FLY_REDPACKET: "sounds/redpack.mp3",
+      COMBO: [ "sounds/combo3.mp3", "sounds/combo4.mp3", "sounds/combo5.mp3", "sounds/combo6.mp3", "sounds/combo7.mp3", "sounds/combo8.mp3", "sounds/combo9.mp3", "sounds/combo10.mp3", "sounds/combo11.mp3", "sounds/combo12.mp3", "sounds/combo13.mp3", "sounds/combo14.mp3" ]
     };
     module.exports = {
       BlockSize: BlockSize,
@@ -19729,7 +20457,9 @@ window.__require = function e(t, n, r) {
       ShareConfig: ShareConfig,
       DefaultShareConfig: DefaultShareConfig,
       WXAdConfig: WXAdConfig,
-      MinGanIp: MinGanIp
+      MinGanIp: MinGanIp,
+      PlayDataKeys: PlayDataKeys,
+      SOUNDS: SOUNDS
     };
     cc._RF.pop();
   }, {} ],
@@ -19737,26 +20467,20 @@ window.__require = function e(t, n, r) {
     "use strict";
     cc._RF.push(module, "96ef2UKx01M/YOHQaeRMFIU", "tt_events");
     "use strict";
-    function _defineProperty(obj, key, value) {
-      key in obj ? Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      }) : obj[key] = value;
-      return obj;
-    }
-    var Events = _defineProperty({
+    var Events = {
       TT_FILL_BOARD: "tt_fill_baord",
       TT_GET_CONFIG_SUCCESS: "tt_get_config_success",
+      TT_GET_CONFIG_FAIL: "tt_get_config_fail",
       TT_RESET_PREVIEWS: "tt_reset_previews",
       TT_CLEAR_ROW: "tt_clear_row",
       TT_REFRESH_SCORE: "tt_refresh_score",
       TT_CLEAR_HAMMER: "tt_clear_hammer",
       TT_REFRESH_PREVIEW_STAT: "tt_refresh_preview_stat",
       TT_EVENT_RED_PACKET_CHANGE: "tt_event_red_packet_change",
-      TT_EVENT_GET_IP_SUCCESS: "tt_event_get_ip_success"
-    }, "TT_EVENT_GET_IP_SUCCESS", "tt_event_get_ip_success");
+      TT_EVENT_GET_IP_SUCCESS: "tt_event_get_ip_success",
+      HELP_ADD: "help_add",
+      LOGIN_SUCCESS: "login_success"
+    };
     module.exports = Events;
     cc._RF.pop();
   }, {} ],
@@ -19823,8 +20547,11 @@ window.__require = function e(t, n, r) {
         key: "resetPreviewConfigs",
         value: function resetPreviewConfigs() {
           var is_use_prop = arguments.length > 0 && void 0 !== arguments[0] && arguments[0];
+          var checkpreviewnumber = arguments.length > 1 && void 0 !== arguments[1] && arguments[1];
           this.previewConfigs = [];
           this.previewStat = [];
+          var checkgameover = true;
+          checkpreviewnumber && 0 == tywx.tt.BoardView.checkPreviewActives() && (checkgameover = false);
           var Constants = tywx.tt.constants;
           var block_configs = Constants.Blocks;
           if (is_use_prop) {
@@ -19839,6 +20566,9 @@ window.__require = function e(t, n, r) {
             if (is_use_prop) {
               this.previewStat[i] = 1;
               config_idx = Constants.ForceRestBlocks[i];
+              var _block_dis = Constants.BlockDis[config_idx];
+              var _is_can_fill = this.isPreviewCanFill(_block_dis);
+              this.previewStat[i] = _is_can_fill ? 1 : 0;
             } else {
               var block_dis = Constants.BlockDis[config_idx];
               var is_can_fill = this.isPreviewCanFill(block_dis);
@@ -19846,37 +20576,47 @@ window.__require = function e(t, n, r) {
             }
             this.previewIndex[i] = config_idx;
           }
-          tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
+          tywx.tt.log("\u51fa\u53d1\u4e86gameover \u68c0\u6d4b\u4e8b\u4ef6 tt_ model_bord 69 \u884c \u662f\u5426\u9700\u8981\u68c0\u6d4b = ", checkgameover);
+          checkgameover && tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
         }
       }, {
         key: "refreshPreviewStat",
-        value: function refreshPreviewStat() {
+        value: function refreshPreviewStat(refresh) {
           tywx.tt.log(TAG, "refreshPreviewStat");
           var Constants = tywx.tt.constants;
           for (var i = 0; i < this.previewIndex.length; ++i) {
             var config_dis = Constants.BlockDis[this.previewIndex[i]];
             var is_can_fill = this.isPreviewCanFill(config_dis);
+            this.previewConfigs[i] || (is_can_fill = false);
             this.previewStat[i] = is_can_fill ? 1 : 0;
+            tywx.tt.log(TAG, "refreshPreviewStat", "idx:" + i + ",stat:" + this.previewStat[i]);
           }
-          tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
+          tywx.tt.log("\u51fa\u53d1\u4e86gameover \u68c0\u6d4b\u4e8b\u4ef6 tt_ model_bord 79 \u884c" + refresh);
+          refresh || tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
         }
       }, {
         key: "isPreviewCanFill",
         value: function isPreviewCanFill(block_dis) {
-          var _this = this;
-          var self = this;
-          var _loop = function _loop(r) {
-            var line = _this.board[r];
-            var _loop2 = function _loop2(c) {
-              block_dis.forEach(function(data) {
-                var rr = r + data[0], cc = c + data[1];
-                if (rr >= 0 && rr < self.board.length && cc >> 0 && cc < line.length && self.board[r][c] > 0) return false;
-              });
-            };
-            for (var c = 0; c < line.length; ++c) _loop2(c);
-          };
-          for (var r = 0; r < this.board.length; ++r) _loop(r);
-          return true;
+          for (var r = 0; r < this.board.length; ++r) {
+            var line = this.board[r];
+            for (var c = 0; c < line.length; ++c) {
+              var tmp_fill_length = 0;
+              var fill_blocks = [];
+              for (var i = 0; i < block_dis.length; i++) {
+                var tmp_data = block_dis[i];
+                var rr = r + tmp_data[0], cc = c + tmp_data[1];
+                if (rr >= 0 && rr < this.h && cc >= 0 && cc < this.w && this.board[rr][cc] <= 0) {
+                  tmp_fill_length++;
+                  fill_blocks.push([ rr, cc ]);
+                }
+              }
+              if (tmp_fill_length === block_dis.length) {
+                tywx.tt.log(TAG, "isPreviewCanFill");
+                return true;
+              }
+            }
+          }
+          return false;
         }
       }, {
         key: "isCanFill",
@@ -19888,8 +20628,8 @@ window.__require = function e(t, n, r) {
           var fill_blocks = [];
           var need_fill_num = 0;
           for (var r = 0; r < config.length; ++r) {
-            var _line = config[r];
-            for (var c = 0; c < _line.length; ++c) {
+            var line = config[r];
+            for (var c = 0; c < line.length; ++c) {
               var dis = BlockMap[r][c];
               if (0 !== config[r][c]) {
                 var b_r = c_r + dis[1], b_c = c_c + dis[0];
@@ -19906,14 +20646,33 @@ window.__require = function e(t, n, r) {
       }, {
         key: "fillBaordByConfig",
         value: function fillBaordByConfig(center_row, center_col, config, touch_idx) {
-          var _this2 = this;
-          tywx.tt.warn(TAG, "start to fillBaord");
+          var _this = this;
+          tywx.tt.warn(TAG, "start to fillBaord" + touch_idx);
           if (!this.willFillBlocks || 0 === this.willFillBlocks.length) {
             tywx.tt.warn(TAG, "fillBoard error, this.willFillBlocks=" + this.willFillBlocks);
             return;
           }
           this.willFillBlocks.forEach(function(e) {
             var _ref2 = [ e[0], e[1] ], r = _ref2[0], c = _ref2[1];
+            if (0 === _this.board[r][c]) {
+              _this.board[r][c] = e[2];
+              _this.emptyBlocks.delete(r + "_" + c);
+            } else tywx.tt.warn(TAG, "fillBoardByConfig error r=" + r + " c=" + c);
+          });
+          tywx.NotificationCenter.trigger(tywx.tt.events.TT_FILL_BOARD, this.willFillBlocks);
+          this.willFillBlocks = [];
+          tywx.NotificationCenter.trigger(tywx.tt.events.HELP_ADD, null);
+          this.previewConfigs[touch_idx] = null;
+          this.outPutBoard();
+          tywx.tt.warn(TAG, "fillBaord end");
+        }
+      }, {
+        key: "fillBord",
+        value: function fillBord(alle) {
+          var _this2 = this;
+          this.willFillBlocks = alle;
+          this.willFillBlocks.forEach(function(e) {
+            var _ref3 = [ e[0], e[1] ], r = _ref3[0], c = _ref3[1];
             if (0 === _this2.board[r][c]) {
               _this2.board[r][c] = e[2];
               _this2.emptyBlocks.delete(r + "_" + c);
@@ -19921,28 +20680,24 @@ window.__require = function e(t, n, r) {
           });
           tywx.NotificationCenter.trigger(tywx.tt.events.TT_FILL_BOARD, this.willFillBlocks);
           this.willFillBlocks = [];
-          this.previewConfigs[touch_idx] = null;
-          this.refreshPreviewStat();
-          this.outPutBoard();
-          tywx.tt.warn(TAG, "fillBaord end");
         }
       }, {
         key: "outPutBoard",
         value: function outPutBoard() {
           for (var r = this.h - 1; r >= 0; --r) {
-            var _line2 = "Row:" + r + "===>";
-            for (var c = 0; c < this.w; ++c) _line2 += this.board[r][c] + ",";
-            tywx.tt.log(TAG, _line2);
+            var line = "Row:" + r + "===>";
+            for (var c = 0; c < this.w; ++c) line += this.board[r][c] + ",";
+            tywx.tt.log(TAG, line);
           }
         }
       }, {
         key: "resetPreviews",
-        value: function resetPreviews() {
+        value: function resetPreviews(checkpreviewnumber) {
           if (this.previewConfigs.every(function(e) {
             return null === e;
           })) {
             tywx.tt.log(TAG, "reset previews");
-            this.resetPreviewConfigs();
+            this.resetPreviewConfigs(false, checkpreviewnumber);
             tywx.NotificationCenter.trigger(tywx.tt.events.TT_RESET_PREVIEWS, null);
           }
         }
@@ -19961,9 +20716,9 @@ window.__require = function e(t, n, r) {
           var tmp_col_fill = [];
           for (var i = 0; i < this.w; ++i) tmp_col_fill.push(0);
           for (var r = 0; r < this.board.length; ++r) {
-            var _line3 = this.board[r];
+            var line = this.board[r];
             var fill_num = 0;
-            for (var c = 0; c < _line3.length; ++c) if (this.board[r][c] >= 1) {
+            for (var c = 0; c < line.length; ++c) if (this.board[r][c] >= 1) {
               tmp_col_fill[c]++;
               fill_num++;
             }
@@ -19971,8 +20726,27 @@ window.__require = function e(t, n, r) {
             tywx.tt.log(TAG, "row:" + r + ",file_num=" + fill_num);
           }
           for (var _i = 0; _i < tmp_col_fill.length; ++_i) tmp_col_fill[_i] === this.h && this.clearCols.push(_i);
-          (this.clearCols.length > 0 || this.clearRows.length > 0) && tywx.NotificationCenter.trigger(tywx.tt.events.TT_CLEAR_ROW, null);
+          if (this.clearCols.length > 0 || this.clearRows.length > 0) {
+            this.hasclear = true;
+            tywx.NotificationCenter.trigger(tywx.tt.events.TT_CLEAR_ROW, null);
+          } else {
+            this.hasclear = false;
+            this.refreshPreviewStat();
+          }
           tywx.tt.log(TAG, "clearRow:" + this.clearRows + ",\nclearCols:" + this.clearCols);
+        }
+      }, {
+        key: "getAddScoreByClear",
+        value: function getAddScoreByClear(rows, cols) {
+          var add_score = 0;
+          var self = this;
+          rows.forEach(function(e) {
+            for (var c = 0; c < self.w; ++c) add_score += tywx.tt.constants.AddScore;
+          });
+          cols.forEach(function(e) {
+            for (var r = 0; r < self.h; ++r) add_score += tywx.tt.constants.AddScore;
+          });
+          return add_score;
         }
       }, {
         key: "clearBlocks",
@@ -19993,10 +20767,17 @@ window.__require = function e(t, n, r) {
               add_score += tywx.tt.constants.AddScore;
             }
           });
+          var cleardata = {};
+          cleardata.rows = this.clearRows;
+          cleardata.cols = this.clearCols;
+          tywx.NotificationCenter.trigger(tywx.tt.events.HELP_ADD, null);
           this.score += add_score;
-          tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_SCORE, null);
           this.clearCols = [];
           this.clearRows = [];
+          this.outPutBoard();
+          this.refreshPreviewStat();
+          tywx.tt.log(TAG, "clearBlocks end");
+          tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_SCORE, cleardata);
         }
       }, {
         key: "hammerClearByRowAndCol",
@@ -20022,6 +20803,12 @@ window.__require = function e(t, n, r) {
         key: "getPreviewConfigs",
         value: function getPreviewConfigs() {
           return this.previewConfigs;
+        }
+      }, {
+        key: "setScore",
+        value: function setScore(score) {
+          this.score = score;
+          tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_SCORE, null);
         }
       } ]);
       return ModelBoard;
@@ -20058,6 +20845,7 @@ window.__require = function e(t, n, r) {
     var ConfigManager = function() {
       function ConfigManager() {
         _classCallCheck(this, ConfigManager);
+        for (var att in tywx.tt.Configs.default) this[att] = tywx.tt.Configs.default[att];
       }
       _createClass(ConfigManager, [ {
         key: "requestConfig",
@@ -20077,7 +20865,7 @@ window.__require = function e(t, n, r) {
               "" === tywx.tt.constants.WXAdConfig.vedioId ? tywx.tt.isCanWatchVideo = false : tywx.tt.isCanWatchVideo = true;
               tywx.tt.log(TAG, "request config success" + JSON.stringify(response));
               tywx.NotificationCenter.trigger(tywx.tt.events.TT_GET_CONFIG_SUCCESS, response);
-            }
+            } else tywx.NotificationCenter.trigger(tywx.tt.events.TT_GET_CONFIG_FAIL, null);
           };
           xhr.open("GET", _configUrl, true);
           xhr.send();
@@ -20092,13 +20880,14 @@ window.__require = function e(t, n, r) {
       return ConfigManager;
     }();
     ConfigManager[_instance] = null;
-    module.exports = ConfigManager.getInstance();
+    module.exports = ConfigManager;
     cc._RF.pop();
   }, {} ],
   tt_scene_menu: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "68b47bUNBZKFo2vkf9uElWn", "tt_scene_menu");
     "use strict";
+    var TAG = "[view/tt_scene_menu]";
     cc.Class({
       extends: cc.Component,
       properties: {
@@ -20113,34 +20902,40 @@ window.__require = function e(t, n, r) {
           MAIN_MENU_NUM: tywx.tt.constants.TT_SCORE
         });
         tywx.tt.boot();
-        tywx.tt.lottery.addZPIcon("home", this.zpbtnNode, cc.v2(0, 0));
-        tywx.tt.ads.addAdsNode("banner_menu", this.bannerNode, cc.v2(0, 0));
+        tywx.PropagateInterface.getShareConfigInfo();
         this.gqnumberLabel.string = parseInt(tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0)) + "";
         tywx.NotificationCenter.listen(tywx.tt.events.TT_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
         tywx.NotificationCenter.listen(tywx.tt.events.TT_EVENT_GET_IP_SUCCESS, this.getIPSuccess, this);
+        var self = this;
         tywx.Timer.setTimer(this, function() {
+          tywx.tt.lottery.addZPIcon("home", self.zpbtnNode, cc.v2(0, 0));
+          tywx.tt.ads.addAdsNode("banner_menu", self.bannerNode, cc.v2(0, 0));
           tywx.tt.isMinGanIP = tywx.tt.Utils.isMinGanIp(tywx.AdManager.ipLocInfo);
-          this.loginSuccess();
-        }, 1, 1, 1);
+          self.loginSuccess();
+        }, 1, 0, 1);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_GET_CONFIG_SUCCESS, this.dealConfig, this);
       },
+      dealConfig: function dealConfig() {},
       getIPSuccess: function getIPSuccess(res) {
-        console.log("IP\u4fe1\u606f = " + JSON.stringify(res));
+        tywx.tt.log(TAG, "IP\u4fe1\u606f = " + JSON.stringify(res));
       },
       onRedPacktChange: function onRedPacktChange(res) {
         if (res.data && res.data.totalAmount) {
           var data = {};
           data.max = tywx.tt.Utils.formatCashFen2Yuan(res.data.totalAmount);
           this.btnGetMoney.getComponent("GetMoneyButton").init(data);
-        } else console.log("\u901a\u77e5\u4e8b\u4ef6\u4e2d\u7684\u7ea2\u5305\u6570\u636e = " + JSON.stringify(res));
+        } else tywx.tt.log(TAG, "\u901a\u77e5\u4e8b\u4ef6\u4e2d\u7684\u7ea2\u5305\u6570\u636e = " + JSON.stringify(res));
       },
       loginSuccess: function loginSuccess() {
         var self = this;
-        console.log("tywx.UserInfo.userId = " + tywx.UserInfo.userId);
+        tywx.tt.log(TAG, "tywx.UserInfo.userId = " + tywx.UserInfo.userId);
         tywx.tt.Utils.requestRedPacket({
           success: function success(res) {
-            self.btnGetMoney.active = true;
-            console.log("huuu = " + JSON.stringify(res));
-            self.btnGetMoney.getComponent("GetMoneyButton").init(res);
+            tywx.tt.log(TAG, "\u5ba1\u6838\u72b6\u6001 = " + tywx.tt.configManager.getInstance().auditing + "\u73a9\u5bb6\u7ea2\u5305\u6570\u636e= " + JSON.stringify(res));
+            if (res.current && false == tywx.tt.configManager.getInstance().auditing) {
+              self.btnGetMoney.active = true;
+              self.btnGetMoney.getComponent("GetMoneyButton").init(res);
+            } else self.btnGetMoney.active = false;
           },
           fail: function fail(res) {
             self.btnGetMoney.active = false;
@@ -20168,35 +20963,175 @@ window.__require = function e(t, n, r) {
     cc._RF.push(module, "4805cLfUy9BEZvckQ7E+WBJ", "tt_scene_play");
     "use strict";
     var TAG = "[tt_scene_play]";
+    var friend = require("../rank/friend.js");
     cc.Class({
       extends: cc.Component,
-      properties: {},
+      properties: {
+        stopbottom: cc.Node,
+        initshow: cc.Node,
+        friendnode: cc.Node,
+        historyscoreLabel: cc.Label,
+        scoreLabel: cc.Label,
+        stopScoreLabel: cc.Label,
+        btnGetMoney: cc.Node,
+        topElementNode: cc.Node
+      },
       onLoad: function onLoad() {
+        var self = this;
+        this.score = 0;
+        this.showstop = false;
+        this.stopbottom.active = true;
+        this.initshow.active = true;
+        this.qzshowinitshow = true;
+        friend.addIcon(this.friendnode);
+        tywx.tt.friend = friend;
+        this.stopbottom.scaleX = 0;
         this.root = this.node.getChildByName("root");
         this.pop = this.node.getChildByName("pop");
         this.loadPlayView();
         this.showBanner();
         tywx.tt.curgamescene = this;
         var canshowads = true;
+        tywx.NotificationCenter.listen(tywx.tt.events.LOGIN_SUCCESS, this.loginSuccess, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_EVENT_RED_PACKET_CHANGE, this.onRedPacktChange, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_EVENT_GET_IP_SUCCESS, this.getIPSuccess, this);
         canshowads && tywx.tt.ads.addAdsNode("list_menu", this.node, cc.v2(220, 222));
+        this.btnGetMoney.active = false;
+        console.log("\u7ea2\u5305\u6570\u636e = " + JSON.stringify(tywx.tt.RedPacketInfo));
+        this.initMoneyBtn();
+        tywx.tt.Utils.isIpx() ? this.topElementNode.y = this.topElementNode.y - 35 : tywx.tt.Utils.is2To1();
+      },
+      initMoneyBtn: function initMoneyBtn() {
+        var self = this;
+        if (false == tywx.tt.configManager.getInstance().auditing && tywx.tt.RedPacketInfo) {
+          self.btnGetMoney.active = true;
+          var data = {};
+          data.max = tywx.tt.Utils.formatCashFen2Yuan(tywx.tt.RedPacketInfo.totalAmount);
+          self.btnGetMoney.getComponent("GetMoneyButton").init(data);
+          self.btnGetMoney.getComponent("GetMoneyButton").setShowCall(function() {
+            console.log("\u4e3b\u754c\u9762\u7684\u7ea2\u5305");
+          });
+        } else self.btnGetMoney.active = false;
+      },
+      onRedPacktChange: function onRedPacktChange(res) {
+        console.log("\u7ea2\u5305\u6570\u636e = " + JSON.stringify(res));
+        if (res.data && res.data.totalAmount) {
+          var data = {};
+          data.max = tywx.tt.Utils.formatCashFen2Yuan(res.data.totalAmount);
+          this.btnGetMoney.getComponent("GetMoneyButton").init(data);
+        } else tywx.tt.log(TAG, "\u901a\u77e5\u4e8b\u4ef6\u4e2d\u7684\u7ea2\u5305\u6570\u636e = " + JSON.stringify(res));
       },
       stopCall: function stopCall() {
-        tywx.tt.stop_view.showStopView();
+        var self = this;
+        if (this.showstop) {
+          this.showstop = false;
+          this.stopbottom.active = true;
+          var _animation = this.stopbottom.getComponent("cc.Animation");
+          var _animState = _animation.play("showstop");
+          _animState.wrapMode = cc.WrapMode.Normal;
+          this.qzshowinitshow = true;
+          var _animation2 = this.initshow.getComponent("cc.Animation");
+          var _animState2 = _animation2.play("initshow");
+          _animState2.wrapMode = cc.WrapMode.Reverse;
+        } else {
+          this.showstop = true;
+          this.stopbottom.active = true;
+          var animation = this.stopbottom.getComponent("cc.Animation");
+          var animState = animation.play("showstop");
+          animState.wrapMode = cc.WrapMode.Reverse;
+          this.qzshowinitshow = false;
+          var animation1 = this.initshow.getComponent("cc.Animation");
+          var animState1 = animation1.play("initshow");
+          animState1.wrapMode = cc.WrapMode.Normal;
+        }
+      },
+      qzShowBase: function qzShowBase() {
+        if (!this.qzshowinitshow) {
+          var self = this;
+          this.stopbottom.active = true;
+          var animation = this.stopbottom.getComponent("cc.Animation");
+          var animState = animation.play("showstop");
+          animState.wrapMode = cc.WrapMode.Normal;
+          this.qzshowinitshow = true;
+          this.showstop = false;
+          var animation1 = this.initshow.getComponent("cc.Animation");
+          var animState1 = animation1.play("initshow");
+          animState1.wrapMode = cc.WrapMode.Reverse;
+        }
       },
       start: function start() {},
       storeScore: function storeScore() {
-        parseInt(tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0)) < this.playviewscript.board.score && tywx.tt.Utils.saveItem(tywx.tt.constants.TT_SCORE, this.playviewscript.board.score, false);
+        parseInt(tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0)) < this.score && tywx.tt.Utils.saveItem(tywx.tt.constants.TT_SCORE, this.score, false);
       },
       onDestroy: function onDestroy() {
-        tywx.tt.log("\u4e3b\u9875\u9000\u51fa ");
+        this.storeScord();
+        tywx.tt.log(TAG, "\u4e3b\u9875\u9000\u51fa ");
         tywx.tt.Utils.destroyWXBanner();
+      },
+      storeScord: function storeScord() {
+        var playdata = {};
+        playdata.bord = tywx.tt.Board.board;
+        playdata.score = tywx.tt.Board.score;
+        playdata.huanyihuan = tywx.tt.BoardView.repeatNumber;
+        var previews = tywx.tt.Board.previewConfigs;
+        var previewIndex = tywx.tt.Board.previewIndex;
+        tywx.tt.log(TAG, "previews = " + previews.length);
+        var congifdata = [];
+        for (var preIndex = 0; preIndex < previews.length; preIndex++) {
+          var config = previews[preIndex];
+          congifdata.push(config);
+        }
+        playdata.previewIndex = previewIndex;
+        playdata.previewsdata = congifdata;
+        tywx.tt.Utils.saveItem(tywx.tt.constants.PlayDataKeys.ttplaydata, JSON.stringify(playdata), true);
       },
       showBanner: function showBanner() {
         tywx.tt.Utils.createAndcreateAndShowWXBanner();
         this.schedule(this.bannerRefresh, tywx.tt.constants.WXAdConfig.bannerRefreshTime);
       },
+      loginSuccess: function loginSuccess() {
+        var self = this;
+        if (tywx.tt.configManager.getInstance().auditing) return;
+        tywx.tt.Utils.requestRedPacket({
+          success: function success(res) {
+            tywx.tt.log(TAG, "\u5ba1\u6838\u72b6\u6001 = " + tywx.tt.configManager.getInstance().auditing + "\u73a9\u5bb6\u7ea2\u5305\u6570\u636e= " + JSON.stringify(res));
+            self.initMoneyBtn();
+          },
+          fail: function fail(res) {
+            self.initMoneyBtn();
+          }
+        });
+      },
       bannerRefresh: function bannerRefresh() {
         tywx.tt.Utils.createAndcreateAndShowWXBanner();
+      },
+      flushMaxScore: function flushMaxScore(score) {
+        this.historyscoreLabel.string = "" + score;
+      },
+      setScore: function setScore(score) {
+        var tscore = this.score;
+        var scorecz = score - this.score;
+        var self = this;
+        if (scorecz > 0) {
+          this.score = score;
+          var call = cc.callFunc(function() {
+            tscore += 2;
+            self.scoreLabel.string = tscore;
+            self.stopScoreLabel.string = tscore;
+          });
+          var time = 2 / scorecz;
+          var delay = cc.delayTime(time);
+          var seq = cc.sequence(delay, call);
+          var rep = cc.repeat(seq, scorecz / 2);
+          this.scoreLabel.node.stopAllActions();
+          this.scoreLabel.node.runAction(rep);
+          tywx.tt.friend.setScore(score);
+          tywx.tt.curgamescene.storeScore();
+        } else {
+          self.stopScoreLabel.string = "0";
+          self.scoreLabel.string = "0";
+        }
+        this.score = score;
       },
       loadPlayView: function loadPlayView() {
         var self = this;
@@ -20211,7 +21146,9 @@ window.__require = function e(t, n, r) {
       }
     });
     cc._RF.pop();
-  }, {} ],
+  }, {
+    "../rank/friend.js": "friend"
+  } ],
   tt_view_block: [ function(require, module, exports) {
     "use strict";
     cc._RF.push(module, "d5286uzGv9PlLSpY6pCMQuz", "tt_view_block");
@@ -20219,25 +21156,46 @@ window.__require = function e(t, n, r) {
     var TAG = "[tt_view_block]";
     cc.Class({
       extends: cc.Component,
-      properties: {},
+      properties: {
+        blink: cc.Sprite
+      },
       onLoad: function onLoad() {
         this.mask = this.node.getChildByName("mask");
         this.mask.active = false;
       },
       onEnable: function onEnable() {},
       start: function start() {},
+      blockBlink: function blockBlink() {
+        this.blink.node.active = true;
+        var scale1 = cc.scaleTo(.5, 1.1);
+        var scale2 = cc.scaleTo(.5, 1);
+        var seq = cc.sequence(scale1, scale2);
+        var rep = cc.repeatForever(seq);
+        this.blink.node.runAction(rep);
+      },
+      blockHide: function blockHide() {
+        this.blink.node.active = false;
+        this.blink.node.stopAllActions();
+      },
       refresh: function refresh() {},
       setStat: function setStat(stat) {
         this.stat = stat;
         this.frameIdx = -1;
         this.init();
       },
+      getStat: function getStat() {
+        return this.stat;
+      },
       hideBg: function hideBg() {
         this.node.getChildByName("bg").active = false;
       },
       setBgColor: function setBgColor(color) {
-        this.node.getChildByName("bg").color = color;
-        this.node.getChildByName("bg").opacity = 11;
+        var self = this;
+        1 == color ? cc.loader.loadRes("images/tt_blocks/greyblack", cc.SpriteFrame, function(err, sprite_frame) {
+          err ? tywx.tt.log(TAG, "ddda error") : self.node.getChildByName("bg").getComponent(cc.Sprite).spriteFrame = sprite_frame;
+        }) : cc.loader.loadRes("images/tt_blocks/hideblack", cc.SpriteFrame, function(err, sprite_frame) {
+          err ? tywx.tt.log(TAG, "ddda error") : self.node.getChildByName("bg").getComponent(cc.Sprite).spriteFrame = sprite_frame;
+        });
       },
       init: function init() {
         this.display = this.node.getChildByName("display");
@@ -20253,9 +21211,20 @@ window.__require = function e(t, n, r) {
           this.frameIdx = this.stat;
           var self = this;
           cc.loader.loadRes("images/tt_blocks/b" + this.stat, cc.SpriteFrame, function(err, sprite_frame) {
-            err || (self.displaySprite.spriteFrame = sprite_frame);
+            err ? tywx.tt.log(TAG, "ddda error") : self.displaySprite.spriteFrame = sprite_frame;
           });
+          this.blinkDisplay();
         }
+      },
+      blinkDisplay: function blinkDisplay() {
+        this.displaySprite.node.stopAllActions();
+        if (12 == this.stat) {
+          var scale1 = cc.scaleTo(.6, 1.1);
+          var scale2 = cc.scaleTo(.6, 1);
+          var seq = cc.sequence(scale1, scale2);
+          var rep = cc.repeatForever(seq);
+          this.displaySprite.node.runAction(rep);
+        } else this.displaySprite.node.scale = 1;
       },
       showMask: function showMask() {
         this.mask.active = true;
@@ -20272,19 +21241,30 @@ window.__require = function e(t, n, r) {
     "use strict";
     var TAG = "[tt_view_play_board]";
     var Board = require("../model/tt_model_board.js");
-    var friend = require("../rank/friend.js");
     cc.Class({
       extends: cc.Component,
       properties: {
         prefabBlock: cc.Prefab,
         prefabPreview: cc.Prefab,
+        addscoreLabelPrefab: cc.Prefab,
         labelScore: cc.Label,
         czNumberLabel: cc.Label,
         repNumberLabel: cc.Label,
         friendnode: cc.Node,
-        maxScoreLabel: cc.Label
+        helpTip: cc.Node,
+        helpts: cc.Sprite,
+        allblock: [],
+        helpTipLabel: cc.Label,
+        maxScoreLabel: cc.Label,
+        lotteryNode: cc.Node,
+        shouzhiNode: cc.Node,
+        blinkNode: cc.Node,
+        alertNode: cc.Node,
+        chuiziNoneNode: cc.Node,
+        chuiziNode: cc.Node
       },
       onLoad: function onLoad() {
+        this.playdata = this.getPlayHistoryData();
         this.node.width = cc.game.canvas.width;
         this.node.height = cc.game.canvas.height;
         this.root = this.node.getChildByName("root");
@@ -20296,34 +21276,60 @@ window.__require = function e(t, n, r) {
         this.hammerIcon.active = false;
         this.board = new Board();
         this.previews = [];
+        this.lotteryboxnumber = 0;
         this.previewsPos = [];
         this.touchIdx = -1;
+        this.useRepeateNumber = 0;
         this.touchHeight = 240;
         this.isTouchLocked = false;
         this.isUsingHammer = false;
         this.board.reset();
         tywx.tt.BoardView = this;
         tywx.tt.Board = this.board;
-        friend.addIcon(this.friendnode, this.score);
-        tywx.tt.friend = friend;
         this.initLayout();
         this.initBoardView();
-        this.initPreviewBlocks();
         this.initTouch();
         this.initHammerTouch();
         this.initChuiZiAndRepeate();
         this.onRefreshScore();
         this.storescorevalue = tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0);
         this.flushMaxScore();
+        this.initPreviewBlocks();
+        if (1 == this.getHelp()) {
+          this.showHelp();
+          this.helpTip.active = true;
+        }
         tywx.NotificationCenter.listen(tywx.tt.events.TT_FILL_BOARD, this.onFillBoard, this);
         tywx.NotificationCenter.listen(tywx.tt.events.TT_RESET_PREVIEWS, this.onResetPreviews, this);
         tywx.NotificationCenter.listen(tywx.tt.events.TT_CLEAR_ROW, this.onClearRow, this);
         tywx.NotificationCenter.listen(tywx.tt.events.TT_REFRESH_SCORE, this.onRefreshScore, this);
         tywx.NotificationCenter.listen(tywx.tt.events.TT_CLEAR_HAMMER, this.onClearHammer, this);
-        tywx.NotificationCenter.listen(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, this.doGameOver, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, this.refreshPreStatue, this);
+        tywx.NotificationCenter.listen(tywx.tt.events.HELP_ADD, this.helpAdd, this);
+        this.initHistoryPlayData();
+      },
+      hideHarmer: function hideHarmer(hide) {
+        if (hide) {
+          this.chuiziNoneNode.active = true;
+          this.chuiziNode.active = false;
+        } else {
+          this.chuiziNoneNode.active = false;
+          this.chuiziNode.active = true;
+        }
+      },
+      checkPreviewActives: function checkPreviewActives() {
+        var canputnumber = 0;
+        for (var i = 0; i < this.previews.length; i++) {
+          var previewscr = this.previews[i].getComponent("tt_view_priview_blocks");
+          previewscr.isCanPut() && canputnumber++;
+        }
+        return canputnumber;
       },
       flushMaxScore: function flushMaxScore() {
-        parseInt(this.storescorevalue) < this.board.score ? this.maxScoreLabel.string = "\u5386\u53f2\u6700\u4f73:" + this.board.score : this.maxScoreLabel.string = "\u5386\u53f2\u6700\u4f73:" + this.storescorevalue;
+        if (parseInt(this.storescorevalue) < this.board.score) {
+          this.maxScoreLabel.string = "\u5386\u53f2\u6700\u4f73:" + this.board.score;
+          tywx.tt.curgamescene.flushMaxScore(this.board.score);
+        } else tywx.tt.curgamescene.flushMaxScore(this.storescorevalue);
       },
       start: function start() {},
       onDestroy: function onDestroy() {
@@ -20336,12 +21342,24 @@ window.__require = function e(t, n, r) {
         this.nodeBoardBottom = this.layout.getChildByName("node_board_bottom");
         this.nodeBottom = this.layout.getChildByName("node_bottom");
         var _ref = [ cc.game.canvas.width, cc.game.canvas.height ], cw = _ref[0], ch = _ref[1];
-        var is_ipx = ch / cw >= 1.9;
-        if (is_ipx) {
-          this.nodeTop.getChildByName("toproot").y = this.nodeTop.getChildByName("toproot").y - 80;
-          this.nodeBoard.y = this.nodeBoard.y - 90;
-          this.nodeBoard.getChildByName("bg").y = this.nodeBoard.getChildByName("bg").y - 90;
+        var top_y = .84765625 * ch;
+        var board_y = .3203125 * ch;
+        var board_bottom_y = .1484375 * ch;
+        var bottom_y = 0;
+        if (tywx.tt.Utils.isIpx()) {
+          top_y -= 30;
+          board_y += 50;
+        } else tywx.tt.Utils.is2To1() && (top_y -= 150);
+        ch < 1280 && (top_y = this.nodeBoard.getBoundingBox().height + board_y);
+        if (cw / ch >= .7) {
+          board_bottom_y = 0;
+          board_y = board_bottom_y + this.nodeBoardBottom.getBoundingBox().height;
+          top_y = board_y + this.nodeBoard.getBoundingBox().height;
         }
+        this.nodeTop.position = cc.v2(0, top_y);
+        this.nodeBoard.position = cc.v2(0, board_y);
+        this.nodeBoardBottom.position = cc.v2(0, board_bottom_y);
+        this.nodeBottom.position = cc.v2(0, bottom_y);
       },
       initBoardView: function initBoardView() {
         var _ref2 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref2[0], h = _ref2[1];
@@ -20353,10 +21371,11 @@ window.__require = function e(t, n, r) {
         var padding_left = (this.root.width * scalebl - w * c_s.width) / 2;
         var bpos = this.nodeBoard.position;
         var padding_bottom = bpos.y;
-        var tpos = this.root.getChildByName("layout").convertToWorldSpaceAR(bpos);
+        var tpos2 = this.nodeBoard.convertToWorldSpace(cc.v2(this.nodeBoard.width / 2, this.nodeBoard.height / 2));
+        var tpos = this.nodeBoard.convertToWorldSpaceAR(cc.v2(this.nodeBoard.width / 2, 0));
+        var tpy = tpos.y - tpos2.y;
         var _ref3 = [ cc.game.canvas.width, cc.game.canvas.height ], cw = _ref3[0], ch = _ref3[1];
-        var is_ipx = ch / cw >= 1.9;
-        is_ipx && (padding_bottom = tpos.y - 195 - this.nodeBoard.height / 2);
+        var hc = 1280 / cc.game.canvas.height;
         this.blockViews = [];
         var x = 0, y = 0;
         var lb_x = 0, lb_y = 0, rt_x = 0, rt_y = 0;
@@ -20370,7 +21389,7 @@ window.__require = function e(t, n, r) {
             var tmp_block = cc.instantiate(this.prefabBlock);
             tmp_block.parent = this.root;
             tmp_block.getComponent("tt_view_block").setStat(-2);
-            tmp_block.getComponent("tt_view_block").setBgColor(idx ? cc.color("#092D41") : cc.color("#FFFFFF"));
+            tmp_block.getComponent("tt_view_block").setBgColor(idx ? 1 : 2);
             idx = !idx;
             tmp_block.position = cc.v2(x, y);
             this.blockViews[i][j] = tmp_block;
@@ -20389,13 +21408,13 @@ window.__require = function e(t, n, r) {
         var _ref4 = [ 0, this.nodeBoardBottom.y ], x = _ref4[0], y = _ref4[1];
         var bpos = this.nodeBoardBottom.position;
         var padding_bottom = bpos.y;
-        var tpos = this.nodeBoardBottom.parent.convertToWorldSpaceAR(bpos);
+        var tpos = this.nodeBoardBottom.convertToWorldSpaceAR(cc.v2(0, 0));
         var _ref5 = [ cc.game.canvas.width, cc.game.canvas.height ], cw = _ref5[0], ch = _ref5[1];
         var is_ipx = ch / cw >= 1.9;
-        is_ipx ? padding_bottom = tpos.y - 261 - 2 * this.nodeBoardBottom.height - 60 : padding_bottom += this.nodeBoardBottom.height / 2;
-        console.log(is_ipx + tpos + "theight = bpos = " + bpos + "padding_bottom position = " + padding_bottom);
+        var ch2 = 1280 / cc.game.canvas.height;
+        padding_bottom += this.nodeBoardBottom.height / 2;
         var previewConfigs = this.board.getPreviewConfigs();
-        for (var i = 0; i < previewConfigs.length; i++) {
+        for (var i = 0; i < previewConfigs.length; i++) if (previewConfigs[i]) {
           var tmp_preview = cc.instantiate(this.prefabPreview);
           tmp_preview.parent = this.root;
           tmp_preview.getComponent("tt_view_priview_blocks").init(previewConfigs[i]);
@@ -20412,6 +21431,7 @@ window.__require = function e(t, n, r) {
           if (self.isTouchLocked) return;
           tywx.tt.log(TAG, "touch start");
           var pos = event.getLocation();
+          tywx.tt.curgamescene.qzShowBase();
           self.pretouchpos = pos;
           self.touchIdx = -1;
           for (var i = 0; i < self.previews.length; i++) {
@@ -20420,12 +21440,13 @@ window.__require = function e(t, n, r) {
             var w = 130, h = 130;
             var lb_x = x - w / 2, lb_y = y - h / 2;
             var rt_x = x + w / 2, rt_y = y + h / 2;
-            if (pos.x >= lb_x && pos.x <= rt_x && pos.y >= lb_y && pos.y <= rt_y) {
+            if (pos.x >= lb_x && pos.x <= rt_x && pos.y >= lb_y && pos.y <= rt_y) if (1 == tywx.tt.Board.previewStat[i] || _this.helpindex && _this.helpindex < 3 && -1 != _this.helpindex) {
               self.touchIdx = i;
               preview.position = cc.v2(pos.x, pos.y);
+              tywx.tt.AudioManager.getInstance().playSound(tywx.tt.constants.SOUNDS.COMBO[0]);
               preview.getComponent("tt_view_priview_blocks").touch();
               tywx.tt.log(TAG, "x[" + lb_x + "," + pos.x + "," + rt_x + "],y[" + lb_y + "," + pos.y + "," + rt_y + "]");
-            }
+            } else tywx.tt.Utils.showAlert("\u70b9\u51fb\u4f7f\u7528\u6362\u4e00\u6362");
           }
         });
         this.root.on(cc.Node.EventType.TOUCH_MOVE, function(event) {
@@ -20456,12 +21477,15 @@ window.__require = function e(t, n, r) {
               var config = preview_sc.config;
               if (self.fillBoard(cc.v2(pos.x, pos.y + _this.touchHeight), config)) {
                 preview_sc.put();
-                self.board.resetPreviews();
+                self.board.resetPreviews(true);
                 self.board.checkClear();
-              } else preview_sc.touchCancle();
+              } else {
+                self.board.refreshPreviewStat();
+                preview_sc.touchCancle();
+              }
             } else {
               preview_sc.touchCancle();
-              console.log("getConfig2 = " + preview_sc.getConfig());
+              tywx.tt.log(TAG, "getConfig2 = " + preview_sc.getConfig());
             }
           }
           self.hideAllBlockFrames();
@@ -20505,8 +21529,8 @@ window.__require = function e(t, n, r) {
             if (select_pos.x >= lb_x && select_pos.x <= rt_x && select_pos.y >= lb_y && select_pos.y <= rt_y) {
               c_r = r;
               c_c = c;
-              tmp_block_sc.setStat(-1);
-            } else tmp_block_sc.setStat(-2);
+            }
+            tmp_block_sc.setStat(-2);
           }
         }
         if (-1 !== c_r && -1 !== c_c) {
@@ -20535,6 +21559,7 @@ window.__require = function e(t, n, r) {
         var view_data = this.getBlockViewByPosition(pos);
         if (view_data.blockView) if (this.board.isCanFill(view_data.centerRow, view_data.centerCol, config)) {
           ret = true;
+          tywx.tt.AudioManager.getInstance().playSound(tywx.tt.constants.SOUNDS.COMBO[1]);
           this.board.fillBaordByConfig(view_data.centerRow, view_data.centerCol, config, this.touchIdx);
         } else ret = false;
         return ret;
@@ -20563,6 +21588,7 @@ window.__require = function e(t, n, r) {
         return ret;
       },
       onFillBoard: function onFillBoard(params) {
+        this.fillblocks = params;
         tywx.tt.log(TAG, "onFillBoard" + JSON.stringify(params));
         var self = this;
         params.forEach(function(e) {
@@ -20581,16 +21607,32 @@ window.__require = function e(t, n, r) {
           view.getComponent("tt_view_priview_blocks").resetByConfig(config);
         }
       },
+      reset: function reset() {
+        this.board.reset();
+        this.gameover = false;
+        this.board.setScore(0);
+        var _ref11 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardHeight ], mr = _ref11[0], mc = _ref11[1];
+        for (var r = 0; r < mr; ++r) for (var c = 0; c < mc; ++c) this.blockViews[r][c].getComponent("tt_view_block").setStat(0);
+        this.onResetPreviews();
+        this.onRefreshScore();
+        this.lotteryboxnumber = 0;
+        this.repeateRepeatNumberCall();
+        this.storescorevalue = tywx.tt.Utils.loadItem(tywx.tt.constants.TT_SCORE, 0);
+        this.flushMaxScore();
+      },
       onClearRow: function onClearRow() {
+        var _this2 = this;
         var clear_rows = this.board.clearRows;
         var clear_cols = this.board.clearCols;
         var clear_blocks = [];
-        var _ref11 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref11[0], h = _ref11[1];
+        var _ref12 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref12[0], h = _ref12[1];
         var self = this;
+        this.lotteryboxs = [];
         clear_rows.forEach(function(e) {
           tywx.tt.log(TAG, "onClearRow:==" + e);
           for (var c = 0; c < w; ++c) {
             var tmp_block_view = self.blockViews[e][c];
+            12 == _this2.board.board[e][c] && _this2.lotteryboxs.push(12);
             clear_blocks.indexOf(tmp_block_view) < 0 && clear_blocks.push(tmp_block_view);
           }
         });
@@ -20598,25 +21640,32 @@ window.__require = function e(t, n, r) {
           tywx.tt.log(TAG, "onClearRow:==" + e);
           for (var r = 0; r < h; ++r) {
             var tmp_block_view = self.blockViews[r][e];
+            12 == _this2.board.board[r][e] && _this2.lotteryboxs.push(12);
             clear_blocks.indexOf(tmp_block_view) < 0 && clear_blocks.push(tmp_block_view);
           }
         });
         var ani_time = .2;
         var delay_time = .05;
+        var tcleartypes = [];
+        this.showAddScore({
+          rows: this.board.clearRows,
+          cols: this.board.clearCols
+        }, this.board.getAddScoreByClear(this.board.clearRows, this.board.clearCols));
         if (clear_blocks.length > 0) {
+          tywx.tt.AudioManager.getInstance().playSound(tywx.tt.constants.SOUNDS.SHUIXIAQIPAO);
           this.isTouchLocked = true;
           var _loop = function _loop(i) {
             var tmp_block_view = clear_blocks[i];
             var is_last = i === clear_blocks.length - 1;
             var display = tmp_block_view.getChildByName("display");
             display.runAction(cc.sequence(cc.delayTime(i * delay_time), cc.spawn(cc.scaleTo(ani_time, .1), cc.fadeOut(ani_time)), cc.callFunc(function() {
+              display.scale = 1;
+              display.opacity = 255;
+              tmp_block_view.getComponent("tt_view_block").setStat(0);
               if (is_last) {
                 self.board.clearBlocks();
                 self.isTouchLocked = false;
               }
-              display.scale = 1;
-              display.opacity = 255;
-              tmp_block_view.getComponent("tt_view_block").setStat(0);
             })));
           };
           for (var i = 0; i < clear_blocks.length; ++i) _loop(i);
@@ -20625,11 +21674,12 @@ window.__require = function e(t, n, r) {
       onBtnResetPreviews: function onBtnResetPreviews() {
         if (this.isTouchLocked) return;
         tywx.tt.log(TAG, "onBtnResetPreviews");
+        if (this.helpindex && this.helpindex > 0) return;
         if (this.repeatNumber > 0) {
           this.useRepeateCall();
           this.board.forseResetPreviews();
         } else {
-          var share_control = tywx.tt.configManager.share_control.gethuanyihuan;
+          var share_control = tywx.tt.configManager.getInstance().share_control ? tywx.tt.configManager.getInstance().share_control.gethuanyihuan : [ "share", 50 ];
           var calltype = tywx.tt.Utils.shareVideoCtr(share_control);
           var self = this;
           tywx.tt.Utils.hideWXBanner();
@@ -20637,7 +21687,7 @@ window.__require = function e(t, n, r) {
             success: function success() {
               self.repeateRepeatNumberCall();
             },
-            tip: "\u514d\u8d39\u83b7\u5f973\u6b21\u6362\u4e00\u6362\uff01",
+            tip: "\u514d\u8d39\u83b7\u5f973\u6b21\u6362\u4e00\u6362\uff01\u53ef\u4ee5\u5728\u5371\u9669\u7684\u65f6\u5019\u4f7f\u7528\u3002",
             config: 1 == calltype ? tywx.tt.constants.ShareConfig.GET_HUNAYIHUAN_NUMBER_SHARE : tywx.tt.constants.ShareConfig.GET_HUNAYIHUAN_NUMBER_VIEDO,
             calltype: calltype
           });
@@ -20645,40 +21695,49 @@ window.__require = function e(t, n, r) {
       },
       onBtnUseHammer: function onBtnUseHammer() {
         if (this.isTouchLocked) return;
+        if (this.helpindex && this.helpindex > 0) return;
         tywx.tt.log(TAG, "onBtnUseHammer");
-        if (this.czInitNumber > 0) this.hammerTouch.active = true; else {
-          var self = this;
-          var share_control = tywx.tt.configManager.share_control.getchuizi;
-          var calltype = tywx.tt.Utils.shareVideoCtr(share_control);
-          tywx.tt.Utils.hideWXBanner();
-          tywx.tt.tipview.show({
-            success: function success() {
-              self.addCZCallBack(1);
-            },
-            tip: "\u514d\u8d39\u83b7\u5f971\u4e2a\u9524\u5b50\uff01",
-            config: 1 == calltype ? tywx.tt.constants.ShareConfig.GET_CHUIZI_NUMBER_SHARE : tywx.tt.constants.ShareConfig.GET_CHUIZI_NUMBER_VIEDO,
-            calltype: calltype
-          });
+        if (this.czInitNumber > 0) {
+          this.hideHarmer(false);
+          this.hammerTouch.active = true;
+        } else {
+          this.hideHarmer(true);
+          this.lqHarmmer();
         }
       },
+      lqHarmmer: function lqHarmmer() {
+        var self = this;
+        var share_control = tywx.tt.configManager.getInstance().share_control ? tywx.tt.configManager.getInstance().share_control.getchuizi : [ "share", 50 ];
+        var calltype = tywx.tt.Utils.shareVideoCtr(share_control);
+        tywx.tt.Utils.hideWXBanner();
+        tywx.tt.tipview.show({
+          success: function success() {
+            self.addCZCallBack(1);
+            self.hideHarmer(false);
+          },
+          tip: "\u514d\u8d39\u83b7\u5f971\u4e2a\u9524\u5b50\uff01\u53ef\u4ee5\u7528\u6765\u70b9\u51fb\u6d88\u96643*3\u8303\u56f4\u7684\u65b9\u5757.",
+          config: 1 == calltype ? tywx.tt.constants.ShareConfig.GET_CHUIZI_NUMBER_SHARE : tywx.tt.constants.ShareConfig.GET_CHUIZI_NUMBER_VIEDO,
+          calltype: calltype
+        });
+      },
       hideAllBlockFrames: function hideAllBlockFrames() {
-        var _ref12 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref12[0], h = _ref12[1];
+        var _ref13 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref13[0], h = _ref13[1];
         for (var r = 0; r < h; ++r) for (var c = 0; c < w; ++c) {
           var tmp_view = this.blockViews[r][c];
           var tmp_block_sc = tmp_view.getComponent("tt_view_block");
           tmp_block_sc.setStat(-2);
         }
       },
-      onRefreshScore: function onRefreshScore() {
-        this.board.score > 70;
-        friend.setScore(this.board.score);
-        this.labelScore.string = "" + this.board.score;
+      onRefreshScore: function onRefreshScore(somedata) {
+        console.log("\u5f53\u524d\u7684\u5206\u6570 = ", this.board.score);
+        tywx.tt.curgamescene.setScore(this.board.score);
+        somedata && this.showLottery(somedata);
       },
       showHammerSelectFrameByPosition: function showHammerSelectFrameByPosition(pos) {
-        var _ref13 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref13[0], h = _ref13[1];
+        var _ref14 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref14[0], h = _ref14[1];
         for (var r = 0; r < h; ++r) for (var c = 0; c < w; ++c) {
           var _tmp_block_view2 = this.blockViews[r][c];
-          var _ref14 = [ _tmp_block_view2.x, _tmp_block_view2.y, _tmp_block_view2.width, _tmp_block_view2.height ], x = _ref14[0], y = _ref14[1], b_w = _ref14[2], b_h = _ref14[3];
+          var _ref15 = [ _tmp_block_view2.x, _tmp_block_view2.y, _tmp_block_view2.width, _tmp_block_view2.height ], x = _ref15[0], y = _ref15[1], b_w = _ref15[2], b_h = _ref15[3];
           var lb_x = x, lb_y = y, rt_x = x + b_w, rt_y = y + b_h;
           if (pos.x >= lb_x && pos.x <= rt_x && pos.y >= lb_y && pos.y <= rt_y) {
             tywx.tt.log(TAG, "showHammerSelectFrameByPosition==>" + r + "," + c);
@@ -20693,7 +21752,7 @@ window.__require = function e(t, n, r) {
       },
       showHammerShadowByRowAndCol: function showHammerShadowByRowAndCol(row, col) {
         var shadow_blocks = [ [ [ -1, 1 ], [ 0, 1 ], [ 1, 1 ] ], [ [ -1, 0 ], [ 0, 0 ], [ 1, 0 ] ], [ [ -1, -1 ], [ 0, -1 ], [ 1, -1 ] ] ];
-        var _ref15 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref15[0], h = _ref15[1];
+        var _ref16 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref16[0], h = _ref16[1];
         this.hideAllBlockMask();
         for (var r = 0; r < 3; ++r) for (var c = 0; c < 3; ++c) {
           var data = shadow_blocks[r][c];
@@ -20715,7 +21774,7 @@ window.__require = function e(t, n, r) {
         }
       },
       onClearHammer: function onClearHammer(blocks) {
-        var _this2 = this;
+        var _this3 = this;
         if (!(blocks.length > 0)) return;
         this.isTouchLocked = true;
         var self = this;
@@ -20725,13 +21784,16 @@ window.__require = function e(t, n, r) {
           var is_last = i === blocks.length - 1;
           var tmp_row = blocks[i][0];
           var tmp_col = blocks[i][1];
-          var tmp_block_view = _this2.blockViews[tmp_row][tmp_col];
+          var tmp_block_view = _this3.blockViews[tmp_row][tmp_col];
           var display = tmp_block_view.getChildByName("display");
           display.runAction(cc.sequence(cc.delayTime(i * delay_time), cc.spawn(cc.scaleTo(ani_time, .1), cc.fadeOut(ani_time)), cc.callFunc(function() {
-            is_last && (self.isTouchLocked = false);
             display.scale = 1;
             display.opacity = 255;
             tmp_block_view.getComponent("tt_view_block").setStat(0);
+            if (is_last) {
+              self.isTouchLocked = false;
+              tywx.tt.Board.refreshPreviewStat();
+            }
           })));
         };
         for (var i = 0; i < blocks.length; i++) _loop2(i);
@@ -20745,7 +21807,7 @@ window.__require = function e(t, n, r) {
           2 != titem.id && 4 != titem.id && 6 != titem.id || (czNumber += titem.num);
         }
         this.czInitNumber = czNumber;
-        this.czNumberLabel.string = czNumber + "";
+        0 == czNumber ? this.hideHarmer(true) : this.hideHarmer(false);
         this.repeatNumber = 3;
         this.repNumberLabel.string = this.repeatNumber + "/3";
       },
@@ -20762,7 +21824,7 @@ window.__require = function e(t, n, r) {
         }
         tywx.tt.Utils.saveItem("tt-items", JSON.stringify(items), false);
         this.czInitNumber = czNumber;
-        this.czNumberLabel.string = czNumber + "";
+        0 == czNumber, this.hideHarmer(true);
       },
       useRepeateCall: function useRepeateCall() {
         if (this.repeatNumber > 0) {
@@ -20770,8 +21832,10 @@ window.__require = function e(t, n, r) {
           this.repNumberLabel.string = this.repeatNumber + "/3";
         } else tywx.tt.error(TAG, "\u6362\u4e00\u6362\u7684\u4f7f\u7528\u6b21\u6570\u4e3a " + this.repeatNumber);
       },
-      repeateRepeatNumberCall: function repeateRepeatNumberCall() {
-        this.repeatNumber = this.repeatNumber + 3;
+      repeateRepeatNumberCall: function repeateRepeatNumberCall(repnum) {
+        this.gameover = false;
+        this.repeatNumber = 3;
+        this.useRepeateNumber = this.useRepeateNumber + 1;
         this.repNumberLabel.string = this.repeatNumber + "/3";
       },
       addCZCallBack: function addCZCallBack(num) {
@@ -20796,30 +21860,372 @@ window.__require = function e(t, n, r) {
         tywx.tt.log("\u9524\u5b50\u7684\u6570\u91cf  = " + czNumber);
         tywx.tt.Utils.saveItem("tt-items", JSON.stringify(items), false);
         this.czInitNumber = czNumber;
-        this.czNumberLabel.string = czNumber + "";
+      },
+      flushPreviewStatueUI: function flushPreviewStatueUI() {
+        var stats = this.board.previewStat;
+        console.log(" \u8bbe\u7f6e\u7684\u72b6\u6001 =  " + stats[0]);
+        console.log(stats.length + " \u5f53\u524d\u7684\u6240\u6709\u72b6\u6001 = " + stats);
+        var haszeorstate = false;
+        for (var ti1 = 0; ti1 < stats.length; ti1++) if (0 == stats[ti1] && null != tywx.tt.Board.previewConfigs[ti1]) {
+          this.previews[ti1].getComponent("tt_view_priview_blocks").setGrey();
+          haszeorstate = true;
+        } else this.previews[ti1].getComponent("tt_view_priview_blocks").hideGrey();
+        if (true == haszeorstate) {
+          this.alertNode.active = true;
+          this.alertNode.getComponent("cc.Animation").play("dangertip");
+        } else this.alertNode.active = false;
+      },
+      refreshPreStatue: function refreshPreStatue() {
+        var self = this;
+        this.hadrefresh = true;
+        var time = true == tywx.tt.Board.hasclear ? .5 : .2;
+        this.doGameOver();
       },
       doGameOver: function doGameOver() {
+        this.hadrefresh = false;
+        var self = this;
+        var deal = false;
+        for (var tg = 0; tg < 3; tg++) if (null != tywx.tt.Board.previewConfigs[tg]) {
+          deal = true;
+          break;
+        }
+        console.log("gameover p\u5224\u65ad\u7684preview = " + JSON.stringify(tywx.tt.Board.previewConfigs));
+        this.flushPreviewStatueUI();
         var stats = this.board.previewStat;
         tywx.tt.log(TAG, stats.length + "this.bord = " + stats);
         var gameover = true;
-        for (var ti = 0; stats.length; ti++) if (0 != stats[ti]) {
-          gameover = false;
-          break;
-        }
+        for (var ti1 = 0; ti1 < stats.length; ti1++) 1 == stats[ti1] && (gameover = false);
         var tgameover = gameover && 0 == this.repeatNumber;
-        tywx.tt.log(TAG, "gameover " + tgameover);
-        if (gameover && 0 == this.repeatNumber) {
-          friend.setStop(true);
-          tywx.tt.fuhuo.show({
-            score: this.board.score
+        tywx.tt.log("tgameover " + tgameover);
+        if (tgameover) {
+          this.alertNode.active = false;
+          this.gameover = true;
+          tywx.tt.Utils.hideWXBanner();
+          var share_control = tywx.tt.configManager.getInstance().share_control ? tywx.tt.configManager.getInstance().share_control.gethuanyihuan : [ "share", 50 ];
+          var calltype = tywx.tt.Utils.shareVideoCtr(share_control);
+          tywx.tt.tipview.show({
+            success: function success() {
+              self.repeateRepeatNumberCall();
+            },
+            tip: "\u514d\u8d39\u83b7\u5f973\u6b21\u6362\u4e00\u6362\uff01\u53ef\u4ee5\u590d\u6d3b!",
+            config: 1 == calltype ? tywx.tt.constants.ShareConfig.GET_HUNAYIHUAN_NUMBER_SHARE : tywx.tt.constants.ShareConfig.GET_HUNAYIHUAN_NUMBER_VIEDO,
+            calltype: calltype,
+            closecall: function closecall() {
+              tywx.tt.friend.setStop(true);
+              tywx.tt.fuhuo.show({
+                score: self.board.score
+              });
+            }
           });
         }
+      },
+      showHelp: function showHelp() {
+        var _this4 = this;
+        this.helpindex = 1;
+        var data = [];
+        for (var row = 0; row < 8; row++) for (var bordI = 0; bordI < 8; bordI++) {
+          var tdata = [];
+          tdata[0] = row;
+          tdata[1] = bordI;
+          tdata[2] = 3;
+          if (row >= 3 && row < 5 && 3 != bordI && 4 != bordI) data.push(tdata); else {
+            var canadd = true;
+            3 != bordI && 4 != bordI || 3 != row && 4 != row || (canadd = false);
+            var _ref17 = [ tdata[0], tdata[1] ], r = _ref17[0], c = _ref17[1];
+            if (0 === this.board.board[r][c] && canadd) {
+              this.board.board[r][c] = -2;
+              this.board.emptyBlocks.delete(r + "_" + c);
+            }
+          }
+        }
+        data.forEach(function(e) {
+          var _ref18 = [ e[0], e[1] ], r = _ref18[0], c = _ref18[1];
+          if (0 === _this4.board.board[r][c]) {
+            _this4.board.board[r][c] = e[2];
+            _this4.board.emptyBlocks.delete(r + "_" + c);
+          }
+          var tmp_block_view = _this4.blockViews[e[0]][e[1]];
+          var tmp_block_sc = tmp_block_view.getComponent("tt_view_block");
+          tmp_block_sc.setStat(e[2]);
+        });
+        this.board.previewStat[0] = 0;
+        this.board.previewStat[1] = 1;
+        this.board.previewStat[0] = 0;
+        var p4pos = this.blockViews[4][3].position;
+        this.blinkNode.position = cc.v2(p4pos.x + 38, p4pos.y);
+        this.helpts.node.active = true;
+        this.previews[0].active = false;
+        this.previews[2].active = false;
+        this.helpTip.active = true;
+        var scale1 = cc.scaleTo(.5, 1.1);
+        var scale2 = cc.scaleTo(.5, 1);
+        var delay = cc.delayTime(.2);
+        var seq = cc.sequence(scale1, scale2, delay);
+        this.blinkNode.zIndex = 99998;
+        this.shouzhiNode.zIndex = 99999;
+        this.blinkNode.runAction(cc.repeatForever(seq));
+        var rep = cc.repeatForever(cc.sequence(cc.scaleTo(.5, 1.1), cc.scaleTo(.5, 1)));
+        this.helpts.node.runAction(rep);
+        this.previews[1].getComponent("tt_view_priview_blocks").resetByConfig(this.getHelpPreviewBlockData());
+        this.showzhiAction(this.blockViews[3][3].position);
+        tywx.tt.log(TAG, "\u65b0\u624b\u6570\u636e  = " + JSON.stringify(this.helpts.node.position));
+      },
+      showzhiAction: function showzhiAction(position) {
+        this.shouzhiNode.stopAllActions();
+        this.shouzhiNode.active = true;
+        this.shouzhiNode.getComponent(cc.Animation).play("dragani");
+        this.shouzhiNode.position = cc.v2(this.previews[1].position.x + 45, this.previews[1].position.y - 38);
+        var move = cc.moveTo(.5, cc.v2(position.x + 76, position.y + 38));
+        var delay = cc.delayTime(.5);
+        var move2 = cc.moveTo(.5, cc.v2(this.previews[1].position.x + 45, this.previews[1].position.y - 38));
+        var seq2 = cc.sequence(move, delay, move2);
+        this.shouzhiNode.runAction(cc.repeatForever(seq2));
+      },
+      helpAdd: function helpAdd() {
+        if (this.helpindex > 0) {
+          this.helpindex++;
+          if (2 == this.helpindex) {
+            var self = this;
+            this.helpTipLabel.string = "\u518d\u62d6\u52a8\u5757\u5230\u76ee\u6807\u4f4d\u7f6e,\u5c31\u53ef\u4ee5\u6d88\u9664\u8fd9\u4e24\u884c\u4e86\u3002";
+            this.previews[1].active = true;
+            tywx.Timer.setTimer(this, function() {
+              this.showzhiAction(this.blockViews[3][4].position);
+              var p4pos = this.blockViews[4][4].position;
+              this.blinkNode.position = cc.v2(p4pos.x + 38, p4pos.y);
+              self.previews[1].getComponent("tt_view_priview_blocks").resetByConfig(self.getHelpPreviewBlockData());
+            }, 1, 0, .3);
+          } else {
+            this.helpindex = -1;
+            this.helpts.node.stopAllActions();
+            this.helpts.node.active = false;
+            this.helpTipLabel.string = "\u606d\u559c\u60a8\uff0c\u795d\u60a8\u73a9\u5f97\u6109\u5feb\u3002";
+            var self = this;
+            this.shouzhiNode.active = false;
+            this.blinkNode.stopAllActions();
+            this.shouzhiNode.stopAllActions();
+            this.blinkNode.active = false;
+            tywx.Timer.setTimer(this, function() {
+              tywx.tt.log(TAG, "\u65b0\u624b\u5f15\u5bfc\u7ed3\u675f");
+              tywx.tt.Utils.saveItem("hadhelp", 2, true);
+              this.previews[0].active = true;
+              this.previews[1].active = true;
+              this.previews[2].active = true;
+              this.helpTip.active = false;
+              tywx.tt.BoardView.reset();
+            }, 1, 0, 2);
+          }
+        }
+      },
+      getHelpPreviewBlockData: function getHelpPreviewBlockData() {
+        var config = tywx.tt.constants.Blocks[1];
+        return config;
+      },
+      getHelp: function getHelp() {
+        var hadhelp = tywx.tt.Utils.loadItem("hadhelp", 1);
+        return hadhelp;
+      },
+      recoverGame: function recoverGame() {
+        var _this5 = this;
+        this.gameover = false;
+        var clears = [];
+        var rows = [ 0, 1, 2, 3, 4, 5, 6, 7 ];
+        var columns = [ 0, 1, 2, 3, 4, 5, 6, 7 ];
+        for (var ti = 0; ti < 8; ti++) {
+          var data = {};
+          data.row = rows[ti];
+          data.column = columns[7 - ti];
+          clears.push(data);
+          data = {};
+          data.row = rows[7 - ti];
+          data.column = columns[ti];
+          clears.push(data);
+        }
+        tywx.tt.log(TAG, "data clear = " + JSON.stringify(clears));
+        clears.forEach(function(data) {
+          _this5.board.hammerClearByRowAndCol(data.row, data.column);
+        });
+        tywx.tt.Board.refreshPreviewStat();
+      },
+      showLottery: function showLottery(param) {
+        if (this.helpindex && this.helpindex < 3) return;
+        if (this.gameover) return;
+        if (!tywx.tt.configManager.getInstance().lottery) return;
+        var boxs = this.lotteryboxs;
+        this.lotteryboxs = [];
+        var self = this;
+        if (boxs.length > 0) {
+          this.lotteryboxnumber = this.lotteryboxnumber - boxs.length;
+          tywx.tt.lottery.showLottery("game", function() {
+            self.addCZCallBack(0);
+            tywx.tt.lottery.removeLotteryView();
+          });
+        }
+        tywx.tt.log(TAG, "\u5f53\u524d\u5b9d\u7bb1\u4e2a\u6570 = " + this.lotteryboxnumber);
+        var cjIndex = 0;
+        for (var scoreIndex = 0; scoreIndex < tywx.tt.configManager.getInstance().lottery.score.length; scoreIndex++) if (this.board.score <= tywx.tt.configManager.getInstance().lottery.score[scoreIndex]) {
+          cjIndex = scoreIndex;
+          break;
+        }
+        var rate = tywx.tt.configManager.getInstance().lottery.rate[cjIndex];
+        var max = tywx.tt.configManager.getInstance().lottery.max[cjIndex];
+        var random = Math.random();
+        tywx.tt.log(TAG, "score = " + this.board.score + " max = " + max + "random = " + random + " rate =  " + rate + " cjIndex = " + cjIndex);
+        if (random <= rate && this.lotteryboxnumber < max) {
+          this.lotteryboxnumber++;
+          var tbord = [];
+          for (var r = 0; r < this.board.board.length; r++) {
+            var tdata = this.board.board[r];
+            for (var c = 0; c < tdata.length; c++) if (this.board.board[r][c] > 0) {
+              var tgz = {};
+              tgz.row = r;
+              tgz.column = c;
+              tbord.push(tgz);
+            }
+          }
+          var sbord = tbord[parseInt(Math.random() * tbord.length)];
+          tywx.tt.log("\u5c55\u793a\u7684\u4f4d\u7f6e2  = " + JSON.stringify(sbord));
+          if (sbord.row && sbord.column) {
+            this.blockViews[sbord.row][sbord.column].getComponent("tt_view_block").setStat(12);
+            this.board.board[sbord.row][sbord.column] = 12;
+            this.board.emptyBlocks.delete(sbord.row + "_" + sbord.column);
+          }
+        }
+      },
+      addLotteryBox: function addLotteryBox(param) {},
+      getPlayHistoryData: function getPlayHistoryData() {
+        var data = tywx.tt.Utils.getPlayDataByKey(tywx.tt.constants.PlayDataKeys.ttplaydata);
+        tywx.tt.log("\u73a9\u5bb6\u8bb0\u5f55\u6570\u636e = " + data);
+        -1 != data && (data = JSON.parse(data));
+        return data;
+      },
+      initHistoryPlayData: function initHistoryPlayData() {
+        if (-1 != this.playdata) {
+          this.repeatNumber = this.playdata.huanyihuan;
+          this.repNumberLabel.string = this.repeatNumber + "/3";
+          var alle = [];
+          for (var tr = 0; tr < this.playdata.bord.length; tr++) {
+            var tdata = this.playdata.bord[tr];
+            for (var tc = 0; tc < tdata.length; tc++) {
+              var cdata = [];
+              cdata[0] = tr;
+              cdata[1] = tc;
+              cdata[2] = tdata[tc];
+              alle.push(cdata);
+            }
+          }
+          this.board.fillBord(alle);
+          var previewdata = this.playdata.previewsdata;
+          var previewIndex = this.playdata.previewIndex;
+          tywx.tt.Board.previewConfigs = previewdata;
+          tywx.tt.Board.previewIndex = previewIndex;
+          console.log("borddata = " + JSON.stringify(previewIndex));
+          for (var ti = 0; ti < previewdata.length; ti++) {
+            var config = previewdata[ti];
+            var preview_sc = this.previews[ti].getComponent("tt_view_priview_blocks");
+            config ? preview_sc.resetByConfig(config) : preview_sc.put();
+          }
+          tywx.tt.Board.refreshPreviewStat();
+          tywx.tt.Utils.clearPlayDataByKey(tywx.tt.constants.PlayDataKeys.ttplaydata, -1);
+        }
+      },
+      showAddScore: function showAddScore(somedata, score) {
+        if ((somedata.rows.length > 0 || somedata.cols.length > 0) && this.fillblocks.length > 0) {
+          var pos = cc.v2(0, 0);
+          var allcell = [];
+          if (somedata.rows.length > 0) for (var rowindex = 0; rowindex < somedata.rows.length; rowindex++) for (var filleindex = 0; filleindex < this.fillblocks.length; filleindex++) somedata.rows[rowindex] == this.fillblocks[filleindex][0] && allcell.push(this.fillblocks[filleindex]);
+          if (somedata.cols.length > 0) for (var colindex = 0; colindex < somedata.cols.length; colindex++) for (var _filleindex = 0; _filleindex < this.fillblocks.length; _filleindex++) somedata.cols[colindex] == this.fillblocks[_filleindex][1] && allcell.push(this.fillblocks[_filleindex]);
+          if (allcell.length > 0) {
+            if (!this.addscoreLabel) {
+              this.addscoreLabel = cc.instantiate(this.addscoreLabelPrefab);
+              this.root.addChild(this.addscoreLabel, 12e4);
+            }
+            var randomshowIndex = parseInt(Math.random() * allcell.length);
+            var poscell = allcell[randomshowIndex];
+            if (poscell) {
+              pos = this.blockViews[poscell[0]][poscell[1]].position;
+              pos = cc.v2(pos.x + this.blockViews[poscell[0]][poscell[1]].width / 2, pos.y + this.blockViews[poscell[0]][poscell[1]].height / 2);
+              this.addscoreLabel.position = pos;
+              this.addscoreLabel.getComponent("AddScoreLabel").setScore(score);
+              this.addscoreLabel.getComponent("AddScoreLabel").show();
+            }
+          } else tywx.tt.log(TAG, "\u5f53\u524d\u6ca1\u6709\u663e\u793a\u5206\u6570\u7684\u4f4d\u7f6e \u8ba1\u7b97\u53ef\u80fd\u51fa\u9519\u4e86");
+        }
+      },
+      hideAllBlocks: function hideAllBlocks() {
+        var _ref19 = [ tywx.tt.constants.BoardWidth, tywx.tt.constants.BoardWidth ], w = _ref19[0], h = _ref19[1];
+        for (var r = 0; r < h; ++r) for (var c = 0; c < w; ++c) {
+          var tmp_view = this.blockViews[r][c];
+          tmp_view.active = false;
+        }
+      },
+      blocksAni: function blocksAni() {
+        this.isTouchLocked = true;
+        this.hideAllBlocks();
+        if (!this.allcellsanis) {
+          var allcells = [];
+          var dir = 0;
+          var outnumber = 8;
+          for (var row = 0; row < 4; row++) {
+            if (0 == dir) {
+              for (var right = row; right < outnumber; right++) {
+                var data = {};
+                data.row = row;
+                data.column = right;
+                allcells.push(data);
+              }
+              dir = 1;
+            }
+            if (1 == dir) {
+              for (var up = row + 1; up < outnumber; up++) {
+                var _data = {};
+                _data.row = up;
+                _data.column = outnumber - 1;
+                allcells.push(_data);
+              }
+              dir = 2;
+            }
+            if (2 == dir) {
+              for (var left = outnumber - 2; left >= 0; left--) {
+                var _data2 = {};
+                _data2.row = outnumber - 1;
+                _data2.column = left;
+                allcells.push(_data2);
+              }
+              dir = 3;
+            }
+            if (3 == dir) {
+              for (var down = outnumber - 2; down > 0; down--) {
+                var _data3 = {};
+                _data3.row = down;
+                _data3.column = row;
+                allcells.push(_data3);
+              }
+              dir = 0;
+            }
+            outnumber--;
+          }
+          this.allcellsanis = allcells;
+        }
+        var tindex = 0;
+        var self = this;
+        var showcall = cc.callFunc(function() {
+          var data = self.allcellsanis[tindex];
+          var block = self.blockViews[data.row][data.column];
+          block.active = true;
+          tindex++;
+          tindex == self.allcellsanis.length && (self.isTouchLocked = false);
+        });
+        var totaltime = 1.2;
+        var delay = cc.delayTime(totaltime / this.allcellsanis.length);
+        var seq = cc.sequence(showcall, delay);
+        var trepeate = cc.repeat(seq, this.allcellsanis.length);
+        this.node.stopAllActions();
+        this.node.runAction(trepeate);
       }
     });
     cc._RF.pop();
   }, {
-    "../model/tt_model_board.js": "tt_model_board",
-    "../rank/friend.js": "friend"
+    "../model/tt_model_board.js": "tt_model_board"
   } ],
   tt_view_priview_blocks: [ function(require, module, exports) {
     "use strict";
@@ -20877,7 +22283,6 @@ window.__require = function e(t, n, r) {
       touchCancle: function touchCancle() {
         tywx.tt.log(TAG, "touch cancle");
         this.node.runAction(cc.scaleTo(.2, SCALE_NORMAL));
-        this.changeType();
       },
       put: function put() {
         this.root.active = false;
@@ -20905,11 +22310,25 @@ window.__require = function e(t, n, r) {
           tmp_block.getComponent("tt_view_block").setStat(stat);
           tmp_block.getComponent("tt_view_block").hideBg();
         }
-        this.setSameTypeConfig();
+      },
+      setGrey: function setGrey() {
+        for (var i = 0; i < this.config.length; i++) for (var j = 0; j < this.config[i].length; j++) {
+          var tmp_block = this.blockViews[i][j];
+          var script = tmp_block.getComponent("tt_view_block");
+          script.getStat() > 0 && script.setStat(13);
+        }
+      },
+      hideGrey: function hideGrey() {
+        console.log("hide state -= ");
+        for (var i = 0; i < this.config.length; i++) for (var j = 0; j < this.config[i].length; j++) {
+          var tmp_block = this.blockViews[i][j];
+          var script = tmp_block.getComponent("tt_view_block");
+          this.config[i][j] > 0 && script.setStat(this.config[i][j]);
+        }
       },
       getCongifTypeNumber: function getCongifTypeNumber() {
         var tconfig = this.getConfig();
-        console.log("tconfig -= " + tconfig);
+        tywx.tt.log(TAG, "tconfig -= " + tconfig);
         var findit = false;
         var findnumber = null;
         var findcount = 0;
@@ -20959,7 +22378,7 @@ window.__require = function e(t, n, r) {
         this.samekey = [];
         this.pretypenumber = info.number;
         this.precount = info.count;
-        console.log("typenumber = " + JSON.stringify(info));
+        tywx.tt.log(TAG, "typenumber = " + JSON.stringify(info));
         var blocks = tywx.tt.constants.Blocks;
         var blockindex = 0;
         var _iteratorNormalCompletion2 = true;
@@ -21025,12 +22444,12 @@ window.__require = function e(t, n, r) {
         this.sameindex >= this.samekey.length && (this.sameindex = 0);
         var tconfig = this.sametype[this.samekey[this.sameindex + ""]];
         tconfig && this.resetByConfig(tconfig);
-        console.log("index = " + this.sameindex);
-        console.log("\u5f53\u524d= " + JSON.stringify(tconfig) + " \u5168\u90e8" + this.samekey.length + "changeType sametype = " + JSON.stringify(this.sametype));
+        tywx.tt.log(TAG, "index = " + this.sameindex);
+        tywx.tt.log(TAG, "\u5f53\u524d= " + JSON.stringify(tconfig) + " \u5168\u90e8" + this.samekey.length + "changeType sametype = " + JSON.stringify(this.sametype));
         this.sameindex = this.sameindex + 1;
         this.sameindex > this.samekey.length && (this.sameindex = 0);
       }
     });
     cc._RF.pop();
   }, {} ]
-}, {}, [ "AdManager", "BiStatLog", "Bilog", "EncodeDecode", "EventType", "HttpUtil", "NotificationCenter", "PropagateInterface", "ShareInterface", "TCPClient", "Timer", "TuyooSDK", "Util", "GetMoneyButton", "background", "red_packet_transfer", "tip_view", "tt_configs", "tt_constants", "tt_events", "ad_node", "ads_blink", "ads_list", "ads_manager", "ads_node", "testscene", "fuhuo_view", "gameover_rank", "gameover_view", "help_view", "symbol", "lottery_button", "lottery_get_view", "lottery_item", "lottery_manager", "lottery_view", "AudioManager", "ShareButton", "Utils", "tt_model_board", "tt_model_config_manager", "friend", "rank_manager", "rank_view", "stop_view", "tt_boot", "tt_scene_menu", "tt_scene_play", "tt_view_block", "tt_view_play_board", "tt_view_priview_blocks" ]);
+}, {}, [ "AdManager", "BiStatLog", "Bilog", "EncodeDecode", "EventType", "HttpUtil", "NotificationCenter", "PropagateInterface", "ShareInterface", "TCPClient", "Timer", "TuyooSDK", "Util", "AddScoreLabel", "AlertView", "GetMoneyButton", "background", "red_packet_transfer", "tip_view", "tt_configs", "tt_constants", "tt_events", "ad_node", "ads_blink", "ads_list", "ads_manager", "ads_node", "fuhuo_view", "gameover_rank", "gameover_view", "help_view", "symbol", "lottery_button", "lottery_get_view", "lottery_item", "lottery_manager", "lottery_view", "AudioManager", "ShareButton", "Utils", "tt_model_board", "tt_model_config_manager", "friend", "rank_manager", "rank_view", "stop_view", "tt_boot", "loadingscene", "tt_scene_menu", "tt_scene_play", "tt_view_block", "tt_view_play_board", "tt_view_priview_blocks" ]);

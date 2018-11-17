@@ -85,7 +85,7 @@ tywx.TuyooSDK = {
                         },
 
                         success: function success(params) {
-                            tywx.LOGD(null, 'tuyoo login success, params:' + JSON.stringify(params));
+                            tywx.LOGD(null, 'tuyoo login success 1, params:' + JSON.stringify(params));
                         },
 
                         fail: function fail(params) {
@@ -199,7 +199,7 @@ tywx.TuyooSDK = {
                 method: 'POST',
 
                 success: function success(params) {
-                    tywx.LOGD(null, 'tuyoo login success, params:' + JSON.stringify(params));
+                    tywx.LOGD(null, 'tuyoo login success 2, params:' + JSON.stringify(params));
                     var checkData = params.data;
                     if (checkData.error && checkData.error.code == 1 || !(checkData.result && checkData.result.userId)) {
                         tywx.LOGE("TUYOO_SDK_LOGIN_FAIL", JSON.stringify(params));
@@ -216,7 +216,8 @@ tywx.TuyooSDK = {
                     tywx.LOGD(null, 'userId:' + tywx.UserInfo.userId + ' userName:' + tywx.UserInfo.userName + ' userPic:' + tywx.UserInfo.userPic);
 
                     if (tywx.UserInfo.userId && tywx.UserInfo.userName) {
-                        tywx.LOGE("TUYOO_SDK_LOGIN_SUCCESS", JSON.stringify(params));
+                        tywx.NotificationCenter.trigger(tywx.tt.events.LOGIN_SUCCESS);
+                        tywx.LOGD("TUYOO_SDK_LOGIN_SUCCESS", JSON.stringify(params));
                     } else {
                         tywx.LOGE("TUYOO_SDK_LOGIN_FAIL", JSON.stringify(params));
                     }

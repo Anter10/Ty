@@ -1,0 +1,107 @@
+{
+  "version": "1.1.1",
+  "windows": {
+    "main": {
+      "main": true,
+      "url": "app://editor/index.html",
+      "windowType": "dockable",
+      "x": -1920,
+      "y": 23,
+      "width": 1920,
+      "height": 1057,
+      "layout": {
+        "children": [
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "hierarchy"
+                ],
+                "height": 490.984375,
+                "type": "panel",
+                "width": 311
+              },
+              {
+                "active": 0,
+                "children": [
+                  "assets"
+                ],
+                "height": 472,
+                "type": "panel",
+                "width": 311
+              }
+            ],
+            "height": 966,
+            "type": "dock-v",
+            "width": 311
+          },
+          {
+            "children": [
+              {
+                "active": 0,
+                "children": [
+                  "scene"
+                ],
+                "height": 523,
+                "type": "panel",
+                "width": 1133.984375
+              },
+              {
+                "active": 0,
+                "children": [
+                  "console",
+                  "timeline"
+                ],
+                "height": 440,
+                "type": "panel",
+                "width": 1133.984375
+              }
+            ],
+            "height": 966,
+            "type": "dock-v",
+            "width": 1133.984375
+          },
+          {
+            "active": 0,
+            "children": [
+              "inspector"
+            ],
+            "height": 966,
+            "type": "panel",
+            "width": 463
+          }
+        ],
+        "type": "dock-h"
+      },
+      "panels": [
+        "hierarchy",
+        "console",
+        "timeline",
+        "inspector",
+        "assets",
+        "scene"
+      ]
+    }
+  },
+  "panels": {
+    "preferences": {
+      "x": 395,
+      "y": 104,
+      "width": 580,
+      "height": 565
+    },
+    "sprite-editor": {
+      "x": 425,
+      "y": 104,
+      "width": 516,
+      "height": 539
+    },
+    "builder": {
+      "x": -1206,
+      "y": 94,
+      "width": 500,
+      "height": 722
+    }
+  }
+}

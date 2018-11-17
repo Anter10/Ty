@@ -54,11 +54,14 @@ var stop_view = cc.Class({
      */
     repeateGameCall: function repeateGameCall() {
         tywx.tt.friend.setStop(false);
-        tywx.tt.Board.reset();
-        tywx.tt.BoardView.initBoardView();
-        tywx.tt.BoardView.initPreviewBlocks();
+        tywx.tt.BoardView.reset();
+        tywx.tt.BoardView.blocksAni();
         tywx.tt.Utils.showWXBanner();
         this.closeCall();
+    },
+
+    showRankCall: function showRankCall() {
+        tywx.tt.rank_manager.showRank();
     },
 
     helpCall: function helpCall() {
@@ -77,7 +80,8 @@ var stop_view = cc.Class({
         } else if (tywx.tt.AudioManager.getInstance().getIsMute() == true) {
             tywx.tt.AudioManager.getInstance().setIsMute(false);
             tywx.tt.log("curAudioState3 = " + tywx.tt.AudioManager.getInstance().getIsMute());
-            tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.Configs.MUSICS.BG_MUSIC);
+            tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.AudioManager.getInstance().getBGMusic());
+            // tywx.tt.AudioManager.getInstance().playMusic(tywx.tt.configManager.getInstance().MUSICS.BG_MUSIC);
         }
         this.changeTexture();
         tywx.tt.log(_typeof(tywx.tt.AudioManager.getInstance().getIsMute()) + "curAudioState4 = " + tywx.tt.AudioManager.getInstance().getIsMute());
@@ -104,8 +108,8 @@ var stop_view = cc.Class({
      * @description 关闭界面调用
      */
     closeCall: function closeCall() {
-        stop_view.stopview.removeFromParent(true);
-        stop_view.stopview = null;
+        // stop_view.stopview.removeFromParent(true);
+        // stop_view.stopview = null;
     },
 
     statics: {

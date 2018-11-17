@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "tipbottom",
+    "texture": "d7def486-13e4-4f03-a069-5ddccadb0755",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      132,
+      70
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      132,
+      70
+    ],
+    "capInsets": [
+      6,
+      5,
+      7,
+      19
+    ]
+  }
+}

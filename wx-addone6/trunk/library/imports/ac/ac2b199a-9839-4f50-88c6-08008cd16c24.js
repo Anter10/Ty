@@ -125,14 +125,14 @@ cc.Class({
             tywx.gamecenter.giveItems(false, self.produceItem());
             tywx.gamecenter.ryBoxBtn.active = false;
             tywx.gamecenter.sharedelaytime = new Date().getTime();
-
+            tywx.gamecenter.addRyBoxNumber();
             self.close();
         });
         mflq.setShareGroupCall(function () {
             tywx.gamecenter.giveItems(false, self.produceItem());
             tywx.gamecenter.ryBoxBtn.active = false;
+            tywx.gamecenter.addRyBoxNumber();
             tywx.gamecenter.sharedelaytime = new Date().getTime();
-
             self.close();
         });
         this.init();

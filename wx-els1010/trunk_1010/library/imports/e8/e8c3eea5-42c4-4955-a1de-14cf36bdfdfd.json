@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "gameoverrankbottom",
+    "texture": "340f46c2-ceb0-4d24-a556-6caf01017397",
+    "atlas": "",
+    "rect": [
+      0,
+      0,
+      88,
+      90
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      88,
+      90
+    ],
+    "capInsets": [
+      6,
+      6,
+      7,
+      8
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "paddingyjjx",
+    "texture": "4eb1d382-80f2-44a6-ac6a-a20053cef6b6",
+    "atlas": "",
+    "rect": [
+      2,
+      3,
+      72,
+      126
+    ],
+    "offset": [
+      0,
+      -1
+    ],
+    "originalSize": [
+      76,
+      130
+    ],
+    "capInsets": [
+      9,
+      9,
+      11,
+      10
+    ]
+  }
+}

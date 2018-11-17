@@ -25,7 +25,9 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        isOpening: false
+        isOpening: false,
+        nodeWarn: cc.Node,
+        labelWarn: cc.Label
     },
 
     /** 
@@ -43,6 +45,9 @@ cc.Class({
         this.background.node.on('touchstart', function (event) {
             return true;
         });
+        this.nodeWarn.active = false;
+        //this.nodeWarn.active = tywx.ado.Configs.red_pack_share_warn.is_show;
+        //this.labelWarn.string = tywx.ado.Configs.red_pack_share_warn.content;
     },
 
 
@@ -144,8 +149,8 @@ cc.Class({
         }
         this.isOpening = true;
         var self = this;
-        var scale1 = cc.scaleTo(0.5, 0, 1);
-        var scale2 = cc.scaleTo(0.5, 1, 1);
+        var scale1 = cc.scaleTo(0.25, 0, 1);
+        var scale2 = cc.scaleTo(0.25, 1, 1);
         var open = cc.callFunc(function () {
             self.kaibottomNode.active = false;
             //  self.redPackNumberLabel.node.active = true;
