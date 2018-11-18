@@ -120,11 +120,7 @@ cc.Class({
             for (let j = 0; j < this.config[i].length; j++) {
                  let tmp_block = this.blockViews[i][j];
                  let script = tmp_block.getComponent('tt_view_block');
-                 
-                 if (this.config[i][j] > 0) {
-                    
-                     script.setStat(this.config[i][j]);
-                 }
+                 script.setStat(this.config[i][j]);
              }
          }
      },

@@ -123,11 +123,7 @@ cc.Class({
             for (var j = 0; j < this.config[i].length; j++) {
                 var tmp_block = this.blockViews[i][j];
                 var script = tmp_block.getComponent('tt_view_block');
-
-                if (this.config[i][j] > 0) {
-
-                    script.setStat(this.config[i][j]);
-                }
+                script.setStat(this.config[i][j]);
             }
         }
     },

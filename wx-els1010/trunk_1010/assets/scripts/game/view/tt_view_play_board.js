@@ -97,7 +97,8 @@ cc.Class({
         let canputnumber = 0;
         for (let i = 0; i < this.previews.length; i++) {
             let previewscr = this.previews[i].getComponent('tt_view_priview_blocks');
-            if (previewscr.isCanPut()){
+            console.log(previewscr.node.active ,"当前的拖动快是否能PUT = ", previewscr.isCanPut());
+            if (previewscr.node.active == true){
                canputnumber ++;
             }
         }
@@ -321,7 +322,11 @@ cc.Class({
                     let config = preview_sc.config;
                     if (self.fillBoard(cc.v2(pos.x, pos.y + this.touchHeight), config)) {
                         preview_sc.put();
+                         console.log("当前什么情况333 refreshPreviewStat");
                         self.board.resetPreviews(true);
+                        console.log("当前什么情况4444 refreshPreviewStat");
+                        self.board.refreshPreviewStat(true);
+                         console.log("当前什么情况5555 refreshPreviewStat");
                         self.board.checkClear();
                     } else {
                         self.board.refreshPreviewStat();

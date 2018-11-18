@@ -12,6 +12,7 @@ let ModelBoard = class {
         this.clearRows = [];
         this.clearCols = [];
         this.emptyBlocks = new Map();
+        this.evaluate = tywx.tt.boadrEvaluate.getInstance(); // * 棋盘评分实例
     }
     reset() {
         this.score = 0;
@@ -36,11 +37,15 @@ let ModelBoard = class {
         this.previewConfigs = [];
         this.previewStat = [];
         let checkgameover = true;
+        console.log("checkpreviewnumber  = ", checkpreviewnumber);
         if (checkpreviewnumber){
             if (tywx.tt.BoardView.checkPreviewActives() == 0) {
                 checkgameover = false;
             }
         }
+        let block_values = this.evaluate.evaluateByBoard(this.board);
+        tywx.tt.log(TAG, 'block_values', block_values.entries());
+
         let Constants = tywx.tt.constants;
         let block_configs = Constants.Blocks;
         if (is_use_prop) {
@@ -67,13 +72,13 @@ let ModelBoard = class {
             this.previewIndex[i] = config_idx;
         }
         tywx.tt.log("出发了gameover 检测事件 tt_ model_bord 69 行 是否需要检测 = ", checkgameover);
-        if (checkgameover){
+        if (checkgameover && !checkpreviewnumber) {
            tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
         }
     }
 
     refreshPreviewStat(refresh) {
-        tywx.tt.log(TAG, 'refreshPreviewStat');
+        tywx.tt.log(TAG, 'refreshPreviewStat'); 
         let Constants = tywx.tt.constants;
         for (let i = 0; i < this.previewIndex.length; ++i) {
             let config_dis = Constants.BlockDis[this.previewIndex[i]];
@@ -113,7 +118,7 @@ let ModelBoard = class {
         return false;
     }
 
-    isCanFill(center_row, center_col, config) {
+    isCanFill(center_row, center_col, config){
         let ret = false;
         let [c_r, c_c] = [center_row, center_col];
         let [m_r, m_c] = [tywx.tt.constants.BoardHeight, tywx.tt.constants.BoardWidth];
@@ -202,6 +207,8 @@ let ModelBoard = class {
             tywx.tt.log(TAG, 'reset previews');
             this.resetPreviewConfigs(false, checkpreviewnumber);
             tywx.NotificationCenter.trigger(tywx.tt.events.TT_RESET_PREVIEWS, null);
+        }else{
+            tywx.tt.log(TAG, '当前前置设置为空了');
         }
     }
 
@@ -347,6 +354,6 @@ let ModelBoard = class {
     }
 
 
-};
+}
 
 module.exports = ModelBoard;

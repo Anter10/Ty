@@ -189,7 +189,7 @@ cc.Class({
         var current_rotate = this.nodeDisk.rotation % 360;
         //let last_aim_id = parseInt(current_rotate / 60);
         this.isLottering = true;
-        this.nodeDisk.runAction(cc.sequence(cc.rotateBy(1, 360 * 2 - current_rotate).easing(cc.easeIn(2.0)), cc.rotateBy(2, 360 * 3), cc.rotateBy(1, 360 * 2 - aim_id * 60).easing(cc.easeOut(1.0)), cc.callFunc(function () {
+        this.nodeDisk.runAction(cc.sequence(cc.rotateBy(1, 360 * 2 - current_rotate).easing(cc.easeIn(2.0)), cc.rotateBy(2, 360 * 3), cc.rotateBy(1, 360 * 2 - aim_id * 60).easing(cc.easeOut(1.0)), cc.delayTime(0.5), cc.callFunc(function () {
             self.storeCurrentItem();
             self.isLottering = false;
             _this.finishcall && _this.finishcall();

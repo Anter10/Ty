@@ -110,7 +110,7 @@
     "relativePath": "scripts/common_frame/Timer.js"
   },
   "57d9d0aa-602c-4105-a143-4a1907f2bfd0": {
-    "asset": 1540026563984,
+    "asset": 1542452363229,
     "meta": 1539330849519,
     "relativePath": "scripts/game"
   },
@@ -130,7 +130,7 @@
     "relativePath": "scripts/game/libs"
   },
   "0fd96a98-e84b-4ba9-9bbe-f63f1b2ab704": {
-    "asset": 1540541619057,
+    "asset": 1542452420378,
     "meta": 1539330849519,
     "relativePath": "scripts/game/model"
   },
@@ -530,8 +530,8 @@
     "relativePath": "resources/animtions/show_hide.anim"
   },
   "96ef250a-c74d-4cfd-8387-41a791305214": {
-    "asset": 1541073060800,
-    "meta": 1541074011318,
+    "asset": 1542451853897,
+    "meta": 1542451906240,
     "relativePath": "scripts/game/common/tt_events.js"
   },
   "40f06f8f-fafb-4d12-9052-718d3ac1f6ab": {
@@ -790,8 +790,8 @@
     "relativePath": "scripts/game/cross_ad/ads_manager.js"
   },
   "b17579c5-da14-4a81-a6ab-9b743fa73276": {
-    "asset": 1542420976809,
-    "meta": 1542422614538,
+    "asset": 1542452425575,
+    "meta": 1542452446585,
     "relativePath": "scripts/game/lottery/lottery_view.js"
   },
   "33249471-6820-4d52-8083-94b447891dff": {
@@ -805,13 +805,13 @@
     "relativePath": "scripts/game/gameover/gameover_view.js"
   },
   "b8a1ef31-8e15-4819-9712-b62825b9c04f": {
-    "asset": 1542423482219,
-    "meta": 1542423548955,
+    "asset": 1542452523266,
+    "meta": 1542509155109,
     "relativePath": "scripts/game/model/tt_model_board.js"
   },
   "8bc3cf88-5aaf-4a06-a1ad-dcb3498460a9": {
-    "asset": 1542422227641,
-    "meta": 1542422615533,
+    "asset": 1542452051168,
+    "meta": 1542452254120,
     "relativePath": "scripts/game/view/tt_view_priview_blocks.js"
   },
   "fb6d00e2-0a15-43d6-b782-7d79945c4d2f": {
@@ -1150,8 +1150,8 @@
     "relativePath": "scripts/game/stopview/stop_view.js"
   },
   "e5652005-d216-47a3-b953-e461a7345ce1": {
-    "asset": 1542362176106,
-    "meta": 1542362518145,
+    "asset": 1542433582733,
+    "meta": 1542452447523,
     "relativePath": "scripts/game/tt_boot.js"
   },
   "0d9dede2-78ee-430a-9bda-af1499295c7b": {
@@ -1185,8 +1185,13 @@
     "relativePath": "scripts/game/gameover/fuhuo_view.js"
   },
   "b9179400-d052-4108-b938-45638bbdb0f9": {
-    "asset": 1542423588937,
-    "meta": 1542445654022,
+    "asset": 1542451829579,
+    "meta": 1542451906394,
     "relativePath": "scripts/game/view/tt_view_play_board.js"
+  },
+  "7a69db23-67f0-41a1-8f07-e0e5352723fe": {
+    "asset": 1542436817213,
+    "meta": 1542452447522,
+    "relativePath": "scripts/game/model/tt_model_evaluate.js"
   }
 }

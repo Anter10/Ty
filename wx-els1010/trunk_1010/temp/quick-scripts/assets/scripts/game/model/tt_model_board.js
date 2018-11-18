@@ -24,6 +24,7 @@ var ModelBoard = function () {
         this.clearRows = [];
         this.clearCols = [];
         this.emptyBlocks = new Map();
+        this.evaluate = tywx.tt.boadrEvaluate.getInstance(); // * 棋盘评分实例
     }
 
     _createClass(ModelBoard, [{
@@ -56,11 +57,15 @@ var ModelBoard = function () {
             this.previewConfigs = [];
             this.previewStat = [];
             var checkgameover = true;
+            console.log("checkpreviewnumber  = ", checkpreviewnumber);
             if (checkpreviewnumber) {
                 if (tywx.tt.BoardView.checkPreviewActives() == 0) {
                     checkgameover = false;
                 }
             }
+            var block_values = this.evaluate.evaluateByBoard(this.board);
+            tywx.tt.log(TAG, 'block_values', block_values.entries());
+
             var Constants = tywx.tt.constants;
             var block_configs = Constants.Blocks;
             if (is_use_prop) {
@@ -87,7 +92,7 @@ var ModelBoard = function () {
                 this.previewIndex[i] = config_idx;
             }
             tywx.tt.log("出发了gameover 检测事件 tt_ model_bord 69 行 是否需要检测 = ", checkgameover);
-            if (checkgameover) {
+            if (checkgameover && !checkpreviewnumber) {
                 tywx.NotificationCenter.trigger(tywx.tt.events.TT_REFRESH_PREVIEW_STAT, null);
             }
         }
@@ -242,6 +247,8 @@ var ModelBoard = function () {
                 tywx.tt.log(TAG, 'reset previews');
                 this.resetPreviewConfigs(false, checkpreviewnumber);
                 tywx.NotificationCenter.trigger(tywx.tt.events.TT_RESET_PREVIEWS, null);
+            } else {
+                tywx.tt.log(TAG, '当前前置设置为空了');
             }
         }
     }, {

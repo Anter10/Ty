@@ -190,6 +190,7 @@
                  cc.rotateBy(1, 360 * 2 - current_rotate).easing(cc.easeIn(2.0)),
                  cc.rotateBy(2, 360 * 3),
                  cc.rotateBy(1, 360 * 2 - aim_id * 60).easing(cc.easeOut(1.0)),
+                 cc.delayTime(0.5),
                  cc.callFunc(() => {
                      self.storeCurrentItem();
                      self.isLottering = false;

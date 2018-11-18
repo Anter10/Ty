@@ -19,6 +19,7 @@ tywx.tt.lottery = require('./lottery/lottery_manager'); //* 大转盘管理
 tywx.tt.help = require('./help/help_view'); //* 大转盘管理
 tywx.tt.gameover = require('./gameover/gameover_view'); //* 大转盘管理
 tywx.tt.fuhuo = require('./gameover/fuhuo_view'); //* 大转盘管理
+tywx.tt.boadrEvaluate = require('./model/tt_model_evaluate');
 
 tywx.tt.configManager = require('./model/tt_model_config_manager');
 tywx.tt.isCanWatchVideo = false;
